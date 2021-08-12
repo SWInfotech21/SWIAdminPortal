@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+
+<head>
+    <base href="/">
+    <script src="dmxAppConnect/dmxAppConnect.js"></script>
+    <meta charset="UTF-8">
+    <title>Untitled Document</title>
+
+    <script src="dmxAppConnect/dmxRouting/dmxRouting.js"></script>
+</head>
+
+<body is="dmx-app" id="main">
+    <div is="dmx-view" id="content">
+        <%- await include(content, locals); %>
+    </div>
+</body>
+
+</html>
