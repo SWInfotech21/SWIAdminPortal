@@ -1,0 +1,15 @@
+{
+  "name": "postgres_gcpServer",
+  "module": "dbconnector",
+  "action": "connect",
+  "options": {
+    "client": "postgres",
+    "connection": {
+      "host": "35.200.194.181",
+      "port": 5432,
+      "user": "postgres",
+      "password": "Harshit@Ariful21",
+      "database": "postgres"
+    }
+  }
+}

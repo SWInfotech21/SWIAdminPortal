@@ -1,0 +1,46 @@
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="users" appConnect="local" components="{dmxBootstrap5TableGenerator:{},dmxBootstrap5Navigation:{}}" -->
+<meta name="ac:route" content="/users">
+<dmx-serverconnect id="scUsers" url="api/Users"></dmx-serverconnect>
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" id="mainNavbar">
+
+
+
+    <a class="navbar-brand" href="#" id="logo">
+        <img id="logo" width="50" height="50" class="img-fluid" src="assets/images/swinfotech.png">SWInfotech</a>
+</nav>
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 id="Users" class="text-center align-self-center">SW Infotech Users</h1>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-sm">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="scUsers.data.FetchUsers.data" id="tableRepeat1">
+                <tr>
+                    <td dmx-text="id"></td>
+                    <td dmx-text="name"></td>
+                    <td dmx-text="email"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<footer>
+    <div class="container">
+        <div class="row">
+            <p id="footer" class="text-center align-self-center">www.swinfotech.com</p>
+        </div>
+    </div>
+</footer>
