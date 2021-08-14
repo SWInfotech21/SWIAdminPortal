@@ -1,18 +1,21 @@
-<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="users" appConnect="local" components="{dmxBootstrap5TableGenerator:{},dmxBootstrap5Navigation:{}}" -->
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="users" appConnect="local" components="{dmxBootstrap5TableGenerator:{},dmxBootstrap5Navigation:{},dmxDataTraversal:{}}" -->
 <meta name="ac:route" content="/users">
 <dmx-serverconnect id="scUsers" url="api/Users"></dmx-serverconnect>
+<dmx-data-view id="dvUsers" dmx-bind:data="scUsers.data.FetchUsers.data" pageSize="100" page="10"></dmx-data-view>
+<dmx-data-detail id="ddUsers" dmx-bind:data="dvUsers.data" key="id"></dmx-data-detail>
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" id="mainNavbar">
 
 
 
     <a class="navbar-brand" href="#" id="logo">
-        <img id="logo" width="50" height="50" class="img-fluid" src="assets/images/swinfotech.png">SWInfotech</a>
+        <img id="swilogo" width="50" height="50" class="img-fluid" src="assets/images/swinfotech.png">SWInfotech</a>
 </nav>
 <header>
     <div class="container">
         <div class="row">
             <div class="col">
                 <h1 id="Users" class="text-center align-self-center">SW Infotech Users</h1>
+                <button id="btnAdd" class="btn btn-primary" dmx-on:click="modalAddUsers.show(); ddUsers.select(0);">Add New</button>
             </div>
         </div>
     </div>
@@ -24,18 +27,33 @@
                 <tr>
                     <th>Id</th>
                     <th>Name</th>
+                    <th>Image</th>
                     <th>Email</th>
+                    <th>Mobile</th>
+                    <th>User Type</th>
+                    <th>Status</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="scUsers.data.FetchUsers.data" id="tableRepeat1">
                 <tr>
                     <td dmx-text="id"></td>
-                    <td dmx-text="name"></td>
+                    <td dmx-text="name.titlecase()"></td>
+                    <td><img dmx-bind:src="image" width="50" height="50">
+                    </td>
                     <td dmx-text="email"></td>
+                    <td dmx-text="mobile"></td>
+                    <td dmx-text="user_type == 1 ? 'Admin' : user_type == 2 ? 'DT' : user_type == 3 ? 'RT' : 'None'" dmx-class:table-primary="user_type == 1" dmx-class:table-success="user_type == 2" dmx-class:table-warning="user_type == 3" dmx-class:table-danger="user_type == 4"></td>
+                    <td dmx-text="status != 1 ?'Inactive' : 'Active'" dmx-class:table-primary="status == 1" dmx-class:table-warning="status != 1"></td>
+                    <td>
+                        <a class="dropdown-item" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalAddUsers"><i class="fas fa-edit" title="Edit Users"></i></a>&emsp;
+                        <a class="dropdown-item" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalDelUser"><i class="far fa-trash-alt" title="Delete User"></i></a>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
+
 </div>
 <footer>
     <div class="container">

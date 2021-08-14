@@ -1,0 +1,429 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/layouts/main.ejs",
+      "linkedForm": "formAddEditUser"
+    },
+    "$_POST": [
+      {
+        "type": "text",
+        "fieldName": "UserId",
+        "name": "UserId"
+      },
+      {
+        "type": "text",
+        "fieldName": "name",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "User Name is required."
+            },
+            "core:maxlength": {
+              "param": "50"
+            }
+          }
+        },
+        "name": "name"
+      },
+      {
+        "type": "text",
+        "fieldName": "email",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Email id is required."
+            },
+            "core:maxlength": {
+              "param": "100"
+            },
+            "core:email": {
+              "param": ""
+            },
+            "core:nowhitespace": {
+              "param": ""
+            }
+          }
+        },
+        "name": "email"
+      },
+      {
+        "type": "number",
+        "fieldName": "mobile",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Mobile id is required."
+            },
+            "core:number": {
+              "param": ""
+            },
+            "core:maxlength": {
+              "param": "10"
+            }
+          }
+        },
+        "name": "mobile"
+      },
+      {
+        "type": "text",
+        "fieldName": "password",
+        "options": {
+          "rules": {
+            "core:maxlength": {
+              "param": "50"
+            }
+          }
+        },
+        "name": "password"
+      },
+      {
+        "type": "text",
+        "fieldName": "status",
+        "name": "status"
+      },
+      {
+        "type": "number",
+        "fieldName": "user_type",
+        "options": {
+          "rules": {
+            "core:number": {}
+          }
+        },
+        "name": "user_type"
+      },
+      {
+        "type": "text",
+        "name": "updated_by"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "validate",
+        "module": "validator",
+        "action": "validate",
+        "options": {
+          "data": [
+            {
+              "name": "validate_1",
+              "value": "{{$_POST.email}}",
+              "rules": {
+                "db:notexists": {
+                  "param": {
+                    "connection": "postgres_gcpServer",
+                    "table": "users",
+                    "column": "email"
+                  }
+                }
+              },
+              "fieldName": "email"
+            }
+          ]
+        },
+        "disabled": true
+      },
+      {
+        "name": "",
+        "module": "core",
+        "action": "condition",
+        "options": {
+          "if": "{{$_POST.UserId != ''}}",
+          "then": {
+            "steps": {
+              "name": "EditUsers",
+              "module": "dbupdater",
+              "action": "update",
+              "options": {
+                "connection": "postgres_gcpServer",
+                "sql": {
+                  "type": "update",
+                  "values": [
+                    {
+                      "table": "users",
+                      "column": "name",
+                      "type": "text",
+                      "value": "{{$_POST.name.lowercase()}}"
+                    },
+                    {
+                      "table": "users",
+                      "column": "email",
+                      "type": "text",
+                      "value": "{{$_POST.email.lowercase()}}"
+                    },
+                    {
+                      "table": "users",
+                      "column": "mobile",
+                      "type": "text",
+                      "value": "{{$_POST.mobile}}"
+                    },
+                    {
+                      "table": "users",
+                      "column": "status",
+                      "type": "text",
+                      "value": "{{$_POST.status}}"
+                    },
+                    {
+                      "table": "users",
+                      "column": "user_type",
+                      "type": "text",
+                      "value": "{{$_POST.user_type}}"
+                    },
+                    {
+                      "table": "users",
+                      "column": "updated_by",
+                      "type": "text",
+                      "value": "{{$_POST.updated_by.default(1)}}"
+                    },
+                    {
+                      "table": "users",
+                      "column": "updated_on",
+                      "type": "datetime",
+                      "value": "{{NOW}}"
+                    }
+                  ],
+                  "table": "users",
+                  "wheres": {
+                    "condition": "AND",
+                    "rules": [
+                      {
+                        "id": "id",
+                        "field": "id",
+                        "type": "double",
+                        "operator": "equal",
+                        "value": "{{$_POST.UserId}}",
+                        "data": {
+                          "column": "id"
+                        },
+                        "operation": "="
+                      }
+                    ],
+                    "conditional": null,
+                    "valid": true
+                  },
+                  "query": "UPDATE users\nSET name = :P1 /* {{$_POST.name.lowercase()}} */, email = :P2 /* {{$_POST.email.lowercase()}} */, mobile = :P3 /* {{$_POST.mobile}} */, status = :P4 /* {{$_POST.status}} */, user_type = :P5 /* {{$_POST.user_type}} */, updated_by = :P6 /* {{$_POST.updated_by.default(1)}} */, updated_on = :P7 /* {{NOW}} */\nWHERE id = :P8 /* {{$_POST.UserId}} */",
+                  "params": [
+                    {
+                      "name": ":P1",
+                      "type": "expression",
+                      "value": "{{$_POST.name.lowercase()}}"
+                    },
+                    {
+                      "name": ":P2",
+                      "type": "expression",
+                      "value": "{{$_POST.email.lowercase()}}"
+                    },
+                    {
+                      "name": ":P3",
+                      "type": "expression",
+                      "value": "{{$_POST.mobile}}"
+                    },
+                    {
+                      "name": ":P4",
+                      "type": "expression",
+                      "value": "{{$_POST.status}}"
+                    },
+                    {
+                      "name": ":P5",
+                      "type": "expression",
+                      "value": "{{$_POST.user_type}}"
+                    },
+                    {
+                      "name": ":P6",
+                      "type": "expression",
+                      "value": "{{$_POST.updated_by.default(1)}}"
+                    },
+                    {
+                      "name": ":P7",
+                      "type": "expression",
+                      "value": "{{NOW}}"
+                    },
+                    {
+                      "operator": "equal",
+                      "type": "expression",
+                      "name": ":P8",
+                      "value": "{{$_POST.UserId}}"
+                    }
+                  ]
+                }
+              },
+              "meta": [
+                {
+                  "name": "affected",
+                  "type": "number"
+                }
+              ],
+              "output": true
+            }
+          },
+          "else": {
+            "steps": {
+              "name": "AddUser",
+              "module": "dbupdater",
+              "action": "insert",
+              "options": {
+                "connection": "postgres_gcpServer",
+                "sql": {
+                  "type": "insert",
+                  "values": [
+                    {
+                      "table": "users",
+                      "column": "name",
+                      "type": "text",
+                      "value": "{{$_POST.name}}"
+                    },
+                    {
+                      "table": "users",
+                      "column": "email",
+                      "type": "text",
+                      "value": "{{$_POST.email}}"
+                    },
+                    {
+                      "table": "users",
+                      "column": "mobile",
+                      "type": "text",
+                      "value": "{{$_POST.mobile}}"
+                    },
+                    {
+                      "table": "users",
+                      "column": "password",
+                      "type": "text",
+                      "value": "{{$_POST.password.sha256('NOW.encrypt(\\'Hw3fTCdch1\\')')}}"
+                    },
+                    {
+                      "table": "users",
+                      "column": "saltvalue",
+                      "type": "text",
+                      "value": "{{NOW.encrypt('Hw3fTCdch1')}}"
+                    },
+                    {
+                      "table": "users",
+                      "column": "status",
+                      "type": "text",
+                      "value": "{{$_POST.status}}"
+                    },
+                    {
+                      "table": "users",
+                      "column": "user_type",
+                      "type": "text",
+                      "value": "{{$_POST.user_type}}"
+                    },
+                    {
+                      "table": "users",
+                      "column": "super_user",
+                      "type": "text",
+                      "value": "{{$_POST.super_user.default(0)}}"
+                    },
+                    {
+                      "table": "users",
+                      "column": "remove",
+                      "type": "text",
+                      "value": "{{$_POST.remove.default(1)}}"
+                    },
+                    {
+                      "table": "users",
+                      "column": "image",
+                      "type": "text",
+                      "value": "{{$_POST.image.default('https://github.com/bdo.png')}}"
+                    },
+                    {
+                      "table": "users",
+                      "column": "created_by",
+                      "type": "text",
+                      "value": "{{$_POST.created_by.default(1)}}"
+                    },
+                    {
+                      "table": "users",
+                      "column": "created_on",
+                      "type": "datetime",
+                      "value": "{{NOW}}"
+                    }
+                  ],
+                  "table": "users",
+                  "query": "INSERT INTO users\n(name, email, mobile, password, saltvalue, status, user_type, super_user, remove, image, created_by, created_on) VALUES (:P1 /* {{$_POST.name}} */, :P2 /* {{$_POST.email}} */, :P3 /* {{$_POST.mobile}} */, :P4 /* {{$_POST.password.sha256('NOW.encrypt(\\'Hw3fTCdch1\\')')}} */, :P5 /* {{NOW.encrypt('Hw3fTCdch1')}} */, :P6 /* {{$_POST.status}} */, :P7 /* {{$_POST.user_type}} */, :P8 /* {{$_POST.super_user.default(0)}} */, :P9 /* {{$_POST.remove.default(1)}} */, :P10 /* {{$_POST.image.default('https://github.com/bdo.png')}} */, :P11 /* {{$_POST.created_by.default(1)}} */, :P12 /* {{NOW}} */)",
+                  "params": [
+                    {
+                      "name": ":P1",
+                      "type": "expression",
+                      "value": "{{$_POST.name}}"
+                    },
+                    {
+                      "name": ":P2",
+                      "type": "expression",
+                      "value": "{{$_POST.email}}"
+                    },
+                    {
+                      "name": ":P3",
+                      "type": "expression",
+                      "value": "{{$_POST.mobile}}"
+                    },
+                    {
+                      "name": ":P4",
+                      "type": "expression",
+                      "value": "{{$_POST.password.sha256('NOW.encrypt(\\'Hw3fTCdch1\\')')}}"
+                    },
+                    {
+                      "name": ":P5",
+                      "type": "expression",
+                      "value": "{{NOW.encrypt('Hw3fTCdch1')}}"
+                    },
+                    {
+                      "name": ":P6",
+                      "type": "expression",
+                      "value": "{{$_POST.status}}"
+                    },
+                    {
+                      "name": ":P7",
+                      "type": "expression",
+                      "value": "{{$_POST.user_type}}"
+                    },
+                    {
+                      "name": ":P8",
+                      "type": "expression",
+                      "value": "{{$_POST.super_user.default(0)}}"
+                    },
+                    {
+                      "name": ":P9",
+                      "type": "expression",
+                      "value": "{{$_POST.remove.default(1)}}"
+                    },
+                    {
+                      "name": ":P10",
+                      "type": "expression",
+                      "value": "{{$_POST.image.default('https://github.com/bdo.png')}}"
+                    },
+                    {
+                      "name": ":P11",
+                      "type": "expression",
+                      "value": "{{$_POST.created_by.default(1)}}"
+                    },
+                    {
+                      "name": ":P12",
+                      "type": "expression",
+                      "value": "{{NOW}}"
+                    }
+                  ]
+                }
+              },
+              "meta": [
+                {
+                  "name": "identity",
+                  "type": "text"
+                },
+                {
+                  "name": "affected",
+                  "type": "number"
+                }
+              ],
+              "output": true
+            }
+          }
+        },
+        "outputType": "boolean"
+      }
+    ]
+  }
+}

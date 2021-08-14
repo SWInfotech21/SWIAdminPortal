@@ -1,0 +1,144 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/layouts/main.ejs",
+      "linkedForm": "formDelUser"
+    },
+    "$_POST": [
+      {
+        "type": "text",
+        "fieldName": "UserId",
+        "name": "UserId"
+      },
+      {
+        "type": "text",
+        "name": "deleted_by"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "delUsers",
+        "module": "dbupdater",
+        "action": "delete",
+        "options": {
+          "connection": "postgres_gcpServer",
+          "sql": {
+            "type": "delete",
+            "table": "users",
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "id",
+                  "field": "id",
+                  "type": "double",
+                  "operator": "equal",
+                  "value": "{{$_POST.UserId}}",
+                  "data": {
+                    "column": "id"
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "query": "DELETE\nFROM users\nWHERE id = :P1 /* {{$_POST.UserId}} */",
+            "params": [
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P1",
+                "value": "{{$_POST.UserId}}"
+              }
+            ]
+          }
+        },
+        "meta": [
+          {
+            "name": "affected",
+            "type": "number"
+          }
+        ],
+        "disabled": true
+      },
+      {
+        "name": "DelUsers",
+        "module": "dbupdater",
+        "action": "update",
+        "options": {
+          "connection": "postgres_gcpServer",
+          "sql": {
+            "type": "update",
+            "values": [
+              {
+                "table": "users",
+                "column": "remove",
+                "type": "text",
+                "value": "0"
+              },
+              {
+                "table": "users",
+                "column": "deleted_by",
+                "type": "text",
+                "value": "{{$_POST.deleted_by.default(1)}}"
+              },
+              {
+                "table": "users",
+                "column": "deleted_on",
+                "type": "datetime",
+                "value": "{{NOW}}"
+              }
+            ],
+            "table": "users",
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "id",
+                  "field": "id",
+                  "type": "double",
+                  "operator": "equal",
+                  "value": "{{$_POST.UserId}}",
+                  "data": {
+                    "column": "id"
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "query": "UPDATE users\nSET remove = '0', deleted_by = :P1 /* {{$_POST.deleted_by.default(1)}} */, deleted_on = :P2 /* {{NOW}} */\nWHERE id = :P3 /* {{$_POST.UserId}} */",
+            "params": [
+              {
+                "name": ":P1",
+                "type": "expression",
+                "value": "{{$_POST.deleted_by.default(1)}}"
+              },
+              {
+                "name": ":P2",
+                "type": "expression",
+                "value": "{{NOW}}"
+              },
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P3",
+                "value": "{{$_POST.UserId}}"
+              }
+            ]
+          }
+        },
+        "meta": [
+          {
+            "name": "affected",
+            "type": "number"
+          }
+        ]
+      }
+    ]
+  }
+}
