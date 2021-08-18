@@ -1,0 +1,166 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/layouts/main.ejs",
+      "linkedForm": "formMobRech"
+    },
+    "$_POST": [
+      {
+        "type": "text",
+        "fieldName": "MobRechId",
+        "name": "MobRechId"
+      },
+      {
+        "type": "number",
+        "fieldName": "MobRech",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Mobile id is required."
+            },
+            "core:number": {
+              "param": ""
+            },
+            "core:maxlength": {
+              "param": "10"
+            }
+          }
+        },
+        "name": "MobRech"
+      },
+      {
+        "type": "number",
+        "fieldName": "MobRechAmount",
+        "options": {
+          "rules": {
+            "core:number": {},
+            "core:maxlength": {
+              "param": "50"
+            }
+          }
+        },
+        "name": "MobRechAmount"
+      },
+      {
+        "type": "text",
+        "fieldName": "opname",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Operator Name is required."
+            },
+            "core:maxlength": {
+              "param": "50"
+            }
+          }
+        },
+        "name": "opname"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "MobRecharge",
+        "module": "dbupdater",
+        "action": "insert",
+        "options": {
+          "connection": "postgres_gcpServer",
+          "sql": {
+            "type": "insert",
+            "values": [
+              {
+                "table": "api_response",
+                "column": "user_id",
+                "type": "text",
+                "value": "{{$_POST.user_id.default(3)}}"
+              },
+              {
+                "table": "api_response",
+                "column": "recharge_mobile",
+                "type": "text",
+                "value": "{{$_POST.recharge_mobile}}"
+              },
+              {
+                "table": "api_response",
+                "column": "operator",
+                "type": "text",
+                "value": "{{$_POST.opname}}"
+              },
+              {
+                "table": "api_response",
+                "column": "amount",
+                "type": "text",
+                "value": "{{$_POST.MobRechAmount}}"
+              },
+              {
+                "table": "api_response",
+                "column": "time",
+                "type": "datetime",
+                "value": "{{NOW}}"
+              }
+            ],
+            "table": "api_response",
+            "query": "INSERT INTO api_response\n(user_id, recharge_mobile, operator, amount, time) VALUES (:P1 /* {{$_POST.user_id.default(3)}} */, :P2 /* {{$_POST.recharge_mobile}} */, :P3 /* {{$_POST.opname}} */, :P4 /* {{$_POST.MobRechAmount}} */, :P5 /* {{NOW}} */)",
+            "params": [
+              {
+                "name": ":P1",
+                "type": "expression",
+                "value": "{{$_POST.user_id.default(3)}}"
+              },
+              {
+                "name": ":P2",
+                "type": "expression",
+                "value": "{{$_POST.recharge_mobile}}"
+              },
+              {
+                "name": ":P3",
+                "type": "expression",
+                "value": "{{$_POST.opname}}"
+              },
+              {
+                "name": ":P4",
+                "type": "expression",
+                "value": "{{$_POST.MobRechAmount}}"
+              },
+              {
+                "name": ":P5",
+                "type": "expression",
+                "value": "{{NOW}}"
+              }
+            ]
+          }
+        },
+        "meta": [
+          {
+            "name": "identity",
+            "type": "text"
+          },
+          {
+            "name": "affected",
+            "type": "number"
+          }
+        ],
+        "disabled": true
+      },
+      {
+        "name": "api",
+        "module": "api",
+        "action": "send",
+        "options": {
+          "url": "https://www.sonakshiworld.com/apiservice.asmx/Recharge",
+          "params": {
+            "apiToken": "{{'a88ccb6aa2a14eaf8eaa1f112c3ff690'}}",
+            "mn": "{{$_POST.MobRech}}",
+            "amt": "{{$_POST.MobRechAmount}}",
+            "reqid": "{{'ssdsfd332'}}",
+            "op": "1"
+          }
+        },
+        "output": true
+      }
+    ]
+  }
+}

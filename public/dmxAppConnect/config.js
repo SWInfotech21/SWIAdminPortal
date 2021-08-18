@@ -178,5 +178,145 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "mobilerecharge": {
+    "dvMRech": {
+      "meta": [
+        {
+          "name": "id",
+          "type": "number"
+        },
+        {
+          "name": "user_id",
+          "type": "text"
+        },
+        {
+          "name": "recharge_mobile",
+          "type": "text"
+        },
+        {
+          "name": "operator",
+          "type": "text"
+        },
+        {
+          "name": "amount",
+          "type": "text"
+        },
+        {
+          "name": "status",
+          "type": "text"
+        },
+        {
+          "name": "order_id",
+          "type": "text"
+        },
+        {
+          "name": "balance",
+          "type": "text"
+        },
+        {
+          "name": "ec",
+          "type": "text"
+        },
+        {
+          "name": "apirefid",
+          "type": "text"
+        },
+        {
+          "name": "remarks",
+          "type": "text"
+        },
+        {
+          "name": "blank1",
+          "type": "text"
+        },
+        {
+          "name": "blank2",
+          "type": "text"
+        },
+        {
+          "name": "field1",
+          "type": "text"
+        },
+        {
+          "name": "field2",
+          "type": "text"
+        },
+        {
+          "name": "time",
+          "type": "datetime"
+        }
+      ],
+      "outputType": "array"
+    },
+    "tableRepeat1": {
+      "meta": [
+        {
+          "name": "id",
+          "type": "number"
+        },
+        {
+          "name": "user_id",
+          "type": "text"
+        },
+        {
+          "name": "recharge_mobile",
+          "type": "text"
+        },
+        {
+          "name": "operator",
+          "type": "text"
+        },
+        {
+          "name": "amount",
+          "type": "text"
+        },
+        {
+          "name": "status",
+          "type": "text"
+        },
+        {
+          "name": "order_id",
+          "type": "text"
+        },
+        {
+          "name": "balance",
+          "type": "text"
+        },
+        {
+          "name": "ec",
+          "type": "text"
+        },
+        {
+          "name": "apirefid",
+          "type": "text"
+        },
+        {
+          "name": "remarks",
+          "type": "text"
+        },
+        {
+          "name": "blank1",
+          "type": "text"
+        },
+        {
+          "name": "blank2",
+          "type": "text"
+        },
+        {
+          "name": "field1",
+          "type": "text"
+        },
+        {
+          "name": "field2",
+          "type": "text"
+        },
+        {
+          "name": "time",
+          "type": "datetime"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });

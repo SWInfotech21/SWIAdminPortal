@@ -10,6 +10,11 @@
       "path": "/users",
       "page": "users",
       "layout": "main"
+    },
+    {
+      "path": "/mobile-recharge",
+      "page": "mobile-recharge",
+      "layout": "main"
     }
   ]
 }

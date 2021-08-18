@@ -140,7 +140,53 @@
                 </div>
             </div>
         </div>
+        <div class="modal" id="modalMobRech" is="dmx-bs5-modal" tabindex="-1">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Mobile Recharge</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form is="dmx-serverconnect-form" id="formMobRech" method="post" action="api/AddMobRech" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formMobRech.data.AddMobRech ? scNotif.success('Recharge Success') : scNotif.success('User updated'); modalMobRech.hide();" dmx-on:error="scNotif.warning('An error occurred'); modalMobRech.hide();">
+                            <input type="hidden" name="MobRechId" dmx-bind:value="ddMobRech.data.id">
+                            <div class="mb-3 row">
+                                <label for="inp_mobile" class="col-sm-2 col-form-label">Mobile</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" id="inp_MobRech" name="MobRech" aria-describedby="inp_MobRech_help" placeholder="Enter mobile bo be recharged" maxlength="10" required="" data-msg-required="Mobile id is required." data-rule-number="">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="inp_name" class="col-sm-2 col-form-label">Operator</label>
+                                <div class="col-sm-10">
+                                    <select type="text" class="form-control" id="inp_opname" name="opname" aria-describedby="inp_opname_help" placeholder="Enter Operator Name" maxlength="50" required="" data-msg-required="Operator Name is required.">
+                                        <option value="1">AirTel</option>
+                                        <option value="4">Vi</option>
+                                        <option value="2">BSNL</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="inp_amount" class="col-sm-2 col-form-label">Amount</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" id="inp_amt" name="MobRechAmount" aria-describedby="inp_amount_help" placeholder="Enter Amount" maxlength="50">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <div class="col-sm-2">&nbsp;</div>
+                                <div class="col-sm-10">
+                                    <button type="submit" class="btn btn-primary">Save<span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span></button>
+                                </div>
+                            </div>
+                        </form>
 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <%- await include(content, locals); %>
 
     </div>

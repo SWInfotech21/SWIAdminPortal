@@ -2,5 +2,9 @@
   "users.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "mobile-recharge.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }
