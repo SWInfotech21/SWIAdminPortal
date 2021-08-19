@@ -148,7 +148,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form is="dmx-serverconnect-form" id="formMobRech" method="post" action="api/AddMobRech" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formMobRech.data.AddMobRech ? scNotif.success('Recharge Success') : scNotif.success('User updated'); modalMobRech.hide();" dmx-on:error="scNotif.warning('An error occurred'); modalMobRech.hide();">
+                        <form is="dmx-serverconnect-form" id="formMobRech" method="post" action="api/AddMobRech" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formMobRech.data.AddMobRech ? scNotif.success('Recharge Success') : scNotif.success(' '); modalMobRech.hide();" dmx-on:error="scNotif.warning('An error occurred'); modalMobRech.hide();">
                             <input type="hidden" name="MobRechId" dmx-bind:value="ddMobRech.data.id">
                             <div class="mb-3 row">
                                 <label for="inp_mobile" class="col-sm-2 col-form-label">Mobile</label>
