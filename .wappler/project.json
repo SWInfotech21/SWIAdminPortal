@@ -18,9 +18,6 @@
     }
   ],
   "projectServerModel": "node",
-  "firebaseProjectID": "",
-  "herokuProjectID": "",
-  "gitURL": "",
   "webRootFolder": "/public",
   "useRouting": true,
   "addBase": true,
@@ -29,11 +26,9 @@
     {
       "name": "Development",
       "remoteURL": "http://localhost:3000/",
-      "access": "local",
-      "localFolder": "file:///F:/SWI/AdminPortal"
+      "access": "local"
     }
   ],
   "activeTarget": "Development",
-  "projectType": "web",
-  "npmInstall": true
+  "projectType": "web"
 }
