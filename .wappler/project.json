@@ -30,5 +30,6 @@
     }
   ],
   "activeTarget": "Development",
-  "projectType": "web"
+  "projectType": "web",
+  "npmInstall": true
 }
