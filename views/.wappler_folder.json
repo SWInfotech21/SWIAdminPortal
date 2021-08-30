@@ -6,5 +6,9 @@
   "mobile-recharge.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "login.ejs": {
+    "layoutPage": "",
+    "description": ""
   }
 }

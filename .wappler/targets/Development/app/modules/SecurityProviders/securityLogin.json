@@ -1,0 +1,37 @@
+{
+  "name": "securityLogin",
+  "module": "auth",
+  "action": "provider",
+  "options": {
+    "secret": "Gw5lRhoUZZekldR",
+    "provider": "Database",
+    "connection": "postgres_gcpServer",
+    "users": {
+      "table": "users",
+      "identity": "id",
+      "username": "email",
+      "password": "password"
+    },
+    "permissions": {
+      "write": {
+        "table": "users",
+        "identity": "id",
+        "conditions": [
+          {
+            "column": "status",
+            "operator": "=",
+            "value": "1"
+          }
+        ]
+      }
+    },
+    "path": "/users",
+    "expires": 50
+  },
+  "meta": [
+    {
+      "name": "identity",
+      "type": "text"
+    }
+  ]
+}

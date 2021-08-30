@@ -10,92 +10,107 @@
   "direct": true,
   "schema": {
     "tables": {
+      "t_recharge_trans": {
+        "db": {
+          "schema": "public"
+        }
+      },
+      "t_sms_log": {
+        "db": {
+          "schema": "public"
+        }
+      },
+      "t_activity_log": {
+        "db": {
+          "schema": "public"
+        }
+      },
+      "t_client_req_log": {
+        "db": {
+          "schema": "public"
+        }
+      },
+      "m_sms_api": {
+        "db": {
+          "schema": "public"
+        }
+      },
+      "t_ticket": {
+        "db": {
+          "schema": "public"
+        }
+      },
+      "m_scheme": {
+        "db": {
+          "schema": "public"
+        }
+      },
+      "m_users": {
+        "db": {
+          "schema": "public"
+        }
+      },
+      "m_service": {
+        "db": {
+          "schema": "public"
+        }
+      },
       "service_provider": {
         "db": {
           "schema": "public"
         }
       },
-      "api_response": {
+      "t_login_history": {
+        "db": {
+          "schema": "public"
+        }
+      },
+      "m_api": {
         "db": {
           "schema": "public"
         },
         "columns": {
           "id": {
             "db": {
-              "type": "integer",
+              "type": "increments",
               "default": "",
-              "primary": false,
+              "primary": true,
               "nullable": false
             }
           },
-          "user_id": {
+          "api_name": {
             "db": {
               "type": "string",
               "primary": false,
               "nullable": false
             }
           },
-          "recharge_mobile": {
+          "api_code": {
             "db": {
               "type": "string",
               "primary": false,
-              "nullable": false
+              "nullable": true
             }
           },
-          "operator": {
+          "username": {
             "db": {
               "type": "string",
               "primary": false,
-              "nullable": false
+              "nullable": true
             }
           },
-          "amount": {
+          "api_password": {
             "db": {
               "type": "string",
               "primary": false,
-              "nullable": false
+              "nullable": true
             }
           },
           "status": {
             "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "order_id": {
-            "db": {
-              "type": "string",
+              "type": "integer",
               "primary": false,
               "nullable": false
-            }
-          },
-          "balance": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "ec": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "apirefid": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "remarks": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
             }
           },
           "blank1": {
@@ -112,27 +127,92 @@
               "nullable": true
             }
           },
-          "field1": {
+          "blank3": {
             "db": {
               "type": "string",
               "primary": false,
               "nullable": true
             }
           },
-          "field2": {
+          "blank4": {
             "db": {
               "type": "string",
               "primary": false,
               "nullable": true
             }
           },
-          "time": {
+          "created_by": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "created_on": {
+            "db": {
+              "type": "timestamp",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "updated_by": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "updated_on": {
+            "db": {
+              "type": "timestamp",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "deleted_by": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "deleted_on": {
             "db": {
               "type": "timestamp",
               "primary": false,
               "nullable": true
             }
           }
+        }
+      },
+      "m_operator": {
+        "db": {
+          "schema": "public"
+        }
+      },
+      "m_commission": {
+        "db": {
+          "schema": "public"
+        }
+      },
+      "m_balance": {
+        "db": {
+          "schema": "public"
+        }
+      },
+      "t_transaction_queue": {
+        "db": {
+          "schema": "public"
+        }
+      },
+      "r_service_auth": {
+        "db": {
+          "schema": "public"
+        }
+      },
+      "m_bank": {
+        "db": {
+          "schema": "public"
         }
       },
       "users": {
@@ -289,6 +369,138 @@
           "deleted_on": {
             "db": {
               "type": "timestamp",
+              "primary": false,
+              "nullable": true
+            }
+          }
+        }
+      },
+      "t_bank_withdrawal": {
+        "db": {
+          "schema": "public"
+        }
+      },
+      "api_response": {
+        "db": {
+          "schema": "public"
+        },
+        "columns": {
+          "id": {
+            "db": {
+              "type": "integer",
+              "default": "",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "user_id": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "recharge_mobile": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "operator": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "amount": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "status": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "order_id": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "balance": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "ec": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "apirefid": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "remarks": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "blank1": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "blank2": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "field1": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "field2": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "time": {
+            "db": {
+              "type": "timestamp",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "live_id": {
+            "db": {
+              "type": "string",
               "primary": false,
               "nullable": true
             }

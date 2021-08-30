@@ -2,28 +2,50 @@
 <html>
 
 <head>
-    <base href="/">
-    <script src="dmxAppConnect/dmxAppConnect.js"></script>
-    <meta charset="UTF-8">
-    <title>Admin Panel</title>
-    <script src="js/jquery-3.5.1.slim.min.js"></script>
-    <script src="dmxAppConnect/dmxRouting/dmxRouting.js" defer=""></script>
-    <link rel="stylesheet" href="dmxAppConnect/dmxBootstrap5TableGenerator/dmxBootstrap5TableGenerator.css" />
-    <script src="dmxAppConnect/dmxBootstrap5Navigation/dmxBootstrap5Navigation.js" defer=""></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="bootstrap/5/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
     <link rel="stylesheet" href="fontawesome5/css/all.min.css" />
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+
     <link rel="stylesheet" href="css/bootstrap-icons.css" />
 
+    <script src="dmxAppConnect/dmxAppConnect.js"></script>
+    <script src="js/jquery-3.5.1.slim.min.js"></script>
+    <script src="dmxAppConnect/dmxRouting/dmxRouting.js" defer=""></script>
+
+    <script src="dmxAppConnect/dmxBootstrap5Navigation/dmxBootstrap5Navigation.js" defer=""></script>
+
     <script src="dmxAppConnect/dmxBootstrap5Modal/dmxBootstrap5Modal.js" defer=""></script>
+
     <link rel="stylesheet" href="dmxAppConnect/dmxNotifications/dmxNotifications.css" />
+
     <script src="dmxAppConnect/dmxNotifications/dmxNotifications.js" defer=""></script>
+
     <link rel="stylesheet" href="dmxAppConnect/dmxValidator/dmxValidator.css" />
+
     <script src="dmxAppConnect/dmxValidator/dmxValidator.js" defer=""></script>
+
     <script src="dmxAppConnect/dmxBrowser/dmxBrowser.js" defer=""></script>
+
     <script src="dmxAppConnect/dmxDataTraversal/dmxDataTraversal.js" defer=""></script>
+
     <script src="dmxAppConnect/dmxFormatter/dmxFormatter.js" defer=""></script>
+
+    <link rel="stylesheet" href="dmxAppConnect/dmxBootstrap5TableGenerator/dmxBootstrap5TableGenerator.css" />
+
+    <base href="/">
+
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+
+    <dmx-serverconnect id="scMobRech" url="api/RechargeAPI"></dmx-serverconnect>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="bootstrap/5/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+
+    <!-- custom navbar & footer -->
+    <link rel="stylesheet" type="text/css" href="./assets/css/styles.min.css" />
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
+    <link id="ctl00_style_color" rel="stylesheet" type="text/css" href="./assets/css/blue1.css" />
+    <!-- custom navbar & footer -->
 </head>
 
 <body is="dmx-app" id="main">
@@ -31,6 +53,181 @@
     <dmx-notifications id="scNotif" newest-on-top="true"></dmx-notifications>
     <div is="dmx-view" id="content">
 
+        <!-- Custom Navbar Starts-->
+        <section id="layout">
+            <div class="logo_profile container_12 bg-warning">
+                <div class="grid_3 logo_img" style="margin-bottom:10px; height:60px; overflow:hidden; margin-top:15px;"> <img src="assets/images/swinfotech.png" id="ctl00_logo_img" width="70px" height="70px" /> </div>
+                <div class="grid_6 logo_img" style="margin-bottom:10px;width:500px; height:80px; overflow:hidden; margin-top:15px;">
+                    Payment Request:<span id="ctl00_lbltolatpayreq">0</span><br />Bank Withdrawal Request:<span id="ctl00_lblbankWithdrawal">0</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pending
+                    Recharge:<span id="ctl00_lbltotalrecharge">2</span><br />
+                    Tikets:<span id="ctl00_lbltotaltikets">2</span><br />
+                    Pending KYC:<span id="ctl00_lblKYC">0</span><br />
+
+                </div>
+                <div class="grid_6 profile_meta" style="width:auto; height:auto; float:right;">
+                    <div class="user_meta" style="margin-top:20px;background-color:#ffffff">
+                        <div class="name" stylealign="center"> <a class="tip-left" title=""><span style="font-size:14px; font-weight:bold;"> <span style="color:#FB4E55;">Logged in as Site Admin</span> -
+                                    <span id="ctl00_lblName">Administrator</span></span> </a> <br />
+                            <b>Balance:</b><span id="ctl00_lblBalance">13179860.000</span><br />
+                            <b>AEPS Balance:</b><span id="ctl00_lblAEPSBalance">11043.000</span><br />
+                            <div> <a onclick="return confirm(&#39;Are you sure? want to logout admin.&#39;);" id="ctl00_lnkLogout" class="button red tip-left small" title="Click Here to Logout" href="javascript:__doPostBack(&#39;ctl00$lnkLogout&#39;,&#39;&#39;)" style="font-weight:bold;">LogOut</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <section id="top">
+                <section id="top_bar">
+                    <section id="main_menu">
+                        <ul id="meenu">
+
+                            <li><a class="sf-with-ul" href="javascript:void(0)">Dashboard<span class="sf-sub-indicator"> »</span></a>
+                                <ul>
+                                    <li><a href="dashboard">Dashboard</a></li>
+                                    <li><a href="#">Dashboard 1</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="sf-with-ul" href="javascript:void(0)">NEW<span class="sf-sub-indicator"> »</span></a>
+                                <ul>
+                                    <li><a href="users">Users</a></li>
+                                    <li><a href="mobile-recharge">Mobile Recharge</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="sf-with-ul" href="javascript:void(0)">Master<span class="sf-sub-indicator"> »</span></a>
+                                <ul>
+                                    <li><a href="Operators.aspx">Operators</a></li>
+                                    <li><a href="OperatorsUpdate.aspx">Operator update</a></li>
+                                    <li><a href="Operatorparam.aspx">Operators Param</a></li>
+                                    <li><a href="Rechargeapi.aspx">Transaction api</a></li>
+
+                                </ul>
+                            </li>
+                            <li><a class="sf-with-ul" href="javascript:void(0)">Setting's<span class="sf-sub-indicator"> »</span></a>
+                                <ul>
+                                    <li><a href="commission.aspx">Commission/API Settings</a></li>
+                                    <li><a href="APIcommission.aspx">API Commission Settings</a></li>
+                                    <li><a href="apiForward.aspx">API Forward</a></li>
+
+                                    <li><a href="transfer_user.aspx">Transfer Retailer</a></li>
+                                    <li><a href="sendSMS.aspx">Send SMS</a></li>
+                                    <li><a href="updateparent.aspx">Update Parent</a></li>
+                                    <li><a href="crdr.aspx">Credits</a></li>
+                                    <li><a href="dr.aspx">Debits</a></li>
+
+
+                                    <li><a class="sf-with-ul" href="javascript:void(0)">Service Fee</a>
+                                        <ul>
+                                            <li><a href="ServiceCharges.aspx">Service Charges Setting</a></li>
+                                            <li><a href="ServiceChargeSettlement.aspx">Service Charges Settlement</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li id="ctl00_liSubAc"><a class="sf-with-ul" href="javascript:void(0)">Manage Customers<span class="sf-sub-indicator"> »</span></a>
+                                <ul>
+                                    <li><a href="addUser.aspx">Add Users</a></li>
+                                    <li><a href=" ViewUser.aspx">View User</a></li>
+                                    <li><a href="ViewKycUser.aspx">View KYC User</a></li>
+                                    <li><a class="sf-with-ul" href="javascript:void(0)">Sales Manager</a>
+                                        <ul>
+                                            <li><a href="addSalesManager.aspx">Add</a></li>
+                                            <li><a href="SalesManeger.aspx">View</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a class="sf-with-ul" href="javascript:void(0)">CC</a>
+                                        <ul>
+                                            <li><a href="addcc.aspx">Add</a></li>
+                                            <li><a href="cc.aspx">View</a></li>
+                                            <li><a href="customercarepage.aspx">Add CustomerCare Pages</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="view_scheme.aspx">View Scheme</a></li>
+                                    <li><a href=" SearchUsers.aspx">Search User</a></li>
+                                    <li><a href="ServiceSetting.aspx">User Services Setting</a></li>
+                                </ul>
+                            </li>
+                            <li id="ctl00_liReport"><a class="sf-with-ul" href="javascript:void(0)">Reports<span class="sf-sub-indicator"> »</span></a>
+                                <ul>
+                                    <li><a href="rechargeHistory.aspx">Transaction Report</a></li>
+                                    <li><a class="sf-with-ul" href="javascript:void(0)">AEPS</a>
+                                        <ul>
+                                            <li><a href="AEPSHistory.aspx">AEPS Report</a></li>
+                                            <li><a href="baSummary.aspx">AEPS Summary</a></li>
+                                            <li><a href="BankWithdrawal.aspx">Bank Withdrawal</a></li>
+                                            <li><a href="reconciliationAeps.aspx">Reconciliation Aeps</a></li>
+                                            <li><a href="BalancemissAeps.aspx">Balance Miss Aeps</a></li>
+                                            <li><a href="UserWiseSummaryAeps.aspx">UserWise Summary Aeps</a></li>
+                                            <li><a href="draaeps.aspx">AEPS Debits</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li><a href="liverechargeHistory.aspx" target="_blank">Live Transaction Report</a></li>
+                                    <li><a href="AccountSummary.aspx">Account Summary Report</a></li>
+                                    <li><a href="balance_report.aspx">Balance Report</a></li>
+                                    <li><a href="api_sales_report.aspx">API Sales Report</a></li>
+                                    <li><a href="transactions.aspx">Transactions</a></li>
+                                    <li><a href="SaleDownline.aspx">Downline Summary</a></li>
+                                    <li><a href="pendingRecharges.aspx">Pending Transactions</a></li>
+
+                                    <li><a href="Refund.aspx">Refund Report</a></li>
+                                    <li><a href="searchTrans.aspx">Update Transaction.</a></li>
+                                    <li><a href="walletReport.aspx">Full E-Wallet Report</a></li>
+                                    <li><a href="smsussd.aspx">SMS Report</a></li>
+                                    <li><a href="bSummary.aspx">Summary</a></li>
+                                    <li><a href="APIReconciliation.aspx">API Reconciliation</a></li>
+                                    <li><a href="OperatorReconciliation.aspx">Operator Reconciliation</a></li>
+                                    <li><a href="UserCommission.aspx">Operator Wise Comm. Report</a></li>
+
+                                    <li><a href="bSummaryOutStanding.aspx">OutStanding Stat. Report</a></li>
+                                    <li><a href="UserUsage.aspx" target="_blank">User GST/TDS</a></li>
+
+                                </ul>
+                            </li>
+                            <li><a href="javascript:void(0)" class="sf-with-ul">My Account<span class="sf-sub-indicator"> »</span></a>
+                                <ul>
+                                    <li><a href="Profile.aspx">Profile</a></li>
+                                    <li><a href="changePassword.aspx">Change Password</a></li>
+                                    <li><a href="changeTpin.aspx">Change TPIN</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="sf-with-ul" href="browseTickets.aspx">Support Center<span class="sf-sub-indicator"> »</span></a>
+                                <ul>
+                                    <li><a href="browseTickets.aspx">Browse Tickets</a></li>
+                                    <li><a href="paymentRequest.aspx">Payment Requests</a></li>
+                                    <li><a href="paymentHistory.aspx">Payment History</a></li>
+                                    <li><a href="SignupRequest.aspx">Signup History</a></li>
+                                    <li><a href="APILOG.aspx">Request Response</a></li>
+                                    <li><a href="Requestlog.aspx">API Request Response</a></li>
+                                    <li><a href="OutStandingCollection.aspx">OutStanding Collection</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="sf-with-ul" href="SearchUsers.aspx">Search<span class="sf-sub-indicator"> »</span></a>
+
+                            </li>
+                        </ul>
+                        <div class="clear"></div>
+                    </section>
+
+                </section>
+
+            </section>
+            <!-- End of #top_bar -->
+            <div class="clear"></div>
+            <section class="top_in">
+
+
+
+                <!-- End of #second_top_bar -->
+            </section>
+            <!-- End of .top_in -->
+
+        </section>
+
+
+        <!-- Custom Navbar Starts -->
+        <!-- Modal Delete Users -->
         <div class="modal" id="modalDelUser" is="dmx-bs5-modal" tabindex="-1">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -69,7 +266,7 @@
                 </div>
             </div>
         </div>
-
+        <!-- Modal Add users -->
         <div class="modal" id="modalAddUsers" is="dmx-bs5-modal" tabindex="-1">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -138,6 +335,7 @@
                 </div>
             </div>
         </div>
+        <!-- Modal Mobile recharge -->
         <div class="modal" id="modalMobRech" is="dmx-bs5-modal" tabindex="-1">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -146,8 +344,8 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form is="dmx-serverconnect-form" id="formMobRech" method="post" action="api/AddMobRech" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formMobRech.data.AddMobRech ? scNotif.success('Recharge Success') : scNotif.success(' '); modalMobRech.hide();" dmx-on:error="scNotif.danger('An error occurred'); modalMobRech.hide();">
-                            <input type="hidden" name="MobRechId" dmx-bind:value="ddMobRech.data.id">
+                        <form is="dmx-serverconnect-form" id="formMobRech" method="post" action="api/AddMobRech" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formMobRech.data.AddMobRech ? scNotif.success('Recharge Success') : scNotif.warning('API hitted, but pending'); modalMobRech.hide();scMobRech.load({},true)" dmx-on:error="scNotif.danger('An error occurred'); modalMobRech.hide();">
+                            <!-- <input type="hidden" name="MobRechId" dmx-bind:value="ddMobRech.data.id"> -->
                             <div class="mb-3 row">
                                 <label for="inp_mobile" class="col-sm-2 col-form-label">Mobile</label>
                                 <div class="col-sm-10">
@@ -160,6 +358,7 @@
                                     <select type="text" class="form-control" id="inp_opname" name="opname" aria-describedby="inp_opname_help" placeholder="Enter Operator Name" maxlength="50" required="" data-msg-required="Operator Name is required.">
                                         <option value="1">AirTel</option>
                                         <option value="4">Vi</option>
+                                        <option value="116">Jio</option>
                                         <option value="2">BSNL</option>
                                     </select>
                                 </div>
@@ -187,12 +386,19 @@
         </div>
         <%- await include(content, locals); %>
 
+
+
+
     </div>
     <script src="bootstrap/5/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 
-
+    <div class="clear"></div>
+    <div class="tst" style="display: none; max-width: 85%; max-height: 90%;"></div>
+    <section class="footer_bar">
+        <div class="copyr"> <span class="ctl00_cpRight">Copyright @ 2021 SWInfotech.in</span></div>
+    </section>
 </body>
 
 </html>

@@ -13,7 +13,7 @@
     },
     "meta": {}
   },
-  "actionFilePath": "file:///F:/SWI/AdminPortal/app/modules/connections/postgres_gcpServer.json",
+  "actionFilePath": "file:///F:/swi/SWIAdminPortal/app/modules/connections/postgres_gcpServer.json",
   "serverType": "node",
   "fileName": "postgres_gcpServer.json"
 }

@@ -37,7 +37,8 @@
             {
               "table": "api_response",
               "column": "id",
-              "direction": "DESC"
+              "direction": "DESC",
+              "recid": 1
             }
           ],
           "query": "SELECT *\nFROM api_response\nORDER BY id DESC",
@@ -161,6 +162,10 @@
             {
               "name": "time",
               "type": "datetime"
+            },
+            {
+              "name": "live_id",
+              "type": "text"
             }
           ]
         }

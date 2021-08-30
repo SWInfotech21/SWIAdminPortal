@@ -1,0 +1,112 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/login.ejs",
+      "linkedForm": "formLogin"
+    },
+    "$_POST": [
+      {
+        "type": "text",
+        "fieldName": "Email",
+        "options": {
+          "rules": {
+            "core:email": {}
+          }
+        },
+        "name": "Email"
+      },
+      {
+        "type": "text",
+        "fieldName": "Password",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Please enter your password"
+            }
+          }
+        },
+        "name": "Password"
+      },
+      {
+        "type": "text",
+        "fieldName": "remember",
+        "name": "remember"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "getSalt",
+        "module": "dbconnector",
+        "action": "single",
+        "options": {
+          "connection": "postgres_gcpServer",
+          "sql": {
+            "type": "SELECT",
+            "columns": [
+              {
+                "table": "users",
+                "column": "saltvalue"
+              }
+            ],
+            "table": {
+              "name": "users"
+            },
+            "joins": [],
+            "query": "SELECT saltvalue\nFROM users\nWHERE email = :P1 /* {{$_POST.Email}} */",
+            "params": [
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P1",
+                "value": "{{$_POST.Email}}"
+              }
+            ],
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "users.email",
+                  "field": "users.email",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "{{$_POST.Email}}",
+                  "data": {
+                    "table": "users",
+                    "column": "email",
+                    "type": "text"
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            }
+          }
+        },
+        "output": true,
+        "meta": [
+          {
+            "name": "saltvalue",
+            "type": "text"
+          }
+        ],
+        "outputType": "object"
+      },
+      {
+        "name": "identity",
+        "module": "auth",
+        "action": "login",
+        "options": {
+          "provider": "securityLogin",
+          "password": "{{$_POST.Password.sha256(getSalt.saltvalue.decrypt('Hw3fTCdch1'))}}",
+          "username": "{{$_POST.Email.lowercase()}}"
+        },
+        "output": true,
+        "meta": []
+      }
+    ]
+  }
+}
