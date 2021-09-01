@@ -1,0 +1,486 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/operators.ejs",
+      "linkedForm": "formAddEditOperator"
+    },
+    "$_POST": [
+      {
+        "type": "text",
+        "fieldName": "OperatorId",
+        "name": "OperatorId"
+      },
+      {
+        "type": "text",
+        "fieldName": "name",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Operator Name is required."
+            },
+            "core:maxlength": {
+              "param": "50"
+            }
+          }
+        },
+        "name": "name"
+      },
+      {
+        "type": "text",
+        "fieldName": "operator_code",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Operator code is required."
+            },
+            "core:maxlength": {
+              "param": "10"
+            }
+          }
+        },
+        "name": "operator_code"
+      },
+      {
+        "type": "text",
+        "fieldName": "api_code",
+        "options": {
+          "rules": {
+            "core:maxlength": {
+              "param": "100"
+            }
+          }
+        },
+        "name": "api_code"
+      },
+      {
+        "type": "text",
+        "fieldName": "service",
+        "name": "service"
+      },
+      {
+        "type": "text",
+        "fieldName": "status",
+        "name": "status"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "",
+        "module": "auth",
+        "action": "restrict",
+        "options": {
+          "provider": "securityLogin",
+          "permissions": [
+            "write"
+          ],
+          "loginUrl": "/views/login.ejs",
+          "forbiddenUrl": "/views/403-forbidden.ejs"
+        },
+        "output": true
+      },
+      {
+        "name": "",
+        "module": "core",
+        "action": "condition",
+        "options": {
+          "if": "{{$_POST.OperatorId != ''}}",
+          "then": {
+            "steps": {
+              "name": "OperatorEdit",
+              "module": "dbupdater",
+              "action": "update",
+              "options": {
+                "connection": "postgres_gcpServer",
+                "sql": {
+                  "type": "update",
+                  "values": [
+                    {
+                      "table": "m_operator",
+                      "column": "operator_name",
+                      "type": "text",
+                      "value": "{{$_POST.name}}"
+                    },
+                    {
+                      "table": "m_operator",
+                      "column": "api_code",
+                      "type": "text",
+                      "value": "{{$_POST.api_code}}"
+                    },
+                    {
+                      "table": "m_operator",
+                      "column": "operator_code",
+                      "type": "text",
+                      "value": "{{$_POST.operator_code}}"
+                    },
+                    {
+                      "table": "m_operator",
+                      "column": "status",
+                      "type": "number",
+                      "value": "{{$_POST.status}}"
+                    },
+                    {
+                      "table": "m_operator",
+                      "column": "operator_type",
+                      "type": "text",
+                      "value": "{{$_POST.operator_type}}"
+                    },
+                    {
+                      "table": "m_operator",
+                      "column": "image",
+                      "type": "text",
+                      "value": "{{$_POST.image}}"
+                    },
+                    {
+                      "table": "m_operator",
+                      "column": "is_bbps",
+                      "type": "number",
+                      "value": "{{$_POST.is_bbps}}"
+                    },
+                    {
+                      "table": "m_operator",
+                      "column": "is_validate",
+                      "type": "number",
+                      "value": "{{$_POST.is_validate}}"
+                    },
+                    {
+                      "table": "m_operator",
+                      "column": "is_partial",
+                      "type": "number",
+                      "value": "{{$_POST.is_partial}}"
+                    },
+                    {
+                      "table": "m_operator",
+                      "column": "allow_type",
+                      "type": "text",
+                      "value": "{{$_POST.allow_type}}"
+                    },
+                    {
+                      "table": "m_operator",
+                      "column": "min_amount",
+                      "type": "number",
+                      "value": "{{$_POST.min_amount}}"
+                    },
+                    {
+                      "table": "m_operator",
+                      "column": "max_amount",
+                      "type": "text",
+                      "value": "{{$_POST.max_amount}}"
+                    },
+                    {
+                      "table": "m_operator",
+                      "column": "min_length",
+                      "type": "number",
+                      "value": "{{$_POST.min_length}}"
+                    },
+                    {
+                      "table": "m_operator",
+                      "column": "max_length",
+                      "type": "number",
+                      "value": "{{$_POST.max_length}}"
+                    },
+                    {
+                      "table": "m_operator",
+                      "column": "is_random",
+                      "type": "number",
+                      "value": "{{$_POST.is_random}}"
+                    },
+                    {
+                      "table": "m_operator",
+                      "column": "rejected_amt",
+                      "type": "number",
+                      "value": "{{$_POST.rejected_amt}}"
+                    },
+                    {
+                      "table": "m_operator",
+                      "column": "created_by",
+                      "type": "number",
+                      "value": "{{$_POST.created_by}}"
+                    },
+                    {
+                      "table": "m_operator",
+                      "column": "created_on",
+                      "type": "datetime",
+                      "value": "{{$_POST.created_on}}"
+                    },
+                    {
+                      "table": "m_operator",
+                      "column": "updated_by",
+                      "type": "number",
+                      "value": "{{$_POST.updated_by}}"
+                    },
+                    {
+                      "table": "m_operator",
+                      "column": "updated_on",
+                      "type": "datetime",
+                      "value": "{{$_POST.updated_on}}"
+                    },
+                    {
+                      "table": "m_operator",
+                      "column": "deleted_by",
+                      "type": "number",
+                      "value": "{{$_POST.deleted_by}}"
+                    },
+                    {
+                      "table": "m_operator",
+                      "column": "deleted_on",
+                      "type": "datetime",
+                      "value": "{{$_POST.deleted_on}}"
+                    }
+                  ],
+                  "table": "m_operator",
+                  "wheres": {
+                    "condition": "AND",
+                    "rules": [
+                      {
+                        "id": "id",
+                        "type": "double",
+                        "operator": "equal",
+                        "value": "{{$_POST.id}}",
+                        "data": {
+                          "column": "id"
+                        },
+                        "operation": "="
+                      }
+                    ]
+                  },
+                  "query": "UPDATE m_operator\nSET operator_name = :P1 /* {{$_POST.name}} */, api_code = :P2 /* {{$_POST.api_code}} */, operator_code = :P3 /* {{$_POST.operator_code}} */, status = :P4 /* {{$_POST.status}} */, operator_type = :P5 /* {{$_POST.operator_type}} */, image = :P6 /* {{$_POST.image}} */, is_bbps = :P7 /* {{$_POST.is_bbps}} */, is_validate = :P8 /* {{$_POST.is_validate}} */, is_partial = :P9 /* {{$_POST.is_partial}} */, allow_type = :P10 /* {{$_POST.allow_type}} */, min_amount = :P11 /* {{$_POST.min_amount}} */, max_amount = :P12 /* {{$_POST.max_amount}} */, min_length = :P13 /* {{$_POST.min_length}} */, max_length = :P14 /* {{$_POST.max_length}} */, is_random = :P15 /* {{$_POST.is_random}} */, rejected_amt = :P16 /* {{$_POST.rejected_amt}} */, created_by = :P17 /* {{$_POST.created_by}} */, created_on = :P18 /* {{$_POST.created_on}} */, updated_by = :P19 /* {{$_POST.updated_by}} */, updated_on = :P20 /* {{$_POST.updated_on}} */, deleted_by = :P21 /* {{$_POST.deleted_by}} */, deleted_on = :P22 /* {{$_POST.deleted_on}} */\nWHERE id = :P23 /* {{$_POST.id}} */",
+                  "params": [
+                    {
+                      "name": ":P1",
+                      "type": "expression",
+                      "value": "{{$_POST.name}}"
+                    },
+                    {
+                      "name": ":P2",
+                      "type": "expression",
+                      "value": "{{$_POST.api_code}}"
+                    },
+                    {
+                      "name": ":P3",
+                      "type": "expression",
+                      "value": "{{$_POST.operator_code}}"
+                    },
+                    {
+                      "name": ":P4",
+                      "type": "expression",
+                      "value": "{{$_POST.status}}"
+                    },
+                    {
+                      "name": ":P5",
+                      "type": "expression",
+                      "value": "{{$_POST.operator_type}}"
+                    },
+                    {
+                      "name": ":P6",
+                      "type": "expression",
+                      "value": "{{$_POST.image}}"
+                    },
+                    {
+                      "name": ":P7",
+                      "type": "expression",
+                      "value": "{{$_POST.is_bbps}}"
+                    },
+                    {
+                      "name": ":P8",
+                      "type": "expression",
+                      "value": "{{$_POST.is_validate}}"
+                    },
+                    {
+                      "name": ":P9",
+                      "type": "expression",
+                      "value": "{{$_POST.is_partial}}"
+                    },
+                    {
+                      "name": ":P10",
+                      "type": "expression",
+                      "value": "{{$_POST.allow_type}}"
+                    },
+                    {
+                      "name": ":P11",
+                      "type": "expression",
+                      "value": "{{$_POST.min_amount}}"
+                    },
+                    {
+                      "name": ":P12",
+                      "type": "expression",
+                      "value": "{{$_POST.max_amount}}"
+                    },
+                    {
+                      "name": ":P13",
+                      "type": "expression",
+                      "value": "{{$_POST.min_length}}"
+                    },
+                    {
+                      "name": ":P14",
+                      "type": "expression",
+                      "value": "{{$_POST.max_length}}"
+                    },
+                    {
+                      "name": ":P15",
+                      "type": "expression",
+                      "value": "{{$_POST.is_random}}"
+                    },
+                    {
+                      "name": ":P16",
+                      "type": "expression",
+                      "value": "{{$_POST.rejected_amt}}"
+                    },
+                    {
+                      "name": ":P17",
+                      "type": "expression",
+                      "value": "{{$_POST.created_by}}"
+                    },
+                    {
+                      "name": ":P18",
+                      "type": "expression",
+                      "value": "{{$_POST.created_on}}"
+                    },
+                    {
+                      "name": ":P19",
+                      "type": "expression",
+                      "value": "{{$_POST.updated_by}}"
+                    },
+                    {
+                      "name": ":P20",
+                      "type": "expression",
+                      "value": "{{$_POST.updated_on}}"
+                    },
+                    {
+                      "name": ":P21",
+                      "type": "expression",
+                      "value": "{{$_POST.deleted_by}}"
+                    },
+                    {
+                      "name": ":P22",
+                      "type": "expression",
+                      "value": "{{$_POST.deleted_on}}"
+                    },
+                    {
+                      "operator": "equal",
+                      "type": "expression",
+                      "name": ":P23",
+                      "value": "{{$_POST.id}}"
+                    }
+                  ]
+                }
+              },
+              "meta": [
+                {
+                  "name": "affected",
+                  "type": "number"
+                }
+              ]
+            }
+          },
+          "else": {
+            "steps": {
+              "name": "insert",
+              "module": "dbupdater",
+              "action": "insert",
+              "options": {
+                "connection": "postgres_gcpServer",
+                "sql": {
+                  "type": "insert",
+                  "values": [
+                    {
+                      "table": "m_operator",
+                      "column": "operator_name",
+                      "type": "text",
+                      "value": "{{$_POST.name.lowercase()}}"
+                    },
+                    {
+                      "table": "m_operator",
+                      "column": "service_id",
+                      "type": "number",
+                      "value": "{{$_POST.service}}"
+                    },
+                    {
+                      "table": "m_operator",
+                      "column": "api_code",
+                      "type": "text",
+                      "value": "{{$_POST.api_code}}"
+                    },
+                    {
+                      "table": "m_operator",
+                      "column": "operator_code",
+                      "type": "text",
+                      "value": "{{$_POST.operator_code}}"
+                    },
+                    {
+                      "table": "m_operator",
+                      "column": "status",
+                      "type": "number",
+                      "value": "{{$_POST.status}}"
+                    },
+                    {
+                      "table": "m_operator",
+                      "column": "created_by",
+                      "type": "number",
+                      "value": "1"
+                    },
+                    {
+                      "table": "m_operator",
+                      "column": "created_on",
+                      "type": "datetime",
+                      "value": "{{NOW}}"
+                    }
+                  ],
+                  "table": "m_operator",
+                  "returning": "id",
+                  "query": "INSERT INTO m_operator\n(operator_name, service_id, api_code, operator_code, status, created_by, created_on) VALUES (:P1 /* {{$_POST.name.lowercase()}} */, :P2 /* {{$_POST.service}} */, :P3 /* {{$_POST.api_code}} */, :P4 /* {{$_POST.operator_code}} */, :P5 /* {{$_POST.status}} */, '1', :P6 /* {{NOW}} */)",
+                  "params": [
+                    {
+                      "name": ":P1",
+                      "type": "expression",
+                      "value": "{{$_POST.name.lowercase()}}"
+                    },
+                    {
+                      "name": ":P2",
+                      "type": "expression",
+                      "value": "{{$_POST.service}}"
+                    },
+                    {
+                      "name": ":P3",
+                      "type": "expression",
+                      "value": "{{$_POST.api_code}}"
+                    },
+                    {
+                      "name": ":P4",
+                      "type": "expression",
+                      "value": "{{$_POST.operator_code}}"
+                    },
+                    {
+                      "name": ":P5",
+                      "type": "expression",
+                      "value": "{{$_POST.status}}"
+                    },
+                    {
+                      "name": ":P6",
+                      "type": "expression",
+                      "value": "{{NOW}}"
+                    }
+                  ]
+                }
+              },
+              "meta": [
+                {
+                  "name": "identity",
+                  "type": "text"
+                },
+                {
+                  "name": "affected",
+                  "type": "number"
+                }
+              ]
+            }
+          }
+        },
+        "outputType": "boolean"
+      }
+    ]
+  }
+}

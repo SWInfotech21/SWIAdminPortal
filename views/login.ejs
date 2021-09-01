@@ -31,13 +31,13 @@
   }
 ]</script>
 
-    <dmx-session-manager id="session1"></dmx-session-manager>
-    <dmx-cookie-manager id="cookies1"></dmx-cookie-manager>
+    <dmx-session-manager id="sessionLogin"></dmx-session-manager>
+    <dmx-cookie-manager id="cookiesLogin"></dmx-cookie-manager>
     <div is="dmx-browser" id="browser1"></div>
     <dmx-value id="varLogin" dmx-bind:value="'Login'"></dmx-value>
     <dmx-value id="varInvalidLogin" dmx-bind:value="0"></dmx-value>
     <dmx-value id="varCountUser" dmx-bind:value="0"></dmx-value>
-    <dmx-notifications id="Notification">
+    <dmx-notifications id="Notification" newest-on-top="true">
 
     </dmx-notifications>
     <header class="text-center">
@@ -55,7 +55,7 @@
                             <div class="card-body px-5">
                                 <h1 class="sd-fs-45 sd-fs-35 sd-fw-500 text-black mb-3">Login</h1>
                                 <p class="px-1 mb-3 sd-fs-12 sd-fw-500 text-black">Enter your credentials below</p>
-                                <form id="formLogin" is="dmx-serverconnect-form" method="post" action="api/login" dmx-on:success="browser1.goto('users')" dmx-on:unauthorized="varInvalidLogin.setValue(1);formLogin.reset;" dmx-on:forbidden="Notification.danger('This user doesnot exists, please try again!')">
+                                <form id="formLogin" is="dmx-serverconnect-form" method="post" action="api/Users/login" dmx-on:success="browser1.goto('users')" dmx-on:unauthorized="varInvalidLogin.setValue(1);formLogin.reset;" dmx-on:forbidden="Notification.danger('This user doesnot exists, please try again!')">
                                     <div class="input-group mb-4">
                                         <span class="input-group-text border-1 border-end-0 bg-transparent"><i class="fa fa-user"></i></span>
                                         <input type="email" class="border-1 border-start-0 form-control" id="" name="Email" placeholder="Email" data-rule-email="true">
@@ -72,7 +72,7 @@
                                     </p>
                                     <p class="mb-4 sd-fs-12 sd-fw-500 text-center text-danger mb-4" dmx-hide="!varCountUser.value">User Already Exists. Please Try again.
                                     </p>
-                                    <button id="submitLogin" class="btn btn-primary text-white w-100 mt-2 mb-3" type="submit">Log in <span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span>
+                                    <button id="submitLogin" class="btn btn-primary text-white w-100 mt-2 mb-3" type="submit" dmx-bind:disabled="state.executing">Log in <span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span>
                                     </button>
                                     <a href="#" class="d-flex justify-content-center sd-fs-12 sd-fw-500 text-primary" internal data-bs-toggle="button" dmx-on:click="varLogin.setValue('ForgotPass')">Forgot password?</a>
                                 </form>

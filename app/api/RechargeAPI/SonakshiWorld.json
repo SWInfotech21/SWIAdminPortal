@@ -1,0 +1,78 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/layouts/main.ejs",
+      "linkedForm": "formMobRech"
+    },
+    "$_POST": [
+      {
+        "type": "number",
+        "fieldName": "MobRech",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Mobile id is required."
+            },
+            "core:number": {
+              "param": ""
+            },
+            "core:maxlength": {
+              "param": "10"
+            }
+          }
+        },
+        "name": "MobRech"
+      },
+      {
+        "type": "number",
+        "fieldName": "MobRechAmount",
+        "options": {
+          "rules": {
+            "core:number": {},
+            "core:maxlength": {
+              "param": "50"
+            }
+          }
+        },
+        "name": "MobRechAmount"
+      },
+      {
+        "type": "text",
+        "fieldName": "opname",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Operator Name is required."
+            },
+            "core:maxlength": {
+              "param": "50"
+            }
+          }
+        },
+        "name": "opname"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "api",
+      "module": "api",
+      "action": "send",
+      "options": {
+        "url": "https://www.sonakshiworld.com/apiservice.asmx/Recharge",
+        "params": {
+          "apiToken": "{{'a88ccb6aa2a14eaf8eaa1f112c3ff690'}}",
+          "mn": "{{$_POST.MobRech}}",
+          "op": "{{$_POST.opname}}",
+          "amt": "{{$_POST.MobRechAmount}}",
+          "reqid": "{{NOW.md5(1234).substr(1, 6)}}",
+          "field1": "",
+          "field2": ""
+        }
+      },
+      "output": true
+    }
+  }
+}

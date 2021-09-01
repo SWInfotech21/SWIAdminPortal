@@ -318,5 +318,371 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "operators": {
+    "dvOperator": {
+      "meta": [
+        {
+          "name": "id",
+          "type": "text"
+        },
+        {
+          "name": "operator_name",
+          "type": "text"
+        },
+        {
+          "name": "service_id",
+          "type": "number"
+        },
+        {
+          "name": "api_code",
+          "type": "text"
+        },
+        {
+          "name": "operator_code",
+          "type": "text"
+        },
+        {
+          "name": "status",
+          "type": "number"
+        },
+        {
+          "name": "operator_type",
+          "type": "text"
+        },
+        {
+          "name": "image",
+          "type": "text"
+        },
+        {
+          "name": "is_bbps",
+          "type": "number"
+        },
+        {
+          "name": "is_validate",
+          "type": "number"
+        },
+        {
+          "name": "is_partial",
+          "type": "number"
+        },
+        {
+          "name": "allow_type",
+          "type": "text"
+        },
+        {
+          "name": "min_amount",
+          "type": "number"
+        },
+        {
+          "name": "max_amount",
+          "type": "text"
+        },
+        {
+          "name": "min_length",
+          "type": "number"
+        },
+        {
+          "name": "max_length",
+          "type": "number"
+        },
+        {
+          "name": "is_random",
+          "type": "number"
+        },
+        {
+          "name": "rejected_amt",
+          "type": "number"
+        },
+        {
+          "name": "created_by",
+          "type": "number"
+        },
+        {
+          "name": "created_on",
+          "type": "datetime"
+        },
+        {
+          "name": "updated_by",
+          "type": "number"
+        },
+        {
+          "name": "updated_on",
+          "type": "datetime"
+        },
+        {
+          "name": "deleted_by",
+          "type": "number"
+        },
+        {
+          "name": "deleted_on",
+          "type": "datetime"
+        }
+      ],
+      "outputType": "array"
+    },
+    "ddOperator": {
+      "meta": [
+        {
+          "name": "operator_name",
+          "type": "text"
+        },
+        {
+          "name": "service_id",
+          "type": "number"
+        },
+        {
+          "name": "api_code",
+          "type": "text"
+        },
+        {
+          "name": "operator_code",
+          "type": "text"
+        },
+        {
+          "name": "status",
+          "type": "number"
+        },
+        {
+          "name": "operator_type",
+          "type": "text"
+        },
+        {
+          "name": "image",
+          "type": "text"
+        },
+        {
+          "name": "is_bbps",
+          "type": "number"
+        },
+        {
+          "name": "is_validate",
+          "type": "number"
+        },
+        {
+          "name": "is_partial",
+          "type": "number"
+        },
+        {
+          "name": "allow_type",
+          "type": "text"
+        },
+        {
+          "name": "min_amount",
+          "type": "number"
+        },
+        {
+          "name": "max_amount",
+          "type": "text"
+        },
+        {
+          "name": "min_length",
+          "type": "number"
+        },
+        {
+          "name": "max_length",
+          "type": "number"
+        },
+        {
+          "name": "created_by",
+          "type": "number"
+        },
+        {
+          "name": "created_on",
+          "type": "datetime"
+        },
+        {
+          "name": "updated_by",
+          "type": "number"
+        },
+        {
+          "name": "service_name",
+          "type": "text"
+        },
+        {
+          "name": "service_type",
+          "type": "text"
+        },
+        {
+          "name": "id",
+          "type": "text"
+        }
+      ],
+      "outputType": "array"
+    },
+    "tableRepeat1": {
+      "meta": [
+        {
+          "name": "$index",
+          "type": "number"
+        },
+        {
+          "name": "$key",
+          "type": "text"
+        },
+        {
+          "name": "$value",
+          "type": "object"
+        },
+        {
+          "name": "op_id",
+          "type": "text"
+        },
+        {
+          "name": "operator_name",
+          "type": "text"
+        },
+        {
+          "name": "service_id",
+          "type": "number"
+        },
+        {
+          "name": "api_code",
+          "type": "text"
+        },
+        {
+          "name": "operator_code",
+          "type": "text"
+        },
+        {
+          "name": "status",
+          "type": "number"
+        },
+        {
+          "name": "operator_type",
+          "type": "text"
+        },
+        {
+          "name": "is_validate",
+          "type": "number"
+        },
+        {
+          "name": "is_bbps",
+          "type": "number"
+        },
+        {
+          "name": "is_partial",
+          "type": "number"
+        },
+        {
+          "name": "min_amount",
+          "type": "number"
+        },
+        {
+          "name": "max_amount",
+          "type": "text"
+        },
+        {
+          "name": "min_length",
+          "type": "number"
+        },
+        {
+          "name": "max_length",
+          "type": "number"
+        },
+        {
+          "name": "allow_type",
+          "type": "text"
+        },
+        {
+          "name": "created_on",
+          "type": "datetime"
+        },
+        {
+          "name": "created_by",
+          "type": "number"
+        },
+        {
+          "name": "service_name",
+          "type": "text"
+        },
+        {
+          "name": "service_type",
+          "type": "text"
+        }
+      ],
+      "outputType": "array"
+    },
+    "ddOperators": {
+      "meta": [
+        {
+          "name": "op_id",
+          "type": "text"
+        },
+        {
+          "name": "operator_name",
+          "type": "text"
+        },
+        {
+          "name": "service_id",
+          "type": "number"
+        },
+        {
+          "name": "api_code",
+          "type": "text"
+        },
+        {
+          "name": "operator_code",
+          "type": "text"
+        },
+        {
+          "name": "status",
+          "type": "number"
+        },
+        {
+          "name": "operator_type",
+          "type": "text"
+        },
+        {
+          "name": "is_validate",
+          "type": "number"
+        },
+        {
+          "name": "is_bbps",
+          "type": "number"
+        },
+        {
+          "name": "is_partial",
+          "type": "number"
+        },
+        {
+          "name": "min_amount",
+          "type": "number"
+        },
+        {
+          "name": "max_amount",
+          "type": "text"
+        },
+        {
+          "name": "min_length",
+          "type": "number"
+        },
+        {
+          "name": "max_length",
+          "type": "number"
+        },
+        {
+          "name": "allow_type",
+          "type": "text"
+        },
+        {
+          "name": "created_on",
+          "type": "datetime"
+        },
+        {
+          "name": "created_by",
+          "type": "number"
+        },
+        {
+          "name": "service_name",
+          "type": "text"
+        },
+        {
+          "name": "service_type",
+          "type": "text"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });

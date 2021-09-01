@@ -5,9 +5,9 @@
 File :  Modified Styles For Green Template*/
 
 /*Styles from main_menu.css*/
-body {
+/* body {
 	background:url(groovepaper_006699.png);
-}
+} */
 #color_preview{ background:#006699 !important;}
 #color_preview span{ color:#FFF !important;}
 .sf-menu {
@@ -277,14 +277,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3AA6ED', end
 	#meenu {
 		
 		margin: 0px auto;
-		border: 1px solid #1fe2c6;
-		background-color: #1fe2c6;
-		background-image: -moz-linear-gradient(#07a68f, #1fe2c6); 
-		background-image: -webkit-gradient(linear, left top, left bottom, from(#07a68f), to(#1fe2c6));	
-		background-image: -webkit-linear-gradient(#07a68f, #1fe2c6);	
-		background-image: -o-linear-gradient(#07a68f, #1fe2c6);
-		background-image: -ms-linear-gradient(#07a68f, #1fe2c6);
-		background-image: linear-gradient(#07a68f, #1fe2c6);
+		border: 1px solid #1ebea5;
+		background-color: #1ebea5;
+		background-image: -moz-linear-gradient(#07a68f, #1ebea5); 
+		background-image: -webkit-gradient(linear, left top, left bottom, from(#07a68f), to(#1ebea5));	
+		background-image: -webkit-linear-gradient(#07a68f, #1ebea5);	
+		background-image: -o-linear-gradient(#07a68f, #1ebea5);
+		background-image: -ms-linear-gradient(#07a68f, #1ebea5);
+		background-image: linear-gradient(#07a68f, #1ebea5);
 		-moz-border-radius: 6px;
 		-webkit-border-radius: 6px;
 		border-radius: 6px;
@@ -311,7 +311,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3AA6ED', end
 		float: left;
 		
 		
-		border-right: 1px solid #1fe2c6;
+		border-right: 1px solid #1ebea5;
 		
 		
 		-moz-box-shadow: 1px 0 0 #07a68f;
@@ -327,7 +327,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3AA6ED', end
 		text-transform: uppercase;
 		font: bold 12px Arial, Helvetica;
 		text-decoration: none;
-		text-shadow: 0 1px 0 #000;
+	/*	text-shadow: 0 1px 0 #000;*/
 	}
 	
 	#meenu li:hover > a {
@@ -348,12 +348,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3AA6ED', end
 		left: 0;
 		z-index: 1;    
 		background: #07a68f;
-		background: -moz-linear-gradient(#07a68f, #1fe2c6);
-		background-image: -webkit-gradient(linear, left top, left bottom, from(#07a68f), to(#1fe2c6));
-		background: -webkit-linear-gradient(#07a68f, #1fe2c6);    
-		background: -o-linear-gradient(#07a68f, #1fe2c6);	
-		background: -ms-linear-gradient(#07a68f, #1fe2c6);	
-		background: linear-gradient(#07a68f, #1fe2c6);
+		background: -moz-linear-gradient(#07a68f, #1ebea5);
+		background-image: -webkit-gradient(linear, left top, left bottom, from(#07a68f), to(#1ebea5));
+		background: -webkit-linear-gradient(#07a68f, #1ebea5);    
+		background: -o-linear-gradient(#07a68f, #1ebea5);	
+		background: -ms-linear-gradient(#07a68f, #1ebea5);	
+		background: linear-gradient(#07a68f, #1ebea5);
 		-moz-box-shadow: 0 -1px rgba(255,255,255,.3);
 		-webkit-box-shadow: 0 -1px 0 rgba(255,255,255,.3);
 		box-shadow: 0 -1px 0 rgba(255,255,255,.3);	
@@ -391,9 +391,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3AA6ED', end
 		
 		
 		
-		-moz-box-shadow: 0 1px 0 #1fe2c6, 0 2px 0 #0d7eb7;
-		-webkit-box-shadow: 0 1px 0 #1fe2c6, 0 2px 0 #0d7eb7;
-		box-shadow: 0 1px 0 #1fe2c6, 0 2px 0 #0d7eb7;
+		-moz-box-shadow: 0 1px 0 #1ebea5, 0 2px 0 #0fa991;
+		-webkit-box-shadow: 0 1px 0 #1ebea5, 0 2px 0 #0fa991;
+		box-shadow: 0 1px 0 #1ebea5, 0 2px 0 #0fa991;
 	}
 	
 	#meenu ul li:last-child {   

@@ -1,0 +1,167 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "offset"
+      },
+      {
+        "type": "text",
+        "name": "limit"
+      },
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "",
+        "module": "auth",
+        "action": "restrict",
+        "options": {
+          "provider": "securityLogin",
+          "permissions": [
+            "write"
+          ],
+          "loginUrl": "/views/login.ejs",
+          "forbiddenUrl": "/views/403-forbidden.ejs"
+        }
+      },
+      {
+        "name": "FetchServices",
+        "module": "dbconnector",
+        "action": "paged",
+        "options": {
+          "connection": "postgres_gcpServer",
+          "sql": {
+            "type": "SELECT",
+            "columns": [],
+            "table": {
+              "name": "m_service"
+            },
+            "joins": [],
+            "query": "SELECT *\nFROM m_service",
+            "params": []
+          }
+        },
+        "output": true,
+        "meta": [
+          {
+            "name": "offset",
+            "type": "number"
+          },
+          {
+            "name": "limit",
+            "type": "number"
+          },
+          {
+            "name": "total",
+            "type": "number"
+          },
+          {
+            "name": "page",
+            "type": "object",
+            "sub": [
+              {
+                "name": "offset",
+                "type": "object",
+                "sub": [
+                  {
+                    "name": "first",
+                    "type": "number"
+                  },
+                  {
+                    "name": "prev",
+                    "type": "number"
+                  },
+                  {
+                    "name": "next",
+                    "type": "number"
+                  },
+                  {
+                    "name": "last",
+                    "type": "number"
+                  }
+                ]
+              },
+              {
+                "name": "current",
+                "type": "number"
+              },
+              {
+                "name": "total",
+                "type": "number"
+              }
+            ]
+          },
+          {
+            "name": "data",
+            "type": "array",
+            "sub": [
+              {
+                "name": "id",
+                "type": "text"
+              },
+              {
+                "name": "service_name",
+                "type": "text"
+              },
+              {
+                "name": "service_desc",
+                "type": "text"
+              },
+              {
+                "name": "service_type",
+                "type": "text"
+              },
+              {
+                "name": "is_active",
+                "type": "number"
+              },
+              {
+                "name": "is_bbps",
+                "type": "number"
+              },
+              {
+                "name": "is_auth",
+                "type": "number"
+              },
+              {
+                "name": "created_by",
+                "type": "number"
+              },
+              {
+                "name": "created_on",
+                "type": "datetime"
+              },
+              {
+                "name": "updated_by",
+                "type": "number"
+              },
+              {
+                "name": "updated_on",
+                "type": "datetime"
+              },
+              {
+                "name": "deleted_by",
+                "type": "number"
+              },
+              {
+                "name": "deleted_on",
+                "type": "datetime"
+              }
+            ]
+          }
+        ],
+        "outputType": "object"
+      }
+    ]
+  }
+}

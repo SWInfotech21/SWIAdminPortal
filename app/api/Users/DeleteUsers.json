@@ -19,50 +19,17 @@
   "exec": {
     "steps": [
       {
-        "name": "delUsers",
-        "module": "dbupdater",
-        "action": "delete",
+        "name": "",
+        "module": "auth",
+        "action": "restrict",
         "options": {
-          "connection": "postgres_gcpServer",
-          "sql": {
-            "type": "delete",
-            "table": "users",
-            "wheres": {
-              "condition": "AND",
-              "rules": [
-                {
-                  "id": "id",
-                  "field": "id",
-                  "type": "double",
-                  "operator": "equal",
-                  "value": "{{$_POST.UserId}}",
-                  "data": {
-                    "column": "id"
-                  },
-                  "operation": "="
-                }
-              ],
-              "conditional": null,
-              "valid": true
-            },
-            "query": "DELETE\nFROM users\nWHERE id = :P1 /* {{$_POST.UserId}} */",
-            "params": [
-              {
-                "operator": "equal",
-                "type": "expression",
-                "name": ":P1",
-                "value": "{{$_POST.UserId}}"
-              }
-            ]
-          }
-        },
-        "meta": [
-          {
-            "name": "affected",
-            "type": "number"
-          }
-        ],
-        "disabled": true
+          "provider": "securityLogin",
+          "permissions": [
+            "write"
+          ],
+          "loginUrl": "/views/login.ejs",
+          "forbiddenUrl": "/views/403-forbidden.ejs"
+        }
       },
       {
         "name": "DelUsers",

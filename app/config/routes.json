@@ -19,6 +19,20 @@
     {
       "path": "/login",
       "page": "login"
+    },
+    {
+      "path": "/operators",
+      "page": "operators",
+      "layout": "main"
+    },
+    {
+      "path": "/services",
+      "page": "services",
+      "layout": "main"
+    },
+    {
+      "path": "/403-forbidden",
+      "page": "403-forbidden"
     }
   ]
 }

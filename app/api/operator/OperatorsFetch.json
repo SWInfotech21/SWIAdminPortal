@@ -1,0 +1,299 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "offset"
+      },
+      {
+        "type": "text",
+        "name": "limit"
+      },
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "",
+        "module": "auth",
+        "action": "restrict",
+        "options": {
+          "provider": "securityLogin",
+          "permissions": [
+            "write"
+          ],
+          "loginUrl": "/views/login.ejs",
+          "forbiddenUrl": "/views/403-forbidden.ejs"
+        }
+      },
+      {
+        "name": "OperatorFetch",
+        "module": "dbconnector",
+        "action": "paged",
+        "options": {
+          "connection": "postgres_gcpServer",
+          "sql": {
+            "type": "SELECT",
+            "columns": [
+              {
+                "table": "m_operator",
+                "column": "id",
+                "alias": "op_id"
+              },
+              {
+                "table": "m_operator",
+                "column": "operator_name"
+              },
+              {
+                "table": "m_operator",
+                "column": "service_id"
+              },
+              {
+                "table": "m_operator",
+                "column": "api_code"
+              },
+              {
+                "table": "m_operator",
+                "column": "operator_code"
+              },
+              {
+                "table": "m_operator",
+                "column": "status"
+              },
+              {
+                "table": "m_operator",
+                "column": "operator_type"
+              },
+              {
+                "table": "m_operator",
+                "column": "is_validate"
+              },
+              {
+                "table": "m_operator",
+                "column": "is_bbps"
+              },
+              {
+                "table": "m_operator",
+                "column": "is_partial"
+              },
+              {
+                "table": "m_operator",
+                "column": "min_amount"
+              },
+              {
+                "table": "m_operator",
+                "column": "max_amount"
+              },
+              {
+                "table": "m_operator",
+                "column": "min_length"
+              },
+              {
+                "table": "m_operator",
+                "column": "max_length"
+              },
+              {
+                "table": "m_operator",
+                "column": "allow_type"
+              },
+              {
+                "table": "m_operator",
+                "column": "created_on"
+              },
+              {
+                "table": "m_operator",
+                "column": "created_by"
+              },
+              {
+                "table": "op_service",
+                "column": "service_name"
+              },
+              {
+                "table": "op_service",
+                "column": "service_type"
+              }
+            ],
+            "table": {
+              "name": "m_operator"
+            },
+            "joins": [
+              {
+                "table": "m_service",
+                "column": "*",
+                "alias": "op_service",
+                "type": "INNER",
+                "clauses": {
+                  "condition": "AND",
+                  "rules": [
+                    {
+                      "table": "op_service",
+                      "column": "id",
+                      "operator": "equal",
+                      "value": {
+                        "table": "m_operator",
+                        "column": "service_id"
+                      },
+                      "operation": "="
+                    }
+                  ]
+                }
+              }
+            ],
+            "orders": [
+              {
+                "table": "m_operator",
+                "column": "id",
+                "direction": "DESC",
+                "recid": 1
+              }
+            ],
+            "query": "SELECT m_operator.id AS op_id, m_operator.operator_name, m_operator.service_id, m_operator.api_code, m_operator.operator_code, m_operator.status, m_operator.operator_type, m_operator.is_validate, m_operator.is_bbps, m_operator.is_partial, m_operator.min_amount, m_operator.max_amount, m_operator.min_length, m_operator.max_length, m_operator.allow_type, m_operator.created_on, m_operator.created_by, op_service.service_name, op_service.service_type\nFROM m_operator\nINNER JOIN m_service AS op_service ON (op_service.id = m_operator.service_id)\nORDER BY m_operator.id DESC",
+            "params": []
+          }
+        },
+        "output": true,
+        "meta": [
+          {
+            "name": "offset",
+            "type": "number"
+          },
+          {
+            "name": "limit",
+            "type": "number"
+          },
+          {
+            "name": "total",
+            "type": "number"
+          },
+          {
+            "name": "page",
+            "type": "object",
+            "sub": [
+              {
+                "name": "offset",
+                "type": "object",
+                "sub": [
+                  {
+                    "name": "first",
+                    "type": "number"
+                  },
+                  {
+                    "name": "prev",
+                    "type": "number"
+                  },
+                  {
+                    "name": "next",
+                    "type": "number"
+                  },
+                  {
+                    "name": "last",
+                    "type": "number"
+                  }
+                ]
+              },
+              {
+                "name": "current",
+                "type": "number"
+              },
+              {
+                "name": "total",
+                "type": "number"
+              }
+            ]
+          },
+          {
+            "name": "data",
+            "type": "array",
+            "sub": [
+              {
+                "name": "op_id",
+                "type": "text"
+              },
+              {
+                "name": "operator_name",
+                "type": "text"
+              },
+              {
+                "name": "service_id",
+                "type": "number"
+              },
+              {
+                "name": "api_code",
+                "type": "text"
+              },
+              {
+                "name": "operator_code",
+                "type": "text"
+              },
+              {
+                "name": "status",
+                "type": "number"
+              },
+              {
+                "name": "operator_type",
+                "type": "text"
+              },
+              {
+                "name": "is_validate",
+                "type": "number"
+              },
+              {
+                "name": "is_bbps",
+                "type": "number"
+              },
+              {
+                "name": "is_partial",
+                "type": "number"
+              },
+              {
+                "name": "min_amount",
+                "type": "number"
+              },
+              {
+                "name": "max_amount",
+                "type": "text"
+              },
+              {
+                "name": "min_length",
+                "type": "number"
+              },
+              {
+                "name": "max_length",
+                "type": "number"
+              },
+              {
+                "name": "allow_type",
+                "type": "text"
+              },
+              {
+                "name": "created_on",
+                "type": "datetime"
+              },
+              {
+                "name": "created_by",
+                "type": "number"
+              },
+              {
+                "name": "service_name",
+                "type": "text"
+              },
+              {
+                "name": "service_type",
+                "type": "text"
+              }
+            ]
+          }
+        ],
+        "outputType": "object"
+      }
+    ]
+  }
+}

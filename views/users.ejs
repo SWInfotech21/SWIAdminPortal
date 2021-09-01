@@ -1,6 +1,6 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="users" appConnect="local" components="{dmxBootstrap5TableGenerator:{},dmxBootstrap5Navigation:{},dmxDataTraversal:{}}" -->
 <meta name="ac:route" content="/users">
-<dmx-serverconnect id="scUsers" url="api/Users"></dmx-serverconnect>
+<dmx-serverconnect id="scUsers" url="api/Users/Users"></dmx-serverconnect>
 <dmx-data-view id="dvUsers" dmx-bind:data="scUsers.data.FetchUsers.data" pageSize="100" page="10"></dmx-data-view>
 <dmx-data-detail id="ddUsers" dmx-bind:data="dvUsers.data" key="id"></dmx-data-detail>
 <!-- <nav class="navbar navbar-expand-lg navbar-light sticky-top bg-warning" id="mainNavbar" style="background-color: #e3f2fd;">
@@ -46,7 +46,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1 id="Users" class="text-center align-self-center">SW Infotech Mobile Recharge</h1>
+                <h1 id="Users" class="text-center align-self-center">SW Infotech Users</h1>
                 <button id="btnAdd" class="btn btn-primary" dmx-on:click="modalAddUsers.show(); ddUsers.select(0);">Add User</button>
             </div>
         </div>

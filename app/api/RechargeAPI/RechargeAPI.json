@@ -1,0 +1,191 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "offset"
+      },
+      {
+        "type": "text",
+        "name": "limit"
+      },
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "",
+        "module": "auth",
+        "action": "restrict",
+        "options": {
+          "provider": "securityLogin",
+          "permissions": [
+            "write"
+          ],
+          "loginUrl": "/views/login.ejs",
+          "forbiddenUrl": "/views/403-forbidden.ejs"
+        }
+      },
+      {
+        "name": "API_Response",
+        "module": "dbconnector",
+        "action": "paged",
+        "options": {
+          "connection": "postgres_gcpServer",
+          "sql": {
+            "type": "SELECT",
+            "columns": [],
+            "table": {
+              "name": "api_response"
+            },
+            "joins": [],
+            "orders": [
+              {
+                "table": "api_response",
+                "column": "id",
+                "direction": "DESC",
+                "recid": 1
+              }
+            ],
+            "query": "SELECT *\nFROM api_response\nORDER BY id DESC",
+            "params": []
+          }
+        },
+        "output": true,
+        "meta": [
+          {
+            "name": "offset",
+            "type": "number"
+          },
+          {
+            "name": "limit",
+            "type": "number"
+          },
+          {
+            "name": "total",
+            "type": "number"
+          },
+          {
+            "name": "page",
+            "type": "object",
+            "sub": [
+              {
+                "name": "offset",
+                "type": "object",
+                "sub": [
+                  {
+                    "name": "first",
+                    "type": "number"
+                  },
+                  {
+                    "name": "prev",
+                    "type": "number"
+                  },
+                  {
+                    "name": "next",
+                    "type": "number"
+                  },
+                  {
+                    "name": "last",
+                    "type": "number"
+                  }
+                ]
+              },
+              {
+                "name": "current",
+                "type": "number"
+              },
+              {
+                "name": "total",
+                "type": "number"
+              }
+            ]
+          },
+          {
+            "name": "data",
+            "type": "array",
+            "sub": [
+              {
+                "name": "id",
+                "type": "number"
+              },
+              {
+                "name": "user_id",
+                "type": "text"
+              },
+              {
+                "name": "recharge_mobile",
+                "type": "text"
+              },
+              {
+                "name": "operator",
+                "type": "text"
+              },
+              {
+                "name": "amount",
+                "type": "text"
+              },
+              {
+                "name": "status",
+                "type": "text"
+              },
+              {
+                "name": "order_id",
+                "type": "text"
+              },
+              {
+                "name": "balance",
+                "type": "text"
+              },
+              {
+                "name": "ec",
+                "type": "text"
+              },
+              {
+                "name": "apirefid",
+                "type": "text"
+              },
+              {
+                "name": "remarks",
+                "type": "text"
+              },
+              {
+                "name": "blank1",
+                "type": "text"
+              },
+              {
+                "name": "blank2",
+                "type": "text"
+              },
+              {
+                "name": "field1",
+                "type": "text"
+              },
+              {
+                "name": "field2",
+                "type": "text"
+              },
+              {
+                "name": "time",
+                "type": "datetime"
+              },
+              {
+                "name": "live_id",
+                "type": "text"
+              }
+            ]
+          }
+        ],
+        "outputType": "object"
+      }
+    ]
+  }
+}

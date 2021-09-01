@@ -764,7 +764,7 @@ ul.sf-menu li li li.sfHover ul {
 	height:			10px;
 	text-indent: 	-999em;
 	overflow:		hidden;
-	background:		url('../images/arrows-666.png') no-repeat -10px -100px; 
+	/* background:		url('../images/arrows-666.png') no-repeat -10px -100px;  */
 }
 a > .sf-sub-indicator {  
 	top:			.8em;

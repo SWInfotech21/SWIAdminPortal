@@ -3,49 +3,11 @@
 <!-- <dmx-serverconnect id="scMobRech" url="api/RechargeAPI"></dmx-serverconnect> -->
 <dmx-data-view id="dvMRech" pageSize="100" page="10" dmx-bind:data="scMobRech.data.API_Response.data"></dmx-data-view>
 <dmx-data-detail id="ddMobRech" dmx-bind:data="dvMobRech.data" key="id"></dmx-data-detail>
-<!-- <nav class="navbar navbar-expand-lg navbar-light sticky-top bg-warning" id="mainNavbar" style="background-color: #e3f2fd;">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#" id="logo">
-            <img id="swilogo" width="50" height="50" class="img-fluid" src="assets/images/swinfotech.png">SWInfotech</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="users">Users</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="mobile-recharge">Mobile Recharge</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        APIs
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="mobile"> Recharge</a></li>
-                        <li><a class="dropdown-item" href="#">DTH</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-        </div>
-    </div>
-</nav> -->
 <header>
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1 id="headingMobRech" class="text-center align-self-center">SW Infotech Users</h1>
+                <h1 id="headingMobRech" class="text-center align-self-center">SW Infotech Mobile Recharge</h1>
                 <button id="btnAdd" class="btn btn-primary" dmx-on:click="modalMobRech.show(); ddMobRech.select(0);">Recharge Now</button>
             </div>
         </div>
@@ -66,15 +28,16 @@
                     <th>Amt.</th>
                     <th>Status</th>
                     <th>Balance</th>
-                    <th>EC</th>
+                    <th>Agent Id/ Live Id</th>
                     <th>Order Id</th>
                     <th>Tr. Id</th>
-                    <th>Agent Id/ Live Id</th>
+                    <th>EC</th>
+                    <th>Process Time</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody is="dmx-repeat" dmx-generator="bs5table" id="tableRepeat1" dmx-bind:repeat="scMobRech.data.API_Response.data">
-                <tr dmx-style:background="(status == 2) ? '#0dcaf0d1' : '#e06565')">
+                <tr dmx-class:table-warning="status == 1" dmx-class:table-success="status == 2" dmx-class:table-danger="status == 3">
                     <td dmx-text="id"></td>
                     <td dmx-text="remarks"></td>
                     <td dmx-text="time"></td>
@@ -84,12 +47,14 @@
                     <td dmx-text="recharge_mobile"></td>
                     <td dmx-text="operator"></td>
                     <td dmx-text="amount"></td>
-                    <td dmx-text="remarks.titlecase()+' ('+status+')'"></td>
-                    <td dmx-text="balance"></td>
-                    <td dmx-text="ec"></td>
+                    <td dmx-text="status"></td>
+                    <td dmx-text="balance">
+                    <td dmx-text="live_id"></td>
                     <td dmx-text="order_id"></td>
                     <td dmx-text="apirefid"></td>
-                    <td dmx-text="live_id"></td>
+                    </td>
+                    <td dmx-text="ec"></td>
+                    <td dmx-text="blank1"></td>
                     <td>
                         <a class="dropdown-item" href="#" dmx-on:click="ddMobRech.select(id)" data-bs-toggle="modal" data-bs-target="#"><i class="fas fa-eye" title="Details"></i></a>&emsp;
                         <a class="dropdown-item" href="#" dmx-on:click="ddMobRech.select(id)" data-bs-toggle="modal" data-bs-target="#"><i class="far fa-trash-alt" title="Delete User"></i></a>

@@ -10,5 +10,17 @@
   "login.ejs": {
     "layoutPage": "",
     "description": ""
+  },
+  "operators.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  },
+  "services.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  },
+  "403-forbidden.ejs": {
+    "layoutPage": "",
+    "description": ""
   }
 }
