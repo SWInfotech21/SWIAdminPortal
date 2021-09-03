@@ -98,7 +98,7 @@
 
 <body is="dmx-app" id="main">
     <div is="dmx-browser" id="browserMain"></div>
-    <dmx-notifications id="scNotif" newest-on-top="true"></dmx-notifications>
+    <dmx-notifications id="scNotif" newest-on-top="true" timeout="10000"></dmx-notifications>
     <div is="dmx-view" id="content">
 
         <!-- Custom Navbar Starts-->
@@ -139,6 +139,7 @@
                             </li>
                             <li><a class="sf-with-ul" href="javascript:void(0)">NEW<span class="sf-sub-indicator"> »</span></a>
                                 <ul>
+                                    <li><a href="api-add-update">API Add Update</a></li>
                                     <li><a href="users">Users</a></li>
                                     <li><a href="mobile-recharge">Mobile Recharge</a></li>
                                     <li><a href="operators">Operator</a></li>

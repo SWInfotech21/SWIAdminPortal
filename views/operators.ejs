@@ -58,7 +58,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form is="dmx-serverconnect-form" id="formAddEditOperator" method="post" action="api/operator/OperatorsAddEdit" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAddEditOperator.data.AddEditOperators ? scNotif.success('New Operator Added') : scNotif.success('Operator updated'); modalAddOperators.hide();formAddEditOperator.reset();browserMain.goto('operators')" dmx-on:error="scNotif.warning('An error occurred'); modalAddOperators.hide();formAddEditOperator.reset()">
+                <form is="dmx-serverconnect-form" id="formAddEditOperator" method="post" action="api/operator/OperatorsAddEdit" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAddEditOperator.data.AddEditOperators ? scNotif.success('New Operator Added') : scNotif.success('Operator Updated'); formAddEditOperator.reset()" dmx-on:error="scNotif.warning('An error occurred'); modalAddOperators.hide();formAddEditOperator.reset()">
+                    <!-- modalAddOperators.hide();browserMain.goto('operators') -->
                     <input type="hidden" name="OperatorId" dmx-bind:value="ddOperators.data.op_id">
                     <div class="mb-3 row">
                         <label for="inp_name" class="col-sm-2 col-form-label">Operator Name</label>
@@ -91,15 +92,8 @@
                         <label for="inp_status" class="col-sm-2 col-form-label">Status</label>
                         <div class="col-sm-4">
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="SwitchCheckStatus" name="status" dmx-bind:checked="ddOperators.data.status == 1" dmx-bind:value="SwitchCheckStatus.checked? '1' : '0'">
+                                <input class="form-check-input" type="checkbox" id="SwitchCheckStatus" name="op_status" dmx-bind:checked="ddOperators.data.status == 1" dmx-bind:value="SwitchCheckStatus.checked ? 1 : 0">
                             </div>
-
-
-
-                            <!--select type="text" class="form-control" id="inp_Operator_status" name="status" aria-describedby="inp_status_help" placeholder="Enter Status" dmx-bind:value="ddOperators.data.status">
-                                <option value="1">Active</option>
-                                <option value="0">InActive</option>
-                            </select-->
                         </div>
                     </div>
                     <div class="mb-3 row">

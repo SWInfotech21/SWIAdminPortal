@@ -544,6 +544,86 @@
       "m_bank": {
         "db": {
           "schema": "public"
+        },
+        "columns": {
+          "id": {
+            "db": {
+              "type": "increments",
+              "default": "",
+              "primary": true,
+              "nullable": false
+            }
+          },
+          "bank_name": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "ac_holder_name": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "ac_no": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "ifsc_code": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "branch_name": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "image_url": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "created_by": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "created_on": {
+            "db": {
+              "type": "timestamp",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "updated_by": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "updated_on": {
+            "db": {
+              "type": "timestamp",
+              "primary": false,
+              "nullable": true
+            }
+          }
         }
       },
       "users": {

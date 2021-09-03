@@ -684,5 +684,149 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "apiaddupdate": {
+    "dvAPIs": {
+      "meta": [
+        {
+          "name": "id",
+          "type": "text"
+        },
+        {
+          "name": "api_name",
+          "type": "text"
+        },
+        {
+          "name": "api_code",
+          "type": "text"
+        },
+        {
+          "name": "username",
+          "type": "text"
+        },
+        {
+          "name": "api_password",
+          "type": "text"
+        },
+        {
+          "name": "status",
+          "type": "number"
+        },
+        {
+          "name": "blank1",
+          "type": "text"
+        },
+        {
+          "name": "blank2",
+          "type": "text"
+        },
+        {
+          "name": "blank3",
+          "type": "text"
+        },
+        {
+          "name": "blank4",
+          "type": "text"
+        },
+        {
+          "name": "created_by",
+          "type": "number"
+        },
+        {
+          "name": "created_on",
+          "type": "datetime"
+        },
+        {
+          "name": "updated_by",
+          "type": "number"
+        },
+        {
+          "name": "updated_on",
+          "type": "datetime"
+        },
+        {
+          "name": "deleted_by",
+          "type": "number"
+        },
+        {
+          "name": "deleted_on",
+          "type": "datetime"
+        }
+      ],
+      "outputType": "array"
+    },
+    "ddAPIs": {
+      "meta": null,
+      "outputType": "object"
+    },
+    "tableRepeat1": {
+      "meta": [
+        {
+          "name": "id",
+          "type": "text"
+        },
+        {
+          "name": "api_name",
+          "type": "text"
+        },
+        {
+          "name": "api_code",
+          "type": "text"
+        },
+        {
+          "name": "username",
+          "type": "text"
+        },
+        {
+          "name": "api_password",
+          "type": "text"
+        },
+        {
+          "name": "status",
+          "type": "number"
+        },
+        {
+          "name": "blank1",
+          "type": "text"
+        },
+        {
+          "name": "blank2",
+          "type": "text"
+        },
+        {
+          "name": "blank3",
+          "type": "text"
+        },
+        {
+          "name": "blank4",
+          "type": "text"
+        },
+        {
+          "name": "created_by",
+          "type": "number"
+        },
+        {
+          "name": "created_on",
+          "type": "datetime"
+        },
+        {
+          "name": "updated_by",
+          "type": "number"
+        },
+        {
+          "name": "updated_on",
+          "type": "datetime"
+        },
+        {
+          "name": "deleted_by",
+          "type": "number"
+        },
+        {
+          "name": "deleted_on",
+          "type": "datetime"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });

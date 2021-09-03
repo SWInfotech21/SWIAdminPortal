@@ -1,0 +1,110 @@
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="apiaddupdate" appConnect="local" -->
+<meta name="ac:route" content="/api-add-update">
+<dmx-serverconnect id="scAPIs" url="api/APIS/FetchAPIs"></dmx-serverconnect>
+<dmx-data-view id="dvAPIs" pageSize="100" page="10" dmx-bind:data="scAPIs.data.FetchAPI.data"></dmx-data-view>
+<dmx-data-detail id="ddAPIs" key="api_id" dmx-bind:data="dvAPIs.data"></dmx-data-detail>
+
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 id="APIs" class="text-center align-self-center">SW Infotech APIs</h1>
+                <button id="btnAdd" class="btn btn-primary" dmx-on:click="modalAddAPIs.show(); ddAPIs.select(0);">Add api</button>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-sm">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Provider Name</th>
+                    <th>API Code</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Status</th>
+                    <th>Created By/ On</th>
+                    <th>Updated By/ On</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody is="dmx-repeat" dmx-generator="bs5table" id="tableRepeat1" dmx-bind:repeat="dvAPIs.data" key="'id'">
+                <tr>
+                    <td dmx-text="api_id"></td>
+                    <td dmx-text="api_name.titlecase()"></td>
+                    <td dmx-text="api_code"></td>
+                    <td dmx-text="username"></td>
+                    <td dmx-text="api_password"></td>
+                    <td dmx-text="status == 1 ? 'Active' : 'Inactive'" dmx-class:table-primary="status == 1" dmx-class:table-danger="status == 0"></td>
+                    <td dmx-text="created_by+' ('+created_on.formatDate('dd-MM-yyyy HH:mm:ss')+')'"></td>
+                    <td dmx-text="updated_by+' ('+updated_on+')'"></td>
+                    <td>
+                        <a class="dropdown-item" href="#" dmx-on:click="ddAPIs.select(api_id)" data-bs-toggle="modal" data-bs-target="#modalAddAPIs"><i class="fas fa-edit" title="Edit APIs"></i></a>&emsp;
+                        <a class="dropdown-item" href="#" dmx-on:click="ddAPIs.select(api_id)" data-bs-toggle="modal" data-bs-target="#modalDelapi"><i class="far fa-trash-alt" title="Delete api"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<!-- Modal Add APIs -->
+<div class="modal fade" id="modalAddAPIs" is="dmx-bs5-modal" tabindex="-1" nokeyboard="true" nocloseonclick="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ddAPIs.data.api_id ? 'Edit APIs' : 'Add APIs'}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form is="dmx-serverconnect-form" id="formAddEditapi" method="post" action="api/APIS/ApiAddEdit" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAddEditapi.data.AddEditAPIs ? scNotif.success('New API Details Added') : scNotif.success('Api Details Updated'); modalAddAPIs.hide();formAddEditapi.reset();browserMain.goto('api-add-update')" dmx-on:error="scNotif.warning('An error occurred'); modalAddAPIs.hide();formAddEditapi.reset()">
+                    <input type="hidden" name="ApiId" dmx-bind:value="ddAPIs.data.api_id">
+                    <div class="mb-3 row">
+                        <label for="inp_name" class="col-sm-2 col-form-label">Api Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inp_api_name" name="name" aria-describedby="inp_name_help" placeholder="E.g: SONAKSHI/ SWI" maxlength="100" required="" data-msg-required="api Name is required." dmx-bind:value="ddAPIs.data.api_name">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inp_APIs_type" class="col-sm-2 col-form-label">API Code/ Shortform</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inp_api_code" name="api_code" aria-describedby="inp_api_code_help" placeholder="Enter api Code " maxlength="200" required="" data-msg-required="Api Code id is required." dmx-bind:value="ddAPIs.data.api_code">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inp_api_username" class="col-sm-2 col-form-label">Api Username</label>
+                        <div class="col-sm-10">
+                            <textarea type="text" class="form-control" id="inp_APIs_username" name="username" aria-describedby="inp_api_username_help" placeholder="Enter api Username" maxlength="200" dmx-bind:value="ddAPIs.data.username"></textarea>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inp_api_pass" class="col-sm-2 col-form-label">Api Pass</label>
+                        <div class="col-sm-10">
+                            <textarea type="text" class="form-control" id="inp_APIs_pass" name="password" aria-describedby="inp_api_pass_help" placeholder="Enter api Password" maxlength="200" dmx-bind:value="ddAPIs.data.api_password"></textarea>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inp_status" class="col-sm-2 col-form-label">Status</label>
+                        <div class="col-sm-10">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="SwitchCheckStatus" name="api_status" dmx-bind:checked="ddAPIs.data.status == 1" dmx-bind:unchecked="ddAPIs.data.status == 0" dmx-bind:value="SwitchCheckStatus.checked ? 1 : 0">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="col-sm-2">&nbsp;</div>
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary" dmx-bind:disabled="state.executing">Save<span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span></button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -33,6 +33,11 @@
     {
       "path": "/403-forbidden",
       "page": "403-forbidden"
+    },
+    {
+      "path": "/api-add-update",
+      "page": "api-add-update",
+      "layout": "main"
     }
   ]
 }

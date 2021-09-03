@@ -22,5 +22,9 @@
   "403-forbidden.ejs": {
     "layoutPage": "",
     "description": ""
+  },
+  "api-add-update.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }
