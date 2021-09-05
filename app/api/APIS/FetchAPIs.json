@@ -27,8 +27,8 @@
         "action": "restrict",
         "options": {
           "provider": "securityLogin",
-          "loginUrl": "/views/login.ejs",
-          "forbiddenUrl": "/views/403-forbidden.ejs",
+          "loginUrl": "../../view/login",
+          "forbiddenUrl": "../../view/403-forbidden",
           "permissions": [
             "write"
           ]

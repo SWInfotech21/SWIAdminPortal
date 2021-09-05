@@ -47,35 +47,36 @@
             "type": "SELECT",
             "columns": [
               {
-                "table": "users",
-                "column": "saltvalue"
+                "table": "m_users",
+                "column": "salt",
+                "alias": "saltvalue"
               }
             ],
             "table": {
-              "name": "users"
+              "name": "m_users"
             },
             "joins": [],
-            "query": "SELECT saltvalue\nFROM users\nWHERE email = :P1 /* {{$_POST.Email}} */",
+            "query": "SELECT salt AS saltvalue\nFROM m_users\nWHERE user_email = :P1 /* {{$_POST.Email.lowercase()}} */",
             "params": [
               {
                 "operator": "equal",
                 "type": "expression",
                 "name": ":P1",
-                "value": "{{$_POST.Email}}"
+                "value": "{{$_POST.Email.lowercase()}}"
               }
             ],
             "wheres": {
               "condition": "AND",
               "rules": [
                 {
-                  "id": "users.email",
-                  "field": "users.email",
+                  "id": "m_users.user_email",
+                  "field": "m_users.user_email",
                   "type": "string",
                   "operator": "equal",
-                  "value": "{{$_POST.Email}}",
+                  "value": "{{$_POST.Email.lowercase()}}",
                   "data": {
-                    "table": "users",
-                    "column": "email",
+                    "table": "m_users",
+                    "column": "user_email",
                     "type": "text"
                   },
                   "operation": "="
@@ -96,16 +97,39 @@
         "outputType": "object"
       },
       {
-        "name": "identity",
-        "module": "auth",
-        "action": "login",
+        "name": "",
+        "module": "core",
+        "action": "condition",
         "options": {
-          "provider": "securityLogin",
-          "password": "{{$_POST.Password.sha256(getSalt.saltvalue.decrypt('Hw3fTCdch1'))}}",
-          "username": "{{$_POST.Email.lowercase()}}"
+          "if": "{{getSalt}}",
+          "then": {
+            "steps": {
+              "name": "identity",
+              "module": "auth",
+              "action": "login",
+              "options": {
+                "provider": "securityLogin",
+                "password": "{{$_POST.Password.sha256(getSalt.saltvalue.decrypt('Hw3fTCdch1'))}}",
+                "username": "{{$_POST.Email.lowercase()}}"
+              },
+              "output": true,
+              "meta": []
+            }
+          },
+          "else": {
+            "steps": {
+              "name": "LoginRes403",
+              "module": "core",
+              "action": "response",
+              "options": {
+                "status": 403,
+                "data": "User does not exists"
+              }
+            }
+          }
         },
-        "output": true,
-        "meta": []
+        "outputType": "boolean",
+        "output": true
       }
     ]
   }

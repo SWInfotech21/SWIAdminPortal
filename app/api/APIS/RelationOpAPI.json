@@ -1,0 +1,93 @@
+[
+  {
+    "name": "OPAPI",
+    "module": "core",
+    "action": "setvalue",
+    "options": {
+      "value": "{{custom[0].opapi}}"
+    },
+    "output": true,
+    "disabled": true
+  },
+  {
+    "name": "custom",
+    "module": "dbupdater",
+    "action": "custom",
+    "options": {
+      "connection": "postgres_gcpServer",
+      "sql": {
+        "query": "select distinct toa.op_id, mop.operator_name, string_agg(toa.id::character varying, ', ') as op_table_ids, string_agg(toa.api_id::character varying, ', ') as api_ids, string_agg(toa.code, ', ') as api_code, string_agg(ma.api_name, ', ') as api_names\nfrom public.t_op_api toa \nleft join public.m_api ma on ma.id = toa.api_id \nleft join public.m_operator mop on mop.id = toa.op_id\ngroup by toa.op_id, mop.operator_name;",
+        "params": []
+      }
+    },
+    "output": true,
+    "meta": [],
+    "outputType": "array"
+  },
+  {
+    "name": "FetchApiCode",
+    "module": "dbconnector",
+    "action": "select",
+    "options": {
+      "connection": "postgres_gcpServer",
+      "sql": {
+        "type": "SELECT",
+        "columns": [
+          {
+            "table": "t_op_api",
+            "column": "id",
+            "alias": "t_op_api_id"
+          },
+          {
+            "table": "t_op_api",
+            "column": "op_id"
+          },
+          {
+            "table": "t_op_api",
+            "column": "api_id"
+          },
+          {
+            "table": "t_op_api",
+            "column": "code"
+          }
+        ],
+        "table": {
+          "name": "t_op_api"
+        },
+        "joins": [],
+        "orders": [
+          {
+            "table": "t_op_api",
+            "column": "id",
+            "direction": "DESC",
+            "recid": 1
+          }
+        ],
+        "query": "SELECT id AS t_op_api_id, op_id, api_id, code\nFROM t_op_api\nORDER BY id DESC",
+        "params": []
+      }
+    },
+    "output": true,
+    "type": "dbconnector_select",
+    "meta": [
+      {
+        "name": "t_op_api_id",
+        "type": "text"
+      },
+      {
+        "name": "op_id",
+        "type": "number"
+      },
+      {
+        "name": "api_id",
+        "type": "number"
+      },
+      {
+        "name": "code",
+        "type": "text"
+      }
+    ],
+    "outputType": "array",
+    "disabled": true
+  }
+]

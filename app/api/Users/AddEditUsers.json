@@ -97,6 +97,10 @@
       {
         "type": "text",
         "name": "updated_by"
+      },
+      {
+        "type": "number",
+        "name": "id"
       }
     ]
   },
@@ -111,8 +115,8 @@
           "permissions": [
             "write"
           ],
-          "loginUrl": "/views/login.ejs",
-          "forbiddenUrl": "/views/403-forbidden.ejs"
+          "loginUrl": "login",
+          "forbiddenUrl": "403-forbidden"
         }
       },
       {
@@ -156,109 +160,101 @@
                   "type": "update",
                   "values": [
                     {
-                      "table": "users",
-                      "column": "name",
+                      "table": "m_users",
+                      "column": "user_fname",
                       "type": "text",
-                      "value": "{{$_POST.name.lowercase()}}"
+                      "value": "{{$_POST.name}}"
                     },
                     {
-                      "table": "users",
-                      "column": "email",
-                      "type": "text",
-                      "value": "{{$_POST.email.lowercase()}}"
-                    },
-                    {
-                      "table": "users",
-                      "column": "mobile",
+                      "table": "m_users",
+                      "column": "user_mobile",
                       "type": "text",
                       "value": "{{$_POST.mobile}}"
                     },
                     {
-                      "table": "users",
-                      "column": "status",
+                      "table": "m_users",
+                      "column": "user_email",
                       "type": "text",
-                      "value": "{{$_POST.status}}"
+                      "value": "{{$_POST.email.lowercase()}}"
                     },
                     {
-                      "table": "users",
+                      "table": "m_users",
                       "column": "user_type",
                       "type": "text",
                       "value": "{{$_POST.user_type}}"
                     },
                     {
-                      "table": "users",
-                      "column": "updated_by",
+                      "table": "m_users",
+                      "column": "u_status",
                       "type": "text",
-                      "value": "{{$_POST.updated_by.default(1)}}"
+                      "value": "{{$_POST.status}}"
                     },
                     {
-                      "table": "users",
+                      "table": "m_users",
+                      "column": "updated_by",
+                      "type": "text",
+                      "value": "1"
+                    },
+                    {
+                      "table": "m_users",
                       "column": "updated_on",
                       "type": "datetime",
                       "value": "{{NOW}}"
                     }
                   ],
-                  "table": "users",
+                  "table": "m_users",
                   "wheres": {
                     "condition": "AND",
                     "rules": [
                       {
                         "id": "id",
-                        "field": "id",
                         "type": "double",
                         "operator": "equal",
-                        "value": "{{$_POST.UserId}}",
+                        "value": "{{$_POST.id}}",
                         "data": {
                           "column": "id"
                         },
                         "operation": "="
                       }
-                    ],
-                    "conditional": null,
-                    "valid": true
+                    ]
                   },
-                  "query": "UPDATE users\nSET name = :P1 /* {{$_POST.name.lowercase()}} */, email = :P2 /* {{$_POST.email.lowercase()}} */, mobile = :P3 /* {{$_POST.mobile}} */, status = :P4 /* {{$_POST.status}} */, user_type = :P5 /* {{$_POST.user_type}} */, updated_by = :P6 /* {{$_POST.updated_by.default(1)}} */, updated_on = :P7 /* {{NOW}} */\nWHERE id = :P8 /* {{$_POST.UserId}} */",
+                  "query": "UPDATE m_users\nSET user_fname = :P1 /* {{$_POST.name}} */, user_mobile = :P2 /* {{$_POST.mobile}} */, user_email = :P3 /* {{$_POST.email.lowercase()}} */, user_type = :P4 /* {{$_POST.user_type}} */, u_status = :P5 /* {{$_POST.status}} */, updated_by = '1', updated_on = :P6 /* {{NOW}} */\nWHERE id = :P7 /* {{$_POST.id}} */",
                   "params": [
                     {
                       "name": ":P1",
                       "type": "expression",
-                      "value": "{{$_POST.name.lowercase()}}"
+                      "value": "{{$_POST.name}}"
                     },
                     {
                       "name": ":P2",
                       "type": "expression",
-                      "value": "{{$_POST.email.lowercase()}}"
+                      "value": "{{$_POST.mobile}}"
                     },
                     {
                       "name": ":P3",
                       "type": "expression",
-                      "value": "{{$_POST.mobile}}"
+                      "value": "{{$_POST.email.lowercase()}}"
                     },
                     {
                       "name": ":P4",
                       "type": "expression",
-                      "value": "{{$_POST.status}}"
+                      "value": "{{$_POST.user_type}}"
                     },
                     {
                       "name": ":P5",
                       "type": "expression",
-                      "value": "{{$_POST.user_type}}"
+                      "value": "{{$_POST.status}}"
                     },
                     {
                       "name": ":P6",
-                      "type": "expression",
-                      "value": "{{$_POST.updated_by.default(1)}}"
-                    },
-                    {
-                      "name": ":P7",
                       "type": "expression",
                       "value": "{{NOW}}"
                     },
                     {
                       "operator": "equal",
                       "type": "expression",
-                      "name": ":P8",
-                      "value": "{{$_POST.UserId}}"
+                      "name": ":P7",
+                      "value": "{{$_POST.id}}"
                     }
                   ]
                 }
@@ -283,90 +279,78 @@
                   "type": "insert",
                   "values": [
                     {
-                      "table": "users",
-                      "column": "name",
+                      "table": "m_users",
+                      "column": "user_id",
+                      "type": "text",
+                      "value": "{{NOW.md5(1234).substr(1, 6)}}"
+                    },
+                    {
+                      "table": "m_users",
+                      "column": "user_fname",
                       "type": "text",
                       "value": "{{$_POST.name}}"
                     },
                     {
-                      "table": "users",
-                      "column": "email",
-                      "type": "text",
-                      "value": "{{$_POST.email}}"
-                    },
-                    {
-                      "table": "users",
-                      "column": "mobile",
+                      "table": "m_users",
+                      "column": "user_mobile",
                       "type": "text",
                       "value": "{{$_POST.mobile}}"
                     },
                     {
-                      "table": "users",
+                      "table": "m_users",
+                      "column": "user_email",
+                      "type": "text",
+                      "value": "{{$_POST.email.lowercase()}}"
+                    },
+                    {
+                      "table": "m_users",
                       "column": "password",
                       "type": "text",
                       "value": "{{$_POST.password.sha256('NOW.encrypt(\\'Hw3fTCdch1\\')')}}"
                     },
                     {
-                      "table": "users",
-                      "column": "saltvalue",
+                      "table": "m_users",
+                      "column": "salt",
                       "type": "text",
                       "value": "{{NOW.encrypt('Hw3fTCdch1')}}"
                     },
                     {
-                      "table": "users",
-                      "column": "status",
-                      "type": "text",
-                      "value": "{{$_POST.status}}"
-                    },
-                    {
-                      "table": "users",
+                      "table": "m_users",
                       "column": "user_type",
                       "type": "text",
                       "value": "{{$_POST.user_type}}"
                     },
                     {
-                      "table": "users",
-                      "column": "super_user",
+                      "table": "m_users",
+                      "column": "u_status",
                       "type": "text",
-                      "value": "{{$_POST.super_user.default(0)}}"
+                      "value": "{{$_POST.status}}"
                     },
                     {
-                      "table": "users",
-                      "column": "remove",
-                      "type": "text",
-                      "value": "{{$_POST.remove.default(1)}}"
-                    },
-                    {
-                      "table": "users",
-                      "column": "image",
-                      "type": "text",
-                      "value": "{{$_POST.image.default('https://github.com/bdo.png')}}"
-                    },
-                    {
-                      "table": "users",
+                      "table": "m_users",
                       "column": "created_by",
                       "type": "text",
-                      "value": "{{$_POST.created_by.default(1)}}"
+                      "value": "1"
                     },
                     {
-                      "table": "users",
+                      "table": "m_users",
                       "column": "created_on",
                       "type": "datetime",
                       "value": "{{NOW}}"
                     }
                   ],
-                  "table": "users",
-                  "query": "INSERT INTO users\n(name, email, mobile, password, saltvalue, status, user_type, super_user, remove, image, created_by, created_on) VALUES (:P1 /* {{$_POST.name}} */, :P2 /* {{$_POST.email}} */, :P3 /* {{$_POST.mobile}} */, :P4 /* {{$_POST.password.sha256('NOW.encrypt(\\'Hw3fTCdch1\\')')}} */, :P5 /* {{NOW.encrypt('Hw3fTCdch1')}} */, :P6 /* {{$_POST.status}} */, :P7 /* {{$_POST.user_type}} */, :P8 /* {{$_POST.super_user.default(0)}} */, :P9 /* {{$_POST.remove.default(1)}} */, :P10 /* {{$_POST.image.default('https://github.com/bdo.png')}} */, :P11 /* {{$_POST.created_by.default(1)}} */, :P12 /* {{NOW}} */)",
+                  "table": "m_users",
+                  "query": "INSERT INTO m_users\n(user_id, user_fname, user_mobile, user_email, password, salt, user_type, u_status, created_by, created_on) VALUES (:P1 /* {{NOW.md5(1234).substr(1, 6)}} */, :P2 /* {{$_POST.name}} */, :P3 /* {{$_POST.mobile}} */, :P4 /* {{$_POST.email.lowercase()}} */, :P5 /* {{$_POST.password.sha256('NOW.encrypt(\\'Hw3fTCdch1\\')')}} */, :P6 /* {{NOW.encrypt('Hw3fTCdch1')}} */, :P7 /* {{$_POST.user_type}} */, :P8 /* {{$_POST.status}} */, '1', :P9 /* {{NOW}} */)",
                   "params": [
                     {
                       "name": ":P1",
                       "type": "expression",
-                      "value": "{{$_POST.name}}"
+                      "value": "{{NOW.md5(1234).substr(1, 6)}}"
                     },
                     {
                       "name": ":P2",
                       "type": "expression",
-                      "value": "{{$_POST.email}}"
+                      "value": "{{$_POST.name}}"
                     },
                     {
                       "name": ":P3",
@@ -376,17 +360,17 @@
                     {
                       "name": ":P4",
                       "type": "expression",
-                      "value": "{{$_POST.password.sha256('NOW.encrypt(\\'Hw3fTCdch1\\')')}}"
+                      "value": "{{$_POST.email.lowercase()}}"
                     },
                     {
                       "name": ":P5",
                       "type": "expression",
-                      "value": "{{NOW.encrypt('Hw3fTCdch1')}}"
+                      "value": "{{$_POST.password.sha256('NOW.encrypt(\\'Hw3fTCdch1\\')')}}"
                     },
                     {
                       "name": ":P6",
                       "type": "expression",
-                      "value": "{{$_POST.status}}"
+                      "value": "{{NOW.encrypt('Hw3fTCdch1')}}"
                     },
                     {
                       "name": ":P7",
@@ -396,29 +380,15 @@
                     {
                       "name": ":P8",
                       "type": "expression",
-                      "value": "{{$_POST.super_user.default(0)}}"
+                      "value": "{{$_POST.status}}"
                     },
                     {
                       "name": ":P9",
                       "type": "expression",
-                      "value": "{{$_POST.remove.default(1)}}"
-                    },
-                    {
-                      "name": ":P10",
-                      "type": "expression",
-                      "value": "{{$_POST.image.default('https://github.com/bdo.png')}}"
-                    },
-                    {
-                      "name": ":P11",
-                      "type": "expression",
-                      "value": "{{$_POST.created_by.default(1)}}"
-                    },
-                    {
-                      "name": ":P12",
-                      "type": "expression",
                       "value": "{{NOW}}"
                     }
-                  ]
+                  ],
+                  "returning": "id"
                 }
               },
               "meta": [

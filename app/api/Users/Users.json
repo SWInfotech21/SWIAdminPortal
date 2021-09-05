@@ -30,8 +30,8 @@
           "permissions": [
             "write"
           ],
-          "loginUrl": "/views/403-forbidden.ejs",
-          "forbiddenUrl": "/views/403-forbidden.ejs"
+          "loginUrl": "login",
+          "forbiddenUrl": "403-forbidden"
         }
       },
       {
@@ -44,40 +44,19 @@
             "type": "SELECT",
             "columns": [],
             "table": {
-              "name": "users"
+              "name": "m_users"
             },
             "joins": [],
-            "query": "SELECT *\nFROM users\nWHERE remove = '1'\nORDER BY id ASC",
+            "query": "SELECT *\nFROM m_users\nORDER BY user_id DESC",
             "params": [],
             "orders": [
               {
-                "table": "users",
-                "column": "id",
-                "direction": "ASC",
-                "condition": "",
+                "table": "m_users",
+                "column": "user_id",
+                "direction": "DESC",
                 "recid": 1
               }
-            ],
-            "wheres": {
-              "condition": "AND",
-              "rules": [
-                {
-                  "id": "users.remove",
-                  "field": "users.remove",
-                  "type": "string",
-                  "operator": "equal",
-                  "value": "1",
-                  "data": {
-                    "table": "users",
-                    "column": "remove",
-                    "type": "text"
-                  },
-                  "operation": "="
-                }
-              ],
-              "conditional": null,
-              "valid": true
-            }
+            ]
           }
         },
         "output": true,
@@ -136,18 +115,26 @@
             "sub": [
               {
                 "name": "id",
-                "type": "number"
-              },
-              {
-                "name": "name",
                 "type": "text"
               },
               {
-                "name": "email",
+                "name": "user_id",
                 "type": "text"
               },
               {
-                "name": "mobile",
+                "name": "user_fname",
+                "type": "text"
+              },
+              {
+                "name": "user_lname",
+                "type": "text"
+              },
+              {
+                "name": "user_mobile",
+                "type": "text"
+              },
+              {
+                "name": "user_email",
                 "type": "text"
               },
               {
@@ -155,11 +142,7 @@
                 "type": "text"
               },
               {
-                "name": "saltvalue",
-                "type": "text"
-              },
-              {
-                "name": "status",
+                "name": "salt",
                 "type": "text"
               },
               {
@@ -167,32 +150,56 @@
                 "type": "text"
               },
               {
-                "name": "super_user",
+                "name": "md_id",
                 "type": "text"
               },
               {
-                "name": "remove",
+                "name": "ds_id",
                 "type": "text"
               },
               {
-                "name": "blank1",
+                "name": "u_status",
                 "type": "text"
               },
               {
-                "name": "blank2",
+                "name": "user_tpin",
                 "type": "text"
               },
               {
-                "name": "blank3",
+                "name": "scheme_id",
                 "type": "text"
               },
               {
-                "name": "blank4",
+                "name": "ip",
                 "type": "text"
               },
               {
-                "name": "image",
+                "name": "kyc_status",
                 "type": "text"
+              },
+              {
+                "name": "is_block",
+                "type": "number"
+              },
+              {
+                "name": "cap_amt",
+                "type": "number"
+              },
+              {
+                "name": "balance_amt",
+                "type": "number"
+              },
+              {
+                "name": "balance_outstanding",
+                "type": "number"
+              },
+              {
+                "name": "aeps_limit",
+                "type": "text"
+              },
+              {
+                "name": "aeps_balance",
+                "type": "number"
               },
               {
                 "name": "created_by",

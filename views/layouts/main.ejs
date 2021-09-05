@@ -4,6 +4,22 @@
 <head>
     <script src="dmxAppConnect/dmxAppConnect.js"></script>
     <script src="js/jquery-3.5.1.slim.min.js"></script>
+    <script src="dmxAppConnect/dmxNotifications/dmxNotifications.js" defer=""></script>
+
+    <link rel="stylesheet" href="dmxAppConnect/dmxValidator/dmxValidator.css" />
+
+    <script src="dmxAppConnect/dmxValidator/dmxValidator.js" defer=""></script>
+
+    <script src="dmxAppConnect/dmxBrowser/dmxBrowser.js" defer=""></script>
+
+    <script src="dmxAppConnect/dmxDataTraversal/dmxDataTraversal.js" defer=""></script>
+
+    <script src="dmxAppConnect/dmxFormatter/dmxFormatter.js" defer=""></script>
+
+    <link rel="stylesheet" href="dmxAppConnect/dmxBootstrap5TableGenerator/dmxBootstrap5TableGenerator.css" />
+
+
+
     <script src="dmxAppConnect/dmxSwiper/dmxSwiper.js" defer=""></script>
 
     <script src="dmxAppConnect/dmxSwiper/swiper.min.js" defer=""></script>
@@ -25,20 +41,14 @@
     <script src="dmxAppConnect/dmxBootstrap5Modal/dmxBootstrap5Modal.js" defer=""></script>
 
     <link rel="stylesheet" href="dmxAppConnect/dmxNotifications/dmxNotifications.css" />
+    <dmx-serverconnect id="scLogout" url="api/Users/logout" noload dmx-on:success="browserMain.goto('login')"></dmx-serverconnect>
 
-    <script src="dmxAppConnect/dmxNotifications/dmxNotifications.js" defer=""></script>
 
-    <link rel="stylesheet" href="dmxAppConnect/dmxValidator/dmxValidator.css" />
 
-    <script src="dmxAppConnect/dmxValidator/dmxValidator.js" defer=""></script>
 
-    <script src="dmxAppConnect/dmxBrowser/dmxBrowser.js" defer=""></script>
 
-    <script src="dmxAppConnect/dmxDataTraversal/dmxDataTraversal.js" defer=""></script>
 
-    <script src="dmxAppConnect/dmxFormatter/dmxFormatter.js" defer=""></script>
 
-    <link rel="stylesheet" href="dmxAppConnect/dmxBootstrap5TableGenerator/dmxBootstrap5TableGenerator.css" />
 
     <base href="/">
 
@@ -119,7 +129,10 @@
                                     <span id="ctl00_lblName">Administrator</span></span> </a> <br />
                             <b>Balance:</b><span id="ctl00_lblBalance">13179860.000</span><br />
                             <b>AEPS Balance:</b><span id="ctl00_lblAEPSBalance">11043.000</span><br />
-                            <div> <a onclick="return confirm(&#39;Are you sure? want to logout admin.&#39;);" id="ctl00_lnkLogout" class="button red tip-left small" title="Click Here to Logout" href="javascript:__doPostBack(&#39;ctl00$lnkLogout&#39;,&#39;&#39;)" style="font-weight:bold;">LogOut</a>
+                            <div><a class="dropdown-item" href="#" dmx-on:click="scLogout.load()">
+                                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                    <span class="sd-fw-500">Log Out</span>
+                                </a> <a onclick="return confirm(&#39;Are you sure? want to logout admin.&#39;);" id="ctl00_lnkLogout" class="button red tip-left small" title="Click Here to Logout" href="javascript:__doPostBack(&#39;ctl00$lnkLogout&#39;,&#39;&#39;)" style="font-weight:bold;">LogOut</a>
                             </div>
                         </div>
                     </div>
@@ -140,9 +153,11 @@
                             <li><a class="sf-with-ul" href="javascript:void(0)">NEW<span class="sf-sub-indicator"> »</span></a>
                                 <ul>
                                     <li><a href="api-add-update">API Add Update</a></li>
+                                    <li><a href="scheme">Scheme</a></li>
                                     <li><a href="users">Users</a></li>
                                     <li><a href="mobile-recharge">Mobile Recharge</a></li>
                                     <li><a href="operators">Operator</a></li>
+                                    <li><a href="relation-op-api">Relation API Operator</a></li>
                                     <li><a href="services">Services</a></li>
                                 </ul>
                             </li>

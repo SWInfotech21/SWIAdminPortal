@@ -75,8 +75,8 @@
           "permissions": [
             "write"
           ],
-          "loginUrl": "/views/403-forbidden.ejs",
-          "forbiddenUrl": "/views/403-forbidden.ejs"
+          "loginUrl": "login",
+          "forbiddenUrl": "403-forbidden"
         }
       },
       {

@@ -27,8 +27,8 @@
           "permissions": [
             "write"
           ],
-          "loginUrl": "/views/login.ejs",
-          "forbiddenUrl": "/views/403-forbidden.ejs"
+          "loginUrl": "login",
+          "forbiddenUrl": "403-forbidden"
         }
       },
       {
@@ -41,25 +41,19 @@
             "type": "update",
             "values": [
               {
-                "table": "users",
-                "column": "remove",
-                "type": "text",
-                "value": "0"
-              },
-              {
-                "table": "users",
+                "table": "m_users",
                 "column": "deleted_by",
                 "type": "text",
-                "value": "{{$_POST.deleted_by.default(1)}}"
+                "value": "1"
               },
               {
-                "table": "users",
+                "table": "m_users",
                 "column": "deleted_on",
                 "type": "datetime",
                 "value": "{{NOW}}"
               }
             ],
-            "table": "users",
+            "table": "m_users",
             "wheres": {
               "condition": "AND",
               "rules": [
@@ -78,22 +72,17 @@
               "conditional": null,
               "valid": true
             },
-            "query": "UPDATE users\nSET remove = '0', deleted_by = :P1 /* {{$_POST.deleted_by.default(1)}} */, deleted_on = :P2 /* {{NOW}} */\nWHERE id = :P3 /* {{$_POST.UserId}} */",
+            "query": "UPDATE m_users\nSET deleted_by = '1', deleted_on = :P1 /* {{NOW}} */\nWHERE id = :P2 /* {{$_POST.UserId}} */",
             "params": [
               {
                 "name": ":P1",
-                "type": "expression",
-                "value": "{{$_POST.deleted_by.default(1)}}"
-              },
-              {
-                "name": ":P2",
                 "type": "expression",
                 "value": "{{NOW}}"
               },
               {
                 "operator": "equal",
                 "type": "expression",
-                "name": ":P3",
+                "name": ":P2",
                 "value": "{{$_POST.UserId}}"
               }
             ]

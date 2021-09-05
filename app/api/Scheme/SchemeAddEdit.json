@@ -1,14 +1,14 @@
 {
   "meta": {
     "options": {
-      "linkedFile": "/views/api-add-update.ejs",
-      "linkedForm": "formAddEditapi"
+      "linkedFile": "/views/scheme.ejs",
+      "linkedForm": "formAddEditScheme"
     },
     "$_POST": [
       {
         "type": "text",
-        "fieldName": "ApiId",
-        "name": "ApiId"
+        "fieldName": "SchemeId",
+        "name": "SchemeId"
       },
       {
         "type": "text",
@@ -17,7 +17,7 @@
           "rules": {
             "core:required": {
               "param": "",
-              "message": "api Name is required."
+              "message": "Scheme Name is required."
             },
             "core:maxlength": {
               "param": "100"
@@ -28,48 +28,34 @@
       },
       {
         "type": "text",
-        "fieldName": "api_code",
+        "fieldName": "scheme_desc",
         "options": {
           "rules": {
             "core:required": {
               "param": "",
-              "message": "api Code id is required."
+              "message": "Desc. id is required."
             },
             "core:maxlength": {
-              "param": "200"
+              "param": 200
             }
           }
         },
-        "name": "api_code"
+        "name": "scheme_desc"
       },
       {
-        "type": "text",
-        "fieldName": "api_status",
-        "name": "api_status"
-      },
-      {
-        "type": "text",
-        "fieldName": "username",
+        "type": "number",
+        "fieldName": "scheme_type",
         "options": {
           "rules": {
-            "core:maxlength": {
-              "param": "200"
-            }
+            "core:number": {}
           }
         },
-        "name": "username"
+        "name": "scheme_type"
       },
       {
         "type": "text",
-        "fieldName": "password",
-        "options": {
-          "rules": {
-            "core:maxlength": {
-              "param": "200"
-            }
-          }
-        },
-        "name": "password"
+        "fieldName": "status",
+        "name": "status"
       }
     ]
   },
@@ -79,10 +65,10 @@
       "module": "core",
       "action": "condition",
       "options": {
-        "if": "{{$_POST.ApiId  != ''}}",
+        "if": "{{$_POST.SchemeId != ''}}",
         "then": {
           "steps": {
-            "name": "ApiUpdate",
+            "name": "SchemeEdit",
             "module": "dbupdater",
             "action": "update",
             "options": {
@@ -91,49 +77,43 @@
                 "type": "update",
                 "values": [
                   {
-                    "table": "m_api",
-                    "column": "api_name",
+                    "table": "m_scheme",
+                    "column": "scheme_name",
                     "type": "text",
                     "value": "{{$_POST.name}}"
                   },
                   {
-                    "table": "m_api",
-                    "column": "api_code",
+                    "table": "m_scheme",
+                    "column": "scheme_desc",
                     "type": "text",
-                    "value": "{{$_POST.api_code}}"
+                    "value": "{{$_POST.scheme_desc}}"
                   },
                   {
-                    "table": "m_api",
-                    "column": "username",
+                    "table": "m_scheme",
+                    "column": "scheme_type",
                     "type": "text",
-                    "value": "{{$_POST.username}}"
+                    "value": "{{$_POST.scheme_type}}"
                   },
                   {
-                    "table": "m_api",
-                    "column": "api_password",
-                    "type": "text",
-                    "value": "{{$_POST.password}}"
-                  },
-                  {
-                    "table": "m_api",
-                    "column": "status",
-                    "type": "number",
-                    "value": "{{$_POST.api_status}}"
-                  },
-                  {
-                    "table": "m_api",
+                    "table": "m_scheme",
                     "column": "updated_by",
                     "type": "number",
                     "value": "1"
                   },
                   {
-                    "table": "m_api",
+                    "table": "m_scheme",
                     "column": "updated_on",
                     "type": "datetime",
                     "value": "{{NOW}}"
+                  },
+                  {
+                    "table": "m_scheme",
+                    "column": "status",
+                    "type": "number",
+                    "value": "{{$_POST.status}}"
                   }
                 ],
-                "table": "m_api",
+                "table": "m_scheme",
                 "wheres": {
                   "condition": "AND",
                   "rules": [
@@ -142,7 +122,7 @@
                       "field": "id",
                       "type": "double",
                       "operator": "equal",
-                      "value": "{{$_POST.ApiId}}",
+                      "value": "{{$_POST.SchemeId}}",
                       "data": {
                         "column": "id"
                       },
@@ -152,7 +132,7 @@
                   "conditional": null,
                   "valid": true
                 },
-                "query": "UPDATE m_api\nSET api_name = :P1 /* {{$_POST.name}} */, api_code = :P2 /* {{$_POST.api_code}} */, username = :P3 /* {{$_POST.username}} */, api_password = :P4 /* {{$_POST.password}} */, status = :P5 /* {{$_POST.api_status}} */, updated_by = '1', updated_on = :P6 /* {{NOW}} */\nWHERE id = :P7 /* {{$_POST.ApiId}} */",
+                "query": "UPDATE m_scheme\nSET scheme_name = :P1 /* {{$_POST.name}} */, scheme_desc = :P2 /* {{$_POST.scheme_desc}} */, scheme_type = :P3 /* {{$_POST.scheme_type}} */, updated_by = '1', updated_on = :P4 /* {{NOW}} */, status = :P5 /* {{$_POST.status}} */\nWHERE id = :P6 /* {{$_POST.SchemeId}} */",
                 "params": [
                   {
                     "name": ":P1",
@@ -162,33 +142,28 @@
                   {
                     "name": ":P2",
                     "type": "expression",
-                    "value": "{{$_POST.api_code}}"
+                    "value": "{{$_POST.scheme_desc}}"
                   },
                   {
                     "name": ":P3",
                     "type": "expression",
-                    "value": "{{$_POST.username}}"
+                    "value": "{{$_POST.scheme_type}}"
                   },
                   {
                     "name": ":P4",
                     "type": "expression",
-                    "value": "{{$_POST.password}}"
+                    "value": "{{NOW}}"
                   },
                   {
                     "name": ":P5",
                     "type": "expression",
-                    "value": "{{$_POST.api_status}}"
-                  },
-                  {
-                    "name": ":P6",
-                    "type": "expression",
-                    "value": "{{NOW}}"
+                    "value": "{{$_POST.status}}"
                   },
                   {
                     "operator": "equal",
                     "type": "expression",
-                    "name": ":P7",
-                    "value": "{{$_POST.ApiId}}"
+                    "name": ":P6",
+                    "value": "{{$_POST.SchemeId}}"
                   }
                 ]
               }
@@ -198,13 +173,12 @@
                 "name": "affected",
                 "type": "number"
               }
-            ],
-            "output": true
+            ]
           }
         },
         "else": {
           "steps": {
-            "name": "ApiAdd",
+            "name": "SchemeAdd",
             "module": "dbupdater",
             "action": "insert",
             "options": {
@@ -213,51 +187,45 @@
                 "type": "insert",
                 "values": [
                   {
-                    "table": "m_api",
-                    "column": "api_name",
+                    "table": "m_scheme",
+                    "column": "scheme_name",
                     "type": "text",
                     "value": "{{$_POST.name}}"
                   },
                   {
-                    "table": "m_api",
-                    "column": "api_code",
+                    "table": "m_scheme",
+                    "column": "scheme_desc",
                     "type": "text",
-                    "value": "{{$_POST.api_code}}"
+                    "value": "{{$_POST.scheme_desc}}"
                   },
                   {
-                    "table": "m_api",
-                    "column": "username",
+                    "table": "m_scheme",
+                    "column": "scheme_type",
                     "type": "text",
-                    "value": "{{$_POST.username}}"
+                    "value": "{{$_POST.scheme_type}}"
                   },
                   {
-                    "table": "m_api",
-                    "column": "api_password",
-                    "type": "text",
-                    "value": "{{$_POST.password}}"
-                  },
-                  {
-                    "table": "m_api",
-                    "column": "status",
-                    "type": "number",
-                    "value": "{{$_POST.api_status}}"
-                  },
-                  {
-                    "table": "m_api",
+                    "table": "m_scheme",
                     "column": "created_by",
                     "type": "number",
                     "value": "1"
                   },
                   {
-                    "table": "m_api",
+                    "table": "m_scheme",
                     "column": "created_on",
                     "type": "datetime",
                     "value": "{{NOW}}"
+                  },
+                  {
+                    "table": "m_scheme",
+                    "column": "status",
+                    "type": "number",
+                    "value": "{{$_POST.status}}"
                   }
                 ],
-                "table": "m_api",
+                "table": "m_scheme",
                 "returning": "id",
-                "query": "INSERT INTO m_api\n(api_name, api_code, username, api_password, status, created_by, created_on) VALUES (:P1 /* {{$_POST.name}} */, :P2 /* {{$_POST.api_code}} */, :P3 /* {{$_POST.username}} */, :P4 /* {{$_POST.password}} */, :P5 /* {{$_POST.api_status}} */, '1', :P6 /* {{NOW}} */)",
+                "query": "INSERT INTO m_scheme\n(scheme_name, scheme_desc, scheme_type, created_by, created_on, status) VALUES (:P1 /* {{$_POST.name}} */, :P2 /* {{$_POST.scheme_desc}} */, :P3 /* {{$_POST.scheme_type}} */, '1', :P4 /* {{NOW}} */, :P5 /* {{$_POST.status}} */)",
                 "params": [
                   {
                     "name": ":P1",
@@ -267,27 +235,22 @@
                   {
                     "name": ":P2",
                     "type": "expression",
-                    "value": "{{$_POST.api_code}}"
+                    "value": "{{$_POST.scheme_desc}}"
                   },
                   {
                     "name": ":P3",
                     "type": "expression",
-                    "value": "{{$_POST.username}}"
+                    "value": "{{$_POST.scheme_type}}"
                   },
                   {
                     "name": ":P4",
                     "type": "expression",
-                    "value": "{{$_POST.password}}"
+                    "value": "{{NOW}}"
                   },
                   {
                     "name": ":P5",
                     "type": "expression",
-                    "value": "{{$_POST.api_status}}"
-                  },
-                  {
-                    "name": ":P6",
-                    "type": "expression",
-                    "value": "{{NOW}}"
+                    "value": "{{$_POST.status}}"
                   }
                 ]
               }
@@ -301,13 +264,11 @@
                 "name": "affected",
                 "type": "number"
               }
-            ],
-            "output": true
+            ]
           }
         }
       },
-      "outputType": "boolean",
-      "output": false
+      "outputType": "boolean"
     }
   }
 }

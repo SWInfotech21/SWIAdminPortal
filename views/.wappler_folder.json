@@ -26,5 +26,13 @@
   "api-add-update.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "scheme.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  },
+  "relation-op-api.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }

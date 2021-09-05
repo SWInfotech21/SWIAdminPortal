@@ -58,6 +58,7 @@
             <thead>
                 <tr>
                     <th>Id</th>
+                    <th>Unique Id</th>
                     <th>Name</th>
                     <th>Image</th>
                     <th>Email</th>
@@ -70,13 +71,14 @@
             <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="scUsers.data.FetchUsers.data" id="tableRepeat1">
                 <tr>
                     <td dmx-text="id"></td>
-                    <td dmx-text="name.titlecase()"></td>
-                    <td><img dmx-bind:src="image" width="50" height="50">
+                    <td dmx-text="user_id"></td>
+                    <td dmx-text="user_fname.titlecase()"></td>
+                    <td><img dmx-bind:src="user_lname" width="50" height="50">
                     </td>
-                    <td dmx-text="email"></td>
-                    <td dmx-text="mobile"></td>
-                    <td dmx-text="user_type == 1 ? 'Admin' : user_type == 2 ? 'DT' : user_type == 3 ? 'RT' : 'None'" dmx-class:table-primary="user_type == 1" dmx-class:table-success="user_type == 2" dmx-class:table-warning="user_type == 3" dmx-class:table-danger="user_type == 4"></td>
-                    <td dmx-text="status != 1 ?'Inactive' : 'Active'" dmx-class:table-primary="status == 1" dmx-class:table-warning="status != 1"></td>
+                    <td dmx-text="user_email"></td>
+                    <td dmx-text="user_mobile"></td>
+                    <td dmx-text="user_type == 1 ? 'MDT' : user_type == 2 ? 'DT' : user_type == 3 ? 'RT' : 'None'" dmx-class:table-primary="user_type == 1" dmx-class:table-success="user_type == 2" dmx-class:table-warning="user_type == 3" dmx-class:table-danger="user_type == 4"></td>
+                    <td dmx-text="status != 1 ?'Inactive' : 'Active'" dmx-class:table-primary="u_status == 1" dmx-class:table-warning="u_status != 1"></td>
                     <td>
                         <a class="dropdown-item" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalAddUsers"><i class="fas fa-edit" title="Edit Users"></i></a>&emsp;
                         <a class="dropdown-item" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalDelUser"><i class="far fa-trash-alt" title="Delete User"></i></a>

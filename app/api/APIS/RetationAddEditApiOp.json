@@ -1,42 +1,22 @@
 {
   "meta": {
     "options": {
-      "linkedFile": "/views/api-add-update.ejs",
-      "linkedForm": "formAddEditapi"
+      "linkedFile": "/views/relation-op-api.ejs",
+      "linkedForm": "formAddEditApiOp"
     },
     "$_POST": [
       {
         "type": "text",
-        "fieldName": "ApiId",
-        "name": "ApiId"
-      },
-      {
-        "type": "text",
-        "fieldName": "name",
-        "options": {
-          "rules": {
-            "core:required": {
-              "param": "",
-              "message": "api Name is required."
-            },
-            "core:maxlength": {
-              "param": "100"
-            }
-          }
-        },
-        "name": "name"
+        "fieldName": "OpApiId",
+        "name": "OpApiId"
       },
       {
         "type": "text",
         "fieldName": "api_code",
         "options": {
           "rules": {
-            "core:required": {
-              "param": "",
-              "message": "api Code id is required."
-            },
             "core:maxlength": {
-              "param": "200"
+              "param": "10"
             }
           }
         },
@@ -44,32 +24,32 @@
       },
       {
         "type": "text",
-        "fieldName": "api_status",
-        "name": "api_status"
-      },
-      {
-        "type": "text",
-        "fieldName": "username",
+        "fieldName": "operator_id",
         "options": {
           "rules": {
-            "core:maxlength": {
-              "param": "200"
+            "core:required": {
+              "param": ""
             }
           }
         },
-        "name": "username"
+        "name": "operator_id"
       },
       {
         "type": "text",
-        "fieldName": "password",
+        "fieldName": "inp_api_id",
         "options": {
           "rules": {
-            "core:maxlength": {
-              "param": "200"
+            "core:required": {
+              "param": ""
             }
           }
         },
-        "name": "password"
+        "name": "inp_api_id"
+      },
+      {
+        "type": "text",
+        "fieldName": "status",
+        "name": "status"
       }
     ]
   },
@@ -79,10 +59,10 @@
       "module": "core",
       "action": "condition",
       "options": {
-        "if": "{{$_POST.ApiId  != ''}}",
+        "if": "{{$_POST.OpApiId != ''}}",
         "then": {
           "steps": {
-            "name": "ApiUpdate",
+            "name": "APICodeUpdate",
             "module": "dbupdater",
             "action": "update",
             "options": {
@@ -91,49 +71,31 @@
                 "type": "update",
                 "values": [
                   {
-                    "table": "m_api",
-                    "column": "api_name",
-                    "type": "text",
-                    "value": "{{$_POST.name}}"
-                  },
-                  {
-                    "table": "m_api",
-                    "column": "api_code",
+                    "table": "t_op_api",
+                    "column": "code",
                     "type": "text",
                     "value": "{{$_POST.api_code}}"
                   },
                   {
-                    "table": "m_api",
-                    "column": "username",
-                    "type": "text",
-                    "value": "{{$_POST.username}}"
-                  },
-                  {
-                    "table": "m_api",
-                    "column": "api_password",
-                    "type": "text",
-                    "value": "{{$_POST.password}}"
-                  },
-                  {
-                    "table": "m_api",
+                    "table": "t_op_api",
                     "column": "status",
                     "type": "number",
-                    "value": "{{$_POST.api_status}}"
+                    "value": "{{$_POST.status}}"
                   },
                   {
-                    "table": "m_api",
+                    "table": "t_op_api",
                     "column": "updated_by",
                     "type": "number",
                     "value": "1"
                   },
                   {
-                    "table": "m_api",
+                    "table": "t_op_api",
                     "column": "updated_on",
                     "type": "datetime",
                     "value": "{{NOW}}"
                   }
                 ],
-                "table": "m_api",
+                "table": "t_op_api",
                 "wheres": {
                   "condition": "AND",
                   "rules": [
@@ -142,7 +104,7 @@
                       "field": "id",
                       "type": "double",
                       "operator": "equal",
-                      "value": "{{$_POST.ApiId}}",
+                      "value": "{{$_POST.OpApiId}}",
                       "data": {
                         "column": "id"
                       },
@@ -152,43 +114,28 @@
                   "conditional": null,
                   "valid": true
                 },
-                "query": "UPDATE m_api\nSET api_name = :P1 /* {{$_POST.name}} */, api_code = :P2 /* {{$_POST.api_code}} */, username = :P3 /* {{$_POST.username}} */, api_password = :P4 /* {{$_POST.password}} */, status = :P5 /* {{$_POST.api_status}} */, updated_by = '1', updated_on = :P6 /* {{NOW}} */\nWHERE id = :P7 /* {{$_POST.ApiId}} */",
+                "query": "UPDATE t_op_api\nSET code = :P1 /* {{$_POST.api_code}} */, status = :P2 /* {{$_POST.status}} */, updated_by = '1', updated_on = :P3 /* {{NOW}} */\nWHERE id = :P4 /* {{$_POST.OpApiId}} */",
                 "params": [
                   {
                     "name": ":P1",
                     "type": "expression",
-                    "value": "{{$_POST.name}}"
+                    "value": "{{$_POST.api_code}}"
                   },
                   {
                     "name": ":P2",
                     "type": "expression",
-                    "value": "{{$_POST.api_code}}"
+                    "value": "{{$_POST.status}}"
                   },
                   {
                     "name": ":P3",
-                    "type": "expression",
-                    "value": "{{$_POST.username}}"
-                  },
-                  {
-                    "name": ":P4",
-                    "type": "expression",
-                    "value": "{{$_POST.password}}"
-                  },
-                  {
-                    "name": ":P5",
-                    "type": "expression",
-                    "value": "{{$_POST.api_status}}"
-                  },
-                  {
-                    "name": ":P6",
                     "type": "expression",
                     "value": "{{NOW}}"
                   },
                   {
                     "operator": "equal",
                     "type": "expression",
-                    "name": ":P7",
-                    "value": "{{$_POST.ApiId}}"
+                    "name": ":P4",
+                    "value": "{{$_POST.OpApiId}}"
                   }
                 ]
               }
@@ -204,7 +151,7 @@
         },
         "else": {
           "steps": {
-            "name": "ApiAdd",
+            "name": "APIAdd",
             "module": "dbupdater",
             "action": "insert",
             "options": {
@@ -213,79 +160,68 @@
                 "type": "insert",
                 "values": [
                   {
-                    "table": "m_api",
-                    "column": "api_name",
-                    "type": "text",
-                    "value": "{{$_POST.name}}"
+                    "table": "t_op_api",
+                    "column": "op_id",
+                    "type": "number",
+                    "value": "{{$_POST.operator_id}}"
                   },
                   {
-                    "table": "m_api",
-                    "column": "api_code",
+                    "table": "t_op_api",
+                    "column": "api_id",
+                    "type": "number",
+                    "value": "{{$_POST.inp_api_id}}"
+                  },
+                  {
+                    "table": "t_op_api",
+                    "column": "code",
                     "type": "text",
                     "value": "{{$_POST.api_code}}"
                   },
                   {
-                    "table": "m_api",
-                    "column": "username",
-                    "type": "text",
-                    "value": "{{$_POST.username}}"
-                  },
-                  {
-                    "table": "m_api",
-                    "column": "api_password",
-                    "type": "text",
-                    "value": "{{$_POST.password}}"
-                  },
-                  {
-                    "table": "m_api",
+                    "table": "t_op_api",
                     "column": "status",
                     "type": "number",
-                    "value": "{{$_POST.api_status}}"
+                    "value": "{{$_POST.status}}"
                   },
                   {
-                    "table": "m_api",
+                    "table": "t_op_api",
                     "column": "created_by",
                     "type": "number",
                     "value": "1"
                   },
                   {
-                    "table": "m_api",
+                    "table": "t_op_api",
                     "column": "created_on",
                     "type": "datetime",
                     "value": "{{NOW}}"
                   }
                 ],
-                "table": "m_api",
+                "table": "t_op_api",
                 "returning": "id",
-                "query": "INSERT INTO m_api\n(api_name, api_code, username, api_password, status, created_by, created_on) VALUES (:P1 /* {{$_POST.name}} */, :P2 /* {{$_POST.api_code}} */, :P3 /* {{$_POST.username}} */, :P4 /* {{$_POST.password}} */, :P5 /* {{$_POST.api_status}} */, '1', :P6 /* {{NOW}} */)",
+                "query": "INSERT INTO t_op_api\n(op_id, api_id, code, status, created_by, created_on) VALUES (:P1 /* {{$_POST.operator_id}} */, :P2 /* {{$_POST.inp_api_id}} */, :P3 /* {{$_POST.api_code}} */, :P4 /* {{$_POST.status}} */, '1', :P5 /* {{NOW}} */)",
                 "params": [
                   {
                     "name": ":P1",
                     "type": "expression",
-                    "value": "{{$_POST.name}}"
+                    "value": "{{$_POST.operator_id}}"
                   },
                   {
                     "name": ":P2",
                     "type": "expression",
-                    "value": "{{$_POST.api_code}}"
+                    "value": "{{$_POST.inp_api_id}}"
                   },
                   {
                     "name": ":P3",
                     "type": "expression",
-                    "value": "{{$_POST.username}}"
+                    "value": "{{$_POST.api_code}}"
                   },
                   {
                     "name": ":P4",
                     "type": "expression",
-                    "value": "{{$_POST.password}}"
+                    "value": "{{$_POST.status}}"
                   },
                   {
                     "name": ":P5",
-                    "type": "expression",
-                    "value": "{{$_POST.api_status}}"
-                  },
-                  {
-                    "name": ":P6",
                     "type": "expression",
                     "value": "{{NOW}}"
                   }
@@ -306,8 +242,7 @@
           }
         }
       },
-      "outputType": "boolean",
-      "output": false
+      "outputType": "boolean"
     }
   }
 }

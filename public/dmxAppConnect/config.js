@@ -828,5 +828,111 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "scheme": {
+    "dvSchemes": {
+      "meta": [
+        {
+          "name": "sc_id",
+          "type": "text"
+        },
+        {
+          "name": "scheme_name",
+          "type": "text"
+        },
+        {
+          "name": "scheme_desc",
+          "type": "text"
+        },
+        {
+          "name": "scheme_type",
+          "type": "text"
+        },
+        {
+          "name": "scheme_amount",
+          "type": "text"
+        },
+        {
+          "name": "created_by",
+          "type": "number"
+        },
+        {
+          "name": "created_on",
+          "type": "datetime"
+        },
+        {
+          "name": "updated_by",
+          "type": "number"
+        },
+        {
+          "name": "updated_on",
+          "type": "datetime"
+        },
+        {
+          "name": "status",
+          "type": "number"
+        }
+      ],
+      "outputType": "array"
+    },
+    "tableRepeat1": {
+      "meta": [
+        {
+          "name": "sc_id",
+          "type": "text"
+        },
+        {
+          "name": "scheme_name",
+          "type": "text"
+        },
+        {
+          "name": "scheme_desc",
+          "type": "text"
+        },
+        {
+          "name": "scheme_type",
+          "type": "text"
+        },
+        {
+          "name": "scheme_amount",
+          "type": "text"
+        },
+        {
+          "name": "created_by",
+          "type": "number"
+        },
+        {
+          "name": "created_on",
+          "type": "datetime"
+        },
+        {
+          "name": "updated_by",
+          "type": "number"
+        },
+        {
+          "name": "updated_on",
+          "type": "datetime"
+        },
+        {
+          "name": "status",
+          "type": "number"
+        }
+      ],
+      "outputType": "array"
+    }
+  },
+  "relationopapi": {
+    "dvAPIOP": {
+      "meta": null,
+      "outputType": "array"
+    },
+    "ddAPIOP": {
+      "meta": null,
+      "outputType": "array"
+    },
+    "tableRepeat1": {
+      "meta": null,
+      "outputType": "array"
+    }
   }
 });

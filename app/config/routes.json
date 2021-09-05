@@ -38,6 +38,16 @@
       "path": "/api-add-update",
       "page": "api-add-update",
       "layout": "main"
+    },
+    {
+      "path": "/scheme",
+      "page": "scheme",
+      "layout": "main"
+    },
+    {
+      "path": "/relation-op-api",
+      "page": "relation-op-api",
+      "layout": "main"
     }
   ]
 }

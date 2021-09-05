@@ -7,18 +7,18 @@
     "provider": "Database",
     "connection": "postgres_gcpServer",
     "users": {
-      "table": "users",
+      "table": "m_users",
       "identity": "id",
-      "username": "email",
+      "username": "user_email",
       "password": "password"
     },
     "permissions": {
       "write": {
-        "table": "users",
+        "table": "m_users",
         "identity": "id",
         "conditions": [
           {
-            "column": "status",
+            "column": "u_status",
             "operator": "=",
             "value": "1"
           }

@@ -6,57 +6,30 @@
     },
     "$_POST": [
       {
-        "type": "number",
-        "fieldName": "MobRech",
-        "options": {
-          "rules": {
-            "core:required": {
-              "param": "",
-              "message": "Mobile id is required."
-            },
-            "core:number": {
-              "param": ""
-            },
-            "core:maxlength": {
-              "param": "10"
-            }
-          }
-        },
-        "name": "MobRech"
-      },
-      {
-        "type": "number",
-        "fieldName": "MobRechAmount",
-        "options": {
-          "rules": {
-            "core:number": {},
-            "core:maxlength": {
-              "param": "50"
-            }
-          }
-        },
-        "name": "MobRechAmount"
+        "type": "text",
+        "name": "operator"
       },
       {
         "type": "text",
-        "fieldName": "opname",
-        "options": {
-          "rules": {
-            "core:required": {
-              "param": "",
-              "message": "Operator Name is required."
-            },
-            "core:maxlength": {
-              "param": "50"
-            }
-          }
-        },
+        "name": "blank1"
+      },
+      {
+        "type": "text",
         "name": "opname"
       }
     ]
   },
   "exec": {
     "steps": [
+      {
+        "name": "SubmitTime",
+        "module": "core",
+        "action": "setvalue",
+        "options": {
+          "value": "{{NOW}}"
+        },
+        "output": true
+      },
       {
         "name": "api",
         "module": "api",
@@ -73,6 +46,182 @@
             "field2": ""
           }
         },
+        "output": true
+      },
+      {
+        "name": "xml",
+        "module": "core",
+        "action": "setvalue",
+        "options": {
+          "key": "xml",
+          "value": "{{api.data.xmlToJSON()}}"
+        },
+        "output": true
+      },
+      {
+        "name": "insert",
+        "module": "dbupdater",
+        "action": "insert",
+        "options": {
+          "connection": "postgres_gcpServer",
+          "sql": {
+            "type": "insert",
+            "values": [
+              {
+                "table": "api_response",
+                "column": "user_id",
+                "type": "text",
+                "value": "1"
+              },
+              {
+                "table": "api_response",
+                "column": "recharge_mobile",
+                "type": "text",
+                "value": "{{xml.Result.mn[0]}}"
+              },
+              {
+                "table": "api_response",
+                "column": "operator",
+                "type": "text",
+                "value": "{{$_POST.opname}}"
+              },
+              {
+                "table": "api_response",
+                "column": "amount",
+                "type": "text",
+                "value": "{{xml.Result.amt[0]}}"
+              },
+              {
+                "table": "api_response",
+                "column": "status",
+                "type": "text",
+                "value": "{{xml.Result.status[0]}}"
+              },
+              {
+                "table": "api_response",
+                "column": "order_id",
+                "type": "text",
+                "value": "{{xml.Result.apirefid[0]}}"
+              },
+              {
+                "table": "api_response",
+                "column": "balance",
+                "type": "text",
+                "value": "{{xml.Result.balance[0]}}"
+              },
+              {
+                "table": "api_response",
+                "column": "ec",
+                "type": "text",
+                "value": "{{xml.Result.ec[0]}}"
+              },
+              {
+                "table": "api_response",
+                "column": "apirefid",
+                "type": "text",
+                "value": "{{xml.Result.field1[0]}}"
+              },
+              {
+                "table": "api_response",
+                "column": "remarks",
+                "type": "text",
+                "value": "{{xml.Result.remark[0]}}"
+              },
+              {
+                "table": "api_response",
+                "column": "blank1",
+                "type": "text",
+                "value": "{{NOW.dateDiff('seconds', SubmitTime)}}"
+              },
+              {
+                "table": "api_response",
+                "column": "time",
+                "type": "datetime",
+                "value": "{{NOW}}"
+              },
+              {
+                "table": "api_response",
+                "column": "live_id",
+                "type": "text",
+                "value": "{{xml.Result.reqid[0]}}"
+              }
+            ],
+            "table": "api_response",
+            "query": "INSERT INTO api_response\n(user_id, recharge_mobile, operator, amount, status, order_id, balance, ec, apirefid, remarks, blank1, time, live_id) VALUES ('1', :P1 /* {{xml.Result.mn[0]}} */, :P2 /* {{$_POST.opname}} */, :P3 /* {{xml.Result.amt[0]}} */, :P4 /* {{xml.Result.status[0]}} */, :P5 /* {{xml.Result.apirefid[0]}} */, :P6 /* {{xml.Result.balance[0]}} */, :P7 /* {{xml.Result.ec[0]}} */, :P8 /* {{xml.Result.field1[0]}} */, :P9 /* {{xml.Result.remark[0]}} */, :P10 /* {{NOW.dateDiff('seconds', SubmitTime)}} */, :P11 /* {{NOW}} */, :P12 /* {{xml.Result.reqid[0]}} */)",
+            "params": [
+              {
+                "name": ":P1",
+                "type": "expression",
+                "value": "{{xml.Result.mn[0]}}"
+              },
+              {
+                "name": ":P2",
+                "type": "expression",
+                "value": "{{$_POST.opname}}"
+              },
+              {
+                "name": ":P3",
+                "type": "expression",
+                "value": "{{xml.Result.amt[0]}}"
+              },
+              {
+                "name": ":P4",
+                "type": "expression",
+                "value": "{{xml.Result.status[0]}}"
+              },
+              {
+                "name": ":P5",
+                "type": "expression",
+                "value": "{{xml.Result.apirefid[0]}}"
+              },
+              {
+                "name": ":P6",
+                "type": "expression",
+                "value": "{{xml.Result.balance[0]}}"
+              },
+              {
+                "name": ":P7",
+                "type": "expression",
+                "value": "{{xml.Result.ec[0]}}"
+              },
+              {
+                "name": ":P8",
+                "type": "expression",
+                "value": "{{xml.Result.field1[0]}}"
+              },
+              {
+                "name": ":P9",
+                "type": "expression",
+                "value": "{{xml.Result.remark[0]}}"
+              },
+              {
+                "name": ":P10",
+                "type": "expression",
+                "value": "{{NOW.dateDiff('seconds', SubmitTime)}}"
+              },
+              {
+                "name": ":P11",
+                "type": "expression",
+                "value": "{{NOW}}"
+              },
+              {
+                "name": ":P12",
+                "type": "expression",
+                "value": "{{xml.Result.reqid[0]}}"
+              }
+            ]
+          }
+        },
+        "meta": [
+          {
+            "name": "identity",
+            "type": "text"
+          },
+          {
+            "name": "affected",
+            "type": "number"
+          }
+        ],
         "output": true
       },
       {
@@ -134,7 +283,8 @@
             ]
           }
         },
-        "outputType": "boolean"
+        "outputType": "boolean",
+        "disabled": true
       }
     ]
   }
