@@ -41,7 +41,7 @@
             "mn": "{{$_POST.MobRech}}",
             "op": "{{$_POST.opname}}",
             "amt": "{{$_POST.MobRechAmount}}",
-            "reqid": "{{NOW.md5(1234).substr(1, 6)}}",
+            "reqid": "{{NOW.md5(1234).substr(1, 6)}}a",
             "field1": "",
             "field2": ""
           }

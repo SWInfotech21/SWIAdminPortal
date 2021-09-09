@@ -1,0 +1,177 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/scheme-priority.ejs",
+      "linkedForm": "formAddEditSchPriority"
+    },
+    "$_POST": [
+      {
+        "type": "text",
+        "fieldName": "SchemeId",
+        "name": "SchemeId"
+      },
+      {
+        "type": "text",
+        "fieldName": "user_type",
+        "name": "user_type"
+      },
+      {
+        "type": "text",
+        "fieldName": "target_user_id",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": ""
+            }
+          }
+        },
+        "name": "target_user_id"
+      },
+      {
+        "type": "text",
+        "fieldName": "for_user_type",
+        "name": "for_user_type"
+      },
+      {
+        "type": "text",
+        "fieldName": "target_scheme1",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": ""
+            }
+          }
+        },
+        "name": "target_scheme1"
+      },
+      {
+        "type": "text",
+        "fieldName": "target_scheme2",
+        "name": "target_scheme2"
+      },
+      {
+        "type": "text",
+        "fieldName": "target_scheme3",
+        "name": "target_scheme3"
+      },
+      {
+        "type": "text",
+        "fieldName": "target_scheme4",
+        "name": "target_scheme4"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "insert",
+      "module": "dbupdater",
+      "action": "insert",
+      "options": {
+        "connection": "postgres_gcpServer",
+        "sql": {
+          "type": "insert",
+          "values": [
+            {
+              "table": "t_scheme_user",
+              "column": "user_id",
+              "type": "number",
+              "value": "{{$_POST.target_user_id}}"
+            },
+            {
+              "table": "t_scheme_user",
+              "column": "scheme1",
+              "type": "number",
+              "value": "{{$_POST.target_scheme1}}"
+            },
+            {
+              "table": "t_scheme_user",
+              "column": "scheme2",
+              "type": "number",
+              "value": "{{$_POST.target_scheme2}}"
+            },
+            {
+              "table": "t_scheme_user",
+              "column": "scheme3",
+              "type": "number",
+              "value": "{{$_POST.target_scheme3}}"
+            },
+            {
+              "table": "t_scheme_user",
+              "column": "scheme4",
+              "type": "number",
+              "value": "{{$_POST.target_scheme4}}"
+            },
+            {
+              "table": "t_scheme_user",
+              "column": "created_by",
+              "type": "text",
+              "value": "1"
+            },
+            {
+              "table": "t_scheme_user",
+              "column": "created_on",
+              "type": "datetime",
+              "value": "{{NOW}}"
+            },
+            {
+              "table": "t_scheme_user",
+              "column": "for_user_type",
+              "type": "number",
+              "value": "{{$_POST.for_user_type}}"
+            }
+          ],
+          "table": "t_scheme_user",
+          "returning": "id",
+          "query": "INSERT INTO t_scheme_user\n(user_id, scheme1, scheme2, scheme3, scheme4, created_by, created_on, for_user_type) VALUES (:P1 /* {{$_POST.target_user_id}} */, :P2 /* {{$_POST.target_scheme1}} */, :P3 /* {{$_POST.target_scheme2}} */, :P4 /* {{$_POST.target_scheme3}} */, :P5 /* {{$_POST.target_scheme4}} */, '1', :P6 /* {{NOW}} */, :P7 /* {{$_POST.for_user_type}} */)",
+          "params": [
+            {
+              "name": ":P1",
+              "type": "expression",
+              "value": "{{$_POST.target_user_id}}"
+            },
+            {
+              "name": ":P2",
+              "type": "expression",
+              "value": "{{$_POST.target_scheme1}}"
+            },
+            {
+              "name": ":P3",
+              "type": "expression",
+              "value": "{{$_POST.target_scheme2}}"
+            },
+            {
+              "name": ":P4",
+              "type": "expression",
+              "value": "{{$_POST.target_scheme3}}"
+            },
+            {
+              "name": ":P5",
+              "type": "expression",
+              "value": "{{$_POST.target_scheme4}}"
+            },
+            {
+              "name": ":P6",
+              "type": "expression",
+              "value": "{{NOW}}"
+            },
+            {
+              "name": ":P7",
+              "type": "expression",
+              "value": "{{$_POST.for_user_type}}"
+            }
+          ]
+        }
+      },
+      "meta": [
+        {
+          "name": "identity",
+          "type": "text"
+        },
+        {
+          "name": "affected",
+          "type": "number"
+        }
+      ]
+    }
+  }
+}

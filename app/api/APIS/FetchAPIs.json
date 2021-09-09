@@ -83,6 +83,10 @@
               {
                 "table": "m_api",
                 "column": "updated_on"
+              },
+              {
+                "table": "m_api",
+                "column": "blank2"
               }
             ],
             "table": {
@@ -92,12 +96,11 @@
             "orders": [
               {
                 "table": "m_api",
-                "column": "id",
-                "direction": "DESC",
-                "recid": 1
+                "column": "api_name",
+                "direction": "ASC"
               }
             ],
-            "query": "SELECT id AS api_id, api_name, api_code, username, api_password, status, created_on, created_by, updated_by, updated_on\nFROM m_api\nORDER BY id DESC",
+            "query": "SELECT id AS api_id, api_name, api_code, username, api_password, status, created_on, created_by, updated_by, updated_on, blank2\nFROM m_api\nORDER BY api_name ASC",
             "params": []
           }
         },
@@ -194,6 +197,10 @@
               {
                 "name": "updated_on",
                 "type": "datetime"
+              },
+              {
+                "name": "blank2",
+                "type": "text"
               }
             ]
           }

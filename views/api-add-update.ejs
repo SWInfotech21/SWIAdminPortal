@@ -21,9 +21,10 @@
                 <tr>
                     <th>Id</th>
                     <th>Provider Name</th>
-                    <th>API Code</th>
+                    <th>Short Form</th>
                     <th>Username</th>
-                    <th>Password</th>
+                    <th>Password/ Token</th>
+                    <th>Responce Type</th>
                     <th>Status</th>
                     <th>Created By/ On</th>
                     <th>Updated By/ On</th>
@@ -37,6 +38,7 @@
                     <td dmx-text="api_code"></td>
                     <td dmx-text="username"></td>
                     <td dmx-text="api_password"></td>
+                    <td dmx-text="blank2"></td>
                     <td dmx-text="status == 1 ? 'Active' : 'Inactive'" dmx-class:table-primary="status == 1" dmx-class:table-danger="status == 0"></td>
                     <td dmx-text="created_by+' ('+created_on.formatDate('dd-MM-yyyy HH:mm:ss')+')'"></td>
                     <td dmx-text="updated_by+' ('+updated_on+')'"></td>
@@ -68,7 +70,7 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="inp_APIs_type" class="col-sm-2 col-form-label">API Code/ Shortform</label>
+                        <label for="inp_APIs_type" class="col-sm-2 col-form-label">API Shortform</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="inp_api_code" name="api_code" aria-describedby="inp_api_code_help" placeholder="Enter api Code " maxlength="200" required="" data-msg-required="Api Code id is required." dmx-bind:value="ddAPIs.data.api_code">
                         </div>
@@ -80,9 +82,22 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="inp_api_pass" class="col-sm-2 col-form-label">Api Pass</label>
+                        <label for="inp_api_pass" class="col-sm-2 col-form-label">Api Pass/ Token</label>
                         <div class="col-sm-10">
                             <textarea type="text" class="form-control" id="inp_APIs_pass" name="password" aria-describedby="inp_api_pass_help" placeholder="Enter api Password" maxlength="200" dmx-bind:value="ddAPIs.data.api_password"></textarea>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inp_status" class="col-sm-2 col-form-label">Responce Type</label>
+                        <div class="col-sm-10">
+                            <div class="form-check form-switch">
+                                <select type="text" class="form-control" id="inp_response" name="response_type" aria-describedby="inp_response_help" maxlength="50" data-msg-required="Response type is required." dmx-bind:value="blank2">
+                                    <option value="">Select</option>
+                                    <option value="JSON">JSON</option>
+                                    <option value="XML">XML</option>
+
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="mb-3 row">

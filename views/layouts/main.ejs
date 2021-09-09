@@ -56,8 +56,10 @@
     <title>Admin Panel</title>
 
     <dmx-serverconnect id="scMobRech" url="api/RechargeAPI/RechargeAPI"></dmx-serverconnect>
+    <dmx-serverconnect id="scOperator" url="api/operator/OperatorsFetch" noload></dmx-serverconnect>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="bootstrap/5/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
 
     <!-- custom navbar & footer -->
     <link rel="stylesheet" type="text/css" href="./assets/css/styles.min.css" />
@@ -152,13 +154,16 @@
                             </li>
                             <li><a class="sf-with-ul" href="javascript:void(0)">NEW<span class="sf-sub-indicator"> »</span></a>
                                 <ul>
+                                    <li><a href="scheme-commision-set">Scheme Commision Set</a></li>
                                     <li><a href="api-add-update">API Add Update</a></li>
                                     <li><a href="scheme">Scheme</a></li>
+                                    <li><a href="scheme-priority">Scheme Priority</a></li>
                                     <li><a href="users">Users</a></li>
                                     <li><a href="mobile-recharge">Mobile Recharge</a></li>
                                     <li><a href="operators">Operator</a></li>
                                     <li><a href="relation-op-api">Relation API Operator</a></li>
                                     <li><a href="services">Services</a></li>
+                                    <li><a href="bank-admin">Admin Bank</a></li>
                                 </ul>
                             </li>
                             <li><a class="sf-with-ul" href="javascript:void(0)">Master<span class="sf-sub-indicator"> »</span></a>
@@ -314,9 +319,9 @@
                                 </tr>
                                 <tr>
                                     <td><img dmx-bind:src="ddUsers.data.image" width="50" height="50"></td>
-                                    <td>{{ddUsers.data.name.titlecase()}}</td>
-                                    <td>{{ddUsers.data.email}}</td>
-                                    <td>{{ddUsers.data.mobile}}</td>
+                                    <td>{{ddUsers.data.user_fname.titlecase()}}</td>
+                                    <td>{{ddUsers.data.user_email}}</td>
+                                    <td>{{ddUsers.data.user_mobile}}</td>
                                 </tr>
                             </table>
                             <div class="mb-3 row">
@@ -337,34 +342,34 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">{{ddUsers.data.id ? 'Edit Users' : 'Add Users'}}</h5>
+                        <h5 class="modal-title">{{ddUsers.data.id ? 'Edit User Details' : 'Add A New User'}}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form is="dmx-serverconnect-form" id="formAddEditUser" method="post" action="api/Users/AddEditUsers" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAddEditUser.data.AddEditUsers ? scNotif.success('New User Added') : scNotif.success('User updated'); modalAddUsers.hide();formAddEditUser.reset();browserMain.goto('users')" dmx-on:error="scNotif.warning('An error occurred'); modalAddUsers.hide();formAddEditUser.reset()">
+                        <form is="dmx-serverconnect-form" id="formAddEditUser" method="post" action="api/Users/AddEditUsers" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAddEditUser.data.AddEditUsers ? scNotif.success('New User Added') : scNotif.success('User Details Updated');formAddEditUser.reset();scUsers.load();" dmx-on:error="scNotif.warning('An error occurred'); ">
                             <input type="hidden" name="UserId" dmx-bind:value="ddUsers.data.id">
                             <div class="mb-3 row">
-                                <label for="inp_name" class="col-sm-2 col-form-label">Name</label>
+                                <label for="inp_name" class="col-sm-2 col-form-label">User Name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inp_name" name="name" aria-describedby="inp_name_help" placeholder="Enter Name" maxlength="50" required="" data-msg-required="User Name is required." dmx-bind:value="ddUsers.data.name">
+                                    <input type="text" class="form-control" id="inp_name" name="name" aria-describedby="inp_name_help" placeholder="Enter Name" maxlength="50" required="" data-msg-required="User Name is required." dmx-bind:value="ddUsers.data.user_fname">
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <label for="inp_email" class="col-sm-2 col-form-label">Email</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inp_email" name="email" aria-describedby="inp_email_help" placeholder="Enter Email" maxlength="100" required="" data-msg-required="Email id is required." data-rule-email="" data-rule-nowhitespace="" dmx-bind:value="ddUsers.data.email">
+                                    <input type="text" class="form-control" id="inp_email" name="email" aria-describedby="inp_email_help" placeholder="Enter Email" maxlength="100" required="" data-msg-required="Email id is required." data-rule-email="" data-rule-nowhitespace="" dmx-bind:value="ddUsers.data.user_email">
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <label for="inp_mobile" class="col-sm-2 col-form-label">Mobile</label>
                                 <div class="col-sm-10">
-                                    <input type="number" class="form-control" id="inp_mobile" name="mobile" aria-describedby="inp_mobile_help" placeholder="Enter Mobile" maxlength="10" required="" data-msg-required="Mobile id is required." data-rule-number="" dmx-bind:value="ddUsers.data.mobile">
+                                    <input type="number" class="form-control" id="inp_mobile" name="mobile" aria-describedby="inp_mobile_help" placeholder="Enter Mobile" maxlength="10" required="" data-msg-required="Mobile id is required." data-rule-number="" dmx-bind:value="ddUsers.data.user_mobile">
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <label for="inp_status" class="col-sm-2 col-form-label">Status</label>
                                 <div class="col-sm-10">
-                                    <select type="text" class="form-control" id="inp_status" name="status" aria-describedby="inp_status_help" placeholder="Enter Status" dmx-bind:value="ddUsers.data.status">
+                                    <select type="text" class="form-control" id="inp_status" name="status" aria-describedby="inp_status_help" placeholder="Enter Status" dmx-bind:value="ddUsers.data.u_status">
                                         <option value="1">Active</option>
                                         <option value="0">InActive</option>
                                     </select>
@@ -383,7 +388,7 @@
                             <div class="mb-3 row" dmx-show="!ddUsers.data.id">
                                 <label for="inp_password" class="col-sm-2 col-form-label">Password</label>
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control" id="inp_password" name="password" aria-describedby="inp_password_help" placeholder="Enter Password" maxlength="50">
+                                    <input type="password" class="form-control" id="inp_password" name="password" aria-describedby="inp_password_help" placeholder="Enter Password" maxlength="50" dmx-show="!ddUsers.data.id">
                                 </div>
                             </div>
                             <div class="mb-3 row">
@@ -410,7 +415,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form is="dmx-serverconnect-form" id="formMobRech" method="post" action="api/RechargeAPI/SonakshiWorld" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formMobRech.data.AddMobRech ? scNotif.success('Recharge Success') : scNotif.warning('API hitted, but pending'); modalMobRech.hide();scMobRech.load({},true)" dmx-on:error="scNotif.danger('An error occurred'); modalMobRech.hide();">
+                        <form is="dmx-serverconnect-form" id="formMobRech" method="post" action="api/RechargeAPI/MobileRecharge" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formMobRech.data.MobileRecharge ? scNotif.success('Recharge Success') : scNotif.warning('API hitted, but pending'); modalMobRech.hide();scMobRech.load({})" dmx-on:error="scNotif.danger('An error occurred'); modalMobRech.hide();">
                             <!-- <input type="hidden" name="MobRechId" dmx-bind:value="ddMobRech.data.id"> -->
                             <div class="mb-3 row">
                                 <label for="inp_mobile" class="col-sm-2 col-form-label">Mobile</label>
@@ -421,11 +426,9 @@
                             <div class="mb-3 row">
                                 <label for="inp_name" class="col-sm-2 col-form-label">Operator</label>
                                 <div class="col-sm-10">
-                                    <select type="text" class="form-control" id="inp_opname" name="opname" aria-describedby="inp_opname_help" placeholder="Enter Operator Name" maxlength="50" required="" data-msg-required="Operator Name is required.">
-                                        <option value="1">AirTel</option>
-                                        <option value="4">Vi</option>
-                                        <option value="116">Jio</option>
-                                        <option value="2">BSNL</option>
+                                    <select type="text" class="form-control" id="inp_opname" name="op_code" aria-describedby="inp_opname_help" placeholder="Enter Operator Name" maxlength="50" data-msg-required="Operator Name is required." dmx-on:click="scOperator.load({})" dmx-bind:options="scOperator.data.OperatorFetch.data" optiontext="operator_name" optionvalue="op_id">
+                                        <option value="">Select</option>
+
                                     </select>
                                 </div>
                             </div>

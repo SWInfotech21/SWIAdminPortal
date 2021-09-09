@@ -1,87 +1,95 @@
 {
   "meta": {
     "options": {
-      "linkedFile": "/views/api-add-update.ejs",
-      "linkedForm": "formAddEditapi"
+      "linkedFile": "/views/bank-admin.ejs",
+      "linkedForm": "formAddEditBank"
     },
     "$_POST": [
       {
         "type": "text",
-        "fieldName": "ApiId",
-        "name": "ApiId"
+        "fieldName": "BankId",
+        "name": "BankId"
       },
       {
         "type": "text",
-        "fieldName": "name",
+        "fieldName": "bank_name",
         "options": {
           "rules": {
             "core:required": {
               "param": "",
-              "message": "api Name is required."
+              "message": "Bank Name is required."
             },
             "core:maxlength": {
               "param": "100"
             }
           }
         },
-        "name": "name"
+        "name": "bank_name"
       },
       {
         "type": "text",
-        "fieldName": "api_code",
+        "fieldName": "bank_ifsc",
         "options": {
           "rules": {
             "core:required": {
               "param": "",
-              "message": "Api Code id is required."
+              "message": "Bank IFSC is required."
             },
             "core:maxlength": {
-              "param": "200"
+              "param": 15
             }
           }
         },
-        "name": "api_code"
+        "name": "bank_ifsc"
       },
       {
         "type": "text",
-        "fieldName": "api_status",
-        "name": "api_status"
+        "fieldName": "ac_no",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Bank A/C Number is required."
+            },
+            "core:maxlength": {
+              "param": "20"
+            }
+          }
+        },
+        "name": "ac_no"
       },
       {
         "type": "text",
-        "fieldName": "username",
+        "fieldName": "ac_holder_name",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Bank A/C Holder Name is required."
+            },
+            "core:maxlength": {
+              "param": "100"
+            }
+          }
+        },
+        "name": "ac_holder_name"
+      },
+      {
+        "type": "text",
+        "fieldName": "status",
+        "name": "status"
+      },
+      {
+        "type": "text",
+        "fieldName": "branch_name",
         "options": {
           "rules": {
             "core:maxlength": {
-              "param": "200"
+              "param": "100"
             }
           }
         },
-        "name": "username"
-      },
-      {
-        "type": "text",
-        "fieldName": "password",
-        "options": {
-          "rules": {
-            "core:maxlength": {
-              "param": "200"
-            }
-          }
-        },
-        "name": "password"
-      },
-      {
-        "type": "text",
-        "fieldName": "response_type",
-        "options": {
-          "rules": {
-            "core:maxlength": {
-              "param": "50"
-            }
-          }
-        },
-        "name": "response_type"
+        "name": "branch_name"
       }
     ]
   },
@@ -91,10 +99,10 @@
       "module": "core",
       "action": "condition",
       "options": {
-        "if": "{{$_POST.ApiId  != ''}}",
+        "if": "{{$_POST.BankId != ''}}",
         "then": {
           "steps": {
-            "name": "ApiUpdate",
+            "name": "AdminBankEdit",
             "module": "dbupdater",
             "action": "update",
             "options": {
@@ -103,55 +111,55 @@
                 "type": "update",
                 "values": [
                   {
-                    "table": "m_api",
-                    "column": "api_name",
+                    "table": "m_bank",
+                    "column": "bank_name",
                     "type": "text",
-                    "value": "{{$_POST.name}}"
+                    "value": "{{$_POST.bank_name}}"
                   },
                   {
-                    "table": "m_api",
-                    "column": "api_code",
+                    "table": "m_bank",
+                    "column": "ac_holder_name",
                     "type": "text",
-                    "value": "{{$_POST.api_code}}"
+                    "value": "{{$_POST.ac_holder_name}}"
                   },
                   {
-                    "table": "m_api",
-                    "column": "username",
+                    "table": "m_bank",
+                    "column": "ac_no",
                     "type": "text",
-                    "value": "{{$_POST.username}}"
+                    "value": "{{$_POST.ac_no}}"
                   },
                   {
-                    "table": "m_api",
-                    "column": "api_password",
+                    "table": "m_bank",
+                    "column": "ifsc_code",
                     "type": "text",
-                    "value": "{{$_POST.password}}"
+                    "value": "{{$_POST.bank_ifsc}}"
                   },
                   {
-                    "table": "m_api",
-                    "column": "status",
-                    "type": "number",
-                    "value": "{{$_POST.api_status}}"
+                    "table": "m_bank",
+                    "column": "branch_name",
+                    "type": "text",
+                    "value": "{{$_POST.bank_name}}"
                   },
                   {
-                    "table": "m_api",
+                    "table": "m_bank",
                     "column": "updated_by",
                     "type": "number",
                     "value": "1"
                   },
                   {
-                    "table": "m_api",
+                    "table": "m_bank",
                     "column": "updated_on",
                     "type": "datetime",
                     "value": "{{NOW}}"
                   },
                   {
-                    "table": "m_api",
-                    "column": "blank2",
-                    "type": "text",
-                    "value": "{{$_POST.response_type}}"
+                    "table": "m_bank",
+                    "column": "status",
+                    "type": "number",
+                    "value": "{{$_POST.status}}"
                   }
                 ],
-                "table": "m_api",
+                "table": "m_bank",
                 "wheres": {
                   "condition": "AND",
                   "rules": [
@@ -160,7 +168,7 @@
                       "field": "id",
                       "type": "double",
                       "operator": "equal",
-                      "value": "{{$_POST.ApiId}}",
+                      "value": "{{$_POST.BankId}}",
                       "data": {
                         "column": "id"
                       },
@@ -170,32 +178,32 @@
                   "conditional": null,
                   "valid": true
                 },
-                "query": "UPDATE m_api\nSET api_name = :P1 /* {{$_POST.name}} */, api_code = :P2 /* {{$_POST.api_code}} */, username = :P3 /* {{$_POST.username}} */, api_password = :P4 /* {{$_POST.password}} */, status = :P5 /* {{$_POST.api_status}} */, updated_by = '1', updated_on = :P6 /* {{NOW}} */, blank2 = :P7 /* {{$_POST.response_type}} */\nWHERE id = :P8 /* {{$_POST.ApiId}} */",
+                "query": "UPDATE m_bank\nSET bank_name = :P1 /* {{$_POST.bank_name}} */, ac_holder_name = :P2 /* {{$_POST.ac_holder_name}} */, ac_no = :P3 /* {{$_POST.ac_no}} */, ifsc_code = :P4 /* {{$_POST.bank_ifsc}} */, branch_name = :P5 /* {{$_POST.bank_name}} */, updated_by = '1', updated_on = :P6 /* {{NOW}} */, status = :P7 /* {{$_POST.status}} */\nWHERE id = :P8 /* {{$_POST.BankId}} */",
                 "params": [
                   {
                     "name": ":P1",
                     "type": "expression",
-                    "value": "{{$_POST.name}}"
+                    "value": "{{$_POST.bank_name}}"
                   },
                   {
                     "name": ":P2",
                     "type": "expression",
-                    "value": "{{$_POST.api_code}}"
+                    "value": "{{$_POST.ac_holder_name}}"
                   },
                   {
                     "name": ":P3",
                     "type": "expression",
-                    "value": "{{$_POST.username}}"
+                    "value": "{{$_POST.ac_no}}"
                   },
                   {
                     "name": ":P4",
                     "type": "expression",
-                    "value": "{{$_POST.password}}"
+                    "value": "{{$_POST.bank_ifsc}}"
                   },
                   {
                     "name": ":P5",
                     "type": "expression",
-                    "value": "{{$_POST.api_status}}"
+                    "value": "{{$_POST.bank_name}}"
                   },
                   {
                     "name": ":P6",
@@ -205,13 +213,13 @@
                   {
                     "name": ":P7",
                     "type": "expression",
-                    "value": "{{$_POST.response_type}}"
+                    "value": "{{$_POST.status}}"
                   },
                   {
                     "operator": "equal",
                     "type": "expression",
                     "name": ":P8",
-                    "value": "{{$_POST.ApiId}}"
+                    "value": "{{$_POST.BankId}}"
                   }
                 ]
               }
@@ -221,13 +229,12 @@
                 "name": "affected",
                 "type": "number"
               }
-            ],
-            "output": true
+            ]
           }
         },
         "else": {
           "steps": {
-            "name": "ApiAdd",
+            "name": "AdminBankAdd",
             "module": "dbupdater",
             "action": "insert",
             "options": {
@@ -236,82 +243,82 @@
                 "type": "insert",
                 "values": [
                   {
-                    "table": "m_api",
-                    "column": "api_name",
+                    "table": "m_bank",
+                    "column": "bank_name",
                     "type": "text",
-                    "value": "{{$_POST.name}}"
+                    "value": "{{$_POST.bank_name}}"
                   },
                   {
-                    "table": "m_api",
-                    "column": "api_code",
+                    "table": "m_bank",
+                    "column": "ac_holder_name",
                     "type": "text",
-                    "value": "{{$_POST.api_code}}"
+                    "value": "{{$_POST.ac_holder_name}}"
                   },
                   {
-                    "table": "m_api",
-                    "column": "username",
+                    "table": "m_bank",
+                    "column": "ac_no",
                     "type": "text",
-                    "value": "{{$_POST.username}}"
+                    "value": "{{$_POST.ac_no}}"
                   },
                   {
-                    "table": "m_api",
-                    "column": "api_password",
+                    "table": "m_bank",
+                    "column": "ifsc_code",
                     "type": "text",
-                    "value": "{{$_POST.password}}"
+                    "value": "{{$_POST.bank_ifsc}}"
                   },
                   {
-                    "table": "m_api",
-                    "column": "status",
-                    "type": "number",
-                    "value": "{{$_POST.api_status}}"
+                    "table": "m_bank",
+                    "column": "branch_name",
+                    "type": "text",
+                    "value": "{{$_POST.branch_name}}"
                   },
                   {
-                    "table": "m_api",
+                    "table": "m_bank",
                     "column": "created_by",
                     "type": "number",
                     "value": "1"
                   },
                   {
-                    "table": "m_api",
+                    "table": "m_bank",
                     "column": "created_on",
                     "type": "datetime",
                     "value": "{{NOW}}"
                   },
                   {
-                    "table": "m_api",
-                    "column": "blank2",
-                    "type": "text",
-                    "value": "{{$_POST.response_type}}"
+                    "table": "m_bank",
+                    "column": "status",
+                    "type": "number",
+                    "value": "{{$_POST.status}}"
                   }
                 ],
-                "table": "m_api",
+                "table": "m_bank",
                 "returning": "id",
-                "query": "INSERT INTO m_api\n(api_name, api_code, username, api_password, status, created_by, created_on, blank2) VALUES (:P1 /* {{$_POST.name}} */, :P2 /* {{$_POST.api_code}} */, :P3 /* {{$_POST.username}} */, :P4 /* {{$_POST.password}} */, :P5 /* {{$_POST.api_status}} */, '1', :P6 /* {{NOW}} */, :P7 /* {{$_POST.response_type}} */)",
+                "query": "INSERT INTO m_bank\n(bank_name, ac_holder_name, ac_no, ifsc_code, branch_name, created_by, created_on, status) VALUES (:P1 /* {{$_POST.bank_name}} */, :P2 /* {{$_POST.ac_holder_name}} */, :P3 /* {{$_POST.ac_no}} */, :P4 /* {{$_POST.bank_ifsc}} */, :P5 /* {{$_POST.branch_name}} */, '1', :P6 /* {{NOW}} */, :P7 /* {{$_POST.status}} */)",
                 "params": [
                   {
                     "name": ":P1",
                     "type": "expression",
-                    "value": "{{$_POST.name}}"
+                    "value": "{{$_POST.bank_name}}"
                   },
                   {
                     "name": ":P2",
                     "type": "expression",
-                    "value": "{{$_POST.api_code}}"
+                    "value": "{{$_POST.ac_holder_name}}"
                   },
                   {
                     "name": ":P3",
                     "type": "expression",
-                    "value": "{{$_POST.username}}"
+                    "value": "{{$_POST.ac_no}}"
                   },
                   {
                     "name": ":P4",
                     "type": "expression",
-                    "value": "{{$_POST.password}}"
+                    "value": "{{$_POST.bank_ifsc}}"
                   },
                   {
                     "name": ":P5",
                     "type": "expression",
-                    "value": "{{$_POST.api_status}}"
+                    "value": "{{$_POST.branch_name}}"
                   },
                   {
                     "name": ":P6",
@@ -321,7 +328,7 @@
                   {
                     "name": ":P7",
                     "type": "expression",
-                    "value": "{{$_POST.response_type}}"
+                    "value": "{{$_POST.status}}"
                   }
                 ]
               }
@@ -335,13 +342,11 @@
                 "name": "affected",
                 "type": "number"
               }
-            ],
-            "output": true
+            ]
           }
         }
       },
-      "outputType": "boolean",
-      "output": false
+      "outputType": "boolean"
     }
   }
 }

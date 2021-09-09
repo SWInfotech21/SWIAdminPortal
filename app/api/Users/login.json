@@ -109,7 +109,7 @@
               "action": "login",
               "options": {
                 "provider": "securityLogin",
-                "password": "{{$_POST.Password.sha256(getSalt.saltvalue.decrypt('Hw3fTCdch1'))}}",
+                "password": "{{$_POST.Password.sha256(getSalt.saltvalue)}}",
                 "username": "{{$_POST.Email.lowercase()}}"
               },
               "output": true,

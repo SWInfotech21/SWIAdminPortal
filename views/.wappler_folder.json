@@ -34,5 +34,17 @@
   "relation-op-api.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "bank-admin.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  },
+  "scheme-priority.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  },
+  "scheme-commision-set.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }

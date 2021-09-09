@@ -31,7 +31,7 @@
                     <td dmx-text="sc_id"></td>
                     <td dmx-text="scheme_name.titlecase()"></td>
                     <td dmx-text="scheme_desc"></td>
-                    <td dmx-text="scheme_type == 1 ? 'Master Distributor' : scheme_type == 2 ? 'Distributor' : scheme_type == 3 ? 'Retailer' : 'None'" dmx-class:table-primary="scheme_type == 1" dmx-class:table-success="scheme_type == 2" dmx-class:table-warning="scheme_type == 3" dmx-class:table-danger="scheme_type == 4"></td>
+                    <td dmx-text="scheme_type == 1 ? 'MDT' : scheme_type == 2 ? 'DT' : scheme_type == 3 ? 'RT' : 'None'" dmx-class:table-primary="scheme_type == 1" dmx-class:table-success="scheme_type == 2" dmx-class:table-warning="scheme_type == 3" dmx-class:table-danger="scheme_type == 4"></td>
                     <td dmx-text="status != 1 ?'Inactive' : 'Active'" dmx-class:table-primary="status == 1" dmx-class:table-warning="status != 1"></td>
                     <td>
                         <a class="dropdown-item" href="#" dmx-on:click="ddSchemes.select(sc_id)" data-bs-toggle="modal" data-bs-target="#modalAddScheme"><i class="fas fa-edit" title="Edit Schemes"></i></a>&emsp;
@@ -52,7 +52,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form is="dmx-serverconnect-form" id="formAddEditScheme" method="post" action="api/Scheme/SchemeAddEdit" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAddEditScheme.data.AddEditSchemes ? scNotif.success('New Scheme Added') : scNotif.success('Scheme Details Updated'); modalAddSchemes.hide()" dmx-on:error="scNotif.warning('An error occurred'); modalAddSchemes.hide();formAddEditScheme.reset();formAddEditScheme.reset();browserMain.goto('schemes')">
+                <form is="dmx-serverconnect-form" id="formAddEditScheme" method="post" action="api/Scheme/SchemeAddEdit" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAddEditScheme.data.AddEditSchemes ? scNotif.success('New Scheme Added') : scNotif.success('Scheme Details Updated');scSchemes.load()" dmx-on:error="scNotif.warning('An error occurred'); modalAddSchemes.hide();formAddEditScheme.reset();browserMain.goto('schemes')">
                     <!--  -->
                     <input type="hidden" name="SchemeId" dmx-bind:value="ddSchemes.data.sc_id">
                     <div class="mb-3 row">
@@ -72,9 +72,9 @@
                         <div class="col-sm-10">
                             <select type="number" class="form-control" id="inp_Scheme_type" name="scheme_type" aria-describedby="inp_Scheme_type_help" placeholder="Enter Scheme type" dmx-bind:value="ddSchemes.data.scheme_type">
                                 <option value="">Select Option</option>
-                                <option value="1">Master Distributor</option>
-                                <option value="2">Distributor</option>
-                                <option value="3">Retailer</option>
+                                <option value="1">MDT</option>
+                                <option value="2">DT</option>
+                                <option value="3">RT</option>
                             </select>
                         </div>
                     </div>

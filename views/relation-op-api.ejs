@@ -33,7 +33,7 @@
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Operator Name</th>
+                    <th>Operator Name & Sequence</th>
                     <th>API Names</th>
                     <th>API Codes</th>
                 </tr>
@@ -82,7 +82,13 @@
                     <div class="mb-3 row">
                         <label for="inp_api_code" class="col-sm-2 col-form-label">Api Code</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inp_api_code" name="api_code" aria-describedby="inp_code_help" placeholder="Enter Unique API Code." maxlength="10" dmx-bind:value="scAPICode.data.ApiCode.code">
+                            <input type="text" class="form-control" id="inp_api_code" name="api_code" aria-describedby="inp_code_help" placeholder="Enter Unique API Code." maxlength="10" required="" dmx-bind:value="scAPICode.data.ApiCode.code">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inp_api_sequence" class="col-sm-2 col-form-label">Api Hit Sequence</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inp_api_sequence" name="api_sequence" aria-describedby="inp_sequence_help" placeholder="Enter Unique API Sequence." maxlength="10" required="" dmx-bind:value="scAPICode.data.ApiCode.api_hit_serial">
                         </div>
                     </div>
                     <div class="mb-3 row">

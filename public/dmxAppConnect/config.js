@@ -934,5 +934,182 @@ dmx.config({
       "meta": null,
       "outputType": "array"
     }
+  },
+  "bankadmin": {
+    "dvBanks": {
+      "meta": [
+        {
+          "name": "id",
+          "type": "text"
+        },
+        {
+          "name": "bank_name",
+          "type": "text"
+        },
+        {
+          "name": "ac_holder_name",
+          "type": "text"
+        },
+        {
+          "name": "ac_no",
+          "type": "text"
+        },
+        {
+          "name": "ifsc_code",
+          "type": "text"
+        },
+        {
+          "name": "branch_name",
+          "type": "text"
+        },
+        {
+          "name": "image_url",
+          "type": "text"
+        },
+        {
+          "name": "created_by",
+          "type": "number"
+        },
+        {
+          "name": "created_on",
+          "type": "datetime"
+        },
+        {
+          "name": "updated_by",
+          "type": "number"
+        },
+        {
+          "name": "updated_on",
+          "type": "datetime"
+        }
+      ],
+      "outputType": "object"
+    },
+    "tableRepeat1": {
+      "meta": [
+        {
+          "name": "id",
+          "type": "text"
+        },
+        {
+          "name": "bank_name",
+          "type": "text"
+        },
+        {
+          "name": "ac_holder_name",
+          "type": "text"
+        },
+        {
+          "name": "ac_no",
+          "type": "text"
+        },
+        {
+          "name": "ifsc_code",
+          "type": "text"
+        },
+        {
+          "name": "branch_name",
+          "type": "text"
+        },
+        {
+          "name": "image_url",
+          "type": "text"
+        },
+        {
+          "name": "created_by",
+          "type": "number"
+        },
+        {
+          "name": "created_on",
+          "type": "datetime"
+        },
+        {
+          "name": "updated_by",
+          "type": "number"
+        },
+        {
+          "name": "updated_on",
+          "type": "datetime"
+        }
+      ],
+      "outputType": "object"
+    },
+    "ddMobRech": {
+      "meta": [
+        {
+          "name": "id",
+          "type": "text"
+        },
+        {
+          "name": "bank_name",
+          "type": "text"
+        },
+        {
+          "name": "ac_holder_name",
+          "type": "text"
+        },
+        {
+          "name": "ac_no",
+          "type": "text"
+        },
+        {
+          "name": "ifsc_code",
+          "type": "text"
+        },
+        {
+          "name": "branch_name",
+          "type": "text"
+        },
+        {
+          "name": "image_url",
+          "type": "text"
+        },
+        {
+          "name": "created_by",
+          "type": "number"
+        },
+        {
+          "name": "created_on",
+          "type": "datetime"
+        },
+        {
+          "name": "updated_by",
+          "type": "number"
+        },
+        {
+          "name": "updated_on",
+          "type": "datetime"
+        }
+      ],
+      "outputType": "object"
+    }
+  },
+  "schemepriority": {
+    "dvSchemePriority": {
+      "meta": [],
+      "outputType": "array"
+    },
+    "ddSchemePriority": {
+      "meta": null,
+      "outputType": "array"
+    },
+    "tableRepeat1": {
+      "meta": null,
+      "outputType": "array"
+    }
+  },
+  "schemecommisionset": {
+    "tableRepeat1": {
+      "meta": null,
+      "outputType": "array"
+    },
+    "dvCommision": {
+      "meta": [],
+      "outputType": "array"
+    },
+    "ddCommision": {
+      "meta": null,
+      "outputType": "array"
+    }
   }
 });

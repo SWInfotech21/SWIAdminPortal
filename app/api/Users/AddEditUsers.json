@@ -208,17 +208,20 @@
                     "rules": [
                       {
                         "id": "id",
+                        "field": "id",
                         "type": "double",
                         "operator": "equal",
-                        "value": "{{$_POST.id}}",
+                        "value": "{{$_POST.UserId}}",
                         "data": {
                           "column": "id"
                         },
                         "operation": "="
                       }
-                    ]
+                    ],
+                    "conditional": null,
+                    "valid": true
                   },
-                  "query": "UPDATE m_users\nSET user_fname = :P1 /* {{$_POST.name}} */, user_mobile = :P2 /* {{$_POST.mobile}} */, user_email = :P3 /* {{$_POST.email.lowercase()}} */, user_type = :P4 /* {{$_POST.user_type}} */, u_status = :P5 /* {{$_POST.status}} */, updated_by = '1', updated_on = :P6 /* {{NOW}} */\nWHERE id = :P7 /* {{$_POST.id}} */",
+                  "query": "UPDATE m_users\nSET user_fname = :P1 /* {{$_POST.name}} */, user_mobile = :P2 /* {{$_POST.mobile}} */, user_email = :P3 /* {{$_POST.email.lowercase()}} */, user_type = :P4 /* {{$_POST.user_type}} */, u_status = :P5 /* {{$_POST.status}} */, updated_by = '1', updated_on = :P6 /* {{NOW}} */\nWHERE id = :P7 /* {{$_POST.UserId}} */",
                   "params": [
                     {
                       "name": ":P1",
@@ -254,7 +257,7 @@
                       "operator": "equal",
                       "type": "expression",
                       "name": ":P7",
-                      "value": "{{$_POST.id}}"
+                      "value": "{{$_POST.UserId}}"
                     }
                   ]
                 }
@@ -306,13 +309,13 @@
                       "table": "m_users",
                       "column": "password",
                       "type": "text",
-                      "value": "{{$_POST.password.sha256('NOW.encrypt(\\'Hw3fTCdch1\\')')}}"
+                      "value": "{{$_POST.password.sha256(NOW)}}"
                     },
                     {
                       "table": "m_users",
                       "column": "salt",
                       "type": "text",
-                      "value": "{{NOW.encrypt('Hw3fTCdch1')}}"
+                      "value": "{{NOW}}"
                     },
                     {
                       "table": "m_users",
@@ -337,10 +340,16 @@
                       "column": "created_on",
                       "type": "datetime",
                       "value": "{{NOW}}"
+                    },
+                    {
+                      "table": "m_users",
+                      "column": "user_lname",
+                      "type": "text",
+                      "value": "{{'https://github.com/ado.png'}}"
                     }
                   ],
                   "table": "m_users",
-                  "query": "INSERT INTO m_users\n(user_id, user_fname, user_mobile, user_email, password, salt, user_type, u_status, created_by, created_on) VALUES (:P1 /* {{NOW.md5(1234).substr(1, 6)}} */, :P2 /* {{$_POST.name}} */, :P3 /* {{$_POST.mobile}} */, :P4 /* {{$_POST.email.lowercase()}} */, :P5 /* {{$_POST.password.sha256('NOW.encrypt(\\'Hw3fTCdch1\\')')}} */, :P6 /* {{NOW.encrypt('Hw3fTCdch1')}} */, :P7 /* {{$_POST.user_type}} */, :P8 /* {{$_POST.status}} */, '1', :P9 /* {{NOW}} */)",
+                  "query": "INSERT INTO m_users\n(user_id, user_fname, user_mobile, user_email, password, salt, user_type, u_status, created_by, created_on, user_lname) VALUES (:P1 /* {{NOW.md5(1234).substr(1, 6)}} */, :P2 /* {{$_POST.name}} */, :P3 /* {{$_POST.mobile}} */, :P4 /* {{$_POST.email.lowercase()}} */, :P5 /* {{$_POST.password.sha256(NOW)}} */, :P6 /* {{NOW}} */, :P7 /* {{$_POST.user_type}} */, :P8 /* {{$_POST.status}} */, '1', :P9 /* {{NOW}} */, :P10 /* {{'https://github.com/ado.png'}} */)",
                   "params": [
                     {
                       "name": ":P1",
@@ -365,12 +374,12 @@
                     {
                       "name": ":P5",
                       "type": "expression",
-                      "value": "{{$_POST.password.sha256('NOW.encrypt(\\'Hw3fTCdch1\\')')}}"
+                      "value": "{{$_POST.password.sha256(NOW)}}"
                     },
                     {
                       "name": ":P6",
                       "type": "expression",
-                      "value": "{{NOW.encrypt('Hw3fTCdch1')}}"
+                      "value": "{{NOW}}"
                     },
                     {
                       "name": ":P7",
@@ -386,6 +395,11 @@
                       "name": ":P9",
                       "type": "expression",
                       "value": "{{NOW}}"
+                    },
+                    {
+                      "name": ":P10",
+                      "type": "expression",
+                      "value": "{{'https://github.com/ado.png'}}"
                     }
                   ],
                   "returning": "id"

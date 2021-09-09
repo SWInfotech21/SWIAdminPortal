@@ -48,6 +48,21 @@
       "path": "/relation-op-api",
       "page": "relation-op-api",
       "layout": "main"
+    },
+    {
+      "path": "/bank-admin",
+      "page": "bank-admin",
+      "layout": "main"
+    },
+    {
+      "path": "/scheme-priority",
+      "page": "scheme-priority",
+      "layout": "main"
+    },
+    {
+      "path": "/scheme-commision-set",
+      "page": "scheme-commision-set",
+      "layout": "main"
     }
   ]
 }

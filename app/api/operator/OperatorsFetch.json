@@ -150,12 +150,11 @@
             "orders": [
               {
                 "table": "m_operator",
-                "column": "id",
-                "direction": "DESC",
-                "recid": 1
+                "column": "operator_name",
+                "direction": "ASC"
               }
             ],
-            "query": "SELECT m_operator.id AS op_id, m_operator.operator_name, m_operator.service_id, m_operator.api_code, m_operator.operator_code, m_operator.status, m_operator.operator_type, m_operator.is_validate, m_operator.is_bbps, m_operator.is_partial, m_operator.min_amount, m_operator.max_amount, m_operator.min_length, m_operator.max_length, m_operator.allow_type, m_operator.created_on, m_operator.created_by, op_service.service_name, op_service.service_type\nFROM m_operator\nINNER JOIN m_service AS op_service ON (op_service.id = m_operator.service_id)\nORDER BY m_operator.id DESC",
+            "query": "SELECT m_operator.id AS op_id, m_operator.operator_name, m_operator.service_id, m_operator.api_code, m_operator.operator_code, m_operator.status, m_operator.operator_type, m_operator.is_validate, m_operator.is_bbps, m_operator.is_partial, m_operator.min_amount, m_operator.max_amount, m_operator.min_length, m_operator.max_length, m_operator.allow_type, m_operator.created_on, m_operator.created_by, op_service.service_name, op_service.service_type\nFROM m_operator\nINNER JOIN m_service AS op_service ON (op_service.id = m_operator.service_id)\nORDER BY m_operator.operator_name ASC",
             "params": []
           }
         },

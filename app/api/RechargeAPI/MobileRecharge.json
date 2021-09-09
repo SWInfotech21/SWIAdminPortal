@@ -1,0 +1,899 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/layouts/main.ejs",
+      "linkedForm": "formMobRech"
+    },
+    "$_POST": [
+      {
+        "type": "text",
+        "name": "user_id"
+      },
+      {
+        "type": "text",
+        "name": "recharge_mobile"
+      },
+      {
+        "type": "text",
+        "name": "operator"
+      },
+      {
+        "type": "text",
+        "name": "amount"
+      },
+      {
+        "type": "text",
+        "name": "status"
+      },
+      {
+        "type": "text",
+        "name": "order_id"
+      },
+      {
+        "type": "text",
+        "name": "balance"
+      },
+      {
+        "type": "text",
+        "name": "ec"
+      },
+      {
+        "type": "text",
+        "name": "apirefid"
+      },
+      {
+        "type": "text",
+        "name": "remarks"
+      },
+      {
+        "type": "text",
+        "name": "blank1"
+      },
+      {
+        "type": "text",
+        "name": "blank2"
+      },
+      {
+        "type": "text",
+        "name": "field1"
+      },
+      {
+        "type": "text",
+        "name": "field2"
+      },
+      {
+        "type": "datetime",
+        "name": "time"
+      },
+      {
+        "type": "text",
+        "name": "live_id"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "SubmitTime",
+        "module": "core",
+        "action": "setvalue",
+        "options": {
+          "value": "{{NOW}}"
+        },
+        "output": true
+      },
+      {
+        "name": "GetAPISequence",
+        "module": "dbconnector",
+        "action": "select",
+        "options": {
+          "connection": "postgres_gcpServer",
+          "sql": {
+            "type": "SELECT",
+            "columns": [
+              {
+                "table": "t_op_api",
+                "column": "api_id"
+              },
+              {
+                "table": "t_op_api",
+                "column": "code",
+                "alias": "operator_code"
+              },
+              {
+                "table": "APIRel",
+                "column": "api_name"
+              },
+              {
+                "table": "APIRel",
+                "column": "api_code"
+              },
+              {
+                "table": "APIRel",
+                "column": "username"
+              },
+              {
+                "table": "APIRel",
+                "column": "api_password"
+              },
+              {
+                "table": "APIRel",
+                "column": "status"
+              },
+              {
+                "table": "APIRel",
+                "column": "blank2"
+              }
+            ],
+            "table": {
+              "name": "t_op_api"
+            },
+            "joins": [
+              {
+                "table": "m_api",
+                "column": "*",
+                "alias": "APIRel",
+                "type": "INNER",
+                "clauses": {
+                  "condition": "AND",
+                  "rules": [
+                    {
+                      "table": "APIRel",
+                      "column": "id",
+                      "operator": "equal",
+                      "value": {
+                        "table": "t_op_api",
+                        "column": "api_id"
+                      },
+                      "operation": "="
+                    }
+                  ]
+                }
+              }
+            ],
+            "orders": [
+              {
+                "table": "t_op_api",
+                "column": "api_hit_serial",
+                "direction": "ASC",
+                "recid": 1
+              }
+            ],
+            "query": "SELECT t_op_api.api_id, t_op_api.code AS operator_code, APIRel.api_name, APIRel.api_code, APIRel.username, APIRel.api_password, APIRel.status, APIRel.blank2\nFROM t_op_api\nINNER JOIN m_api AS APIRel ON (APIRel.id = t_op_api.api_id)\nWHERE t_op_api.op_id = 1 AND APIRel.status = 1\nORDER BY t_op_api.api_hit_serial ASC",
+            "params": [],
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "t_op_api.op_id",
+                  "field": "t_op_api.op_id",
+                  "type": "double",
+                  "operator": "equal",
+                  "value": 1,
+                  "data": {
+                    "table": "t_op_api",
+                    "column": "op_id",
+                    "type": "number"
+                  },
+                  "operation": "="
+                },
+                {
+                  "id": "APIRel.status",
+                  "field": "APIRel.status",
+                  "type": "double",
+                  "operator": "equal",
+                  "value": 1,
+                  "data": {
+                    "table": "APIRel",
+                    "column": "status",
+                    "type": "number"
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            }
+          }
+        },
+        "output": true,
+        "type": "dbconnector_select",
+        "meta": [
+          {
+            "name": "api_id",
+            "type": "number"
+          },
+          {
+            "name": "operator_code",
+            "type": "text"
+          },
+          {
+            "name": "api_name",
+            "type": "text"
+          },
+          {
+            "name": "api_code",
+            "type": "text"
+          },
+          {
+            "name": "username",
+            "type": "text"
+          },
+          {
+            "name": "api_password",
+            "type": "text"
+          },
+          {
+            "name": "status",
+            "type": "number"
+          },
+          {
+            "name": "blank2",
+            "type": "text"
+          }
+        ],
+        "outputType": "array"
+      },
+      {
+        "name": "res",
+        "module": "core",
+        "action": "setvalue",
+        "options": {
+          "value": 3
+        },
+        "output": true
+      },
+      {
+        "name": "repeat1",
+        "module": "core",
+        "action": "repeat",
+        "options": {
+          "repeat": "{{GetAPISequence}}",
+          "outputFields": [],
+          "exec": {
+            "steps": [
+              {
+                "name": "",
+                "module": "core",
+                "action": "condition",
+                "options": {
+                  "if": "{{GetAPISequence[0].api_code == 'SN' && res != 1}}",
+                  "then": {
+                    "steps": {
+                      "name": "SN",
+                      "module": "core",
+                      "action": "setvalue",
+                      "options": {
+                        "value": 2
+                      },
+                      "output": true
+                    }
+                  }
+                },
+                "outputType": "boolean"
+              },
+              {
+                "name": "",
+                "module": "core",
+                "action": "condition",
+                "options": {
+                  "if": "{{GetAPISequence[0].api_code == 'RT' && rec != 1}}",
+                  "then": {
+                    "steps": {
+                      "name": "RT",
+                      "module": "core",
+                      "action": "setvalue",
+                      "options": {
+                        "value": 1
+                      },
+                      "output": true
+                    }
+                  }
+                },
+                "outputType": "boolean"
+              }
+            ]
+          }
+        },
+        "output": true,
+        "meta": [
+          {
+            "name": "$index",
+            "type": "number"
+          },
+          {
+            "name": "$number",
+            "type": "number"
+          },
+          {
+            "name": "$name",
+            "type": "text"
+          },
+          {
+            "name": "$value",
+            "type": "object"
+          },
+          {
+            "name": "api_id",
+            "type": "number"
+          },
+          {
+            "name": "operator_code",
+            "type": "text"
+          },
+          {
+            "name": "api_name",
+            "type": "text"
+          },
+          {
+            "name": "api_code",
+            "type": "text"
+          },
+          {
+            "name": "username",
+            "type": "text"
+          },
+          {
+            "name": "api_password",
+            "type": "text"
+          },
+          {
+            "name": "status",
+            "type": "number"
+          },
+          {
+            "name": "blank2",
+            "type": "text"
+          }
+        ],
+        "outputType": "array"
+      },
+      {
+        "name": "repeat",
+        "module": "core",
+        "action": "repeat",
+        "options": {
+          "repeat": "{{GetAPISequence}}",
+          "outputFields": [],
+          "exec": {
+            "steps": [
+              {
+                "name": "",
+                "module": "core",
+                "action": "condition",
+                "options": {
+                  "if": "{{GetAPISequence[0].blank2 == 'XML'}}",
+                  "then": {
+                    "steps": [
+                      {
+                        "name": "ApiXML",
+                        "module": "api",
+                        "action": "send",
+                        "options": {
+                          "url": "https://www.sonakshiworld.com/apiservice.asmx/Recharge",
+                          "params": {
+                            "apiToken": "{{GetAPISequence[0].api_password}}",
+                            "mn": "{{$_POST.MobRech}}",
+                            "op": "{{GetAPISequence[0].operator_code}}",
+                            "amt": "{{$_POST.MobRechAmount}}",
+                            "reqid": "{{NOW.md5(1234).substr(1, 6)}}a",
+                            "field1": "",
+                            "field2": ""
+                          }
+                        },
+                        "output": true,
+                        "disabled": true
+                      },
+                      {
+                        "name": "xml",
+                        "module": "core",
+                        "action": "setvalue",
+                        "options": {
+                          "value": "{{api.data.xmlToJSON()}}"
+                        },
+                        "output": true
+                      },
+                      {
+                        "name": "insert",
+                        "module": "dbupdater",
+                        "action": "insert",
+                        "options": {
+                          "connection": "postgres_gcpServer",
+                          "sql": {
+                            "type": "insert",
+                            "values": [
+                              {
+                                "table": "api_response",
+                                "column": "user_id",
+                                "type": "text",
+                                "value": "1"
+                              },
+                              {
+                                "table": "api_response",
+                                "column": "recharge_mobile",
+                                "type": "text",
+                                "value": "{{xml.Result.mn[0]}}"
+                              },
+                              {
+                                "table": "api_response",
+                                "column": "operator",
+                                "type": "text",
+                                "value": "{{GetAPISequence[0].operator_code}}"
+                              },
+                              {
+                                "table": "api_response",
+                                "column": "amount",
+                                "type": "text",
+                                "value": "{{xml.Result.amt[0]}}"
+                              },
+                              {
+                                "table": "api_response",
+                                "column": "status",
+                                "type": "text",
+                                "value": "{{xml.Result.status[0]}}"
+                              },
+                              {
+                                "table": "api_response",
+                                "column": "order_id",
+                                "type": "text",
+                                "value": "{{xml.Result.apirefid[0]}}"
+                              },
+                              {
+                                "table": "api_response",
+                                "column": "balance",
+                                "type": "text",
+                                "value": "{{xml.Result.balance[0]}}"
+                              },
+                              {
+                                "table": "api_response",
+                                "column": "ec",
+                                "type": "text",
+                                "value": "{{xml.Result.ec[0]}}"
+                              },
+                              {
+                                "table": "api_response",
+                                "column": "apirefid",
+                                "type": "text",
+                                "value": "{{xml.Result.field1[0]}}"
+                              },
+                              {
+                                "table": "api_response",
+                                "column": "remarks",
+                                "type": "text",
+                                "value": "{{xml.Result.remark[0]}}"
+                              },
+                              {
+                                "table": "api_response",
+                                "column": "blank1",
+                                "type": "text",
+                                "value": "{{NOW.dateDiff('seconds', SubmitTime)}}"
+                              },
+                              {
+                                "table": "api_response",
+                                "column": "time",
+                                "type": "datetime",
+                                "value": "{{NOW}}"
+                              },
+                              {
+                                "table": "api_response",
+                                "column": "live_id",
+                                "type": "text",
+                                "value": "{{xml.Result.reqid[0]}}"
+                              },
+                              {
+                                "table": "api_response",
+                                "column": "blank2",
+                                "type": "text",
+                                "value": "{{GetAPISequence[0].api_id}}"
+                              }
+                            ],
+                            "table": "api_response",
+                            "query": "INSERT INTO api_response\n(user_id, recharge_mobile, operator, amount, status, order_id, balance, ec, apirefid, remarks, blank1, time, live_id, blank2) VALUES ('1', :P1 /* {{xml.Result.mn[0]}} */, :P2 /* {{GetAPISequence[0].operator_code}} */, :P3 /* {{xml.Result.amt[0]}} */, :P4 /* {{xml.Result.status[0]}} */, :P5 /* {{xml.Result.apirefid[0]}} */, :P6 /* {{xml.Result.balance[0]}} */, :P7 /* {{xml.Result.ec[0]}} */, :P8 /* {{xml.Result.field1[0]}} */, :P9 /* {{xml.Result.remark[0]}} */, :P10 /* {{NOW.dateDiff('seconds', SubmitTime)}} */, :P11 /* {{NOW}} */, :P12 /* {{xml.Result.reqid[0]}} */, :P13 /* {{GetAPISequence[0].api_id}} */)",
+                            "params": [
+                              {
+                                "name": ":P1",
+                                "type": "expression",
+                                "value": "{{xml.Result.mn[0]}}"
+                              },
+                              {
+                                "name": ":P2",
+                                "type": "expression",
+                                "value": "{{GetAPISequence[0].operator_code}}"
+                              },
+                              {
+                                "name": ":P3",
+                                "type": "expression",
+                                "value": "{{xml.Result.amt[0]}}"
+                              },
+                              {
+                                "name": ":P4",
+                                "type": "expression",
+                                "value": "{{xml.Result.status[0]}}"
+                              },
+                              {
+                                "name": ":P5",
+                                "type": "expression",
+                                "value": "{{xml.Result.apirefid[0]}}"
+                              },
+                              {
+                                "name": ":P6",
+                                "type": "expression",
+                                "value": "{{xml.Result.balance[0]}}"
+                              },
+                              {
+                                "name": ":P7",
+                                "type": "expression",
+                                "value": "{{xml.Result.ec[0]}}"
+                              },
+                              {
+                                "name": ":P8",
+                                "type": "expression",
+                                "value": "{{xml.Result.field1[0]}}"
+                              },
+                              {
+                                "name": ":P9",
+                                "type": "expression",
+                                "value": "{{xml.Result.remark[0]}}"
+                              },
+                              {
+                                "name": ":P10",
+                                "type": "expression",
+                                "value": "{{NOW.dateDiff('seconds', SubmitTime)}}"
+                              },
+                              {
+                                "name": ":P11",
+                                "type": "expression",
+                                "value": "{{NOW}}"
+                              },
+                              {
+                                "name": ":P12",
+                                "type": "expression",
+                                "value": "{{xml.Result.reqid[0]}}"
+                              },
+                              {
+                                "name": ":P13",
+                                "type": "expression",
+                                "value": "{{GetAPISequence[0].api_id}}"
+                              }
+                            ]
+                          }
+                        },
+                        "meta": [
+                          {
+                            "name": "identity",
+                            "type": "text"
+                          },
+                          {
+                            "name": "affected",
+                            "type": "number"
+                          }
+                        ],
+                        "output": true,
+                        "disabled": true
+                      }
+                    ]
+                  }
+                },
+                "outputType": "boolean",
+                "disabled": true
+              },
+              {
+                "name": "",
+                "module": "core",
+                "action": "condition",
+                "options": {
+                  "if": "{{GetAPISequence[0].blank2 == 'JSON'}}",
+                  "then": {
+                    "steps": [
+                      {
+                        "name": "api",
+                        "module": "api",
+                        "action": "send",
+                        "options": {
+                          "url": "http://rathodtelecom.in/API/TransactionAPI",
+                          "params": {
+                            "UserID": "{{GetAPISequence[0].username}}",
+                            "Token": "{{GetAPISequence[0].api_password}}",
+                            "Account": "{{$_POST.MobRech}}",
+                            "Amount": "{{$_POST.MobRechAmount}}",
+                            "SPKey": "{{GetAPISequence[0].operator_code}}",
+                            "APIRequestID": "{{NOW.md5(1234).substr(1, 6)}}"
+                          }
+                        },
+                        "output": true,
+                        "disabled": true
+                      },
+                      {
+                        "name": "",
+                        "module": "core",
+                        "action": "condition",
+                        "options": {
+                          "if": "{{api.data.agentid}}",
+                          "then": {
+                            "steps": {
+                              "name": "insertJson",
+                              "module": "dbupdater",
+                              "action": "insert",
+                              "options": {
+                                "connection": "postgres_gcpServer",
+                                "sql": {
+                                  "type": "insert",
+                                  "values": [
+                                    {
+                                      "table": "api_response",
+                                      "column": "user_id",
+                                      "type": "text",
+                                      "value": "1"
+                                    },
+                                    {
+                                      "table": "api_response",
+                                      "column": "recharge_mobile",
+                                      "type": "text",
+                                      "value": "{{api.data.account}}"
+                                    },
+                                    {
+                                      "table": "api_response",
+                                      "column": "operator",
+                                      "type": "text",
+                                      "value": "{{$_POST.operator}}"
+                                    },
+                                    {
+                                      "table": "api_response",
+                                      "column": "amount",
+                                      "type": "text",
+                                      "value": "{{api.data.amount}}"
+                                    },
+                                    {
+                                      "table": "api_response",
+                                      "column": "status",
+                                      "type": "text",
+                                      "value": "{{api.data.status}}"
+                                    },
+                                    {
+                                      "table": "api_response",
+                                      "column": "order_id",
+                                      "type": "text",
+                                      "value": "{{api.data.rpid}}"
+                                    },
+                                    {
+                                      "table": "api_response",
+                                      "column": "balance",
+                                      "type": "text",
+                                      "value": "{{api.data.bal}}"
+                                    },
+                                    {
+                                      "table": "api_response",
+                                      "column": "ec",
+                                      "type": "text",
+                                      "value": "{{api.data.errorcode}}"
+                                    },
+                                    {
+                                      "table": "api_response",
+                                      "column": "apirefid",
+                                      "type": "text",
+                                      "value": "{{api.data.opid}}"
+                                    },
+                                    {
+                                      "table": "api_response",
+                                      "column": "remarks",
+                                      "type": "text",
+                                      "value": "{{api.data.msg}}"
+                                    },
+                                    {
+                                      "table": "api_response",
+                                      "column": "blank1",
+                                      "type": "text",
+                                      "value": "{{api.data.agentid}}"
+                                    },
+                                    {
+                                      "table": "api_response",
+                                      "column": "time",
+                                      "type": "datetime",
+                                      "value": "{{NOW}}"
+                                    },
+                                    {
+                                      "table": "api_response",
+                                      "column": "live_id",
+                                      "type": "text",
+                                      "value": "{{NOW.dateDiff('seconds', SubmitTime)}}"
+                                    },
+                                    {
+                                      "table": "api_response",
+                                      "column": "blank2",
+                                      "type": "text",
+                                      "value": "{{GetAPISequence[0].api_id}}"
+                                    }
+                                  ],
+                                  "table": "api_response",
+                                  "query": "INSERT INTO api_response\n(user_id, recharge_mobile, operator, amount, status, order_id, balance, ec, apirefid, remarks, blank1, time, live_id, blank2) VALUES ('1', :P1 /* {{api.data.account}} */, :P2 /* {{$_POST.operator}} */, :P3 /* {{api.data.amount}} */, :P4 /* {{api.data.status}} */, :P5 /* {{api.data.rpid}} */, :P6 /* {{api.data.bal}} */, :P7 /* {{api.data.errorcode}} */, :P8 /* {{api.data.opid}} */, :P9 /* {{api.data.msg}} */, :P10 /* {{api.data.agentid}} */, :P11 /* {{NOW}} */, :P12 /* {{NOW.dateDiff('seconds', SubmitTime)}} */, :P13 /* {{GetAPISequence[0].api_id}} */)",
+                                  "params": [
+                                    {
+                                      "name": ":P1",
+                                      "type": "expression",
+                                      "value": "{{api.data.account}}"
+                                    },
+                                    {
+                                      "name": ":P2",
+                                      "type": "expression",
+                                      "value": "{{$_POST.operator}}"
+                                    },
+                                    {
+                                      "name": ":P3",
+                                      "type": "expression",
+                                      "value": "{{api.data.amount}}"
+                                    },
+                                    {
+                                      "name": ":P4",
+                                      "type": "expression",
+                                      "value": "{{api.data.status}}"
+                                    },
+                                    {
+                                      "name": ":P5",
+                                      "type": "expression",
+                                      "value": "{{api.data.rpid}}"
+                                    },
+                                    {
+                                      "name": ":P6",
+                                      "type": "expression",
+                                      "value": "{{api.data.bal}}"
+                                    },
+                                    {
+                                      "name": ":P7",
+                                      "type": "expression",
+                                      "value": "{{api.data.errorcode}}"
+                                    },
+                                    {
+                                      "name": ":P8",
+                                      "type": "expression",
+                                      "value": "{{api.data.opid}}"
+                                    },
+                                    {
+                                      "name": ":P9",
+                                      "type": "expression",
+                                      "value": "{{api.data.msg}}"
+                                    },
+                                    {
+                                      "name": ":P10",
+                                      "type": "expression",
+                                      "value": "{{api.data.agentid}}"
+                                    },
+                                    {
+                                      "name": ":P11",
+                                      "type": "expression",
+                                      "value": "{{NOW}}"
+                                    },
+                                    {
+                                      "name": ":P12",
+                                      "type": "expression",
+                                      "value": "{{NOW.dateDiff('seconds', SubmitTime)}}"
+                                    },
+                                    {
+                                      "name": ":P13",
+                                      "type": "expression",
+                                      "value": "{{GetAPISequence[0].api_id}}"
+                                    }
+                                  ]
+                                }
+                              },
+                              "meta": [
+                                {
+                                  "name": "identity",
+                                  "type": "text"
+                                },
+                                {
+                                  "name": "affected",
+                                  "type": "number"
+                                }
+                              ],
+                              "output": true,
+                              "disabled": true
+                            }
+                          }
+                        },
+                        "outputType": "boolean"
+                      }
+                    ]
+                  }
+                },
+                "outputType": "boolean"
+              }
+            ]
+          }
+        },
+        "output": true,
+        "meta": [
+          {
+            "name": "$index",
+            "type": "number"
+          },
+          {
+            "name": "$number",
+            "type": "number"
+          },
+          {
+            "name": "$name",
+            "type": "text"
+          },
+          {
+            "name": "$value",
+            "type": "object"
+          },
+          {
+            "name": "api_id",
+            "type": "number"
+          },
+          {
+            "name": "operator_code",
+            "type": "text"
+          },
+          {
+            "name": "api_name",
+            "type": "text"
+          },
+          {
+            "name": "api_code",
+            "type": "text"
+          },
+          {
+            "name": "username",
+            "type": "text"
+          },
+          {
+            "name": "api_password",
+            "type": "text"
+          },
+          {
+            "name": "status",
+            "type": "number"
+          },
+          {
+            "name": "blank2",
+            "type": "text"
+          },
+          {
+            "name": "ApiXML",
+            "type": "text"
+          },
+          {
+            "name": "xml",
+            "type": "text"
+          },
+          {
+            "name": "insert",
+            "type": "text",
+            "sub": [
+              {
+                "name": "identity",
+                "type": "text"
+              },
+              {
+                "name": "affected",
+                "type": "number"
+              }
+            ]
+          },
+          {
+            "name": "api",
+            "type": "text"
+          },
+          {
+            "name": "insertJson",
+            "type": "text",
+            "sub": [
+              {
+                "name": "identity",
+                "type": "text"
+              },
+              {
+                "name": "affected",
+                "type": "number"
+              }
+            ]
+          }
+        ],
+        "outputType": "array",
+        "disabled": true
+      }
+    ]
+  }
+}

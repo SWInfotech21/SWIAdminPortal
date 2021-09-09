@@ -50,6 +50,14 @@
         "type": "text",
         "fieldName": "status",
         "name": "status"
+      },
+      {
+        "type": "text",
+        "fieldName": "api_sequence",
+        "options": {
+          "rules": {}
+        },
+        "name": "api_sequence"
       }
     ]
   },
@@ -93,6 +101,12 @@
                     "column": "updated_on",
                     "type": "datetime",
                     "value": "{{NOW}}"
+                  },
+                  {
+                    "table": "t_op_api",
+                    "column": "api_hit_serial",
+                    "type": "number",
+                    "value": "{{$_POST.api_sequence}}"
                   }
                 ],
                 "table": "t_op_api",
@@ -114,7 +128,7 @@
                   "conditional": null,
                   "valid": true
                 },
-                "query": "UPDATE t_op_api\nSET code = :P1 /* {{$_POST.api_code}} */, status = :P2 /* {{$_POST.status}} */, updated_by = '1', updated_on = :P3 /* {{NOW}} */\nWHERE id = :P4 /* {{$_POST.OpApiId}} */",
+                "query": "UPDATE t_op_api\nSET code = :P1 /* {{$_POST.api_code}} */, status = :P2 /* {{$_POST.status}} */, updated_by = '1', updated_on = :P3 /* {{NOW}} */, api_hit_serial = :P4 /* {{$_POST.api_sequence}} */\nWHERE id = :P5 /* {{$_POST.OpApiId}} */",
                 "params": [
                   {
                     "name": ":P1",
@@ -132,9 +146,14 @@
                     "value": "{{NOW}}"
                   },
                   {
+                    "name": ":P4",
+                    "type": "expression",
+                    "value": "{{$_POST.api_sequence}}"
+                  },
+                  {
                     "operator": "equal",
                     "type": "expression",
-                    "name": ":P4",
+                    "name": ":P5",
                     "value": "{{$_POST.OpApiId}}"
                   }
                 ]
@@ -194,11 +213,17 @@
                     "column": "created_on",
                     "type": "datetime",
                     "value": "{{NOW}}"
+                  },
+                  {
+                    "table": "t_op_api",
+                    "column": "api_hit_serial",
+                    "type": "number",
+                    "value": "{{$_POST.api_sequence}}"
                   }
                 ],
                 "table": "t_op_api",
                 "returning": "id",
-                "query": "INSERT INTO t_op_api\n(op_id, api_id, code, status, created_by, created_on) VALUES (:P1 /* {{$_POST.operator_id}} */, :P2 /* {{$_POST.inp_api_id}} */, :P3 /* {{$_POST.api_code}} */, :P4 /* {{$_POST.status}} */, '1', :P5 /* {{NOW}} */)",
+                "query": "INSERT INTO t_op_api\n(op_id, api_id, code, status, created_by, created_on, api_hit_serial) VALUES (:P1 /* {{$_POST.operator_id}} */, :P2 /* {{$_POST.inp_api_id}} */, :P3 /* {{$_POST.api_code}} */, :P4 /* {{$_POST.status}} */, '1', :P5 /* {{NOW}} */, :P6 /* {{$_POST.api_sequence}} */)",
                 "params": [
                   {
                     "name": ":P1",
@@ -224,6 +249,11 @@
                     "name": ":P5",
                     "type": "expression",
                     "value": "{{NOW}}"
+                  },
+                  {
+                    "name": ":P6",
+                    "type": "expression",
+                    "value": "{{$_POST.api_sequence}}"
                   }
                 ]
               }
