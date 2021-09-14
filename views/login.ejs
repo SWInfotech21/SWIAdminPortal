@@ -58,7 +58,7 @@
                                 <form id="formLogin" is="dmx-serverconnect-form" method="post" action="api/Users/login" dmx-on:success="browser1.goto('users')" dmx-on:unauthorized="varInvalidLogin.setValue(1);formLogin.reset;" dmx-on:forbidden="Notification.danger('This user doesnot exists, please try again!')">
                                     <div class="input-group mb-4">
                                         <span class="input-group-text border-1 border-end-0 bg-transparent"><i class="fa fa-user"></i></span>
-                                        <input type="email" class="border-1 border-start-0 form-control" id="" name="Email" placeholder="Email" data-rule-email="true">
+                                        <input type="number" class="border-1 border-start-0 form-control" id="Mobile" name="Mobile" placeholder="6666666666">
                                     </div>
                                     <div class="input-group mb-4">
                                         <span class="input-group-text border-1 border-end-0 bg-transparent"><i class="fa fa-lock"></i></span>
@@ -72,7 +72,7 @@
                                     </p>
                                     <p class="mb-4 sd-fs-12 sd-fw-500 text-center text-danger mb-4" dmx-hide="!varCountUser.value">User Already Exists. Please Try again.
                                     </p>
-                                    <button id="submitLogin" class="btn btn-primary text-white w-100 mt-2 mb-3" type="submit" dmx-bind:disabled="state.executing">Log in <span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span>
+                                    <button id="submitLogin" class="btn btn-primary text-white w-100 mt-2 mb-3" type="submit" dmx-bind:disabled="state.executing">LogIn<span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span>
                                     </button>
                                     <a href="#" class="d-flex justify-content-center sd-fs-12 sd-fw-500 text-primary" internal data-bs-toggle="button" dmx-on:click="varLogin.setValue('ForgotPass')">Forgot password?</a>
                                 </form>

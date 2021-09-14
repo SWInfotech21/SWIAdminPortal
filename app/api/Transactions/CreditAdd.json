@@ -1,0 +1,1623 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/wallet-credits.ejs",
+      "linkedForm": "formAddCredit"
+    },
+    "$_POST": [
+      {
+        "type": "number",
+        "fieldName": "credit_amount",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": ""
+            },
+            "core:number": {}
+          }
+        },
+        "name": "credit_amount"
+      },
+      {
+        "type": "number",
+        "fieldName": "tpin",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": ""
+            },
+            "core:number": {}
+          }
+        },
+        "name": "tpin"
+      },
+      {
+        "type": "text",
+        "fieldName": "comment",
+        "name": "comment"
+      },
+      {
+        "type": "text",
+        "fieldName": "user_type",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": ""
+            }
+          }
+        },
+        "name": "user_type"
+      },
+      {
+        "type": "text",
+        "fieldName": "target_user_id",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": ""
+            }
+          }
+        },
+        "name": "target_user_id"
+      },
+      {
+        "type": "number",
+        "name": "comm_per"
+      },
+      {
+        "type": "number",
+        "name": "comm_val"
+      },
+      {
+        "type": "number",
+        "name": "comm_amt"
+      },
+      {
+        "type": "number",
+        "name": "other_charge"
+      },
+      {
+        "type": "number",
+        "name": "charge_per"
+      },
+      {
+        "type": "number",
+        "name": "charge_amt"
+      },
+      {
+        "type": "number",
+        "name": "net_amt"
+      },
+      {
+        "type": "number",
+        "name": "closing_balance"
+      },
+      {
+        "type": "number",
+        "name": "tr_mode"
+      },
+      {
+        "type": "number",
+        "name": "tr_type"
+      },
+      {
+        "type": "number",
+        "name": "status"
+      },
+      {
+        "type": "number",
+        "name": "tr_id"
+      },
+      {
+        "type": "number",
+        "name": "reason"
+      },
+      {
+        "type": "number",
+        "name": "api_logs"
+      },
+      {
+        "type": "number",
+        "name": "is_processed"
+      },
+      {
+        "type": "number",
+        "name": "operator_ref"
+      },
+      {
+        "type": "number",
+        "name": "api_ref"
+      },
+      {
+        "type": "number",
+        "name": "revert_trans"
+      },
+      {
+        "type": "number",
+        "name": "ip_address"
+      },
+      {
+        "type": "number",
+        "name": "api_response_id"
+      },
+      {
+        "type": "number",
+        "name": "process_mode"
+      },
+      {
+        "type": "number",
+        "name": "live"
+      },
+      {
+        "type": "datetime",
+        "name": "tr_date"
+      },
+      {
+        "type": "datetime",
+        "name": "updated_on"
+      },
+      {
+        "type": "number",
+        "name": "updated_by"
+      },
+      {
+        "type": "text",
+        "name": "extra1"
+      },
+      {
+        "type": "text",
+        "name": "extra2"
+      },
+      {
+        "type": "text",
+        "name": "extra3"
+      },
+      {
+        "type": "number",
+        "name": "credit_amount * GetCommision"
+      },
+      {
+        "type": "number",
+        "name": "credit_amount - ($_POST"
+      },
+      {
+        "type": "number",
+        "name": "api_id"
+      },
+      {
+        "type": "number",
+        "name": "user_id"
+      },
+      {
+        "type": "text",
+        "name": "user_number"
+      },
+      {
+        "type": "text",
+        "name": "details"
+      },
+      {
+        "type": "number",
+        "name": "opening_balance"
+      },
+      {
+        "type": "number",
+        "name": "amount"
+      },
+      {
+        "type": "number",
+        "name": "id"
+      },
+      {
+        "type": "number",
+        "name": "balance_amt"
+      },
+      {
+        "type": "number",
+        "name": "new_balance"
+      },
+      {
+        "type": "text",
+        "name": "crdr_type"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "GetDebitUser",
+        "module": "dbconnector",
+        "action": "single",
+        "options": {
+          "connection": "postgres_gcpServer",
+          "sql": {
+            "type": "SELECT",
+            "columns": [
+              {
+                "table": "m_users",
+                "column": "user_fname"
+              },
+              {
+                "table": "m_users",
+                "column": "user_mobile"
+              },
+              {
+                "table": "m_users",
+                "column": "user_email"
+              },
+              {
+                "table": "m_users",
+                "column": "balance_amt"
+              },
+              {
+                "table": "m_users",
+                "column": "balance_outstanding"
+              },
+              {
+                "table": "m_users",
+                "column": "user_tpin"
+              }
+            ],
+            "table": {
+              "name": "m_users"
+            },
+            "joins": [],
+            "query": "SELECT user_fname, user_mobile, user_email, balance_amt, balance_outstanding, user_tpin\nFROM m_users\nWHERE id = 1",
+            "params": [],
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "m_users.id",
+                  "field": "m_users.id",
+                  "type": "double",
+                  "operator": "equal",
+                  "value": 1,
+                  "data": {
+                    "table": "m_users",
+                    "column": "id",
+                    "type": "number"
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            }
+          }
+        },
+        "output": true,
+        "meta": [
+          {
+            "name": "user_fname",
+            "type": "text"
+          },
+          {
+            "name": "user_mobile",
+            "type": "text"
+          },
+          {
+            "name": "user_email",
+            "type": "text"
+          },
+          {
+            "name": "balance_amt",
+            "type": "number"
+          },
+          {
+            "name": "balance_outstanding",
+            "type": "number"
+          },
+          {
+            "name": "user_tpin",
+            "type": "text"
+          }
+        ],
+        "outputType": "object"
+      },
+      {
+        "name": "",
+        "module": "core",
+        "action": "condition",
+        "options": {
+          "if": "{{$_POST.tpin == GetDebitUser.user_tpin}}",
+          "then": {
+            "steps": [
+              {
+                "name": "TransactionId",
+                "module": "core",
+                "action": "setvalue",
+                "options": {
+                  "value": "{{NOW.md5(123456).substr(1, 9)}}"
+                }
+              },
+              {
+                "name": "GetOperatorId",
+                "module": "dbconnector",
+                "action": "single",
+                "options": {
+                  "connection": "postgres_gcpServer",
+                  "sql": {
+                    "type": "SELECT",
+                    "columns": [
+                      {
+                        "table": "m_operator",
+                        "column": "id",
+                        "alias": "op_id"
+                      },
+                      {
+                        "table": "m_operator",
+                        "column": "service_id"
+                      }
+                    ],
+                    "table": {
+                      "name": "m_operator"
+                    },
+                    "joins": [],
+                    "wheres": {
+                      "condition": "AND",
+                      "rules": [
+                        {
+                          "id": "m_operator.operator_name",
+                          "field": "m_operator.operator_name",
+                          "type": "string",
+                          "operator": "equal",
+                          "value": "Wallet Credit",
+                          "data": {
+                            "table": "m_operator",
+                            "column": "operator_name",
+                            "type": "text"
+                          },
+                          "operation": "="
+                        },
+                        {
+                          "id": "m_operator.status",
+                          "field": "m_operator.status",
+                          "type": "double",
+                          "operator": "equal",
+                          "value": 1,
+                          "data": {
+                            "table": "m_operator",
+                            "column": "status",
+                            "type": "number"
+                          },
+                          "operation": "="
+                        }
+                      ],
+                      "conditional": null,
+                      "valid": true
+                    },
+                    "query": "SELECT id AS op_id, service_id\nFROM m_operator\nWHERE operator_name = 'Wallet Credit' AND status = 1",
+                    "params": []
+                  }
+                },
+                "output": true,
+                "meta": [
+                  {
+                    "name": "op_id",
+                    "type": "text"
+                  },
+                  {
+                    "name": "service_id",
+                    "type": "number"
+                  }
+                ],
+                "outputType": "object"
+              },
+              {
+                "name": "GetSchfromUser",
+                "module": "dbconnector",
+                "action": "single",
+                "options": {
+                  "connection": "postgres_gcpServer",
+                  "sql": {
+                    "type": "SELECT",
+                    "columns": [
+                      {
+                        "table": "m_users",
+                        "column": "user_fname"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "user_mobile"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "user_email"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "scheme_id"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "balance_amt"
+                      }
+                    ],
+                    "table": {
+                      "name": "m_users"
+                    },
+                    "joins": [],
+                    "wheres": {
+                      "condition": "AND",
+                      "rules": [
+                        {
+                          "id": "m_users.id",
+                          "field": "m_users.id",
+                          "type": "double",
+                          "operator": "equal",
+                          "value": "{{$_POST.target_user_id}}",
+                          "data": {
+                            "table": "m_users",
+                            "column": "id",
+                            "type": "number"
+                          },
+                          "operation": "="
+                        }
+                      ],
+                      "conditional": null,
+                      "valid": true
+                    },
+                    "query": "SELECT user_fname, user_mobile, user_email, scheme_id, balance_amt\nFROM m_users\nWHERE id = :P1 /* {{$_POST.target_user_id}} */",
+                    "params": [
+                      {
+                        "operator": "equal",
+                        "type": "expression",
+                        "name": ":P1",
+                        "value": "{{$_POST.target_user_id}}"
+                      }
+                    ]
+                  }
+                },
+                "output": true,
+                "meta": [
+                  {
+                    "name": "user_fname",
+                    "type": "text"
+                  },
+                  {
+                    "name": "user_mobile",
+                    "type": "text"
+                  },
+                  {
+                    "name": "user_email",
+                    "type": "text"
+                  },
+                  {
+                    "name": "scheme_id",
+                    "type": "text"
+                  },
+                  {
+                    "name": "balance_amt",
+                    "type": "number"
+                  }
+                ],
+                "outputType": "object"
+              },
+              {
+                "name": "GetCommision",
+                "module": "dbconnector",
+                "action": "single",
+                "options": {
+                  "connection": "postgres_gcpServer",
+                  "sql": {
+                    "type": "SELECT",
+                    "columns": [
+                      {
+                        "table": "m_commission",
+                        "column": "comm_per"
+                      },
+                      {
+                        "table": "m_commission",
+                        "column": "comm_val"
+                      },
+                      {
+                        "table": "m_commission",
+                        "column": "service_charge_per"
+                      },
+                      {
+                        "table": "m_commission",
+                        "column": "service_charge_val"
+                      }
+                    ],
+                    "table": {
+                      "name": "m_commission"
+                    },
+                    "joins": [],
+                    "wheres": {
+                      "condition": "AND",
+                      "rules": [
+                        {
+                          "id": "m_commission.operator_id",
+                          "field": "m_commission.operator_id",
+                          "type": "double",
+                          "operator": "equal",
+                          "value": "{{GetOperatorId.op_id}}",
+                          "data": {
+                            "table": "m_commission",
+                            "column": "operator_id",
+                            "type": "number"
+                          },
+                          "operation": "="
+                        },
+                        {
+                          "id": "m_commission.scheme_id",
+                          "field": "m_commission.scheme_id",
+                          "type": "double",
+                          "operator": "equal",
+                          "value": "{{GetSchfromUser.scheme_id}}",
+                          "data": {
+                            "table": "m_commission",
+                            "column": "scheme_id",
+                            "type": "number"
+                          },
+                          "operation": "="
+                        }
+                      ],
+                      "conditional": null,
+                      "valid": true
+                    },
+                    "query": "SELECT comm_per, comm_val, service_charge_per, service_charge_val\nFROM m_commission\nWHERE operator_id = :P1 /* {{GetOperatorId.op_id}} */ AND scheme_id = :P2 /* {{GetSchfromUser.scheme_id}} */",
+                    "params": [
+                      {
+                        "operator": "equal",
+                        "type": "expression",
+                        "name": ":P1",
+                        "value": "{{GetOperatorId.op_id}}"
+                      },
+                      {
+                        "operator": "equal",
+                        "type": "expression",
+                        "name": ":P2",
+                        "value": "{{GetSchfromUser.scheme_id}}"
+                      }
+                    ]
+                  }
+                },
+                "output": true,
+                "meta": [
+                  {
+                    "name": "comm_per",
+                    "type": "text"
+                  },
+                  {
+                    "name": "comm_val",
+                    "type": "number"
+                  },
+                  {
+                    "name": "service_charge_per",
+                    "type": "text"
+                  },
+                  {
+                    "name": "service_charge_val",
+                    "type": "text"
+                  }
+                ],
+                "outputType": "object"
+              },
+              {
+                "name": "CreditBalance",
+                "module": "dbupdater",
+                "action": "insert",
+                "options": {
+                  "connection": "postgres_gcpServer",
+                  "sql": {
+                    "type": "insert",
+                    "values": [
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "op_id",
+                        "type": "number",
+                        "value": "{{GetOperatorId.op_id}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "service_id",
+                        "type": "number",
+                        "value": "{{GetOperatorId.service_id}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "api_id",
+                        "type": "number",
+                        "value": "0"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "user_id",
+                        "type": "number",
+                        "value": "1"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "user_number",
+                        "type": "text",
+                        "value": "{{GetSchfromUser.user_mobile}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "details",
+                        "type": "text",
+                        "value": "{{GetSchfromUser.user_fname}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "opening_balance",
+                        "type": "number",
+                        "value": "{{GetSchfromUser.balance_amt}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "amount",
+                        "type": "number",
+                        "value": "{{$_POST.credit_amount}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "comm_per",
+                        "type": "number",
+                        "value": "{{GetCommision.comm_per}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "comm_val",
+                        "type": "number",
+                        "value": "{{GetCommision.comm_val}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "comm_amt",
+                        "type": "number",
+                        "value": "{{$_POST.credit_amount * GetCommision.comm_per / 100}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "other_charge",
+                        "type": "number",
+                        "value": "0"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "charge_per",
+                        "type": "number",
+                        "value": "{{GetCommision.service_charge_per}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "charge_amt",
+                        "type": "number",
+                        "value": "{{$_POST.credit_amount * GetCommision.service_charge_per / 100}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "net_amt",
+                        "type": "number",
+                        "value": "{{$_POST.credit_amount - ($_POST.credit_amount * GetCommision.comm_per / 100) - ($_POST.credit_amount * GetCommision.service_charge_per / 100)}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "closing_balance",
+                        "type": "number",
+                        "value": "{{GetSchfromUser.balance_amt + $_POST.credit_amount - ($_POST.credit_amount * GetCommision.comm_per / 100) - ($_POST.credit_amount * GetCommision.service_charge_per / 100)}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "tr_mode",
+                        "type": "number",
+                        "value": "{{'Web'}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "tr_type",
+                        "type": "number",
+                        "value": "{{'Virtual'}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "status",
+                        "type": "number",
+                        "value": "{{'Success'}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "tr_id",
+                        "type": "number",
+                        "value": "{{TransactionId}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "reason",
+                        "type": "number",
+                        "value": "{{$_POST.comment}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "is_processed",
+                        "type": "number",
+                        "value": "0"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "operator_ref",
+                        "type": "number",
+                        "value": "0"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "api_ref",
+                        "type": "number",
+                        "value": "0"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "revert_trans",
+                        "type": "number",
+                        "value": "0"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "ip_address",
+                        "type": "number",
+                        "value": "0"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "api_response_id",
+                        "type": "number",
+                        "value": "0"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "live",
+                        "type": "number",
+                        "value": "{{'Push'}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "tr_date",
+                        "type": "datetime",
+                        "value": "{{NOW}}"
+                      }
+                    ],
+                    "table": "tt_recharge_trans",
+                    "returning": "id",
+                    "query": "INSERT INTO tt_recharge_trans\n(op_id, service_id, api_id, user_id, user_number, details, opening_balance, amount, comm_per, comm_val, comm_amt, other_charge, charge_per, charge_amt, net_amt, closing_balance, tr_mode, tr_type, status, tr_id, reason, is_processed, operator_ref, api_ref, revert_trans, ip_address, api_response_id, live, tr_date) VALUES (:P1 /* {{GetOperatorId.op_id}} */, :P2 /* {{GetOperatorId.service_id}} */, '0', '1', :P3 /* {{GetSchfromUser.user_mobile}} */, :P4 /* {{GetSchfromUser.user_fname}} */, :P5 /* {{GetSchfromUser.balance_amt}} */, :P6 /* {{$_POST.credit_amount}} */, :P7 /* {{GetCommision.comm_per}} */, :P8 /* {{GetCommision.comm_val}} */, :P9 /* {{$_POST.credit_amount * GetCommision.comm_per / 100}} */, '0', :P10 /* {{GetCommision.service_charge_per}} */, :P11 /* {{$_POST.credit_amount * GetCommision.service_charge_per / 100}} */, :P12 /* {{$_POST.credit_amount - ($_POST.credit_amount * GetCommision.comm_per / 100) - ($_POST.credit_amount * GetCommision.service_charge_per / 100)}} */, :P13 /* {{GetSchfromUser.balance_amt + $_POST.credit_amount - ($_POST.credit_amount * GetCommision.comm_per / 100) - ($_POST.credit_amount * GetCommision.service_charge_per / 100)}} */, :P14 /* {{'Web'}} */, :P15 /* {{'Virtual'}} */, :P16 /* {{'Success'}} */, :P17 /* {{TransactionId}} */, :P18 /* {{$_POST.comment}} */, '0', '0', '0', '0', '0', '0', :P19 /* {{'Push'}} */, :P20 /* {{NOW}} */)",
+                    "params": [
+                      {
+                        "name": ":P1",
+                        "type": "expression",
+                        "value": "{{GetOperatorId.op_id}}"
+                      },
+                      {
+                        "name": ":P2",
+                        "type": "expression",
+                        "value": "{{GetOperatorId.service_id}}"
+                      },
+                      {
+                        "name": ":P3",
+                        "type": "expression",
+                        "value": "{{GetSchfromUser.user_mobile}}"
+                      },
+                      {
+                        "name": ":P4",
+                        "type": "expression",
+                        "value": "{{GetSchfromUser.user_fname}}"
+                      },
+                      {
+                        "name": ":P5",
+                        "type": "expression",
+                        "value": "{{GetSchfromUser.balance_amt}}"
+                      },
+                      {
+                        "name": ":P6",
+                        "type": "expression",
+                        "value": "{{$_POST.credit_amount}}"
+                      },
+                      {
+                        "name": ":P7",
+                        "type": "expression",
+                        "value": "{{GetCommision.comm_per}}"
+                      },
+                      {
+                        "name": ":P8",
+                        "type": "expression",
+                        "value": "{{GetCommision.comm_val}}"
+                      },
+                      {
+                        "name": ":P9",
+                        "type": "expression",
+                        "value": "{{$_POST.credit_amount * GetCommision.comm_per / 100}}"
+                      },
+                      {
+                        "name": ":P10",
+                        "type": "expression",
+                        "value": "{{GetCommision.service_charge_per}}"
+                      },
+                      {
+                        "name": ":P11",
+                        "type": "expression",
+                        "value": "{{$_POST.credit_amount * GetCommision.service_charge_per / 100}}"
+                      },
+                      {
+                        "name": ":P12",
+                        "type": "expression",
+                        "value": "{{$_POST.credit_amount - ($_POST.credit_amount * GetCommision.comm_per / 100) - ($_POST.credit_amount * GetCommision.service_charge_per / 100)}}"
+                      },
+                      {
+                        "name": ":P13",
+                        "type": "expression",
+                        "value": "{{GetSchfromUser.balance_amt + $_POST.credit_amount - ($_POST.credit_amount * GetCommision.comm_per / 100) - ($_POST.credit_amount * GetCommision.service_charge_per / 100)}}"
+                      },
+                      {
+                        "name": ":P14",
+                        "type": "expression",
+                        "value": "{{'Web'}}"
+                      },
+                      {
+                        "name": ":P15",
+                        "type": "expression",
+                        "value": "{{'Virtual'}}"
+                      },
+                      {
+                        "name": ":P16",
+                        "type": "expression",
+                        "value": "{{'Success'}}"
+                      },
+                      {
+                        "name": ":P17",
+                        "type": "expression",
+                        "value": "{{TransactionId}}"
+                      },
+                      {
+                        "name": ":P18",
+                        "type": "expression",
+                        "value": "{{$_POST.comment}}"
+                      },
+                      {
+                        "name": ":P19",
+                        "type": "expression",
+                        "value": "{{'Push'}}"
+                      },
+                      {
+                        "name": ":P20",
+                        "type": "expression",
+                        "value": "{{NOW}}"
+                      }
+                    ]
+                  }
+                },
+                "meta": [
+                  {
+                    "name": "identity",
+                    "type": "text"
+                  },
+                  {
+                    "name": "affected",
+                    "type": "number"
+                  }
+                ],
+                "output": true
+              },
+              {
+                "name": "DebitBalance",
+                "module": "dbupdater",
+                "action": "insert",
+                "options": {
+                  "connection": "postgres_gcpServer",
+                  "sql": {
+                    "type": "insert",
+                    "values": [
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "op_id",
+                        "type": "number",
+                        "value": "{{GetOperatorId.op_id}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "service_id",
+                        "type": "number",
+                        "value": "{{GetOperatorId.service_id}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "api_id",
+                        "type": "number",
+                        "value": "0"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "user_id",
+                        "type": "number",
+                        "value": "1"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "user_number",
+                        "type": "text",
+                        "value": "{{GetDebitUser.user_mobile}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "details",
+                        "type": "text",
+                        "value": "{{GetDebitUser.user_fname}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "opening_balance",
+                        "type": "number",
+                        "value": "{{GetDebitUser.balance_amt}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "amount",
+                        "type": "number",
+                        "value": "{{$_POST.credit_amount}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "comm_per",
+                        "type": "number",
+                        "value": "{{GetCommision.comm_per}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "comm_val",
+                        "type": "number",
+                        "value": "{{GetCommision.comm_val}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "comm_amt",
+                        "type": "number",
+                        "value": "{{$_POST.credit_amount * GetCommision.comm_per / 100}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "other_charge",
+                        "type": "number",
+                        "value": "0"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "charge_per",
+                        "type": "number",
+                        "value": "{{GetCommision.service_charge_per}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "charge_amt",
+                        "type": "number",
+                        "value": "{{$_POST.credit_amount * GetCommision.service_charge_per / 100}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "net_amt",
+                        "type": "number",
+                        "value": "{{$_POST.credit_amount * GetCommision.comm_per / 100 +$_POST.credit_amount * GetCommision.service_charge_per / 100}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "closing_balance",
+                        "type": "number",
+                        "value": "{{GetDebitUser.balance_amt - ($_POST.credit_amount * GetCommision.comm_per / 100) - ($_POST.credit_amount * GetCommision.service_charge_per / 100)}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "tr_mode",
+                        "type": "number",
+                        "value": "{{'Web'}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "tr_type",
+                        "type": "number",
+                        "value": "{{'Virtual'}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "status",
+                        "type": "number",
+                        "value": "1"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "tr_id",
+                        "type": "number",
+                        "value": "{{TransactionId}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "reason",
+                        "type": "number",
+                        "value": "{{$_POST.comment}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "is_processed",
+                        "type": "number",
+                        "value": "0"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "operator_ref",
+                        "type": "number",
+                        "value": "0"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "api_ref",
+                        "type": "number",
+                        "value": "0"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "revert_trans",
+                        "type": "number",
+                        "value": "0"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "ip_address",
+                        "type": "number",
+                        "value": "0"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "api_response_id",
+                        "type": "number",
+                        "value": "0"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "live",
+                        "type": "number",
+                        "value": "{{'Push'}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "tr_date",
+                        "type": "datetime",
+                        "value": "{{NOW}}"
+                      }
+                    ],
+                    "table": "tt_recharge_trans",
+                    "returning": "id",
+                    "query": "INSERT INTO tt_recharge_trans\n(op_id, service_id, api_id, user_id, user_number, details, opening_balance, amount, comm_per, comm_val, comm_amt, other_charge, charge_per, charge_amt, net_amt, closing_balance, tr_mode, tr_type, status, tr_id, reason, is_processed, operator_ref, api_ref, revert_trans, ip_address, api_response_id, live, tr_date) VALUES (:P1 /* {{GetOperatorId.op_id}} */, :P2 /* {{GetOperatorId.service_id}} */, '0', '1', :P3 /* {{GetDebitUser.user_mobile}} */, :P4 /* {{GetDebitUser.user_fname}} */, :P5 /* {{GetDebitUser.balance_amt}} */, :P6 /* {{$_POST.credit_amount}} */, :P7 /* {{GetCommision.comm_per}} */, :P8 /* {{GetCommision.comm_val}} */, :P9 /* {{$_POST.credit_amount * GetCommision.comm_per / 100}} */, '0', :P10 /* {{GetCommision.service_charge_per}} */, :P11 /* {{$_POST.credit_amount * GetCommision.service_charge_per / 100}} */, :P12 /* {{$_POST.credit_amount * GetCommision.comm_per / 100 +$_POST.credit_amount * GetCommision.service_charge_per / 100}} */, :P13 /* {{GetDebitUser.balance_amt - ($_POST.credit_amount * GetCommision.comm_per / 100) - ($_POST.credit_amount * GetCommision.service_charge_per / 100)}} */, :P14 /* {{'Web'}} */, :P15 /* {{'Virtual'}} */, '1', :P16 /* {{TransactionId}} */, :P17 /* {{$_POST.comment}} */, '0', '0', '0', '0', '0', '0', :P18 /* {{'Push'}} */, :P19 /* {{NOW}} */)",
+                    "params": [
+                      {
+                        "name": ":P1",
+                        "type": "expression",
+                        "value": "{{GetOperatorId.op_id}}"
+                      },
+                      {
+                        "name": ":P2",
+                        "type": "expression",
+                        "value": "{{GetOperatorId.service_id}}"
+                      },
+                      {
+                        "name": ":P3",
+                        "type": "expression",
+                        "value": "{{GetDebitUser.user_mobile}}"
+                      },
+                      {
+                        "name": ":P4",
+                        "type": "expression",
+                        "value": "{{GetDebitUser.user_fname}}"
+                      },
+                      {
+                        "name": ":P5",
+                        "type": "expression",
+                        "value": "{{GetDebitUser.balance_amt}}"
+                      },
+                      {
+                        "name": ":P6",
+                        "type": "expression",
+                        "value": "{{$_POST.credit_amount}}"
+                      },
+                      {
+                        "name": ":P7",
+                        "type": "expression",
+                        "value": "{{GetCommision.comm_per}}"
+                      },
+                      {
+                        "name": ":P8",
+                        "type": "expression",
+                        "value": "{{GetCommision.comm_val}}"
+                      },
+                      {
+                        "name": ":P9",
+                        "type": "expression",
+                        "value": "{{$_POST.credit_amount * GetCommision.comm_per / 100}}"
+                      },
+                      {
+                        "name": ":P10",
+                        "type": "expression",
+                        "value": "{{GetCommision.service_charge_per}}"
+                      },
+                      {
+                        "name": ":P11",
+                        "type": "expression",
+                        "value": "{{$_POST.credit_amount * GetCommision.service_charge_per / 100}}"
+                      },
+                      {
+                        "name": ":P12",
+                        "type": "expression",
+                        "value": "{{$_POST.credit_amount * GetCommision.comm_per / 100 +$_POST.credit_amount * GetCommision.service_charge_per / 100}}"
+                      },
+                      {
+                        "name": ":P13",
+                        "type": "expression",
+                        "value": "{{GetDebitUser.balance_amt - ($_POST.credit_amount * GetCommision.comm_per / 100) - ($_POST.credit_amount * GetCommision.service_charge_per / 100)}}"
+                      },
+                      {
+                        "name": ":P14",
+                        "type": "expression",
+                        "value": "{{'Web'}}"
+                      },
+                      {
+                        "name": ":P15",
+                        "type": "expression",
+                        "value": "{{'Virtual'}}"
+                      },
+                      {
+                        "name": ":P16",
+                        "type": "expression",
+                        "value": "{{TransactionId}}"
+                      },
+                      {
+                        "name": ":P17",
+                        "type": "expression",
+                        "value": "{{$_POST.comment}}"
+                      },
+                      {
+                        "name": ":P18",
+                        "type": "expression",
+                        "value": "{{'Push'}}"
+                      },
+                      {
+                        "name": ":P19",
+                        "type": "expression",
+                        "value": "{{NOW}}"
+                      }
+                    ]
+                  }
+                },
+                "meta": [
+                  {
+                    "name": "identity",
+                    "type": "text"
+                  },
+                  {
+                    "name": "affected",
+                    "type": "number"
+                  }
+                ],
+                "output": true,
+                "disabled": true
+              },
+              {
+                "name": "BalanceUpdateDebitUser",
+                "module": "dbupdater",
+                "action": "update",
+                "options": {
+                  "connection": "postgres_gcpServer",
+                  "sql": {
+                    "type": "update",
+                    "values": [
+                      {
+                        "table": "m_users",
+                        "column": "balance_amt",
+                        "type": "number",
+                        "value": "{{GetDebitUser.balance_amt - ($_POST.credit_amount * GetCommision.comm_per / 100) - ($_POST.credit_amount * GetCommision.service_charge_per / 100)}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "balance_outstanding",
+                        "type": "number",
+                        "value": "0"
+                      }
+                    ],
+                    "table": "m_users",
+                    "wheres": {
+                      "condition": "AND",
+                      "rules": [
+                        {
+                          "id": "id",
+                          "field": "id",
+                          "type": "double",
+                          "operator": "equal",
+                          "value": 1,
+                          "data": {
+                            "column": "id"
+                          },
+                          "operation": "="
+                        }
+                      ],
+                      "conditional": null,
+                      "valid": true
+                    },
+                    "query": "UPDATE m_users\nSET balance_amt = :P1 /* {{GetDebitUser.balance_amt - ($_POST.credit_amount * GetCommision.comm_per / 100) - ($_POST.credit_amount * GetCommision.service_charge_per / 100)}} */, balance_outstanding = '0'\nWHERE id = 1",
+                    "params": [
+                      {
+                        "name": ":P1",
+                        "type": "expression",
+                        "value": "{{GetDebitUser.balance_amt - ($_POST.credit_amount * GetCommision.comm_per / 100) - ($_POST.credit_amount * GetCommision.service_charge_per / 100)}}"
+                      }
+                    ]
+                  }
+                },
+                "meta": [
+                  {
+                    "name": "affected",
+                    "type": "number"
+                  }
+                ],
+                "output": true
+              },
+              {
+                "name": "BalUpCreditUser",
+                "module": "dbupdater",
+                "action": "update",
+                "options": {
+                  "connection": "postgres_gcpServer",
+                  "sql": {
+                    "type": "update",
+                    "values": [
+                      {
+                        "table": "m_users",
+                        "column": "balance_amt",
+                        "type": "number",
+                        "value": "{{GetSchfromUser.balance_amt + $_POST.credit_amount - ($_POST.credit_amount * GetCommision.comm_per / 100) - ($_POST.credit_amount * GetCommision.service_charge_per / 100)}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "balance_outstanding",
+                        "type": "number",
+                        "value": "0"
+                      }
+                    ],
+                    "table": "m_users",
+                    "wheres": {
+                      "condition": "AND",
+                      "rules": [
+                        {
+                          "id": "id",
+                          "type": "double",
+                          "operator": "equal",
+                          "value": "{{$_POST.id}}",
+                          "data": {
+                            "column": "id"
+                          },
+                          "operation": "="
+                        }
+                      ]
+                    },
+                    "query": "UPDATE m_users\nSET balance_amt = :P1 /* {{GetSchfromUser.balance_amt + $_POST.credit_amount - ($_POST.credit_amount * GetCommision.comm_per / 100) - ($_POST.credit_amount * GetCommision.service_charge_per / 100)}} */, balance_outstanding = '0'\nWHERE id = :P2 /* {{$_POST.id}} */",
+                    "params": [
+                      {
+                        "name": ":P1",
+                        "type": "expression",
+                        "value": "{{GetSchfromUser.balance_amt + $_POST.credit_amount - ($_POST.credit_amount * GetCommision.comm_per / 100) - ($_POST.credit_amount * GetCommision.service_charge_per / 100)}}"
+                      },
+                      {
+                        "operator": "equal",
+                        "type": "expression",
+                        "name": ":P2",
+                        "value": "{{$_POST.id}}"
+                      }
+                    ]
+                  }
+                },
+                "meta": [
+                  {
+                    "name": "affected",
+                    "type": "number"
+                  }
+                ],
+                "output": true
+              },
+              {
+                "name": "WalletCredit",
+                "module": "dbupdater",
+                "action": "insert",
+                "options": {
+                  "connection": "postgres_gcpServer",
+                  "sql": {
+                    "type": "insert",
+                    "values": [
+                      {
+                        "table": "tt_balance",
+                        "column": "user_id",
+                        "type": "number",
+                        "value": "{{$_POST.target_user_id}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "old_balance",
+                        "type": "number",
+                        "value": "{{GetSchfromUser.balance_amt}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "amount",
+                        "type": "number",
+                        "value": "{{$_POST.credit_amount}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "new_balance",
+                        "type": "number",
+                        "value": "{{GetSchfromUser.balance_amt + $_POST.credit_amount - $_POST.credit_amount * GetCommision.comm_per / 100 - $_POST.credit_amount * GetCommision.service_charge_per / 100}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "transaction_type",
+                        "type": "text",
+                        "value": "{{'Credit'}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "tr_date",
+                        "type": "text",
+                        "value": "{{NOW}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "ip_address",
+                        "type": "text",
+                        "value": "0"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "crdr_type",
+                        "type": "text",
+                        "value": "{{'Credit'}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "pay_ref_id",
+                        "type": "text",
+                        "value": "{{CreditBalance.identity}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "remarks",
+                        "type": "text",
+                        "value": "{{'Balance transfer from: '+GetDebitUser.user_fname+' To: '+GetSchfromUser.user_mobile}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "created_by",
+                        "type": "number",
+                        "value": "1"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "created_on",
+                        "type": "datetime",
+                        "value": "{{NOW}}"
+                      }
+                    ],
+                    "table": "tt_balance",
+                    "returning": "id",
+                    "query": "INSERT INTO tt_balance\n(user_id, old_balance, amount, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on) VALUES (:P1 /* {{$_POST.target_user_id}} */, :P2 /* {{GetSchfromUser.balance_amt}} */, :P3 /* {{$_POST.credit_amount}} */, :P4 /* {{GetSchfromUser.balance_amt + $_POST.credit_amount - $_POST.credit_amount * GetCommision.comm_per / 100 - $_POST.credit_amount * GetCommision.service_charge_per / 100}} */, :P5 /* {{'Credit'}} */, :P6 /* {{NOW}} */, '0', :P7 /* {{'Credit'}} */, :P8 /* {{CreditBalance.identity}} */, :P9 /* {{'Balance transfer from: '+GetDebitUser.user_fname+' To: '+GetSchfromUser.user_mobile}} */, '1', :P10 /* {{NOW}} */)",
+                    "params": [
+                      {
+                        "name": ":P1",
+                        "type": "expression",
+                        "value": "{{$_POST.target_user_id}}"
+                      },
+                      {
+                        "name": ":P2",
+                        "type": "expression",
+                        "value": "{{GetSchfromUser.balance_amt}}"
+                      },
+                      {
+                        "name": ":P3",
+                        "type": "expression",
+                        "value": "{{$_POST.credit_amount}}"
+                      },
+                      {
+                        "name": ":P4",
+                        "type": "expression",
+                        "value": "{{GetSchfromUser.balance_amt + $_POST.credit_amount - $_POST.credit_amount * GetCommision.comm_per / 100 - $_POST.credit_amount * GetCommision.service_charge_per / 100}}"
+                      },
+                      {
+                        "name": ":P5",
+                        "type": "expression",
+                        "value": "{{'Credit'}}"
+                      },
+                      {
+                        "name": ":P6",
+                        "type": "expression",
+                        "value": "{{NOW}}"
+                      },
+                      {
+                        "name": ":P7",
+                        "type": "expression",
+                        "value": "{{'Credit'}}"
+                      },
+                      {
+                        "name": ":P8",
+                        "type": "expression",
+                        "value": "{{CreditBalance.identity}}"
+                      },
+                      {
+                        "name": ":P9",
+                        "type": "expression",
+                        "value": "{{'Balance transfer from: '+GetDebitUser.user_fname+' To: '+GetSchfromUser.user_mobile}}"
+                      },
+                      {
+                        "name": ":P10",
+                        "type": "expression",
+                        "value": "{{NOW}}"
+                      }
+                    ]
+                  }
+                },
+                "meta": [
+                  {
+                    "name": "identity",
+                    "type": "text"
+                  },
+                  {
+                    "name": "affected",
+                    "type": "number"
+                  }
+                ]
+              },
+              {
+                "name": "WalletDebit",
+                "module": "dbupdater",
+                "action": "insert",
+                "options": {
+                  "connection": "postgres_gcpServer",
+                  "sql": {
+                    "type": "insert",
+                    "values": [
+                      {
+                        "table": "tt_balance",
+                        "column": "user_id",
+                        "type": "number",
+                        "value": "1"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "old_balance",
+                        "type": "number",
+                        "value": "{{GetDebitUser.balance_amt}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "amount",
+                        "type": "number",
+                        "value": "{{$_POST.credit_amount}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "new_balance",
+                        "type": "number",
+                        "value": "{{GetDebitUser.balance_amt - $_POST.credit_amount * GetCommision.comm_per / 100 - $_POST.credit_amount * GetCommision.service_charge_per / 100}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "transaction_type",
+                        "type": "text",
+                        "value": "{{'Debit'}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "tr_date",
+                        "type": "text",
+                        "value": "{{NOW}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "ip_address",
+                        "type": "text",
+                        "value": "0"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "crdr_type",
+                        "type": "text",
+                        "value": "{{'Debit'}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "pay_ref_id",
+                        "type": "text",
+                        "value": "{{CreditBalance.identity}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "remarks",
+                        "type": "text",
+                        "value": "{{'Balance Debited From '+GetDebitUser.user_fname+GetDebitUser.user_mobile+' To: '+GetSchfromUser.user_mobile}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "created_by",
+                        "type": "number",
+                        "value": "1"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "created_on",
+                        "type": "datetime",
+                        "value": "{{NOW}}"
+                      }
+                    ],
+                    "table": "tt_balance",
+                    "returning": "id",
+                    "query": "INSERT INTO tt_balance\n(user_id, old_balance, amount, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on) VALUES ('1', :P1 /* {{GetDebitUser.balance_amt}} */, :P2 /* {{$_POST.credit_amount}} */, :P3 /* {{GetDebitUser.balance_amt - $_POST.credit_amount * GetCommision.comm_per / 100 - $_POST.credit_amount * GetCommision.service_charge_per / 100}} */, :P4 /* {{'Debit'}} */, :P5 /* {{NOW}} */, '0', :P6 /* {{'Debit'}} */, :P7 /* {{CreditBalance.identity}} */, :P8 /* {{'Balance Debited From '+GetDebitUser.user_fname+GetDebitUser.user_mobile+' To: '+GetSchfromUser.user_mobile}} */, '1', :P9 /* {{NOW}} */)",
+                    "params": [
+                      {
+                        "name": ":P1",
+                        "type": "expression",
+                        "value": "{{GetDebitUser.balance_amt}}"
+                      },
+                      {
+                        "name": ":P2",
+                        "type": "expression",
+                        "value": "{{$_POST.credit_amount}}"
+                      },
+                      {
+                        "name": ":P3",
+                        "type": "expression",
+                        "value": "{{GetDebitUser.balance_amt - $_POST.credit_amount * GetCommision.comm_per / 100 - $_POST.credit_amount * GetCommision.service_charge_per / 100}}"
+                      },
+                      {
+                        "name": ":P4",
+                        "type": "expression",
+                        "value": "{{'Debit'}}"
+                      },
+                      {
+                        "name": ":P5",
+                        "type": "expression",
+                        "value": "{{NOW}}"
+                      },
+                      {
+                        "name": ":P6",
+                        "type": "expression",
+                        "value": "{{'Debit'}}"
+                      },
+                      {
+                        "name": ":P7",
+                        "type": "expression",
+                        "value": "{{CreditBalance.identity}}"
+                      },
+                      {
+                        "name": ":P8",
+                        "type": "expression",
+                        "value": "{{'Balance Debited From '+GetDebitUser.user_fname+GetDebitUser.user_mobile+' To: '+GetSchfromUser.user_mobile}}"
+                      },
+                      {
+                        "name": ":P9",
+                        "type": "expression",
+                        "value": "{{NOW}}"
+                      }
+                    ]
+                  }
+                },
+                "meta": [
+                  {
+                    "name": "identity",
+                    "type": "text"
+                  },
+                  {
+                    "name": "affected",
+                    "type": "number"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "outputType": "boolean"
+      }
+    ]
+  }
+}

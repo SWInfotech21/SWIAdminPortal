@@ -1111,5 +1111,106 @@ dmx.config({
       "meta": null,
       "outputType": "array"
     }
+  },
+  "walletcredits": {
+    "dvUserScmPrio": {
+      "meta": [
+        {
+          "name": "id",
+          "type": "text"
+        },
+        {
+          "name": "user_fname",
+          "type": "text"
+        },
+        {
+          "name": "user_mobile",
+          "type": "text"
+        },
+        {
+          "name": "user_type",
+          "type": "text"
+        },
+        {
+          "name": "user_type_id",
+          "type": "text"
+        },
+        {
+          "name": "user_id",
+          "type": "text"
+        },
+        {
+          "name": "balance_amt",
+          "type": "number"
+        }
+      ],
+      "outputType": "array"
+    },
+    "ddUserSchemPrio": {
+      "meta": [
+        {
+          "name": "id",
+          "type": "text"
+        },
+        {
+          "name": "user_fname",
+          "type": "text"
+        },
+        {
+          "name": "user_mobile",
+          "type": "text"
+        },
+        {
+          "name": "user_type",
+          "type": "text"
+        },
+        {
+          "name": "user_type_id",
+          "type": "text"
+        },
+        {
+          "name": "user_id",
+          "type": "text"
+        },
+        {
+          "name": "balance_amt",
+          "type": "number"
+        }
+      ],
+      "outputType": "array"
+    },
+    "ddUserSchemePrio": {
+      "meta": [
+        {
+          "name": "id",
+          "type": "text"
+        },
+        {
+          "name": "user_fname",
+          "type": "text"
+        },
+        {
+          "name": "user_mobile",
+          "type": "text"
+        },
+        {
+          "name": "user_type",
+          "type": "text"
+        },
+        {
+          "name": "user_type_id",
+          "type": "text"
+        },
+        {
+          "name": "user_id",
+          "type": "text"
+        },
+        {
+          "name": "balance_amt",
+          "type": "number"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });

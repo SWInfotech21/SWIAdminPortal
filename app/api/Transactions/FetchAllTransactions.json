@@ -1,0 +1,279 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "offset"
+      },
+      {
+        "type": "text",
+        "name": "limit"
+      },
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "GetAllTrans",
+      "module": "dbconnector",
+      "action": "paged",
+      "options": {
+        "connection": "postgres_gcpServer",
+        "sql": {
+          "type": "SELECT",
+          "columns": [],
+          "table": {
+            "name": "tt_recharge_trans"
+          },
+          "joins": [],
+          "orders": [
+            {
+              "table": "tt_recharge_trans",
+              "column": "id",
+              "direction": "DESC"
+            }
+          ],
+          "query": "SELECT *\nFROM tt_recharge_trans\nORDER BY id DESC",
+          "params": []
+        }
+      },
+      "output": true,
+      "meta": [
+        {
+          "name": "offset",
+          "type": "number"
+        },
+        {
+          "name": "limit",
+          "type": "number"
+        },
+        {
+          "name": "total",
+          "type": "number"
+        },
+        {
+          "name": "page",
+          "type": "object",
+          "sub": [
+            {
+              "name": "offset",
+              "type": "object",
+              "sub": [
+                {
+                  "name": "first",
+                  "type": "number"
+                },
+                {
+                  "name": "prev",
+                  "type": "number"
+                },
+                {
+                  "name": "next",
+                  "type": "number"
+                },
+                {
+                  "name": "last",
+                  "type": "number"
+                }
+              ]
+            },
+            {
+              "name": "current",
+              "type": "number"
+            },
+            {
+              "name": "total",
+              "type": "number"
+            }
+          ]
+        },
+        {
+          "name": "data",
+          "type": "array",
+          "sub": [
+            {
+              "name": "id",
+              "type": "text"
+            },
+            {
+              "name": "operator_id",
+              "type": "number"
+            },
+            {
+              "name": "user_id",
+              "type": "number"
+            },
+            {
+              "name": "user_details",
+              "type": "text"
+            },
+            {
+              "name": "user_number",
+              "type": "text"
+            },
+            {
+              "name": "opening_balance",
+              "type": "number"
+            },
+            {
+              "name": "amount",
+              "type": "number"
+            },
+            {
+              "name": "comm_per",
+              "type": "number"
+            },
+            {
+              "name": "comm_val",
+              "type": "number"
+            },
+            {
+              "name": "comm_amt",
+              "type": "number"
+            },
+            {
+              "name": "other_charge",
+              "type": "number"
+            },
+            {
+              "name": "service_charge",
+              "type": "number"
+            },
+            {
+              "name": "service_charge_val",
+              "type": "number"
+            },
+            {
+              "name": "service_charge_amt",
+              "type": "number"
+            },
+            {
+              "name": "cost_tr",
+              "type": "number"
+            },
+            {
+              "name": "closing_balance",
+              "type": "number"
+            },
+            {
+              "name": "trans_mode",
+              "type": "text"
+            },
+            {
+              "name": "trans_date",
+              "type": "datetime"
+            },
+            {
+              "name": "updated_on",
+              "type": "datetime"
+            },
+            {
+              "name": "updated_by",
+              "type": "number"
+            },
+            {
+              "name": "status",
+              "type": "text"
+            },
+            {
+              "name": "service_id",
+              "type": "number"
+            },
+            {
+              "name": "service_name",
+              "type": "text"
+            },
+            {
+              "name": "api_id",
+              "type": "number"
+            },
+            {
+              "name": "transaction_id",
+              "type": "text"
+            },
+            {
+              "name": "reason",
+              "type": "text"
+            },
+            {
+              "name": "api_logs",
+              "type": "text"
+            },
+            {
+              "name": "is_processed",
+              "type": "number"
+            },
+            {
+              "name": "extra1",
+              "type": "text"
+            },
+            {
+              "name": "extra2",
+              "type": "text"
+            },
+            {
+              "name": "extra3",
+              "type": "text"
+            },
+            {
+              "name": "extra4",
+              "type": "text"
+            },
+            {
+              "name": "extra5",
+              "type": "text"
+            },
+            {
+              "name": "operator_ref",
+              "type": "text"
+            },
+            {
+              "name": "api_ref",
+              "type": "text"
+            },
+            {
+              "name": "reverttran",
+              "type": "number"
+            },
+            {
+              "name": "ip_address",
+              "type": "text"
+            },
+            {
+              "name": "extra6",
+              "type": "text"
+            },
+            {
+              "name": "extra7",
+              "type": "text"
+            },
+            {
+              "name": "extra8",
+              "type": "text"
+            },
+            {
+              "name": "extra9",
+              "type": "text"
+            },
+            {
+              "name": "commamount",
+              "type": "number"
+            },
+            {
+              "name": "chargeamount",
+              "type": "number"
+            }
+          ]
+        }
+      ],
+      "outputType": "object"
+    }
+  }
+}

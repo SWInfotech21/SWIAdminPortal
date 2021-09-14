@@ -1,0 +1,172 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/scheme-commision-set.ejs",
+      "linkedForm": "formUpdateAllCommision"
+    },
+    "$_POST": [
+      {
+        "type": "text",
+        "fieldName": "scheme_id_all",
+        "name": "scheme_id_all"
+      },
+      {
+        "type": "number",
+        "fieldName": "commision_percent",
+        "options": {
+          "rules": {
+            "core:number": {}
+          }
+        },
+        "name": "commision_percent"
+      },
+      {
+        "type": "number",
+        "fieldName": "commision_value",
+        "options": {
+          "rules": {}
+        },
+        "name": "commision_value"
+      },
+      {
+        "type": "number",
+        "fieldName": "charge_percent",
+        "options": {
+          "rules": {}
+        },
+        "name": "charge_percent"
+      },
+      {
+        "type": "number",
+        "fieldName": "charge_value",
+        "options": {
+          "rules": {}
+        },
+        "name": "charge_value"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "update",
+      "module": "dbupdater",
+      "action": "update",
+      "options": {
+        "connection": "postgres_gcpServer",
+        "sql": {
+          "type": "update",
+          "values": [
+            {
+              "table": "m_commission",
+              "column": "user_id",
+              "type": "number",
+              "value": "1"
+            },
+            {
+              "table": "m_commission",
+              "column": "comm_per",
+              "type": "text",
+              "value": "{{$_POST.commision_percent}}"
+            },
+            {
+              "table": "m_commission",
+              "column": "comm_val",
+              "type": "number",
+              "value": "{{$_POST.commision_value}}"
+            },
+            {
+              "table": "m_commission",
+              "column": "service_charge_per",
+              "type": "text",
+              "value": "{{$_POST.charge_percent}}"
+            },
+            {
+              "table": "m_commission",
+              "column": "service_charge_val",
+              "type": "text",
+              "value": "{{$_POST.charge_value}}"
+            },
+            {
+              "table": "m_commission",
+              "column": "is_active",
+              "type": "number",
+              "value": "1"
+            },
+            {
+              "table": "m_commission",
+              "column": "updated_by",
+              "type": "number",
+              "value": "1"
+            },
+            {
+              "table": "m_commission",
+              "column": "updated_on",
+              "type": "datetime",
+              "value": "{{NOW}}"
+            }
+          ],
+          "table": "m_commission",
+          "wheres": {
+            "condition": "AND",
+            "rules": [
+              {
+                "id": "scheme_id",
+                "field": "scheme_id",
+                "type": "double",
+                "operator": "equal",
+                "value": "{{$_POST.scheme_id_all}}",
+                "data": {
+                  "column": "scheme_id"
+                },
+                "operation": "="
+              }
+            ],
+            "conditional": null,
+            "valid": true
+          },
+          "query": "UPDATE m_commission\nSET user_id = '1', comm_per = :P1 /* {{$_POST.commision_percent}} */, comm_val = :P2 /* {{$_POST.commision_value}} */, service_charge_per = :P3 /* {{$_POST.charge_percent}} */, service_charge_val = :P4 /* {{$_POST.charge_value}} */, is_active = '1', updated_by = '1', updated_on = :P5 /* {{NOW}} */\nWHERE scheme_id = :P6 /* {{$_POST.scheme_id_all}} */",
+          "params": [
+            {
+              "name": ":P1",
+              "type": "expression",
+              "value": "{{$_POST.commision_percent}}"
+            },
+            {
+              "name": ":P2",
+              "type": "expression",
+              "value": "{{$_POST.commision_value}}"
+            },
+            {
+              "name": ":P3",
+              "type": "expression",
+              "value": "{{$_POST.charge_percent}}"
+            },
+            {
+              "name": ":P4",
+              "type": "expression",
+              "value": "{{$_POST.charge_value}}"
+            },
+            {
+              "name": ":P5",
+              "type": "expression",
+              "value": "{{NOW}}"
+            },
+            {
+              "operator": "equal",
+              "type": "expression",
+              "name": ":P6",
+              "value": "{{$_POST.scheme_id_all}}"
+            }
+          ]
+        }
+      },
+      "meta": [
+        {
+          "name": "affected",
+          "type": "number"
+        }
+      ],
+      "output": true
+    }
+  }
+}

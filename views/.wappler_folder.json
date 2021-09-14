@@ -46,5 +46,9 @@
   "scheme-commision-set.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "wallet-credits.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }

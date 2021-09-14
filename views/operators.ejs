@@ -1,8 +1,8 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="operators" appConnect="local" components="{dmxSwiper:{},dmxFormatter:{}}" -->
 <dmx-serverconnect id="scService" url="api/Services/Services"></dmx-serverconnect>
 <meta name="ac:route" content="/operators">
-<dmx-serverconnect id="scOperator" url="api/operator/OperatorsFetch"></dmx-serverconnect>
-<dmx-data-view id="dvOperator" dmx-bind:data="scOperator.data.OperatorFetch.data" pageSize="100" page="10"></dmx-data-view>
+<dmx-serverconnect id="scOperator" url="api/operator/OperatorsFetch" dmx-param:limit="100"></dmx-serverconnect>
+<dmx-data-view id="dvOperator" dmx-bind:data="scOperator.data.OperatorFetch.data"></dmx-data-view>
 <dmx-data-detail id="ddOperators" dmx-bind:data="dvOperator.data" key="op_id"></dmx-data-detail>
 <header>
     <div class="container">
@@ -19,7 +19,7 @@
         <table class="table table-striped table-bordered table-sm">
             <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>Sl. No.</th>
                     <th>Op. Name</th>
                     <th>Service</th>
                     <th>API Code</th>
@@ -31,7 +31,7 @@
             </thead>
             <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="dvOperator.data" id="tableRepeat1">
                 <tr>
-                    <td dmx-text="op_id"></td>
+                    <td>{{$index+1}}</td>
                     <td dmx-text="operator_name.titlecase()"></td>
                     <td dmx-text="service_name"></td>
                     <td dmx-text="api_code"></td>
@@ -58,7 +58,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form is="dmx-serverconnect-form" id="formAddEditOperator" method="post" action="api/operator/OperatorsAddEdit" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAddEditOperator.data.AddEditOperators ? scNotif.success('New Operator Added') : scNotif.success('Operator Updated'); formAddEditOperator.reset()" dmx-on:error="scNotif.warning('An error occurred'); modalAddOperators.hide();formAddEditOperator.reset()">
+                <form is="dmx-serverconnect-form" id="formAddEditOperator" method="post" action="api/operator/OperatorsAddEdit" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAddEditOperator.data.AddEditOperators ? scNotif.success('New Operator Added') : scNotif.success('Operator Updated'); formAddEditOperator.reset(); scOperator.load()" dmx-on:error="scNotif.warning('An error occurred'); modalAddOperators.hide();formAddEditOperator.reset()">
                     <!-- modalAddOperators.hide();browserMain.goto('operators') -->
                     <input type="hidden" name="OperatorId" dmx-bind:value="ddOperators.data.op_id">
                     <div class="mb-3 row">

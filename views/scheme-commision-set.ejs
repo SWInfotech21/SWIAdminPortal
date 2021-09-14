@@ -31,30 +31,35 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-2 p-1">
+                <div class="col-12 col-lg-3 p-1">
                     <label>Select Scheme</label>
-                    <select id="scheme_type" name="scheme_select" class="form-control" dmx-bind:options="scSchemes.data.FetchScheme.data" optiontext="scheme_name" optionvalue="sc_id" dmx-on:changed="flowCommision.run()">
+                    <select id="scheme_type" name="scheme_select" class="form-control col-12 px-1" dmx-bind:options="scSchemes.data.FetchScheme.data" optiontext="scheme_name" optionvalue="sc_id" dmx-on:changed="flowCommision.run()">
                         <option value="">Select</option>
                     </select>
                 </div>
-                <div class="col-3 p-1"></div>
+                <form is="dmx-serverconnect-form" id="formUpdateAllCommision" method="post" action="api/commision/UpdateAllCommision" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formUpdateAllCommision.data.UpdateAllCommision ? scNotif.success('New Commision Added') : scNotif.success('All Commision Updated');formUpdateAllCommision.reset(); scCommision.load({})" dmx-on:error="scNotif.warning('An error occurred'); " class="d-flex col-12 col-md-9 justify-content-md-end">
+                    <input type="hidden" name="scheme_id_all" dmx-bind:value="scheme_type.value">
+                    <div class="col-2 col-md-1 p-0">
+                        <label>Comm. Per.</label>
+                        <input type="number" id="commision_percent" name="commision_percent" class="form-control px-1" placeholder="E.g: 0.00" value="0.00">
+                    </div>
+                    <div class="col-2 col-md-1 p-0">
+                        <label>Comm. Val.</label>
+                        <input type="number" id="commision_value" name="commision_value" class="form-control px-1" placeholder="E.g: 0.00" value="0.00">
+                    </div>
+                    <div class="col-2 col-md-1 p-0">
+                        <label>Charge Per.</label>
+                        <input type="number" id="charge_percent" name="charge_percent" class="form-control px-1" placeholder="E.g: 0.00" value="0.00">
+                    </div>
+                    <div class="col-2 col-md-1 p-0">
+                        <label>Charge Val.</label>
+                        <input type="number" id="charge_value" name="charge_value" class="form-control px-1" placeholder="E.g: 0.00" value="0.00">
+                    </div>
+                    <div class="col-2 p-0 mt-3 ms-3">
+                        <button id="btn1" class="btn btn-info mt-md-4" type="submit" dmx-bind:disabled="state.executing">Update All<span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span></button>
 
-                <div class="col-1 p-1">For User Type:</div>
-                <div class="col-1 p-0">
-                    <select id="ForUsertype" name="for_user_type" class="form-control">
-                        <option value="">MDT</option>
-                        <option value="">DT</option>
-                        <option value="">RT</option>
-                    </select>
-                </div>
-                <div class="col-1 p-1">Scheme:</div>
-                <div class="col-2 p-0">
-                    <select id="scheme" name="scheme" class="form-control">
-                        <option value="">MDT</option>
-                        <option value="">DT</option>
-                        <option value="">RT</option>
-                    </select>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -104,7 +109,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form is="dmx-serverconnect-form" id="formAddEditCommision" method="post" action="api/commision/SchemeCommisionAddEdit" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAddEditCommision.data.SchemeCommisionAddEdit ? scNotif.success('New Commision Added') : scNotif.success('Commision Updated');formAddEditCommision.reset(); scCommision.load({})" dmx-on:error="scNotif.warning('An error occurred'); ">
+                <form is="dmx-serverconnect-form" id="formAddEditCommision" method="post" action="api/commision/SchemeCommisionAddEdit" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAddEditCommision.data.SchemeCommisionAddEdit ? scNotif.success('New Commision Added') : scNotif.success('Commision Updated'); scCommision.load({})" dmx-on:error="scNotif.warning('An error occurred'); ">
+                    <!-- formAddEditCommision.reset(); -->
                     <input type="hidden" name="commisionid" dmx-bind:value="ddCommision.data.commision_id">
                     <input type="hidden" name="op_id" dmx-bind:value="ddCommision.data.op_id">
                     <input type="hidden" name="scheme_id" dmx-bind:value="scheme_type.value">

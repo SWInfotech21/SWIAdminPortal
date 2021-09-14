@@ -23,8 +23,17 @@
         "name": "Password"
       },
       {
-        "type": "text",
-        "name": "salt"
+        "type": "number",
+        "fieldName": "tpin",
+        "options": {
+          "rules": {
+            "core:number": {},
+            "core:maxlength": {
+              "param": "6"
+            }
+          }
+        },
+        "name": "tpin"
       }
     ]
   },
@@ -68,6 +77,12 @@
                     "column": "updated_on",
                     "type": "datetime",
                     "value": "{{NOW}}"
+                  },
+                  {
+                    "table": "m_users",
+                    "column": "user_tpin",
+                    "type": "text",
+                    "value": "{{$_POST.tpin}}"
                   }
                 ],
                 "table": "m_users",
@@ -89,7 +104,7 @@
                   "conditional": null,
                   "valid": true
                 },
-                "query": "UPDATE m_users\nSET password = :P1 /* {{$_POST.Password.sha256(NOW)}} */, salt = :P2 /* {{NOW}} */, updated_by = '1', updated_on = :P3 /* {{NOW}} */\nWHERE id = :P4 /* {{$_POST.UserId}} */",
+                "query": "UPDATE m_users\nSET password = :P1 /* {{$_POST.Password.sha256(NOW)}} */, salt = :P2 /* {{NOW}} */, updated_by = '1', updated_on = :P3 /* {{NOW}} */, user_tpin = :P4 /* {{$_POST.tpin}} */\nWHERE id = :P5 /* {{$_POST.UserId}} */",
                 "params": [
                   {
                     "name": ":P1",
@@ -107,9 +122,14 @@
                     "value": "{{NOW}}"
                   },
                   {
+                    "name": ":P4",
+                    "type": "expression",
+                    "value": "{{$_POST.tpin}}"
+                  },
+                  {
                     "operator": "equal",
                     "type": "expression",
-                    "name": ":P4",
+                    "name": ":P5",
                     "value": "{{$_POST.UserId}}"
                   }
                 ]

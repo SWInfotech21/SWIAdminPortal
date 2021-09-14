@@ -1,4 +1,15 @@
-<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="users" appConnect="local" components="{dmxBootstrap5TableGenerator:{},dmxBootstrap5Navigation:{},dmxDataTraversal:{}}" -->
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="users" appConnect="local" components="{dmxBootstrap5TableGenerator:{},dmxBootstrap5Navigation:{},dmxDataTraversal:{},dmxValidator:{}}" -->
+<dmx-serverconnect id="scGetSchInd" url="api/Scheme/GetSchemeAllotted" dmx-param:for_user_type="modalAddUsers.formAddEditUser.inp_user_type.value" noload></dmx-serverconnect>
+<script is="dmx-flow" id="flowGetScheme" type="text/dmx-flow">{
+    condition: {
+    if: "{{modalAddUsers.formAddEditUser.inp_user_type.value}}",
+    then: {
+    steps: {
+    run: {action: "{{scGetSchInd.load({})}}"}
+    }
+    }
+    }
+    }</script>
 <meta name="ac:route" content="/users">
 <dmx-serverconnect id="scUsers" url="api/Users/Users"></dmx-serverconnect>
 <dmx-data-view id="dvUsers" dmx-bind:data="scUsers.data.FetchUsers.data" pageSize="100" page="10"></dmx-data-view>
@@ -57,12 +68,13 @@
         <table class="table table-striped table-bordered table-sm">
             <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>Sl. No.</th>
                     <th>Unique Id</th>
                     <th>Name</th>
                     <th>Image</th>
                     <th>Email</th>
                     <th>Mobile</th>
+                    <th>TPIN</th>
                     <th>User Type</th>
                     <th>Status</th>
                     <th>Action</th>
@@ -70,18 +82,19 @@
             </thead>
             <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="scUsers.data.FetchUsers.data" id="tableRepeat1">
                 <tr>
-                    <td dmx-text="id"></td>
+                    <td>{{$index+1}}</td>
                     <td dmx-text="user_id"></td>
                     <td dmx-text="user_fname.titlecase()"></td>
                     <td><img dmx-bind:src="user_lname" width="50" height="50">
                     </td>
                     <td dmx-text="user_email"></td>
                     <td dmx-text="user_mobile"></td>
+                    <td dmx-text="user_tpin"></td>
                     <td dmx-text="user_type == 1 ? 'MDT' : user_type == 2 ? 'DT' : user_type == 3 ? 'RT' : 'None'" dmx-class:table-primary="user_type == 1" dmx-class:table-success="user_type == 2" dmx-class:table-warning="user_type == 3" dmx-class:table-danger="user_type == 4"></td>
                     <td dmx-text="u_status != 1 ?'Inactive' : 'Active'" dmx-class:table-primary="u_status == 1" dmx-class:table-warning="u_status != 1"></td>
                     <td>
                         <a class="sw-col-ar" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalAddUsers"><i class="fas fa-edit" title="Edit Users"></i></a>&emsp;<a class="sw-col-br" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalPasswordUser"><i class="fas fa-user-lock" title="Password Update"></i></a>&emsp;
-                        <a class="sw-col-dr" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalDelUser"><i class="far fa-trash-alt" title="Delete User"></i></a>
+                        <a class="sw-col-dr" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalDelUser"><i class="far fa-trash-alt" title="Delete User"></i></a>&emsp;<a class="sw-col-cr" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#"><i class="fas fa-sign-in-alt" title="Login to user panel"></i></a>
                     </td>
                 </tr>
             </tbody>
@@ -99,7 +112,7 @@
             </div>
             <div class="modal-body">
                 <h3>Do you want to update this user password?</h3>
-                <form is="dmx-serverconnect-form" id="formPassUser" method="post" action="api/Users/PassUpdtByAdmin" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formPassUser.data.DeleteUsers ? scNotif.success('User Password Updated') : ''; modalPasswordUser.hide();formPassUser.reset(); scUsers.load()" dmx-on:error="scNotif.warning('An error occurred'); modalPasswordUser.hide();formPassUser.reset()">
+                <form is="dmx-serverconnect-form" id="formPassUser" method="post" action="api/Users/PassUpdtByAdmin" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formPassUser.data ? scNotif.success('User Password and TPIN Updated') : ''; formPassUser.reset(); scUsers.load();" dmx-on:error="scNotif.warning('An error occurred');">
                     <input type="hidden" name="UserId" dmx-bind:value="ddUsers.data.id">
                     <table class="table table-striped table-bordered table-sm">
                         <tr>
@@ -118,7 +131,13 @@
                     <div class="mb-3 row">
                         <label for="inp_password" class="col-sm-2 col-form-label">Password</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" id="inp_password" name="Password" aria-describedby="inp_password_help" placeholder="Enter Password" maxlength="50">
+                            <input type="password" class="form-control" id="inp_password" name="Password" aria-describedby="inp_password_help" placeholder="Enter Password" required="" maxlength="50">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inp_tpin" class="col-sm-2 col-form-label">TPIN</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="inp_tpin" name="tpin" aria-describedby="inp_tpin_help" placeholder="Enter TPIN" data-rule-integer="" required="" maxlength="6">
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -127,6 +146,124 @@
                         </div>
                     </div>
                 </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Custom Navbar Starts -->
+<!-- Modal Delete Users -->
+<div class="modal fade" id="modalDelUser" is="dmx-bs5-modal" tabindex="-1" nokeyboard="true" nocloseonclick="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h3>Do you want to delete this user?</h3>
+                <form is="dmx-serverconnect-form" id="formDelUser" method="post" action="api/Users/DeleteUsers" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formDelUser.data.DeleteUsers ? scNotif.success('User Deleted') : ''; modalDelUser.hide();formDelUser.reset();browserMain.goto('users')" dmx-on:error="scNotif.warning('An error occurred'); modalDelUser.hide();formDelUser.reset()">
+                    <input type="hidden" name="UserId" dmx-bind:value="ddUsers.data.id">
+                    <table class="table table-striped table-bordered table-sm">
+                        <tr>
+                            <td>Image</td>
+                            <td>Name</td>
+                            <td>Email</td>
+                            <td>Phone No.</td>
+                        </tr>
+                        <tr>
+                            <td><img dmx-bind:src="ddUsers.data.image" width="50" height="50"></td>
+                            <td>{{ddUsers.data.user_fname.titlecase()}}</td>
+                            <td>{{ddUsers.data.user_email}}</td>
+                            <td>{{ddUsers.data.user_mobile}}</td>
+                        </tr>
+                    </table>
+                    <div class="mb-3 row">
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary" dmx-bind:disabled="state.executing">Delete<span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Add users -->
+<div class="modal fade" id="modalAddUsers" is="dmx-bs5-modal" tabindex="-1" nocloseonclick="true" nokeyboard="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ddUsers.data.id ? 'Edit User Details' : 'Add A New User'}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form is="dmx-serverconnect-form" id="formAddEditUser" method="post" action="api/Users/AddEditUsers" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAddEditUser.data.AddEditUsers ? scNotif.success('New User Added') : scNotif.success('User Details Updated');formAddEditUser.reset();scUsers.load();" dmx-on:error="scNotif.warning('An error occurred'); ">
+                    <input type="hidden" name="UserId" dmx-bind:value="ddUsers.data.id">
+                    <div class="mb-3 row">
+                        <label for="inp_name" class="col-sm-2 col-form-label">User Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inp_name" name="name" aria-describedby="inp_name_help" placeholder="Enter Name" maxlength="50" required="" data-msg-required="User Name is required." dmx-bind:value="ddUsers.data.user_fname">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inp_email" class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inp_email" name="email" aria-describedby="inp_email_help" placeholder="Enter Email" maxlength="100" required="" data-msg-required="Email id is required." data-rule-email="" data-rule-nowhitespace="" dmx-bind:value="ddUsers.data.user_email">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inp_mobile" class="col-sm-2 col-form-label">Mobile</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="inp_mobile" name="mobile" aria-describedby="inp_mobile_help" placeholder="Enter Mobile" maxlength="10" required="" data-msg-required="Mobile id is required." data-rule-number="" dmx-bind:value="ddUsers.data.user_mobile">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inp_status" class="col-sm-2 col-form-label">Status</label>
+                        <div class="col-sm-10">
+                            <select type="text" class="form-control" id="inp_status" name="status" aria-describedby="inp_status_help" placeholder="Enter Status" dmx-bind:value="ddUsers.data.u_status">
+                                <option value="1">Active</option>
+                                <option value="0">InActive</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inp_super_user" class="col-sm-2 col-form-label">User Type</label>
+                        <div class="col-sm-10">
+                            <select type="number" class="form-control" id="inp_user_type" name="user_type" aria-describedby="inp_user_type_help" placeholder="Enter user type" dmx-bind:value="ddUsers.data.user_type" dmx-on:changed="flowGetScheme.run()">
+                                <option value="">Select Option</option>
+                                <option value="1">Master Distributor</option>
+                                <option value="2">Distributor</option>
+                                <option value="3">Retailer</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inp_scheme_user" class="col-sm-2 col-form-label">Allot Scheme</label>
+                        <div class="col-sm-10">
+                            <select type="number" class="form-control" id="inp_scheme_type" name="scheme_id" aria-describedby="inp_scheme_type_help" dmx-bind:options="scGetSchInd.data.custom" optiontext="scheme_name" optionvalue="scheme" dmx-bind:value="ddUsers.data.scheme_id">
+                                <option value="">Select Option</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row" dmx-show="!ddUsers.data.id">
+                        <label for="inp_password" class="col-sm-2 col-form-label">Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="inp_new_password" name="password" aria-describedby="inp_password_help" placeholder="Enter Password" maxlength="50" dmx-show="!ddUsers.data.id">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="col-sm-2">&nbsp;</div>
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary" dmx-bind:disabled="state.executing">Save<span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span></button>
+                        </div>
+                    </div>
+                </form>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

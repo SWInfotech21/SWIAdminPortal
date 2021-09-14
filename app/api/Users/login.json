@@ -6,14 +6,14 @@
     },
     "$_POST": [
       {
-        "type": "text",
-        "fieldName": "Email",
+        "type": "number",
+        "fieldName": "Mobile",
         "options": {
           "rules": {
-            "core:email": {}
+            "core:number": {}
           }
         },
-        "name": "Email"
+        "name": "Mobile"
       },
       {
         "type": "text",
@@ -56,27 +56,27 @@
               "name": "m_users"
             },
             "joins": [],
-            "query": "SELECT salt AS saltvalue\nFROM m_users\nWHERE user_email = :P1 /* {{$_POST.Email.lowercase()}} */",
+            "query": "SELECT salt AS saltvalue\nFROM m_users\nWHERE user_mobile = :P1 /* {{$_POST.Mobile}} */",
             "params": [
               {
                 "operator": "equal",
                 "type": "expression",
                 "name": ":P1",
-                "value": "{{$_POST.Email.lowercase()}}"
+                "value": "{{$_POST.Mobile}}"
               }
             ],
             "wheres": {
               "condition": "AND",
               "rules": [
                 {
-                  "id": "m_users.user_email",
-                  "field": "m_users.user_email",
+                  "id": "m_users.user_mobile",
+                  "field": "m_users.user_mobile",
                   "type": "string",
                   "operator": "equal",
-                  "value": "{{$_POST.Email.lowercase()}}",
+                  "value": "{{$_POST.Mobile}}",
                   "data": {
                     "table": "m_users",
-                    "column": "user_email",
+                    "column": "user_mobile",
                     "type": "text"
                   },
                   "operation": "="
@@ -110,7 +110,7 @@
               "options": {
                 "provider": "securityLogin",
                 "password": "{{$_POST.Password.sha256(getSalt.saltvalue)}}",
-                "username": "{{$_POST.Email.lowercase()}}"
+                "username": "{{$_POST.Mobile}}"
               },
               "output": true,
               "meta": []

@@ -1,0 +1,67 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      },
+      {
+        "type": "text",
+        "name": "for_user_type"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "user_value",
+        "module": "core",
+        "action": "setvalue",
+        "options": {
+          "value": "{{$_GET.for_user_type}}"
+        },
+        "output": true,
+        "disabled": true
+      },
+      {
+        "name": "custom",
+        "module": "dbupdater",
+        "action": "custom",
+        "options": {
+          "connection": "postgres_gcpServer",
+          "sql": {
+            "query": "select ms.scheme_name, unnest(array[scheme1, scheme2, scheme3, scheme4]) AS \"scheme\" FROM t_scheme_user tsu \ninner join m_scheme ms on ms.id = tsu.scheme1 or ms.id = tsu.scheme2 or ms.id = tsu.scheme3 or ms.id = tsu.scheme4 \nwhere tsu.user_id = @user_id and tsu.for_user_type = @for_user_type group by scheme, ms.scheme_name ;",
+            "params": [
+              {
+                "name": "@user_id",
+                "value": "1",
+                "test": ""
+              },
+              {
+                "name": "@for_user_type",
+                "value": "{{$_GET.for_user_type}}",
+                "test": ""
+              }
+            ]
+          }
+        },
+        "output": true,
+        "meta": [
+          {
+            "name": "scheme_name",
+            "type": "text"
+          },
+          {
+            "name": "scheme",
+            "type": "number"
+          }
+        ],
+        "outputType": "array"
+      }
+    ]
+  }
+}
