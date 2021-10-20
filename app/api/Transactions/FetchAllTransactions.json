@@ -37,7 +37,8 @@
             {
               "table": "tt_recharge_trans",
               "column": "id",
-              "direction": "DESC"
+              "direction": "DESC",
+              "recid": 1
             }
           ],
           "query": "SELECT *\nFROM tt_recharge_trans\nORDER BY id DESC",
@@ -103,7 +104,15 @@
               "type": "text"
             },
             {
-              "name": "operator_id",
+              "name": "op_id",
+              "type": "number"
+            },
+            {
+              "name": "service_id",
+              "type": "number"
+            },
+            {
+              "name": "api_id",
               "type": "number"
             },
             {
@@ -111,11 +120,11 @@
               "type": "number"
             },
             {
-              "name": "user_details",
+              "name": "user_number",
               "type": "text"
             },
             {
-              "name": "user_number",
+              "name": "details",
               "type": "text"
             },
             {
@@ -143,19 +152,15 @@
               "type": "number"
             },
             {
-              "name": "service_charge",
+              "name": "charge_per",
               "type": "number"
             },
             {
-              "name": "service_charge_val",
+              "name": "charge_amt",
               "type": "number"
             },
             {
-              "name": "service_charge_amt",
-              "type": "number"
-            },
-            {
-              "name": "cost_tr",
+              "name": "net_amt",
               "type": "number"
             },
             {
@@ -163,11 +168,63 @@
               "type": "number"
             },
             {
-              "name": "trans_mode",
-              "type": "text"
+              "name": "tr_mode",
+              "type": "number"
             },
             {
-              "name": "trans_date",
+              "name": "tr_type",
+              "type": "number"
+            },
+            {
+              "name": "status",
+              "type": "number"
+            },
+            {
+              "name": "tr_id",
+              "type": "number"
+            },
+            {
+              "name": "reason",
+              "type": "number"
+            },
+            {
+              "name": "api_logs",
+              "type": "number"
+            },
+            {
+              "name": "is_processed",
+              "type": "number"
+            },
+            {
+              "name": "operator_ref",
+              "type": "number"
+            },
+            {
+              "name": "api_ref",
+              "type": "number"
+            },
+            {
+              "name": "revert_trans",
+              "type": "number"
+            },
+            {
+              "name": "ip_address",
+              "type": "number"
+            },
+            {
+              "name": "api_response_id",
+              "type": "number"
+            },
+            {
+              "name": "process_mode",
+              "type": "number"
+            },
+            {
+              "name": "live",
+              "type": "number"
+            },
+            {
+              "name": "tr_date",
               "type": "datetime"
             },
             {
@@ -176,38 +233,6 @@
             },
             {
               "name": "updated_by",
-              "type": "number"
-            },
-            {
-              "name": "status",
-              "type": "text"
-            },
-            {
-              "name": "service_id",
-              "type": "number"
-            },
-            {
-              "name": "service_name",
-              "type": "text"
-            },
-            {
-              "name": "api_id",
-              "type": "number"
-            },
-            {
-              "name": "transaction_id",
-              "type": "text"
-            },
-            {
-              "name": "reason",
-              "type": "text"
-            },
-            {
-              "name": "api_logs",
-              "type": "text"
-            },
-            {
-              "name": "is_processed",
               "type": "number"
             },
             {
@@ -221,54 +246,6 @@
             {
               "name": "extra3",
               "type": "text"
-            },
-            {
-              "name": "extra4",
-              "type": "text"
-            },
-            {
-              "name": "extra5",
-              "type": "text"
-            },
-            {
-              "name": "operator_ref",
-              "type": "text"
-            },
-            {
-              "name": "api_ref",
-              "type": "text"
-            },
-            {
-              "name": "reverttran",
-              "type": "number"
-            },
-            {
-              "name": "ip_address",
-              "type": "text"
-            },
-            {
-              "name": "extra6",
-              "type": "text"
-            },
-            {
-              "name": "extra7",
-              "type": "text"
-            },
-            {
-              "name": "extra8",
-              "type": "text"
-            },
-            {
-              "name": "extra9",
-              "type": "text"
-            },
-            {
-              "name": "commamount",
-              "type": "number"
-            },
-            {
-              "name": "chargeamount",
-              "type": "number"
             }
           ]
         }

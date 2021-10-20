@@ -1,5 +1,18 @@
 [
   {
+    "name": "",
+    "module": "auth",
+    "action": "restrict",
+    "options": {
+      "provider": "securityLogin",
+      "permissions": [
+        "write"
+      ],
+      "loginUrl": "login",
+      "forbiddenUrl": "403-forbidden"
+    }
+  },
+  {
     "name": "OPAPI",
     "module": "core",
     "action": "setvalue",

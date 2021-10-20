@@ -80,6 +80,16 @@
         }
       },
       {
+        "name": "identity",
+        "module": "auth",
+        "action": "identify",
+        "options": {
+          "provider": "securityLogin"
+        },
+        "output": true,
+        "meta": []
+      },
+      {
         "name": "",
         "module": "core",
         "action": "condition",
@@ -123,7 +133,7 @@
                       "table": "m_service",
                       "column": "updated_by",
                       "type": "number",
-                      "value": "1"
+                      "value": "{{identity}}"
                     },
                     {
                       "table": "m_service",
@@ -151,7 +161,7 @@
                     "conditional": null,
                     "valid": true
                   },
-                  "query": "UPDATE m_service\nSET service_name = :P1 /* {{$_POST.name}} */, service_desc = :P2 /* {{$_POST.service_desc}} */, service_type = :P3 /* {{$_POST.service_type}} */, is_active = :P4 /* {{$_POST.status}} */, updated_by = '1', updated_on = :P5 /* {{NOW}} */\nWHERE id = :P6 /* {{$_POST.ServiceId}} */",
+                  "query": "UPDATE m_service\nSET service_name = :P1 /* {{$_POST.name}} */, service_desc = :P2 /* {{$_POST.service_desc}} */, service_type = :P3 /* {{$_POST.service_type}} */, is_active = :P4 /* {{$_POST.status}} */, updated_by = :P5 /* {{identity}} */, updated_on = :P6 /* {{NOW}} */\nWHERE id = :P7 /* {{$_POST.ServiceId}} */",
                   "params": [
                     {
                       "name": ":P1",
@@ -176,12 +186,17 @@
                     {
                       "name": ":P5",
                       "type": "expression",
+                      "value": "{{identity}}"
+                    },
+                    {
+                      "name": ":P6",
+                      "type": "expression",
                       "value": "{{NOW}}"
                     },
                     {
                       "operator": "equal",
                       "type": "expression",
-                      "name": ":P6",
+                      "name": ":P7",
                       "value": "{{$_POST.ServiceId}}"
                     }
                   ]
@@ -245,7 +260,7 @@
                       "table": "m_service",
                       "column": "created_by",
                       "type": "number",
-                      "value": "1"
+                      "value": "{{identity}}"
                     },
                     {
                       "table": "m_service",
@@ -256,7 +271,7 @@
                   ],
                   "table": "m_service",
                   "returning": "id",
-                  "query": "INSERT INTO m_service\n(service_name, service_desc, service_type, is_active, is_bbps, is_auth, created_by, created_on) VALUES (:P1 /* {{$_POST.name}} */, :P2 /* {{$_POST.service_desc}} */, :P3 /* {{$_POST.service_type}} */, :P4 /* {{$_POST.status}} */, '0', '1', '1', :P5 /* {{NOW}} */)",
+                  "query": "INSERT INTO m_service\n(service_name, service_desc, service_type, is_active, is_bbps, is_auth, created_by, created_on) VALUES (:P1 /* {{$_POST.name}} */, :P2 /* {{$_POST.service_desc}} */, :P3 /* {{$_POST.service_type}} */, :P4 /* {{$_POST.status}} */, '0', '1', :P5 /* {{identity}} */, :P6 /* {{NOW}} */)",
                   "params": [
                     {
                       "name": ":P1",
@@ -280,6 +295,11 @@
                     },
                     {
                       "name": ":P5",
+                      "type": "expression",
+                      "value": "{{identity}}"
+                    },
+                    {
+                      "name": ":P6",
                       "type": "expression",
                       "value": "{{NOW}}"
                     }

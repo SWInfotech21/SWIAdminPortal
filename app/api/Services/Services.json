@@ -47,8 +47,15 @@
               "name": "m_service"
             },
             "joins": [],
-            "query": "SELECT *\nFROM m_service",
-            "params": []
+            "query": "SELECT *\nFROM m_service\nORDER BY id DESC",
+            "params": [],
+            "orders": [
+              {
+                "table": "m_service",
+                "column": "id",
+                "direction": "DESC"
+              }
+            ]
           }
         },
         "output": true,

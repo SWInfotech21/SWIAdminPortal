@@ -34,7 +34,7 @@
                     <td dmx-text="scheme_type == 1 ? 'MDT' : scheme_type == 2 ? 'DT' : scheme_type == 3 ? 'RT' : 'None'" dmx-class:table-primary="scheme_type == 1" dmx-class:table-success="scheme_type == 2" dmx-class:table-warning="scheme_type == 3" dmx-class:table-danger="scheme_type == 4"></td>
                     <td dmx-text="status != 1 ?'Inactive' : 'Active'" dmx-class:table-primary="status == 1" dmx-class:table-warning="status != 1"></td>
                     <td>
-                        <a class="dropdown-item" href="#" dmx-on:click="ddSchemes.select(sc_id)" data-bs-toggle="modal" data-bs-target="#modalAddScheme"><i class="fas fa-edit" title="Edit Schemes"></i></a>&emsp;
+                        <a class="dropdown-item" href="#" dmx-on:click="ddSchemes.select(sc_id)" data-bs-toggle="modal" data-bs-target="#modalAddScheme"><i class="fas fa-edit sw-col-ar" title="Edit Schemes"></i></a>&emsp;
                         <a class="dropdown-item" href="#" dmx-on:click="ddSchemes.select(sc_id)" data-bs-toggle="modal" data-bs-target="#modalDelScheme"><i class="far fa-trash-alt" title="Delete Scheme"></i></a>
                     </td>
                 </tr>

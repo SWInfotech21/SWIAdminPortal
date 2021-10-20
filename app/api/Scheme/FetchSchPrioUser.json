@@ -10,6 +10,19 @@
   "exec": {
     "steps": [
       {
+        "name": "",
+        "module": "auth",
+        "action": "restrict",
+        "options": {
+          "provider": "securityLogin",
+          "permissions": [
+            "write"
+          ],
+          "loginUrl": "login",
+          "forbiddenUrl": "403-forbidden"
+        }
+      },
+      {
         "name": "UserDetails",
         "module": "dbconnector",
         "action": "select",
@@ -78,8 +91,7 @@
               {
                 "table": "m_users",
                 "column": "user_fname",
-                "direction": "ASC",
-                "recid": 1
+                "direction": "ASC"
               }
             ],
             "query": "SELECT m_users.id, m_users.user_fname, m_users.user_mobile, user_type_name.user_type, m_users.user_type AS user_type_id, m_users.user_id, m_users.balance_amt\nFROM m_users\nINNER JOIN m_user_type AS user_type_name ON (user_type_name.id = m_users.user_type)\nWHERE m_users.user_type = :P1 /* {{$_GET.user_type}} */\nORDER BY m_users.user_fname ASC",

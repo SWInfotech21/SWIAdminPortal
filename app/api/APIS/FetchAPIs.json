@@ -97,7 +97,8 @@
               {
                 "table": "m_api",
                 "column": "api_name",
-                "direction": "ASC"
+                "direction": "ASC",
+                "recid": 1
               }
             ],
             "query": "SELECT id AS api_id, api_name, api_code, username, api_password, status, created_on, created_by, updated_by, updated_on, blank2\nFROM m_api\nORDER BY api_name ASC",

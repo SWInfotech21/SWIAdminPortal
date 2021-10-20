@@ -1,23 +1,29 @@
 {
   "meta": {
     "options": {
-      "linkedFile": "/views/layouts/main.ejs",
-      "linkedForm": "formDelUser"
+      "linkedFile": "/views/users.ejs",
+      "linkedForm": "formMobRech"
     },
     "$_POST": [
       {
         "type": "text",
         "fieldName": "UserId",
         "name": "UserId"
-      },
-      {
-        "type": "text",
-        "name": "deleted_by"
       }
     ]
   },
   "exec": {
     "steps": [
+      {
+        "name": "identity",
+        "module": "auth",
+        "action": "identify",
+        "options": {
+          "provider": "securityLogin"
+        },
+        "output": true,
+        "meta": []
+      },
       {
         "name": "",
         "module": "auth",
@@ -44,7 +50,7 @@
                 "table": "m_users",
                 "column": "deleted_by",
                 "type": "text",
-                "value": "1"
+                "value": "{{identity}}"
               },
               {
                 "table": "m_users",
@@ -72,17 +78,22 @@
               "conditional": null,
               "valid": true
             },
-            "query": "UPDATE m_users\nSET deleted_by = '1', deleted_on = :P1 /* {{NOW}} */\nWHERE id = :P2 /* {{$_POST.UserId}} */",
+            "query": "UPDATE m_users\nSET deleted_by = :P1 /* {{identity}} */, deleted_on = :P2 /* {{NOW}} */\nWHERE id = :P3 /* {{$_POST.UserId}} */",
             "params": [
               {
                 "name": ":P1",
+                "type": "expression",
+                "value": "{{identity}}"
+              },
+              {
+                "name": ":P2",
                 "type": "expression",
                 "value": "{{NOW}}"
               },
               {
                 "operator": "equal",
                 "type": "expression",
-                "name": ":P2",
+                "name": ":P3",
                 "value": "{{$_POST.UserId}}"
               }
             ]

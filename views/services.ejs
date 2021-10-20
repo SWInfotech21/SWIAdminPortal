@@ -43,7 +43,7 @@
                     <td dmx-text="created_by+' ('+created_on.formatDate('dd-MM-yyyy HH:mm:ss')+')'"></td>
                     <td dmx-text="updated_by+' ('+updated_on+')'"></td>
                     <td>
-                        <a class="dropdown-item" href="#" dmx-on:click="ddServices.select(id)" data-bs-toggle="modal" data-bs-target="#modalAddServices"><i class="fas fa-edit" title="Edit Services"></i></a>&emsp;
+                        <a class="dropdown-item" href="#" dmx-on:click="ddServices.select(id)" data-bs-toggle="modal" data-bs-target="#modalAddServices"><i class="fas fa-edit sw-col-ar" title="Edit Services"></i></a>&emsp;
                         <a class="dropdown-item" href="#" dmx-on:click="ddServices.select(id)" data-bs-toggle="modal" data-bs-target="#modalDelService"><i class="far fa-trash-alt" title="Delete Service"></i></a>
                     </td>
                 </tr>
@@ -61,7 +61,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form is="dmx-serverconnect-form" id="formAddEditService" method="post" action="api/Services/ServicesAddEdit" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAddEditService.data.AddEditServices ? scNotif.success('New Service Added') : scNotif.success('Service updated'); modalAddServices.hide();formAddEditService.reset();browserMain.goto('Services')" dmx-on:error="scNotif.warning('An error occurred'); modalAddServices.hide();formAddEditService.reset()">
+                <form is="dmx-serverconnect-form" id="formAddEditService" method="post" action="api/Services/ServicesAddEdit" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAddEditService.data.AddEditServices ? scNotif.success('New Service Added') : scNotif.success('Service updated'); modalAddServices.hide();formAddEditService.reset(); scServices.load({})" dmx-on:error="scNotif.warning('An error occurred'); modalAddServices.hide();formAddEditService.reset()">
                     <input type="hidden" name="ServiceId" dmx-bind:value="ddServices.data.id">
                     <div class="mb-3 row">
                         <label for="inp_name" class="col-sm-2 col-form-label">Service Name</label>

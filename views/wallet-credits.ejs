@@ -70,6 +70,25 @@
                     </div>
                 </div>
             </form>
+
+            <form is="dmx-serverconnect-form" id="formAdminCredit" method="post" action="api/Transactions/CreditToAdmin" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAdminCredit.data ? scNotif.success('New Credit Added') : scNotif.success('Credit Updated');formAdminCredit.reset(); scCommision.load({})" dmx-on:error="scNotif.warning('An error occurred'); ">
+
+                <div class="row">
+                    <div class="col-12 col-lg-3 p-2">
+                        <label>Update Admin Credit Amount</label>
+                        <input type="number" id="admin_credit_amount" name="admin_credit_amount" class="form-control" placeholder="E.g: 100" required="">
+                    </div>
+                    <div class="col-12 col-lg-2 p-2">
+                        <label>TPIN</label>
+                        <input type="number" id="admin_tpin" name="admintpin" class="form-control" placeholder="E.g: 1452" required="">
+                    </div>
+                    <div class="col-4 p-0 ms-3">
+                        <button id="AdminCredit" class="btn btn-info mt-md-4" type="submit" dmx-bind:disabled="state.executing">Admin Credit<span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span></button>
+
+                    </div>
+                </div>
+            </form>
+
         </div>
     </div>
 

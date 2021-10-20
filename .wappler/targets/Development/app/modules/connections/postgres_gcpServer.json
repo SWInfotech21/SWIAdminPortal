@@ -5,15 +5,12 @@
   "options": {
     "client": "postgres",
     "connection": {
-      "host": "35.200.194.181",
+      "host": "35.244.48.241",
       "port": 5432,
       "user": "postgres",
       "password": "Harshit@Ariful21",
       "database": "postgres"
-    },
-    "meta": {}
+    }
   },
-  "actionFilePath": "file:///F:/swi/SWIAdminPortal/app/modules/connections/postgres_gcpServer.json",
-  "serverType": "node",
   "fileName": "postgres_gcpServer.json"
 }

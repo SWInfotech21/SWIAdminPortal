@@ -87,6 +87,16 @@
         "output": true
       },
       {
+        "name": "identity",
+        "module": "auth",
+        "action": "identify",
+        "options": {
+          "provider": "securityLogin"
+        },
+        "output": true,
+        "meta": []
+      },
+      {
         "name": "StatsVal",
         "module": "core",
         "action": "setvalue",
@@ -146,7 +156,7 @@
                       "table": "m_operator",
                       "column": "updated_by",
                       "type": "number",
-                      "value": "1"
+                      "value": "{{identity}}"
                     },
                     {
                       "table": "m_operator",
@@ -180,7 +190,7 @@
                     "conditional": null,
                     "valid": true
                   },
-                  "query": "UPDATE m_operator\nSET operator_name = :P1 /* {{$_POST.name}} */, api_code = :P2 /* {{$_POST.api_code}} */, operator_code = :P3 /* {{$_POST.operator_code}} */, status = :P4 /* {{$_POST.op_status}} */, operator_type = :P5 /* {{$_POST.operator_type}} */, updated_by = '1', updated_on = :P6 /* {{NOW}} */, service_id = :P7 /* {{$_POST.service}} */\nWHERE id = :P8 /* {{$_POST.OperatorId}} */",
+                  "query": "UPDATE m_operator\nSET operator_name = :P1 /* {{$_POST.name}} */, api_code = :P2 /* {{$_POST.api_code}} */, operator_code = :P3 /* {{$_POST.operator_code}} */, status = :P4 /* {{$_POST.op_status}} */, operator_type = :P5 /* {{$_POST.operator_type}} */, updated_by = :P6 /* {{identity}} */, updated_on = :P7 /* {{NOW}} */, service_id = :P8 /* {{$_POST.service}} */\nWHERE id = :P9 /* {{$_POST.OperatorId}} */",
                   "params": [
                     {
                       "name": ":P1",
@@ -210,17 +220,22 @@
                     {
                       "name": ":P6",
                       "type": "expression",
-                      "value": "{{NOW}}"
+                      "value": "{{identity}}"
                     },
                     {
                       "name": ":P7",
+                      "type": "expression",
+                      "value": "{{NOW}}"
+                    },
+                    {
+                      "name": ":P8",
                       "type": "expression",
                       "value": "{{$_POST.service}}"
                     },
                     {
                       "operator": "equal",
                       "type": "expression",
-                      "name": ":P8",
+                      "name": ":P9",
                       "value": "{{$_POST.OperatorId}}"
                     }
                   ]
@@ -285,7 +300,7 @@
                       "table": "m_operator",
                       "column": "created_by",
                       "type": "number",
-                      "value": "1"
+                      "value": "{{identity}}"
                     },
                     {
                       "table": "m_operator",
@@ -296,7 +311,7 @@
                   ],
                   "table": "m_operator",
                   "returning": "id",
-                  "query": "INSERT INTO m_operator\n(operator_name, service_id, api_code, operator_code, status, operator_type, created_by, created_on) VALUES (:P1 /* {{$_POST.name}} */, :P2 /* {{$_POST.service}} */, :P3 /* {{$_POST.api_code}} */, :P4 /* {{$_POST.operator_code}} */, :P5 /* {{$_POST.op_status}} */, :P6 /* {{$_POST.operator_type}} */, '1', :P7 /* {{NOW}} */)",
+                  "query": "INSERT INTO m_operator\n(operator_name, service_id, api_code, operator_code, status, operator_type, created_by, created_on) VALUES (:P1 /* {{$_POST.name}} */, :P2 /* {{$_POST.service}} */, :P3 /* {{$_POST.api_code}} */, :P4 /* {{$_POST.operator_code}} */, :P5 /* {{$_POST.op_status}} */, :P6 /* {{$_POST.operator_type}} */, :P7 /* {{identity}} */, :P8 /* {{NOW}} */)",
                   "params": [
                     {
                       "name": ":P1",
@@ -330,6 +345,11 @@
                     },
                     {
                       "name": ":P7",
+                      "type": "expression",
+                      "value": "{{identity}}"
+                    },
+                    {
+                      "name": ":P8",
                       "type": "expression",
                       "value": "{{NOW}}"
                     }

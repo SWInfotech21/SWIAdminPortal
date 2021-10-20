@@ -18,6 +18,30 @@
   "exec": {
     "steps": [
       {
+        "name": "",
+        "module": "auth",
+        "action": "restrict",
+        "options": {
+          "provider": "securityLogin",
+          "forbiddenUrl": "403-forbidden",
+          "loginUrl": "login",
+          "permissions": [
+            "write"
+          ]
+        }
+      },
+      {
+        "name": "identity",
+        "module": "auth",
+        "action": "identify",
+        "options": {
+          "provider": "securityLogin"
+        },
+        "output": true,
+        "meta": [],
+        "disabled": true
+      },
+      {
         "name": "user_value",
         "module": "core",
         "action": "setvalue",
@@ -34,17 +58,12 @@
         "options": {
           "connection": "postgres_gcpServer",
           "sql": {
-            "query": "select ms.scheme_name, unnest(array[scheme1, scheme2, scheme3, scheme4]) AS \"scheme\" FROM t_scheme_user tsu \ninner join m_scheme ms on ms.id = tsu.scheme1 or ms.id = tsu.scheme2 or ms.id = tsu.scheme3 or ms.id = tsu.scheme4 \nwhere tsu.user_id = @user_id and tsu.for_user_type = @for_user_type group by scheme, ms.scheme_name ;",
+            "query": "select ms.id as scheme_id, ms.scheme_name from m_scheme ms where ms.scheme_type = @for_user_type;\n\n",
             "params": [
-              {
-                "name": "@user_id",
-                "value": "1",
-                "test": ""
-              },
               {
                 "name": "@for_user_type",
                 "value": "{{$_GET.for_user_type}}",
-                "test": ""
+                "test": "1"
               }
             ]
           }
@@ -54,10 +73,6 @@
           {
             "name": "scheme_name",
             "type": "text"
-          },
-          {
-            "name": "scheme",
-            "type": "number"
           }
         ],
         "outputType": "array"

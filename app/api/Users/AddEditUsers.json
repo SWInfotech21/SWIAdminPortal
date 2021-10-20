@@ -129,21 +129,30 @@
           "data": [
             {
               "name": "validate_1",
-              "value": "{{$_POST.email}}",
+              "value": "{{$_POST.mobile}}",
               "rules": {
                 "db:notexists": {
                   "param": {
                     "connection": "postgres_gcpServer",
                     "table": "users",
-                    "column": "email"
+                    "column": "mobile"
                   }
                 }
               },
-              "fieldName": "email"
+              "fieldName": "mobile"
             }
           ]
+        }
+      },
+      {
+        "name": "identity",
+        "module": "auth",
+        "action": "identify",
+        "options": {
+          "provider": "securityLogin"
         },
-        "disabled": true
+        "output": true,
+        "meta": []
       },
       {
         "name": "CheckMobile",
@@ -194,7 +203,8 @@
                 "name": ":P1",
                 "value": "{{$_POST.mobile}}"
               }
-            ]
+            ],
+            "orders": []
           }
         },
         "output": true,
@@ -341,7 +351,7 @@
                               "table": "m_users",
                               "column": "updated_by",
                               "type": "text",
-                              "value": "1"
+                              "value": "{{identity}}"
                             },
                             {
                               "table": "m_users",
@@ -375,7 +385,7 @@
                             "conditional": null,
                             "valid": true
                           },
-                          "query": "UPDATE m_users\nSET user_fname = :P1 /* {{$_POST.name}} */, user_mobile = :P2 /* {{$_POST.mobile}} */, user_email = :P3 /* {{$_POST.email.lowercase()}} */, user_type = :P4 /* {{$_POST.user_type}} */, u_status = :P5 /* {{$_POST.status}} */, updated_by = '1', updated_on = :P6 /* {{NOW}} */, scheme_id = :P7 /* {{$_POST.scheme_id}} */\nWHERE id = :P8 /* {{$_POST.UserId}} */",
+                          "query": "UPDATE m_users\nSET user_fname = :P1 /* {{$_POST.name}} */, user_mobile = :P2 /* {{$_POST.mobile}} */, user_email = :P3 /* {{$_POST.email.lowercase()}} */, user_type = :P4 /* {{$_POST.user_type}} */, u_status = :P5 /* {{$_POST.status}} */, updated_by = :P6 /* {{identity}} */, updated_on = :P7 /* {{NOW}} */, scheme_id = :P8 /* {{$_POST.scheme_id}} */\nWHERE id = :P9 /* {{$_POST.UserId}} */",
                           "params": [
                             {
                               "name": ":P1",
@@ -405,17 +415,22 @@
                             {
                               "name": ":P6",
                               "type": "expression",
-                              "value": "{{NOW}}"
+                              "value": "{{identity}}"
                             },
                             {
                               "name": ":P7",
+                              "type": "expression",
+                              "value": "{{NOW}}"
+                            },
+                            {
+                              "name": ":P8",
                               "type": "expression",
                               "value": "{{$_POST.scheme_id}}"
                             },
                             {
                               "operator": "equal",
                               "type": "expression",
-                              "name": ":P8",
+                              "name": ":P9",
                               "value": "{{$_POST.UserId}}"
                             }
                           ]
@@ -492,7 +507,7 @@
                               "table": "m_users",
                               "column": "created_by",
                               "type": "text",
-                              "value": "1"
+                              "value": "{{identity}}"
                             },
                             {
                               "table": "m_users",
@@ -538,7 +553,7 @@
                             }
                           ],
                           "table": "m_users",
-                          "query": "INSERT INTO m_users\n(user_id, user_fname, user_mobile, user_email, password, salt, user_type, u_status, created_by, created_on, user_lname, cap_amt, balance_amt, balance_outstanding, aeps_balance, scheme_id) VALUES (:P1 /* {{UniqueID}} */, :P2 /* {{$_POST.name}} */, :P3 /* {{$_POST.mobile}} */, :P4 /* {{$_POST.email.lowercase()}} */, :P5 /* {{$_POST.password.sha256(NOW)}} */, :P6 /* {{NOW}} */, :P7 /* {{$_POST.user_type}} */, :P8 /* {{$_POST.status}} */, '1', :P9 /* {{NOW}} */, :P10 /* {{'https://github.com/ado.png'}} */, '0', '0', '0', '0', :P11 /* {{$_POST.scheme_id}} */)",
+                          "query": "INSERT INTO m_users\n(user_id, user_fname, user_mobile, user_email, password, salt, user_type, u_status, created_by, created_on, user_lname, cap_amt, balance_amt, balance_outstanding, aeps_balance, scheme_id) VALUES (:P1 /* {{UniqueID}} */, :P2 /* {{$_POST.name}} */, :P3 /* {{$_POST.mobile}} */, :P4 /* {{$_POST.email.lowercase()}} */, :P5 /* {{$_POST.password.sha256(NOW)}} */, :P6 /* {{NOW}} */, :P7 /* {{$_POST.user_type}} */, :P8 /* {{$_POST.status}} */, :P9 /* {{identity}} */, :P10 /* {{NOW}} */, :P11 /* {{'https://github.com/ado.png'}} */, '0', '0', '0', '0', :P12 /* {{$_POST.scheme_id}} */)",
                           "params": [
                             {
                               "name": ":P1",
@@ -583,15 +598,20 @@
                             {
                               "name": ":P9",
                               "type": "expression",
-                              "value": "{{NOW}}"
+                              "value": "{{identity}}"
                             },
                             {
                               "name": ":P10",
                               "type": "expression",
-                              "value": "{{'https://github.com/ado.png'}}"
+                              "value": "{{NOW}}"
                             },
                             {
                               "name": ":P11",
+                              "type": "expression",
+                              "value": "{{'https://github.com/ado.png'}}"
+                            },
+                            {
+                              "name": ":P12",
                               "type": "expression",
                               "value": "{{$_POST.scheme_id}}"
                             }

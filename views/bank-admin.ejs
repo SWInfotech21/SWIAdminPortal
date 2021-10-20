@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col">
                 <h1 id="Banks" class="text-center align-self-center">SW Infotech Banks</h1>
-                <button id="btnAdd" class="btn btn-primary" dmx-on:click="modalAddBanks.show(); ddBanks.select(0);">Add Bank </button>
+                <button id="btnAdd" class="btn btn-primary" dmx-on:click="modalAddBanks.show(); ddBanks.select(0); formAddEditBank.reset();">Add Bank </button>
             </div>
         </div>
     </div>
@@ -61,7 +61,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form is="dmx-serverconnect-form" id="formAddEditBank" method="post" action="api/Users/AdminBankAddEdit" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAddEditBank.data.AdminBankAddEdit ? scNotif.success('New Bank Added') : scNotif.success('Bank Details Updated'); scBank.load()" dmx-on:error="scNotif.warning('An error occurred');">
+                <form is="dmx-serverconnect-form" id="formAddEditBank" method="post" action="api/Users/AdminBankAddEdit" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAddEditBank.data.AdminBankAddEdit ? scNotif.success('New Bank Added') : scNotif.success('Bank Details Updated'); formAddEditBank.reset(); scBank.load();" dmx-on:error="scNotif.warning('An error occurred');">
                     <input type="hidden" name="BankId" dmx-bind:value="ddBank.data.id">
                     <div class="mb-3 row">
                         <label for="inp_name" class="col-sm-2 col-form-label">Bank Name</label>
