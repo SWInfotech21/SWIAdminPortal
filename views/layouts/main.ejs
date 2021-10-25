@@ -48,7 +48,7 @@
 
     <meta charset="UTF-8">
     <title>Admin Panel</title>
-
+    <dmx-serverconnect id="scAdminBalance" url="api/Transactions/FetchAdminBalance" dmx-on:unauthorized="browserMain.goto('/login')" dmx-on:forbidden="browserMain.goto('/login')" dmx-on:invalid="browserMain.goto('/login')" dmx-on:error="browserMain.goto('/login')"></dmx-serverconnect>
     <dmx-serverconnect id="scMobRech" url="api/RechargeAPI/RechargeAPI"></dmx-serverconnect>
     <dmx-serverconnect id="scOperator" url="api/operator/OperatorsFetch" noload></dmx-serverconnect>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -122,13 +122,13 @@
                 <div class="grid_6 profile_meta" style="width:auto; height:auto; float:right;">
                     <div class="user_meta" style="margin-top:20px;background-color:#ffffff">
                         <div class="name" stylealign="center"> <a class="tip-left" title=""><span style="font-size:14px; font-weight:bold;"> <span style="color:#FB4E55;">Logged in as Site Admin</span> -
-                                    <span id="ctl00_lblName">Administrator</span></span> </a> <br />
-                            <b>Balance:</b><span id="ctl00_lblBalance">13179860.000</span><br />
-                            <b>AEPS Balance:</b><span id="ctl00_lblAEPSBalance">11043.000</span><br />
-                            <div><a class="dropdown-item" href="#" dmx-on:click="scLogout.load()">
+                                    <span id="ctl00_lblName">{{scAdminBalance.data.query.user_fname}}</span></span> </a> <br />
+                            <b>Balance:</b><span id="ctl00_lblBalance">&emsp;{{scAdminBalance.data.query.balance_amt}}</span><br />
+                            <b>AEPS Balance:</b><span id="ctl00_lblAEPSBalance">&emsp;{{scAdminBalance.data.query.aeps_balance}}</span><br />
+                            <div><a class="button red tip-left small" href="#" dmx-on:click="scLogout.load()" title="Click Here to Logout">
                                     <i class="fa fa-sign-out" aria-hidden="true"></i>
-                                    <span class="sd-fw-500">Log Out</span>
-                                </a> <a onclick="return confirm(&#39;Are you sure? want to logout admin.&#39;);" id="ctl00_lnkLogout" class="button red tip-left small" title="Click Here to Logout" href="javascript:__doPostBack(&#39;ctl00$lnkLogout&#39;,&#39;&#39;)" style="font-weight:bold;">LogOut</a>
+                                    <span class="sd-fw-500" style="font-weight:bold;">Log Out</span>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -146,7 +146,7 @@
                                     <li><a href="#">Dashboard 1</a></li>
                                 </ul>
                             </li>
-                            <li><a class="sf-with-ul" href="javascript:void(0)">NEW<span class="sf-sub-indicator"> »</span></a>
+                            <li><a class="sf-with-ul" href="javascript:void(0)">Master<span class="sf-sub-indicator"> »</span></a>
                                 <ul>
                                     <li><a href="scheme-commision-set">Scheme Commision Set</a></li>
                                     <li><a href="mobile-recharge">Mobile Recharge</a></li>
@@ -160,13 +160,10 @@
                                     <li><a href="bank-admin">Admin Bank</a></li>
                                 </ul>
                             </li>
-                            <li><a class="sf-with-ul" href="javascript:void(0)">Master<span class="sf-sub-indicator"> »</span></a>
+                            <li><a class="sf-with-ul" href="#">Wallet<span class="sf-sub-indicator"> »</span></a>
                                 <ul>
-                                    <li><a href="Operators.aspx">Operators</a></li>
-                                    <li><a href="OperatorsUpdate.aspx">Operator update</a></li>
-                                    <li><a href="Operatorparam.aspx">Operators Param</a></li>
-                                    <li><a href="Rechargeapi.aspx">Transaction api</a></li>
-
+                                    <li><a href="wallet-debit">Wallet Debit</a></li>
+                                    <li><a href="wallet-credits">Wallet Credit</a></li>
                                 </ul>
                             </li>
                             <li><a class="sf-with-ul" href="javascript:void(0)">Setting's<span class="sf-sub-indicator"> »</span></a>

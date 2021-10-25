@@ -30,8 +30,8 @@
           "permissions": [
             "write"
           ],
-          "loginUrl": "login",
-          "forbiddenUrl": "403-forbidden"
+          "loginUrl": "/login",
+          "forbiddenUrl": "/403-forbidden"
         }
       },
       {
@@ -147,7 +147,7 @@
               },
               {
                 "name": "user_type",
-                "type": "text"
+                "type": "number"
               },
               {
                 "name": "md_id",

@@ -117,8 +117,8 @@
           "permissions": [
             "write"
           ],
-          "loginUrl": "login",
-          "forbiddenUrl": "403-forbidden"
+          "loginUrl": "/views/login",
+          "forbiddenUrl": "/403-forbidden"
         }
       },
       {

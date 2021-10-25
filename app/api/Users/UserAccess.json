@@ -1,0 +1,72 @@
+[
+  {
+    "name": "identity",
+    "module": "auth",
+    "action": "identify",
+    "options": {
+      "provider": "securityLogin"
+    },
+    "output": true,
+    "meta": []
+  },
+  {
+    "name": "query",
+    "module": "dbconnector",
+    "action": "single",
+    "options": {
+      "connection": "postgres_gcpServer",
+      "sql": {
+        "type": "SELECT",
+        "columns": [
+          {
+            "table": "m_users",
+            "column": "id",
+            "aggregate": "COUNT"
+          }
+        ],
+        "groupBy": [],
+        "table": {
+          "name": "m_users"
+        },
+        "joins": [],
+        "wheres": {
+          "condition": "AND",
+          "rules": [
+            {
+              "id": "m_users.id",
+              "field": "m_users.id",
+              "type": "double",
+              "operator": "equal",
+              "value": "{{identity}}",
+              "data": {
+                "table": "m_users",
+                "column": "id",
+                "type": "number"
+              },
+              "operation": "="
+            }
+          ],
+          "conditional": null,
+          "valid": true
+        },
+        "query": "SELECT COUNT(id)\nFROM m_users\nWHERE id = :P1 /* {{identity}} */",
+        "params": [
+          {
+            "operator": "equal",
+            "type": "expression",
+            "name": ":P1",
+            "value": "{{identity}}"
+          }
+        ]
+      }
+    },
+    "output": true,
+    "meta": [
+      {
+        "name": "id",
+        "type": "text"
+      }
+    ],
+    "outputType": "object"
+  }
+]

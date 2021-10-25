@@ -15,6 +15,7 @@
 <dmx-serverconnect id="scUserType" url="api/Users/UserType"></dmx-serverconnect>
 <dmx-serverconnect id="scUserSchemPrio" url="api/Scheme/FetchSchPrioUser" dmx-param:user_type="formAddCredit.UserTypeSelf.value" noload></dmx-serverconnect>
 <dmx-data-detail id="ddUserScheme" dmx-bind:data="scUserSchemPrio.data.UserDetails" key="id"></dmx-data-detail>
+<dmx-serverconnect id="scAdminTrans" url="api/Transactions/FetchAllAdminBalTr"></dmx-serverconnect>
 
 <header>
     <div class="container">
@@ -28,12 +29,11 @@
 <div class="container">
     <div class="card">
         <div class="card-header sw-bg-col-primary">
-            <b>Credit Add</b>
+            <b>Wallet Credit Add to MDT/DT/RT</b>
         </div>
 
         <div class="card-body">
-            <form is="dmx-serverconnect-form" id="formAddCredit" method="post" action="" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAddCredit.data ? scNotif.success('New Credit Added') : scNotif.success('Credit Updated');formAddCredit.reset(); scCommision.load({})" dmx-on:error="scNotif.warning('An error occurred'); ">
-
+            <form is="dmx-serverconnect-form" id="formAddCredit" method="post" action="api/Transactions/CreditAdd" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAddCredit.data ? scNotif.success('New Credit Added') : scNotif.success('Credit Updated');formAddCredit.reset(); scCommision.load({});scAdminBalance.load()" dmx-on:error="scNotif.warning('An error occurred'); ">
                 <div class="row">
                     <div class="col-12 col-lg-2 p-2">
                         <label>User Type</label>
@@ -62,7 +62,7 @@
                     </div>
                     <div class="col-12 col-lg-7 p-2">
                         <label>Comments/ Remarks</label>
-                        <input type="text" id="comment" name="comment" class="form-control" placeholder="E.g: 1452">
+                        <input type="text" id="comment" name="comment" class="form-control" placeholder="Add any note (optional)">
                     </div>
                     <div class="col-4 p-0 ms-3">
                         <button id="btn1" class="btn btn-info mt-md-4" type="submit" dmx-bind:disabled="state.executing">Credit<span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span></button>
@@ -70,8 +70,12 @@
                     </div>
                 </div>
             </form>
-
-            <form is="dmx-serverconnect-form" id="formAdminCredit" method="post" action="api/Transactions/CreditToAdmin" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAdminCredit.data ? scNotif.success('New Credit Added') : scNotif.success('Credit Updated');formAdminCredit.reset(); scCommision.load({})" dmx-on:error="scNotif.warning('An error occurred'); ">
+        </div>
+        <div class="card-header sw-bg-col-primary mt-3">
+            <b>Admin Wallet Credit update</b>
+        </div>
+        <div class="card-body">
+            <form is="dmx-serverconnect-form" id="formAdminCredit" method="post" action="api/Transactions/CreditToAdmin" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAdminCredit.data ? scNotif.success('New Credit Added') : scNotif.success('Credit Updated');formAdminCredit.reset(); scCommision.load({});scAdminBalance.load()" dmx-on:error="scNotif.warning('An error occurred'); ">
 
                 <div class="row">
                     <div class="col-12 col-lg-3 p-2">
@@ -98,30 +102,28 @@
         <table class="table table-striped table-bordered table-sm">
             <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Operator Name</th>
-                    <th>Service</th>
-                    <th>Com. Per.</th>
-                    <th>Com. Val.</th>
-                    <th>Charge %</th>
-                    <th>Charge Val.</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                    <th>Sl No.</th>
+                    <th>Tr. Id</th>
+                    <th>Type</th>
+                    <th>User Details</th>
+                    <th>Old Bal.</th>
+                    <th>Amt.</th>
+                    <th>Comm. | Chrg. | Net Amt.</th>
+                    <th>New Val.</th>
+                    <th>Remarks</th>
                 </tr>
             </thead>
-            <tbody is="dmx-repeat" dmx-generator="bs5table" id="tableRepeat1" dmx-bind:repeat="dvCommision.data">
+            <tbody is="dmx-repeat" dmx-generator="bs5table" id="tableRepeat1" dmx-bind:repeat="scAdminTrans.data.GetAllAdminTrans">
                 <tr>
-                    <td dmx-text="commision_id"></td>
-                    <td dmx-text="operator_name"></td>
-                    <td dmx-text="service_name"></td>
-                    <td dmx-text="comm_per+' %'"></td>
-                    <td dmx-text="comm_val"></td>
-                    <td dmx-text="service_charge_per+' %'"></td>
-                    <td dmx-text="service_charge_val"></td>
-                    <td dmx-text="is_active == 1 ? 'Active' : 'Inactive'" dmx-class:table-primary="is_active == 1" dmx-class:table-danger="is_active == 0"></td>
-                    <td>
-                        <a class="dropdown-item" href="#" dmx-on:click="ddCommision.select(commision_id)" data-bs-toggle="modal" data-bs-target="#modalAddCommision"><i class="fas fa-edit" title="Edit Commision"></i></a>
-                    </td>
+                    <td>{{$index+1}}</td>
+                    <td dmx-text="transaction_id"></td>
+                    <td dmx-text="tr_type+' | '+tr_mode "></td>
+                    <td dmx-text="details+' | '+user_number+' | '+user_id"></td>
+                    <td dmx-text="opening_balance"></td>
+                    <td dmx-text="amount"></td>
+                    <td dmx-text="comm_amt+' | '+charge_amt+' | '+net_amt"></td>
+                    <td dmx-text="closing_balance"></td>
+                    <td dmx-text="reason"></td>
                 </tr>
             </tbody>
         </table>

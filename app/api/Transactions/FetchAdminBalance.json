@@ -1,0 +1,123 @@
+[
+  {
+    "name": "",
+    "module": "auth",
+    "action": "restrict",
+    "options": {
+      "provider": "securityLogin",
+      "permissions": [
+        "write"
+      ],
+      "loginUrl": "login",
+      "forbiddenUrl": "403-forbidden"
+    }
+  },
+  {
+    "name": "identity",
+    "module": "auth",
+    "action": "identify",
+    "options": {
+      "provider": "securityLogin"
+    },
+    "output": true,
+    "meta": []
+  },
+  {
+    "name": "query",
+    "module": "dbconnector",
+    "action": "single",
+    "options": {
+      "connection": "postgres_gcpServer",
+      "sql": {
+        "type": "SELECT",
+        "columns": [
+          {
+            "table": "m_users",
+            "column": "balance_amt"
+          },
+          {
+            "table": "m_users",
+            "column": "balance_outstanding"
+          },
+          {
+            "table": "m_users",
+            "column": "aeps_balance"
+          },
+          {
+            "table": "m_users",
+            "column": "user_fname"
+          },
+          {
+            "table": "m_users",
+            "column": "user_mobile"
+          },
+          {
+            "table": "m_users",
+            "column": "user_email"
+          }
+        ],
+        "table": {
+          "name": "m_users"
+        },
+        "joins": [],
+        "wheres": {
+          "condition": "AND",
+          "rules": [
+            {
+              "id": "m_users.id",
+              "field": "m_users.id",
+              "type": "double",
+              "operator": "equal",
+              "value": "{{identity}}",
+              "data": {
+                "table": "m_users",
+                "column": "id",
+                "type": "number"
+              },
+              "operation": "="
+            }
+          ],
+          "conditional": null,
+          "valid": true
+        },
+        "query": "SELECT balance_amt, balance_outstanding, aeps_balance, user_fname, user_mobile, user_email\nFROM m_users\nWHERE id = :P1 /* {{identity}} */",
+        "params": [
+          {
+            "operator": "equal",
+            "type": "expression",
+            "name": ":P1",
+            "value": "{{identity}}"
+          }
+        ]
+      }
+    },
+    "output": true,
+    "meta": [
+      {
+        "name": "balance_amt",
+        "type": "number"
+      },
+      {
+        "name": "balance_outstanding",
+        "type": "number"
+      },
+      {
+        "name": "aeps_balance",
+        "type": "number"
+      },
+      {
+        "name": "user_fname",
+        "type": "text"
+      },
+      {
+        "name": "user_mobile",
+        "type": "text"
+      },
+      {
+        "name": "user_email",
+        "type": "text"
+      }
+    ],
+    "outputType": "object"
+  }
+]

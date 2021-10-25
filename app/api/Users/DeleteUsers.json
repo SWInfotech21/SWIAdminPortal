@@ -15,16 +15,6 @@
   "exec": {
     "steps": [
       {
-        "name": "identity",
-        "module": "auth",
-        "action": "identify",
-        "options": {
-          "provider": "securityLogin"
-        },
-        "output": true,
-        "meta": []
-      },
-      {
         "name": "",
         "module": "auth",
         "action": "restrict",
@@ -33,9 +23,19 @@
           "permissions": [
             "write"
           ],
-          "loginUrl": "login",
-          "forbiddenUrl": "403-forbidden"
+          "loginUrl": "/login",
+          "forbiddenUrl": "/403-forbidden"
         }
+      },
+      {
+        "name": "identity",
+        "module": "auth",
+        "action": "identify",
+        "options": {
+          "provider": "securityLogin"
+        },
+        "output": true,
+        "meta": []
       },
       {
         "name": "DelUsers",

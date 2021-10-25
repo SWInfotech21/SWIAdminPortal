@@ -10,7 +10,9 @@
       "user": "postgres",
       "password": "Harshit@Ariful21",
       "database": "postgres"
-    }
+    },
+    "meta": {}
   },
-  "fileName": "postgres_gcpServer.json"
+  "fileName": "postgres_gcpServer.json",
+  "serverType": "node"
 }

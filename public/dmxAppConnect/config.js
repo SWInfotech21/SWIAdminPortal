@@ -1211,6 +1211,67 @@ dmx.config({
         }
       ],
       "outputType": "array"
+    },
+    "tableRepeat1": {
+      "meta": [
+        {
+          "name": "user_id",
+          "type": "number"
+        },
+        {
+          "name": "old_balance",
+          "type": "number"
+        },
+        {
+          "name": "amount",
+          "type": "number"
+        },
+        {
+          "name": "new_balance",
+          "type": "number"
+        },
+        {
+          "name": "transaction_type",
+          "type": "text"
+        },
+        {
+          "name": "tr_date",
+          "type": "text"
+        },
+        {
+          "name": "ip_address",
+          "type": "text"
+        },
+        {
+          "name": "crdr_type",
+          "type": "text"
+        },
+        {
+          "name": "transaction_id",
+          "type": "text"
+        },
+        {
+          "name": "remarks",
+          "type": "text"
+        },
+        {
+          "name": "created_by",
+          "type": "number"
+        },
+        {
+          "name": "user_fname",
+          "type": "text"
+        },
+        {
+          "name": "user_mobile",
+          "type": "text"
+        },
+        {
+          "name": "user_type",
+          "type": "number"
+        }
+      ],
+      "outputType": "array"
     }
   }
 });

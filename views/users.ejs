@@ -75,7 +75,8 @@
                     <th>Email</th>
                     <th>Mobile</th>
                     <th>TPIN</th>
-                    <th>User Type</th>
+                    <th>Wallet Bal.</th>
+                    <th>Type</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
@@ -90,6 +91,7 @@
                     <td dmx-text="user_email"></td>
                     <td dmx-text="user_mobile"></td>
                     <td dmx-text="user_tpin"></td>
+                    <td dmx-text="balance_amt"></td>
                     <td dmx-text="user_type == 1 ? 'MDT' : user_type == 2 ? 'DT' : user_type == 3 ? 'RT' : 'None'" dmx-class:table-primary="user_type == 1" dmx-class:table-success="user_type == 2" dmx-class:table-warning="user_type == 3" dmx-class:table-danger="user_type == 4"></td>
                     <td dmx-text="u_status != 1 ?'Inactive' : 'Active'" dmx-class:table-primary="u_status == 1" dmx-class:table-warning="u_status != 1"></td>
                     <td>

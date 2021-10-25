@@ -50,5 +50,9 @@
   "wallet-credits.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "wallet-debit.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }

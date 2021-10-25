@@ -73,6 +73,121 @@
       "m_commission": {
         "db": {
           "schema": "public"
+        },
+        "columns": {
+          "id": {
+            "db": {
+              "type": "increments",
+              "default": "",
+              "primary": true,
+              "nullable": false
+            }
+          },
+          "operator_id": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "user_id": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "api_id": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "scheme_id": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "comm_per": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "comm_val": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "service_charge_per": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "service_charge_val": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "is_active": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "created_by": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "created_on": {
+            "db": {
+              "type": "timestamp",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "updated_by": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "updated_on": {
+            "db": {
+              "type": "timestamp",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "deleted_by": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "deleted_on": {
+            "db": {
+              "type": "timestamp",
+              "primary": false,
+              "nullable": true
+            }
+          }
         }
       },
       "m_api": {
@@ -98,6 +213,357 @@
       "t_op_api": {
         "db": {
           "schema": "public"
+        }
+      },
+      "tt_recharge_trans": {
+        "db": {
+          "schema": "public"
+        },
+        "columns": {
+          "id": {
+            "db": {
+              "type": "increments",
+              "default": "",
+              "primary": true,
+              "nullable": false
+            }
+          },
+          "op_id": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "service_id": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "api_id": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "user_id": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "user_number": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "details": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "opening_balance": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "amount": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "comm_per": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "comm_val": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "comm_amt": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "other_charge": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "charge_per": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "charge_amt": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "net_amt": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "closing_balance": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "tr_mode": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "tr_type": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "status": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "tr_id": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "reason": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "api_logs": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "is_processed": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "operator_ref": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "api_ref": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "revert_trans": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "ip_address": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "api_response_id": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "process_mode": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "live": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "tr_date": {
+            "db": {
+              "type": "timestamp",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "updated_on": {
+            "db": {
+              "type": "timestamp",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "transaction_by": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "extra1": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "extra2": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "extra3": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "dtcommper": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "dtcommval": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "dtcommamt": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "dtchargeper": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "dtchargeval": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "dtchargeamt": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "mdtcommper": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "mdtcommval": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "mdtcommamt": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "mdtchargeper": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "mdtchargeval": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "mdtchargeamt": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          }
         }
       },
       "m_operator": {
@@ -279,444 +745,16 @@
       "t_bank_withdrawal": {
         "db": {
           "schema": "public"
-        },
-        "columns": {
-          "id": {
-            "db": {
-              "type": "increments",
-              "default": "",
-              "primary": true,
-              "nullable": false
-            }
-          },
-          "user_id": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "user_details": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "opening_balance": {
-            "db": {
-              "type": "decimal",
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "amount": {
-            "db": {
-              "type": "decimal",
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "comm_amt": {
-            "db": {
-              "type": "decimal",
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "charge_amt": {
-            "db": {
-              "type": "decimal",
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "closing_balance": {
-            "db": {
-              "type": "decimal",
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "paymenttype": {
-            "db": {
-              "type": "string",
-              "maxLength": 50,
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "bank_id": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "ac_holdername": {
-            "db": {
-              "type": "string",
-              "maxLength": 150,
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "account_no": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "ifsc_code": {
-            "db": {
-              "type": "string",
-              "maxLength": 50,
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "created_on": {
-            "db": {
-              "type": "timestamp",
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "status": {
-            "db": {
-              "type": "string",
-              "maxLength": 50,
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "replydate": {
-            "db": {
-              "type": "timestamp",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "remarks": {
-            "db": {
-              "type": "string",
-              "maxLength": 150,
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "withdrawal_mode": {
-            "db": {
-              "type": "string",
-              "maxLength": 50,
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "transaction_mode": {
-            "db": {
-              "type": "string",
-              "maxLength": 50,
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "ref_id": {
-            "db": {
-              "type": "bigInteger",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "rrn": {
-            "db": {
-              "type": "string",
-              "maxLength": 100,
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "apistatus": {
-            "db": {
-              "type": "string",
-              "maxLength": 100,
-              "primary": false,
-              "nullable": true
-            }
-          }
         }
       },
-      "users": {
+      "tt_client_req_log": {
         "db": {
           "schema": "public"
         }
       },
-      "tt_recharge_trans": {
+      "tt_balance": {
         "db": {
           "schema": "public"
-        },
-        "columns": {
-          "id": {
-            "db": {
-              "type": "increments",
-              "default": "",
-              "primary": true,
-              "nullable": false
-            }
-          },
-          "op_id": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "service_id": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "api_id": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "user_id": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "user_number": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "details": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "opening_balance": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "amount": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "comm_per": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "comm_val": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "comm_amt": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "other_charge": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "charge_per": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "charge_amt": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "net_amt": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "closing_balance": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "tr_mode": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "tr_type": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "status": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "tr_id": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "reason": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "api_logs": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "is_processed": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "operator_ref": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "api_ref": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "revert_trans": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "ip_address": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "api_response_id": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "process_mode": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "live": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "tr_date": {
-            "db": {
-              "type": "timestamp",
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "updated_on": {
-            "db": {
-              "type": "timestamp",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "transaction_by": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "extra1": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "extra2": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "extra3": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          }
         }
       },
       "m_users": {
@@ -855,14 +893,14 @@
           },
           "balance_amt": {
             "db": {
-              "type": "float",
+              "type": "string",
               "primary": false,
               "nullable": true
             }
           },
           "balance_outstanding": {
             "db": {
-              "type": "float",
+              "type": "string",
               "primary": false,
               "nullable": true
             }
@@ -876,7 +914,7 @@
           },
           "aeps_balance": {
             "db": {
-              "type": "float",
+              "type": "string",
               "primary": false,
               "nullable": true
             }
@@ -923,138 +961,6 @@
               "nullable": true
             }
           }
-        }
-      },
-      "tt_balance": {
-        "db": {
-          "schema": "public"
-        },
-        "columns": {
-          "id": {
-            "db": {
-              "type": "increments",
-              "default": "",
-              "primary": true,
-              "nullable": false
-            }
-          },
-          "user_id": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "old_balance": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "amount": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "new_balance": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "transaction_type": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "tr_date": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "ip_address": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "crdr_type": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "pay_ref_id": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "remarks": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "created_by": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "created_on": {
-            "db": {
-              "type": "timestamp",
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "updated_by": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "updated_on": {
-            "db": {
-              "type": "timestamp",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "deleted_by": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "deleted_on": {
-            "db": {
-              "type": "timestamp",
-              "primary": false,
-              "nullable": true
-            }
-          }
-        }
-      },
-      "tt_client_req_log": {
-        "db": {
-          "schema": "public"
         }
       }
     },

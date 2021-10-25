@@ -143,11 +143,11 @@
           },
           {
             "name": "balance_amt",
-            "type": "number"
+            "type": "text"
           },
           {
             "name": "balance_outstanding",
-            "type": "number"
+            "type": "text"
           }
         ],
         "outputType": "object"
@@ -251,559 +251,680 @@
                 "outputType": "object"
               },
               {
-                "name": "WalletCrRechTrans",
-                "module": "dbupdater",
-                "action": "insert",
+                "name": "",
+                "module": "core",
+                "action": "condition",
                 "options": {
-                  "connection": "postgres_gcpServer",
-                  "sql": {
-                    "type": "insert",
-                    "values": [
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "op_id",
-                        "type": "number",
-                        "value": "{{GetOperatorId.op_id}}"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "service_id",
-                        "type": "number",
-                        "value": "{{GetOperatorId.service_id}}"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "api_id",
-                        "type": "number",
-                        "value": "0"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "user_id",
-                        "type": "number",
-                        "value": "{{identity}}"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "user_number",
-                        "type": "text",
-                        "value": "{{GetAdminDetails.user_mobile}}"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "details",
-                        "type": "text",
-                        "value": "{{'Admin:- '+GetAdminDetails.user_fname}}"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "opening_balance",
-                        "type": "number",
-                        "value": "{{GetAdminDetails.balance_amt}}"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "amount",
-                        "type": "number",
-                        "value": "{{$_POST.admin_credit_amount}}"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "comm_per",
-                        "type": "number",
-                        "value": "0"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "comm_val",
-                        "type": "number",
-                        "value": "0"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "comm_amt",
-                        "type": "number",
-                        "value": "0"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "other_charge",
-                        "type": "number",
-                        "value": "0"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "charge_per",
-                        "type": "number",
-                        "value": "0"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "charge_amt",
-                        "type": "number",
-                        "value": "0"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "net_amt",
-                        "type": "number",
-                        "value": "{{$_POST.admin_credit_amount}}"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "closing_balance",
-                        "type": "number",
-                        "value": "0"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "tr_mode",
-                        "type": "text",
-                        "value": "{{'Web'}}"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "tr_type",
-                        "type": "text",
-                        "value": "{{'Virtual'}}"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "status",
-                        "type": "text",
-                        "value": "{{'Success'}}"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "tr_id",
-                        "type": "text",
-                        "value": "{{TransId}}"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "reason",
-                        "type": "text",
-                        "value": "{{'Admin wallet balance update'}}"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "api_logs",
-                        "type": "text",
-                        "value": "0"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "is_processed",
-                        "type": "number",
-                        "value": "0"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "operator_ref",
-                        "type": "text",
-                        "value": "{{'NA'}}"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "api_ref",
-                        "type": "number",
-                        "value": "0"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "revert_trans",
-                        "type": "number",
-                        "value": "0"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "ip_address",
-                        "type": "text",
-                        "value": "0"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "api_response_id",
-                        "type": "number",
-                        "value": "0"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "process_mode",
-                        "type": "text",
-                        "value": "{{'Cash'}}"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "live",
-                        "type": "text",
-                        "value": "{{'Live'}}"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "tr_date",
-                        "type": "datetime",
-                        "value": "{{NOW}}"
-                      },
-                      {
-                        "table": "tt_recharge_trans",
-                        "column": "transaction_by",
-                        "type": "number",
-                        "value": "{{identity}}"
-                      }
-                    ],
-                    "table": "tt_recharge_trans",
-                    "returning": "id",
-                    "query": "INSERT INTO tt_recharge_trans\n(op_id, service_id, api_id, user_id, user_number, details, opening_balance, amount, comm_per, comm_val, comm_amt, other_charge, charge_per, charge_amt, net_amt, closing_balance, tr_mode, tr_type, status, tr_id, reason, api_logs, is_processed, operator_ref, api_ref, revert_trans, ip_address, api_response_id, process_mode, live, tr_date, transaction_by) VALUES (:P1 /* {{GetOperatorId.op_id}} */, :P2 /* {{GetOperatorId.service_id}} */, '0', :P3 /* {{identity}} */, :P4 /* {{GetAdminDetails.user_mobile}} */, :P5 /* {{'Admin:- '+GetAdminDetails.user_fname}} */, :P6 /* {{GetAdminDetails.balance_amt}} */, :P7 /* {{$_POST.admin_credit_amount}} */, '0', '0', '0', '0', '0', '0', :P8 /* {{$_POST.admin_credit_amount}} */, '0', :P9 /* {{'Web'}} */, :P10 /* {{'Virtual'}} */, :P11 /* {{'Success'}} */, :P12 /* {{TransId}} */, :P13 /* {{'Admin wallet balance update'}} */, '0', '0', :P14 /* {{'NA'}} */, '0', '0', '0', '0', :P15 /* {{'Cash'}} */, :P16 /* {{'Live'}} */, :P17 /* {{NOW}} */, :P18 /* {{identity}} */)",
-                    "params": [
-                      {
-                        "name": ":P1",
-                        "type": "expression",
-                        "value": "{{GetOperatorId.op_id}}"
-                      },
-                      {
-                        "name": ":P2",
-                        "type": "expression",
-                        "value": "{{GetOperatorId.service_id}}"
-                      },
-                      {
-                        "name": ":P3",
-                        "type": "expression",
-                        "value": "{{identity}}"
-                      },
-                      {
-                        "name": ":P4",
-                        "type": "expression",
-                        "value": "{{GetAdminDetails.user_mobile}}"
-                      },
-                      {
-                        "name": ":P5",
-                        "type": "expression",
-                        "value": "{{'Admin:- '+GetAdminDetails.user_fname}}"
-                      },
-                      {
-                        "name": ":P6",
-                        "type": "expression",
-                        "value": "{{GetAdminDetails.balance_amt}}"
-                      },
-                      {
-                        "name": ":P7",
-                        "type": "expression",
-                        "value": "{{$_POST.admin_credit_amount}}"
-                      },
-                      {
-                        "name": ":P8",
-                        "type": "expression",
-                        "value": "{{$_POST.admin_credit_amount}}"
-                      },
-                      {
-                        "name": ":P9",
-                        "type": "expression",
-                        "value": "{{'Web'}}"
-                      },
-                      {
-                        "name": ":P10",
-                        "type": "expression",
-                        "value": "{{'Virtual'}}"
-                      },
-                      {
-                        "name": ":P11",
-                        "type": "expression",
-                        "value": "{{'Success'}}"
-                      },
-                      {
-                        "name": ":P12",
-                        "type": "expression",
-                        "value": "{{TransId}}"
-                      },
-                      {
-                        "name": ":P13",
-                        "type": "expression",
-                        "value": "{{'Admin wallet balance update'}}"
-                      },
-                      {
-                        "name": ":P14",
-                        "type": "expression",
-                        "value": "{{'NA'}}"
-                      },
-                      {
-                        "name": ":P15",
-                        "type": "expression",
-                        "value": "{{'Cash'}}"
-                      },
-                      {
-                        "name": ":P16",
-                        "type": "expression",
-                        "value": "{{'Live'}}"
-                      },
-                      {
-                        "name": ":P17",
-                        "type": "expression",
-                        "value": "{{NOW}}"
-                      },
-                      {
-                        "name": ":P18",
-                        "type": "expression",
-                        "value": "{{identity}}"
-                      }
-                    ]
-                  }
-                },
-                "meta": [
-                  {
-                    "name": "identity",
-                    "type": "text"
-                  },
-                  {
-                    "name": "affected",
-                    "type": "number"
-                  }
-                ],
-                "output": true
-              },
-              {
-                "name": "WalletCrBalance",
-                "module": "dbupdater",
-                "action": "insert",
-                "options": {
-                  "connection": "postgres_gcpServer",
-                  "sql": {
-                    "type": "insert",
-                    "values": [
-                      {
-                        "table": "tt_balance",
-                        "column": "user_id",
-                        "type": "number",
-                        "value": "{{identity}}"
-                      },
-                      {
-                        "table": "tt_balance",
-                        "column": "old_balance",
-                        "type": "number",
-                        "value": "{{GetAdminDetails.balance_amt}}"
-                      },
-                      {
-                        "table": "tt_balance",
-                        "column": "amount",
-                        "type": "number",
-                        "value": "{{$_POST.admin_credit_amount}}"
-                      },
-                      {
-                        "table": "tt_balance",
-                        "column": "new_balance",
-                        "type": "number",
-                        "value": "{{GetAdminDetails.balance_amt + $_POST.admin_credit_amount}}"
-                      },
-                      {
-                        "table": "tt_balance",
-                        "column": "transaction_type",
-                        "type": "text",
-                        "value": "{{'Wallet Credit'}}"
-                      },
-                      {
-                        "table": "tt_balance",
-                        "column": "tr_date",
-                        "type": "text",
-                        "value": "{{NOW}}"
-                      },
-                      {
-                        "table": "tt_balance",
-                        "column": "ip_address",
-                        "type": "text",
-                        "value": "{{$_SERVER.REMOTE_ADDR}}"
-                      },
-                      {
-                        "table": "tt_balance",
-                        "column": "crdr_type",
-                        "type": "text",
-                        "value": "{{'Credit'}}"
-                      },
-                      {
-                        "table": "tt_balance",
-                        "column": "pay_ref_id",
-                        "type": "text",
-                        "value": "{{WalletCrRechTrans.identity}}"
-                      },
-                      {
-                        "table": "tt_balance",
-                        "column": "remarks",
-                        "type": "text",
-                        "value": "{{'Number: '+GetAdminDetails.user_mobile+' | Amount: '+$_POST.admin_credit_amount+' | Wallet Credit | Ref. Id: '+WalletCrRechTrans.identity+' | Comm Per: 00.00 | Comm Val: 00.00 | Charge Per: 00.00 | Charge Val: 00.00 | GST: 00.00 | TDS: 00.00'}}"
-                      },
-                      {
-                        "table": "tt_balance",
-                        "column": "created_by",
-                        "type": "number",
-                        "value": "{{identity}}"
-                      },
-                      {
-                        "table": "tt_balance",
-                        "column": "created_on",
-                        "type": "datetime",
-                        "value": "{{NOW}}"
-                      }
-                    ],
-                    "table": "tt_balance",
-                    "returning": "id",
-                    "query": "INSERT INTO tt_balance\n(user_id, old_balance, amount, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on) VALUES (:P1 /* {{identity}} */, :P2 /* {{GetAdminDetails.balance_amt}} */, :P3 /* {{$_POST.admin_credit_amount}} */, :P4 /* {{GetAdminDetails.balance_amt + $_POST.admin_credit_amount}} */, :P5 /* {{'Wallet Credit'}} */, :P6 /* {{NOW}} */, :P7 /* {{$_SERVER.REMOTE_ADDR}} */, :P8 /* {{'Credit'}} */, :P9 /* {{WalletCrRechTrans.identity}} */, :P10 /* {{'Number: '+GetAdminDetails.user_mobile+' | Amount: '+$_POST.admin_credit_amount+' | Wallet Credit | Ref. Id: '+WalletCrRechTrans.identity+' | Comm Per: 00.00 | Comm Val: 00.00 | Charge Per: 00.00 | Charge Val: 00.00 | GST: 00.00 | TDS: 00.00'}} */, :P11 /* {{identity}} */, :P12 /* {{NOW}} */)",
-                    "params": [
-                      {
-                        "name": ":P1",
-                        "type": "expression",
-                        "value": "{{identity}}"
-                      },
-                      {
-                        "name": ":P2",
-                        "type": "expression",
-                        "value": "{{GetAdminDetails.balance_amt}}"
-                      },
-                      {
-                        "name": ":P3",
-                        "type": "expression",
-                        "value": "{{$_POST.admin_credit_amount}}"
-                      },
-                      {
-                        "name": ":P4",
-                        "type": "expression",
-                        "value": "{{GetAdminDetails.balance_amt + $_POST.admin_credit_amount}}"
-                      },
-                      {
-                        "name": ":P5",
-                        "type": "expression",
-                        "value": "{{'Wallet Credit'}}"
-                      },
-                      {
-                        "name": ":P6",
-                        "type": "expression",
-                        "value": "{{NOW}}"
-                      },
-                      {
-                        "name": ":P7",
-                        "type": "expression",
-                        "value": "{{$_SERVER.REMOTE_ADDR}}"
-                      },
-                      {
-                        "name": ":P8",
-                        "type": "expression",
-                        "value": "{{'Credit'}}"
-                      },
-                      {
-                        "name": ":P9",
-                        "type": "expression",
-                        "value": "{{WalletCrRechTrans.identity}}"
-                      },
-                      {
-                        "name": ":P10",
-                        "type": "expression",
-                        "value": "{{'Number: '+GetAdminDetails.user_mobile+' | Amount: '+$_POST.admin_credit_amount+' | Wallet Credit | Ref. Id: '+WalletCrRechTrans.identity+' | Comm Per: 00.00 | Comm Val: 00.00 | Charge Per: 00.00 | Charge Val: 00.00 | GST: 00.00 | TDS: 00.00'}}"
-                      },
-                      {
-                        "name": ":P11",
-                        "type": "expression",
-                        "value": "{{identity}}"
-                      },
-                      {
-                        "name": ":P12",
-                        "type": "expression",
-                        "value": "{{NOW}}"
-                      }
-                    ]
-                  }
-                },
-                "meta": [
-                  {
-                    "name": "identity",
-                    "type": "text"
-                  },
-                  {
-                    "name": "affected",
-                    "type": "number"
-                  }
-                ],
-                "disabled": true
-              },
-              {
-                "name": "UserBalanceAmt",
-                "module": "dbupdater",
-                "action": "update",
-                "options": {
-                  "connection": "postgres_gcpServer",
-                  "sql": {
-                    "type": "update",
-                    "values": [
-                      {
-                        "table": "m_users",
-                        "column": "balance_amt",
-                        "type": "number",
-                        "value": "{{GetAdminDetails.balance_amt + $_POST.admin_credit_amount}}"
-                      },
-                      {
-                        "table": "m_users",
-                        "column": "updated_by",
-                        "type": "text",
-                        "value": "{{identity}}"
-                      },
-                      {
-                        "table": "m_users",
-                        "column": "updated_on",
-                        "type": "datetime",
-                        "value": "{{NOW}}"
-                      }
-                    ],
-                    "table": "m_users",
-                    "wheres": {
-                      "condition": "AND",
-                      "rules": [
-                        {
-                          "id": "id",
-                          "field": "id",
-                          "type": "double",
-                          "operator": "equal",
-                          "value": "{{identity}}",
-                          "data": {
-                            "column": "id"
+                  "if": "{{GetOperatorId}}",
+                  "then": {
+                    "steps": [
+                      {
+                        "name": "ClosingBalWallet",
+                        "module": "core",
+                        "action": "setvalue",
+                        "options": {
+                          "value": "{{GetAdminDetails.balance_amt.toNumber() +$_POST.admin_credit_amount.toNumber()}}"
+                        },
+                        "output": true
+                      },
+                      {
+                        "name": "WalletCrRechTrans",
+                        "module": "dbupdater",
+                        "action": "insert",
+                        "options": {
+                          "connection": "postgres_gcpServer",
+                          "sql": {
+                            "type": "insert",
+                            "values": [
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "op_id",
+                                "type": "number",
+                                "value": "{{GetOperatorId.op_id}}"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "service_id",
+                                "type": "number",
+                                "value": "{{GetOperatorId.service_id}}"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "api_id",
+                                "type": "number",
+                                "value": "0"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "user_id",
+                                "type": "number",
+                                "value": "{{identity}}"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "user_number",
+                                "type": "text",
+                                "value": "{{GetAdminDetails.user_mobile}}"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "details",
+                                "type": "text",
+                                "value": "{{GetAdminDetails.user_fname}}"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "opening_balance",
+                                "type": "text",
+                                "value": "{{GetAdminDetails.balance_amt}}"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "amount",
+                                "type": "text",
+                                "value": "{{$_POST.admin_credit_amount}}"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "comm_per",
+                                "type": "text",
+                                "value": "0"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "comm_val",
+                                "type": "text",
+                                "value": "0"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "comm_amt",
+                                "type": "text",
+                                "value": "0"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "other_charge",
+                                "type": "text",
+                                "value": "0"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "charge_per",
+                                "type": "text",
+                                "value": "0"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "charge_amt",
+                                "type": "text",
+                                "value": "0"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "net_amt",
+                                "type": "text",
+                                "value": "{{$_POST.admin_credit_amount}}"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "closing_balance",
+                                "type": "text",
+                                "value": "{{ClosingBalWallet}}"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "tr_mode",
+                                "type": "text",
+                                "value": "{{'Web'}}"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "tr_type",
+                                "type": "text",
+                                "value": "{{'Virtual'}}"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "status",
+                                "type": "text",
+                                "value": "{{'Success'}}"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "tr_id",
+                                "type": "text",
+                                "value": "{{TransId}}"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "reason",
+                                "type": "text",
+                                "value": "{{'Admin Wallet Balance Updated'}}"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "api_logs",
+                                "type": "text",
+                                "value": "0"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "is_processed",
+                                "type": "text",
+                                "value": "0"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "operator_ref",
+                                "type": "text",
+                                "value": "0"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "api_ref",
+                                "type": "text",
+                                "value": "0"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "revert_trans",
+                                "type": "text",
+                                "value": "0"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "ip_address",
+                                "type": "text",
+                                "value": "{{$_SERVER.REMOTE_ADDR}}"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "api_response_id",
+                                "type": "number",
+                                "value": "0"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "process_mode",
+                                "type": "text",
+                                "value": "{{'P2P'}}"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "live",
+                                "type": "text",
+                                "value": "{{'Live'}}"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "tr_date",
+                                "type": "datetime",
+                                "value": "{{NOW}}"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "transaction_by",
+                                "type": "number",
+                                "value": "{{identity}}"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "dtcommper",
+                                "type": "text",
+                                "value": "0"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "dtcommval",
+                                "type": "text",
+                                "value": "0"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "dtcommamt",
+                                "type": "text",
+                                "value": "0"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "dtchargeper",
+                                "type": "text",
+                                "value": "0"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "dtchargeval",
+                                "type": "text",
+                                "value": "0"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "dtchargeamt",
+                                "type": "text",
+                                "value": "0"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "mdtcommper",
+                                "type": "text",
+                                "value": "0"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "mdtcommval",
+                                "type": "text",
+                                "value": "0"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "mdtcommamt",
+                                "type": "text",
+                                "value": "0"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "mdtchargeper",
+                                "type": "text",
+                                "value": "0"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "mdtchargeval",
+                                "type": "text",
+                                "value": "0"
+                              },
+                              {
+                                "table": "tt_recharge_trans",
+                                "column": "mdtchargeamt",
+                                "type": "text",
+                                "value": "0"
+                              }
+                            ],
+                            "table": "tt_recharge_trans",
+                            "returning": "id",
+                            "query": "INSERT INTO tt_recharge_trans\n(op_id, service_id, api_id, user_id, user_number, details, opening_balance, amount, comm_per, comm_val, comm_amt, other_charge, charge_per, charge_amt, net_amt, closing_balance, tr_mode, tr_type, status, tr_id, reason, api_logs, is_processed, operator_ref, api_ref, revert_trans, ip_address, api_response_id, process_mode, live, tr_date, transaction_by, dtcommper, dtcommval, dtcommamt, dtchargeper, dtchargeval, dtchargeamt, mdtcommper, mdtcommval, mdtcommamt, mdtchargeper, mdtchargeval, mdtchargeamt) VALUES (:P1 /* {{GetOperatorId.op_id}} */, :P2 /* {{GetOperatorId.service_id}} */, '0', :P3 /* {{identity}} */, :P4 /* {{GetAdminDetails.user_mobile}} */, :P5 /* {{GetAdminDetails.user_fname}} */, :P6 /* {{GetAdminDetails.balance_amt}} */, :P7 /* {{$_POST.admin_credit_amount}} */, '0', '0', '0', '0', '0', '0', :P8 /* {{$_POST.admin_credit_amount}} */, :P9 /* {{ClosingBalWallet}} */, :P10 /* {{'Web'}} */, :P11 /* {{'Virtual'}} */, :P12 /* {{'Success'}} */, :P13 /* {{TransId}} */, :P14 /* {{'Admin Wallet Balance Updated'}} */, '0', '0', '0', '0', '0', :P15 /* {{$_SERVER.REMOTE_ADDR}} */, '0', :P16 /* {{'P2P'}} */, :P17 /* {{'Live'}} */, :P18 /* {{NOW}} */, :P19 /* {{identity}} */, '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0')",
+                            "params": [
+                              {
+                                "name": ":P1",
+                                "type": "expression",
+                                "value": "{{GetOperatorId.op_id}}"
+                              },
+                              {
+                                "name": ":P2",
+                                "type": "expression",
+                                "value": "{{GetOperatorId.service_id}}"
+                              },
+                              {
+                                "name": ":P3",
+                                "type": "expression",
+                                "value": "{{identity}}"
+                              },
+                              {
+                                "name": ":P4",
+                                "type": "expression",
+                                "value": "{{GetAdminDetails.user_mobile}}"
+                              },
+                              {
+                                "name": ":P5",
+                                "type": "expression",
+                                "value": "{{GetAdminDetails.user_fname}}"
+                              },
+                              {
+                                "name": ":P6",
+                                "type": "expression",
+                                "value": "{{GetAdminDetails.balance_amt}}"
+                              },
+                              {
+                                "name": ":P7",
+                                "type": "expression",
+                                "value": "{{$_POST.admin_credit_amount}}"
+                              },
+                              {
+                                "name": ":P8",
+                                "type": "expression",
+                                "value": "{{$_POST.admin_credit_amount}}"
+                              },
+                              {
+                                "name": ":P9",
+                                "type": "expression",
+                                "value": "{{ClosingBalWallet}}"
+                              },
+                              {
+                                "name": ":P10",
+                                "type": "expression",
+                                "value": "{{'Web'}}"
+                              },
+                              {
+                                "name": ":P11",
+                                "type": "expression",
+                                "value": "{{'Virtual'}}"
+                              },
+                              {
+                                "name": ":P12",
+                                "type": "expression",
+                                "value": "{{'Success'}}"
+                              },
+                              {
+                                "name": ":P13",
+                                "type": "expression",
+                                "value": "{{TransId}}"
+                              },
+                              {
+                                "name": ":P14",
+                                "type": "expression",
+                                "value": "{{'Admin Wallet Balance Updated'}}"
+                              },
+                              {
+                                "name": ":P15",
+                                "type": "expression",
+                                "value": "{{$_SERVER.REMOTE_ADDR}}"
+                              },
+                              {
+                                "name": ":P16",
+                                "type": "expression",
+                                "value": "{{'P2P'}}"
+                              },
+                              {
+                                "name": ":P17",
+                                "type": "expression",
+                                "value": "{{'Live'}}"
+                              },
+                              {
+                                "name": ":P18",
+                                "type": "expression",
+                                "value": "{{NOW}}"
+                              },
+                              {
+                                "name": ":P19",
+                                "type": "expression",
+                                "value": "{{identity}}"
+                              }
+                            ]
+                          }
+                        },
+                        "meta": [
+                          {
+                            "name": "identity",
+                            "type": "text"
                           },
-                          "operation": "="
-                        }
-                      ],
-                      "conditional": null,
-                      "valid": true
-                    },
-                    "query": "UPDATE m_users\nSET balance_amt = :P1 /* {{GetAdminDetails.balance_amt + $_POST.admin_credit_amount}} */, updated_by = :P2 /* {{identity}} */, updated_on = :P3 /* {{NOW}} */\nWHERE id = :P4 /* {{identity}} */",
-                    "params": [
-                      {
-                        "name": ":P1",
-                        "type": "expression",
-                        "value": "{{GetAdminDetails.balance_amt + $_POST.admin_credit_amount}}"
+                          {
+                            "name": "affected",
+                            "type": "number"
+                          }
+                        ],
+                        "output": true
                       },
                       {
-                        "name": ":P2",
-                        "type": "expression",
-                        "value": "{{identity}}"
+                        "name": "UserBalanceAmt",
+                        "module": "dbupdater",
+                        "action": "update",
+                        "options": {
+                          "connection": "postgres_gcpServer",
+                          "sql": {
+                            "type": "update",
+                            "values": [
+                              {
+                                "table": "m_users",
+                                "column": "balance_amt",
+                                "type": "number",
+                                "value": "{{ClosingBalWallet}}"
+                              },
+                              {
+                                "table": "m_users",
+                                "column": "updated_by",
+                                "type": "text",
+                                "value": "{{identity}}"
+                              },
+                              {
+                                "table": "m_users",
+                                "column": "updated_on",
+                                "type": "datetime",
+                                "value": "{{NOW}}"
+                              }
+                            ],
+                            "table": "m_users",
+                            "wheres": {
+                              "condition": "AND",
+                              "rules": [
+                                {
+                                  "id": "id",
+                                  "field": "id",
+                                  "type": "double",
+                                  "operator": "equal",
+                                  "value": "{{identity}}",
+                                  "data": {
+                                    "column": "id"
+                                  },
+                                  "operation": "="
+                                }
+                              ],
+                              "conditional": null,
+                              "valid": true
+                            },
+                            "query": "UPDATE m_users\nSET balance_amt = :P1 /* {{ClosingBalWallet}} */, updated_by = :P2 /* {{identity}} */, updated_on = :P3 /* {{NOW}} */\nWHERE id = :P4 /* {{identity}} */",
+                            "params": [
+                              {
+                                "name": ":P1",
+                                "type": "expression",
+                                "value": "{{ClosingBalWallet}}"
+                              },
+                              {
+                                "name": ":P2",
+                                "type": "expression",
+                                "value": "{{identity}}"
+                              },
+                              {
+                                "name": ":P3",
+                                "type": "expression",
+                                "value": "{{NOW}}"
+                              },
+                              {
+                                "operator": "equal",
+                                "type": "expression",
+                                "name": ":P4",
+                                "value": "{{identity}}"
+                              }
+                            ]
+                          }
+                        },
+                        "meta": [
+                          {
+                            "name": "affected",
+                            "type": "number"
+                          }
+                        ],
+                        "output": true
                       },
                       {
-                        "name": ":P3",
-                        "type": "expression",
-                        "value": "{{NOW}}"
-                      },
-                      {
-                        "operator": "equal",
-                        "type": "expression",
-                        "name": ":P4",
-                        "value": "{{identity}}"
+                        "name": "WalletCrBalance",
+                        "module": "dbupdater",
+                        "action": "insert",
+                        "options": {
+                          "connection": "postgres_gcpServer",
+                          "sql": {
+                            "type": "insert",
+                            "values": [
+                              {
+                                "table": "tt_balance",
+                                "column": "user_id",
+                                "type": "number",
+                                "value": "{{identity}}"
+                              },
+                              {
+                                "table": "tt_balance",
+                                "column": "old_balance",
+                                "type": "number",
+                                "value": "{{GetAdminDetails.balance_amt}}"
+                              },
+                              {
+                                "table": "tt_balance",
+                                "column": "amount",
+                                "type": "number",
+                                "value": "{{$_POST.admin_credit_amount}}"
+                              },
+                              {
+                                "table": "tt_balance",
+                                "column": "new_balance",
+                                "type": "number",
+                                "value": "{{ClosingBalWallet}}"
+                              },
+                              {
+                                "table": "tt_balance",
+                                "column": "transaction_type",
+                                "type": "text",
+                                "value": "{{'Wallet Credit'}}"
+                              },
+                              {
+                                "table": "tt_balance",
+                                "column": "tr_date",
+                                "type": "text",
+                                "value": "{{NOW}}"
+                              },
+                              {
+                                "table": "tt_balance",
+                                "column": "ip_address",
+                                "type": "text",
+                                "value": "{{$_SERVER.REMOTE_ADDR}}"
+                              },
+                              {
+                                "table": "tt_balance",
+                                "column": "crdr_type",
+                                "type": "text",
+                                "value": "{{'Credit'}}"
+                              },
+                              {
+                                "table": "tt_balance",
+                                "column": "pay_ref_id",
+                                "type": "text",
+                                "value": "{{WalletCrRechTrans.identity}}"
+                              },
+                              {
+                                "table": "tt_balance",
+                                "column": "remarks",
+                                "type": "text",
+                                "value": "{{'Number: '+GetAdminDetails.user_mobile+' | Amount: '+$_POST.admin_credit_amount+' | Wallet Credit | Ref. Id: '+WalletCrRechTrans.identity+' | Comm Per: 00.00 | Comm Val: 00.00 | Charge Per: 00.00 | Charge Val: 00.00 | GST: 00.00 | TDS: 00.00'}}"
+                              },
+                              {
+                                "table": "tt_balance",
+                                "column": "created_by",
+                                "type": "number",
+                                "value": "{{identity}}"
+                              },
+                              {
+                                "table": "tt_balance",
+                                "column": "created_on",
+                                "type": "datetime",
+                                "value": "{{NOW}}"
+                              }
+                            ],
+                            "table": "tt_balance",
+                            "returning": "id",
+                            "query": "INSERT INTO tt_balance\n(user_id, old_balance, amount, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on) VALUES (:P1 /* {{identity}} */, :P2 /* {{GetAdminDetails.balance_amt}} */, :P3 /* {{$_POST.admin_credit_amount}} */, :P4 /* {{ClosingBalWallet}} */, :P5 /* {{'Wallet Credit'}} */, :P6 /* {{NOW}} */, :P7 /* {{$_SERVER.REMOTE_ADDR}} */, :P8 /* {{'Credit'}} */, :P9 /* {{WalletCrRechTrans.identity}} */, :P10 /* {{'Number: '+GetAdminDetails.user_mobile+' | Amount: '+$_POST.admin_credit_amount+' | Wallet Credit | Ref. Id: '+WalletCrRechTrans.identity+' | Comm Per: 00.00 | Comm Val: 00.00 | Charge Per: 00.00 | Charge Val: 00.00 | GST: 00.00 | TDS: 00.00'}} */, :P11 /* {{identity}} */, :P12 /* {{NOW}} */)",
+                            "params": [
+                              {
+                                "name": ":P1",
+                                "type": "expression",
+                                "value": "{{identity}}"
+                              },
+                              {
+                                "name": ":P2",
+                                "type": "expression",
+                                "value": "{{GetAdminDetails.balance_amt}}"
+                              },
+                              {
+                                "name": ":P3",
+                                "type": "expression",
+                                "value": "{{$_POST.admin_credit_amount}}"
+                              },
+                              {
+                                "name": ":P4",
+                                "type": "expression",
+                                "value": "{{ClosingBalWallet}}"
+                              },
+                              {
+                                "name": ":P5",
+                                "type": "expression",
+                                "value": "{{'Wallet Credit'}}"
+                              },
+                              {
+                                "name": ":P6",
+                                "type": "expression",
+                                "value": "{{NOW}}"
+                              },
+                              {
+                                "name": ":P7",
+                                "type": "expression",
+                                "value": "{{$_SERVER.REMOTE_ADDR}}"
+                              },
+                              {
+                                "name": ":P8",
+                                "type": "expression",
+                                "value": "{{'Credit'}}"
+                              },
+                              {
+                                "name": ":P9",
+                                "type": "expression",
+                                "value": "{{WalletCrRechTrans.identity}}"
+                              },
+                              {
+                                "name": ":P10",
+                                "type": "expression",
+                                "value": "{{'Number: '+GetAdminDetails.user_mobile+' | Amount: '+$_POST.admin_credit_amount+' | Wallet Credit | Ref. Id: '+WalletCrRechTrans.identity+' | Comm Per: 00.00 | Comm Val: 00.00 | Charge Per: 00.00 | Charge Val: 00.00 | GST: 00.00 | TDS: 00.00'}}"
+                              },
+                              {
+                                "name": ":P11",
+                                "type": "expression",
+                                "value": "{{identity}}"
+                              },
+                              {
+                                "name": ":P12",
+                                "type": "expression",
+                                "value": "{{NOW}}"
+                              }
+                            ]
+                          }
+                        },
+                        "meta": [
+                          {
+                            "name": "identity",
+                            "type": "text"
+                          },
+                          {
+                            "name": "affected",
+                            "type": "number"
+                          }
+                        ],
+                        "output": true
                       }
                     ]
+                  },
+                  "else": {
+                    "steps": {
+                      "name": "GetOpSeIdRes403",
+                      "module": "core",
+                      "action": "response",
+                      "options": {
+                        "status": 403,
+                        "data": "Service Id or Operator Id not available"
+                      }
+                    }
                   }
                 },
-                "meta": [
-                  {
-                    "name": "affected",
-                    "type": "number"
-                  }
-                ],
-                "disabled": true
+                "outputType": "boolean"
               }
             ]
+          },
+          "else": {
+            "steps": {
+              "name": "TPinRes403",
+              "module": "core",
+              "action": "response",
+              "options": {
+                "status": 403,
+                "data": "403-forbidden"
+              }
+            }
           }
         },
         "outputType": "boolean"

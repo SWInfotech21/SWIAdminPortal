@@ -9,9 +9,7 @@
         "type": "number",
         "fieldName": "Mobile",
         "options": {
-          "rules": {
-            "core:number": {}
-          }
+          "rules": {}
         },
         "name": "Mobile"
       },
@@ -19,12 +17,7 @@
         "type": "text",
         "fieldName": "Password",
         "options": {
-          "rules": {
-            "core:required": {
-              "param": "",
-              "message": "Please enter your password"
-            }
-          }
+          "rules": {}
         },
         "name": "Password"
       },
@@ -56,7 +49,7 @@
               "name": "m_users"
             },
             "joins": [],
-            "query": "SELECT salt AS saltvalue\nFROM m_users\nWHERE user_mobile = :P1 /* {{$_POST.Mobile}} */",
+            "query": "SELECT salt AS saltvalue\nFROM m_users\nWHERE user_mobile = :P1 /* {{$_POST.Mobile}} */ AND user_type = 0",
             "params": [
               {
                 "operator": "equal",
@@ -78,6 +71,19 @@
                     "table": "m_users",
                     "column": "user_mobile",
                     "type": "text"
+                  },
+                  "operation": "="
+                },
+                {
+                  "id": "m_users.user_type",
+                  "field": "m_users.user_type",
+                  "type": "double",
+                  "operator": "equal",
+                  "value": 0,
+                  "data": {
+                    "table": "m_users",
+                    "column": "user_type",
+                    "type": "number"
                   },
                   "operation": "="
                 }
@@ -117,15 +123,26 @@
             }
           },
           "else": {
-            "steps": {
-              "name": "LoginRes403",
-              "module": "core",
-              "action": "response",
-              "options": {
-                "status": 403,
-                "data": "User does not exists"
+            "steps": [
+              {
+                "name": "LoginRes403",
+                "module": "core",
+                "action": "response",
+                "options": {
+                  "status": 403,
+                  "data": "User does not exists"
+                }
+              },
+              {
+                "name": "Login",
+                "module": "core",
+                "action": "redirect",
+                "options": {
+                  "url": "/login"
+                },
+                "disabled": true
               }
-            }
+            ]
           }
         },
         "outputType": "boolean",
