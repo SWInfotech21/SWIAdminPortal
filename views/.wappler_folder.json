@@ -54,5 +54,29 @@
   "wallet-debit.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "recharge-history.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  },
+  "patients.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  },
+  "pagination.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  },
+  "account-summary-report.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  },
+  "api-sales-report.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  },
+  "balance-report.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }

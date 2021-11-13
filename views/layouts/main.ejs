@@ -4,6 +4,20 @@
 <head>
     <script src="dmxAppConnect/dmxAppConnect.js"></script>
     <script src="js/jquery-3.5.1.slim.min.js"></script>
+    <script src="socket.io/socket.io.js"></script>
+
+    <script src="dmxAppConnect/dmxSockets/dmxSockets.js" defer=""></script>
+
+
+
+    <script src="dmxAppConnect/dmxBootstrap5PagingGenerator/dmxBootstrap5PagingGenerator.js" defer=""></script>
+
+
+
+    <script src="dmxAppConnect/dmxStateManagement/dmxStateManagement.js" defer=""></script>
+
+
+
 
     <script src="dmxAppConnect/dmxNotifications/dmxNotifications.js" defer=""></script>
 
@@ -51,6 +65,7 @@
     <dmx-serverconnect id="scAdminBalance" url="api/Transactions/FetchAdminBalance" dmx-on:unauthorized="browserMain.goto('/login')" dmx-on:forbidden="browserMain.goto('/login')" dmx-on:invalid="browserMain.goto('/login')" dmx-on:error="browserMain.goto('/login')"></dmx-serverconnect>
     <dmx-serverconnect id="scMobRech" url="api/RechargeAPI/RechargeAPI"></dmx-serverconnect>
     <dmx-serverconnect id="scOperator" url="api/operator/OperatorsFetch" noload></dmx-serverconnect>
+    <dmx-serverconnect id="scAPIBalance" url="api/APIS/GetAPIBalance"></dmx-serverconnect>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="bootstrap/5/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css" href="./css/style.css" />
@@ -123,8 +138,8 @@
                     <div class="user_meta" style="margin-top:20px;background-color:#ffffff">
                         <div class="name" stylealign="center"> <a class="tip-left" title=""><span style="font-size:14px; font-weight:bold;"> <span style="color:#FB4E55;">Logged in as Site Admin</span> -
                                     <span id="ctl00_lblName">{{scAdminBalance.data.query.user_fname}}</span></span> </a> <br />
-                            <b>Balance:</b><span id="ctl00_lblBalance">&emsp;{{scAdminBalance.data.query.balance_amt}}</span><br />
-                            <b>AEPS Balance:</b><span id="ctl00_lblAEPSBalance">&emsp;{{scAdminBalance.data.query.aeps_balance}}</span><br />
+                            <b>Balance:</b><span id="ctl00_lblBalance">&emsp;{{scAdminBalance.data.query.balance_amt.toNumber().toFixed(3)}}</span><br />
+                            <b>AEPS Balance:</b><span id="ctl00_lblAEPSBalance">&emsp;{{scAdminBalance.data.query.aeps_balance.toNumber().toFixed(3)}}</span><br /><b>API Balance:</b><span id="">&emsp;{{scAPIBalance.data.GetAPIBalance.Wallet.main}}</span><br />
                             <div><a class="button red tip-left small" href="#" dmx-on:click="scLogout.load()" title="Click Here to Logout">
                                     <i class="fa fa-sign-out" aria-hidden="true"></i>
                                     <span class="sd-fw-500" style="font-weight:bold;">Log Out</span>
@@ -153,7 +168,6 @@
                                     <li><a href="relation-op-api">Relation API Operator</a></li>
                                     <li><a href="api-add-update">API Add Update</a></li>
                                     <li><a href="scheme-priority">Scheme Priority</a></li>
-                                    <li><a href="users">Users</a></li>
                                     <li><a href="scheme">Scheme</a></li>
                                     <li><a href="operators">Operator</a></li>
                                     <li><a href="services">Services</a></li>
@@ -166,32 +180,11 @@
                                     <li><a href="wallet-credits">Wallet Credit</a></li>
                                 </ul>
                             </li>
-                            <li><a class="sf-with-ul" href="javascript:void(0)">Setting's<span class="sf-sub-indicator"> »</span></a>
+                            <li id="ctl00_liSubAc"><a class="sf-with-ul" href="javascript:void(0)">Customers<span class="sf-sub-indicator"> »</span></a>
                                 <ul>
-                                    <li><a href="commission.aspx">Commission/API Settings</a></li>
-                                    <li><a href="APIcommission.aspx">API Commission Settings</a></li>
-                                    <li><a href="apiForward.aspx">API Forward</a></li>
+                                    <li><a href="users">Users</a></li>
 
-                                    <li><a href="transfer_user.aspx">Transfer Retailer</a></li>
-                                    <li><a href="sendSMS.aspx">Send SMS</a></li>
-                                    <li><a href="updateparent.aspx">Update Parent</a></li>
-                                    <li><a href="crdr.aspx">Credits</a></li>
-                                    <li><a href="dr.aspx">Debits</a></li>
-
-
-                                    <li><a class="sf-with-ul" href="javascript:void(0)">Service Fee</a>
-                                        <ul>
-                                            <li><a href="ServiceCharges.aspx">Service Charges Setting</a></li>
-                                            <li><a href="ServiceChargeSettlement.aspx">Service Charges Settlement</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li id="ctl00_liSubAc"><a class="sf-with-ul" href="javascript:void(0)">Manage Customers<span class="sf-sub-indicator"> »</span></a>
-                                <ul>
-                                    <li><a href="addUser.aspx">Add Users</a></li>
-                                    <li><a href=" ViewUser.aspx">View User</a></li>
-                                    <li><a href="ViewKycUser.aspx">View KYC User</a></li>
+                                    <li><a href="#">View KYC User</a></li>
                                     <li><a class="sf-with-ul" href="javascript:void(0)">Sales Manager</a>
                                         <ul>
                                             <li><a href="addSalesManager.aspx">Add</a></li>
@@ -205,46 +198,15 @@
                                             <li><a href="customercarepage.aspx">Add CustomerCare Pages</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="view_scheme.aspx">View Scheme</a></li>
-                                    <li><a href=" SearchUsers.aspx">Search User</a></li>
-                                    <li><a href="ServiceSetting.aspx">User Services Setting</a></li>
+                                    <li><a href="#">User Services Setting</a></li>
                                 </ul>
                             </li>
-                            <li id="ctl00_liReport"><a class="sf-with-ul" href="javascript:void(0)">Reports<span class="sf-sub-indicator"> »</span></a>
+                            <li id="ctl00_liReport"><a class="sf-with-ul" href="javascript:void(0)">Reports<span class="sf-sub-indicator"></span></a>
                                 <ul>
-                                    <li><a href="rechargeHistory.aspx">Transaction Report</a></li>
-                                    <li><a class="sf-with-ul" href="javascript:void(0)">AEPS</a>
-                                        <ul>
-                                            <li><a href="AEPSHistory.aspx">AEPS Report</a></li>
-                                            <li><a href="baSummary.aspx">AEPS Summary</a></li>
-                                            <li><a href="BankWithdrawal.aspx">Bank Withdrawal</a></li>
-                                            <li><a href="reconciliationAeps.aspx">Reconciliation Aeps</a></li>
-                                            <li><a href="BalancemissAeps.aspx">Balance Miss Aeps</a></li>
-                                            <li><a href="UserWiseSummaryAeps.aspx">UserWise Summary Aeps</a></li>
-                                            <li><a href="draaeps.aspx">AEPS Debits</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <li><a href="liverechargeHistory.aspx" target="_blank">Live Transaction Report</a></li>
-                                    <li><a href="AccountSummary.aspx">Account Summary Report</a></li>
-                                    <li><a href="balance_report.aspx">Balance Report</a></li>
-                                    <li><a href="api_sales_report.aspx">API Sales Report</a></li>
-                                    <li><a href="transactions.aspx">Transactions</a></li>
-                                    <li><a href="SaleDownline.aspx">Downline Summary</a></li>
-                                    <li><a href="pendingRecharges.aspx">Pending Transactions</a></li>
-
-                                    <li><a href="Refund.aspx">Refund Report</a></li>
-                                    <li><a href="searchTrans.aspx">Update Transaction.</a></li>
-                                    <li><a href="walletReport.aspx">Full E-Wallet Report</a></li>
-                                    <li><a href="smsussd.aspx">SMS Report</a></li>
-                                    <li><a href="bSummary.aspx">Summary</a></li>
-                                    <li><a href="APIReconciliation.aspx">API Reconciliation</a></li>
-                                    <li><a href="OperatorReconciliation.aspx">Operator Reconciliation</a></li>
-                                    <li><a href="UserCommission.aspx">Operator Wise Comm. Report</a></li>
-
-                                    <li><a href="bSummaryOutStanding.aspx">OutStanding Stat. Report</a></li>
-                                    <li><a href="UserUsage.aspx" target="_blank">User GST/TDS</a></li>
-
+                                    <li><a href="recharge-history">Transaction Report</a></li>
+                                    <li><a href="account-summary-report">Account Summary</a></li>
+                                    <li><a href="balance-report">Balance Report</a></li>
+                                    <li><a href="api-sales-report">API Sales Report</a></li>
                                 </ul>
                             </li>
                             <li><a href="javascript:void(0)" class="sf-with-ul">My Account<span class="sf-sub-indicator"> »</span></a>

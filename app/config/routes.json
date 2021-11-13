@@ -1,79 +1,104 @@
 {
-    "routes": [
-        {
-            "path": "/",
-            "page": "index",
-            "routeType": "page",
-            "layout": "main"
-        },
-        {
-            "path": "/users",
-            "page": "users",
-            "layout": "main"
-        },
-        {
-            "path": "/mobile-recharge",
-            "page": "mobile-recharge",
-            "layout": "main"
-        },
-        {
-            "path": "/login",
-            "page": "login"
-        },
-        {
-            "path": "/operators",
-            "page": "operators",
-            "layout": "main"
-        },
-        {
-            "path": "/services",
-            "page": "services",
-            "layout": "main"
-        },
-        {
-            "path": "/403-forbidden",
-            "page": "403-forbidden"
-        },
-        {
-            "path": "/api-add-update",
-            "page": "api-add-update",
-            "layout": "main"
-        },
-        {
-            "path": "/scheme",
-            "page": "scheme",
-            "layout": "main"
-        },
-        {
-            "path": "/relation-op-api",
-            "page": "relation-op-api",
-            "layout": "main"
-        },
-        {
-            "path": "/bank-admin",
-            "page": "bank-admin",
-            "layout": "main",
-            "exec": "/api/Users/UserAccess"
-        },
-        {
-            "path": "/scheme-priority",
-            "page": "scheme-priority",
-            "layout": "main"
-        },
-        {
-            "path": "/scheme-commision-set",
-            "page": "scheme-commision-set",
-            "layout": "main"
-        },
-        {
-            "path": "/wallet-credits",
-            "page": "wallet-credits",
-            "layout": "main"
-        },
-        {
-            "path": "/wallet-debit",
-            "page": "wallet-debit",
-            "layout": "main"
-        }
-    ]
+  "routes": [
+    {
+      "path": "/",
+      "page": "index",
+      "routeType": "page",
+      "layout": "main"
+    },
+    {
+      "path": "/users",
+      "page": "users",
+      "layout": "main"
+    },
+    {
+      "path": "/mobile-recharge",
+      "page": "mobile-recharge",
+      "layout": "main"
+    },
+    {
+      "path": "/login",
+      "page": "login"
+    },
+    {
+      "path": "/operators",
+      "page": "operators",
+      "layout": "main"
+    },
+    {
+      "path": "/services",
+      "page": "services",
+      "layout": "main"
+    },
+    {
+      "path": "/403-forbidden",
+      "page": "403-forbidden"
+    },
+    {
+      "path": "/api-add-update",
+      "page": "api-add-update",
+      "layout": "main"
+    },
+    {
+      "path": "/scheme",
+      "page": "scheme",
+      "layout": "main"
+    },
+    {
+      "path": "/relation-op-api",
+      "page": "relation-op-api",
+      "layout": "main"
+    },
+    {
+      "path": "/bank-admin",
+      "page": "bank-admin",
+      "layout": "main",
+      "exec": "/api/Users/UserAccess"
+    },
+    {
+      "path": "/scheme-priority",
+      "page": "scheme-priority",
+      "layout": "main"
+    },
+    {
+      "path": "/scheme-commision-set",
+      "page": "scheme-commision-set",
+      "layout": "main"
+    },
+    {
+      "path": "/wallet-credits",
+      "page": "wallet-credits",
+      "layout": "main"
+    },
+    {
+      "path": "/wallet-debit",
+      "page": "wallet-debit",
+      "layout": "main"
+    },
+    {
+      "path": "/recharge-history",
+      "page": "recharge-history",
+      "layout": "main"
+    },
+    {
+      "path": "/patients",
+      "page": "patients",
+      "layout": "main"
+    },
+    {
+      "path": "/account-summary-report",
+      "page": "account-summary-report",
+      "layout": "main"
+    },
+    {
+      "path": "/api-sales-report",
+      "page": "api-sales-report",
+      "layout": "main"
+    },
+    {
+      "path": "/balance-report",
+      "page": "balance-report",
+      "layout": "main"
+    }
+  ]
 }

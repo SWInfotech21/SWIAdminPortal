@@ -1,4 +1,5 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="users" appConnect="local" components="{dmxBootstrap5TableGenerator:{},dmxBootstrap5Navigation:{},dmxDataTraversal:{},dmxValidator:{}}" -->
+<meta name="ac:route" content="/users">
 <dmx-serverconnect id="scGetSchInd" url="api/Scheme/GetSchemeAllotted" dmx-param:for_user_type="modalAddUsers.formAddEditUser.inp_user_type.value" noload></dmx-serverconnect>
 <script is="dmx-flow" id="flowGetScheme" type="text/dmx-flow">{
     condition: {
@@ -10,7 +11,6 @@
     }
     }
     }</script>
-<meta name="ac:route" content="/users">
 <dmx-serverconnect id="scUsers" url="api/Users/Users"></dmx-serverconnect>
 <dmx-data-view id="dvUsers" dmx-bind:data="scUsers.data.FetchUsers.data" pageSize="100" page="10"></dmx-data-view>
 <dmx-data-detail id="ddUsers" dmx-bind:data="dvUsers.data" key="id"></dmx-data-detail>
@@ -91,12 +91,12 @@
                     <td dmx-text="user_email"></td>
                     <td dmx-text="user_mobile"></td>
                     <td dmx-text="user_tpin"></td>
-                    <td dmx-text="balance_amt"></td>
+                    <td dmx-text="balance_amt.toNumber().toFixed(2)"></td>
                     <td dmx-text="user_type == 1 ? 'MDT' : user_type == 2 ? 'DT' : user_type == 3 ? 'RT' : 'None'" dmx-class:table-primary="user_type == 1" dmx-class:table-success="user_type == 2" dmx-class:table-warning="user_type == 3" dmx-class:table-danger="user_type == 4"></td>
                     <td dmx-text="u_status != 1 ?'Inactive' : 'Active'" dmx-class:table-primary="u_status == 1" dmx-class:table-warning="u_status != 1"></td>
                     <td>
-                        <a class="sw-col-ar" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalAddUsers"><i class="fas fa-edit" title="Edit Users"></i></a>&emsp;<a class="sw-col-br" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalPasswordUser"><i class="fas fa-user-lock" title="Password Update"></i></a>&emsp;
-                        <a class="sw-col-dr" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalDelUser"><i class="far fa-trash-alt" title="Delete User"></i></a>&emsp;<a class="sw-col-cr" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#"><i class="fas fa-sign-in-alt" title="Login to user panel"></i></a>
+                        <a class="sw-col-ar" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalAddUsers"><i class="fas fa-edit" title="Edit Users" dmx-on:click="flowGetScheme.run()"></i></a>&emsp;<a class="sw-col-br" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalPasswordUser"><i class="fas fa-user-lock" title="Password Update"></i></a>&emsp;
+                        <a class="sw-col-dr" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalDelUser"><i class="far fa-trash-alt" title="Delete User"></i></a>&emsp;<a class="sw-col-cr" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#"><i class="fas fa-sign-in-alt" title="Login to user panel"></i></a>&emsp;<a class="sw-col-cr" href="wallet-credits"><i class="fas fa-hand-holding-usd" title="Login to user panel"></i></a>
                     </td>
                 </tr>
             </tbody>
@@ -273,3 +273,6 @@
         </div>
     </div>
 </div>
+<!-- <script>
+    setTimeout(function () { location.reload(1); }, 60000);
+</script> -->

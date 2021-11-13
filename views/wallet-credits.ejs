@@ -57,7 +57,7 @@
                         <b>{{scUserSchemPrio.data.UserDetails[0].balance_amt}}</b>
                     </div> -->
                     <div class="col-12 col-lg-2 p-2">
-                        <label>TPIN</label>
+                        <label>Admin TPIN</label>
                         <input type="number" id="tpin" name="tpin" class="form-control" placeholder="E.g: 1452" required="">
                     </div>
                     <div class="col-12 col-lg-7 p-2">
@@ -65,7 +65,7 @@
                         <input type="text" id="comment" name="comment" class="form-control" placeholder="Add any note (optional)">
                     </div>
                     <div class="col-4 p-0 ms-3">
-                        <button id="btn1" class="btn btn-info mt-md-4" type="submit" dmx-bind:disabled="state.executing">Credit<span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span></button>
+                        <button id="btn1" class="btn btn-info mt-md-4" type="submit" dmx-bind:disabled="state.executing" dmx-on:click="scAdminTrans.load()">Credit<span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span></button>
 
                     </div>
                 </div>
@@ -87,7 +87,7 @@
                         <input type="number" id="admin_tpin" name="admintpin" class="form-control" placeholder="E.g: 1452" required="">
                     </div>
                     <div class="col-4 p-0 ms-3">
-                        <button id="AdminCredit" class="btn btn-info mt-md-4" type="submit" dmx-bind:disabled="state.executing">Admin Credit<span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span></button>
+                        <button id="AdminCredit" class="btn btn-info mt-md-4" type="submit" dmx-bind:disabled="state.executing" dmx-on:click="scAdminTrans.load()">Admin Credit<span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span></button>
 
                     </div>
                 </div>
@@ -119,10 +119,10 @@
                     <td dmx-text="transaction_id"></td>
                     <td dmx-text="tr_type+' | '+tr_mode "></td>
                     <td dmx-text="details+' | '+user_number+' | '+user_id"></td>
-                    <td dmx-text="opening_balance"></td>
-                    <td dmx-text="amount"></td>
-                    <td dmx-text="comm_amt+' | '+charge_amt+' | '+net_amt"></td>
-                    <td dmx-text="closing_balance"></td>
+                    <td dmx-text="opening_balance.toNumber().toFixed(2)"></td>
+                    <td dmx-text="amount.toNumber().toFixed(2)"></td>
+                    <td dmx-text="comm_amt.toNumber().toFixed(2)+' | '+charge_amt.toNumber().toFixed(2)+' | '+net_amt.toNumber().toFixed(2)"></td>
+                    <td dmx-text="closing_balance.toNumber().toFixed(2)"></td>
                     <td dmx-text="reason"></td>
                 </tr>
             </tbody>
