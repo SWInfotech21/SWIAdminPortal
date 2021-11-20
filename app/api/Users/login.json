@@ -25,6 +25,28 @@
         "type": "text",
         "fieldName": "remember",
         "name": "remember"
+      },
+      {
+        "type": "text",
+        "name": "user_id"
+      },
+      {
+        "type": "text",
+        "name": "ip_address"
+      },
+      {
+        "type": "datetime",
+        "name": "login_time"
+      },
+      {
+        "type": "datetime",
+        "name": "logout_time"
+      }
+    ],
+    "$_SERVER": [
+      {
+        "type": "text",
+        "name": "REMOTE_ADDR"
       }
     ]
   },
@@ -43,13 +65,17 @@
                 "table": "m_users",
                 "column": "salt",
                 "alias": "saltvalue"
+              },
+              {
+                "table": "m_users",
+                "column": "id"
               }
             ],
             "table": {
               "name": "m_users"
             },
             "joins": [],
-            "query": "SELECT salt AS saltvalue\nFROM m_users\nWHERE user_mobile = :P1 /* {{$_POST.Mobile}} */ AND user_type = 0",
+            "query": "SELECT salt AS saltvalue, id\nFROM m_users\nWHERE user_mobile = :P1 /* {{$_POST.Mobile}} */ AND user_type = 0",
             "params": [
               {
                 "operator": "equal",
@@ -98,6 +124,10 @@
           {
             "name": "saltvalue",
             "type": "text"
+          },
+          {
+            "name": "id",
+            "type": "text"
           }
         ],
         "outputType": "object"
@@ -109,18 +139,82 @@
         "options": {
           "if": "{{getSalt}}",
           "then": {
-            "steps": {
-              "name": "identity",
-              "module": "auth",
-              "action": "login",
-              "options": {
-                "provider": "securityLogin",
-                "password": "{{$_POST.Password.sha256(getSalt.saltvalue)}}",
-                "username": "{{$_POST.Mobile}}"
+            "steps": [
+              {
+                "name": "identity",
+                "module": "auth",
+                "action": "login",
+                "options": {
+                  "provider": "securityLogin",
+                  "password": "{{$_POST.Password.sha256(getSalt.saltvalue)}}",
+                  "username": "{{$_POST.Mobile}}"
+                },
+                "output": true,
+                "meta": []
               },
-              "output": true,
-              "meta": []
-            }
+              {
+                "name": "LoginLog",
+                "module": "dbupdater",
+                "action": "insert",
+                "options": {
+                  "connection": "postgres_gcpServer",
+                  "sql": {
+                    "type": "insert",
+                    "values": [
+                      {
+                        "table": "t_login_history",
+                        "column": "user_id",
+                        "type": "text",
+                        "value": "{{getSalt.id}}"
+                      },
+                      {
+                        "table": "t_login_history",
+                        "column": "ip_address",
+                        "type": "text",
+                        "value": "{{$_SERVER.REMOTE_ADDR}}"
+                      },
+                      {
+                        "table": "t_login_history",
+                        "column": "login_time",
+                        "type": "datetime",
+                        "value": "{{NOW}}"
+                      }
+                    ],
+                    "table": "t_login_history",
+                    "returning": "id",
+                    "query": "INSERT INTO t_login_history\n(user_id, ip_address, login_time) VALUES (:P1 /* {{getSalt.id}} */, :P2 /* {{$_SERVER.REMOTE_ADDR}} */, :P3 /* {{NOW}} */)",
+                    "params": [
+                      {
+                        "name": ":P1",
+                        "type": "expression",
+                        "value": "{{getSalt.id}}"
+                      },
+                      {
+                        "name": ":P2",
+                        "type": "expression",
+                        "value": "{{$_SERVER.REMOTE_ADDR}}"
+                      },
+                      {
+                        "name": ":P3",
+                        "type": "expression",
+                        "value": "{{NOW}}"
+                      }
+                    ]
+                  }
+                },
+                "meta": [
+                  {
+                    "name": "identity",
+                    "type": "text"
+                  },
+                  {
+                    "name": "affected",
+                    "type": "number"
+                  }
+                ],
+                "output": true
+              }
+            ]
           },
           "else": {
             "steps": [

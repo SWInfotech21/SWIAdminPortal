@@ -1,6 +1,6 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="users" appConnect="local" components="{dmxBootstrap5TableGenerator:{},dmxBootstrap5Navigation:{},dmxDataTraversal:{},dmxValidator:{}}" -->
 <meta name="ac:route" content="/users">
-<dmx-serverconnect id="scGetSchInd" url="api/Scheme/GetSchemeAllotted" dmx-param:for_user_type="modalAddUsers.formAddEditUser.inp_user_type.value" noload></dmx-serverconnect>
+<dmx-serverconnect id="scGetSchInd" url="api/Scheme/GetSchemeAllotted" dmx-param:for_user_type="modalAddUsers.formAddEditUser.inp_user_type.value"></dmx-serverconnect>
 <script is="dmx-flow" id="flowGetScheme" type="text/dmx-flow">{
     condition: {
     if: "{{modalAddUsers.formAddEditUser.inp_user_type.value}}",
@@ -71,13 +71,15 @@
                     <th>Sl. No.</th>
                     <th>Unique Id</th>
                     <th>Name</th>
-                    <th>Image</th>
                     <th>Email</th>
                     <th>Mobile</th>
-                    <th>TPIN</th>
                     <th>Wallet Bal.</th>
                     <th>Type</th>
                     <th>Status</th>
+                    <th>Aadhar No.</th>
+                    <th>PAN No.</th>
+                    <th>Address & PIN</th>
+                    <th>State & Dist.</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -86,17 +88,18 @@
                     <td>{{$index+1}}</td>
                     <td dmx-text="user_id"></td>
                     <td dmx-text="user_fname.titlecase()"></td>
-                    <td><img dmx-bind:src="user_lname" width="50" height="50">
-                    </td>
                     <td dmx-text="user_email"></td>
                     <td dmx-text="user_mobile"></td>
-                    <td dmx-text="user_tpin"></td>
                     <td dmx-text="balance_amt.toNumber().toFixed(2)"></td>
-                    <td dmx-text="user_type == 1 ? 'MDT' : user_type == 2 ? 'DT' : user_type == 3 ? 'RT' : 'None'" dmx-class:table-primary="user_type == 1" dmx-class:table-success="user_type == 2" dmx-class:table-warning="user_type == 3" dmx-class:table-danger="user_type == 4"></td>
-                    <td dmx-text="u_status != 1 ?'Inactive' : 'Active'" dmx-class:table-primary="u_status == 1" dmx-class:table-warning="u_status != 1"></td>
+                    <td dmx-text="user_type == 1 ? 'MDT' : user_type == 2 ? 'DT' : user_type == 3 ? 'RT' : 'None'" dmx-class:text-primary="user_type == 1" dmx-class:text-success="user_type == 2" dmx-class:text-warning="user_type == 3" dmx-class:text-danger="user_type == 4"></td>
+                    <td dmx-text="u_status != 1 ?'Inactive' : 'Active'" dmx-class:text-primary="u_status == 1" dmx-class:text-warning="u_status != 1"></td>
+                    <td dmx-text="aadhar_no"></td>
+                    <td dmx-text="pan_no"></td>
+                    <td dmx-text="address+' | '+pin"></td>
+                    <td dmx-text="state+' | '+district"></td>
                     <td>
                         <a class="sw-col-ar" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalAddUsers"><i class="fas fa-edit" title="Edit Users" dmx-on:click="flowGetScheme.run()"></i></a>&emsp;<a class="sw-col-br" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalPasswordUser"><i class="fas fa-user-lock" title="Password Update"></i></a>&emsp;
-                        <a class="sw-col-dr" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalDelUser"><i class="far fa-trash-alt" title="Delete User"></i></a>&emsp;<a class="sw-col-cr" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#"><i class="fas fa-sign-in-alt" title="Login to user panel"></i></a>&emsp;<a class="sw-col-cr" href="wallet-credits"><i class="fas fa-hand-holding-usd" title="Login to user panel"></i></a>
+                        <a class="sw-col-dr" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalDelUser"><i class="far fa-trash-alt" title="Delete User"></i></a>&emsp;<a class="sw-col-cr" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#"><i class="fas fa-sign-in-alt" title="Login to user panel"></i></a>&emsp;<a class="sw-col-cr" href="wallet-credits"><i class="fas fa-hand-holding-usd" title="Wallet Credit Update"></i></a>
                     </td>
                 </tr>
             </tbody>
@@ -196,7 +199,7 @@
     </div>
 </div>
 <!-- Modal Add users -->
-<div class="modal fade" id="modalAddUsers" is="dmx-bs5-modal" tabindex="-1" nocloseonclick="true" nokeyboard="true">
+<div class="modal fade" id="modalAddUsers" is="dmx-bs5-modal" tabindex="-1" nokeyboard="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -207,61 +210,95 @@
                 <form is="dmx-serverconnect-form" id="formAddEditUser" method="post" action="api/Users/AddEditUsers" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAddEditUser.data.AddEditUsers ? scNotif.success('New User Added') : scNotif.success('User Details Updated');formAddEditUser.reset();scUsers.load();" dmx-on:error="scNotif.warning('An error occurred'); ">
                     <input type="hidden" name="UserId" dmx-bind:value="ddUsers.data.id">
                     <div class="mb-3 row">
-                        <label for="inp_name" class="col-sm-2 col-form-label">User Name</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inp_name" name="name" aria-describedby="inp_name_help" placeholder="Enter Name" maxlength="50" required="" data-msg-required="User Name is required." dmx-bind:value="ddUsers.data.user_fname">
+                        <div class="col-12 col-sm-6">
+                            <label for="inp_super_user" class="col-form-label">User Type</label>
+                            <div class="col-12 px-0">
+                                <select type="number" class="form-control form-select" id="inp_user_type" name="user_type" aria-describedby="inp_user_type_help" placeholder="Enter user type" dmx-bind:value="ddUsers.data.user_type" dmx-on:changed="flowGetScheme.run()" dmx-bind:disabled="ddUsers.data.id">
+                                    <option value="">Select Option</option>
+                                    <option value="1">Master Distributor</option>
+                                    <option value="2">Distributor</option>
+                                    <option value="3">Retailer</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <label for="inp_scheme_user" class="col-form-label">Allot Scheme</label>
+                            <div class="col-12 px-0">
+                                <select type="number" class="form-control form-select" id="inp_scheme_type" name="scheme_id" aria-describedby="inp_scheme_type_help" dmx-bind:options="scGetSchInd.data.custom" optiontext="scheme_name" optionvalue="scheme_id" dmx-bind:value="ddUsers.data.scheme_id">
+                                    <option value="">Select Option</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="inp_email" class="col-sm-2 col-form-label">Email</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inp_email" name="email" aria-describedby="inp_email_help" placeholder="Enter Email" maxlength="100" required="" data-msg-required="Email id is required." data-rule-email="" data-rule-nowhitespace="" dmx-bind:value="ddUsers.data.user_email">
+                        <div class="col-12 col-sm-6">
+                            <label for="inp_name" class="col-form-label">User Name</label>
+                            <div class="col-12 px-0">
+                                <input type="text" class="form-control" id="inp_name" name="name" aria-describedby="inp_name_help" placeholder="Enter Name" maxlength="50" required="" data-msg-required="User Name is required." dmx-bind:value="ddUsers.data.user_fname">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6"><label for="inp_email" class="col-form-label">Email</label>
+                            <div class="col-12 px-0">
+                                <input type="text" class="form-control" id="inp_email" name="email" aria-describedby="inp_email_help" placeholder="Enter Email" maxlength="100" required="" data-msg-required="Email id is required." data-rule-email="" data-rule-nowhitespace="" dmx-bind:value="ddUsers.data.user_email">
+                            </div>
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="inp_mobile" class="col-sm-2 col-form-label">Mobile</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" id="inp_mobile" name="mobile" aria-describedby="inp_mobile_help" placeholder="Enter Mobile" maxlength="10" required="" data-msg-required="Mobile id is required." data-rule-number="" dmx-bind:value="ddUsers.data.user_mobile">
+                        <div class="col-12 col-sm-6">
+                            <label for="inp_mobile" class="col-form-label">Mobile</label>
+                            <div class="col-12 px-0">
+                                <input type="number" class="form-control" id="inp_mobile" name="mobile" aria-describedby="inp_mobile_help" placeholder="Enter Mobile" maxlength="10" required="" data-msg-required="Mobile id is required." data-rule-number="" dmx-bind:value="ddUsers.data.user_mobile" dmx-bind:readonly="ddUsers.data.id">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6"><label for="inp_aadhar" class="col-form-label">Aadhar No</label>
+                            <div class="col-12 px-0">
+                                <input type="number" class="form-control" id="inp_aadhar" name="aadhar" aria-describedby="inp_aadhar_help" placeholder="Enter Aadhar No" maxlength="12" required="" data-msg-required="Aadhar no is required." data-rule-number="" dmx-bind:value="ddUsers.data.aadhar_no">
+                            </div>
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="inp_status" class="col-sm-2 col-form-label">Status</label>
-                        <div class="col-sm-10">
-                            <select type="text" class="form-control" id="inp_status" name="status" aria-describedby="inp_status_help" placeholder="Enter Status" dmx-bind:value="ddUsers.data.u_status">
-                                <option value="1">Active</option>
-                                <option value="0">InActive</option>
-                            </select>
+                        <div class="col-12 col-sm-6">
+                            <label for="inp_pan" class="col-form-label">PAN</label>
+                            <div class="col-12 px-0">
+                                <input type="text" class="form-control" id="inp_pan" name="pan" aria-describedby="inp_pan_help" placeholder="Enter PAN No" maxlength="10" required="" data-msg-required="PAN no is required." dmx-bind:value="ddUsers.data.pan_no">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6"><label for="inp_address" class="col-form-label">Address</label>
+                            <div class="col-12 px-0">
+                                <input type="text" class="form-control" id="inp_address" name="address" aria-describedby="inp_address_help" placeholder="Enter address No" maxlength="100" required="" data-msg-required="Address is required." dmx-bind:value="ddUsers.data.address">
+                            </div>
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="inp_super_user" class="col-sm-2 col-form-label">User Type</label>
-                        <div class="col-sm-10">
-                            <select type="number" class="form-control" id="inp_user_type" name="user_type" aria-describedby="inp_user_type_help" placeholder="Enter user type" dmx-bind:value="ddUsers.data.user_type" dmx-on:changed="flowGetScheme.run()">
-                                <option value="">Select Option</option>
-                                <option value="1">Master Distributor</option>
-                                <option value="2">Distributor</option>
-                                <option value="3">Retailer</option>
-                            </select>
+                        <div class="col-12 col-sm-6 row mx-0">
+                            <label for="inp_pin" class="col-form-label">PIN</label>
+                            <div class="col-12 px-0">
+                                <input type="number" class="form-control" id="inp_pin" name="pin" aria-describedby="inp_pin_help" placeholder="Enter PIN No." maxlength="100" required="" data-msg-required="PIN is required." dmx-bind:value="ddUsers.data.pin">
+                            </div>
+                            <div class="col-12 px-0"><label for="inp_state" class="col-form-label">State</label>
+                                <div class="col-12 px-0">
+                                    <input type="text" class="form-control" id="inp_state" name="state" aria-describedby="inp_state_help" placeholder="Enter State" maxlength="100" required="" data-msg-required="State is required." dmx-bind:value="ddUsers.data.state">
+                                </div>
+                            </div>
+                            <div class="col-12 px-0">
+                                <label for="inp_district" class="col-form-label">District</label>
+                                <div class="col-12 px-0">
+                                    <input type="text" class="form-control" id="inp_district" name="district" aria-describedby="inp_district_help" placeholder="Enter District" maxlength="100" required="" data-msg-required="District is required." dmx-bind:value="ddUsers.data.district">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="repeat1" class="col-12 col-sm-6" is="dmx-repeat" dmx-bind:repeat="scGetSchInd.data.GetRtScheme">
+                            <label for="inp_scheme_user" class="col-form-label">Target RT Scheme{{$index+1}}</label>
+                            <div class="col-12 px-0">
+                                <select type="text" class="form-control form-select" dmx-bind:id="'inp_rt_scheme_type'+$index" aria-describedby="inp_scheme_type_help" dmx-bind:options="scGetSchInd.data.GetRtScheme" optiontext="scheme_name" optionvalue="id" dmx-bind:value="$index == 0 ? ddUsers.data.scheme0 : $index == 1 ? ddUsers.data.scheme1 : $index == 2 ? ddUsers.data.scheme2 : $index == 3 ? ddUsers.data.scheme3 : 0" dmx-bind:name="'scheme'+$index">
+                                    <option value="">Select Option</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="inp_scheme_user" class="col-sm-2 col-form-label">Allot Scheme</label>
-                        <div class="col-sm-10">
-                            <select type="number" class="form-control" id="inp_scheme_type" name="scheme_id" aria-describedby="inp_scheme_type_help" dmx-bind:options="scGetSchInd.data.custom" optiontext="scheme_name" optionvalue="scheme_id" dmx-bind:value="ddUsers.data.scheme_id">
-                                <option value="">Select Option</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="mb-3 row" dmx-show="!ddUsers.data.id">
-                        <label for="inp_password" class="col-sm-2 col-form-label">Password</label>
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control" id="inp_new_password" name="password" aria-describedby="inp_password_help" placeholder="Enter Password" maxlength="50" dmx-show="!ddUsers.data.id">
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <div class="col-sm-2">&nbsp;</div>
-                        <div class="col-sm-10">
-                            <button type="submit" class="btn btn-primary" dmx-bind:disabled="state.executing">Save<span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span></button>
+                        <div class="col-12 text-center">
+                            <button type="submit" class="btn btn-primary" dmx-bind:disabled="state.executing">{{ddUsers.data.id? 'Update' : 'Save'}}<span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span></button>
                         </div>
                     </div>
                 </form>

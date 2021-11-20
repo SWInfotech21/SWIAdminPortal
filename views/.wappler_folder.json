@@ -78,5 +78,21 @@
   "balance-report.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "my-profile.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  },
+  "security-update.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  },
+  "login-history.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  },
+  "send-sms.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }

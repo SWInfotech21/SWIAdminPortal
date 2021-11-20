@@ -99,6 +99,26 @@
       "path": "/balance-report",
       "page": "balance-report",
       "layout": "main"
+    },
+    {
+      "path": "/my-profile",
+      "page": "my-profile",
+      "layout": "main"
+    },
+    {
+      "path": "/security-update",
+      "page": "security-update",
+      "layout": "main"
+    },
+    {
+      "path": "/login-history",
+      "page": "login-history",
+      "layout": "main"
+    },
+    {
+      "path": "/send-sms",
+      "page": "send-sms",
+      "layout": "main"
     }
   ]
 }

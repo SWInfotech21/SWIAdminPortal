@@ -2,8 +2,18 @@
 <html>
 
 <head>
+    <link rel="stylesheet" href="dmxAppConnect/dmxDatePicker/daterangepicker.min.css" />
+
     <script src="dmxAppConnect/dmxAppConnect.js"></script>
     <script src="js/jquery-3.5.1.slim.min.js"></script>
+    <script src="dmxAppConnect/dmxDatePicker/daterangepicker.min.js" defer=""></script>
+
+    <link rel="stylesheet" href="dmxAppConnect/dmxDatePicker/dmxDatePicker.css" />
+
+    <script src="dmxAppConnect/dmxDatePicker/dmxDatePicker.js" defer=""></script>
+
+
+
     <script src="socket.io/socket.io.js"></script>
 
     <script src="dmxAppConnect/dmxSockets/dmxSockets.js" defer=""></script>
@@ -57,6 +67,7 @@
 
     <link rel="stylesheet" href="dmxAppConnect/dmxNotifications/dmxNotifications.css" />
     <dmx-serverconnect id="scLogout" url="api/Users/logout" noload dmx-on:success="browserMain.goto('login')"></dmx-serverconnect>
+    <dmx-datetime id="varDateTime"></dmx-datetime>
 
     <base href="/">
 
@@ -124,14 +135,14 @@
 
         <!-- Custom Navbar Starts-->
         <section id="layout">
-            <div class="logo_profile container_12 bg-warning">
+            <div class="logo_profile container_12 bg-warning mx-0">
                 <div class="grid_3 logo_img" style="margin-bottom:10px; height:60px; overflow:hidden; margin-top:15px;"> <img src="assets/images/swinfotech.png" id="ctl00_logo_img" width="70px" height="70px" /> </div>
                 <div class="grid_6 logo_img" style="margin-bottom:10px;width:500px; height:80px; overflow:hidden; margin-top:15px;">
                     Payment Request:<span id="ctl00_lbltolatpayreq">0</span><br />Bank Withdrawal Request:<span id="ctl00_lblbankWithdrawal">0</span>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pending
                     Recharge:<span id="ctl00_lbltotalrecharge">2</span><br />
                     Tikets:<span id="ctl00_lbltotaltikets">2</span><br />
-                    Pending KYC:<span id="ctl00_lblKYC">0</span><br />
+                    Time:<span id="ctl00_lblKYC">{{varDateTime.datetime.formatDate('MM/dd/yyyy hh:mm:ss')}}</span><br />
 
                 </div>
                 <div class="grid_6 profile_meta" style="width:auto; height:auto; float:right;">
@@ -155,13 +166,13 @@
                     <section id="main_menu">
                         <ul id="meenu">
 
-                            <li><a class="sf-with-ul" href="javascript:void(0)">Dashboard<span class="sf-sub-indicator"> »</span></a>
+                            <li><a class="sf-with-ul" href="javascript:void(0)">Dashboard&emsp;<i class="fas fa-angle-down"></i></a>
                                 <ul>
                                     <li><a href="dashboard">Dashboard</a></li>
                                     <li><a href="#">Dashboard 1</a></li>
                                 </ul>
                             </li>
-                            <li><a class="sf-with-ul" href="javascript:void(0)">Master<span class="sf-sub-indicator"> »</span></a>
+                            <li><a class="sf-with-ul" href="javascript:void(0)">Master&emsp;<i class="fas fa-angle-down"></i></a>
                                 <ul>
                                     <li><a href="scheme-commision-set">Scheme Commision Set</a></li>
                                     <li><a href="mobile-recharge">Mobile Recharge</a></li>
@@ -174,34 +185,21 @@
                                     <li><a href="bank-admin">Admin Bank</a></li>
                                 </ul>
                             </li>
-                            <li><a class="sf-with-ul" href="#">Wallet<span class="sf-sub-indicator"> »</span></a>
+                            <li><a class="sf-with-ul" href="#">Wallet&emsp;<i class="fas fa-angle-down"></i></a>
                                 <ul>
                                     <li><a href="wallet-debit">Wallet Debit</a></li>
                                     <li><a href="wallet-credits">Wallet Credit</a></li>
                                 </ul>
                             </li>
-                            <li id="ctl00_liSubAc"><a class="sf-with-ul" href="javascript:void(0)">Customers<span class="sf-sub-indicator"> »</span></a>
+                            <li id="ctl00_liSubAc"><a class="sf-with-ul" href="javascript:void(0)">Customers&emsp;<i class="fas fa-angle-down"></i></a>
                                 <ul>
                                     <li><a href="users">Users</a></li>
 
                                     <li><a href="#">View KYC User</a></li>
-                                    <li><a class="sf-with-ul" href="javascript:void(0)">Sales Manager</a>
-                                        <ul>
-                                            <li><a href="addSalesManager.aspx">Add</a></li>
-                                            <li><a href="SalesManeger.aspx">View</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a class="sf-with-ul" href="javascript:void(0)">CC</a>
-                                        <ul>
-                                            <li><a href="addcc.aspx">Add</a></li>
-                                            <li><a href="cc.aspx">View</a></li>
-                                            <li><a href="customercarepage.aspx">Add CustomerCare Pages</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">User Services Setting</a></li>
+                                    <li><a href="send-sms">SMS</a></li>
                                 </ul>
                             </li>
-                            <li id="ctl00_liReport"><a class="sf-with-ul" href="javascript:void(0)">Reports<span class="sf-sub-indicator"></span></a>
+                            <li id="ctl00_liReport"><a class="sf-with-ul" href="javascript:void(0)">Reports&emsp;<i class="fas fa-angle-down"></i></a>
                                 <ul>
                                     <li><a href="recharge-history">Transaction Report</a></li>
                                     <li><a href="account-summary-report">Account Summary</a></li>
@@ -209,25 +207,22 @@
                                     <li><a href="api-sales-report">API Sales Report</a></li>
                                 </ul>
                             </li>
-                            <li><a href="javascript:void(0)" class="sf-with-ul">My Account<span class="sf-sub-indicator"> »</span></a>
+                            <li><a href="javascript:void(0)" class="sf-with-ul">My Account&emsp;<i class="fas fa-angle-down"></i></a>
                                 <ul>
-                                    <li><a href="Profile.aspx">Profile</a></li>
-                                    <li><a href="changePassword.aspx">Change Password</a></li>
-                                    <li><a href="changeTpin.aspx">Change TPIN</a></li>
+                                    <li><a href="my-profile">Profile</a></li>
+                                    <li><a href="security-update">Security Update</a></li>
+                                    <li><a href="login-history">Admin Log</a></li>
                                 </ul>
                             </li>
-                            <li><a class="sf-with-ul" href="browseTickets.aspx">Support Center<span class="sf-sub-indicator"> »</span></a>
+                            <li><a class="sf-with-ul" href="#">Support Center&emsp;<i class="fas fa-angle-down"></i></a>
                                 <ul>
-                                    <li><a href="browseTickets.aspx">Browse Tickets</a></li>
-                                    <li><a href="paymentRequest.aspx">Payment Requests</a></li>
-                                    <li><a href="paymentHistory.aspx">Payment History</a></li>
-                                    <li><a href="SignupRequest.aspx">Signup History</a></li>
-                                    <li><a href="APILOG.aspx">Request Response</a></li>
-                                    <li><a href="Requestlog.aspx">API Request Response</a></li>
-                                    <li><a href="OutStandingCollection.aspx">OutStanding Collection</a></li>
+                                    <li><a href="#">Browse Tickets</a></li>
+                                    <li><a href="#">Payment Requests</a></li>
+                                    <li><a href="#">Request Response</a></li>
+                                    <li><a href="#">API Request Response</a></li>
                                 </ul>
                             </li>
-                            <li><a class="sf-with-ul" href="SearchUsers.aspx">Search<span class="sf-sub-indicator"> »</span></a>
+                            <li><a class="sf-with-ul" href="#">Search<span class="sf-sub-indicator"> »</span></a>
 
                             </li>
                         </ul>

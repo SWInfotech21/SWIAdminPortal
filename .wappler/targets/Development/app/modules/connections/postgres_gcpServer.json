@@ -5,11 +5,14 @@
   "options": {
     "client": "postgres",
     "connection": {
-      "host": "35.244.48.241",
-      "port": 5432,
-      "user": "postgres",
-      "password": "Harshit@Ariful21",
-      "database": "postgres"
+      "host": "db-postgresql-blr1-40136-do-user-10118978-0.b.db.ondigitalocean.com",
+      "port": 25060,
+      "user": "doadmin",
+      "password": "9hi1N6DClf1GAWlo",
+      "database": "defaultdb",
+      "ssl": {
+        "rejectUnauthorized": false
+      }
     }
   },
   "fileName": "postgres_gcpServer.json"

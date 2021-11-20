@@ -42,12 +42,123 @@
           "connection": "postgres_gcpServer",
           "sql": {
             "type": "SELECT",
-            "columns": [],
+            "columns": [
+              {
+                "table": "tsu",
+                "column": "scheme1",
+                "alias": "scheme0"
+              },
+              {
+                "table": "tsu",
+                "column": "scheme2",
+                "alias": "scheme1"
+              },
+              {
+                "table": "tsu",
+                "column": "scheme3",
+                "alias": "scheme2"
+              },
+              {
+                "table": "tsu",
+                "column": "scheme4",
+                "alias": "scheme3"
+              },
+              {
+                "table": "m_users",
+                "column": "id"
+              },
+              {
+                "table": "m_users",
+                "column": "user_id"
+              },
+              {
+                "table": "m_users",
+                "column": "user_fname"
+              },
+              {
+                "table": "m_users",
+                "column": "user_lname"
+              },
+              {
+                "table": "m_users",
+                "column": "user_email"
+              },
+              {
+                "table": "m_users",
+                "column": "user_mobile"
+              },
+              {
+                "table": "m_users",
+                "column": "user_type"
+              },
+              {
+                "table": "m_users",
+                "column": "u_status"
+              },
+              {
+                "table": "m_users",
+                "column": "user_tpin"
+              },
+              {
+                "table": "m_users",
+                "column": "scheme_id"
+              },
+              {
+                "table": "m_users",
+                "column": "balance_amt"
+              },
+              {
+                "table": "m_users",
+                "column": "aadhar_no"
+              },
+              {
+                "table": "m_users",
+                "column": "pan_no"
+              },
+              {
+                "table": "m_users",
+                "column": "address"
+              },
+              {
+                "table": "m_users",
+                "column": "pin"
+              },
+              {
+                "table": "m_users",
+                "column": "state"
+              },
+              {
+                "table": "m_users",
+                "column": "district"
+              }
+            ],
             "table": {
               "name": "m_users"
             },
-            "joins": [],
-            "query": "SELECT *\nFROM m_users\nORDER BY user_id DESC",
+            "joins": [
+              {
+                "table": "t_scheme_user",
+                "column": "*",
+                "alias": "tsu",
+                "type": "LEFT",
+                "clauses": {
+                  "condition": "AND",
+                  "rules": [
+                    {
+                      "table": "tsu",
+                      "column": "user_id",
+                      "operator": "equal",
+                      "value": {
+                        "table": "m_users",
+                        "column": "id"
+                      },
+                      "operation": "="
+                    }
+                  ]
+                }
+              }
+            ],
+            "query": "SELECT tsu.scheme1 AS scheme0, tsu.scheme2 AS scheme1, tsu.scheme3 AS scheme2, tsu.scheme4 AS scheme3, m_users.id, m_users.user_id, m_users.user_fname, m_users.user_lname, m_users.user_email, m_users.user_mobile, m_users.user_type, m_users.u_status, m_users.user_tpin, m_users.scheme_id, m_users.balance_amt, m_users.aadhar_no, m_users.pan_no, m_users.address, m_users.pin, m_users.state, m_users.district\nFROM m_users\nLEFT JOIN t_scheme_user AS tsu ON (tsu.user_id = m_users.id)\nORDER BY m_users.user_id DESC",
             "params": [],
             "orders": [
               {
@@ -114,6 +225,22 @@
             "type": "array",
             "sub": [
               {
+                "name": "scheme0",
+                "type": "number"
+              },
+              {
+                "name": "scheme1",
+                "type": "number"
+              },
+              {
+                "name": "scheme2",
+                "type": "number"
+              },
+              {
+                "name": "scheme3",
+                "type": "number"
+              },
+              {
                 "name": "id",
                 "type": "text"
               },
@@ -130,32 +257,16 @@
                 "type": "text"
               },
               {
-                "name": "user_mobile",
-                "type": "text"
-              },
-              {
                 "name": "user_email",
                 "type": "text"
               },
               {
-                "name": "password",
-                "type": "text"
-              },
-              {
-                "name": "salt",
+                "name": "user_mobile",
                 "type": "text"
               },
               {
                 "name": "user_type",
                 "type": "number"
-              },
-              {
-                "name": "md_id",
-                "type": "text"
-              },
-              {
-                "name": "ds_id",
-                "type": "text"
               },
               {
                 "name": "u_status",
@@ -170,60 +281,32 @@
                 "type": "text"
               },
               {
-                "name": "ip",
-                "type": "text"
-              },
-              {
-                "name": "kyc_status",
-                "type": "text"
-              },
-              {
-                "name": "is_block",
-                "type": "number"
-              },
-              {
-                "name": "cap_amt",
-                "type": "number"
-              },
-              {
                 "name": "balance_amt",
-                "type": "number"
-              },
-              {
-                "name": "balance_outstanding",
-                "type": "number"
-              },
-              {
-                "name": "aeps_limit",
                 "type": "text"
               },
               {
-                "name": "aeps_balance",
-                "type": "number"
-              },
-              {
-                "name": "created_by",
+                "name": "aadhar_no",
                 "type": "text"
               },
               {
-                "name": "created_on",
-                "type": "datetime"
-              },
-              {
-                "name": "updated_by",
+                "name": "pan_no",
                 "type": "text"
               },
               {
-                "name": "updated_on",
-                "type": "datetime"
-              },
-              {
-                "name": "deleted_by",
+                "name": "address",
                 "type": "text"
               },
               {
-                "name": "deleted_on",
-                "type": "datetime"
+                "name": "pin",
+                "type": "text"
+              },
+              {
+                "name": "state",
+                "type": "text"
+              },
+              {
+                "name": "district",
+                "type": "text"
               }
             ]
           }

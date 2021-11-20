@@ -37,10 +37,6 @@
           },
           {
             "table": "m_users",
-            "column": "balance_outstanding"
-          },
-          {
-            "table": "m_users",
             "column": "aeps_balance"
           },
           {
@@ -54,6 +50,30 @@
           {
             "table": "m_users",
             "column": "user_email"
+          },
+          {
+            "table": "m_users",
+            "column": "aadhar_no"
+          },
+          {
+            "table": "m_users",
+            "column": "pan_no"
+          },
+          {
+            "table": "m_users",
+            "column": "address"
+          },
+          {
+            "table": "m_users",
+            "column": "pin"
+          },
+          {
+            "table": "m_users",
+            "column": "state"
+          },
+          {
+            "table": "m_users",
+            "column": "district"
           }
         ],
         "table": {
@@ -80,7 +100,7 @@
           "conditional": null,
           "valid": true
         },
-        "query": "SELECT balance_amt, balance_outstanding, aeps_balance, user_fname, user_mobile, user_email\nFROM m_users\nWHERE id = :P1 /* {{identity}} */",
+        "query": "SELECT balance_amt, aeps_balance, user_fname, user_mobile, user_email, aadhar_no, pan_no, address, pin, state, district\nFROM m_users\nWHERE id = :P1 /* {{identity}} */",
         "params": [
           {
             "operator": "equal",
@@ -95,15 +115,11 @@
     "meta": [
       {
         "name": "balance_amt",
-        "type": "number"
-      },
-      {
-        "name": "balance_outstanding",
-        "type": "number"
+        "type": "text"
       },
       {
         "name": "aeps_balance",
-        "type": "number"
+        "type": "text"
       },
       {
         "name": "user_fname",
@@ -115,6 +131,30 @@
       },
       {
         "name": "user_email",
+        "type": "text"
+      },
+      {
+        "name": "aadhar_no",
+        "type": "text"
+      },
+      {
+        "name": "pan_no",
+        "type": "text"
+      },
+      {
+        "name": "address",
+        "type": "text"
+      },
+      {
+        "name": "pin",
+        "type": "text"
+      },
+      {
+        "name": "state",
+        "type": "text"
+      },
+      {
+        "name": "district",
         "type": "text"
       }
     ],

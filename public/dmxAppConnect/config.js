@@ -2300,5 +2300,24 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "loginhistory": {
+    "tableRepeat1": {
+      "meta": [
+        {
+          "name": "ip_address",
+          "type": "text"
+        },
+        {
+          "name": "login_time",
+          "type": "datetime"
+        },
+        {
+          "name": "logout_time",
+          "type": "datetime"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });

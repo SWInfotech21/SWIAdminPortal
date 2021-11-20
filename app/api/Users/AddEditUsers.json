@@ -68,21 +68,104 @@
         "name": "mobile"
       },
       {
-        "type": "text",
-        "fieldName": "password",
+        "type": "number",
+        "fieldName": "aadhar",
         "options": {
           "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Aadhar no is required."
+            },
+            "core:number": {
+              "param": ""
+            },
             "core:maxlength": {
-              "param": "50"
+              "param": "12"
             }
           }
         },
-        "name": "password"
+        "name": "aadhar"
       },
       {
         "type": "text",
-        "fieldName": "status",
-        "name": "status"
+        "fieldName": "pan",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "PAN no is required."
+            },
+            "core:maxlength": {
+              "param": "10"
+            }
+          }
+        },
+        "name": "pan"
+      },
+      {
+        "type": "text",
+        "fieldName": "address",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Address is required."
+            },
+            "core:maxlength": {
+              "param": "100"
+            }
+          }
+        },
+        "name": "address"
+      },
+      {
+        "type": "number",
+        "fieldName": "pin",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "PIN is required."
+            },
+            "core:number": {},
+            "core:maxlength": {
+              "param": "100"
+            }
+          }
+        },
+        "name": "pin"
+      },
+      {
+        "type": "text",
+        "fieldName": "state",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "State is required."
+            },
+            "core:maxlength": {
+              "param": "100"
+            }
+          }
+        },
+        "name": "state"
+      },
+      {
+        "type": "text",
+        "fieldName": "district",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "District is required."
+            },
+            "core:maxlength": {
+              "param": "100"
+            }
+          }
+        },
+        "name": "district"
       },
       {
         "type": "number",
@@ -103,47 +186,35 @@
           }
         },
         "name": "scheme_id"
+      },
+      {
+        "type": "number",
+        "name": "scheme0"
+      },
+      {
+        "type": "number",
+        "name": "scheme1"
+      },
+      {
+        "type": "number",
+        "name": "scheme2"
+      },
+      {
+        "type": "number",
+        "name": "scheme3"
+      },
+      {
+        "type": "number",
+        "name": "user_type + 1"
+      },
+      {
+        "type": "text",
+        "name": "status"
       }
     ]
   },
   "exec": {
     "steps": [
-      {
-        "name": "",
-        "module": "auth",
-        "action": "restrict",
-        "options": {
-          "provider": "securityLogin",
-          "permissions": [
-            "write"
-          ],
-          "loginUrl": "/views/login",
-          "forbiddenUrl": "/403-forbidden"
-        }
-      },
-      {
-        "name": "validate",
-        "module": "validator",
-        "action": "validate",
-        "options": {
-          "data": [
-            {
-              "name": "validate_1",
-              "value": "{{$_POST.mobile}}",
-              "rules": {
-                "db:notexists": {
-                  "param": {
-                    "connection": "postgres_gcpServer",
-                    "table": "users",
-                    "column": "mobile"
-                  }
-                }
-              },
-              "fieldName": "mobile"
-            }
-          ]
-        }
-      },
       {
         "name": "identity",
         "module": "auth",
@@ -155,7 +226,7 @@
         "meta": []
       },
       {
-        "name": "CheckMobile",
+        "name": "SequenceNo",
         "module": "dbconnector",
         "action": "single",
         "options": {
@@ -166,7 +237,7 @@
               {
                 "table": "m_users",
                 "column": "id",
-                "alias": "count_user",
+                "alias": "u_no",
                 "aggregate": "COUNT"
               }
             ],
@@ -179,14 +250,14 @@
               "condition": "AND",
               "rules": [
                 {
-                  "id": "m_users.user_mobile",
-                  "field": "m_users.user_mobile",
-                  "type": "string",
+                  "id": "m_users.user_type",
+                  "field": "m_users.user_type",
+                  "type": "double",
                   "operator": "equal",
-                  "value": "{{$_POST.mobile}}",
+                  "value": "{{$_POST.user_type}}",
                   "data": {
                     "table": "m_users",
-                    "column": "user_mobile",
+                    "column": "user_type",
                     "type": "text"
                   },
                   "operation": "="
@@ -195,69 +266,144 @@
               "conditional": null,
               "valid": true
             },
-            "query": "SELECT COUNT(id) AS count_user\nFROM m_users\nWHERE user_mobile = :P1 /* {{$_POST.mobile}} */",
+            "query": "SELECT COUNT(id) AS u_no\nFROM m_users\nWHERE user_type = :P1 /* {{$_POST.user_type}} */",
             "params": [
               {
                 "operator": "equal",
                 "type": "expression",
                 "name": ":P1",
-                "value": "{{$_POST.mobile}}"
+                "value": "{{$_POST.user_type}}"
               }
-            ],
-            "orders": []
+            ]
           }
         },
         "output": true,
         "meta": [
           {
-            "name": "count_user",
+            "name": "u_no",
             "type": "text"
           }
         ],
         "outputType": "object"
       },
       {
+        "name": "User",
+        "module": "core",
+        "action": "setvalue",
+        "options": {
+          "value": "{{$_POST.user_type == 1 ? 'MD10' : $_POST.user_type == 2 ? 'DT20' : $_POST.user_type == 3 ? 'RT30' : 'UN40'}}"
+        }
+      },
+      {
+        "name": "UniqueID",
+        "module": "core",
+        "action": "setvalue",
+        "options": {
+          "value": "{{User+SequenceNo.u_no.sum('1')}}"
+        }
+      },
+      {
         "name": "",
         "module": "core",
         "action": "condition",
         "options": {
-          "if": "{{CheckMobile.count_user < 1}}",
+          "if": "{{$_POST.UserId != ''}}",
           "then": {
             "steps": [
               {
-                "name": "SequenceNo",
-                "module": "dbconnector",
-                "action": "single",
+                "name": "EditUsers",
+                "module": "dbupdater",
+                "action": "update",
                 "options": {
                   "connection": "postgres_gcpServer",
                   "sql": {
-                    "type": "SELECT",
-                    "columns": [
+                    "type": "update",
+                    "values": [
                       {
                         "table": "m_users",
-                        "column": "id",
-                        "alias": "u_no",
-                        "aggregate": "COUNT"
+                        "column": "user_fname",
+                        "type": "text",
+                        "value": "{{$_POST.name}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "user_type",
+                        "type": "text",
+                        "value": "{{$_POST.user_type}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "u_status",
+                        "type": "text",
+                        "value": "{{$_POST.status}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "updated_by",
+                        "type": "text",
+                        "value": "{{identity}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "updated_on",
+                        "type": "datetime",
+                        "value": "{{NOW}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "scheme_id",
+                        "type": "text",
+                        "value": "{{$_POST.scheme_id}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "aadhar_no",
+                        "type": "text",
+                        "value": "{{$_POST.aadhar}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "pan_no",
+                        "type": "text",
+                        "value": "{{$_POST.pan}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "address",
+                        "type": "text",
+                        "value": "{{$_POST.address}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "pin",
+                        "type": "text",
+                        "value": "{{$_POST.pin}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "state",
+                        "type": "text",
+                        "value": "{{$_POST.state}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "district",
+                        "type": "text",
+                        "value": "{{$_POST.district}}"
                       }
                     ],
-                    "groupBy": [],
-                    "table": {
-                      "name": "m_users"
-                    },
-                    "joins": [],
+                    "table": "m_users",
                     "wheres": {
                       "condition": "AND",
                       "rules": [
                         {
-                          "id": "m_users.user_type",
-                          "field": "m_users.user_type",
-                          "type": "string",
+                          "id": "id",
+                          "field": "id",
+                          "type": "double",
                           "operator": "equal",
-                          "value": "{{$_POST.user_type}}",
+                          "value": "{{$_POST.UserId}}",
                           "data": {
-                            "table": "m_users",
-                            "column": "user_type",
-                            "type": "text"
+                            "column": "id"
                           },
                           "operation": "="
                         }
@@ -265,51 +411,94 @@
                       "conditional": null,
                       "valid": true
                     },
-                    "query": "SELECT COUNT(id) AS u_no\nFROM m_users\nWHERE user_type = :P1 /* {{$_POST.user_type}} */",
+                    "query": "UPDATE m_users\nSET user_fname = :P1 /* {{$_POST.name}} */, user_type = :P2 /* {{$_POST.user_type}} */, u_status = :P3 /* {{$_POST.status}} */, updated_by = :P4 /* {{identity}} */, updated_on = :P5 /* {{NOW}} */, scheme_id = :P6 /* {{$_POST.scheme_id}} */, aadhar_no = :P7 /* {{$_POST.aadhar}} */, pan_no = :P8 /* {{$_POST.pan}} */, address = :P9 /* {{$_POST.address}} */, pin = :P10 /* {{$_POST.pin}} */, state = :P11 /* {{$_POST.state}} */, district = :P12 /* {{$_POST.district}} */\nWHERE id = :P13 /* {{$_POST.UserId}} */",
                     "params": [
+                      {
+                        "name": ":P1",
+                        "type": "expression",
+                        "value": "{{$_POST.name}}"
+                      },
+                      {
+                        "name": ":P2",
+                        "type": "expression",
+                        "value": "{{$_POST.user_type}}"
+                      },
+                      {
+                        "name": ":P3",
+                        "type": "expression",
+                        "value": "{{$_POST.status}}"
+                      },
+                      {
+                        "name": ":P4",
+                        "type": "expression",
+                        "value": "{{identity}}"
+                      },
+                      {
+                        "name": ":P5",
+                        "type": "expression",
+                        "value": "{{NOW}}"
+                      },
+                      {
+                        "name": ":P6",
+                        "type": "expression",
+                        "value": "{{$_POST.scheme_id}}"
+                      },
+                      {
+                        "name": ":P7",
+                        "type": "expression",
+                        "value": "{{$_POST.aadhar}}"
+                      },
+                      {
+                        "name": ":P8",
+                        "type": "expression",
+                        "value": "{{$_POST.pan}}"
+                      },
+                      {
+                        "name": ":P9",
+                        "type": "expression",
+                        "value": "{{$_POST.address}}"
+                      },
+                      {
+                        "name": ":P10",
+                        "type": "expression",
+                        "value": "{{$_POST.pin}}"
+                      },
+                      {
+                        "name": ":P11",
+                        "type": "expression",
+                        "value": "{{$_POST.state}}"
+                      },
+                      {
+                        "name": ":P12",
+                        "type": "expression",
+                        "value": "{{$_POST.district}}"
+                      },
                       {
                         "operator": "equal",
                         "type": "expression",
-                        "name": ":P1",
-                        "value": "{{$_POST.user_type}}"
+                        "name": ":P13",
+                        "value": "{{$_POST.UserId}}"
                       }
                     ]
                   }
                 },
-                "output": true,
                 "meta": [
                   {
-                    "name": "u_no",
-                    "type": "text"
+                    "name": "affected",
+                    "type": "number"
                   }
                 ],
-                "outputType": "object"
-              },
-              {
-                "name": "User",
-                "module": "core",
-                "action": "setvalue",
-                "options": {
-                  "value": "{{$_POST.user_type == 1 ? 'MD10' : $_POST.user_type == 2 ? 'DT20' : $_POST.user_type == 3 ? 'RT30' : 'UN40'}}"
-                }
-              },
-              {
-                "name": "UniqueID",
-                "module": "core",
-                "action": "setvalue",
-                "options": {
-                  "value": "{{User+SequenceNo.u_no.sum('1')}}"
-                }
+                "output": true
               },
               {
                 "name": "",
                 "module": "core",
                 "action": "condition",
                 "options": {
-                  "if": "{{$_POST.UserId != ''}}",
+                  "if": "{{$_POST.user_type < 3}}",
                   "then": {
                     "steps": {
-                      "name": "EditUsers",
+                      "name": "schemeFrRT",
                       "module": "dbupdater",
                       "action": "update",
                       "options": {
@@ -318,66 +507,58 @@
                           "type": "update",
                           "values": [
                             {
-                              "table": "m_users",
-                              "column": "user_fname",
-                              "type": "text",
-                              "value": "{{$_POST.name}}"
+                              "table": "t_scheme_user",
+                              "column": "scheme1",
+                              "type": "number",
+                              "value": "{{$_POST.scheme0}}",
+                              "condition": "{{$_POST.scheme0}}"
                             },
                             {
-                              "table": "m_users",
-                              "column": "user_mobile",
-                              "type": "text",
-                              "value": "{{$_POST.mobile}}"
+                              "table": "t_scheme_user",
+                              "column": "scheme2",
+                              "type": "number",
+                              "value": "{{$_POST.scheme1}}",
+                              "condition": "{{$_POST.scheme1}}"
                             },
                             {
-                              "table": "m_users",
-                              "column": "user_email",
-                              "type": "text",
-                              "value": "{{$_POST.email.lowercase()}}"
+                              "table": "t_scheme_user",
+                              "column": "scheme3",
+                              "type": "number",
+                              "value": "{{$_POST.scheme2}}",
+                              "condition": "{{$_POST.scheme2}}"
                             },
                             {
-                              "table": "m_users",
-                              "column": "user_type",
-                              "type": "text",
-                              "value": "{{$_POST.user_type}}"
+                              "table": "t_scheme_user",
+                              "column": "scheme4",
+                              "type": "number",
+                              "value": "{{$_POST.scheme3}}",
+                              "condition": "{{$_POST.scheme3}}"
                             },
                             {
-                              "table": "m_users",
-                              "column": "u_status",
-                              "type": "text",
-                              "value": "{{$_POST.status}}"
-                            },
-                            {
-                              "table": "m_users",
+                              "table": "t_scheme_user",
                               "column": "updated_by",
                               "type": "text",
                               "value": "{{identity}}"
                             },
                             {
-                              "table": "m_users",
+                              "table": "t_scheme_user",
                               "column": "updated_on",
                               "type": "datetime",
                               "value": "{{NOW}}"
-                            },
-                            {
-                              "table": "m_users",
-                              "column": "scheme_id",
-                              "type": "text",
-                              "value": "{{$_POST.scheme_id}}"
                             }
                           ],
-                          "table": "m_users",
+                          "table": "t_scheme_user",
                           "wheres": {
                             "condition": "AND",
                             "rules": [
                               {
-                                "id": "id",
-                                "field": "id",
+                                "id": "user_id",
+                                "field": "user_id",
                                 "type": "double",
                                 "operator": "equal",
                                 "value": "{{$_POST.UserId}}",
                                 "data": {
-                                  "column": "id"
+                                  "column": "user_id"
                                 },
                                 "operation": "="
                               }
@@ -385,52 +566,42 @@
                             "conditional": null,
                             "valid": true
                           },
-                          "query": "UPDATE m_users\nSET user_fname = :P1 /* {{$_POST.name}} */, user_mobile = :P2 /* {{$_POST.mobile}} */, user_email = :P3 /* {{$_POST.email.lowercase()}} */, user_type = :P4 /* {{$_POST.user_type}} */, u_status = :P5 /* {{$_POST.status}} */, updated_by = :P6 /* {{identity}} */, updated_on = :P7 /* {{NOW}} */, scheme_id = :P8 /* {{$_POST.scheme_id}} */\nWHERE id = :P9 /* {{$_POST.UserId}} */",
+                          "query": "UPDATE t_scheme_user\nSET scheme1 = :P1 /* {{$_POST.scheme0}} */, scheme2 = :P2 /* {{$_POST.scheme1}} */, scheme3 = :P3 /* {{$_POST.scheme2}} */, scheme4 = :P4 /* {{$_POST.scheme3}} */, updated_by = :P5 /* {{identity}} */, updated_on = :P6 /* {{NOW}} */\nWHERE user_id = :P7 /* {{$_POST.UserId}} */",
                           "params": [
                             {
                               "name": ":P1",
                               "type": "expression",
-                              "value": "{{$_POST.name}}"
+                              "value": "{{$_POST.scheme0}}"
                             },
                             {
                               "name": ":P2",
                               "type": "expression",
-                              "value": "{{$_POST.mobile}}"
+                              "value": "{{$_POST.scheme1}}"
                             },
                             {
                               "name": ":P3",
                               "type": "expression",
-                              "value": "{{$_POST.email.lowercase()}}"
+                              "value": "{{$_POST.scheme2}}"
                             },
                             {
                               "name": ":P4",
                               "type": "expression",
-                              "value": "{{$_POST.user_type}}"
+                              "value": "{{$_POST.scheme3}}"
                             },
                             {
                               "name": ":P5",
                               "type": "expression",
-                              "value": "{{$_POST.status}}"
+                              "value": "{{identity}}"
                             },
                             {
                               "name": ":P6",
                               "type": "expression",
-                              "value": "{{identity}}"
-                            },
-                            {
-                              "name": ":P7",
-                              "type": "expression",
                               "value": "{{NOW}}"
-                            },
-                            {
-                              "name": ":P8",
-                              "type": "expression",
-                              "value": "{{$_POST.scheme_id}}"
                             },
                             {
                               "operator": "equal",
                               "type": "expression",
-                              "name": ":P9",
+                              "name": ":P7",
                               "value": "{{$_POST.UserId}}"
                             }
                           ]
@@ -444,10 +615,322 @@
                       ],
                       "output": true
                     }
+                  }
+                },
+                "outputType": "boolean"
+              }
+            ]
+          },
+          "else": {
+            "steps": [
+              {
+                "name": "validate",
+                "module": "validator",
+                "action": "validate",
+                "options": {
+                  "data": [
+                    {
+                      "name": "validate_1",
+                      "value": "{{$_POST.mobile}}",
+                      "rules": {
+                        "db:notexists": {
+                          "param": {
+                            "connection": "postgres_gcpServer",
+                            "table": "m_users",
+                            "column": "user_mobile"
+                          },
+                          "message": "Mobile No. already exists in database."
+                        }
+                      },
+                      "fieldName": "mobile"
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "password",
+                "module": "core",
+                "action": "setvalue",
+                "options": {
+                  "value": "{{NOW.md5(123456).substr(1, 9)}}"
+                },
+                "output": true
+              },
+              {
+                "name": "AddUser",
+                "module": "dbupdater",
+                "action": "insert",
+                "options": {
+                  "connection": "postgres_gcpServer",
+                  "sql": {
+                    "type": "insert",
+                    "values": [
+                      {
+                        "table": "m_users",
+                        "column": "user_id",
+                        "type": "text",
+                        "value": "{{UniqueID}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "user_fname",
+                        "type": "text",
+                        "value": "{{$_POST.name}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "user_mobile",
+                        "type": "text",
+                        "value": "{{$_POST.mobile}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "user_email",
+                        "type": "text",
+                        "value": "{{$_POST.email.lowercase()}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "password",
+                        "type": "text",
+                        "value": "{{password.sha256(NOW)}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "salt",
+                        "type": "text",
+                        "value": "{{NOW}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "user_type",
+                        "type": "text",
+                        "value": "{{$_POST.user_type}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "u_status",
+                        "type": "text",
+                        "value": "1"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "created_by",
+                        "type": "text",
+                        "value": "{{identity}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "created_on",
+                        "type": "datetime",
+                        "value": "{{NOW}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "user_lname",
+                        "type": "text",
+                        "value": "{{'https://github.com/ado.png'}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "cap_amt",
+                        "type": "number",
+                        "value": "0"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "balance_amt",
+                        "type": "number",
+                        "value": "0"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "balance_outstanding",
+                        "type": "number",
+                        "value": "0"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "aeps_balance",
+                        "type": "number",
+                        "value": "0"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "scheme_id",
+                        "type": "text",
+                        "value": "{{$_POST.scheme_id}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "aadhar_no",
+                        "type": "text",
+                        "value": "{{$_POST.aadhar}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "pan_no",
+                        "type": "text",
+                        "value": "{{$_POST.pan}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "address",
+                        "type": "text",
+                        "value": "{{$_POST.address}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "pin",
+                        "type": "text",
+                        "value": "{{$_POST.pin}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "state",
+                        "type": "text",
+                        "value": "{{$_POST.state}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "district",
+                        "type": "text",
+                        "value": "{{$_POST.district}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "blank1",
+                        "type": "text",
+                        "value": "{{password}}"
+                      }
+                    ],
+                    "table": "m_users",
+                    "query": "INSERT INTO m_users\n(user_id, user_fname, user_mobile, user_email, password, salt, user_type, u_status, created_by, created_on, user_lname, cap_amt, balance_amt, balance_outstanding, aeps_balance, scheme_id, aadhar_no, pan_no, address, pin, state, district, blank1) VALUES (:P1 /* {{UniqueID}} */, :P2 /* {{$_POST.name}} */, :P3 /* {{$_POST.mobile}} */, :P4 /* {{$_POST.email.lowercase()}} */, :P5 /* {{password.sha256(NOW)}} */, :P6 /* {{NOW}} */, :P7 /* {{$_POST.user_type}} */, '1', :P8 /* {{identity}} */, :P9 /* {{NOW}} */, :P10 /* {{'https://github.com/ado.png'}} */, '0', '0', '0', '0', :P11 /* {{$_POST.scheme_id}} */, :P12 /* {{$_POST.aadhar}} */, :P13 /* {{$_POST.pan}} */, :P14 /* {{$_POST.address}} */, :P15 /* {{$_POST.pin}} */, :P16 /* {{$_POST.state}} */, :P17 /* {{$_POST.district}} */, :P18 /* {{password}} */)",
+                    "params": [
+                      {
+                        "name": ":P1",
+                        "type": "expression",
+                        "value": "{{UniqueID}}"
+                      },
+                      {
+                        "name": ":P2",
+                        "type": "expression",
+                        "value": "{{$_POST.name}}"
+                      },
+                      {
+                        "name": ":P3",
+                        "type": "expression",
+                        "value": "{{$_POST.mobile}}"
+                      },
+                      {
+                        "name": ":P4",
+                        "type": "expression",
+                        "value": "{{$_POST.email.lowercase()}}"
+                      },
+                      {
+                        "name": ":P5",
+                        "type": "expression",
+                        "value": "{{password.sha256(NOW)}}"
+                      },
+                      {
+                        "name": ":P6",
+                        "type": "expression",
+                        "value": "{{NOW}}"
+                      },
+                      {
+                        "name": ":P7",
+                        "type": "expression",
+                        "value": "{{$_POST.user_type}}"
+                      },
+                      {
+                        "name": ":P8",
+                        "type": "expression",
+                        "value": "{{identity}}"
+                      },
+                      {
+                        "name": ":P9",
+                        "type": "expression",
+                        "value": "{{NOW}}"
+                      },
+                      {
+                        "name": ":P10",
+                        "type": "expression",
+                        "value": "{{'https://github.com/ado.png'}}"
+                      },
+                      {
+                        "name": ":P11",
+                        "type": "expression",
+                        "value": "{{$_POST.scheme_id}}"
+                      },
+                      {
+                        "name": ":P12",
+                        "type": "expression",
+                        "value": "{{$_POST.aadhar}}"
+                      },
+                      {
+                        "name": ":P13",
+                        "type": "expression",
+                        "value": "{{$_POST.pan}}"
+                      },
+                      {
+                        "name": ":P14",
+                        "type": "expression",
+                        "value": "{{$_POST.address}}"
+                      },
+                      {
+                        "name": ":P15",
+                        "type": "expression",
+                        "value": "{{$_POST.pin}}"
+                      },
+                      {
+                        "name": ":P16",
+                        "type": "expression",
+                        "value": "{{$_POST.state}}"
+                      },
+                      {
+                        "name": ":P17",
+                        "type": "expression",
+                        "value": "{{$_POST.district}}"
+                      },
+                      {
+                        "name": ":P18",
+                        "type": "expression",
+                        "value": "{{password}}"
+                      }
+                    ],
+                    "returning": "id"
+                  }
+                },
+                "meta": [
+                  {
+                    "name": "identity",
+                    "type": "text"
                   },
-                  "else": {
+                  {
+                    "name": "affected",
+                    "type": "number"
+                  }
+                ],
+                "output": true
+              },
+              {
+                "name": "user_type",
+                "module": "core",
+                "action": "setvalue",
+                "options": {
+                  "value": "{{$_POST.user_type}}"
+                },
+                "output": true
+              },
+              {
+                "name": "",
+                "module": "core",
+                "action": "condition",
+                "options": {
+                  "if": "{{$_POST.user_type < 3}}",
+                  "then": {
                     "steps": {
-                      "name": "AddUser",
+                      "name": "schemeRt",
                       "module": "dbupdater",
                       "action": "insert",
                       "options": {
@@ -456,167 +939,103 @@
                           "type": "insert",
                           "values": [
                             {
-                              "table": "m_users",
+                              "table": "t_scheme_user",
                               "column": "user_id",
-                              "type": "text",
-                              "value": "{{UniqueID}}"
+                              "type": "number",
+                              "value": "{{AddUser.identity}}"
                             },
                             {
-                              "table": "m_users",
-                              "column": "user_fname",
-                              "type": "text",
-                              "value": "{{$_POST.name}}"
+                              "table": "t_scheme_user",
+                              "column": "scheme1",
+                              "type": "number",
+                              "value": "{{$_POST.scheme0}}",
+                              "condition": "{{$_POST.scheme0}}"
                             },
                             {
-                              "table": "m_users",
-                              "column": "user_mobile",
-                              "type": "text",
-                              "value": "{{$_POST.mobile}}"
+                              "table": "t_scheme_user",
+                              "column": "scheme2",
+                              "type": "number",
+                              "value": "{{$_POST.scheme1}}",
+                              "condition": "{{$_POST.scheme1}}"
                             },
                             {
-                              "table": "m_users",
-                              "column": "user_email",
-                              "type": "text",
-                              "value": "{{$_POST.email.lowercase()}}"
+                              "table": "t_scheme_user",
+                              "column": "scheme3",
+                              "type": "number",
+                              "value": "{{$_POST.scheme2}}",
+                              "condition": "{{$_POST.scheme2}}"
                             },
                             {
-                              "table": "m_users",
-                              "column": "password",
-                              "type": "text",
-                              "value": "{{$_POST.password.sha256(NOW)}}"
+                              "table": "t_scheme_user",
+                              "column": "scheme4",
+                              "type": "number",
+                              "value": "{{$_POST.scheme3}}",
+                              "condition": "{{$_POST.scheme3}}"
                             },
                             {
-                              "table": "m_users",
-                              "column": "salt",
-                              "type": "text",
-                              "value": "{{NOW}}"
-                            },
-                            {
-                              "table": "m_users",
-                              "column": "user_type",
-                              "type": "text",
-                              "value": "{{$_POST.user_type}}"
-                            },
-                            {
-                              "table": "m_users",
-                              "column": "u_status",
-                              "type": "text",
-                              "value": "{{$_POST.status}}"
-                            },
-                            {
-                              "table": "m_users",
+                              "table": "t_scheme_user",
                               "column": "created_by",
                               "type": "text",
                               "value": "{{identity}}"
                             },
                             {
-                              "table": "m_users",
+                              "table": "t_scheme_user",
                               "column": "created_on",
                               "type": "datetime",
                               "value": "{{NOW}}"
                             },
                             {
-                              "table": "m_users",
-                              "column": "user_lname",
-                              "type": "text",
-                              "value": "{{'https://github.com/ado.png'}}"
-                            },
-                            {
-                              "table": "m_users",
-                              "column": "cap_amt",
+                              "table": "t_scheme_user",
+                              "column": "for_user_type",
                               "type": "number",
-                              "value": "0"
-                            },
-                            {
-                              "table": "m_users",
-                              "column": "balance_amt",
-                              "type": "number",
-                              "value": "0"
-                            },
-                            {
-                              "table": "m_users",
-                              "column": "balance_outstanding",
-                              "type": "number",
-                              "value": "0"
-                            },
-                            {
-                              "table": "m_users",
-                              "column": "aeps_balance",
-                              "type": "number",
-                              "value": "0"
-                            },
-                            {
-                              "table": "m_users",
-                              "column": "scheme_id",
-                              "type": "text",
-                              "value": "{{$_POST.scheme_id}}"
+                              "value": "{{$_POST.user_type.sum('1')}}"
                             }
                           ],
-                          "table": "m_users",
-                          "query": "INSERT INTO m_users\n(user_id, user_fname, user_mobile, user_email, password, salt, user_type, u_status, created_by, created_on, user_lname, cap_amt, balance_amt, balance_outstanding, aeps_balance, scheme_id) VALUES (:P1 /* {{UniqueID}} */, :P2 /* {{$_POST.name}} */, :P3 /* {{$_POST.mobile}} */, :P4 /* {{$_POST.email.lowercase()}} */, :P5 /* {{$_POST.password.sha256(NOW)}} */, :P6 /* {{NOW}} */, :P7 /* {{$_POST.user_type}} */, :P8 /* {{$_POST.status}} */, :P9 /* {{identity}} */, :P10 /* {{NOW}} */, :P11 /* {{'https://github.com/ado.png'}} */, '0', '0', '0', '0', :P12 /* {{$_POST.scheme_id}} */)",
+                          "table": "t_scheme_user",
+                          "returning": "id",
+                          "query": "INSERT INTO t_scheme_user\n(user_id, scheme1, scheme2, scheme3, scheme4, created_by, created_on, for_user_type) VALUES (:P1 /* {{AddUser.identity}} */, :P2 /* {{$_POST.scheme0}} */, :P3 /* {{$_POST.scheme1}} */, :P4 /* {{$_POST.scheme2}} */, :P5 /* {{$_POST.scheme3}} */, :P6 /* {{identity}} */, :P7 /* {{NOW}} */, :P8 /* {{$_POST.user_type.sum('1')}} */)",
                           "params": [
                             {
                               "name": ":P1",
                               "type": "expression",
-                              "value": "{{UniqueID}}"
+                              "value": "{{AddUser.identity}}"
                             },
                             {
                               "name": ":P2",
                               "type": "expression",
-                              "value": "{{$_POST.name}}"
+                              "value": "{{$_POST.scheme0}}"
                             },
                             {
                               "name": ":P3",
                               "type": "expression",
-                              "value": "{{$_POST.mobile}}"
+                              "value": "{{$_POST.scheme1}}"
                             },
                             {
                               "name": ":P4",
                               "type": "expression",
-                              "value": "{{$_POST.email.lowercase()}}"
+                              "value": "{{$_POST.scheme2}}"
                             },
                             {
                               "name": ":P5",
                               "type": "expression",
-                              "value": "{{$_POST.password.sha256(NOW)}}"
+                              "value": "{{$_POST.scheme3}}"
                             },
                             {
                               "name": ":P6",
                               "type": "expression",
-                              "value": "{{NOW}}"
+                              "value": "{{identity}}"
                             },
                             {
                               "name": ":P7",
                               "type": "expression",
-                              "value": "{{$_POST.user_type}}"
+                              "value": "{{NOW}}"
                             },
                             {
                               "name": ":P8",
                               "type": "expression",
-                              "value": "{{$_POST.status}}"
-                            },
-                            {
-                              "name": ":P9",
-                              "type": "expression",
-                              "value": "{{identity}}"
-                            },
-                            {
-                              "name": ":P10",
-                              "type": "expression",
-                              "value": "{{NOW}}"
-                            },
-                            {
-                              "name": ":P11",
-                              "type": "expression",
-                              "value": "{{'https://github.com/ado.png'}}"
-                            },
-                            {
-                              "name": ":P12",
-                              "type": "expression",
-                              "value": "{{$_POST.scheme_id}}"
+                              "value": "{{$_POST.user_type.sum('1')}}"
                             }
-                          ],
-                          "returning": "id"
+                          ]
                         }
                       },
                       "meta": [
