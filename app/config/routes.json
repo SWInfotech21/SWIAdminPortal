@@ -12,11 +12,6 @@
       "layout": "main"
     },
     {
-      "path": "/mobile-recharge",
-      "page": "mobile-recharge",
-      "layout": "main"
-    },
-    {
       "path": "/login",
       "page": "login"
     },
@@ -118,6 +113,11 @@
     {
       "path": "/send-sms",
       "page": "send-sms",
+      "layout": "main"
+    },
+    {
+      "path": "/dashboard",
+      "page": "dashboard",
       "layout": "main"
     }
   ]

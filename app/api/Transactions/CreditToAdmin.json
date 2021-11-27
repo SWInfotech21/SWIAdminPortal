@@ -130,28 +130,28 @@
         "output": true,
         "meta": [
           {
-            "name": "user_fname",
-            "type": "text"
+            "type": "text",
+            "name": "user_fname"
           },
           {
-            "name": "user_mobile",
-            "type": "text"
+            "type": "text",
+            "name": "user_mobile"
           },
           {
-            "name": "user_email",
-            "type": "text"
+            "type": "text",
+            "name": "user_email"
           },
           {
-            "name": "user_tpin",
-            "type": "text"
+            "type": "text",
+            "name": "user_tpin"
           },
           {
-            "name": "balance_amt",
-            "type": "text"
+            "type": "text",
+            "name": "balance_amt"
           },
           {
-            "name": "balance_outstanding",
-            "type": "text"
+            "type": "text",
+            "name": "balance_outstanding"
           }
         ],
         "outputType": "object"
@@ -171,7 +171,9 @@
                 "options": {
                   "value": "{{NOW.md5(123456).substr(1, 9)}}"
                 },
-                "output": true
+                "output": true,
+                "meta": [],
+                "outputType": "text"
               },
               {
                 "name": "GetOperatorId",
@@ -244,12 +246,12 @@
                 "output": true,
                 "meta": [
                   {
-                    "name": "op_id",
-                    "type": "text"
+                    "type": "number",
+                    "name": "op_id"
                   },
                   {
-                    "name": "service_id",
-                    "type": "number"
+                    "type": "number",
+                    "name": "service_id"
                   }
                 ],
                 "outputType": "object"
@@ -269,7 +271,9 @@
                         "options": {
                           "value": "{{GetAdminDetails.balance_amt.toNumber() +$_POST.admin_credit_amount.toNumber()}}"
                         },
-                        "output": true
+                        "output": true,
+                        "meta": [],
+                        "outputType": "text"
                       },
                       {
                         "name": "WalletCrRechTrans",
@@ -410,7 +414,7 @@
                                 "table": "tt_recharge_trans",
                                 "column": "api_logs",
                                 "type": "text",
-                                "value": "{{'N/A'}}"
+                                "value": "0"
                               },
                               {
                                 "table": "tt_recharge_trans",
@@ -428,7 +432,7 @@
                                 "table": "tt_recharge_trans",
                                 "column": "api_ref",
                                 "type": "text",
-                                "value": "0"
+                                "value": "{{'N/A'}}"
                               },
                               {
                                 "table": "tt_recharge_trans",
@@ -547,7 +551,7 @@
                             ],
                             "table": "tt_recharge_trans",
                             "returning": "id",
-                            "query": "INSERT INTO tt_recharge_trans\n(op_id, service_id, api_id, user_id, user_number, details, opening_balance, amount, comm_per, comm_val, comm_amt, other_charge, charge_per, charge_amt, net_amt, closing_balance, tr_mode, tr_type, status, tr_id, reason, api_logs, is_processed, operator_ref, api_ref, revert_trans, ip_address, api_response_id, process_mode, live, tr_date, transaction_by, dtcommper, dtcommval, dtcommamt, dtchargeper, dtchargeval, dtchargeamt, mdtcommper, mdtcommval, mdtcommamt, mdtchargeper, mdtchargeval, mdtchargeamt) VALUES (:P1 /* {{GetOperatorId.op_id}} */, :P2 /* {{GetOperatorId.service_id}} */, '0', :P3 /* {{identity}} */, :P4 /* {{GetAdminDetails.user_mobile}} */, :P5 /* {{GetAdminDetails.user_fname}} */, :P6 /* {{GetAdminDetails.balance_amt}} */, :P7 /* {{$_POST.admin_credit_amount}} */, '0', '0', '0', '0', '0', '0', :P8 /* {{$_POST.admin_credit_amount}} */, :P9 /* {{ClosingBalWallet}} */, :P10 /* {{'Web'}} */, :P11 /* {{'Virtual'}} */, :P12 /* {{'SUCCESS'}} */, :P13 /* {{TransId}} */, :P14 /* {{'Admin Wallet Balance Updated'}} */, :P15 /* {{'N/A'}} */, '0', '0', '0', '0', :P16 /* {{$_SERVER.REMOTE_ADDR}} */, '0', :P17 /* {{'P2P'}} */, :P18 /* {{'Live'}} */, :P19 /* {{NOW}} */, :P20 /* {{identity}} */, '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0')",
+                            "query": "INSERT INTO tt_recharge_trans\n(op_id, service_id, api_id, user_id, user_number, details, opening_balance, amount, comm_per, comm_val, comm_amt, other_charge, charge_per, charge_amt, net_amt, closing_balance, tr_mode, tr_type, status, tr_id, reason, api_logs, is_processed, operator_ref, api_ref, revert_trans, ip_address, api_response_id, process_mode, live, tr_date, transaction_by, dtcommper, dtcommval, dtcommamt, dtchargeper, dtchargeval, dtchargeamt, mdtcommper, mdtcommval, mdtcommamt, mdtchargeper, mdtchargeval, mdtchargeamt) VALUES (:P1 /* {{GetOperatorId.op_id}} */, :P2 /* {{GetOperatorId.service_id}} */, '0', :P3 /* {{identity}} */, :P4 /* {{GetAdminDetails.user_mobile}} */, :P5 /* {{GetAdminDetails.user_fname}} */, :P6 /* {{GetAdminDetails.balance_amt}} */, :P7 /* {{$_POST.admin_credit_amount}} */, '0', '0', '0', '0', '0', '0', :P8 /* {{$_POST.admin_credit_amount}} */, :P9 /* {{ClosingBalWallet}} */, :P10 /* {{'Web'}} */, :P11 /* {{'Virtual'}} */, :P12 /* {{'SUCCESS'}} */, :P13 /* {{TransId}} */, :P14 /* {{'Admin Wallet Balance Updated'}} */, '0', '0', '0', :P15 /* {{'N/A'}} */, '0', :P16 /* {{$_SERVER.REMOTE_ADDR}} */, '0', :P17 /* {{'P2P'}} */, :P18 /* {{'Live'}} */, :P19 /* {{NOW}} */, :P20 /* {{identity}} */, '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0')",
                             "params": [
                               {
                                 "name": ":P1",

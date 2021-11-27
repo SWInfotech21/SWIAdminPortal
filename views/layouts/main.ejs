@@ -2,10 +2,17 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="dmxAppConnect/dmxDatePicker/daterangepicker.min.css" />
-
     <script src="dmxAppConnect/dmxAppConnect.js"></script>
     <script src="js/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.25.1/moment.min.js"></script>
+    <script src="dmxAppConnect/dmxCharts/Chart.min.js" defer=""></script>
+
+    <script src="dmxAppConnect/dmxCharts/dmxCharts.js" defer=""></script>
+
+    <link rel="stylesheet" href="dmxAppConnect/dmxDatePicker/daterangepicker.min.css" />
+
+
+
     <script src="dmxAppConnect/dmxDatePicker/daterangepicker.min.js" defer=""></script>
 
     <link rel="stylesheet" href="dmxAppConnect/dmxDatePicker/dmxDatePicker.css" />
@@ -130,7 +137,9 @@
 
 <body is="dmx-app" id="main">
     <div is="dmx-browser" id="browserMain"></div>
-    <dmx-notifications id="scNotif" newest-on-top="true" timeout="10000"></dmx-notifications>
+    <dmx-notifications id="scNotif" newest-on-top="true" timeout="10000">
+    </dmx-notifications>
+    <dmx-datetime id="dateNow" interval="days"></dmx-datetime>
     <div is="dmx-view" id="content">
 
         <!-- Custom Navbar Starts-->
@@ -174,11 +183,11 @@
                             </li>
                             <li><a class="sf-with-ul" href="javascript:void(0)">Master&emsp;<i class="fas fa-angle-down"></i></a>
                                 <ul>
-                                    <li><a href="scheme-commision-set">Scheme Commision Set</a></li>
-                                    <li><a href="mobile-recharge">Mobile Recharge</a></li>
-                                    <li><a href="relation-op-api">Relation API Operator</a></li>
+                                    <li><a href="scheme-commision-set">API Scheme Commision</a></li>
+                                    <!-- <li><a href="mobile-recharge">Mobile Recharge</a></li> -->
+                                    <li><a href="relation-op-api">API Operator Connection</a></li>
                                     <li><a href="api-add-update">API Add Update</a></li>
-                                    <li><a href="scheme-priority">Scheme Priority</a></li>
+                                    <!-- <li><a href="scheme-priority">Scheme Priority</a></li> -->
                                     <li><a href="scheme">Scheme</a></li>
                                     <li><a href="operators">Operator</a></li>
                                     <li><a href="services">Services</a></li>

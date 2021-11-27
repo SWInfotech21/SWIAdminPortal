@@ -39,8 +39,7 @@
                     <td dmx-text="operator_type == 1 ? 'Admin' : operator_type == 2 ? 'DT' : operator_type == 3 ? 'RT' : 'None'" dmx-class:table-primary="operator_type == 1" dmx-class:table-success="operator_type == 2" dmx-class:table-warning="operator_type == 3" dmx-class:table-danger="operator_type == 4"></td>
                     <td dmx-text="status != 1 ?'Inactive' : 'Active'" dmx-class:table-primary="status == 1" dmx-class:table-warning="status != 1"></td>
                     <td>
-                        <a class="dropdown-item" href="#" dmx-on:click="ddOperators.select(op_id)" data-bs-toggle="modal" data-bs-target="#modalAddOperators"><i class="fas fa-edit sw-col-ar" title="Edit Operator"></i></a>&emsp;
-                        <a class="dropdown-item" href="#" dmx-on:click="ddOperators.select('op_id')" data-bs-toggle="modal" data-bs-target="#modalDelUser"><i class="far fa-trash-alt" title="Delete User"></i></a>
+                        <a class="dropdown-item" href="#" dmx-on:click="ddOperators.select(op_id)" data-bs-toggle="modal" data-bs-target="#modalAddOperators"><i class="fas fa-edit sw-col-ar" title="Edit Operator"></i></a>
                     </td>
                 </tr>
             </tbody>
@@ -82,7 +81,7 @@
                     <div class="mb-3 row">
                         <label for="inp_service" class="col-sm-2 col-form-label">Service</label>
                         <div class="col-sm-10">
-                            <select type="text" class="form-control" id="inp_Operator_service" name="service" aria-describedby="inp_service_help" placeholder="Enter Service" dmx-bind:options="scService.data.FetchServices.data" optiontext="service_name" optionvalue="id" dmx-bind:value="ddOperators.data.service_id">
+                            <select type="text" class="form-control form-select" id="inp_Operator_service" name="service" aria-describedby="inp_service_help" placeholder="Enter Service" dmx-bind:options="scService.data.FetchServices.data" optiontext="service_name" optionvalue="id" dmx-bind:value="ddOperators.data.service_id">
                                 <option value="">Select Service</option>
                             </select>
 

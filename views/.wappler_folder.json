@@ -94,5 +94,9 @@
   "send-sms.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "dashboard.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }

@@ -65,7 +65,7 @@
                     <div class="mb-3 row">
                         <label for="inp_name" class="col-sm-2 col-form-label">Select Operator</label>
                         <div class="col-sm-10">
-                            <select type="text" class="form-control" id="inp_operator_id" name="operator_id" aria-describedby="inp_operator_api_help" dmx-bind:options="scOperator.data.OperatorFetch.data" optiontext="operator_name" optionvalue="op_id" required="" dmx-on:changed="flowApiCode.run()">
+                            <select type="text" class="form-control form-select" id="inp_operator_id" name="operator_id" aria-describedby="inp_operator_api_help" dmx-bind:options="scOperator.data.OperatorFetch.data" optiontext="operator_name" optionvalue="op_id" required="" dmx-on:changed="flowApiCode.run()">
                                 <option value="">Select </option>
                             </select>
                             <!-- dmx-on:change="scOperator.load()" -->
@@ -73,7 +73,7 @@
                     </div>
                     <div class="mb-3 row">
                         <label for="inp_services_type" class="col-sm-2 col-form-label">Select <API></API></label>
-                        <div class="col-sm-10"><select type="text" class="form-control" id="inp_api_id" name="inp_api_id" aria-describedby="inp_api_help" required="" dmx-bind:options="scAPIs.data.FetchAPI.data" optiontext="api_name" optionvalue="api_id" dmx-on:changed="flowApiCode.run()">
+                        <div class="col-sm-10"><select type="text" class="form-control form-select" id="inp_api_id" name="inp_api_id" aria-describedby="inp_api_help" required="" dmx-bind:options="scAPIs.data.FetchAPI.data" optiontext="api_name" optionvalue="api_id" dmx-on:changed="flowApiCode.run()">
                                 <option value="">Select </option>
                             </select>
                             <!-- dmx-on:click="scAPIs.load()" -->
@@ -94,7 +94,7 @@
                     <div class="mb-3 row">
                         <label for="inp_status" class="col-sm-2 col-form-label">Status</label>
                         <div class="col-sm-10">
-                            <select type="text" class="form-control" id="inp_service_status" name="status" aria-describedby="inp_status_help" placeholder="Enter Status" dmx-bind:value="ddServices.data.status">
+                            <select type="text" class="form-control form-select" id="inp_service_status" name="status" aria-describedby="inp_status_help" placeholder="Enter Status" dmx-bind:value="ddServices.data.status">
                                 <option value="1">Active</option>
                                 <option value="0">InActive</option>
                             </select>

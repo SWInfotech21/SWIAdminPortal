@@ -154,7 +154,7 @@
           },
           {
             "name": "balance_amt",
-            "type": "number"
+            "type": "text"
           }
         ],
         "outputType": "array",
@@ -261,7 +261,8 @@
             "type": "text"
           }
         ],
-        "outputType": "array"
+        "outputType": "array",
+        "disabled": true
       }
     ]
   }

@@ -169,7 +169,7 @@
                     <div class="mb-3 row">
                         <label for="inp_name" class="col-sm-2 col-form-label">User Type:</label>
                         <div class="col-sm-10">
-                            <select id="UserTypeSelf" name="user_type" class="form-control" dmx-on:changed="flowFetchUser.run()" required="">
+                            <select id="UserTypeSelf" name="user_type" class="form-control form-select" dmx-on:changed="flowFetchUser.run()" required="">
                                 <option value="">Select</option>
                                 <option value="1">MDT</option>
                                 <option value="2">DT</option>
@@ -180,7 +180,7 @@
                     <div class="mb-3 row">
                         <label for="inp_services_type" class="col-sm-2 col-form-label">Target User</label>
                         <div class="col-sm-10">
-                            <select type="text" class="form-control" id="inp_target_user" name="target_user_id" aria-describedby="inp_target_user_help" dmx-bind:options="scUserSchemPrio.data.UserDetails" optiontext="user_mobile+' || '+user_fname+' || '+user_type" optionvalue="id" required="">
+                            <select type="text" class="form-control form-select" id="inp_target_user" name="target_user_id" aria-describedby="inp_target_user_help" dmx-bind:options="scUserSchemPrio.data.UserDetails" optiontext="user_mobile+' || '+user_fname+' || '+user_type" optionvalue="id" required="">
                                 <option value="">Select </option>
                             </select>
                         </div>
@@ -188,7 +188,7 @@
                     <div class="mb-3 row">
                         <label for="inp_service_desc" class="col-sm-2 col-form-label">For User Type :</label>
                         <div class="col-sm-10">
-                            <select id="ForUserType" name="for_user_type" class="form-control" dmx-bind:options="scUserSchemPrio.data.GetUserType" optiontext="for_user_type_name" optionvalue="for_user_type_id" dmx-on:changed="flowFetchScheme.run()" required="">
+                            <select id="ForUserType" name="for_user_type" class="form-control form-select" dmx-bind:options="scUserSchemPrio.data.GetUserType" optiontext="for_user_type_name" optionvalue="for_user_type_id" dmx-on:changed="flowFetchScheme.run()" required="">
                                 <option value="">Select</option>
                             </select>
                         </div>
@@ -196,7 +196,7 @@
                     <div class="mb-3 row">
                         <label for="inp_scheme_type1" class="col-sm-2 col-form-label">Target Scheme1 *</label>
                         <div class="col-sm-10">
-                            <select type="text" class="form-control" id="inp_target_scheme1" name="target_scheme1" aria-describedby="inp_target_scheme_help" dmx-bind:options="scSchemType.data.GetSchemes" optiontext="scheme_name" optionvalue="id" required="">
+                            <select type="text" class="form-control form-select" id="inp_target_scheme1" name="target_scheme1" aria-describedby="inp_target_scheme_help" dmx-bind:options="scSchemType.data.GetSchemes" optiontext="scheme_name" optionvalue="id" required="">
                                 <option value="">Select </option>
                             </select>
                         </div>
@@ -204,7 +204,7 @@
                     <div class="mb-3 row">
                         <label for="inp_scheme_type2" class="col-sm-2 col-form-label">Target Scheme2</label>
                         <div class="col-sm-10">
-                            <select type="text" class="form-control" id="inp_target_scheme2" name="target_scheme2" aria-describedby="inp_target_scheme_help" dmx-bind:options="scSchemType.data.GetSchemes" optiontext="scheme_name" optionvalue="id">
+                            <select type="text" class="form-control form-select" id="inp_target_scheme2" name="target_scheme2" aria-describedby="inp_target_scheme_help" dmx-bind:options="scSchemType.data.GetSchemes" optiontext="scheme_name" optionvalue="id">
                                 <option value="">Select </option>
                             </select>
                         </div>
@@ -212,7 +212,7 @@
                     <div class="mb-3 row">
                         <label for="inp_scheme_type3" class="col-sm-2 col-form-label">Target Scheme3</label>
                         <div class="col-sm-10">
-                            <select type="text" class="form-control" id="inp_target_scheme3" name="target_scheme3" aria-describedby="inp_target_scheme_help" dmx-bind:options="scSchemType.data.GetSchemes" optiontext="scheme_name" optionvalue="id">
+                            <select type="text" class="form-control form-select" id="inp_target_scheme3" name="target_scheme3" aria-describedby="inp_target_scheme_help" dmx-bind:options="scSchemType.data.GetSchemes" optiontext="scheme_name" optionvalue="id">
                                 <option value="">Select </option>
                             </select>
                         </div>
@@ -220,7 +220,7 @@
                     <div class="mb-3 row">
                         <label for="inp_scheme_type4" class="col-sm-2 col-form-label">Target Scheme4</label>
                         <div class="col-sm-10">
-                            <select type="text" class="form-control" id="inp_target_scheme4" name="target_scheme4" aria-describedby="inp_target_scheme_help" dmx-bind:options="scSchemType.data.GetSchemes" optiontext="scheme_name" optionvalue="id">
+                            <select type="text" class="form-control form-select" id="inp_target_scheme4" name="target_scheme4" aria-describedby="inp_target_scheme_help" dmx-bind:options="scSchemType.data.GetSchemes" optiontext="scheme_name" optionvalue="id">
                                 <option value="">Select </option>
                             </select>
                         </div>

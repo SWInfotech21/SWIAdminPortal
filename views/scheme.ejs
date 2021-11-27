@@ -34,8 +34,7 @@
                     <td dmx-text="scheme_type == 1 ? 'MDT' : scheme_type == 2 ? 'DT' : scheme_type == 3 ? 'RT' : 'None'" dmx-class:table-primary="scheme_type == 1" dmx-class:table-success="scheme_type == 2" dmx-class:table-warning="scheme_type == 3" dmx-class:table-danger="scheme_type == 4"></td>
                     <td dmx-text="status != 1 ?'Inactive' : 'Active'" dmx-class:table-primary="status == 1" dmx-class:table-warning="status != 1"></td>
                     <td>
-                        <a class="dropdown-item" href="#" dmx-on:click="ddSchemes.select(sc_id)" data-bs-toggle="modal" data-bs-target="#modalAddScheme"><i class="fas fa-edit sw-col-ar" title="Edit Schemes"></i></a>&emsp;
-                        <a class="dropdown-item" href="#" dmx-on:click="ddSchemes.select(sc_id)" data-bs-toggle="modal" data-bs-target="#modalDelScheme"><i class="far fa-trash-alt" title="Delete Scheme"></i></a>
+                        <a class="dropdown-item" href="#" dmx-on:click="ddSchemes.select(sc_id)" data-bs-toggle="modal" data-bs-target="#modalAddScheme"><i class="fas fa-edit sw-col-ar" title="Edit Schemes"></i></a>
                     </td>
                 </tr>
             </tbody>
@@ -70,7 +69,7 @@
                     <div class="mb-3 row">
                         <label for="inp_super_Scheme" class="col-sm-2 col-form-label">Scheme Type</label>
                         <div class="col-sm-10">
-                            <select type="number" class="form-control" id="inp_Scheme_type" name="scheme_type" aria-describedby="inp_Scheme_type_help" placeholder="Enter Scheme type" dmx-bind:value="ddSchemes.data.scheme_type">
+                            <select type="number" class="form-control form-select" id="inp_Scheme_type" name="scheme_type" aria-describedby="inp_Scheme_type_help" placeholder="Enter Scheme type" dmx-bind:value="ddSchemes.data.scheme_type">
                                 <option value="">Select Option</option>
                                 <option value="1">MDT</option>
                                 <option value="2">DT</option>
@@ -81,7 +80,7 @@
                     <div class="mb-3 row">
                         <label for="inp_status" class="col-sm-2 col-form-label">Status</label>
                         <div class="col-sm-10">
-                            <select type="text" class="form-control" id="inp_status" name="status" aria-describedby="inp_status_help" placeholder="Enter Status" dmx-bind:value="ddSchemes.data.status">
+                            <select type="text" class="form-control form-select" id="inp_status" name="status" aria-describedby="inp_status_help" placeholder="Enter Status" dmx-bind:value="ddSchemes.data.status">
                                 <option value="1">Active</option>
                                 <option value="0">InActive</option>
                             </select>

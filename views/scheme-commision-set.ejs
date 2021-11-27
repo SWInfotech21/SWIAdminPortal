@@ -33,7 +33,7 @@
             <div class="row">
                 <div class="col-12 col-lg-3 p-1">
                     <label>Select Scheme</label>
-                    <select id="scheme_type" name="scheme_select" class="form-control col-12 px-1" dmx-bind:options="scSchemes.data.FetchScheme.data" optiontext="scheme_name" optionvalue="sc_id" dmx-on:changed="flowCommision.run()">
+                    <select id="scheme_type" name="scheme_select" class="form-control col-12 px-1 form-select" dmx-bind:options="scSchemes.data.FetchScheme.data" optiontext="scheme_name" optionvalue="sc_id" dmx-on:changed="flowCommision.run()">
                         <option value="">Select</option>
                     </select>
                 </div>
@@ -141,7 +141,7 @@
                     <div class="mb-3 row">
                         <label for="inp_status" class="col-sm-2 col-form-label">Status</label>
                         <div class="col-sm-10">
-                            <select type="text" class="form-control" id="inp_Commision_status" name="status" aria-describedby="inp_status_help" placeholder="Enter Status" dmx-bind:value="ddCommision.data.is_active">
+                            <select type="text" class="form-control form-select" id="inp_Commision_status" name="status" aria-describedby="inp_status_help" placeholder="Enter Status" dmx-bind:value="ddCommision.data.is_active">
                                 <option value="1">Active</option>
                                 <option value="0">InActive</option>
                             </select>

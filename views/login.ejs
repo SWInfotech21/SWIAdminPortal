@@ -55,7 +55,7 @@
                             <div class="card-body px-5">
                                 <h1 class="sd-fs-45 sd-fs-35 sd-fw-500 text-black mb-3">Login</h1>
                                 <p class="px-1 mb-3 sd-fs-12 sd-fw-500 text-black">Enter your credentials below</p>
-                                <form id="formLogin" is="dmx-serverconnect-form" method="post" action="api/Users/login" dmx-on:success="browser1.goto('users')" dmx-on:unauthorized="varInvalidLogin.setValue(1);formLogin.reset;" dmx-on:forbidden="Notification.danger('This user doesnot exists, please try again!')">
+                                <form id="formLogin" is="dmx-serverconnect-form" method="post" action="api/Users/login" dmx-on:success="browser1.goto('dashboard')" dmx-on:unauthorized="varInvalidLogin.setValue(1);formLogin.reset;" dmx-on:forbidden="Notification.danger('This user doesnot exists, please try again!')">
                                     <div class="input-group mb-4">
                                         <span class="input-group-text border-1 border-end-0 bg-transparent"><i class="fa fa-user"></i></span>
                                         <input type="number" class="border-1 border-start-0 form-control" id="Mobile" name="Mobile" placeholder="6666666666">

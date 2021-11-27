@@ -38,7 +38,7 @@
                     <thead>
                         <tr>
                             <th>Sl. No.</th>
-                            <th class="sorting" dmx-on:click="qm.set('sort','table_id');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='table_id' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='table_id' && qm.data.dir == 'desc'">Table Id</th>
+                            <!-- <th class="sorting" dmx-on:click="qm.set('sort','table_id');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='table_id' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='table_id' && qm.data.dir == 'desc'">Table Id</th> -->
                             <th class="sorting" dmx-on:click="qm.set('sort','pay_ref_id');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='pay_ref_id' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='pay_ref_id' && qm.data.dir == 'desc'">Pay Ref. Id</th>
                             <th class="sorting" dmx-on:click="qm.set('sort','api_ref');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='api_ref' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='api_ref' && qm.data.dir == 'desc'">Api Ref. No. <i class="fas fa-search"></i></th>
                             <th class="sorting" dmx-on:click="qm.set('sort','parent_fname');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='parent_fname' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='parent_fname' && qm.data.dir == 'desc'">Parent <i class="fas fa-search"></i></th>
@@ -69,7 +69,7 @@
                     <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="dvRechTrans.data" id="tableRepeat1" dmx-state="qm" dmx-sort="sort" dmx-order="dir" key="table_id">
                         <tr>
                             <td>{{$index+1}}</td>
-                            <td dmx-text="table_id"></td>
+                            <!-- <td dmx-text="table_id"></td> -->
                             <td dmx-text="pay_ref_id"></td>
                             <td dmx-text="api_ref"></td>
                             <td dmx-text="parent_mobile+' | '+parent_fname"></td>

@@ -43,8 +43,7 @@
                     <td dmx-text="created_by+' ('+created_on.formatDate('dd-MM-yyyy HH:mm:ss')+')'"></td>
                     <td dmx-text="updated_by+' ('+updated_on+')'"></td>
                     <td>
-                        <a class="dropdown-item" href="#" dmx-on:click="ddAPIs.select(api_id)" data-bs-toggle="modal" data-bs-target="#modalAddAPIs"><i class="fas fa-edit sw-col-ar" title="Edit APIs"></i></a>&emsp;
-                        <a class="dropdown-item" href="#" dmx-on:click="ddAPIs.select(api_id)" data-bs-toggle="modal" data-bs-target="#modalDelapi"><i class="far fa-trash-alt" title="Delete api"></i></a>
+                        <a class="dropdown-item" href="#" dmx-on:click="ddAPIs.select(api_id)" data-bs-toggle="modal" data-bs-target="#modalAddAPIs"><i class="fas fa-edit sw-col-ar" title="Edit APIs"></i></a>
                     </td>
                 </tr>
             </tbody>
@@ -91,7 +90,7 @@
                         <label for="inp_status" class="col-sm-2 col-form-label">Responce Type</label>
                         <div class="col-sm-10">
                             <div class="form-check form-switch">
-                                <select type="text" class="form-control" id="inp_response" name="response_type" aria-describedby="inp_response_help" maxlength="50" data-msg-required="Response type is required." dmx-bind:value="ddAPIs.data.blank2">
+                                <select type="text" class="form-control form-select" id="inp_response" name="response_type" aria-describedby="inp_response_help" maxlength="50" data-msg-required="Response type is required." dmx-bind:value="ddAPIs.data.blank2">
                                     <option value="">Select</option>
                                     <option value="JSON">JSON</option>
                                     <option value="XML">XML</option>

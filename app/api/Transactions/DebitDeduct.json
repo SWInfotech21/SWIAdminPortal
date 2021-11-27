@@ -228,32 +228,32 @@
         "output": true,
         "meta": [
           {
-            "name": "user_id",
-            "type": "text"
+            "type": "text",
+            "name": "user_id"
           },
           {
-            "name": "user_fname",
-            "type": "text"
+            "type": "text",
+            "name": "user_fname"
           },
           {
-            "name": "user_mobile",
-            "type": "text"
+            "type": "text",
+            "name": "user_mobile"
           },
           {
-            "name": "user_email",
-            "type": "text"
+            "type": "text",
+            "name": "user_email"
           },
           {
-            "name": "user_tpin",
-            "type": "text"
+            "type": "text",
+            "name": "user_tpin"
           },
           {
-            "name": "balance_amt",
-            "type": "text"
+            "type": "text",
+            "name": "balance_amt"
           },
           {
-            "name": "aeps_balance",
-            "type": "text"
+            "type": "text",
+            "name": "aeps_balance"
           }
         ],
         "outputType": "object"
@@ -336,12 +336,12 @@
                 "output": true,
                 "meta": [
                   {
-                    "name": "service_id",
-                    "type": "number"
+                    "type": "number",
+                    "name": "service_id"
                   },
                   {
-                    "name": "op_id",
-                    "type": "text"
+                    "type": "number",
+                    "name": "op_id"
                   }
                 ],
                 "outputType": "object"
@@ -418,28 +418,28 @@
                 "output": true,
                 "meta": [
                   {
-                    "name": "user_id",
-                    "type": "text"
+                    "type": "text",
+                    "name": "user_id"
                   },
                   {
-                    "name": "user_fname",
-                    "type": "text"
+                    "type": "text",
+                    "name": "user_fname"
                   },
                   {
-                    "name": "user_mobile",
-                    "type": "text"
+                    "type": "text",
+                    "name": "user_mobile"
                   },
                   {
-                    "name": "user_email",
-                    "type": "text"
+                    "type": "text",
+                    "name": "user_email"
                   },
                   {
-                    "name": "balance_amt",
-                    "type": "text"
+                    "type": "text",
+                    "name": "balance_amt"
                   },
                   {
-                    "name": "aeps_balance",
-                    "type": "text"
+                    "type": "text",
+                    "name": "aeps_balance"
                   }
                 ],
                 "outputType": "object"
@@ -450,7 +450,9 @@
                 "action": "setvalue",
                 "options": {
                   "value": "{{NOW.md5(123456).substr(1, 9)}}"
-                }
+                },
+                "meta": [],
+                "outputType": "text"
               },
               {
                 "name": "DrClosingBal",
@@ -459,7 +461,9 @@
                 "options": {
                   "value": "{{GetDebitFromUser.balance_amt.toNumber() - $_POST.debit_amount.toNumber()}}"
                 },
-                "output": true
+                "output": true,
+                "meta": [],
+                "outputType": "text"
               },
               {
                 "name": "CrClosingBal",
@@ -468,7 +472,9 @@
                 "options": {
                   "value": "{{$_POST.debit_amount.toNumber() +GetCreditUser.balance_amt.toNumber()}}"
                 },
-                "output": true
+                "output": true,
+                "meta": [],
+                "outputType": "text"
               },
               {
                 "name": "DrBalRechTrans",
@@ -609,7 +615,7 @@
                         "table": "tt_recharge_trans",
                         "column": "api_logs",
                         "type": "text",
-                        "value": "{{'N/A'}}"
+                        "value": "0"
                       },
                       {
                         "table": "tt_recharge_trans",
@@ -627,7 +633,7 @@
                         "table": "tt_recharge_trans",
                         "column": "api_ref",
                         "type": "text",
-                        "value": "0"
+                        "value": "{{'N/A'}}"
                       },
                       {
                         "table": "tt_recharge_trans",
@@ -704,7 +710,7 @@
                     ],
                     "table": "tt_recharge_trans",
                     "returning": "id",
-                    "query": "INSERT INTO tt_recharge_trans\n(op_id, service_id, api_id, user_id, user_number, details, opening_balance, amount, comm_per, comm_val, comm_amt, other_charge, charge_per, charge_amt, net_amt, closing_balance, tr_mode, tr_type, status, tr_id, reason, api_logs, is_processed, operator_ref, api_ref, revert_trans, ip_address, api_response_id, process_mode, live, tr_date, transaction_by, extra1, dtchargeamt, dtcommamt, mdtcommamt, mdtchargeamt) VALUES (:P1 /* {{GetOperator.op_id}} */, :P2 /* {{GetOperator.service_id}} */, '0', :P3 /* {{$_POST.target_user_id}} */, :P4 /* {{GetDebitFromUser.user_mobile}} */, :P5 /* {{GetDebitFromUser.user_fname}} */, :P6 /* {{GetDebitFromUser.balance_amt}} */, :P7 /* {{$_POST.debit_amount}} */, '0', '0', '0', '0', '0', '0', :P8 /* {{$_POST.debit_amount}} */, :P9 /* {{DrClosingBal}} */, :P10 /* {{'Web'}} */, :P11 /* {{'Cash'}} */, :P12 /* {{'SUCCESS'}} */, :P13 /* {{TransId}} */, :P14 /* {{'Wallet balance Rs. '+$_POST.debit_amount+' updated by '+GetCreditUser.user_fname+' debited from '+GetDebitFromUser.user_fname}} */, :P15 /* {{'N/A'}} */, '0', '0', '0', '0', :P16 /* {{$_SERVER.REMOTE_ADDR}} */, '0', :P17 /* {{'A2P'}} */, :P18 /* {{'Push'}} */, :P19 /* {{NOW}} */, :P20 /* {{identity}} */, :P21 /* {{$_POST.comment}} */, '0', '0', '0', '0')",
+                    "query": "INSERT INTO tt_recharge_trans\n(op_id, service_id, api_id, user_id, user_number, details, opening_balance, amount, comm_per, comm_val, comm_amt, other_charge, charge_per, charge_amt, net_amt, closing_balance, tr_mode, tr_type, status, tr_id, reason, api_logs, is_processed, operator_ref, api_ref, revert_trans, ip_address, api_response_id, process_mode, live, tr_date, transaction_by, extra1, dtchargeamt, dtcommamt, mdtcommamt, mdtchargeamt) VALUES (:P1 /* {{GetOperator.op_id}} */, :P2 /* {{GetOperator.service_id}} */, '0', :P3 /* {{$_POST.target_user_id}} */, :P4 /* {{GetDebitFromUser.user_mobile}} */, :P5 /* {{GetDebitFromUser.user_fname}} */, :P6 /* {{GetDebitFromUser.balance_amt}} */, :P7 /* {{$_POST.debit_amount}} */, '0', '0', '0', '0', '0', '0', :P8 /* {{$_POST.debit_amount}} */, :P9 /* {{DrClosingBal}} */, :P10 /* {{'Web'}} */, :P11 /* {{'Cash'}} */, :P12 /* {{'SUCCESS'}} */, :P13 /* {{TransId}} */, :P14 /* {{'Wallet balance Rs. '+$_POST.debit_amount+' updated by '+GetCreditUser.user_fname+' debited from '+GetDebitFromUser.user_fname}} */, '0', '0', '0', :P15 /* {{'N/A'}} */, '0', :P16 /* {{$_SERVER.REMOTE_ADDR}} */, '0', :P17 /* {{'A2P'}} */, :P18 /* {{'Push'}} */, :P19 /* {{NOW}} */, :P20 /* {{identity}} */, :P21 /* {{$_POST.comment}} */, '0', '0', '0', '0')",
                     "params": [
                       {
                         "name": ":P1",
