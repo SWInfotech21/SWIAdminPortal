@@ -1,4 +1,4 @@
-<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="apiaddupdate" appConnect="local" -->
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="apiaddupdate" appConnect="local" components="{dmxDataTraversal:{},dmxBootstrap5Modal:{}}" -->
 <meta name="ac:route" content="/api-add-update">
 <dmx-serverconnect id="scAPIs" url="api/APIS/FetchAPIs"></dmx-serverconnect>
 <dmx-data-view id="dvAPIs" pageSize="100" page="10" dmx-bind:data="scAPIs.data.FetchAPI.data"></dmx-data-view>
@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1 id="APIs" class="text-center align-self-center">SW Infotech APIs</h1>
+                <h1 id="APIs" class="text-center align-self-center">SW Infotech APIs<span class="border-3 ms-2 spinner-border spinner-border-sm" role="status" dmx-show="scAPIs.state.executing"></span></h1>
                 <button id="btnAdd" class="btn btn-primary" dmx-on:click="modalAddAPIs.show(); ddAPIs.select(0);">Add api</button>
             </div>
         </div>

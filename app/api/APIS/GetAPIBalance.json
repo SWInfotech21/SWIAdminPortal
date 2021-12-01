@@ -5,7 +5,7 @@
     "action": "send",
     "options": {
       "params": {
-        "apiToken": "{{'f5e11be7da444cd49409dad7508b5111'}}"
+        "apiToken": "{{'d0c6a881f6d642c9a3df19697fecdb1b'}}"
       },
       "url": "http://sonakshiworld.com/apiservice.asmx/GetBalanceNew"
     },
@@ -18,6 +18,8 @@
     "options": {
       "value": "{{api.data.xmlToJSON()}}"
     },
-    "output": true
+    "output": true,
+    "meta": [],
+    "outputType": "text"
   }
 ]

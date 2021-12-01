@@ -119,6 +119,11 @@
       "path": "/dashboard",
       "page": "dashboard",
       "layout": "main"
+    },
+    {
+      "path": "/add-user",
+      "page": "add-user",
+      "layout": "main"
     }
   ]
 }

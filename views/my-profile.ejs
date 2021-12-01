@@ -3,16 +3,32 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h1 class="mt-4">Profile</h1>
+            <h1 class="mt-4">Profile<span class="border-3 ms-2 spinner-border spinner-border-sm" role="status" dmx-show="scAdminBalance.state.executing"></span></h1>
 
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item active">User Info./ {{scAdminBalance.data.query.user_id}}</li>
             </ol>
         </div>
     </div>
+    <form is="dmx-serverconnect-form" id="formUpdateUser" method="post" action="api/Users/UpdateUserId" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formUpdateUser.data.AddEditUsers ? scNotif.success('New User Added') : scNotif.success('User Updated');)();scAdminBalance.load()" dmx-on:error="scNotif.warning('An error occurred'); ">
+        <div class="row">
+            <label class="fw-bold col-3 col-sm-2" for="inlineFormInputGroup">Update Login Id</label>
+            <div class="col-9 col-sm-4 mb-3">
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text bg-body">
+                            <i class="far fa-user"></i>
+                        </div>
+                    </div>
+                    <input type="text" class="form-control form-control-plaintext px-2" name="userid" id="inlineFormInputName" dmx-bind:value="scAdminBalance.data.query.blank2">
+                </div>
+            </div>
+            <div class="col-12 col-sm-3 mb-2"><button class="btn btn-primary" type="submit">Submit</button></div>
+        </div>
+    </form>
     <div class="row">
         <div class="col-12 col-sm-4 mb-3">
-            <label class="fw-bold" for="inlineFormInputGroup">Username</label>
+            <label class="fw-bold" for="inlineFormInputGroup">Admin Name</label>
             <div class="input-group mb-2">
                 <div class="input-group-prepend">
                     <div class="input-group-text bg-body">

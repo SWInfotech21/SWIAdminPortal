@@ -1,7 +1,6 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="sendsms" appConnect="local" -->
 <meta name="ac:route" content="/send-sms">
-<!-- New Wappler Page -->
-<meta name="ac:route" content="/wallet-credits">
+
 <dmx-serverconnect id="scUserType" url="api/Users/UserType"></dmx-serverconnect>
 <header>
     <div class="container">
@@ -15,7 +14,7 @@
 <div class="container">
     <div class="card">
         <div class="card-header sw-bg-col-primary">
-            <b>Group Send SMS</b>
+            <b>Group SMS Send</b>
         </div>
 
         <div class="card-body">
@@ -39,7 +38,7 @@
             </form>
         </div>
         <div class="card-header sw-bg-col-primary mt-3">
-            <b>Individual Send SMS</b>
+            <b>Individual SMS Send</b>
         </div>
         <div class="card-body">
             <form is="dmx-serverconnect-form" id="formPersonalSMS" method="post" action="api/SMS/SendSMS" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="scNotif.success('Message sent successfully');formPersonalSMS.reset()" dmx-on:error="scNotif.warning('An error occurred'); ">

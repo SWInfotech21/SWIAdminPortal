@@ -58,11 +58,11 @@
                                 <form id="formLogin" is="dmx-serverconnect-form" method="post" action="api/Users/login" dmx-on:success="browser1.goto('dashboard')" dmx-on:unauthorized="varInvalidLogin.setValue(1);formLogin.reset;" dmx-on:forbidden="Notification.danger('This user doesnot exists, please try again!')">
                                     <div class="input-group mb-4">
                                         <span class="input-group-text border-1 border-end-0 bg-transparent"><i class="fa fa-user"></i></span>
-                                        <input type="number" class="border-1 border-start-0 form-control" id="Mobile" name="Mobile" placeholder="6666666666">
+                                        <input type="text" class="border-1 border-start-0 form-control" id="Mobile" name="Mobile" placeholder="Enter User Name" required="true">
                                     </div>
                                     <div class="input-group mb-4">
                                         <span class="input-group-text border-1 border-end-0 bg-transparent"><i class="fa fa-lock"></i></span>
-                                        <input type="password" class="border-1 border-start-0 form-control" id="" name="Password" placeholder="Password" required="" data-msg-required="Please enter your password">
+                                        <input type="password" class="border-1 border-start-0 form-control" id="" name="Password" placeholder="Password" required="true" data-msg-required="Please enter your password">
                                     </div>
                                     <div class="form-check mb-2">
                                         <input class="form-check-input" type="checkbox" value="1" id="inputRemember" name="remember">

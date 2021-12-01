@@ -6,10 +6,12 @@
     },
     "$_POST": [
       {
-        "type": "number",
+        "type": "text",
         "fieldName": "Mobile",
         "options": {
-          "rules": {}
+          "rules": {
+            "core:required": {}
+          }
         },
         "name": "Mobile"
       },
@@ -17,7 +19,11 @@
         "type": "text",
         "fieldName": "Password",
         "options": {
-          "rules": {}
+          "rules": {
+            "core:required": {
+              "message": "Please enter your password"
+            }
+          }
         },
         "name": "Password"
       },
@@ -25,22 +31,6 @@
         "type": "text",
         "fieldName": "remember",
         "name": "remember"
-      },
-      {
-        "type": "text",
-        "name": "user_id"
-      },
-      {
-        "type": "text",
-        "name": "ip_address"
-      },
-      {
-        "type": "datetime",
-        "name": "login_time"
-      },
-      {
-        "type": "datetime",
-        "name": "logout_time"
       }
     ],
     "$_SERVER": [
@@ -75,7 +65,7 @@
               "name": "m_users"
             },
             "joins": [],
-            "query": "SELECT salt AS saltvalue, id\nFROM m_users\nWHERE user_mobile = :P1 /* {{$_POST.Mobile}} */ AND user_type = 0",
+            "query": "SELECT salt AS saltvalue, id\nFROM m_users\nWHERE blank2 = :P1 /* {{$_POST.Mobile}} */ AND user_type = 0",
             "params": [
               {
                 "operator": "equal",
@@ -88,14 +78,14 @@
               "condition": "AND",
               "rules": [
                 {
-                  "id": "m_users.user_mobile",
-                  "field": "m_users.user_mobile",
+                  "id": "m_users.blank2",
+                  "field": "m_users.blank2",
                   "type": "string",
                   "operator": "equal",
                   "value": "{{$_POST.Mobile}}",
                   "data": {
                     "table": "m_users",
-                    "column": "user_mobile",
+                    "column": "blank2",
                     "type": "text"
                   },
                   "operation": "="
@@ -122,12 +112,12 @@
         "output": true,
         "meta": [
           {
-            "name": "saltvalue",
-            "type": "text"
+            "type": "text",
+            "name": "saltvalue"
           },
           {
-            "name": "id",
-            "type": "text"
+            "type": "number",
+            "name": "id"
           }
         ],
         "outputType": "object"

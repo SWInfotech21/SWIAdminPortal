@@ -1,4 +1,4 @@
-<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="schemecommisionset" appConnect="local" -->
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="schemecommisionset" appConnect="local" components="{dmxDataTraversal:{},dmxBootstrap5Modal:{}}" -->
 <script is="dmx-flow" id="flowCommision" type="text/dmx-flow">{
   condition: {
     if: "{{scheme_type.value}}",
@@ -19,7 +19,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1 id="Commision" class="text-center align-self-center">SW Infotech Commision</h1>
+                <h1 id="Commision" class="text-center align-self-center">SW Infotech Commision<span class="border-3 ms-2 spinner-border spinner-border-sm" role="status" dmx-show="scCommision.state.executing"></span></h1>
             </div>
         </div>
     </div>

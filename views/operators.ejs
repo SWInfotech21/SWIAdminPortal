@@ -1,4 +1,4 @@
-<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="operators" appConnect="local" components="{dmxSwiper:{},dmxFormatter:{}}" -->
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="operators" appConnect="local" components="{dmxSwiper:{},dmxFormatter:{},dmxDataTraversal:{},dmxBootstrap5Modal:{}}" -->
 <dmx-serverconnect id="scService" url="api/Services/Services"></dmx-serverconnect>
 <meta name="ac:route" content="/operators">
 <dmx-serverconnect id="scOperator" url="api/operator/OperatorsFetch" dmx-param:limit="100"></dmx-serverconnect>
@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1 id="Operator" class="text-center align-self-center">SW Infotech Operators</h1>
+                <h1 id="Operator" class="text-center align-self-center">SW Infotech Operators <span class="border-3 ms-2 spinner-border spinner-border-sm" role="status" dmx-show="scOperator.state.executing"></span></h1>
                 <button id="btnAdd" class="btn btn-primary" dmx-on:click="modalAddOperators.show(); ddOperators.select(0);">Add Operator</button>
             </div>
         </div>

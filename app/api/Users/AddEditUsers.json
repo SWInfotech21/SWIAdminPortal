@@ -280,8 +280,8 @@
         "output": true,
         "meta": [
           {
-            "name": "u_no",
-            "type": "text"
+            "type": "number",
+            "name": "u_no"
           }
         ],
         "outputType": "object"
@@ -292,7 +292,9 @@
         "action": "setvalue",
         "options": {
           "value": "{{$_POST.user_type == 1 ? 'MD10' : $_POST.user_type == 2 ? 'DT20' : $_POST.user_type == 3 ? 'RT30' : 'UN40'}}"
-        }
+        },
+        "meta": [],
+        "outputType": "text"
       },
       {
         "name": "UniqueID",
@@ -300,7 +302,9 @@
         "action": "setvalue",
         "options": {
           "value": "{{User+SequenceNo.u_no.sum('1')}}"
-        }
+        },
+        "meta": [],
+        "outputType": "text"
       },
       {
         "name": "",
@@ -654,7 +658,9 @@
                 "options": {
                   "value": "{{NOW.md5(123456).substr(1, 9)}}"
                 },
-                "output": true
+                "output": true,
+                "meta": [],
+                "outputType": "text"
               },
               {
                 "name": "AddUser",
@@ -802,10 +808,16 @@
                         "column": "blank1",
                         "type": "text",
                         "value": "{{password}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "blank2",
+                        "type": "text",
+                        "value": "{{$_POST.mobile}}"
                       }
                     ],
                     "table": "m_users",
-                    "query": "INSERT INTO m_users\n(user_id, user_fname, user_mobile, user_email, password, salt, user_type, u_status, created_by, created_on, user_lname, cap_amt, balance_amt, balance_outstanding, aeps_balance, scheme_id, aadhar_no, pan_no, address, pin, state, district, blank1) VALUES (:P1 /* {{UniqueID}} */, :P2 /* {{$_POST.name}} */, :P3 /* {{$_POST.mobile}} */, :P4 /* {{$_POST.email.lowercase()}} */, :P5 /* {{password.sha256(NOW)}} */, :P6 /* {{NOW}} */, :P7 /* {{$_POST.user_type}} */, '1', :P8 /* {{identity}} */, :P9 /* {{NOW}} */, :P10 /* {{'https://github.com/ado.png'}} */, '0', '0', '0', '0', :P11 /* {{$_POST.scheme_id}} */, :P12 /* {{$_POST.aadhar}} */, :P13 /* {{$_POST.pan}} */, :P14 /* {{$_POST.address}} */, :P15 /* {{$_POST.pin}} */, :P16 /* {{$_POST.state}} */, :P17 /* {{$_POST.district}} */, :P18 /* {{password}} */)",
+                    "query": "INSERT INTO m_users\n(user_id, user_fname, user_mobile, user_email, password, salt, user_type, u_status, created_by, created_on, user_lname, cap_amt, balance_amt, balance_outstanding, aeps_balance, scheme_id, aadhar_no, pan_no, address, pin, state, district, blank1, blank2) VALUES (:P1 /* {{UniqueID}} */, :P2 /* {{$_POST.name}} */, :P3 /* {{$_POST.mobile}} */, :P4 /* {{$_POST.email.lowercase()}} */, :P5 /* {{password.sha256(NOW)}} */, :P6 /* {{NOW}} */, :P7 /* {{$_POST.user_type}} */, '1', :P8 /* {{identity}} */, :P9 /* {{NOW}} */, :P10 /* {{'https://github.com/ado.png'}} */, '0', '0', '0', '0', :P11 /* {{$_POST.scheme_id}} */, :P12 /* {{$_POST.aadhar}} */, :P13 /* {{$_POST.pan}} */, :P14 /* {{$_POST.address}} */, :P15 /* {{$_POST.pin}} */, :P16 /* {{$_POST.state}} */, :P17 /* {{$_POST.district}} */, :P18 /* {{password}} */, :P19 /* {{$_POST.mobile}} */)",
                     "params": [
                       {
                         "name": ":P1",
@@ -896,6 +908,11 @@
                         "name": ":P18",
                         "type": "expression",
                         "value": "{{password}}"
+                      },
+                      {
+                        "name": ":P19",
+                        "type": "expression",
+                        "value": "{{$_POST.mobile}}"
                       }
                     ],
                     "returning": "id"
@@ -920,7 +937,9 @@
                 "options": {
                   "value": "{{$_POST.user_type}}"
                 },
-                "output": true
+                "output": true,
+                "meta": [],
+                "outputType": "text"
               },
               {
                 "name": "",

@@ -74,6 +74,10 @@
           {
             "table": "m_users",
             "column": "district"
+          },
+          {
+            "table": "m_users",
+            "column": "blank2"
           }
         ],
         "table": {
@@ -100,7 +104,7 @@
           "conditional": null,
           "valid": true
         },
-        "query": "SELECT balance_amt, aeps_balance, user_fname, user_mobile, user_email, aadhar_no, pan_no, address, pin, state, district\nFROM m_users\nWHERE id = :P1 /* {{identity}} */",
+        "query": "SELECT balance_amt, aeps_balance, user_fname, user_mobile, user_email, aadhar_no, pan_no, address, pin, state, district, blank2\nFROM m_users\nWHERE id = :P1 /* {{identity}} */",
         "params": [
           {
             "operator": "equal",
@@ -114,48 +118,52 @@
     "output": true,
     "meta": [
       {
-        "name": "balance_amt",
-        "type": "text"
+        "type": "text",
+        "name": "balance_amt"
       },
       {
-        "name": "aeps_balance",
-        "type": "text"
+        "type": "text",
+        "name": "aeps_balance"
       },
       {
-        "name": "user_fname",
-        "type": "text"
+        "type": "text",
+        "name": "user_fname"
       },
       {
-        "name": "user_mobile",
-        "type": "text"
+        "type": "text",
+        "name": "user_mobile"
       },
       {
-        "name": "user_email",
-        "type": "text"
+        "type": "text",
+        "name": "user_email"
       },
       {
-        "name": "aadhar_no",
-        "type": "text"
+        "type": "text",
+        "name": "aadhar_no"
       },
       {
-        "name": "pan_no",
-        "type": "text"
+        "type": "text",
+        "name": "pan_no"
       },
       {
-        "name": "address",
-        "type": "text"
+        "type": "text",
+        "name": "address"
       },
       {
-        "name": "pin",
-        "type": "text"
+        "type": "text",
+        "name": "pin"
       },
       {
-        "name": "state",
-        "type": "text"
+        "type": "text",
+        "name": "state"
       },
       {
-        "name": "district",
-        "type": "text"
+        "type": "text",
+        "name": "district"
+      },
+      {
+        "type": "text",
+        "name": "blank2"
       }
     ],
     "outputType": "object"
