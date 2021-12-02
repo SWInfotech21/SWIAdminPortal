@@ -124,6 +124,11 @@
       "path": "/add-user",
       "page": "add-user",
       "layout": "main"
+    },
+    {
+      "path": "/sms-report",
+      "page": "sms-report",
+      "layout": "main"
     }
   ]
 }

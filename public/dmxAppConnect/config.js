@@ -2319,5 +2319,36 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "smsreport": {
+    "tableRepeat1": {
+      "meta": [
+        {
+          "type": "text",
+          "name": "sms_message"
+        },
+        {
+          "type": "text",
+          "name": "sender_mobile"
+        },
+        {
+          "type": "datetime",
+          "name": "created_on"
+        },
+        {
+          "type": "text",
+          "name": "sms_type"
+        },
+        {
+          "type": "boolean",
+          "name": "status"
+        },
+        {
+          "type": "text",
+          "name": "response"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });

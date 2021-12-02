@@ -182,8 +182,8 @@
                 "output": true,
                 "meta": [
                   {
-                    "name": "user_mobile",
-                    "type": "text"
+                    "type": "text",
+                    "name": "user_mobile"
                   }
                 ],
                 "outputType": "array"
@@ -202,14 +202,14 @@
                         "module": "api",
                         "action": "send",
                         "options": {
-                          "url": "http://mobicomm.dove-sms.com//submitsms.jsp",
+                          "url": "https://mobicomm.dove-sms.com//submitsms.jsp",
                           "params": {
-                            "user": "{{'BucksPay'}}",
-                            "key": "{{'71ae0664a8XX'}}",
+                            "user": "{{'Bucks'}}",
+                            "key": "{{'797b4459a9XX'}}",
                             "mobile": "{{GetUserMobile[$index].user_mobile}}",
                             "message": "{{$_POST.message}}",
                             "senderid": "{{'BUCKSP'}}",
-                            "accusage": "{{6}}"
+                            "accusage": "{{1}}"
                           }
                         },
                         "output": true
@@ -221,7 +221,9 @@
                         "options": {
                           "value": "{{api.status}}"
                         },
-                        "output": true
+                        "output": true,
+                        "meta": [],
+                        "outputType": "text"
                       },
                       {
                         "name": "api_response",
@@ -230,7 +232,9 @@
                         "options": {
                           "value": "{{api.data}}"
                         },
-                        "output": true
+                        "output": true,
+                        "meta": [],
+                        "outputType": "text"
                       },
                       {
                         "name": "record_insert",
@@ -377,6 +381,30 @@
                   {
                     "name": "api",
                     "type": "text"
+                  },
+                  {
+                    "name": "api_status",
+                    "type": "text",
+                    "sub": []
+                  },
+                  {
+                    "name": "api_response",
+                    "type": "text",
+                    "sub": []
+                  },
+                  {
+                    "name": "record_insert",
+                    "type": "text",
+                    "sub": [
+                      {
+                        "name": "identity",
+                        "type": "text"
+                      },
+                      {
+                        "name": "affected",
+                        "type": "number"
+                      }
+                    ]
                   }
                 ],
                 "outputType": "array"
@@ -399,14 +427,14 @@
                 "module": "api",
                 "action": "send",
                 "options": {
-                  "url": "http://mobicomm.dove-sms.com//submitsms.jsp",
+                  "url": "https://mobicomm.dove-sms.com//submitsms.jsp",
                   "params": {
-                    "user": "{{'BucksPay'}}",
-                    "key": "{{'71ae0664a8XX'}}",
+                    "user": "{{'Bucks'}}",
+                    "key": "{{'797b4459a9XX'}}",
                     "mobile": "{{$_POST.sms_mobile}}",
                     "message": "{{$_POST.message}}",
                     "senderid": "{{'BUCKSP'}}",
-                    "accusage": "{{6}}"
+                    "accusage": "{{1}}"
                   }
                 },
                 "output": true
@@ -418,7 +446,9 @@
                 "options": {
                   "value": "{{api_individual.status}}"
                 },
-                "output": true
+                "output": true,
+                "meta": [],
+                "outputType": "text"
               },
               {
                 "name": "api_response",
@@ -427,7 +457,9 @@
                 "options": {
                   "value": "{{api_individual.data}}"
                 },
-                "output": true
+                "output": true,
+                "meta": [],
+                "outputType": "text"
               },
               {
                 "name": "record_insert",

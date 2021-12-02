@@ -102,5 +102,9 @@
   "add-user.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "sms-report.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }
