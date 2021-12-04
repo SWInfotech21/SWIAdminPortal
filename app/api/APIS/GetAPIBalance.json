@@ -4,10 +4,7 @@
     "module": "api",
     "action": "send",
     "options": {
-      "params": {
-        "apiToken": "{{'f5e11be7da444cd49409dad7508b5111'}}"
-      },
-      "url": "https://sonakshiworld.com/apiservice.asmx/GetBalanceNew"
+      "url": "https://www.sonakshiworld.com/apiservice.asmx/GetBalanceNew?apiToken=f5e11be7da444cd49409dad7508b5111"
     },
     "output": true
   },
