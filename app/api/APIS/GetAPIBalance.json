@@ -7,7 +7,7 @@
       "params": {
         "apiToken": "{{'f5e11be7da444cd49409dad7508b5111'}}"
       },
-      "url": "http://sonakshiworld.com/apiservice.asmx/GetBalanceNew"
+      "url": "https://sonakshiworld.com/apiservice.asmx/GetBalanceNew"
     },
     "output": true
   },
