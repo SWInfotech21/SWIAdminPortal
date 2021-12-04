@@ -129,32 +129,32 @@
         "output": true,
         "meta": [
           {
-            "name": "id",
-            "type": "text"
+            "type": "number",
+            "name": "id"
           },
           {
-            "name": "user_fname",
-            "type": "text"
+            "type": "text",
+            "name": "user_fname"
           },
           {
-            "name": "user_mobile",
-            "type": "text"
+            "type": "text",
+            "name": "user_mobile"
           },
           {
-            "name": "user_type",
-            "type": "text"
+            "type": "text",
+            "name": "user_type"
           },
           {
-            "name": "user_type_id",
-            "type": "number"
+            "type": "number",
+            "name": "user_type_id"
           },
           {
-            "name": "user_id",
-            "type": "text"
+            "type": "text",
+            "name": "user_id"
           },
           {
-            "name": "balance_amt",
-            "type": "text"
+            "type": "text",
+            "name": "balance_amt"
           }
         ],
         "outputType": "array",
@@ -253,16 +253,15 @@
         "type": "dbconnector_select",
         "meta": [
           {
-            "name": "for_user_type_id",
-            "type": "number"
+            "type": "number",
+            "name": "for_user_type_id"
           },
           {
-            "name": "for_user_type_name",
-            "type": "text"
+            "type": "text",
+            "name": "for_user_type_name"
           }
         ],
-        "outputType": "array",
-        "disabled": true
+        "outputType": "array"
       }
     ]
   }

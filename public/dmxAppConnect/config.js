@@ -177,6 +177,32 @@ dmx.config({
         }
       ],
       "outputType": "array"
+    },
+    "dtrepeat": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "scheme_name"
+        }
+      ],
+      "outputType": "array"
+    },
+    "rtrepeat": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "scheme_name"
+        }
+      ],
+      "outputType": "array"
     }
   },
   "mobilerecharge": {
@@ -2346,6 +2372,60 @@ dmx.config({
         {
           "type": "text",
           "name": "response"
+        }
+      ],
+      "outputType": "array"
+    }
+  },
+  "adduser": {
+    "dtrepeat": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "scheme_name"
+        }
+      ],
+      "outputType": "array"
+    },
+    "rtrepeat": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "scheme_name"
+        }
+      ],
+      "outputType": "array"
+    },
+    "repeat1": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "scheme_name"
+        }
+      ],
+      "outputType": "array"
+    },
+    "repeat2": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "scheme_name"
         }
       ],
       "outputType": "array"

@@ -76,7 +76,8 @@
               {
                 "table": "m_scheme",
                 "column": "scheme_name",
-                "direction": "ASC"
+                "direction": "ASC",
+                "recid": 1
               }
             ],
             "query": "SELECT id, scheme_name\nFROM m_scheme\nWHERE scheme_type = :P1 /* {{$_GET.for_user_type}} */\nORDER BY scheme_name ASC",
@@ -93,12 +94,12 @@
         "output": true,
         "meta": [
           {
-            "name": "id",
-            "type": "text"
+            "type": "number",
+            "name": "id"
           },
           {
-            "name": "scheme_name",
-            "type": "text"
+            "type": "text",
+            "name": "scheme_name"
           }
         ],
         "outputType": "array"
