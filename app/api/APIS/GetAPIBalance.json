@@ -1,5 +1,14 @@
 [
   {
+    "name": "apiTestUsers",
+    "module": "api",
+    "action": "send",
+    "options": {
+      "url": "https://reqres.in/api/users"
+    },
+    "output": true
+  },
+  {
     "name": "api",
     "module": "api",
     "action": "send",
