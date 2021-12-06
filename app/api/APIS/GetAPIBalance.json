@@ -4,9 +4,14 @@
     "module": "api",
     "action": "send",
     "options": {
-      "url": "https://reqres.in/api/users"
+      "url": "https://sonakshiworld.com/apiservice.asmx/RegisterComplaint",
+      "params": {
+        "apiToken": "{{'f5e11be7da444cd49409dad7508b5111'}}",
+        "reqid": "{{'WWSD43587'}}"
+      }
     },
-    "output": true
+    "output": true,
+    "disabled": true
   },
   {
     "name": "api",
@@ -15,8 +20,7 @@
     "options": {
       "url": "https://www.sonakshiworld.com/apiservice.asmx/GetBalanceNew?apiToken=f5e11be7da444cd49409dad7508b5111"
     },
-    "output": true,
-    "disabled": true
+    "output": true
   },
   {
     "name": "GetAPIBalance",
