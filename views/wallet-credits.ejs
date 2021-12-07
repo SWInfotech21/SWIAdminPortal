@@ -33,7 +33,7 @@
         </div>
 
         <div class="card-body">
-            <form is="dmx-serverconnect-form" id="formAddCredit" method="post" action="api/Transactions/CreditAdd" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAddCredit.data ? scNotif.success('New Credit Added') : scNotif.success('Credit Updated');formAddCredit.reset(); scCommision.load({});scAdminBalance.load()" dmx-on:error="scNotif.warning('An error occurred'); ">
+            <form is="dmx-serverconnect-form" id="formAddCredit" method="post" action="api/Transactions/CreditAdd" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAddCredit.data ? scNotif.success('New Credit Added') : scNotif.success('Credit Updated');formAddCredit.reset(); scCommision.load({});scAdminBalance.load()" dmx-on:error="scNotif.warning('An error occurred'); " dmx-on:forbidden="scNotif.warning(lastError.response)">
                 <div class="row">
                     <div class="col-12 col-lg-2 p-2">
                         <label>User Type</label>

@@ -1461,7 +1461,7 @@
               "action": "response",
               "options": {
                 "status": 403,
-                "data": "TPin Mismatched"
+                "data": "TPin Mismatched or Insufficient Balance"
               }
             }
           }
