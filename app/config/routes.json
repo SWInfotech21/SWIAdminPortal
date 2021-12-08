@@ -4,12 +4,14 @@
       "path": "/",
       "page": "index",
       "routeType": "page",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/IndexAccess"
     },
     {
       "path": "/users",
       "page": "users",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
     },
     {
       "path": "/login",
@@ -18,12 +20,14 @@
     {
       "path": "/operators",
       "page": "operators",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
     },
     {
       "path": "/services",
       "page": "services",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
     },
     {
       "path": "/403-forbidden",
@@ -32,103 +36,120 @@
     {
       "path": "/api-add-update",
       "page": "api-add-update",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
     },
     {
       "path": "/scheme",
       "page": "scheme",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
     },
     {
       "path": "/relation-op-api",
       "page": "relation-op-api",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
     },
     {
       "path": "/bank-admin",
       "page": "bank-admin",
       "layout": "main",
-      "exec": "/api/Users/UserAccess"
+      "exec": "/api/PageAccess/UserAccess"
     },
     {
       "path": "/scheme-priority",
       "page": "scheme-priority",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
     },
     {
       "path": "/scheme-commision-set",
       "page": "scheme-commision-set",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
     },
     {
       "path": "/wallet-credits",
       "page": "wallet-credits",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
     },
     {
       "path": "/wallet-debit",
       "page": "wallet-debit",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
     },
     {
       "path": "/recharge-history",
       "page": "recharge-history",
-      "layout": "main"
-    },
-    {
-      "path": "/patients",
-      "page": "patients",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
     },
     {
       "path": "/account-summary-report",
       "page": "account-summary-report",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
     },
     {
       "path": "/api-sales-report",
       "page": "api-sales-report",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
     },
     {
       "path": "/balance-report",
       "page": "balance-report",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
     },
     {
       "path": "/my-profile",
       "page": "my-profile",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
     },
     {
       "path": "/security-update",
       "page": "security-update",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
     },
     {
       "path": "/login-history",
       "page": "login-history",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
     },
     {
       "path": "/send-sms",
       "page": "send-sms",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
     },
     {
       "path": "/dashboard",
       "page": "dashboard",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
     },
     {
       "path": "/add-user",
       "page": "add-user",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
     },
     {
       "path": "/sms-report",
       "page": "sms-report",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
+    },
+    {
+      "path": "/404-not-found",
+      "page": "404-not-found"
     }
   ]
 }

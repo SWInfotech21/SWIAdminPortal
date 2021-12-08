@@ -228,6 +228,19 @@
   "exec": {
     "steps": [
       {
+        "name": "",
+        "module": "auth",
+        "action": "restrict",
+        "options": {
+          "provider": "securityLogin",
+          "permissions": [
+            "write"
+          ],
+          "loginUrl": "/login",
+          "forbiddenUrl": "/403-forbidden"
+        }
+      },
+      {
         "name": "identity",
         "module": "auth",
         "action": "identify",
@@ -979,10 +992,22 @@
                         "column": "blank2",
                         "type": "text",
                         "value": "{{$_POST.mobile}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "md_id",
+                        "type": "text",
+                        "value": "0"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "ds_id",
+                        "type": "text",
+                        "value": "0"
                       }
                     ],
                     "table": "m_users",
-                    "query": "INSERT INTO m_users\n(user_id, user_fname, user_mobile, user_email, password, salt, user_type, u_status, created_by, created_on, user_lname, cap_amt, balance_amt, balance_outstanding, aeps_balance, scheme_id, aadhar_no, pan_no, address, pin, state, district, blank1, blank2) VALUES (:P1 /* {{UniqueID}} */, :P2 /* {{$_POST.name}} */, :P3 /* {{$_POST.mobile}} */, :P4 /* {{$_POST.email.lowercase()}} */, :P5 /* {{password.sha256(NOW)}} */, :P6 /* {{NOW}} */, :P7 /* {{$_POST.user_type}} */, '1', :P8 /* {{identity}} */, :P9 /* {{NOW}} */, :P10 /* {{'https://github.com/ado.png'}} */, '0', '0', '0', '0', :P11 /* {{$_POST.scheme_id}} */, :P12 /* {{$_POST.aadhar}} */, :P13 /* {{$_POST.pan}} */, :P14 /* {{$_POST.address}} */, :P15 /* {{$_POST.pin}} */, :P16 /* {{$_POST.state}} */, :P17 /* {{$_POST.district}} */, :P18 /* {{password}} */, :P19 /* {{$_POST.mobile}} */)",
+                    "query": "INSERT INTO m_users\n(user_id, user_fname, user_mobile, user_email, password, salt, user_type, u_status, created_by, created_on, user_lname, cap_amt, balance_amt, balance_outstanding, aeps_balance, scheme_id, aadhar_no, pan_no, address, pin, state, district, blank1, blank2, md_id, ds_id) VALUES (:P1 /* {{UniqueID}} */, :P2 /* {{$_POST.name}} */, :P3 /* {{$_POST.mobile}} */, :P4 /* {{$_POST.email.lowercase()}} */, :P5 /* {{password.sha256(NOW)}} */, :P6 /* {{NOW}} */, :P7 /* {{$_POST.user_type}} */, '1', :P8 /* {{identity}} */, :P9 /* {{NOW}} */, :P10 /* {{'https://github.com/ado.png'}} */, '0', '0', '0', '0', :P11 /* {{$_POST.scheme_id}} */, :P12 /* {{$_POST.aadhar}} */, :P13 /* {{$_POST.pan}} */, :P14 /* {{$_POST.address}} */, :P15 /* {{$_POST.pin}} */, :P16 /* {{$_POST.state}} */, :P17 /* {{$_POST.district}} */, :P18 /* {{password}} */, :P19 /* {{$_POST.mobile}} */, '0', '0')",
                     "params": [
                       {
                         "name": ":P1",

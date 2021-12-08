@@ -28,34 +28,6 @@
       },
       {
         "type": "text",
-        "fieldName": "operator_code",
-        "options": {
-          "rules": {
-            "core:required": {
-              "param": "",
-              "message": "Operator code is required."
-            },
-            "core:maxlength": {
-              "param": "10"
-            }
-          }
-        },
-        "name": "operator_code"
-      },
-      {
-        "type": "text",
-        "fieldName": "api_code",
-        "options": {
-          "rules": {
-            "core:maxlength": {
-              "param": "100"
-            }
-          }
-        },
-        "name": "api_code"
-      },
-      {
-        "type": "text",
         "fieldName": "op_status",
         "name": "op_status"
       },
@@ -63,10 +35,6 @@
         "type": "text",
         "fieldName": "service",
         "name": "service"
-      },
-      {
-        "type": "text",
-        "name": "operator_type"
       }
     ]
   },
@@ -104,7 +72,9 @@
           "value": "{{$_POST.op_status}}"
         },
         "output": true,
-        "disabled": true
+        "disabled": true,
+        "meta": [],
+        "outputType": "text"
       },
       {
         "name": "",
@@ -130,27 +100,9 @@
                     },
                     {
                       "table": "m_operator",
-                      "column": "api_code",
-                      "type": "text",
-                      "value": "{{$_POST.api_code}}"
-                    },
-                    {
-                      "table": "m_operator",
-                      "column": "operator_code",
-                      "type": "text",
-                      "value": "{{$_POST.operator_code}}"
-                    },
-                    {
-                      "table": "m_operator",
                       "column": "status",
                       "type": "number",
                       "value": "{{$_POST.op_status}}"
-                    },
-                    {
-                      "table": "m_operator",
-                      "column": "operator_type",
-                      "type": "text",
-                      "value": "{{$_POST.operator_type}}"
                     },
                     {
                       "table": "m_operator",
@@ -190,7 +142,7 @@
                     "conditional": null,
                     "valid": true
                   },
-                  "query": "UPDATE m_operator\nSET operator_name = :P1 /* {{$_POST.name}} */, api_code = :P2 /* {{$_POST.api_code}} */, operator_code = :P3 /* {{$_POST.operator_code}} */, status = :P4 /* {{$_POST.op_status}} */, operator_type = :P5 /* {{$_POST.operator_type}} */, updated_by = :P6 /* {{identity}} */, updated_on = :P7 /* {{NOW}} */, service_id = :P8 /* {{$_POST.service}} */\nWHERE id = :P9 /* {{$_POST.OperatorId}} */",
+                  "query": "UPDATE m_operator\nSET operator_name = :P1 /* {{$_POST.name}} */, status = :P2 /* {{$_POST.op_status}} */, updated_by = :P3 /* {{identity}} */, updated_on = :P4 /* {{NOW}} */, service_id = :P5 /* {{$_POST.service}} */\nWHERE id = :P6 /* {{$_POST.OperatorId}} */",
                   "params": [
                     {
                       "name": ":P1",
@@ -200,42 +152,27 @@
                     {
                       "name": ":P2",
                       "type": "expression",
-                      "value": "{{$_POST.api_code}}"
+                      "value": "{{$_POST.op_status}}"
                     },
                     {
                       "name": ":P3",
                       "type": "expression",
-                      "value": "{{$_POST.operator_code}}"
+                      "value": "{{identity}}"
                     },
                     {
                       "name": ":P4",
                       "type": "expression",
-                      "value": "{{$_POST.op_status}}"
-                    },
-                    {
-                      "name": ":P5",
-                      "type": "expression",
-                      "value": "{{$_POST.operator_type}}"
-                    },
-                    {
-                      "name": ":P6",
-                      "type": "expression",
-                      "value": "{{identity}}"
-                    },
-                    {
-                      "name": ":P7",
-                      "type": "expression",
                       "value": "{{NOW}}"
                     },
                     {
-                      "name": ":P8",
+                      "name": ":P5",
                       "type": "expression",
                       "value": "{{$_POST.service}}"
                     },
                     {
                       "operator": "equal",
                       "type": "expression",
-                      "name": ":P9",
+                      "name": ":P6",
                       "value": "{{$_POST.OperatorId}}"
                     }
                   ]
@@ -274,27 +211,9 @@
                     },
                     {
                       "table": "m_operator",
-                      "column": "api_code",
-                      "type": "text",
-                      "value": "{{$_POST.api_code}}"
-                    },
-                    {
-                      "table": "m_operator",
-                      "column": "operator_code",
-                      "type": "text",
-                      "value": "{{$_POST.operator_code}}"
-                    },
-                    {
-                      "table": "m_operator",
                       "column": "status",
                       "type": "number",
                       "value": "{{$_POST.op_status}}"
-                    },
-                    {
-                      "table": "m_operator",
-                      "column": "operator_type",
-                      "type": "text",
-                      "value": "{{$_POST.operator_type}}"
                     },
                     {
                       "table": "m_operator",
@@ -311,7 +230,7 @@
                   ],
                   "table": "m_operator",
                   "returning": "id",
-                  "query": "INSERT INTO m_operator\n(operator_name, service_id, api_code, operator_code, status, operator_type, created_by, created_on) VALUES (:P1 /* {{$_POST.name}} */, :P2 /* {{$_POST.service}} */, :P3 /* {{$_POST.api_code}} */, :P4 /* {{$_POST.operator_code}} */, :P5 /* {{$_POST.op_status}} */, :P6 /* {{$_POST.operator_type}} */, :P7 /* {{identity}} */, :P8 /* {{NOW}} */)",
+                  "query": "INSERT INTO m_operator\n(operator_name, service_id, status, created_by, created_on) VALUES (:P1 /* {{$_POST.name}} */, :P2 /* {{$_POST.service}} */, :P3 /* {{$_POST.op_status}} */, :P4 /* {{identity}} */, :P5 /* {{NOW}} */)",
                   "params": [
                     {
                       "name": ":P1",
@@ -326,30 +245,15 @@
                     {
                       "name": ":P3",
                       "type": "expression",
-                      "value": "{{$_POST.api_code}}"
+                      "value": "{{$_POST.op_status}}"
                     },
                     {
                       "name": ":P4",
                       "type": "expression",
-                      "value": "{{$_POST.operator_code}}"
-                    },
-                    {
-                      "name": ":P5",
-                      "type": "expression",
-                      "value": "{{$_POST.op_status}}"
-                    },
-                    {
-                      "name": ":P6",
-                      "type": "expression",
-                      "value": "{{$_POST.operator_type}}"
-                    },
-                    {
-                      "name": ":P7",
-                      "type": "expression",
                       "value": "{{identity}}"
                     },
                     {
-                      "name": ":P8",
+                      "name": ":P5",
                       "type": "expression",
                       "value": "{{NOW}}"
                     }

@@ -1,4 +1,4 @@
-<!-- Wappler include head-page="layouts/main" is="dmx-app" id="bankadmin" appConnect="local" -->
+<!-- Wappler include head-page="layouts/main" is="dmx-app" id="bankadmin" appConnect="local" components="{dmxDataTraversal:{}}" -->
 <meta name="ac:route" content="/bank-admin">
 <dmx-serverconnect id="scBank" url="api/Users/AdminBank"></dmx-serverconnect>
 <dmx-data-view id="dvBank" pageSize="100" page="10" dmx-bind:data="scBank.data.GetBanks.data"></dmx-data-view>

@@ -58,31 +58,7 @@
               },
               {
                 "table": "m_operator",
-                "column": "api_code"
-              },
-              {
-                "table": "m_operator",
-                "column": "operator_code"
-              },
-              {
-                "table": "m_operator",
                 "column": "status"
-              },
-              {
-                "table": "m_operator",
-                "column": "operator_type"
-              },
-              {
-                "table": "m_operator",
-                "column": "is_validate"
-              },
-              {
-                "table": "m_operator",
-                "column": "is_bbps"
-              },
-              {
-                "table": "m_operator",
-                "column": "is_partial"
               },
               {
                 "table": "m_operator",
@@ -91,18 +67,6 @@
               {
                 "table": "m_operator",
                 "column": "max_amount"
-              },
-              {
-                "table": "m_operator",
-                "column": "min_length"
-              },
-              {
-                "table": "m_operator",
-                "column": "max_length"
-              },
-              {
-                "table": "m_operator",
-                "column": "allow_type"
               },
               {
                 "table": "m_operator",
@@ -151,10 +115,11 @@
               {
                 "table": "m_operator",
                 "column": "operator_name",
-                "direction": "ASC"
+                "direction": "ASC",
+                "recid": 1
               }
             ],
-            "query": "SELECT m_operator.id AS op_id, m_operator.operator_name, m_operator.service_id, m_operator.api_code, m_operator.operator_code, m_operator.status, m_operator.operator_type, m_operator.is_validate, m_operator.is_bbps, m_operator.is_partial, m_operator.min_amount, m_operator.max_amount, m_operator.min_length, m_operator.max_length, m_operator.allow_type, m_operator.created_on, m_operator.created_by, op_service.service_name, op_service.service_type\nFROM m_operator\nINNER JOIN m_service AS op_service ON (op_service.id = m_operator.service_id)\nORDER BY m_operator.operator_name ASC",
+            "query": "SELECT m_operator.id AS op_id, m_operator.operator_name, m_operator.service_id, m_operator.status, m_operator.min_amount, m_operator.max_amount, m_operator.created_on, m_operator.created_by, op_service.service_name, op_service.service_type\nFROM m_operator\nINNER JOIN m_service AS op_service ON (op_service.id = m_operator.service_id)\nORDER BY m_operator.operator_name ASC",
             "params": []
           }
         },
@@ -213,80 +178,44 @@
             "type": "array",
             "sub": [
               {
-                "name": "op_id",
-                "type": "text"
+                "type": "number",
+                "name": "op_id"
               },
               {
-                "name": "operator_name",
-                "type": "text"
+                "type": "text",
+                "name": "operator_name"
               },
               {
-                "name": "service_id",
-                "type": "number"
+                "type": "number",
+                "name": "service_id"
               },
               {
-                "name": "api_code",
-                "type": "text"
+                "type": "number",
+                "name": "status"
               },
               {
-                "name": "operator_code",
-                "type": "text"
+                "type": "number",
+                "name": "min_amount"
               },
               {
-                "name": "status",
-                "type": "number"
+                "type": "text",
+                "name": "max_amount"
               },
               {
-                "name": "operator_type",
-                "type": "text"
+                "type": "datetime",
+                "name": "created_on"
               },
               {
-                "name": "is_validate",
-                "type": "number"
+                "type": "number",
+                "name": "created_by"
               },
               {
-                "name": "is_bbps",
-                "type": "number"
+                "type": "text",
+                "name": "service_name"
               },
               {
-                "name": "is_partial",
-                "type": "number"
-              },
-              {
-                "name": "min_amount",
-                "type": "number"
-              },
-              {
-                "name": "max_amount",
-                "type": "text"
-              },
-              {
-                "name": "min_length",
-                "type": "number"
-              },
-              {
-                "name": "max_length",
-                "type": "number"
-              },
-              {
-                "name": "allow_type",
-                "type": "text"
-              },
-              {
-                "name": "created_on",
-                "type": "datetime"
-              },
-              {
-                "name": "created_by",
-                "type": "number"
-              },
-              {
-                "name": "service_name",
-                "type": "text"
-              },
-              {
-                "name": "service_type",
-                "type": "text"
+                "type": "text",
+                "name": "service_type"
               }
             ]
           }

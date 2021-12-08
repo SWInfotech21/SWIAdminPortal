@@ -141,13 +141,36 @@
     </dmx-notifications>
     <dmx-datetime id="dateNow" interval="days"></dmx-datetime>
     <div is="dmx-view" id="content">
+        <header>
+            <div class="text-white bg-primary">
+                <div class="row py-3 mx-0">
+                    <h4 class="text-center h4 col-12">SWPAY.IN-Admin</h4>
+                    <div class="col-2 align-self-center text-center"><img src="assets/images/swinfotech.png" id="logo_img" width="70px" height="70px" /></div>
+                    <div class="col-7 row">
+                        <p class="m-0 col-12 col-md-6"><b>Pending Recharge:</b> 0</p>
+                        <p class="m-0 col-12 col-md-6"><b>Payment Request:</b> 0</p>
+                        <p class="m-0 col-12 col-md-6"><b>Tikets:</b>0</p>
+                        <p class="m-0 col-12 col-md-6"><b>Bank Withdrawal Request:</b>0</p>
+                    </div>
+                    <div class="col-3">
+                        <p class="m-0"><b>Logged in site as:</b><span>{{scAdminBalance.data.query.user_fname}}</span></p>
+                        <p class="m-0"><b>Balance:</b><span id="lblBalance">&emsp;{{scAdminBalance.data.query.balance_amt.toNumber().toFixed(3)}}</span></p>
+                        <p class="m-0"><b>AEPS Balance:</b><span>&emsp;{{scAdminBalance.data.query.aeps_balance.toNumber().toFixed(3)}}</span></p>
+                        <p class="m-0"><b>API Balance:</b><span id="">&emsp;{{scAPIBalance.data.GetAPIBalance.Wallet.main}}</span></p><a class="button red tip-left small" href="#" dmx-on:click="scLogout.load()" title="Click Here to Logout">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>
+                            <span class="sd-fw-500" style="font-weight:bold;">Log Out</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
 
         <!-- Custom Navbar Starts-->
         <section id="layout">
-            <div class="logo_profile container_12 bg-warning mx-0">
+            <!-- <div class="logo_profile container_12 bg-warning mx-0">
                 <div class="grid_3 logo_img" style="margin-bottom:10px; height:60px; overflow:hidden; margin-top:15px;"> <img src="assets/images/swinfotech.png" id="ctl00_logo_img" width="70px" height="70px" /> </div>
                 <div class="grid_6 logo_img" style="margin-bottom:10px;width:500px; height:80px; overflow:hidden; margin-top:15px;">
-                    Payment Request:<span id="ctl00_lbltolatpayreq">0</span><br />Bank Withdrawal Request:<span id="ctl00_lblbankWithdrawal">0</span>
+                    Payment Request:<span>0</span><br />Bank Withdrawal Request:<span>0</span>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pending
                     Recharge:<span id="ctl00_lbltotalrecharge">2</span><br />
                     Tikets:<span id="ctl00_lbltotaltikets">2</span><br />
@@ -158,7 +181,7 @@
                     <div class="user_meta" style="margin-top:20px;background-color:#ffffff">
                         <div class="name" stylealign="center"> <a class="tip-left" title=""><span style="font-size:14px; font-weight:bold;"> <span style="color:#FB4E55;">Logged in as Site Admin</span> -
                                     <span id="ctl00_lblName">{{scAdminBalance.data.query.user_fname}}</span></span> </a> <br />
-                            <b>Balance:</b><span id="ctl00_lblBalance">&emsp;{{scAdminBalance.data.query.balance_amt.toNumber().toFixed(3)}}</span><br />
+                            <b>Balance:</b><span>&emsp;{{scAdminBalance.data.query.balance_amt.toNumber().toFixed(3)}}</span><br />
                             <b>AEPS Balance:</b><span id="ctl00_lblAEPSBalance">&emsp;{{scAdminBalance.data.query.aeps_balance.toNumber().toFixed(3)}}</span><br /><b>API Balance:</b><span id="">&emsp;{{scAPIBalance.data.GetAPIBalance.Wallet.main}}</span><br />
                             <div><a class="button red tip-left small" href="#" dmx-on:click="scLogout.load()" title="Click Here to Logout">
                                     <i class="fa fa-sign-out" aria-hidden="true"></i>
@@ -169,7 +192,7 @@
                     </div>
                 </div>
                 <div class="clear"></div>
-            </div>
+            </div> -->
             <section id="top">
                 <section id="top_bar">
                     <section id="main_menu">
@@ -202,6 +225,7 @@
                                     <li><a href="users">View Users</a></li>
 
                                     <li><a href="#">KYC User</a></li>
+                                    <li><a href="#">CC</a></li>
 
                                 </ul>
                             </li>

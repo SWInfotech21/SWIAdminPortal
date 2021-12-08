@@ -106,5 +106,13 @@
   "sms-report.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "index.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  },
+  "404-not-found.ejs": {
+    "layoutPage": "",
+    "description": ""
   }
 }

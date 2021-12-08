@@ -30,8 +30,8 @@
           "permissions": [
             "write"
           ],
-          "loginUrl": "login",
-          "forbiddenUrl": "403-forbidden"
+          "loginUrl": "/login",
+          "forbiddenUrl": "/403-forbidden"
         }
       },
       {
@@ -176,44 +176,44 @@
             "type": "array",
             "sub": [
               {
-                "name": "sc_id",
-                "type": "text"
+                "type": "number",
+                "name": "sc_id"
               },
               {
-                "name": "scheme_name",
-                "type": "text"
+                "type": "text",
+                "name": "scheme_name"
               },
               {
-                "name": "scheme_desc",
-                "type": "text"
+                "type": "text",
+                "name": "scheme_desc"
               },
               {
-                "name": "scheme_type",
-                "type": "text"
+                "type": "text",
+                "name": "scheme_type"
               },
               {
-                "name": "scheme_amount",
-                "type": "text"
+                "type": "text",
+                "name": "scheme_amount"
               },
               {
-                "name": "created_by",
-                "type": "number"
+                "type": "number",
+                "name": "created_by"
               },
               {
-                "name": "created_on",
-                "type": "datetime"
+                "type": "datetime",
+                "name": "created_on"
               },
               {
-                "name": "updated_by",
-                "type": "number"
+                "type": "number",
+                "name": "updated_by"
               },
               {
-                "name": "updated_on",
-                "type": "datetime"
+                "type": "datetime",
+                "name": "updated_on"
               },
               {
-                "name": "status",
-                "type": "number"
+                "type": "number",
+                "name": "status"
               }
             ]
           }

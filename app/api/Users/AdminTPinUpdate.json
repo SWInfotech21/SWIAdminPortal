@@ -34,6 +34,19 @@
   "exec": {
     "steps": [
       {
+        "name": "",
+        "module": "auth",
+        "action": "restrict",
+        "options": {
+          "provider": "securityLogin",
+          "permissions": [
+            "write"
+          ],
+          "loginUrl": "/login",
+          "forbiddenUrl": "/403-forbidden"
+        }
+      },
+      {
         "name": "identity",
         "module": "auth",
         "action": "identify",
@@ -96,8 +109,8 @@
         "output": true,
         "meta": [
           {
-            "name": "olddbtpin",
-            "type": "text"
+            "type": "text",
+            "name": "olddbtpin"
           }
         ],
         "outputType": "object",

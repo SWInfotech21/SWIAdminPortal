@@ -111,6 +111,19 @@
       },
       {
         "name": "",
+        "module": "auth",
+        "action": "restrict",
+        "options": {
+          "provider": "securityLogin",
+          "forbiddenUrl": "/403-forbidden",
+          "loginUrl": "login",
+          "permissions": [
+            "write"
+          ]
+        }
+      },
+      {
+        "name": "",
         "module": "core",
         "action": "condition",
         "options": {
