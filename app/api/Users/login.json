@@ -65,7 +65,7 @@
               "name": "m_users"
             },
             "joins": [],
-            "query": "SELECT salt AS saltvalue, id\nFROM m_users\nWHERE blank2 = :P1 /* {{$_POST.Mobile}} */ AND user_type = 0",
+            "query": "SELECT salt AS saltvalue, id\nFROM m_users\nWHERE blank2 = :P1 /* {{$_POST.Mobile}} */ AND (user_type = 0 OR user_type = 4)",
             "params": [
               {
                 "operator": "equal",
@@ -91,17 +91,36 @@
                   "operation": "="
                 },
                 {
-                  "id": "m_users.user_type",
-                  "field": "m_users.user_type",
-                  "type": "double",
-                  "operator": "equal",
-                  "value": 0,
-                  "data": {
-                    "table": "m_users",
-                    "column": "user_type",
-                    "type": "number"
-                  },
-                  "operation": "="
+                  "condition": "OR",
+                  "rules": [
+                    {
+                      "id": "m_users.user_type",
+                      "field": "m_users.user_type",
+                      "type": "double",
+                      "operator": "equal",
+                      "value": 0,
+                      "data": {
+                        "table": "m_users",
+                        "column": "user_type",
+                        "type": "number"
+                      },
+                      "operation": "="
+                    },
+                    {
+                      "id": "m_users.user_type",
+                      "field": "m_users.user_type",
+                      "type": "double",
+                      "operator": "equal",
+                      "value": 4,
+                      "data": {
+                        "table": "m_users",
+                        "column": "user_type",
+                        "type": "number"
+                      },
+                      "operation": "="
+                    }
+                  ],
+                  "conditional": null
                 }
               ],
               "conditional": null,

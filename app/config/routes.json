@@ -11,7 +11,7 @@
       "path": "/users",
       "page": "users",
       "layout": "main",
-      "exec": "/api/PageAccess/UserAccess"
+      "exec": "/api/PageAccess/AdminAndCC"
     },
     {
       "path": "/login",
@@ -85,43 +85,43 @@
       "path": "/recharge-history",
       "page": "recharge-history",
       "layout": "main",
-      "exec": "/api/PageAccess/UserAccess"
+      "exec": "/api/PageAccess/AdminAndCC"
     },
     {
       "path": "/account-summary-report",
       "page": "account-summary-report",
       "layout": "main",
-      "exec": "/api/PageAccess/UserAccess"
+      "exec": "/api/PageAccess/AdminAndCC"
     },
     {
       "path": "/api-sales-report",
       "page": "api-sales-report",
       "layout": "main",
-      "exec": "/api/PageAccess/UserAccess"
+      "exec": "/api/PageAccess/AdminAndCC"
     },
     {
       "path": "/balance-report",
       "page": "balance-report",
       "layout": "main",
-      "exec": "/api/PageAccess/UserAccess"
+      "exec": "/api/PageAccess/AdminAndCC"
     },
     {
       "path": "/my-profile",
       "page": "my-profile",
       "layout": "main",
-      "exec": "/api/PageAccess/UserAccess"
+      "exec": "/api/PageAccess/AdminAndCC"
     },
     {
       "path": "/security-update",
       "page": "security-update",
       "layout": "main",
-      "exec": "/api/PageAccess/UserAccess"
+      "exec": "/api/PageAccess/AdminAndCC"
     },
     {
       "path": "/login-history",
       "page": "login-history",
       "layout": "main",
-      "exec": "/api/PageAccess/UserAccess"
+      "exec": "/api/PageAccess/AdminAndCC"
     },
     {
       "path": "/send-sms",
@@ -133,7 +133,7 @@
       "path": "/dashboard",
       "page": "dashboard",
       "layout": "main",
-      "exec": "/api/PageAccess/UserAccess"
+      "exec": "/api/PageAccess/AdminAndCC"
     },
     {
       "path": "/add-user",
@@ -145,11 +145,22 @@
       "path": "/sms-report",
       "page": "sms-report",
       "layout": "main",
-      "exec": "/api/PageAccess/UserAccess"
+      "exec": "/api/PageAccess/AdminAndCC"
     },
     {
       "path": "/404-not-found",
       "page": "404-not-found"
+    },
+    {
+      "path": "/add-cc",
+      "page": "add-cc",
+      "layout": "main"
+    },
+    {
+      "path": "/view-cc",
+      "page": "view-cc",
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
     }
   ]
 }

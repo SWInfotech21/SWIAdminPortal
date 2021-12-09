@@ -13,7 +13,10 @@
       "ssl": {
         "rejectUnauthorized": false
       }
-    }
+    },
+    "meta": {}
   },
-  "fileName": "postgres_gcpServer.json"
+  "fileName": "postgres_gcpServer.json",
+  "actionFilePath": "file:///F:/swi/SWIAdminPortal/app/modules/connections/postgres_gcpServer.json",
+  "serverType": "node"
 }

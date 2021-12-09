@@ -200,7 +200,7 @@
 
                             <li><a class="sf-with-ul" href="dashboard">Dashboard</a>
                             </li>
-                            <li><a class="sf-with-ul" href="javascript:void(0)">Master&emsp;<i class="fas fa-angle-down"></i></a>
+                            <li dmx-show="scAdminBalance.data.query.user_type == 0"><a class="sf-with-ul" href="javascript:void(0)">Master&emsp;<i class="fas fa-angle-down"></i></a>
                                 <ul>
                                     <li><a href="send-sms">Send SMS</a></li>
                                     <li><a href="scheme-commision-set">Slab/Commission</a></li>
@@ -213,7 +213,7 @@
                                     <li><a href="bank-admin">Admin Bank</a></li>
                                 </ul>
                             </li>
-                            <li><a class="sf-with-ul" href="#">Wallet&emsp;<i class="fas fa-angle-down"></i></a>
+                            <li dmx-show="scAdminBalance.data.query.user_type == 0"><a class="sf-with-ul" href="#">Wallet&emsp;<i class="fas fa-angle-down"></i></a>
                                 <ul>
                                     <li><a href="wallet-debit">Debit</a></li>
                                     <li><a href="wallet-credits">Credit</a></li>
@@ -221,11 +221,16 @@
                             </li>
                             <li id="ctl00_liSubAc"><a class="sf-with-ul" href="javascript:void(0)">Customers&emsp;<i class="fas fa-angle-down"></i></a>
                                 <ul>
-                                    <li><a href="add-user">Add User</a></li>
+                                    <li dmx-show="scAdminBalance.data.query.user_type == 0"><a href="add-user">Add User</a></li>
                                     <li><a href="users">View Users</a></li>
 
                                     <li><a href="#">KYC User</a></li>
-                                    <li><a href="#">CC</a></li>
+                                    <li dmx-show="scAdminBalance.data.query.user_type == 0"><a href="#" class="sf-with-ul">CC<i class="fas fa-angle-right float-end"></i></a>
+                                        <ul>
+                                            <li><a href="add-cc">Add</a></li>
+                                            <li><a href="view-cc">View</a></li>
+                                        </ul>
+                                    </li>
 
                                 </ul>
                             </li>
@@ -245,7 +250,7 @@
                                     <li><a href="login-history">Login Details</a></li>
                                 </ul>
                             </li>
-                            <li><a class="sf-with-ul" href="#">Support Center&emsp;<i class="fas fa-angle-down"></i></a>
+                            <li dmx-show="scAdminBalance.data.query.user_type == 0"><a class="sf-with-ul" href="#">Support Center&emsp;<i class="fas fa-angle-down"></i></a>
                                 <ul>
                                     <li><a href="#">Browse Tickets</a></li>
                                     <li><a href="#">Payment Requests</a></li>

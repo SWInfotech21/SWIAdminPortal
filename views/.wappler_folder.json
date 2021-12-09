@@ -114,5 +114,13 @@
   "404-not-found.ejs": {
     "layoutPage": "",
     "description": ""
+  },
+  "add-cc.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  },
+  "view-cc.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }

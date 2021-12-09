@@ -78,6 +78,10 @@
           {
             "table": "m_users",
             "column": "blank2"
+          },
+          {
+            "table": "m_users",
+            "column": "user_type"
           }
         ],
         "table": {
@@ -104,7 +108,7 @@
           "conditional": null,
           "valid": true
         },
-        "query": "SELECT balance_amt, aeps_balance, user_fname, user_mobile, user_email, aadhar_no, pan_no, address, pin, state, district, blank2\nFROM m_users\nWHERE id = :P1 /* {{identity}} */",
+        "query": "SELECT balance_amt, aeps_balance, user_fname, user_mobile, user_email, aadhar_no, pan_no, address, pin, state, district, blank2, user_type\nFROM m_users\nWHERE id = :P1 /* {{identity}} */",
         "params": [
           {
             "operator": "equal",
@@ -164,6 +168,10 @@
       {
         "type": "text",
         "name": "blank2"
+      },
+      {
+        "type": "number",
+        "name": "user_type"
       }
     ],
     "outputType": "object"

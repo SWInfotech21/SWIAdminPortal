@@ -222,6 +222,54 @@
       {
         "type": "number",
         "name": "dtscheme3"
+      },
+      {
+        "type": "number",
+        "name": "access_page1"
+      },
+      {
+        "type": "number",
+        "name": "access_page2"
+      },
+      {
+        "type": "number",
+        "name": "access_page3"
+      },
+      {
+        "type": "number",
+        "name": "access_page4"
+      },
+      {
+        "type": "number",
+        "name": "access_page5"
+      },
+      {
+        "type": "number",
+        "name": "access_page6"
+      },
+      {
+        "type": "number",
+        "name": "access_page7"
+      },
+      {
+        "type": "number",
+        "name": "support"
+      },
+      {
+        "type": "number",
+        "name": "PendingTrans"
+      },
+      {
+        "type": "number",
+        "name": "TransReport"
+      },
+      {
+        "type": "number",
+        "name": "LiveTrans"
+      },
+      {
+        "type": "number",
+        "name": "ViewUsers"
       }
     ]
   },
@@ -316,10 +364,11 @@
         "module": "core",
         "action": "setvalue",
         "options": {
-          "value": "{{$_POST.user_type == 1 ? 'MD10' : $_POST.user_type == 2 ? 'DT20' : $_POST.user_type == 3 ? 'RT30' : 'UN40'}}"
+          "value": "{{$_POST.user_type == 1 ? 'MD10' : $_POST.user_type == 2 ? 'DT20' : $_POST.user_type == 3 ? 'RT30' : $_POST.user_type == 4 ? 'CC00' : 'UN40'}}"
         },
         "meta": [],
-        "outputType": "text"
+        "outputType": "text",
+        "output": false
       },
       {
         "name": "UniqueID",
@@ -329,7 +378,8 @@
           "value": "{{User+SequenceNo.u_no.sum('1')}}"
         },
         "meta": [],
-        "outputType": "text"
+        "outputType": "text",
+        "output": false
       },
       {
         "name": "",
@@ -784,6 +834,142 @@
                               "operator": "equal",
                               "type": "expression",
                               "name": ":P7",
+                              "value": "{{$_POST.UserId}}"
+                            }
+                          ]
+                        }
+                      },
+                      "meta": [
+                        {
+                          "name": "affected",
+                          "type": "number"
+                        }
+                      ],
+                      "output": true
+                    }
+                  }
+                },
+                "outputType": "boolean"
+              },
+              {
+                "name": "",
+                "module": "core",
+                "action": "condition",
+                "options": {
+                  "if": "{{$_POST.user_type == 4}}",
+                  "then": {
+                    "steps": {
+                      "name": "PageAccessUp",
+                      "module": "dbupdater",
+                      "action": "update",
+                      "options": {
+                        "connection": "postgres_gcpServer",
+                        "sql": {
+                          "type": "update",
+                          "values": [
+                            {
+                              "table": "cc_pageaccess",
+                              "column": "access_page1",
+                              "type": "number",
+                              "value": "{{$_POST.support == 'true' ? 1 : 0}}"
+                            },
+                            {
+                              "table": "cc_pageaccess",
+                              "column": "access_page2",
+                              "type": "number",
+                              "value": "{{$_POST.PendingTrans == 'true' ? 1 : 0}}"
+                            },
+                            {
+                              "table": "cc_pageaccess",
+                              "column": "access_page3",
+                              "type": "number",
+                              "value": "{{$_POST.TransReport == 'true' ? 1 : 0}}"
+                            },
+                            {
+                              "table": "cc_pageaccess",
+                              "column": "access_page4",
+                              "type": "number",
+                              "value": "{{$_POST.LiveTrans == 'true' ? 1 : 0}}"
+                            },
+                            {
+                              "table": "cc_pageaccess",
+                              "column": "access_page5",
+                              "type": "number",
+                              "value": "{{$_POST.ViewUsers == 'true' ? 1 : 0}}"
+                            },
+                            {
+                              "table": "cc_pageaccess",
+                              "column": "updated_by",
+                              "type": "text",
+                              "value": "{{identity}}"
+                            },
+                            {
+                              "table": "cc_pageaccess",
+                              "column": "updated_on",
+                              "type": "datetime",
+                              "value": "{{NOW}}"
+                            }
+                          ],
+                          "table": "cc_pageaccess",
+                          "wheres": {
+                            "condition": "AND",
+                            "rules": [
+                              {
+                                "id": "ccuser_id",
+                                "field": "ccuser_id",
+                                "type": "string",
+                                "operator": "equal",
+                                "value": "{{$_POST.UserId}}",
+                                "data": {
+                                  "column": "ccuser_id"
+                                },
+                                "operation": "="
+                              }
+                            ],
+                            "conditional": null,
+                            "valid": true
+                          },
+                          "query": "UPDATE cc_pageaccess\nSET access_page1 = :P1 /* {{$_POST.support == 'true' ? 1 : 0}} */, access_page2 = :P2 /* {{$_POST.PendingTrans == 'true' ? 1 : 0}} */, access_page3 = :P3 /* {{$_POST.TransReport == 'true' ? 1 : 0}} */, access_page4 = :P4 /* {{$_POST.LiveTrans == 'true' ? 1 : 0}} */, access_page5 = :P5 /* {{$_POST.ViewUsers == 'true' ? 1 : 0}} */, updated_by = :P6 /* {{identity}} */, updated_on = :P7 /* {{NOW}} */\nWHERE ccuser_id = :P8 /* {{$_POST.UserId}} */",
+                          "params": [
+                            {
+                              "name": ":P1",
+                              "type": "expression",
+                              "value": "{{$_POST.support == 'true' ? 1 : 0}}"
+                            },
+                            {
+                              "name": ":P2",
+                              "type": "expression",
+                              "value": "{{$_POST.PendingTrans == 'true' ? 1 : 0}}"
+                            },
+                            {
+                              "name": ":P3",
+                              "type": "expression",
+                              "value": "{{$_POST.TransReport == 'true' ? 1 : 0}}"
+                            },
+                            {
+                              "name": ":P4",
+                              "type": "expression",
+                              "value": "{{$_POST.LiveTrans == 'true' ? 1 : 0}}"
+                            },
+                            {
+                              "name": ":P5",
+                              "type": "expression",
+                              "value": "{{$_POST.ViewUsers == 'true' ? 1 : 0}}"
+                            },
+                            {
+                              "name": ":P6",
+                              "type": "expression",
+                              "value": "{{identity}}"
+                            },
+                            {
+                              "name": ":P7",
+                              "type": "expression",
+                              "value": "{{NOW}}"
+                            },
+                            {
+                              "operator": "equal",
+                              "type": "expression",
+                              "name": ":P8",
                               "value": "{{$_POST.UserId}}"
                             }
                           ]
@@ -1364,6 +1550,138 @@
                             },
                             {
                               "name": ":P7",
+                              "type": "expression",
+                              "value": "{{NOW}}"
+                            }
+                          ]
+                        }
+                      },
+                      "meta": [
+                        {
+                          "name": "identity",
+                          "type": "text"
+                        },
+                        {
+                          "name": "affected",
+                          "type": "number"
+                        }
+                      ],
+                      "output": true
+                    }
+                  }
+                },
+                "outputType": "boolean"
+              },
+              {
+                "name": "",
+                "module": "core",
+                "action": "condition",
+                "options": {
+                  "if": "{{$_POST.user_type == 4}}",
+                  "then": {
+                    "steps": {
+                      "name": "PageAccessPermission",
+                      "module": "dbupdater",
+                      "action": "insert",
+                      "options": {
+                        "connection": "postgres_gcpServer",
+                        "sql": {
+                          "type": "insert",
+                          "values": [
+                            {
+                              "table": "cc_pageaccess",
+                              "column": "ccuser_id",
+                              "type": "text",
+                              "value": "{{AddUser.identity}}"
+                            },
+                            {
+                              "table": "cc_pageaccess",
+                              "column": "access_page1",
+                              "type": "number",
+                              "value": "{{$_POST.support}}",
+                              "condition": "{{$_POST.support}}"
+                            },
+                            {
+                              "table": "cc_pageaccess",
+                              "column": "access_page2",
+                              "type": "number",
+                              "value": "{{$_POST.PendingTrans}}",
+                              "condition": "{{$_POST.PendingTrans}}"
+                            },
+                            {
+                              "table": "cc_pageaccess",
+                              "column": "access_page3",
+                              "type": "number",
+                              "value": "{{$_POST.TransReport}}",
+                              "condition": "{{$_POST.TransReport}}"
+                            },
+                            {
+                              "table": "cc_pageaccess",
+                              "column": "access_page4",
+                              "type": "number",
+                              "value": "{{$_POST.LiveTrans}}",
+                              "condition": "{{$_POST.LiveTrans}}"
+                            },
+                            {
+                              "table": "cc_pageaccess",
+                              "column": "access_page5",
+                              "type": "number",
+                              "value": "{{$_POST.ViewUsers}}",
+                              "condition": "{{$_POST.ViewUsers}}"
+                            },
+                            {
+                              "table": "cc_pageaccess",
+                              "column": "created_by",
+                              "type": "text",
+                              "value": "{{identity}}"
+                            },
+                            {
+                              "table": "cc_pageaccess",
+                              "column": "created_on",
+                              "type": "datetime",
+                              "value": "{{NOW}}"
+                            }
+                          ],
+                          "table": "cc_pageaccess",
+                          "query": "INSERT INTO cc_pageaccess\n(ccuser_id, access_page1, access_page2, access_page3, access_page4, access_page5, created_by, created_on) VALUES (:P1 /* {{AddUser.identity}} */, :P2 /* {{$_POST.support}} */, :P3 /* {{$_POST.PendingTrans}} */, :P4 /* {{$_POST.TransReport}} */, :P5 /* {{$_POST.LiveTrans}} */, :P6 /* {{$_POST.ViewUsers}} */, :P7 /* {{identity}} */, :P8 /* {{NOW}} */)",
+                          "params": [
+                            {
+                              "name": ":P1",
+                              "type": "expression",
+                              "value": "{{AddUser.identity}}"
+                            },
+                            {
+                              "name": ":P2",
+                              "type": "expression",
+                              "value": "{{$_POST.support}}"
+                            },
+                            {
+                              "name": ":P3",
+                              "type": "expression",
+                              "value": "{{$_POST.PendingTrans}}"
+                            },
+                            {
+                              "name": ":P4",
+                              "type": "expression",
+                              "value": "{{$_POST.TransReport}}"
+                            },
+                            {
+                              "name": ":P5",
+                              "type": "expression",
+                              "value": "{{$_POST.LiveTrans}}"
+                            },
+                            {
+                              "name": ":P6",
+                              "type": "expression",
+                              "value": "{{$_POST.ViewUsers}}"
+                            },
+                            {
+                              "name": ":P7",
+                              "type": "expression",
+                              "value": "{{identity}}"
+                            },
+                            {
+                              "name": ":P8",
                               "type": "expression",
                               "value": "{{NOW}}"
                             }

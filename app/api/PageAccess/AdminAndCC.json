@@ -8,8 +8,8 @@
       "permissions": [
         "write"
       ],
-      "loginUrl": "login",
-      "forbiddenUrl": "403-forbidden"
+      "loginUrl": "/login",
+      "forbiddenUrl": "/403-forbidden"
     }
   },
   {
@@ -31,7 +31,7 @@
       "then": {
         "steps": [
           {
-            "name": "CheckUser",
+            "name": "CheckAdminCC",
             "module": "dbconnector",
             "action": "single",
             "options": {
@@ -42,15 +42,24 @@
                   {
                     "table": "m_users",
                     "column": "id",
-                    "aggregate": "COUNT",
-                    "alias": "access"
+                    "alias": "access",
+                    "aggregate": "COUNT"
                   }
                 ],
-                "groupBy": [],
                 "table": {
                   "name": "m_users"
                 },
                 "joins": [],
+                "groupBy": [],
+                "query": "SELECT COUNT(id) AS access\nFROM m_users\nWHERE id = :P1 /* {{identity}} */ AND (user_type = 0 OR user_type = 4) AND u_status = '1'",
+                "params": [
+                  {
+                    "operator": "equal",
+                    "type": "expression",
+                    "name": ":P1",
+                    "value": "{{identity}}"
+                  }
+                ],
                 "wheres": {
                   "condition": "AND",
                   "rules": [
@@ -68,17 +77,36 @@
                       "operation": "="
                     },
                     {
-                      "id": "m_users.user_type",
-                      "field": "m_users.user_type",
-                      "type": "double",
-                      "operator": "equal",
-                      "value": 0,
-                      "data": {
-                        "table": "m_users",
-                        "column": "user_type",
-                        "type": "number"
-                      },
-                      "operation": "="
+                      "condition": "OR",
+                      "rules": [
+                        {
+                          "id": "m_users.user_type",
+                          "field": "m_users.user_type",
+                          "type": "double",
+                          "operator": "equal",
+                          "value": 0,
+                          "data": {
+                            "table": "m_users",
+                            "column": "user_type",
+                            "type": "number"
+                          },
+                          "operation": "="
+                        },
+                        {
+                          "id": "m_users.user_type",
+                          "field": "m_users.user_type",
+                          "type": "double",
+                          "operator": "equal",
+                          "value": 4,
+                          "data": {
+                            "table": "m_users",
+                            "column": "user_type",
+                            "type": "number"
+                          },
+                          "operation": "="
+                        }
+                      ],
+                      "conditional": null
                     },
                     {
                       "id": "m_users.u_status",
@@ -96,16 +124,7 @@
                   ],
                   "conditional": null,
                   "valid": true
-                },
-                "query": "SELECT COUNT(id) AS access\nFROM m_users\nWHERE id = :P1 /* {{identity}} */ AND user_type = 0 AND u_status = '1'",
-                "params": [
-                  {
-                    "operator": "equal",
-                    "type": "expression",
-                    "name": ":P1",
-                    "value": "{{identity}}"
-                  }
-                ]
+                }
               }
             },
             "output": true,
@@ -122,10 +141,10 @@
             "module": "core",
             "action": "condition",
             "options": {
-              "if": "{{CheckUser.access == 0}}",
+              "if": "{{CheckAdminCC.access == 0}}",
               "then": {
                 "steps": {
-                  "name": "Redirect",
+                  "name": "UnableAccess",
                   "module": "core",
                   "action": "redirect",
                   "options": {
@@ -140,7 +159,7 @@
       },
       "else": {
         "steps": {
-          "name": "redirect",
+          "name": "Login",
           "module": "core",
           "action": "redirect",
           "options": {
