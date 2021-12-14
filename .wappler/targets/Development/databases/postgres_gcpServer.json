@@ -337,259 +337,6 @@
           }
         }
       },
-      "m_admin": {
-        "db": {
-          "schema": "public"
-        },
-        "columns": {
-          "id": {
-            "db": {
-              "type": "integer",
-              "default": "",
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "user_id": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "user_fname": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "user_lname": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "user_mobile": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "user_email": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "password": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "salt": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "user_type": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "u_status": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "user_tpin": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "access_page1": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "access_page2": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "access_page3": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "access_page4": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "access_page5": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "access_page6": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "access_page7": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "access_page8": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "access_page9": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "access_page10": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "access_page11": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "access_page12": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "access_page13": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "access_page14": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "access_page15": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "ip": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "kyc_status": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "is_block": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "created_by": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "created_on": {
-            "db": {
-              "type": "timestamp",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "updated_by": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "updated_on": {
-            "db": {
-              "type": "timestamp",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "deleted_by": {
-            "db": {
-              "type": "string",
-              "primary": false,
-              "nullable": true
-            }
-          },
-          "deleted_on": {
-            "db": {
-              "type": "timestamp",
-              "primary": false,
-              "nullable": true
-            }
-          }
-        }
-      },
       "m_api": {
         "db": {
           "schema": "public"
@@ -697,6 +444,316 @@
           "deleted_by": {
             "db": {
               "type": "integer",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "deleted_on": {
+            "db": {
+              "type": "timestamp",
+              "primary": false,
+              "nullable": true
+            }
+          }
+        }
+      },
+      "m_api_forward": {
+        "db": {
+          "schema": "public"
+        },
+        "columns": {
+          "id": {
+            "db": {
+              "type": "integer",
+              "default": "",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "service_id": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "operator_id": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "api_id": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "api_status": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "api_blank1": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "api_blank2": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "api_blank3": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "api_blank4": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "created_by": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "created_on": {
+            "db": {
+              "type": "timestamp",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "updated_by": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "updated_on": {
+            "db": {
+              "type": "timestamp",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "deleted_by": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "deleted_on": {
+            "db": {
+              "type": "timestamp",
+              "primary": false,
+              "nullable": true
+            }
+          }
+        }
+      },
+      "m_api_users": {
+        "db": {
+          "schema": "public"
+        },
+        "columns": {
+          "id": {
+            "db": {
+              "type": "integer",
+              "default": "",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "apiuser_id": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "user_fname": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "user_lname": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "user_mobile": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "user_email": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "api_apitoken": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "api_username": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "api_password": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "salt": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "user_type": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "u_status": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "user_tpin": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "ip": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "kyc_status": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "is_block": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "cap_amt": {
+            "db": {
+              "type": "float",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "balance_amt": {
+            "db": {
+              "type": "float",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "balance_outstanding": {
+            "db": {
+              "type": "float",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "aeps_limit": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "aeps_balance": {
+            "db": {
+              "type": "float",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "created_by": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "created_on": {
+            "db": {
+              "type": "timestamp",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "updated_by": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "updated_on": {
+            "db": {
+              "type": "timestamp",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "deleted_by": {
+            "db": {
+              "type": "string",
               "primary": false,
               "nullable": true
             }

@@ -122,5 +122,9 @@
   "view-cc.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "api-forward.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }

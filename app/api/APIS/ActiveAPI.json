@@ -1,0 +1,106 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "",
+        "module": "auth",
+        "action": "restrict",
+        "options": {
+          "provider": "securityLogin",
+          "permissions": [
+            "write"
+          ],
+          "loginUrl": "/login",
+          "forbiddenUrl": "/403-forbidden"
+        }
+      },
+      {
+        "name": "GetActiveAPI",
+        "module": "dbconnector",
+        "action": "select",
+        "options": {
+          "sql": {
+            "type": "SELECT",
+            "columns": [
+              {
+                "table": "m_api",
+                "column": "id"
+              },
+              {
+                "table": "m_api",
+                "column": "api_name"
+              },
+              {
+                "table": "m_api",
+                "column": "api_code"
+              }
+            ],
+            "table": {
+              "name": "m_api"
+            },
+            "joins": [],
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "m_api.status",
+                  "field": "m_api.status",
+                  "type": "double",
+                  "operator": "equal",
+                  "value": 1,
+                  "data": {
+                    "table": "m_api",
+                    "column": "status",
+                    "type": "number"
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "orders": [
+              {
+                "table": "m_api",
+                "column": "api_name",
+                "direction": "ASC",
+                "recid": 1
+              }
+            ],
+            "query": "SELECT id, api_name, api_code\nFROM m_api\nWHERE status = 1\nORDER BY api_name ASC",
+            "params": []
+          },
+          "connection": "postgres_gcpServer"
+        },
+        "output": true,
+        "meta": [
+          {
+            "type": "number",
+            "name": "id"
+          },
+          {
+            "type": "text",
+            "name": "api_name"
+          },
+          {
+            "type": "text",
+            "name": "api_code"
+          }
+        ],
+        "outputType": "array"
+      }
+    ]
+  }
+}

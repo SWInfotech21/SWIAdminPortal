@@ -53,7 +53,8 @@
               {
                 "table": "m_service",
                 "column": "id",
-                "direction": "DESC"
+                "direction": "DESC",
+                "recid": 1
               }
             ]
           }
@@ -113,56 +114,56 @@
             "type": "array",
             "sub": [
               {
-                "name": "id",
-                "type": "text"
+                "type": "number",
+                "name": "id"
               },
               {
-                "name": "service_name",
-                "type": "text"
+                "type": "text",
+                "name": "service_name"
               },
               {
-                "name": "service_desc",
-                "type": "text"
+                "type": "text",
+                "name": "service_desc"
               },
               {
-                "name": "service_type",
-                "type": "text"
+                "type": "text",
+                "name": "service_type"
               },
               {
-                "name": "is_active",
-                "type": "number"
+                "type": "number",
+                "name": "is_active"
               },
               {
-                "name": "is_bbps",
-                "type": "number"
+                "type": "number",
+                "name": "is_bbps"
               },
               {
-                "name": "is_auth",
-                "type": "number"
+                "type": "number",
+                "name": "is_auth"
               },
               {
-                "name": "created_by",
-                "type": "number"
+                "type": "number",
+                "name": "created_by"
               },
               {
-                "name": "created_on",
-                "type": "datetime"
+                "type": "datetime",
+                "name": "created_on"
               },
               {
-                "name": "updated_by",
-                "type": "number"
+                "type": "number",
+                "name": "updated_by"
               },
               {
-                "name": "updated_on",
-                "type": "datetime"
+                "type": "datetime",
+                "name": "updated_on"
               },
               {
-                "name": "deleted_by",
-                "type": "number"
+                "type": "number",
+                "name": "deleted_by"
               },
               {
-                "name": "deleted_on",
-                "type": "datetime"
+                "type": "datetime",
+                "name": "deleted_on"
               }
             ]
           }

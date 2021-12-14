@@ -161,6 +161,12 @@
       "page": "view-cc",
       "layout": "main",
       "exec": "/api/PageAccess/UserAccess"
+    },
+    {
+      "path": "/api-forward",
+      "page": "api-forward",
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
     }
   ]
 }
