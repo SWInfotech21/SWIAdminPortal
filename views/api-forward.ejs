@@ -1,4 +1,4 @@
-<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="apiforward" appConnect="local" -->
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="apiforward" appConnect="local" components="{dmxBootstrap5TableGenerator:{}}" -->
 <meta name="ac:route" content="/api-forward">
 <dmx-serverconnect id="scServices" url="api/Services/ActiveServices"></dmx-serverconnect>
 <script is="dmx-flow" id="flowFetchOperator" type="text/dmx-flow">{
@@ -13,7 +13,17 @@ run: {action: "{{scOperator.load({})}}"}
 }</script>
 <dmx-serverconnect id="scOperator" url="api/operator/ActiveOperator" noload dmx-param:service_type="formAPIForward.ServiceType.value"></dmx-serverconnect>
 <dmx-serverconnect id="scActiveAPI" url="api/APIS/ActiveAPI"></dmx-serverconnect>
-
+<dmx-serverconnect id="scAPIForward" url="api/APIS/APIForwardFetch" noload dmx-param:service_id="ServiceForward.value"></dmx-serverconnect>
+<script is="dmx-flow" id="flowFetchForwardService" type="text/dmx-flow">{
+condition: {
+if: "{{ServiceForward.value}}",
+then: {
+steps: {
+run: {action: "{{scAPIForward.load({})}}"}
+}
+}
+}
+}</script>
 <header>
     <div class="container">
         <div class="row">
@@ -61,5 +71,42 @@ run: {action: "{{scOperator.load({})}}"}
         </div>
 
     </div>
+    <div class="card ">
+        <div class="card-header sw-bg-col-primary">
+            <b>API Forward Data</b>
+        </div>
 
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 col-lg-6 p-2">
+                    <label>Service Type</label>
+                    <select id="ServiceForward" name="service_id" class="form-control form-select col-12 px-2" dmx-bind:options="scServices.data.GetActiveServices" optiontext="service_name" optionvalue="id" dmx-on:changed="flowFetchForwardService.run()" required="">
+                        <option value="">Select</option>
+                    </select>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Operator</th>
+                            <th>Forward Api</th>
+                            <th>Created on</th>
+                            <th>Updated on</th>
+                        </tr>
+                    </thead>
+                    <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="scAPIForward.data.GetForwardData" id="tableRepeat1">
+                        <tr>
+                            <td dmx-text="service_name"></td>
+                            <td dmx-text="operator_name"></td>
+                            <td dmx-text="api_name+'('+api_code+')'"></td>
+                            <td dmx-text="created_on.formatDate('dd/MM/yyyy hh:mm:ss A')"></td>
+                            <td dmx-text="updated_on.formatDate('dd/MM/yyyy hh:mm:ss A')"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
