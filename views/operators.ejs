@@ -23,6 +23,10 @@
                     <th>Op. Name</th>
                     <th>Service</th>
                     <th>Status</th>
+                    <th>Allow GST</th>
+                    <th>Allow TDS</th>
+                    <th>Min Amount</th>
+                    <th>Max Amount</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -32,6 +36,10 @@
                     <td dmx-text="operator_name.titlecase()"></td>
                     <td dmx-text="service_name"></td>
                     <td dmx-text="status != 1 ?'Inactive' : 'Active'" dmx-class:table-primary="status == 1" dmx-class:table-warning="status != 1"></td>
+                    <td dmx-text="is_gst == 1 ?'True' : 'False'" dmx-class:table-primary="is_gst == 1" dmx-class:table-warning="is_gst != 1"></td>
+                    <td dmx-text="is_tds == 1 ?'True' : 'False'" dmx-class:table-primary="is_tds == 1" dmx-class:table-warning="is_tds != 1"></td>
+                    <td dmx-text="min_amount"></td>
+                    <td dmx-text="max_amount"></td>
                     <td>
                         <a class="dropdown-item" href="#" dmx-on:click="ddOperators.select(op_id)" data-bs-toggle="modal" data-bs-target="#modalAddOperators"><i class="fas fa-edit sw-col-ar" title="Edit Operator"></i></a>
                     </td>
@@ -85,7 +93,8 @@
                         <label for="inp_status" class="col-sm-2 col-form-label">Status</label>
                         <div class="col-sm-4">
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="SwitchCheckStatus" name="op_status" dmx-bind:checked="ddOperators.data.status == 1" dmx-bind:value="SwitchCheckStatus.checked ? 1 : 0">
+                                <input class="form-check-input" type="checkbox" id="SwitchCheckStatus" dmx-bind:checked="ddOperators.data.status == 1" dmx-bind:value="SwitchCheckStatus.checked ? 1 : 0">
+                                <input type="hidden" name="op_status" dmx-bind:value="SwitchCheckStatus.checked">
                             </div>
                         </div>
                     </div>

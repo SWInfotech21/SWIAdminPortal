@@ -102,7 +102,7 @@
                       "table": "m_operator",
                       "column": "status",
                       "type": "number",
-                      "value": "{{$_POST.op_status}}"
+                      "value": "{{$_POST.op_status == 'true' ? 1 : 0}}"
                     },
                     {
                       "table": "m_operator",
@@ -142,7 +142,7 @@
                     "conditional": null,
                     "valid": true
                   },
-                  "query": "UPDATE m_operator\nSET operator_name = :P1 /* {{$_POST.name}} */, status = :P2 /* {{$_POST.op_status}} */, updated_by = :P3 /* {{identity}} */, updated_on = :P4 /* {{NOW}} */, service_id = :P5 /* {{$_POST.service}} */\nWHERE id = :P6 /* {{$_POST.OperatorId}} */",
+                  "query": "UPDATE m_operator\nSET operator_name = :P1 /* {{$_POST.name}} */, status = :P2 /* {{$_POST.op_status == 'true' ? 1 : 0}} */, updated_by = :P3 /* {{identity}} */, updated_on = :P4 /* {{NOW}} */, service_id = :P5 /* {{$_POST.service}} */\nWHERE id = :P6 /* {{$_POST.OperatorId}} */",
                   "params": [
                     {
                       "name": ":P1",
@@ -152,7 +152,7 @@
                     {
                       "name": ":P2",
                       "type": "expression",
-                      "value": "{{$_POST.op_status}}"
+                      "value": "{{$_POST.op_status == 'true' ? 1 : 0}}"
                     },
                     {
                       "name": ":P3",
@@ -213,7 +213,7 @@
                       "table": "m_operator",
                       "column": "status",
                       "type": "number",
-                      "value": "{{$_POST.op_status}}"
+                      "value": "{{$_POST.op_status == 'true' ? 1 : 0}}"
                     },
                     {
                       "table": "m_operator",
@@ -230,7 +230,7 @@
                   ],
                   "table": "m_operator",
                   "returning": "id",
-                  "query": "INSERT INTO m_operator\n(operator_name, service_id, status, created_by, created_on) VALUES (:P1 /* {{$_POST.name}} */, :P2 /* {{$_POST.service}} */, :P3 /* {{$_POST.op_status}} */, :P4 /* {{identity}} */, :P5 /* {{NOW}} */)",
+                  "query": "INSERT INTO m_operator\n(operator_name, service_id, status, created_by, created_on) VALUES (:P1 /* {{$_POST.name}} */, :P2 /* {{$_POST.service}} */, :P3 /* {{$_POST.op_status == 'true' ? 1 : 0}} */, :P4 /* {{identity}} */, :P5 /* {{NOW}} */)",
                   "params": [
                     {
                       "name": ":P1",
@@ -245,7 +245,7 @@
                     {
                       "name": ":P3",
                       "type": "expression",
-                      "value": "{{$_POST.op_status}}"
+                      "value": "{{$_POST.op_status == 'true' ? 1 : 0}}"
                     },
                     {
                       "name": ":P4",

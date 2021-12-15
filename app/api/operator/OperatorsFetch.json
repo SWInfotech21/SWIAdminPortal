@@ -83,6 +83,14 @@
               {
                 "table": "op_service",
                 "column": "service_type"
+              },
+              {
+                "table": "m_operator",
+                "column": "is_gst"
+              },
+              {
+                "table": "m_operator",
+                "column": "is_tds"
               }
             ],
             "table": {
@@ -119,7 +127,7 @@
                 "recid": 1
               }
             ],
-            "query": "SELECT m_operator.id AS op_id, m_operator.operator_name, m_operator.service_id, m_operator.status, m_operator.min_amount, m_operator.max_amount, m_operator.created_on, m_operator.created_by, op_service.service_name, op_service.service_type\nFROM m_operator\nINNER JOIN m_service AS op_service ON (op_service.id = m_operator.service_id)\nORDER BY m_operator.operator_name ASC",
+            "query": "SELECT m_operator.id AS op_id, m_operator.operator_name, m_operator.service_id, m_operator.status, m_operator.min_amount, m_operator.max_amount, m_operator.created_on, m_operator.created_by, op_service.service_name, op_service.service_type, m_operator.is_gst, m_operator.is_tds\nFROM m_operator\nINNER JOIN m_service AS op_service ON (op_service.id = m_operator.service_id)\nORDER BY m_operator.operator_name ASC",
             "params": []
           }
         },
@@ -216,6 +224,14 @@
               {
                 "type": "text",
                 "name": "service_type"
+              },
+              {
+                "type": "number",
+                "name": "is_gst"
+              },
+              {
+                "type": "number",
+                "name": "is_tds"
               }
             ]
           }
