@@ -18,7 +18,10 @@
     "module": "api",
     "action": "send",
     "options": {
-      "url": "https://www.sonakshiworld.com/apiservice.asmx/GetBalanceNew?apiToken=c7ccddb22d7e494cbf29df6a8d7ccba5\t"
+      "url": "https://www.sonakshiworld.com/apiservice.asmx/GetBalanceNew",
+      "params": {
+        "apiToken": "{{'c7ccddb22d7e494cbf29df6a8d7ccba5'}}"
+      }
     },
     "output": true
   },
