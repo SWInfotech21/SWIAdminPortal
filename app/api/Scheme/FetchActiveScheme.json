@@ -97,8 +97,28 @@
                 "recid": 1
               }
             ],
-            "query": "SELECT id AS sc_id, scheme_name, scheme_desc, scheme_type, scheme_amount, created_by, created_on, updated_by, updated_on, status\nFROM m_scheme\nORDER BY id DESC",
-            "params": []
+            "query": "SELECT id AS sc_id, scheme_name, scheme_desc, scheme_type, scheme_amount, created_by, created_on, updated_by, updated_on, status\nFROM m_scheme\nWHERE status = 1\nORDER BY id DESC",
+            "params": [],
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "m_scheme.status",
+                  "field": "m_scheme.status",
+                  "type": "double",
+                  "operator": "equal",
+                  "value": 1,
+                  "data": {
+                    "table": "m_scheme",
+                    "column": "status",
+                    "type": "number"
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            }
           }
         },
         "output": true,

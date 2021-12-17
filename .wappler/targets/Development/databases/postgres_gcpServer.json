@@ -1748,6 +1748,230 @@
           }
         }
       },
+      "t_op_api_rel": {
+        "db": {
+          "schema": "public"
+        },
+        "columns": {
+          "id": {
+            "db": {
+              "type": "increments",
+              "default": "",
+              "primary": true,
+              "nullable": false
+            }
+          },
+          "op_id": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "api_code1": {
+            "db": {
+              "type": "string",
+              "maxLength": 10,
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "api_code2": {
+            "db": {
+              "type": "string",
+              "maxLength": 10,
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "api_code3": {
+            "db": {
+              "type": "string",
+              "maxLength": 10,
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "api_code4": {
+            "db": {
+              "type": "string",
+              "maxLength": 10,
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "api_code5": {
+            "db": {
+              "type": "string",
+              "maxLength": 10,
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "api_code6": {
+            "db": {
+              "type": "string",
+              "maxLength": 10,
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "api_code7": {
+            "db": {
+              "type": "string",
+              "maxLength": 10,
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "api_code8": {
+            "db": {
+              "type": "string",
+              "maxLength": 10,
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "api_code9": {
+            "db": {
+              "type": "string",
+              "maxLength": 10,
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "api_code10": {
+            "db": {
+              "type": "string",
+              "maxLength": 10,
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "api_code11": {
+            "db": {
+              "type": "string",
+              "maxLength": 10,
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "api_code12": {
+            "db": {
+              "type": "string",
+              "maxLength": 10,
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "api_code13": {
+            "db": {
+              "type": "string",
+              "maxLength": 10,
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "api_code14": {
+            "db": {
+              "type": "string",
+              "maxLength": 10,
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "api_code15": {
+            "db": {
+              "type": "string",
+              "maxLength": 10,
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "api_code16": {
+            "db": {
+              "type": "string",
+              "maxLength": 10,
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "api_code17": {
+            "db": {
+              "type": "string",
+              "maxLength": 10,
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "api_code18": {
+            "db": {
+              "type": "string",
+              "maxLength": 10,
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "api_code19": {
+            "db": {
+              "type": "string",
+              "maxLength": 10,
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "api_code20": {
+            "db": {
+              "type": "string",
+              "maxLength": 10,
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "created_by": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "created_on": {
+            "db": {
+              "type": "timestamp",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "updated_by": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "updated_on": {
+            "db": {
+              "type": "timestamp",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "deleted_by": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "deleted_on": {
+            "db": {
+              "type": "timestamp",
+              "primary": false,
+              "nullable": true
+            }
+          }
+        }
+      },
       "t_scheme_user": {
         "db": {
           "schema": "public"

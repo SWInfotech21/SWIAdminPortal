@@ -61,8 +61,10 @@
                     <td dmx-text="address+' | '+pin"></td>
                     <td dmx-text="state+' | '+district"></td>
                     <td dmx-show="scAdminBalance.data.query.user_type == 0">
-                        <a class="sw-col-ar" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalAddUsers"><i class="fas fa-edit" title="Edit Users" dmx-on:click="flowGetScheme.run()"></i></a>&emsp;<a class="sw-col-br" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalPasswordUser"><i class="fas fa-user-lock" title="Password Update"></i></a>&emsp;
-                        <a class="sw-col-dr" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalDelUser"><i class="far fa-trash-alt" title="Delete User"></i></a>&emsp;<a class="sw-col-cr" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#"><i class="fas fa-sign-in-alt" title="Login to user panel"></i></a>&emsp;
+                        <a class="sw-col-ar" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalAddUsers"><i class="fas fa-edit" title="Edit Users" dmx-on:click="flowGetScheme.run()"></i></a>&emsp;<a class="sw-col-br" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalPasswordUser"><i class="fas fa-user-lock" title="Password Update"></i></a>
+                        <!-- &emsp;
+                        <a class="sw-col-dr" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalDelUser"><i class="far fa-trash-alt" title="Delete User"></i></a> -->
+                        &emsp;<a class="sw-col-cr" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#"><i class="fas fa-sign-in-alt" title="Login to user panel"></i></a>&emsp;
                         <a class="sw-col-cr" href="scheme-priority"><i class="fas fa-code-branch" title="Scheme Priority"></i></a>
                     </td>
                 </tr>

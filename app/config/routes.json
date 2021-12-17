@@ -167,6 +167,11 @@
       "page": "api-forward",
       "layout": "main",
       "exec": "/api/PageAccess/UserAccess"
+    },
+    {
+      "path": "/op-api-code-update",
+      "page": "op-api-code-update",
+      "layout": "main"
     }
   ]
 }

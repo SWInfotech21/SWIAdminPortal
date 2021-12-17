@@ -2746,5 +2746,242 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "opapicodeupdate": {
+    "query": [
+      {
+        "type": "text",
+        "name": "offset"
+      },
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ],
+    "dvOpAPICode": {
+      "meta": [
+        {
+          "type": "text",
+          "name": "operator_name"
+        },
+        {
+          "type": "text",
+          "name": "image"
+        },
+        {
+          "type": "text",
+          "name": "service_name"
+        },
+        {
+          "type": "number",
+          "name": "tbl_id"
+        },
+        {
+          "type": "number",
+          "name": "op_id"
+        },
+        {
+          "type": "text",
+          "name": "api_code1"
+        },
+        {
+          "type": "text",
+          "name": "api_code2"
+        },
+        {
+          "type": "text",
+          "name": "api_code3"
+        },
+        {
+          "type": "text",
+          "name": "api_code4"
+        },
+        {
+          "type": "text",
+          "name": "api_code5"
+        },
+        {
+          "type": "text",
+          "name": "api_code6"
+        },
+        {
+          "type": "text",
+          "name": "api_code7"
+        },
+        {
+          "type": "text",
+          "name": "api_code8"
+        },
+        {
+          "type": "text",
+          "name": "api_code9"
+        },
+        {
+          "type": "text",
+          "name": "api_code10"
+        }
+      ],
+      "outputType": "array"
+    },
+    "ddOpAPICode": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "op_id"
+        },
+        {
+          "type": "text",
+          "name": "operator_name"
+        },
+        {
+          "type": "text",
+          "name": "image"
+        },
+        {
+          "type": "text",
+          "name": "service_name"
+        },
+        {
+          "type": "number",
+          "name": "tbl_id"
+        },
+        {
+          "type": "text",
+          "name": "api_code1"
+        },
+        {
+          "type": "text",
+          "name": "api_code2"
+        },
+        {
+          "type": "text",
+          "name": "api_code3"
+        },
+        {
+          "type": "text",
+          "name": "api_code4"
+        },
+        {
+          "type": "text",
+          "name": "api_code5"
+        },
+        {
+          "type": "text",
+          "name": "api_code6"
+        },
+        {
+          "type": "text",
+          "name": "api_code7"
+        },
+        {
+          "type": "text",
+          "name": "api_code8"
+        },
+        {
+          "type": "text",
+          "name": "api_code9"
+        },
+        {
+          "type": "text",
+          "name": "api_code10"
+        }
+      ],
+      "outputType": "array"
+    },
+    "dvAPIFetch": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "api_name"
+        }
+      ],
+      "outputType": "array"
+    },
+    "repeatAPIs": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "api_name"
+        }
+      ],
+      "outputType": "array"
+    },
+    "repeatOpAPICodeList": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "op_id"
+        },
+        {
+          "type": "text",
+          "name": "operator_name"
+        },
+        {
+          "type": "text",
+          "name": "image"
+        },
+        {
+          "type": "text",
+          "name": "service_name"
+        },
+        {
+          "type": "number",
+          "name": "tbl_id"
+        },
+        {
+          "type": "text",
+          "name": "api_code1"
+        },
+        {
+          "type": "text",
+          "name": "api_code2"
+        },
+        {
+          "type": "text",
+          "name": "api_code3"
+        },
+        {
+          "type": "text",
+          "name": "api_code4"
+        },
+        {
+          "type": "text",
+          "name": "api_code5"
+        },
+        {
+          "type": "text",
+          "name": "api_code6"
+        },
+        {
+          "type": "text",
+          "name": "api_code7"
+        },
+        {
+          "type": "text",
+          "name": "api_code8"
+        },
+        {
+          "type": "text",
+          "name": "api_code9"
+        },
+        {
+          "type": "text",
+          "name": "api_code10"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });

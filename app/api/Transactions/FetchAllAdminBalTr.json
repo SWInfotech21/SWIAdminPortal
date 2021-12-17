@@ -129,6 +129,10 @@
               {
                 "table": "tt_recharge_trans",
                 "column": "charge_amt"
+              },
+              {
+                "table": "tt_recharge_trans",
+                "column": "tr_date"
               }
             ],
             "table": {
@@ -186,7 +190,7 @@
                 "recid": 1
               }
             ],
-            "query": "SELECT tt_recharge_trans.user_number, tt_recharge_trans.details, tt_recharge_trans.opening_balance, tt_recharge_trans.amount, tt_recharge_trans.comm_per, tt_recharge_trans.comm_val, tt_recharge_trans.other_charge, tt_recharge_trans.comm_amt, tt_recharge_trans.charge_per, tt_recharge_trans.net_amt, tt_recharge_trans.closing_balance, tt_recharge_trans.tr_mode, tt_recharge_trans.tr_type, tt_recharge_trans.reason, tt_recharge_trans.ip_address, mu.user_type, mu.user_id, tt_recharge_trans.id AS transaction_id, tt_recharge_trans.charge_amt\nFROM tt_recharge_trans\nINNER JOIN m_users AS mu ON (mu.id = tt_recharge_trans.user_id)\nWHERE tt_recharge_trans.transaction_by = :P1 /* {{identity}} */\nORDER BY tt_recharge_trans.id DESC",
+            "query": "SELECT tt_recharge_trans.user_number, tt_recharge_trans.details, tt_recharge_trans.opening_balance, tt_recharge_trans.amount, tt_recharge_trans.comm_per, tt_recharge_trans.comm_val, tt_recharge_trans.other_charge, tt_recharge_trans.comm_amt, tt_recharge_trans.charge_per, tt_recharge_trans.net_amt, tt_recharge_trans.closing_balance, tt_recharge_trans.tr_mode, tt_recharge_trans.tr_type, tt_recharge_trans.reason, tt_recharge_trans.ip_address, mu.user_type, mu.user_id, tt_recharge_trans.id AS transaction_id, tt_recharge_trans.charge_amt, tt_recharge_trans.tr_date\nFROM tt_recharge_trans\nINNER JOIN m_users AS mu ON (mu.id = tt_recharge_trans.user_id)\nWHERE tt_recharge_trans.transaction_by = :P1 /* {{identity}} */\nORDER BY tt_recharge_trans.id DESC",
             "params": [
               {
                 "operator": "equal",
@@ -200,80 +204,84 @@
         "output": true,
         "meta": [
           {
-            "name": "user_number",
-            "type": "text"
+            "type": "text",
+            "name": "user_number"
           },
           {
-            "name": "details",
-            "type": "text"
+            "type": "text",
+            "name": "details"
           },
           {
-            "name": "opening_balance",
-            "type": "text"
+            "type": "text",
+            "name": "opening_balance"
           },
           {
-            "name": "amount",
-            "type": "text"
+            "type": "text",
+            "name": "amount"
           },
           {
-            "name": "comm_per",
-            "type": "text"
+            "type": "text",
+            "name": "comm_per"
           },
           {
-            "name": "comm_val",
-            "type": "text"
+            "type": "text",
+            "name": "comm_val"
           },
           {
-            "name": "other_charge",
-            "type": "text"
+            "type": "text",
+            "name": "other_charge"
           },
           {
-            "name": "comm_amt",
-            "type": "text"
+            "type": "text",
+            "name": "comm_amt"
           },
           {
-            "name": "charge_per",
-            "type": "text"
+            "type": "text",
+            "name": "charge_per"
           },
           {
-            "name": "net_amt",
-            "type": "text"
+            "type": "text",
+            "name": "net_amt"
           },
           {
-            "name": "closing_balance",
-            "type": "text"
+            "type": "text",
+            "name": "closing_balance"
           },
           {
-            "name": "tr_mode",
-            "type": "text"
+            "type": "text",
+            "name": "tr_mode"
           },
           {
-            "name": "tr_type",
-            "type": "text"
+            "type": "text",
+            "name": "tr_type"
           },
           {
-            "name": "reason",
-            "type": "text"
+            "type": "text",
+            "name": "reason"
           },
           {
-            "name": "ip_address",
-            "type": "text"
+            "type": "text",
+            "name": "ip_address"
           },
           {
-            "name": "user_type",
-            "type": "number"
+            "type": "number",
+            "name": "user_type"
           },
           {
-            "name": "user_id",
-            "type": "text"
+            "type": "text",
+            "name": "user_id"
           },
           {
-            "name": "transaction_id",
-            "type": "text"
+            "type": "number",
+            "name": "transaction_id"
           },
           {
-            "name": "charge_amt",
-            "type": "text"
+            "type": "text",
+            "name": "charge_amt"
+          },
+          {
+            "type": "datetime",
+            "name": "tr_date"
           }
         ],
         "outputType": "array"

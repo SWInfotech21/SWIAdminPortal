@@ -75,7 +75,7 @@
             <b>Admin Wallet Credit update</b>
         </div>
         <div class="card-body">
-            <form is="dmx-serverconnect-form" id="formAdminCredit" method="post" action="api/Transactions/CreditToAdmin" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAdminCredit.data ? scNotif.success('New Credit Added') : scNotif.success('Credit Updated');formAdminCredit.reset(); scCommision.load({});scAdminBalance.load()" dmx-on:error="scNotif.warning('An error occurred'); ">
+            <form is="dmx-serverconnect-form" id="formAdminCredit" method="post" action="api/Transactions/CreditToAdmin" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAdminCredit.data ? scNotif.success('New Credit Added') : scNotif.success('Credit Updated');formAdminCredit.reset(); scCommision.load({});scAdminBalance.load();scAdminTrans.load()" dmx-on:error="scNotif.warning('An error occurred'); ">
 
                 <div class="row">
                     <div class="col-12 col-lg-3 p-2">
@@ -104,12 +104,14 @@
                 <tr>
                     <th>Sl No.</th>
                     <th>Tr. Id</th>
-                    <th>Type</th>
                     <th>User Details</th>
+                    <th>Type</th>
                     <th>Old Bal.</th>
                     <th>Amt.</th>
                     <th>Comm. | Chrg. | Net Amt.</th>
                     <th>New Val.</th>
+                    <th>Mode</th>
+                    <th>Tr. Date</th>
                     <th>Remarks</th>
                 </tr>
             </thead>
@@ -117,12 +119,14 @@
                 <tr>
                     <td>{{$index+1}}</td>
                     <td dmx-text="transaction_id"></td>
-                    <td dmx-text="tr_type+' | '+tr_mode "></td>
                     <td dmx-text="details+' | '+user_number+' | '+user_id"></td>
+                    <td dmx-text="opening_balance.toNumber().toFixed(2)> closing_balance.toNumber().toFixed(2)? 'Debite' : 'Credit'"></td>
                     <td dmx-text="opening_balance.toNumber().toFixed(2)"></td>
                     <td dmx-text="amount.toNumber().toFixed(2)"></td>
                     <td dmx-text="comm_amt.toNumber().toFixed(2)+' | '+charge_amt.toNumber().toFixed(2)+' | '+net_amt.toNumber().toFixed(2)"></td>
                     <td dmx-text="closing_balance.toNumber().toFixed(2)"></td>
+                    <td dmx-text="tr_type+' | '+tr_mode "></td>
+                    <td dmx-text="tr_date.formatDate('dd-MM-yyyy HH:mm:ss A')"></td>
                     <td dmx-text="reason"></td>
                 </tr>
             </tbody>

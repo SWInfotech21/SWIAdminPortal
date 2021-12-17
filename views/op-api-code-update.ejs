@@ -1,0 +1,158 @@
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="opapicodeupdate" appConnect="local" components="{dmxStateManagement:{},dmxDataTraversal:{},dmxBootstrap5TableGenerator:{},dmxBootstrap5PagingGenerator:{},dmxValidator:{}}" -->
+<meta name="ac:route" content="/op-api-code-update">
+<dmx-query-manager id="qm"></dmx-query-manager>
+<dmx-serverconnect id="scOpAPICode" url="api/operator/OpUpdateAPICode" dmx-param:offset="qm.data.offset" dmx-param:limit="30" dmx-param:sort="qm.data.sort" dmx-param:dir="qm.data.dir"></dmx-serverconnect>
+<dmx-data-detail id="ddOpAPICode" key="op_id" dmx-bind:data="scOpAPICode.data.GetAPICode.data"></dmx-data-detail>
+<div class="row align-items-center justify-content-between px-4 mb-3 sd-secondary-header mx-0">
+    <div class="col-12 col-md-auto me-auto">
+        <h1 class="ms-md-1 mt-md-3 text-dark fs-2 sd-fw-800 d-flex align-items-center">
+            Operator API Code Update
+            <span class="border-3 ms-2 spinner-border spinner-border-sm" role="status" dmx-show="scPatients.state.executing"></span>
+        </h1>
+    </div>
+    <div class="col-auto order-1 order-md-3 d-flex align-items-center justify-content-center">
+        <form id="formSearchUser" class="sd-search-form">
+            <div class="d-flex justify-content-end mb-3 mb-lg-0 mb-md-0">
+                <input type="text" class="form-control sd-search-input rounded-pill" id="Search" name="Search" placeholder="Search">
+                <span class="bg-transparent btn position-absolute px-1 py-1"><i class="fas fa-search mb-1 mb-xl-0"></i></span>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="container" id="OpAPICodeList">
+    <div class="card">
+        <div class="card-header sw-bg-col-primary">
+            <b>Operator API Code Update</b>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-sm bg-white table-hover">
+                    <thead class="bg-warning">
+                        <tr>
+                            <th class="sorting" dmx-on:click="qm.set('sort','tbl_id');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='tbl_id' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='tbl_id' && qm.data.dir == 'desc'">Id</th>
+                            <th class="sorting" dmx-on:click="qm.set('sort','op_id');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='op_id' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='op_id' && qm.data.dir == 'desc'">Op. Id</th>
+                            <th class="sorting" dmx-on:click="qm.set('sort','service_name');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='service_name' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='service_name' && qm.data.dir == 'desc'">Service name</th>
+                            <th class="sorting" dmx-on:click="qm.set('sort','image');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='image' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='image' && qm.data.dir == 'desc'">Image</th>
+                            <th class="sorting" dmx-on:click="qm.set('sort','operator_name');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='operator_name' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='operator_name' && qm.data.dir == 'desc'">Operator</th>
+                            <th class="sorting" dmx-on:click="qm.set('sort','api_code1');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='api_code1' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='api_code1' && qm.data.dir == 'desc'">Our Code</th>
+                            <th class="sorting" dmx-on:click="qm.set('sort','api_code2');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='api_code2' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='api_code2' && qm.data.dir == 'desc'">Sonakshi</th>
+                            <th class="sorting" dmx-on:click="qm.set('sort','api_code3');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='api_code3' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='api_code3' && qm.data.dir == 'desc'">M-Robotic</th>
+                            <th class="sorting" dmx-on:click="qm.set('sort','api_code4');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='api_code4' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='api_code4' && qm.data.dir == 'desc'">Money Art</th>
+                            <th class="sorting" dmx-on:click="qm.set('sort','api_code5');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='api_code5' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='api_code5' && qm.data.dir == 'desc'">Ambika</th>
+                            <th class="sorting" dmx-on:click="qm.set('sort','api_code6');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='api_code6' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='api_code6' && qm.data.dir == 'desc'">Rathod</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody is="dmx-repeat" dmx-generator="bs5paging" dmx-bind:repeat="scOpAPICode.data.GetAPICode.data" id="repeatOpAPICodeList">
+                        <tr>
+                            <td>{{tbl_id}}</td>
+                            <td dmx-text="op_id"></td>
+                            <td dmx-text="service_name"></td>
+                            <td>
+                                <img dmx-bind:src="'/assets/images/operators/'+image" class="sd-icon-dimensions" alt="operator_name" width="30" height="30">
+                            </td>
+                            <td dmx-text="operator_name"></td>
+                            <td dmx-text="api_code1">
+                            </td>
+                            <td dmx-text="api_code2"></td>
+                            <td dmx-text="api_code3"></td>
+                            <td dmx-text="api_code4"></td>
+                            <td dmx-text="api_code5"></td>
+                            <td dmx-text="api_code6"></td>
+                            <td>
+                                <a class="dropdown-item" href="#" dmx-on:click="ddOpAPICode.select(op_id)" data-bs-toggle="modal" data-bs-target="#modalAddEditOpUp"><i class="fas fa-edit sw-col-ar" title="Edit Operator API Code"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+    <ul class="pagination" dmx-populate="content.scOpAPICode.data.GetAPICode" dmx-state="qm" dmx-offset="offset" dmx-generator="bs5paging">
+        <li class="page-item" dmx-class:disabled="content.scOpAPICode.data.GetAPICode.page.current == 1" aria-label="First">
+            <a href="javascript:void(0)" class="page-link" dmx-on:click="qm.set('offset',content.scOpAPICode.data.GetAPICode.page.offset.first)"><span aria-hidden="true">&lsaquo;&lsaquo;</span></a>
+        </li>
+        <li class="page-item" dmx-class:disabled="content.scOpAPICode.data.GetAPICode.page.current == 1" aria-label="Previous">
+            <a href="javascript:void(0)" class="page-link" dmx-on:click="qm.set('offset',content.scOpAPICode.data.GetAPICode.page.offset.prev)"><span aria-hidden="true">&lsaquo;</span></a>
+        </li>
+        <li class="page-item" dmx-class:active="title == content.scOpAPICode.data.GetAPICode.current" dmx-class:disabled="!active" dmx-repeat="content.scOpAPICode.data.GetAPICode.getServerConnectPagination(2,1,'...')">
+            <a href="javascript:void(0)" class="page-link" dmx-on:click="qm.set('offset',(page-1)*content.scOpAPICode.data.GetAPICode.limit)">{{title}}</a>
+        </li>
+        <li class="page-item" dmx-class:disabled="content.scOpAPICode.data.GetAPICode.page.current ==  content.scOpAPICode.data.GetAPICode.page.total" aria-label="Next">
+            <a href="javascript:void(0)" class="page-link" dmx-on:click="qm.set('offset',content.scOpAPICode.data.GetAPICode.page.offset.next)"><span aria-hidden="true">&rsaquo;</span></a>
+        </li>
+        <li class="page-item" dmx-class:disabled="content.scOpAPICode.data.GetAPICode.page.current ==  content.scOpAPICode.data.GetAPICode.page.total" aria-label="Last">
+            <a href="javascript:void(0)" class="page-link" dmx-on:click="qm.set('offset',content.scOpAPICode.data.GetAPICode.page.offset.last)"><span aria-hidden="true">&rsaquo;&rsaquo;</span></a>
+        </li>
+    </ul>
+</div>
+<!-- Modal Add Operator API Code -->
+<div class="modal fade" id="modalAddEditOpUp" is="dmx-bs5-modal" tabindex="-1" nokeyboard="true" nocloseonclick="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ddOpAPICode.data.tbl_id ? 'Edit Operator API Code' : 'Add Operator API Code'}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form is="dmx-serverconnect-form" id="formAddEditOpAPICode" method="post" action="api/operator/OpAPICodeAddEdit" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAddEditOpAPICode.data.SchemeCommisionAddEdit ? scNotif.success('New Operator API Code Added') : scNotif.success('Operator API Code Updated'); scOpAPICode.load({})" dmx-on:error="scNotif.warning('An error occurred'); ">
+                    <!-- formAddEditOpAPICode.reset(); -->
+                    <input type="hidden" name="opapicodeid" dmx-bind:value="ddOpAPICode.data.tbl_id">
+                    <input type="hidden" name="op_id" dmx-bind:value="ddOpAPICode.data.op_id">
+                    <div class="mb-3 row">
+                        <span class="col-4 fs-5 fw-bold text-center text-orange">{{ddOpAPICode.data.service_name}}</span>&emsp;<i class="fas fa-angle-double-right fs-5 fw-bold text-center col-2"></i>&emsp;<span class="col-4 fs-5 fw-bold text-center text-green">{{ddOpAPICode.data.operator_name}}</span>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="inp_name" class="col-sm-2 col-form-label">Our Code</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inp_our_code" name="api_code1" aria-describedby="inp_name_help" placeholder="E.g: AB" maxlength="4" required="" dmx-bind:value="ddOpAPICode.data.api_code1">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inp_api_code2" class="col-sm-2 col-form-label">Sonakshi</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inp_api_code2" name="api_code2" aria-describedby="inp_api_code2_help" placeholder="E.g: AB" dmx-bind:value="ddOpAPICode.data.api_code2" data-msg-maxlength="4">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inp_api_code3" class="col-sm-2 col-form-label">M-Robotic</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inp_api_code3" name="api_code3" aria-describedby="inp_api_code3_help" placeholder="E.g: AB" maxlength="4" dmx-bind:value="ddOpAPICode.data.api_code3">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inp_api_code4" class="col-sm-2 col-form-label">Money Art</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inp_api_code4" name="api_code4" aria-describedby="inp_api_code4_help" placeholder="E.g: AB" maxlength="4" dmx-bind:value="ddOpAPICode.data.api_code4">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inp_api_code5" class="col-sm-2 col-form-label">Ambika</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inp_api_code5" name="api_code5" aria-describedby="inp_api_code5_help" placeholder="E.g: AB" maxlength="4" dmx-bind:value="ddOpAPICode.data.api_code5">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inp_api_code6" class="col-sm-2 col-form-label">Rathod</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inp_api_code6" name="api_code6" aria-describedby="inp_api_code6_help" placeholder="E.g: AB" maxlength="4" dmx-bind:value="ddOpAPICode.data.api_code6">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="col-sm-2">&nbsp;</div>
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary" dmx-bind:disabled="state.executing">Save<span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span></button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
