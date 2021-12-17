@@ -36,7 +36,7 @@
         "options": {
           "rules": {
             "core:maxlength": {
-              "param": 4
+              "param": "4"
             }
           }
         },
@@ -48,7 +48,7 @@
         "options": {
           "rules": {
             "core:maxlength": {
-              "param": 4
+              "param": "4"
             }
           }
         },
@@ -89,10 +89,6 @@
           }
         },
         "name": "api_code6"
-      },
-      {
-        "type": "number",
-        "name": "id"
       }
     ]
   },
