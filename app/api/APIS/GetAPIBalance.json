@@ -20,7 +20,7 @@
     "options": {
       "url": "https://www.sonakshiworld.com/apiservice.asmx/GetBalanceNew",
       "params": {
-        "apiToken": "{{'c7ccddb22d7e494cbf29df6a8d7ccba5'}}"
+        "apiToken": "{{'069f5596739a4ee79b557107e3fb4280'}}"
       },
       "passErrors": false
     },

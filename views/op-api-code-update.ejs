@@ -1,7 +1,7 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="opapicodeupdate" appConnect="local" components="{dmxStateManagement:{},dmxDataTraversal:{},dmxBootstrap5TableGenerator:{},dmxBootstrap5PagingGenerator:{},dmxValidator:{}}" -->
 <meta name="ac:route" content="/op-api-code-update">
 <dmx-query-manager id="qm"></dmx-query-manager>
-<dmx-serverconnect id="scOpAPICode" url="api/operator/OpUpdateAPICode" dmx-param:offset="qm.data.offset" dmx-param:limit="30" dmx-param:sort="qm.data.sort" dmx-param:dir="qm.data.dir"></dmx-serverconnect>
+<dmx-serverconnect id="scOpAPICode" url="api/operator/OpUpdateAPICode" dmx-param:offset="qm.data.offset" dmx-param:limit="10" dmx-param:sort="qm.data.sort" dmx-param:dir="qm.data.dir"></dmx-serverconnect>
 <dmx-data-detail id="ddOpAPICode" key="op_id" dmx-bind:data="scOpAPICode.data.GetAPICode.data"></dmx-data-detail>
 <div class="row align-items-center justify-content-between px-4 mb-3 sd-secondary-header mx-0">
     <div class="col-12 col-md-auto me-auto">
@@ -49,7 +49,7 @@
                             <td dmx-text="op_id"></td>
                             <td dmx-text="service_name"></td>
                             <td>
-                                <img dmx-bind:src="'/assets/images/operators/'+image" class="sd-icon-dimensions" alt="operator_name" width="30" height="30">
+                                <img dmx-bind:src="image" class="sd-icon-dimensions" alt="operator_name" width="30" height="30">
                             </td>
                             <td dmx-text="operator_name"></td>
                             <td dmx-text="api_code1">
