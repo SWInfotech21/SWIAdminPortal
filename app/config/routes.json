@@ -172,6 +172,16 @@
       "path": "/op-api-code-update",
       "page": "op-api-code-update",
       "layout": "main"
+    },
+    {
+      "path": "/add-api-user",
+      "page": "add-api-user",
+      "layout": "main"
+    },
+    {
+      "path": "/view-api-users",
+      "page": "view-api-users",
+      "layout": "main"
     }
   ]
 }

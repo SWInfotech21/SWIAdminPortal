@@ -364,7 +364,7 @@
         "module": "core",
         "action": "setvalue",
         "options": {
-          "value": "{{$_POST.user_type == 1 ? 'MD10' : $_POST.user_type == 2 ? 'DT20' : $_POST.user_type == 3 ? 'RT30' : $_POST.user_type == 4 ? 'CC00' : 'UN40'}}"
+          "value": "{{$_POST.user_type == 1 ? 'MD10' : $_POST.user_type == 2 ? 'DT20' : $_POST.user_type == 3 ? 'RT30' : $_POST.user_type == 4 ? 'CC00' : $_POST.user_type == 5 ? 'API00' : 'UN40'}}"
         },
         "meta": [],
         "outputType": "text",

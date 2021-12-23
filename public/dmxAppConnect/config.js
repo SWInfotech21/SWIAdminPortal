@@ -2983,5 +2983,97 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "viewapiusers": {
+    "dvUsers": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "user_id"
+        },
+        {
+          "type": "text",
+          "name": "user_fname"
+        },
+        {
+          "type": "text",
+          "name": "user_mobile"
+        },
+        {
+          "type": "text",
+          "name": "user_email"
+        },
+        {
+          "type": "text",
+          "name": "u_status"
+        },
+        {
+          "type": "text",
+          "name": "user_tpin"
+        },
+        {
+          "type": "number",
+          "name": "scheme_id"
+        },
+        {
+          "type": "text",
+          "name": "balance_amt"
+        },
+        {
+          "type": "text",
+          "name": "blank1"
+        }
+      ],
+      "outputType": "array"
+    },
+    "tableRepeat1": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "user_id"
+        },
+        {
+          "type": "text",
+          "name": "user_fname"
+        },
+        {
+          "type": "text",
+          "name": "user_mobile"
+        },
+        {
+          "type": "text",
+          "name": "user_email"
+        },
+        {
+          "type": "text",
+          "name": "u_status"
+        },
+        {
+          "type": "text",
+          "name": "user_tpin"
+        },
+        {
+          "type": "number",
+          "name": "scheme_id"
+        },
+        {
+          "type": "text",
+          "name": "balance_amt"
+        },
+        {
+          "type": "text",
+          "name": "blank1"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });

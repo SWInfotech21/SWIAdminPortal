@@ -130,5 +130,13 @@
   "op-api-code-update.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "add-api-user.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  },
+  "view-api-users.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }
