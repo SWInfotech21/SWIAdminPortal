@@ -26,7 +26,6 @@
         <label>From Date:</label><input type="date" name="fromdate" id="inpFromDate" dmx-bind:value="dateNow.datetime.formatDate('yyyy-MM-dd')" class="w-25" required="">
         &emsp;<label>To Date:</label><input type="date" name="todate" id="inpToDate" dmx-bind:value="dateNow.datetime.formatDate('yyyy-MM-dd')" class="w-25" required="">
         &emsp;<button id="btnFilter" class="btn btn-primary btn-sm" dmx-on:click="flowPendingRech.run()">Filter</button>
-        <button id="btnExport" class="btn btn-dark btn-sm">Export</button>
     </div>
     <div class="col-auto order-1 order-md-3 d-flex align-items-center justify-content-center">
         <form id="formSearchUser" class="sd-search-form">
