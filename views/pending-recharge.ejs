@@ -1,6 +1,6 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="pendingrecharge" appConnect="local" -->
 <meta name="ac:route" content="/pending-recharge">
-<script is="dmx-flow" id="flowPendingRech" type="text/dmx-flow">{
+<!-- <script is="dmx-flow" id="flowPendingRech" type="text/dmx-flow">{
   condition: {
     if: "{{inpFromDate.value && inpToDate.value}}",
     then: {
@@ -9,8 +9,8 @@
       }
     }
   }
-}</script>
-<dmx-value id="varFilter" dmx-bind:value="0"></dmx-value>
+}</script> -->
+<!-- <dmx-value id="varFilter" dmx-bind:value="0"></dmx-value> -->
 <dmx-serverconnect id="scServices" url="api/Services/Services"></dmx-serverconnect>
 
 <dmx-serverconnect id="scPendingRech" url="api/Reports/PendingRecharge" dmx-param:fromdate="inpFromDate.value" dmx-param:todate="inpToDate.value"></dmx-serverconnect>
@@ -23,9 +23,9 @@
         </h1>
     </div>
     <div class="col-auto order-2 order-md-1 d-flex align-items-center justify-content-start justify-content-md-center px-0 px-lg-2">
-        <label>From Date:</label><input type="date" name="fromdate" id="inpFromDate" class="w-25" required="">
-        &emsp;<label>To Date:</label><input type="date" name="todate" id="inpToDate" class="w-25" required="">
-        &emsp;<button id="btnFilter" class="btn btn-primary btn-sm" dmx-on:click="flowPendingRech.run(); varFilter.setValue(1)">Filter</button>
+        <label>From Date:</label><input type="date" name="fromdate" id="inpFromDate" dmx-bind:value="dateNow.datetime.formatDate('yyyy-MM-dd')" class="w-25" required="">
+        &emsp;<label>To Date:</label><input type="date" name="todate" id="inpToDate" dmx-bind:value="dateNow.datetime.formatDate('yyyy-MM-dd')" class="w-25" required="">
+        &emsp;<button id="btnFilter" class="btn btn-primary btn-sm" dmx-on:click="flowPendingRech.run()">Filter</button>
         <button id="btnExport" class="btn btn-dark btn-sm">Export</button>
     </div>
     <div class="col-auto order-1 order-md-3 d-flex align-items-center justify-content-center">
@@ -37,7 +37,7 @@
         </form>
     </div>
 </div>
-<div class="container px-4" id="AccontSummery" dmx-show="varFilter.value == 1">
+<div class="container px-4" id="AccontSummery">
     <div class="card">
         <div class="card-header sw-bg-col-primary">
             <b>Pending Recharges</b>
