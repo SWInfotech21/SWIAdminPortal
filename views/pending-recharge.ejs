@@ -1,4 +1,4 @@
-<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="pendingrecharge" appConnect="local" -->
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="pendingrecharge" appConnect="local" components="{dmxDataTraversal:{}}" -->
 <meta name="ac:route" content="/pending-recharge">
 <!-- <script is="dmx-flow" id="flowPendingRech" type="text/dmx-flow">{
   condition: {
@@ -12,8 +12,11 @@
 }</script> -->
 <!-- <dmx-value id="varFilter" dmx-bind:value="0"></dmx-value> -->
 <dmx-serverconnect id="scServices" url="api/Services/Services"></dmx-serverconnect>
+<dmx-value id="varRefundDecline" dmx-bind:value="0"></dmx-value>
 
 <dmx-serverconnect id="scPendingRech" url="api/Reports/PendingRecharge" dmx-param:fromdate="inpFromDate.value" dmx-param:todate="inpToDate.value"></dmx-serverconnect>
+<dmx-data-view id="dvPendingTrans" dmx-bind:data="content.scPendingRech.data.GetPendingRech.data"></dmx-data-view>
+<dmx-data-detail id="ddPendingTrans" dmx-bind:data="content.dvPendingTrans.data" key="id"></dmx-data-detail>
 
 <div class="row align-items-center justify-content-between px-4 mb-3 sd-secondary-header mx-0">
     <div class="col-12 col-md-auto me-auto ps-4">
@@ -36,7 +39,7 @@
         </form>
     </div>
 </div>
-<div class="container px-4" id="AccontSummery">
+<div class="container px-4" id="Pendingrecharge">
     <div class="card">
         <div class="card-header sw-bg-col-primary">
             <b>Pending Recharges</b>
@@ -80,11 +83,64 @@
                             <td dmx-text="api_log"></td>
                             <td dmx-text="tr_type"></td>
                             <td dmx-text="tr_date.formatDate('dd-MM-yyyy hh:mm:ss A')"></td>
-                            <td><button class="btn btn-success">Reply</button></td>
+                            <td><button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalReply" dmx-on:click="ddPendingTrans.select(id)">Reply</button></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade fixed-left sd-right-sidebar-40" id="modalReply" is="dmx-bs5-modal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-aside my-0 modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content rounded-0 px-3">
+            <div class="modal-header">
+                <h3 class="modal-title">Refund</h3>
+                <button type="button" class="bg-transparent border-1 ms-auto p-0 px-1" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fas fa-times" alt="icon"></i>
+                </button>
+            </div>
+            <form id="ResponseForm" method="post">
+                <div class="modal-body">
+                    <input type="hidden" name="transid" dmx-bind:value="ddPendingTrans.data.id"><input type="hidden" name="refdeclval" dmx-bind:value="varRefundDecline.value">
+                    <div class="row align-items-baseline">
+                        <div class="col-12">
+                            <label for="inpFromDate" class="form-label text-black fw-bold">User Details:</label>&emsp;<span>{{ddPendingTrans.data.user_id+' | '+ddPendingTrans.data.user_fname+' | '+ddPendingTrans.data.user_mobile}}</span>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="inpFromDate" class="form-label text-black fw-bold">Operaotr:</label>&emsp;<span>{{ddPendingTrans.data.operator_name}}</span>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="inpFromDate" class="form-label text-black fw-bold">Recharge Mobile:</label>&emsp;<span>{{ddPendingTrans.data.user_number}}</span>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="inpFromDate" class="form-label text-black fw-bold">Amount:</label>&emsp;<span>{{ddPendingTrans.data.amount}}</span>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="inpFromDate" class="form-label text-black fw-bold">Actual Deduction:</label>&emsp;<span>{{ddPendingTrans.data.net_amt}}</span>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="inpFromDate" class="form-label text-black fw-bold">Recharge IP:</label>&emsp;<span>{{ddPendingTrans.data.ip_address}}</span>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="inpFromDate" class="form-label text-black fw-bold">Recharge Date:</label>&emsp;<span>{{ddPendingTrans.data.tr_date.formatDate('dd-MM-yyyy hh:mm:ss A')}}</span>
+                        </div>
+                        <div class="col-12 my-3">
+                            <label for="inpFromDate" class="form-label text-black fw-bold">API Ref. Id./ Operaotr Id :</label>&emsp;
+                            <input type="text" name="api_ref" dmx-bind:value="ddPendingTrans.data.api_ref">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" dmx-on:click="varRefundDecline.setValue(3)">Decline</button>
+                    <button type="button" class="btn btn-warning" dmx-on:click="varRefundDecline.setValue(2)">Refund</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

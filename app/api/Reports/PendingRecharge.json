@@ -127,6 +127,14 @@
               {
                 "table": "m_user",
                 "column": "user_id"
+              },
+              {
+                "table": "tt_recharge_trans",
+                "column": "api_ref"
+              },
+              {
+                "table": "tt_recharge_trans",
+                "column": "ip_address"
               }
             ],
             "table": {
@@ -222,7 +230,7 @@
               "conditional": null,
               "valid": true
             },
-            "query": "SELECT tt_recharge_trans.id, tt_recharge_trans.user_id, tt_recharge_trans.user_number, tt_recharge_trans.opening_balance, tt_recharge_trans.amount, tt_recharge_trans.comm_amt, tt_recharge_trans.charge_amt, tt_recharge_trans.net_amt, tt_recharge_trans.closing_balance, tt_recharge_trans.tr_date, tt_recharge_trans.status, tt_recharge_trans.tr_type, tt_recharge_trans.api_logs, m_op.operator_name, m_user.user_fname, m_user.user_mobile, m_user.user_id\nFROM tt_recharge_trans\nLEFT JOIN m_operator AS m_op ON (m_op.id = tt_recharge_trans.op_id) LEFT JOIN m_users AS m_user ON (m_user.id = tt_recharge_trans.user_id)\nWHERE tt_recharge_trans.extra2 = '1' AND tt_recharge_trans.tr_date >= :P1 /* {{$_GET.fromdate}} */ AND tt_recharge_trans.tr_date <= :P2 /* {{$_GET.todate}} */",
+            "query": "SELECT tt_recharge_trans.id, tt_recharge_trans.user_id, tt_recharge_trans.user_number, tt_recharge_trans.opening_balance, tt_recharge_trans.amount, tt_recharge_trans.comm_amt, tt_recharge_trans.charge_amt, tt_recharge_trans.net_amt, tt_recharge_trans.closing_balance, tt_recharge_trans.tr_date, tt_recharge_trans.status, tt_recharge_trans.tr_type, tt_recharge_trans.api_logs, m_op.operator_name, m_user.user_fname, m_user.user_mobile, m_user.user_id, tt_recharge_trans.api_ref, tt_recharge_trans.ip_address\nFROM tt_recharge_trans\nLEFT JOIN m_operator AS m_op ON (m_op.id = tt_recharge_trans.op_id) LEFT JOIN m_users AS m_user ON (m_user.id = tt_recharge_trans.user_id)\nWHERE tt_recharge_trans.extra2 = '1' AND tt_recharge_trans.tr_date >= :P1 /* {{$_GET.fromdate}} */ AND tt_recharge_trans.tr_date <= :P2 /* {{$_GET.todate}} */",
             "params": [
               {
                 "operator": "greater_or_equal",
@@ -357,6 +365,14 @@
               {
                 "type": "text",
                 "name": "user_mobile"
+              },
+              {
+                "type": "text",
+                "name": "api_ref"
+              },
+              {
+                "type": "text",
+                "name": "ip_address"
               }
             ]
           }
