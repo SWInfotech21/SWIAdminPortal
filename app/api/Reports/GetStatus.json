@@ -36,6 +36,7 @@
       },
       "url": "https://sonakshiworld.com/apiservice.asmx/RegisterComplaint"
     },
-    "output": true
+    "output": true,
+    "disabled": true
   }
 ]

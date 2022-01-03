@@ -1,6 +1,16 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="viewcc" appConnect="local" components="{dmxDataTraversal:{},dmxBootstrap5Modal:{}}" -->
 <meta name="ac:route" content="/view-cc">
-
+<dmx-serverconnect id="scPinStateDist" url="api/Users/GetPINStateDist" dmx-param:pincode="modalAddUsers.formAddEditUser.inp_pin.value"></dmx-serverconnect>
+<script is="dmx-flow" id="flowGetPIN" type="text/dmx-flow">{
+    condition: {
+    if: "{{modalAddUsers.formAddEditUser.inp_pin.value.length() == 6}}",
+    then: {
+    steps: {
+    run: {action: "{{scPinStateDist.load({})}}"}
+    }
+    }
+    }
+    }</script>
 <dmx-serverconnect id="scCCUsers" url="api/Users/UsersCC"></dmx-serverconnect>
 <dmx-data-view id="dvUsers" dmx-bind:data="scCCUsers.data.GetCCUsers.data" pageSize="100" page="10"></dmx-data-view>
 <dmx-data-detail id="ddUsers" dmx-bind:data="dvUsers.data" key="id"></dmx-data-detail>
@@ -123,7 +133,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{{ddUsers.data.id ? 'Edit User Details' : 'Add A New User'}}</h5>
+                <h5 class="modal-title">{{ddUsers.data.id ? 'Edit CC User Details' : 'Add A New CC User'}}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -157,34 +167,36 @@
                     </div>
                     <div class="mb-3 row">
                         <div class="col-12 col-sm-6">
-                            <label for="inp_pan" class="col-form-label">PAN</label>
+                            <label for="inp_pan" class="col-form-label">PAN No.</label>
                             <div class="col-12 px-0">
                                 <input type="text" class="form-control" id="inp_pan" name="pan" aria-describedby="inp_pan_help" placeholder="Enter PAN No" maxlength="10" required="" data-msg-required="PAN no is required." dmx-bind:value="ddUsers.data.pan_no">
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6"><label for="inp_address" class="col-form-label">Address</label>
-                            <div class="col-12 px-0">
-                                <input type="text" class="form-control" id="inp_address" name="address" aria-describedby="inp_address_help" placeholder="Enter address No" maxlength="100" required="" data-msg-required="Address is required." dmx-bind:value="ddUsers.data.address">
                             </div>
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <div class="col-12 col-sm-6 row mx-0">
-                            <label for="inp_pin" class="col-form-label">PIN</label>
+                            <label for="inp_pin" class="col-form-label">PIN Code</label>
                             <div class="col-12 px-0">
-                                <input type="number" class="form-control" id="inp_pin" name="pin" aria-describedby="inp_pin_help" placeholder="Enter PIN No." maxlength="100" required="" data-msg-required="PIN is required." dmx-bind:value="ddUsers.data.pin">
+                                <input type="number" class="form-control" id="inp_pin" name="pin" aria-describedby="inp_pin_help" placeholder="Enter PIN No." maxlength="100" required="" data-msg-required="PIN is required." dmx-bind:value="ddUsers.data.pin" dmx-on:keyup="flowGetPIN.run()">
                             </div>
                         </div>
                         <div class="col-12 col-sm-6 row mx-0">
                             <label for="inp_state" class="col-form-label">State</label>
                             <div class="col-12 px-0">
-                                <input type="text" class="form-control" id="inp_state" name="state" aria-describedby="inp_state_help" placeholder="Enter State" maxlength="100" required="" data-msg-required="State is required." dmx-bind:value="ddUsers.data.state">
+                                <input type="text" class="form-control" id="inp_state" name="state" aria-describedby="inp_state_help" placeholder="Enter State" maxlength="100" required="" data-msg-required="State is required." dmx-bind:value="scPinStateDist.data.PinAPI[0].Circle? scPinStateDist.data.PinAPI[0].Circle : ddUsers.data.state">
                             </div>
                         </div>
                         <div class="col-12 col-sm-6 row mx-0">
                             <label for="inp_district" class="col-form-label">District</label>
                             <div class="col-12 px-0">
-                                <input type="text" class="form-control" id="inp_district" name="district" aria-describedby="inp_district_help" placeholder="Enter District" maxlength="100" required="" data-msg-required="District is required." dmx-bind:value="ddUsers.data.district">
+                                <input type="text" class="form-control" id="inp_district" name="district" aria-describedby="inp_district_help" placeholder="Enter District" maxlength="100" required="" data-msg-required="District is required." dmx-bind:value="scPinStateDist.data.PinAPI[0].District? scPinStateDist.data.PinAPI[0].District : ddUsers.data.district">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6"><label for="inp_address" class="col-form-label">Address</label>
+                            <div class="col-12 px-0">
+                                <select type="text" class="form-control form-select" id="inp_address" name="address" dmx-bind:options="scPinStateDist.data.PinAPI" optiontext="Name" optionvalue="Name" dmx-bind:value="ddUsers.data.address">
+                                    <option value="">Select Address</option>
+                                </select>
                             </div>
                         </div>
                     </div>

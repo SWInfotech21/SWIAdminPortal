@@ -138,5 +138,9 @@
   "view-api-users.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "pending-recharge.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }

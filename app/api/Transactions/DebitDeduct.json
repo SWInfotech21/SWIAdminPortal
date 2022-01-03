@@ -918,11 +918,17 @@
                         "column": "netamt",
                         "type": "text",
                         "value": "{{$_POST.debit_amount}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "status",
+                        "type": "text",
+                        "value": "{{'SUCCESS'}}"
                       }
                     ],
                     "table": "tt_balance",
                     "returning": "id",
-                    "query": "INSERT INTO tt_balance\n(user_id, old_balance, amount, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on, netamt) VALUES (:P1 /* {{$_POST.target_user_id}} */, :P2 /* {{GetDebitFromUser.balance_amt}} */, :P3 /* {{$_POST.debit_amount}} */, :P4 /* {{DrClosingBal}} */, :P5 /* {{'Wallet Debit'}} */, :P6 /* {{NOW}} */, :P7 /* {{$_SERVER.REMOTE_ADDR}} */, :P8 /* {{'Debit'}} */, :P9 /* {{DrBalRechTrans.identity}} */, :P10 /* {{'Number: '+GetDebitFromUser.user_mobile+' | Amount:\\n '+$_POST.debit_amount+' | Wallet Debit | Ref. Id:\\n '+DrBalRechTrans.identity+' | Comm Per: 0 | Comm Val: 0 | Charge Per: 0 | Charge Val: 0 | GST: 00.00 | Net Amt.: '+DrClosingBal}} */, :P11 /* {{identity}} */, :P12 /* {{NOW}} */, :P13 /* {{$_POST.debit_amount}} */)",
+                    "query": "INSERT INTO tt_balance\n(user_id, old_balance, amount, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on, netamt, status) VALUES (:P1 /* {{$_POST.target_user_id}} */, :P2 /* {{GetDebitFromUser.balance_amt}} */, :P3 /* {{$_POST.debit_amount}} */, :P4 /* {{DrClosingBal}} */, :P5 /* {{'Wallet Debit'}} */, :P6 /* {{NOW}} */, :P7 /* {{$_SERVER.REMOTE_ADDR}} */, :P8 /* {{'Debit'}} */, :P9 /* {{DrBalRechTrans.identity}} */, :P10 /* {{'Number: '+GetDebitFromUser.user_mobile+' | Amount:\\n '+$_POST.debit_amount+' | Wallet Debit | Ref. Id:\\n '+DrBalRechTrans.identity+' | Comm Per: 0 | Comm Val: 0 | Charge Per: 0 | Charge Val: 0 | GST: 00.00 | Net Amt.: '+DrClosingBal}} */, :P11 /* {{identity}} */, :P12 /* {{NOW}} */, :P13 /* {{$_POST.debit_amount}} */, :P14 /* {{'SUCCESS'}} */)",
                     "params": [
                       {
                         "name": ":P1",
@@ -988,6 +994,11 @@
                         "name": ":P13",
                         "type": "expression",
                         "value": "{{$_POST.debit_amount}}"
+                      },
+                      {
+                        "name": ":P14",
+                        "type": "expression",
+                        "value": "{{'SUCCESS'}}"
                       }
                     ]
                   }
@@ -1090,11 +1101,17 @@
                         "column": "netamt",
                         "type": "text",
                         "value": "{{$_POST.debit_amount}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "status",
+                        "type": "text",
+                        "value": "{{'SUCCESS'}}"
                       }
                     ],
                     "table": "tt_balance",
                     "returning": "id",
-                    "query": "INSERT INTO tt_balance\n(user_id, old_balance, amount, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on, netamt) VALUES (:P1 /* {{identity}} */, :P2 /* {{GetCreditUser.balance_amt}} */, :P3 /* {{$_POST.debit_amount}} */, :P4 /* {{CrClosingBal}} */, :P5 /* {{'Wallet Credit'}} */, :P6 /* {{NOW}} */, :P7 /* {{$_SERVER.REMOTE_ADDR}} */, :P8 /* {{'Credit'}} */, :P9 /* {{DrBalRechTrans.identity}} */, :P10 /* {{'Number: '+GetCreditUser.user_mobile+' | Amount:\\n '+$_POST.debit_amount+' | Wallet Credit | Ref. Id:\\n '+DrBalRechTrans.identity+' | Comm Per: 0 | Comm Val: 0 | Charge Per: 0 | Charge Val: 0 | GST: 00.00 | TDS: 00.00 | Net Amt. '+CrClosingBal}} */, :P11 /* {{identity}} */, :P12 /* {{NOW}} */, :P13 /* {{$_POST.debit_amount}} */)",
+                    "query": "INSERT INTO tt_balance\n(user_id, old_balance, amount, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on, netamt, status) VALUES (:P1 /* {{identity}} */, :P2 /* {{GetCreditUser.balance_amt}} */, :P3 /* {{$_POST.debit_amount}} */, :P4 /* {{CrClosingBal}} */, :P5 /* {{'Wallet Credit'}} */, :P6 /* {{NOW}} */, :P7 /* {{$_SERVER.REMOTE_ADDR}} */, :P8 /* {{'Credit'}} */, :P9 /* {{DrBalRechTrans.identity}} */, :P10 /* {{'Number: '+GetCreditUser.user_mobile+' | Amount:\\n '+$_POST.debit_amount+' | Wallet Credit | Ref. Id:\\n '+DrBalRechTrans.identity+' | Comm Per: 0 | Comm Val: 0 | Charge Per: 0 | Charge Val: 0 | GST: 00.00 | TDS: 00.00 | Net Amt. '+CrClosingBal}} */, :P11 /* {{identity}} */, :P12 /* {{NOW}} */, :P13 /* {{$_POST.debit_amount}} */, :P14 /* {{'SUCCESS'}} */)",
                     "params": [
                       {
                         "name": ":P1",
@@ -1160,6 +1177,11 @@
                         "name": ":P13",
                         "type": "expression",
                         "value": "{{$_POST.debit_amount}}"
+                      },
+                      {
+                        "name": ":P14",
+                        "type": "expression",
+                        "value": "{{'SUCCESS'}}"
                       }
                     ]
                   }

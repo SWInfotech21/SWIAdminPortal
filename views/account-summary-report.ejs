@@ -1,4 +1,5 @@
 <!-- Wappler include head-page="layouts/main" is="dmx-app" id="accountsummaryreport" appConnect="local" components="{dmxFormatter:{}}" -->
+<meta name="ac:route" content="/account-summary-report">
 <script is="dmx-flow" id="flowAcSummary" type="text/dmx-flow">{
   condition: {
     if: "{{inpYear.value && selectMonth.value && selectServices.value}}",
@@ -13,10 +14,6 @@
 <dmx-serverconnect id="scServices" url="api/Services/Services"></dmx-serverconnect>
 
 <dmx-serverconnect id="scAcSummary" url="api/Reports/AccSummaryMonth" dmx-param:year="inpYear.value" dmx-param:month="selectMonth.value" dmx-param:service_id="selectServices.value" noload></dmx-serverconnect>
-
-<meta name="ac:route" content="/account-summary-report">
-
-
 
 <div class="row align-items-center justify-content-between px-4 mb-3 sd-secondary-header mx-0">
     <div class="col-12 col-md-auto me-auto ps-4">

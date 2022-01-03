@@ -182,6 +182,11 @@
       "path": "/view-api-users",
       "page": "view-api-users",
       "layout": "main"
+    },
+    {
+      "path": "/pending-recharge",
+      "page": "pending-recharge",
+      "layout": "main"
     }
   ]
 }

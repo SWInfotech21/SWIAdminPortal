@@ -337,6 +337,11 @@
           }
         }
       },
+      "dump_api_token": {
+        "db": {
+          "schema": "public"
+        }
+      },
       "m_api": {
         "db": {
           "schema": "public"
@@ -1603,6 +1608,11 @@
           "schema": "public"
         }
       },
+      "t_api_token": {
+        "db": {
+          "schema": "public"
+        }
+      },
       "t_bank_withdrawal": {
         "db": {
           "schema": "public"
@@ -2372,6 +2382,13 @@
             }
           },
           "netamt": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "status": {
             "db": {
               "type": "string",
               "primary": false,

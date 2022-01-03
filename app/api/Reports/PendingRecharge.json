@@ -1,0 +1,368 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "offset"
+      },
+      {
+        "type": "text",
+        "name": "limit"
+      },
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      },
+      {
+        "type": "text",
+        "name": "fromdate"
+      },
+      {
+        "type": "text",
+        "name": "todate"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "",
+        "module": "auth",
+        "action": "restrict",
+        "options": {
+          "provider": "securityLogin",
+          "permissions": [
+            "write"
+          ],
+          "loginUrl": "/login",
+          "forbiddenUrl": "/403-forbidden"
+        }
+      },
+      {
+        "name": "identity",
+        "module": "auth",
+        "action": "identify",
+        "options": {
+          "provider": "securityLogin"
+        },
+        "output": true,
+        "meta": []
+      },
+      {
+        "name": "GetPendingRech",
+        "module": "dbconnector",
+        "action": "paged",
+        "options": {
+          "sql": {
+            "type": "SELECT",
+            "columns": [
+              {
+                "table": "tt_recharge_trans",
+                "column": "id"
+              },
+              {
+                "table": "tt_recharge_trans",
+                "column": "user_id"
+              },
+              {
+                "table": "tt_recharge_trans",
+                "column": "user_number"
+              },
+              {
+                "table": "tt_recharge_trans",
+                "column": "opening_balance"
+              },
+              {
+                "table": "tt_recharge_trans",
+                "column": "amount"
+              },
+              {
+                "table": "tt_recharge_trans",
+                "column": "comm_amt"
+              },
+              {
+                "table": "tt_recharge_trans",
+                "column": "charge_amt"
+              },
+              {
+                "table": "tt_recharge_trans",
+                "column": "net_amt"
+              },
+              {
+                "table": "tt_recharge_trans",
+                "column": "closing_balance"
+              },
+              {
+                "table": "tt_recharge_trans",
+                "column": "tr_date"
+              },
+              {
+                "table": "tt_recharge_trans",
+                "column": "status"
+              },
+              {
+                "table": "tt_recharge_trans",
+                "column": "tr_type"
+              },
+              {
+                "table": "tt_recharge_trans",
+                "column": "api_logs"
+              },
+              {
+                "table": "m_op",
+                "column": "operator_name"
+              },
+              {
+                "table": "m_user",
+                "column": "user_fname"
+              },
+              {
+                "table": "m_user",
+                "column": "user_mobile"
+              },
+              {
+                "table": "m_user",
+                "column": "user_id"
+              }
+            ],
+            "table": {
+              "name": "tt_recharge_trans"
+            },
+            "joins": [
+              {
+                "table": "m_operator",
+                "column": "*",
+                "alias": "m_op",
+                "type": "LEFT",
+                "clauses": {
+                  "condition": "AND",
+                  "rules": [
+                    {
+                      "table": "m_op",
+                      "column": "id",
+                      "operator": "equal",
+                      "value": {
+                        "table": "tt_recharge_trans",
+                        "column": "op_id"
+                      },
+                      "operation": "="
+                    }
+                  ]
+                }
+              },
+              {
+                "table": "m_users",
+                "column": "*",
+                "alias": "m_user",
+                "type": "LEFT",
+                "clauses": {
+                  "condition": "AND",
+                  "rules": [
+                    {
+                      "table": "m_user",
+                      "column": "id",
+                      "operator": "equal",
+                      "value": {
+                        "table": "tt_recharge_trans",
+                        "column": "user_id"
+                      },
+                      "operation": "="
+                    }
+                  ]
+                }
+              }
+            ],
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "tt_recharge_trans.extra2",
+                  "field": "tt_recharge_trans.extra2",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "1",
+                  "data": {
+                    "table": "tt_recharge_trans",
+                    "column": "extra2",
+                    "type": "text"
+                  },
+                  "operation": "="
+                },
+                {
+                  "id": "tt_recharge_trans.tr_date",
+                  "field": "tt_recharge_trans.tr_date",
+                  "type": "datetime",
+                  "operator": "greater_or_equal",
+                  "value": "{{$_GET.fromdate}}",
+                  "data": {
+                    "table": "tt_recharge_trans",
+                    "column": "tr_date",
+                    "type": "datetime"
+                  },
+                  "operation": ">="
+                },
+                {
+                  "id": "tt_recharge_trans.tr_date",
+                  "field": "tt_recharge_trans.tr_date",
+                  "type": "datetime",
+                  "operator": "less_or_equal",
+                  "value": "{{$_GET.todate}}",
+                  "data": {
+                    "table": "tt_recharge_trans",
+                    "column": "tr_date",
+                    "type": "datetime"
+                  },
+                  "operation": "<="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "query": "SELECT tt_recharge_trans.id, tt_recharge_trans.user_id, tt_recharge_trans.user_number, tt_recharge_trans.opening_balance, tt_recharge_trans.amount, tt_recharge_trans.comm_amt, tt_recharge_trans.charge_amt, tt_recharge_trans.net_amt, tt_recharge_trans.closing_balance, tt_recharge_trans.tr_date, tt_recharge_trans.status, tt_recharge_trans.tr_type, tt_recharge_trans.api_logs, m_op.operator_name, m_user.user_fname, m_user.user_mobile, m_user.user_id\nFROM tt_recharge_trans\nLEFT JOIN m_operator AS m_op ON (m_op.id = tt_recharge_trans.op_id) LEFT JOIN m_users AS m_user ON (m_user.id = tt_recharge_trans.user_id)\nWHERE tt_recharge_trans.extra2 = '1' AND tt_recharge_trans.tr_date >= :P1 /* {{$_GET.fromdate}} */ AND tt_recharge_trans.tr_date <= :P2 /* {{$_GET.todate}} */",
+            "params": [
+              {
+                "operator": "greater_or_equal",
+                "type": "expression",
+                "name": ":P1",
+                "value": "{{$_GET.fromdate}}"
+              },
+              {
+                "operator": "less_or_equal",
+                "type": "expression",
+                "name": ":P2",
+                "value": "{{$_GET.todate}}"
+              }
+            ]
+          },
+          "connection": "postgres_gcpServer"
+        },
+        "output": true,
+        "meta": [
+          {
+            "name": "offset",
+            "type": "number"
+          },
+          {
+            "name": "limit",
+            "type": "number"
+          },
+          {
+            "name": "total",
+            "type": "number"
+          },
+          {
+            "name": "page",
+            "type": "object",
+            "sub": [
+              {
+                "name": "offset",
+                "type": "object",
+                "sub": [
+                  {
+                    "name": "first",
+                    "type": "number"
+                  },
+                  {
+                    "name": "prev",
+                    "type": "number"
+                  },
+                  {
+                    "name": "next",
+                    "type": "number"
+                  },
+                  {
+                    "name": "last",
+                    "type": "number"
+                  }
+                ]
+              },
+              {
+                "name": "current",
+                "type": "number"
+              },
+              {
+                "name": "total",
+                "type": "number"
+              }
+            ]
+          },
+          {
+            "name": "data",
+            "type": "array",
+            "sub": [
+              {
+                "type": "number",
+                "name": "id"
+              },
+              {
+                "type": "text",
+                "name": "user_id"
+              },
+              {
+                "type": "text",
+                "name": "user_number"
+              },
+              {
+                "type": "text",
+                "name": "opening_balance"
+              },
+              {
+                "type": "text",
+                "name": "amount"
+              },
+              {
+                "type": "text",
+                "name": "comm_amt"
+              },
+              {
+                "type": "text",
+                "name": "charge_amt"
+              },
+              {
+                "type": "text",
+                "name": "net_amt"
+              },
+              {
+                "type": "text",
+                "name": "closing_balance"
+              },
+              {
+                "type": "datetime",
+                "name": "tr_date"
+              },
+              {
+                "type": "text",
+                "name": "status"
+              },
+              {
+                "type": "text",
+                "name": "tr_type"
+              },
+              {
+                "type": "text",
+                "name": "api_logs"
+              },
+              {
+                "type": "text",
+                "name": "operator_name"
+              },
+              {
+                "type": "text",
+                "name": "user_fname"
+              },
+              {
+                "type": "text",
+                "name": "user_mobile"
+              }
+            ]
+          }
+        ],
+        "outputType": "object"
+      }
+    ]
+  }
+}

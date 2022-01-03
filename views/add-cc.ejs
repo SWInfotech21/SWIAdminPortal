@@ -1,5 +1,16 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="addcc" appConnect="local" -->
 <meta name="ac:route" content="/add-cc">
+<dmx-serverconnect id="scPinStateDist" url="api/Users/GetPINStateDist" dmx-param:pincode="content.formAddEditUser.inp_pin.value"></dmx-serverconnect>
+<script is="dmx-flow" id="flowGetPIN" type="text/dmx-flow">{
+    condition: {
+    if: "{{formAddEditUser.inp_pin.value.length() == 6}}",
+    then: {
+    steps: {
+    run: {action: "{{scPinStateDist.load({})}}"}
+    }
+    }
+    }
+    }</script>
 <div class="container pb-3">
     <header>
         <div class="container">
@@ -49,27 +60,29 @@
                         </div>
                     </div>
                     <div class="col-12 col-sm-6 col-md-3">
-                        <label for="inp_address" class="col-form-label">Address</label>
-                        <div class="col-12 px-0">
-                            <input type="text" class="form-control" id="inp_address" name="address" aria-describedby="inp_address_help" placeholder="Enter address No" maxlength="100" required="" data-msg-required="Address is required." dmx-bind:value="ddUsers.data.address">
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-md-3">
                         <label for="inp_pin" class="col-form-label">PIN</label>
                         <div class="col-12 px-0">
-                            <input type="number" class="form-control" id="inp_pin" name="pin" aria-describedby="inp_pin_help" placeholder="Enter PIN No." maxlength="100" required="" data-msg-required="PIN is required." dmx-bind:value="ddUsers.data.pin">
+                            <input type="number" class="form-control" id="inp_pin" name="pin" aria-describedby="inp_pin_help" placeholder="Enter PIN No." maxlength="100" required="" data-msg-required="PIN is required." dmx-bind:value="ddUsers.data.pin" dmx-on:keyup="flowGetPIN.run()">
                         </div>
                     </div>
                     <div class="col-12 col-sm-6 col-md-3">
                         <label for="inp_state" class="col-form-label">State</label>
                         <div class="col-12 px-0">
-                            <input type="text" class="form-control" id="inp_state" name="state" aria-describedby="inp_state_help" placeholder="Enter State" maxlength="100" required="" data-msg-required="State is required." dmx-bind:value="ddUsers.data.state">
+                            <input type="text" class="form-control" id="inp_state" name="state" aria-describedby="inp_state_help" placeholder="Enter State" maxlength="100" required="" data-msg-required="State is required." dmx-bind:value="scPinStateDist.data.PinAPI[0].Circle">
                         </div>
                     </div>
                     <div class="col-12 col-sm-6 col-md-3">
                         <label for="inp_district" class="col-form-label">District</label>
                         <div class="col-12 px-0">
-                            <input type="text" class="form-control" id="inp_district" name="district" aria-describedby="inp_district_help" placeholder="Enter District" maxlength="100" required="" data-msg-required="District is required." dmx-bind:value="ddUsers.data.district">
+                            <input type="text" class="form-control" id="inp_district" name="district" aria-describedby="inp_district_help" placeholder="Enter District" maxlength="100" required="" data-msg-required="District is required." dmx-bind:value="scPinStateDist.data.PinAPI[0].District">
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <label for="inp_address" class="col-form-label">Address</label>
+                        <div class="col-12 px-0">
+                            <select type="text" class="form-control form-select" id="inp_address" name="address" dmx-bind:options="scPinStateDist.data.PinAPI" optiontext="Name" optionvalue="Name">
+                                <option value="">Select Address</option>
+                            </select>
                         </div>
                     </div>
                 </div>
