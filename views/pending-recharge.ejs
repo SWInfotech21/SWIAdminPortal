@@ -12,8 +12,6 @@
 }</script> -->
 <!-- <dmx-value id="varFilter" dmx-bind:value="0"></dmx-value> -->
 <dmx-serverconnect id="scServices" url="api/Services/Services"></dmx-serverconnect>
-<dmx-value id="varRefundDecline" dmx-bind:value="0"></dmx-value>
-
 <dmx-serverconnect id="scPendingRech" url="api/Reports/PendingRecharge" dmx-param:fromdate="inpFromDate.value" dmx-param:todate="inpToDate.value"></dmx-serverconnect>
 <dmx-data-view id="dvPendingTrans" dmx-bind:data="content.scPendingRech.data.GetPendingRech.data"></dmx-data-view>
 <dmx-data-detail id="ddPendingTrans" dmx-bind:data="content.dvPendingTrans.data" key="id"></dmx-data-detail>
@@ -61,7 +59,9 @@
                             <th>Charge. Amt.</th>
                             <th>Net Amt.</th>
                             <th>Closing Balance</th>
+                            <th>Reason</th>
                             <th>API</th>
+                            <th>Status</th>
                             <th>Tr. Type</th>
                             <th>Date</th>
                             <th>Action</th>
@@ -80,7 +80,9 @@
                             <td dmx-text="charge_amt"></td>
                             <td dmx-text="net_amt"></td>
                             <td dmx-text="closing_balance"></td>
-                            <td dmx-text="api_log"></td>
+                            <td dmx-text="message"></td>
+                            <td dmx-text="api_logs"></td>
+                            <td class="fw-bold" dmx-text="status" dmx-class:text-success="status == 'SUCCESS'" dmx-class:text-warning="status == 'PENDING'" dmx-class:text-danger="status == 'FAILURE'" dmx-class:text-primary="status == 'REFUND'"></td>
                             <td dmx-text="tr_type"></td>
                             <td dmx-text="tr_date.formatDate('dd-MM-yyyy hh:mm:ss A')"></td>
                             <td><button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalReply" dmx-on:click="ddPendingTrans.select(id)">Reply</button></td>
@@ -102,9 +104,9 @@
                     <i class="fas fa-times" alt="icon"></i>
                 </button>
             </div>
-            <form id="ResponseForm" method="post">
+            <form is="dmx-serverconnect-form" id="ResponseForm" method="post" action="api/Transactions/ComplainPendingUp" dmx-on:success="scNotif.success('Action Success'); scPendingRech.load();modalReply.hide()" dmx-on:error="scNotif.warning('An error occurred'); ">
                 <div class="modal-body">
-                    <input type="hidden" name="transid" dmx-bind:value="ddPendingTrans.data.id"><input type="hidden" name="refdeclval" dmx-bind:value="varRefundDecline.value">
+                    <input type="hidden" name="transid" dmx-bind:value="ddPendingTrans.data.id">
                     <div class="row align-items-baseline">
                         <div class="col-12">
                             <label for="inpFromDate" class="form-label text-black fw-bold">User Details:</label>&emsp;<span>{{ddPendingTrans.data.user_id+' | '+ddPendingTrans.data.user_fname+' | '+ddPendingTrans.data.user_mobile}}</span>
@@ -127,16 +129,21 @@
                         <div class="col-12 col-md-6">
                             <label for="inpFromDate" class="form-label text-black fw-bold">Recharge Date:</label>&emsp;<span>{{ddPendingTrans.data.tr_date.formatDate('dd-MM-yyyy hh:mm:ss A')}}</span>
                         </div>
-                        <div class="col-12 my-3">
+                        <div class="col-12 col-md-6 my-3">
                             <label for="inpFromDate" class="form-label text-black fw-bold">API Ref. Id./ Operaotr Id :</label>&emsp;
-                            <input type="text" name="api_ref" dmx-bind:value="ddPendingTrans.data.api_ref">
+                            <input type="text" name="api_ref" dmx-bind:value="ddPendingTrans.data.api_ref" class="form-control" required="">
+                        </div>
+                        <div class="col-12 col-md-6 my-3"><label class="form-label text-black fw-bold">Status:</label>
+                            <select type="text" name="refdeclval" class="form-control" required="">
+                                <option value="3">Decline</option>
+                                <option value="2">Refund</option>
+                            </select>
                         </div>
 
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-info" dmx-on:click="varRefundDecline.setValue(3)">Decline</button>
-                    <button type="button" class="btn btn-warning" dmx-on:click="varRefundDecline.setValue(2)">Refund</button>
+                    <button type="submit" class="btn btn-warning">Submit</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close
                     </button>
                 </div>

@@ -2206,6 +2206,86 @@
       "t_ticket": {
         "db": {
           "schema": "public"
+        },
+        "columns": {
+          "id": {
+            "db": {
+              "type": "increments",
+              "default": "",
+              "primary": true,
+              "nullable": false
+            }
+          },
+          "user_id": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "support_type": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "message": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "tran_id": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "status": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "adddate": {
+            "db": {
+              "type": "timestamp",
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "response": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "reply_date": {
+            "db": {
+              "type": "timestamp",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "attachment": {
+            "db": {
+              "type": "string",
+              "primary": false,
+              "nullable": true
+            }
+          },
+          "created_on": {
+            "db": {
+              "type": "timestamp",
+              "primary": false,
+              "nullable": false
+            }
+          }
         }
       },
       "t_transaction_queue": {

@@ -135,6 +135,15 @@
               {
                 "table": "tt_recharge_trans",
                 "column": "ip_address"
+              },
+              {
+                "table": "t_ticket",
+                "column": "id",
+                "alias": "ticket_id"
+              },
+              {
+                "table": "t_ticket",
+                "column": "message"
               }
             ],
             "table": {
@@ -173,6 +182,37 @@
                     {
                       "table": "m_user",
                       "column": "id",
+                      "operator": "equal",
+                      "value": {
+                        "table": "tt_recharge_trans",
+                        "column": "user_id"
+                      },
+                      "operation": "="
+                    }
+                  ]
+                }
+              },
+              {
+                "table": "t_ticket",
+                "column": "*",
+                "alias": "t_ticket",
+                "type": "INNER",
+                "clauses": {
+                  "condition": "AND",
+                  "rules": [
+                    {
+                      "table": "t_ticket",
+                      "column": "tran_id",
+                      "operator": "equal",
+                      "value": {
+                        "table": "tt_recharge_trans",
+                        "column": "id"
+                      },
+                      "operation": "="
+                    },
+                    {
+                      "table": "t_ticket",
+                      "column": "user_id",
                       "operator": "equal",
                       "value": {
                         "table": "tt_recharge_trans",
@@ -230,7 +270,7 @@
               "conditional": null,
               "valid": true
             },
-            "query": "SELECT tt_recharge_trans.id, tt_recharge_trans.user_id, tt_recharge_trans.user_number, tt_recharge_trans.opening_balance, tt_recharge_trans.amount, tt_recharge_trans.comm_amt, tt_recharge_trans.charge_amt, tt_recharge_trans.net_amt, tt_recharge_trans.closing_balance, tt_recharge_trans.tr_date, tt_recharge_trans.status, tt_recharge_trans.tr_type, tt_recharge_trans.api_logs, m_op.operator_name, m_user.user_fname, m_user.user_mobile, m_user.user_id, tt_recharge_trans.api_ref, tt_recharge_trans.ip_address\nFROM tt_recharge_trans\nLEFT JOIN m_operator AS m_op ON (m_op.id = tt_recharge_trans.op_id) LEFT JOIN m_users AS m_user ON (m_user.id = tt_recharge_trans.user_id)\nWHERE tt_recharge_trans.extra2 = '1' AND tt_recharge_trans.tr_date >= :P1 /* {{$_GET.fromdate}} */ AND tt_recharge_trans.tr_date <= :P2 /* {{$_GET.todate}} */",
+            "query": "SELECT tt_recharge_trans.id, tt_recharge_trans.user_id, tt_recharge_trans.user_number, tt_recharge_trans.opening_balance, tt_recharge_trans.amount, tt_recharge_trans.comm_amt, tt_recharge_trans.charge_amt, tt_recharge_trans.net_amt, tt_recharge_trans.closing_balance, tt_recharge_trans.tr_date, tt_recharge_trans.status, tt_recharge_trans.tr_type, tt_recharge_trans.api_logs, m_op.operator_name, m_user.user_fname, m_user.user_mobile, m_user.user_id, tt_recharge_trans.api_ref, tt_recharge_trans.ip_address, t_ticket.id AS ticket_id, t_ticket.message\nFROM tt_recharge_trans\nLEFT JOIN m_operator AS m_op ON (m_op.id = tt_recharge_trans.op_id) LEFT JOIN m_users AS m_user ON (m_user.id = tt_recharge_trans.user_id) INNER JOIN t_ticket AS t_ticket ON (t_ticket.tran_id = tt_recharge_trans.id AND t_ticket.user_id = tt_recharge_trans.user_id)\nWHERE tt_recharge_trans.extra2 = '1' AND tt_recharge_trans.tr_date >= :P1 /* {{$_GET.fromdate}} */ AND tt_recharge_trans.tr_date <= :P2 /* {{$_GET.todate}} */\nORDER BY tt_recharge_trans.id DESC",
             "params": [
               {
                 "operator": "greater_or_equal",
@@ -243,6 +283,14 @@
                 "type": "expression",
                 "name": ":P2",
                 "value": "{{$_GET.todate}}"
+              }
+            ],
+            "orders": [
+              {
+                "table": "tt_recharge_trans",
+                "column": "id",
+                "direction": "DESC",
+                "recid": 1
               }
             ]
           },
@@ -373,6 +421,14 @@
               {
                 "type": "text",
                 "name": "ip_address"
+              },
+              {
+                "type": "number",
+                "name": "ticket_id"
+              },
+              {
+                "type": "text",
+                "name": "message"
               }
             ]
           }

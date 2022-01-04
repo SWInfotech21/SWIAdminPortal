@@ -1,0 +1,780 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/pending-recharge.ejs",
+      "linkedForm": "ResponseForm"
+    },
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ],
+    "$_POST": [
+      {
+        "type": "text",
+        "fieldName": "transid",
+        "name": "transid"
+      },
+      {
+        "type": "text",
+        "fieldName": "refdeclval",
+        "name": "refdeclval"
+      },
+      {
+        "type": "text",
+        "fieldName": "api_ref",
+        "name": "api_ref"
+      },
+      {
+        "type": "number",
+        "name": "user_id"
+      },
+      {
+        "type": "text",
+        "name": "old_balance"
+      },
+      {
+        "type": "text",
+        "name": "amount"
+      },
+      {
+        "type": "text",
+        "name": "new_balance"
+      },
+      {
+        "type": "text",
+        "name": "transaction_type"
+      },
+      {
+        "type": "text",
+        "name": "tr_date"
+      },
+      {
+        "type": "text",
+        "name": "ip_address"
+      },
+      {
+        "type": "text",
+        "name": "crdr_type"
+      },
+      {
+        "type": "number",
+        "name": "pay_ref_id"
+      },
+      {
+        "type": "text",
+        "name": "remarks"
+      },
+      {
+        "type": "text",
+        "name": "netamt"
+      }
+    ],
+    "$_SERVER": [
+      {
+        "type": "text",
+        "name": "REMOTE_ADDR"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "",
+        "module": "auth",
+        "action": "restrict",
+        "options": {
+          "provider": "securityLogin",
+          "permissions": [
+            "write"
+          ],
+          "loginUrl": "/login",
+          "forbiddenUrl": "/403-forbidden"
+        }
+      },
+      {
+        "name": "identity",
+        "module": "auth",
+        "action": "identify",
+        "options": {
+          "provider": "securityLogin"
+        },
+        "output": true,
+        "meta": []
+      },
+      {
+        "name": "ComplainTicketUp",
+        "module": "dbupdater",
+        "action": "update",
+        "options": {
+          "connection": "postgres_gcpServer",
+          "sql": {
+            "type": "update",
+            "values": [
+              {
+                "table": "t_ticket",
+                "column": "status",
+                "type": "text",
+                "value": "{{$_POST.refdeclval}}"
+              }
+            ],
+            "table": "t_ticket",
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "tran_id",
+                  "field": "tran_id",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "{{$_POST.transid}}",
+                  "data": {
+                    "column": "tran_id"
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "query": "UPDATE t_ticket\nSET status = :P1 /* {{$_POST.refdeclval}} */\nWHERE tran_id = :P2 /* {{$_POST.transid}} */",
+            "params": [
+              {
+                "name": ":P1",
+                "type": "expression",
+                "value": "{{$_POST.refdeclval}}"
+              },
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P2",
+                "value": "{{$_POST.transid}}"
+              }
+            ]
+          }
+        },
+        "meta": [
+          {
+            "name": "affected",
+            "type": "number"
+          }
+        ],
+        "output": true
+      },
+      {
+        "name": "",
+        "module": "core",
+        "action": "condition",
+        "options": {
+          "if": "{{$_POST.refdeclval == 2}}",
+          "then": {
+            "steps": {
+              "name": "RechTransUpDecline",
+              "module": "dbupdater",
+              "action": "update",
+              "options": {
+                "connection": "postgres_gcpServer",
+                "sql": {
+                  "type": "update",
+                  "values": [
+                    {
+                      "table": "tt_recharge_trans",
+                      "column": "api_ref",
+                      "type": "text",
+                      "value": "{{$_POST.api_ref}}"
+                    },
+                    {
+                      "table": "tt_recharge_trans",
+                      "column": "extra2",
+                      "type": "text",
+                      "value": "{{$_POST.refdeclval}}"
+                    }
+                  ],
+                  "table": "tt_recharge_trans",
+                  "wheres": {
+                    "condition": "AND",
+                    "rules": [
+                      {
+                        "id": "id",
+                        "field": "id",
+                        "type": "double",
+                        "operator": "equal",
+                        "value": "{{$_POST.transid}}",
+                        "data": {
+                          "column": "id"
+                        },
+                        "operation": "="
+                      }
+                    ],
+                    "conditional": null,
+                    "valid": true
+                  },
+                  "query": "UPDATE tt_recharge_trans\nSET api_ref = :P1 /* {{$_POST.api_ref}} */, extra2 = :P2 /* {{$_POST.refdeclval}} */\nWHERE id = :P3 /* {{$_POST.transid}} */",
+                  "params": [
+                    {
+                      "name": ":P1",
+                      "type": "expression",
+                      "value": "{{$_POST.api_ref}}"
+                    },
+                    {
+                      "name": ":P2",
+                      "type": "expression",
+                      "value": "{{$_POST.refdeclval}}"
+                    },
+                    {
+                      "operator": "equal",
+                      "type": "expression",
+                      "name": ":P3",
+                      "value": "{{$_POST.transid}}"
+                    }
+                  ]
+                }
+              },
+              "meta": [
+                {
+                  "name": "affected",
+                  "type": "number"
+                }
+              ],
+              "output": true
+            }
+          }
+        },
+        "outputType": "boolean"
+      },
+      {
+        "name": "",
+        "module": "core",
+        "action": "condition",
+        "options": {
+          "if": "{{$_POST.refdeclval == 3}}",
+          "then": {
+            "steps": [
+              {
+                "name": "GetTTBal",
+                "module": "dbconnector",
+                "action": "single",
+                "options": {
+                  "sql": {
+                    "type": "SELECT",
+                    "columns": [
+                      {
+                        "table": "tt_balance",
+                        "column": "user_id"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "amount"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "netamt"
+                      }
+                    ],
+                    "table": {
+                      "name": "tt_balance"
+                    },
+                    "joins": [],
+                    "wheres": {
+                      "condition": "AND",
+                      "rules": [
+                        {
+                          "id": "tt_balance.pay_ref_id",
+                          "field": "tt_balance.pay_ref_id",
+                          "type": "double",
+                          "operator": "equal",
+                          "value": "{{$_POST.transid}}",
+                          "data": {
+                            "table": "tt_balance",
+                            "column": "pay_ref_id",
+                            "type": "number"
+                          },
+                          "operation": "="
+                        }
+                      ],
+                      "conditional": null,
+                      "valid": true
+                    },
+                    "query": "SELECT user_id, amount, netamt\nFROM tt_balance\nWHERE pay_ref_id = :P1 /* {{$_POST.transid}} */",
+                    "params": [
+                      {
+                        "operator": "equal",
+                        "type": "expression",
+                        "name": ":P1",
+                        "value": "{{$_POST.transid}}"
+                      }
+                    ]
+                  },
+                  "connection": "postgres_gcpServer"
+                },
+                "output": true,
+                "meta": [
+                  {
+                    "type": "number",
+                    "name": "user_id"
+                  },
+                  {
+                    "type": "text",
+                    "name": "amount"
+                  },
+                  {
+                    "type": "text",
+                    "name": "netamt"
+                  }
+                ],
+                "outputType": "object",
+                "type": "dbconnector_single"
+              },
+              {
+                "name": "GetUserBalance",
+                "module": "dbconnector",
+                "action": "single",
+                "options": {
+                  "connection": "postgres_gcpServer",
+                  "sql": {
+                    "type": "SELECT",
+                    "columns": [
+                      {
+                        "table": "m_users",
+                        "column": "balance_amt"
+                      }
+                    ],
+                    "table": {
+                      "name": "m_users"
+                    },
+                    "joins": [],
+                    "wheres": {
+                      "condition": "AND",
+                      "rules": [
+                        {
+                          "id": "m_users.id",
+                          "field": "m_users.id",
+                          "type": "double",
+                          "operator": "equal",
+                          "value": "{{GetTTBal.user_id}}",
+                          "data": {
+                            "table": "m_users",
+                            "column": "id",
+                            "type": "number"
+                          },
+                          "operation": "="
+                        }
+                      ],
+                      "conditional": null,
+                      "valid": true
+                    },
+                    "query": "SELECT balance_amt\nFROM m_users\nWHERE id = :P1 /* {{GetTTBal.user_id}} */",
+                    "params": [
+                      {
+                        "operator": "equal",
+                        "type": "expression",
+                        "name": ":P1",
+                        "value": "{{GetTTBal.user_id}}"
+                      }
+                    ]
+                  }
+                },
+                "output": true,
+                "meta": [
+                  {
+                    "type": "text",
+                    "name": "balance_amt"
+                  }
+                ],
+                "outputType": "object"
+              },
+              {
+                "name": "RechTransUpRefund",
+                "module": "dbupdater",
+                "action": "update",
+                "options": {
+                  "connection": "postgres_gcpServer",
+                  "sql": {
+                    "type": "update",
+                    "values": [
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "extra2",
+                        "type": "text",
+                        "value": "{{$_POST.refdeclval}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "api_ref",
+                        "type": "text",
+                        "value": "{{$_POST.api_ref}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "status",
+                        "type": "text",
+                        "value": "{{'REFUND'}}"
+                      }
+                    ],
+                    "table": "tt_recharge_trans",
+                    "wheres": {
+                      "condition": "AND",
+                      "rules": [
+                        {
+                          "id": "id",
+                          "field": "id",
+                          "type": "double",
+                          "operator": "equal",
+                          "value": "{{$_POST.transid}}",
+                          "data": {
+                            "column": "id"
+                          },
+                          "operation": "="
+                        }
+                      ],
+                      "conditional": null,
+                      "valid": true
+                    },
+                    "query": "UPDATE tt_recharge_trans\nSET extra2 = :P1 /* {{$_POST.refdeclval}} */, api_ref = :P2 /* {{$_POST.api_ref}} */, status = :P3 /* {{'REFUND'}} */\nWHERE id = :P4 /* {{$_POST.transid}} */",
+                    "params": [
+                      {
+                        "name": ":P1",
+                        "type": "expression",
+                        "value": "{{$_POST.refdeclval}}"
+                      },
+                      {
+                        "name": ":P2",
+                        "type": "expression",
+                        "value": "{{$_POST.api_ref}}"
+                      },
+                      {
+                        "name": ":P3",
+                        "type": "expression",
+                        "value": "{{'REFUND'}}"
+                      },
+                      {
+                        "operator": "equal",
+                        "type": "expression",
+                        "name": ":P4",
+                        "value": "{{$_POST.transid}}"
+                      }
+                    ]
+                  }
+                },
+                "meta": [
+                  {
+                    "name": "affected",
+                    "type": "number"
+                  }
+                ],
+                "output": true
+              },
+              {
+                "name": "ttBalanceUpRefund",
+                "module": "dbupdater",
+                "action": "update",
+                "options": {
+                  "connection": "postgres_gcpServer",
+                  "sql": {
+                    "type": "update",
+                    "values": [
+                      {
+                        "table": "tt_balance",
+                        "column": "status",
+                        "type": "text",
+                        "value": "{{'REFUND'}}"
+                      }
+                    ],
+                    "table": "tt_balance",
+                    "wheres": {
+                      "condition": "AND",
+                      "rules": [
+                        {
+                          "id": "pay_ref_id",
+                          "field": "pay_ref_id",
+                          "type": "double",
+                          "operator": "equal",
+                          "value": "{{$_POST.transid}}",
+                          "data": {
+                            "column": "pay_ref_id"
+                          },
+                          "operation": "="
+                        }
+                      ],
+                      "conditional": null,
+                      "valid": true
+                    },
+                    "query": "UPDATE tt_balance\nSET status = :P1 /* {{'REFUND'}} */\nWHERE pay_ref_id = :P2 /* {{$_POST.transid}} */",
+                    "params": [
+                      {
+                        "name": ":P1",
+                        "type": "expression",
+                        "value": "{{'REFUND'}}"
+                      },
+                      {
+                        "operator": "equal",
+                        "type": "expression",
+                        "name": ":P2",
+                        "value": "{{$_POST.transid}}"
+                      }
+                    ]
+                  }
+                },
+                "meta": [
+                  {
+                    "name": "affected",
+                    "type": "number"
+                  }
+                ],
+                "output": true
+              },
+              {
+                "name": "ttBalanceAddRefund",
+                "module": "dbupdater",
+                "action": "insert",
+                "options": {
+                  "connection": "postgres_gcpServer",
+                  "sql": {
+                    "type": "insert",
+                    "values": [
+                      {
+                        "table": "tt_balance",
+                        "column": "user_id",
+                        "type": "number",
+                        "value": "{{GetTTBal.user_id}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "old_balance",
+                        "type": "text",
+                        "value": "{{GetUserBalance.balance_amt.toNumber()}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "amount",
+                        "type": "text",
+                        "value": "{{GetTTBal.amount}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "new_balance",
+                        "type": "text",
+                        "value": "{{GetUserBalance.balance_amt.toNumber()+GetTTBal.netamt.toNumber()}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "transaction_type",
+                        "type": "text",
+                        "value": "{{'Recharge Refund'}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "tr_date",
+                        "type": "text",
+                        "value": "{{NOW}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "ip_address",
+                        "type": "text",
+                        "value": "{{$_SERVER.REMOTE_ADDR}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "crdr_type",
+                        "type": "text",
+                        "value": "{{'Credit'}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "pay_ref_id",
+                        "type": "number",
+                        "value": "{{$_POST.transid}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "remarks",
+                        "type": "text",
+                        "value": "{{'Refund of Amount '+GetTTBal.netamt+' for the transaction id '+$_POST.transid}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "created_by",
+                        "type": "number",
+                        "value": "{{identity}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "created_on",
+                        "type": "datetime",
+                        "value": "{{NOW}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "netamt",
+                        "type": "text",
+                        "value": "{{GetTTBal.netamt}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "status",
+                        "type": "text",
+                        "value": "{{'ADDREFUND'}}"
+                      }
+                    ],
+                    "table": "tt_balance",
+                    "returning": "id",
+                    "query": "INSERT INTO tt_balance\n(user_id, old_balance, amount, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on, netamt, status) VALUES (:P1 /* {{GetTTBal.user_id}} */, :P2 /* {{GetUserBalance.balance_amt.toNumber()}} */, :P3 /* {{GetTTBal.amount}} */, :P4 /* {{GetUserBalance.balance_amt.toNumber()+GetTTBal.netamt.toNumber()}} */, :P5 /* {{'Recharge Refund'}} */, :P6 /* {{NOW}} */, :P7 /* {{$_SERVER.REMOTE_ADDR}} */, :P8 /* {{'Credit'}} */, :P9 /* {{$_POST.transid}} */, :P10 /* {{'Refund of Amount '+GetTTBal.netamt+' for the transaction id '+$_POST.transid}} */, :P11 /* {{identity}} */, :P12 /* {{NOW}} */, :P13 /* {{GetTTBal.netamt}} */, :P14 /* {{'ADDREFUND'}} */)",
+                    "params": [
+                      {
+                        "name": ":P1",
+                        "type": "expression",
+                        "value": "{{GetTTBal.user_id}}"
+                      },
+                      {
+                        "name": ":P2",
+                        "type": "expression",
+                        "value": "{{GetUserBalance.balance_amt.toNumber()}}"
+                      },
+                      {
+                        "name": ":P3",
+                        "type": "expression",
+                        "value": "{{GetTTBal.amount}}"
+                      },
+                      {
+                        "name": ":P4",
+                        "type": "expression",
+                        "value": "{{GetUserBalance.balance_amt.toNumber()+GetTTBal.netamt.toNumber()}}"
+                      },
+                      {
+                        "name": ":P5",
+                        "type": "expression",
+                        "value": "{{'Recharge Refund'}}"
+                      },
+                      {
+                        "name": ":P6",
+                        "type": "expression",
+                        "value": "{{NOW}}"
+                      },
+                      {
+                        "name": ":P7",
+                        "type": "expression",
+                        "value": "{{$_SERVER.REMOTE_ADDR}}"
+                      },
+                      {
+                        "name": ":P8",
+                        "type": "expression",
+                        "value": "{{'Credit'}}"
+                      },
+                      {
+                        "name": ":P9",
+                        "type": "expression",
+                        "value": "{{$_POST.transid}}"
+                      },
+                      {
+                        "name": ":P10",
+                        "type": "expression",
+                        "value": "{{'Refund of Amount '+GetTTBal.netamt+' for the transaction id '+$_POST.transid}}"
+                      },
+                      {
+                        "name": ":P11",
+                        "type": "expression",
+                        "value": "{{identity}}"
+                      },
+                      {
+                        "name": ":P12",
+                        "type": "expression",
+                        "value": "{{NOW}}"
+                      },
+                      {
+                        "name": ":P13",
+                        "type": "expression",
+                        "value": "{{GetTTBal.netamt}}"
+                      },
+                      {
+                        "name": ":P14",
+                        "type": "expression",
+                        "value": "{{'ADDREFUND'}}"
+                      }
+                    ]
+                  }
+                },
+                "meta": [
+                  {
+                    "name": "identity",
+                    "type": "text"
+                  },
+                  {
+                    "name": "affected",
+                    "type": "number"
+                  }
+                ],
+                "output": true
+              },
+              {
+                "name": "UserBalUp",
+                "module": "dbupdater",
+                "action": "update",
+                "options": {
+                  "connection": "postgres_gcpServer",
+                  "sql": {
+                    "type": "update",
+                    "values": [
+                      {
+                        "table": "m_users",
+                        "column": "balance_amt",
+                        "type": "text",
+                        "value": "{{GetUserBalance.balance_amt.toNumber()+GetTTBal.netamt.toNumber()}}"
+                      }
+                    ],
+                    "table": "m_users",
+                    "wheres": {
+                      "condition": "AND",
+                      "rules": [
+                        {
+                          "id": "id",
+                          "field": "id",
+                          "type": "double",
+                          "operator": "equal",
+                          "value": "{{GetTTBal.user_id}}",
+                          "data": {
+                            "column": "id"
+                          },
+                          "operation": "="
+                        }
+                      ],
+                      "conditional": null,
+                      "valid": true
+                    },
+                    "query": "UPDATE m_users\nSET balance_amt = :P1 /* {{GetUserBalance.balance_amt.toNumber()+GetTTBal.netamt.toNumber()}} */\nWHERE id = :P2 /* {{GetTTBal.user_id}} */",
+                    "params": [
+                      {
+                        "name": ":P1",
+                        "type": "expression",
+                        "value": "{{GetUserBalance.balance_amt.toNumber()+GetTTBal.netamt.toNumber()}}"
+                      },
+                      {
+                        "operator": "equal",
+                        "type": "expression",
+                        "name": ":P2",
+                        "value": "{{GetTTBal.user_id}}"
+                      }
+                    ]
+                  }
+                },
+                "meta": [
+                  {
+                    "name": "affected",
+                    "type": "number"
+                  }
+                ],
+                "output": true
+              }
+            ]
+          }
+        },
+        "outputType": "boolean"
+      }
+    ]
+  }
+}
