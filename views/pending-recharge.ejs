@@ -1,4 +1,4 @@
-<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="pendingrecharge" appConnect="local" components="{dmxDataTraversal:{}}" -->
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="pendingrecharge" appConnect="local" components="{dmxDataTraversal:{},dmxSockets:{}}" -->
 <meta name="ac:route" content="/pending-recharge">
 <!-- <script is="dmx-flow" id="flowPendingRech" type="text/dmx-flow">{
   condition: {
@@ -12,7 +12,7 @@
 }</script> -->
 <!-- <dmx-value id="varFilter" dmx-bind:value="0"></dmx-value> -->
 <dmx-serverconnect id="scServices" url="api/Services/Services"></dmx-serverconnect>
-<dmx-serverconnect id="scPendingRech" url="api/Reports/PendingRecharge" dmx-param:fromdate="inpFromDate.value" dmx-param:todate="inpToDate.value"></dmx-serverconnect>
+<dmx-serverconnect id="scPendingRech" url="api/Reports/PendingRecharge" dmx-param:fromdate="inpFromDate.value" dmx-param:todate="inpToDate.value" sockets="true"></dmx-serverconnect>
 <dmx-data-view id="dvPendingTrans" dmx-bind:data="content.scPendingRech.data.GetPendingRech.data"></dmx-data-view>
 <dmx-data-detail id="ddPendingTrans" dmx-bind:data="content.dvPendingTrans.data" key="id"></dmx-data-detail>
 
