@@ -1,0 +1,71 @@
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="livetransactions" appConnect="local" -->
+<meta name="ac:route" content="/live-transactions">
+<dmx-serverconnect id="scLiveRecharge" url="api/Reports/LiveTrAPI"></dmx-serverconnect>
+<dmx-data-view id="dvLiveTrans" dmx-bind:data="content.scLiveRecharge.data"></dmx-data-view>
+
+<div class="row align-items-center justify-content-between px-4 mb-3 sd-secondary-header mx-0">
+    <div class="col-12 col-md-auto me-auto ps-4">
+        <h1 class="ms-md-1 mt-md-3 text-dark fs-2 sd-fw-800 d-flex align-items-center">
+            Live Transactions
+            <span class="border-3 ms-2 spinner-border spinner-border-sm" role="status" dmx-show="scPatients.state.executing"></span>
+        </h1>
+    </div>
+</div>
+<div class="container px-4" id="Pendingrecharge">
+    <div class="card">
+        <div class="card-header sw-bg-col-primary">
+            <b>Live Transactions</b>
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th>Sl. No.</th>
+                            <th>Tr. Id</th>
+                            <th>Order. Id</th>
+                            <th>Tr.By</th>
+                            <th>Parent</th>
+                            <th>Mobile</th>
+                            <th>Operator</th>
+                            <th>Opening Balance</th>
+                            <th>Amount</th>
+                            <th>Comm. Amt</th>
+                            <th>Charge. Amt.</th>
+                            <th>Net Amt.</th>
+                            <th>Closing Balance</th>
+                            <th>Reason</th>
+                            <th>API</th>
+                            <th>Status</th>
+                            <th>Tr. Type</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody is="dmx-repeat" dmx-generator="bs5table" id="tableRepeat1" dmx-bind:repeat="scLiveRecharge.data.LiveReport.data">
+                        <tr>
+                            <td>{{$index+1}}</td>
+                            <td dmx-text="id"></td>
+                            <td dmx-text="tr_id"></td>
+                            <td dmx-text="user_id+' | '+user_fname+' | '+user_mobile"></td>
+                            <td dmx-text="parent_id+' | '+parent_name+' | '+parent_mobile"></td>
+                            <td dmx-text="user_number"></td>
+                            <td dmx-text="operator_name"></td>
+                            <td dmx-text="opening_balance.toNumber().toFixed(2)"></td>
+                            <td dmx-text="amount.toNumber().toFixed(2)"></td>
+                            <td dmx-text="comm_amt.toNumber().toFixed(2)"></td>
+                            <td dmx-text="charge_amt.toNumber().toFixed(2)"></td>
+                            <td dmx-text="net_amt.toNumber().toFixed(2)"></td>
+                            <td dmx-text="closing_balance.toNumber().toFixed(2)"></td>
+                            <td dmx-text="message"></td>
+                            <td dmx-text="api_logs"></td>
+                            <td class="fw-bold" dmx-text="status" dmx-class:text-success="status == 'SUCCESS'" dmx-class:text-warning="status == 'PENDING'" dmx-class:text-danger="status == 'FAILURE'" dmx-class:text-primary="status == 'REFUND'"></td>
+                            <td dmx-text="tr_type"></td>
+                            <td dmx-text="tr_date.formatDate('dd-MM-yyyy hh:mm:ss A')"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

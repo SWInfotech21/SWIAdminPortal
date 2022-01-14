@@ -142,5 +142,9 @@
   "pending-recharge.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "live-transactions.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }

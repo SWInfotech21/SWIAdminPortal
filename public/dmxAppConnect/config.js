@@ -3284,5 +3284,37 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "livetransactions": {
+    "dvLiveTrans": {
+      "meta": [
+        {
+          "name": "identity",
+          "type": "text",
+          "sub": []
+        },
+        {
+          "name": "LiveReport",
+          "type": "text",
+          "sub": []
+        }
+      ],
+      "outputType": "object"
+    },
+    "tableRepeat1": {
+      "meta": [
+        {
+          "name": "identity",
+          "type": "text",
+          "sub": []
+        },
+        {
+          "name": "LiveReport",
+          "type": "text",
+          "sub": []
+        }
+      ],
+      "outputType": "object"
+    }
   }
 });
