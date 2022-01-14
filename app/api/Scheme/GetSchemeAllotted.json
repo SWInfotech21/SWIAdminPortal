@@ -38,8 +38,7 @@
           "provider": "securityLogin"
         },
         "output": true,
-        "meta": [],
-        "disabled": true
+        "meta": []
       },
       {
         "name": "user_value",

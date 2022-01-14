@@ -1,6 +1,6 @@
-<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="livetransactions" appConnect="local" -->
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="livetransactions" appConnect="local" components="{dmxSockets:{}}" -->
 <meta name="ac:route" content="/live-transactions">
-<dmx-serverconnect id="scLiveRecharge" url="api/Reports/LiveTrAPI"></dmx-serverconnect>
+<dmx-serverconnect id="scLiveRecharge" url="api/Reports/LiveTrAPI" sockets="true"></dmx-serverconnect>
 <dmx-data-view id="dvLiveTrans" dmx-bind:data="content.scLiveRecharge.data"></dmx-data-view>
 
 <div class="row align-items-center justify-content-between px-4 mb-3 sd-secondary-header mx-0">
@@ -69,3 +69,6 @@
         </div>
     </div>
 </div>
+<script>
+    setTimeout(function () { scLiveRecharge.reload(1); }, 10000);
+</script>
