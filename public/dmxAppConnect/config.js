@@ -3302,19 +3302,12 @@ dmx.config({
       "outputType": "object"
     },
     "tableRepeat1": {
-      "meta": [
-        {
-          "name": "identity",
-          "type": "text",
-          "sub": []
-        },
-        {
-          "name": "LiveReport",
-          "type": "text",
-          "sub": []
-        }
-      ],
-      "outputType": "object"
+      "meta": [],
+      "outputType": "array"
+    },
+    "data_view1": {
+      "meta": [],
+      "outputType": "text"
     }
   }
 });

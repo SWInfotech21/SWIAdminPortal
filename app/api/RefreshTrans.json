@@ -3,7 +3,7 @@
   "module": "sockets",
   "action": "refresh",
   "options": {
-    "action": "Reports/LiveTrAPI"
+    "action": "Reports/LiveTransactions"
   },
   "output": true
 }
