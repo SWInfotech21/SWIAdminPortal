@@ -81,9 +81,7 @@
     <meta charset="UTF-8">
     <title>Admin Panel</title>
     <dmx-serverconnect id="scAdminBalance" url="api/Transactions/FetchAdminBalance" dmx-on:unauthorized="browserMain.goto('/login')" dmx-on:forbidden="browserMain.goto('/login')" dmx-on:invalid="browserMain.goto('/login')" dmx-on:error="browserMain.goto('/login')"></dmx-serverconnect>
-    <dmx-serverconnect id="scMobRech" url="api/RechargeAPI/RechargeAPI"></dmx-serverconnect>
     <dmx-serverconnect id="scOperator" url="api/operator/OperatorsFetch" noload></dmx-serverconnect>
-    <dmx-serverconnect id="scAPIBalance" url="api/APIS/GetAPIBalance"></dmx-serverconnect>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="bootstrap/5/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css" href="./css/style.css" />
@@ -167,32 +165,6 @@
 
         <!-- Custom Navbar Starts-->
         <section id="layout">
-            <!-- <div class="logo_profile container_12 bg-warning mx-0">
-                <div class="grid_3 logo_img" style="margin-bottom:10px; height:60px; overflow:hidden; margin-top:15px;"> <img src="assets/images/swinfotech.png" id="ctl00_logo_img" width="70px" height="70px" /> </div>
-                <div class="grid_6 logo_img" style="margin-bottom:10px;width:500px; height:80px; overflow:hidden; margin-top:15px;">
-                    Payment Request:<span>0</span><br />Bank Withdrawal Request:<span>0</span>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pending
-                    Recharge:<span id="ctl00_lbltotalrecharge">2</span><br />
-                    Tikets:<span id="ctl00_lbltotaltikets">2</span><br />
-                    Time:<span id="ctl00_lblKYC">{{varDateTime.datetime.formatDate('MM/dd/yyyy hh:mm:ss')}}</span><br />
-
-                </div>
-                <div class="grid_6 profile_meta" style="width:auto; height:auto; float:right;">
-                    <div class="user_meta" style="margin-top:20px;background-color:#ffffff">
-                        <div class="name" stylealign="center"> <a class="tip-left" title=""><span style="font-size:14px; font-weight:bold;"> <span style="color:#FB4E55;">Logged in as Site Admin</span> -
-                                    <span id="ctl00_lblName">{{scAdminBalance.data.query.user_fname}}</span></span> </a> <br />
-                            <b>Balance:</b><span>&emsp;{{scAdminBalance.data.query.balance_amt.toNumber().toFixed(3)}}</span><br />
-                            <b>AEPS Balance:</b><span id="ctl00_lblAEPSBalance">&emsp;{{scAdminBalance.data.query.aeps_balance.toNumber().toFixed(3)}}</span><br /><b>API Balance:</b><span id="">&emsp;{{scAPIBalance.data.GetAPIBalance.Wallet.main}}</span><br />
-                            <div><a class="button red tip-left small" href="#" dmx-on:click="scLogout.load()" title="Click Here to Logout">
-                                    <i class="fa fa-sign-out" aria-hidden="true"></i>
-                                    <span class="sd-fw-500" style="font-weight:bold;">Log Out</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="clear"></div>
-            </div> -->
             <section id="top">
                 <section id="top_bar">
                     <section id="main_menu">
@@ -289,54 +261,6 @@
 
         </section>
 
-
-        <!-- Modal Mobile recharge -->
-        <div class="modal fade" id="modalMobRech" is="dmx-bs5-modal" tabindex="-1" nokeyboard="true" nocloseonclick="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Mobile Recharge</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form is="dmx-serverconnect-form" id="formMobRech" method="post" action="api/RechargeAPI/MobileRecharge" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formMobRech.data.MobileRecharge ? scNotif.success('Recharge Success') : scNotif.warning('API hitted, but pending'); modalMobRech.hide();scMobRech.load({})" dmx-on:error="scNotif.danger('An error occurred'); modalMobRech.hide();">
-                            <!-- <input type="hidden" name="MobRechId" dmx-bind:value="ddMobRech.data.id"> -->
-                            <div class="mb-3 row">
-                                <label for="inp_mobile" class="col-sm-2 col-form-label">Mobile</label>
-                                <div class="col-sm-10">
-                                    <input type="number" class="form-control" id="inp_MobRech" name="MobRech" aria-describedby="inp_MobRech_help" placeholder="Enter mobile bo be recharged" maxlength="10" required="" data-msg-required="Mobile id is required." data-rule-number="">
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label for="inp_name" class="col-sm-2 col-form-label">Operator</label>
-                                <div class="col-sm-10">
-                                    <select type="text" class="form-control" id="inp_opname" name="op_code" aria-describedby="inp_opname_help" placeholder="Enter Operator Name" maxlength="50" data-msg-required="Operator Name is required." dmx-on:click="scOperator.load({})" dmx-bind:options="scOperator.data.OperatorFetch.data" optiontext="operator_name" optionvalue="op_id">
-                                        <option value="">Select</option>
-
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label for="inp_amount" class="col-sm-2 col-form-label">Amount</label>
-                                <div class="col-sm-10">
-                                    <input type="number" class="form-control" id="inp_amt" name="MobRechAmount" aria-describedby="inp_amount_help" placeholder="Enter Amount" maxlength="50">
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <div class="col-sm-2">&nbsp;</div>
-                                <div class="col-sm-10">
-                                    <button type="submit" class="btn btn-primary" dmx-bind:disabled="state.executing">Submit<span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span></button>
-                                </div>
-                            </div>
-                        </form>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
         <%- await include(content, locals); %>
 
 
@@ -350,7 +274,7 @@
     <div class="clear"></div>
     <div class="tst" style="display: none; max-width: 85%; max-height: 90%;"></div>
     <section class="footer_bar">
-        <div class="copyr"> <span class="ctl00_cpRight">Copyright @ 2021 SWInfotech.in</span></div>
+        <div class="copyr"> <span class="ctl00_cpRight">Copyright @ 2022 SWInfotech.in</span></div>
     </section>
 </body>
 
