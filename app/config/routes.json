@@ -190,7 +190,7 @@
       "layout": "main"
     },
     {
-      "path": "/404-not-found",
+      "path": "*",
       "page": "404-not-found"
     }
   ]
