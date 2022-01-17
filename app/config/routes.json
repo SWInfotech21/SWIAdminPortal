@@ -148,10 +148,6 @@
       "exec": "/api/PageAccess/AdminAndCC"
     },
     {
-      "path": "/404-not-found",
-      "page": "404-not-found"
-    },
-    {
       "path": "/add-cc",
       "page": "add-cc",
       "layout": "main"
@@ -192,6 +188,10 @@
       "path": "/live-transactions",
       "page": "live-transactions",
       "layout": "main"
+    },
+    {
+      "path": "/404-not-found",
+      "page": "404-not-found"
     }
   ]
 }
