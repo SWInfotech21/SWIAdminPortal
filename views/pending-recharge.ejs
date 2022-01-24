@@ -1,6 +1,6 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="pendingrecharge" appConnect="local" components="{dmxDataTraversal:{},dmxSockets:{}}" -->
 <meta name="ac:route" content="/pending-recharge">
-<!-- <script is="dmx-flow" id="flowPendingRech" type="text/dmx-flow">{
+<!-- <script is="dmx-flow" id="flowPendingRecharge" type="text/dmx-flow">{
   condition: {
     if: "{{inpFromDate.value && inpToDate.value}}",
     then: {
@@ -11,21 +11,26 @@
   }
 }</script> -->
 <!-- <dmx-value id="varFilter" dmx-bind:value="0"></dmx-value> -->
-<dmx-serverconnect id="scPendingRech" url="api/Reports/PendingRecharge" dmx-param:fromdate="inpFromDate.value" dmx-param:todate="inpToDate.value" sockets="true"></dmx-serverconnect>
-<dmx-data-view id="dvPendingTrans" dmx-bind:data="content.scPendingRech.data.GetPendingRech.data"></dmx-data-view>
+<dmx-serverconnect id="scPendingRech" url="api/Reports/PendingRecharge" dmx-param:fromdate="formPendingDate.daterange.start" dmx-param:todate="formPendingDate.daterange.end"></dmx-serverconnect>
+<dmx-data-view id="dvPendingTrans" dmx-bind:data="scPendingRech.data.GetPendingRecharge.data"></dmx-data-view>
 <dmx-data-detail id="ddPendingTrans" dmx-bind:data="content.dvPendingTrans.data" key="id"></dmx-data-detail>
 
 <div class="row align-items-center justify-content-between px-4 mb-3 sd-secondary-header mx-0">
     <div class="col-12 col-md-auto me-auto ps-4">
         <h1 class="ms-md-1 mt-md-3 text-dark fs-2 sd-fw-800 d-flex align-items-center">
             Pending Recharges
-            <span class="border-3 ms-2 spinner-border spinner-border-sm" role="status" dmx-show="scPatients.state.executing"></span>
+            <span class="border-3 ms-2 spinner-border spinner-border-sm" role="status" dmx-show="scPendingRech.state.executing"></span>
         </h1>
     </div>
     <div class="col-auto order-2 order-md-1 d-flex align-items-center justify-content-start justify-content-md-center px-0 px-lg-2">
-        <label>From Date:</label><input type="date" name="fromdate" id="inpFromDate" dmx-bind:value="dateNow.datetime.formatDate('yyyy-MM-dd')" class="w-25" required="">
-        &emsp;<label>To Date:</label><input type="date" name="todate" id="inpToDate" dmx-bind:value="dateNow.datetime.formatDate('yyyy-MM-dd')" class="w-25" required="">
-        &emsp;<button id="btnFilter" class="btn btn-primary btn-sm" dmx-on:click="flowPendingRech.run()">Filter</button>
+        <!-- <label>From Date:</label><input type="date" name="fromdate" id="inpFromDate" dmx-bind:value="dateNow.datetime.formatDate('yyyy-MM-dd')" class="w-25" required="">
+        &emsp;<label>To Date:</label><input type="date" name="todate" id="inpToDate" dmx-bind:value="dateNow.datetime.formatDate('yyyy-MM-dd 23:59:59')" class="w-25" required=""> -->
+        <form id="formPendingDate"><label class="sd-datepicker">
+                <span class="btn bg-light"><img src="assets/images/icons/calendar.svg" class="img-fluid" width="20px"></span>
+                <input type="text" is="dmx-date-range-picker" format="DD MMM YY" class="" placeholder="Nov 2021 - Dec 2021" id="daterange" dmx-bind:startdate="dateNow.datetime.addDays(0)" dmx-bind:enddate="dateNow.datetime.formatDate('yyyy-MM-dd 23:59:59')" autoapply="true">
+            </label>
+        </form>
+        <!-- &emsp;<button id="btnFilter" class="btn btn-primary btn-sm" dmx-on:click="flowPendingRecharge.run();">Filter</button> -->
     </div>
     <div class="col-auto order-1 order-md-3 d-flex align-items-center justify-content-center">
         <form id="formSearchUser" class="sd-search-form">
@@ -66,7 +71,7 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody is="dmx-repeat" dmx-generator="bs5table" id="tableRepeat1" dmx-bind:repeat="scPendingRech.data.GetPendingRech.data">
+                    <tbody is="dmx-repeat" dmx-generator="bs5table" id="tableRepeat1" dmx-bind:repeat="scPendingRech.data.GetPendingRecharge.data">
                         <tr>
                             <td>{{$index+1}}</td>
                             <td dmx-text="id"></td>

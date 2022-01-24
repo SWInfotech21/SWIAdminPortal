@@ -3142,6 +3142,22 @@ dmx.config({
         {
           "type": "text",
           "name": "user_mobile"
+        },
+        {
+          "type": "text",
+          "name": "api_ref"
+        },
+        {
+          "type": "text",
+          "name": "ip_address"
+        },
+        {
+          "type": "number",
+          "name": "ticket_id"
+        },
+        {
+          "type": "text",
+          "name": "message"
         }
       ],
       "outputType": "array"
@@ -3211,6 +3227,22 @@ dmx.config({
         {
           "type": "text",
           "name": "user_mobile"
+        },
+        {
+          "type": "text",
+          "name": "api_ref"
+        },
+        {
+          "type": "text",
+          "name": "ip_address"
+        },
+        {
+          "type": "number",
+          "name": "ticket_id"
+        },
+        {
+          "type": "text",
+          "name": "message"
         }
       ],
       "outputType": "array"
