@@ -108,7 +108,7 @@
                     <i class="fas fa-times" alt="icon"></i>
                 </button>
             </div>
-            <form is="dmx-serverconnect-form" id="ResponseForm" method="post" action="api/Transactions/ComplainPendingUp" dmx-on:success="scNotif.success('Action Success'); scPendingRech.load();modalReply.hide()" dmx-on:error="scNotif.warning('An error occurred'); ">
+            <form is="dmx-serverconnect-form" id="ResponseForm" method="post" action="api/Transactions/ComplainPendingUp" dmx-on:success="scNotif.success('Action Success'); scPendingRech.load();" dmx-on:error="scNotif.warning('An error occurred'); ">
                 <div class="modal-body">
                     <input type="hidden" name="transid" dmx-bind:value="ddPendingTrans.data.id">
                     <div class="row align-items-baseline">
