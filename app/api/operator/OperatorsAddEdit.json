@@ -20,7 +20,7 @@
               "message": "Operator Name is required."
             },
             "core:maxlength": {
-              "param": "50"
+              "param": 100
             }
           }
         },
