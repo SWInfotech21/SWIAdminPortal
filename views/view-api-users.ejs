@@ -192,9 +192,8 @@
                         </div>
                         <div class="col-12 col-sm-6"><label for="inp_address" class="col-form-label">Address</label>
                             <div class="col-12 px-0">
-                                <select type="text" class="form-control form-select" id="inp_address" name="address" dmx-bind:options="scPinStateDist.data.PinAPI" optiontext="Name" optionvalue="Name" dmx-bind:value="ddUsers.data.address">
-                                    <option value="">Select Address</option>
-                                </select>
+                                <textarea type="text" class="form-control form-select" id="inp_address" name="address" dmx-bind:value="ddUsers.data.address">
+                                </textarea>
                             </div>
                         </div>
                     </div>
