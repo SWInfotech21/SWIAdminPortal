@@ -125,19 +125,12 @@
             ],
             "orders": [
               {
-                "table": "m_operator",
-                "column": "operator_name",
-                "direction": "ASC",
-                "recid": 1
-              },
-              {
                 "table": "op_service",
                 "column": "service_name",
-                "direction": "ASC",
-                "recid": 2
+                "direction": "ASC"
               }
             ],
-            "query": "SELECT m_operator.id AS op_id, m_operator.operator_name, m_operator.service_id, m_operator.status, m_operator.min_amount, m_operator.max_amount, m_operator.created_on, m_operator.created_by, op_service.service_name, op_service.service_type, m_operator.is_gst, m_operator.is_tds, m_operator.image\nFROM m_operator\nINNER JOIN m_service AS op_service ON (op_service.id = m_operator.service_id)\nORDER BY m_operator.operator_name ASC, op_service.service_name ASC",
+            "query": "SELECT m_operator.id AS op_id, m_operator.operator_name, m_operator.service_id, m_operator.status, m_operator.min_amount, m_operator.max_amount, m_operator.created_on, m_operator.created_by, op_service.service_name, op_service.service_type, m_operator.is_gst, m_operator.is_tds, m_operator.image\nFROM m_operator\nINNER JOIN m_service AS op_service ON (op_service.id = m_operator.service_id)\nORDER BY op_service.service_name ASC",
             "params": []
           }
         },
