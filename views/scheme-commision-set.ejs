@@ -12,7 +12,7 @@
 <meta name="ac:route" content="/scheme-commision-set">
 <dmx-serverconnect id="scSchemes" url="api/Scheme/FetchActiveScheme"></dmx-serverconnect>
 <dmx-serverconnect id="scCommision" url="api/commision/FetchAllCommision" noload dmx-param:scheme_id="scheme_type.value"></dmx-serverconnect>
-<dmx-data-view id="dvCommision" dmx-bind:data="scCommision.data.AllCommisionScheme" pageSize="100" page="10"></dmx-data-view>
+<dmx-data-view id="dvCommision" dmx-bind:data="scCommision.data.AllCommisionScheme" pageSize="1000" page="10"></dmx-data-view>
 <dmx-data-detail id="ddCommision" dmx-bind:data="dvCommision.data" key="commision_id"></dmx-data-detail>
 
 <header>

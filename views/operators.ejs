@@ -1,7 +1,7 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="operators" appConnect="local" components="{dmxSwiper:{},dmxFormatter:{},dmxDataTraversal:{},dmxBootstrap5Modal:{},dmxValidator:{}}" -->
 <dmx-serverconnect id="scService" url="api/Services/Services"></dmx-serverconnect>
 <meta name="ac:route" content="/operators">
-<dmx-serverconnect id="scOperator" url="api/operator/OperatorsFetch" dmx-param:limit="500"></dmx-serverconnect>
+<dmx-serverconnect id="scOperator" url="api/operator/OperatorsFetch" dmx-param:limit="1000"></dmx-serverconnect>
 <dmx-data-view id="dvOperator" dmx-bind:data="scOperator.data.OperatorFetch.data"></dmx-data-view>
 <dmx-data-detail id="ddOperators" dmx-bind:data="dvOperator.data" key="op_id"></dmx-data-detail>
 <header>
