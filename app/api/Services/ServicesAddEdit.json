@@ -90,6 +90,17 @@
         "meta": []
       },
       {
+        "name": "ServiceId",
+        "module": "core",
+        "action": "setvalue",
+        "options": {
+          "value": "{{$_POST.ServiceId}}"
+        },
+        "meta": [],
+        "outputType": "text",
+        "output": true
+      },
+      {
         "name": "",
         "module": "core",
         "action": "condition",
@@ -207,7 +218,8 @@
                   "name": "affected",
                   "type": "number"
                 }
-              ]
+              ],
+              "output": true
             }
           },
           "else": {
@@ -315,7 +327,8 @@
                   "name": "affected",
                   "type": "number"
                 }
-              ]
+              ],
+              "output": true
             }
           }
         },
