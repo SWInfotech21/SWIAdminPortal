@@ -32,7 +32,8 @@
           "permissions": [
             "write"
           ]
-        }
+        },
+        "disabled": true
       },
       {
         "name": "FetchAPI",
@@ -160,53 +161,131 @@
             "type": "array",
             "sub": [
               {
-                "name": "api_id",
-                "type": "text"
+                "type": "number",
+                "name": "api_id"
               },
               {
-                "name": "api_name",
-                "type": "text"
+                "type": "text",
+                "name": "api_name"
               },
               {
-                "name": "api_code",
-                "type": "text"
+                "type": "text",
+                "name": "api_code"
               },
               {
-                "name": "username",
-                "type": "text"
+                "type": "text",
+                "name": "username"
               },
               {
-                "name": "api_password",
-                "type": "text"
+                "type": "text",
+                "name": "api_password"
               },
               {
-                "name": "status",
-                "type": "number"
+                "type": "number",
+                "name": "status"
               },
               {
-                "name": "created_on",
-                "type": "datetime"
+                "type": "datetime",
+                "name": "created_on"
               },
               {
-                "name": "created_by",
-                "type": "number"
+                "type": "number",
+                "name": "created_by"
               },
               {
-                "name": "updated_by",
-                "type": "number"
+                "type": "number",
+                "name": "updated_by"
               },
               {
-                "name": "updated_on",
-                "type": "datetime"
+                "type": "datetime",
+                "name": "updated_on"
               },
               {
-                "name": "blank2",
-                "type": "text"
+                "type": "text",
+                "name": "blank2"
               }
             ]
           }
         ],
         "outputType": "object"
+      },
+      {
+        "name": "api",
+        "module": "api",
+        "action": "send",
+        "options": {
+          "url": "http://corp.moneyart.in/UserWalletBalance",
+          "params": {
+            "token": "{{FetchAPI.data[1].api_password}}"
+          },
+          "method": "POST"
+        },
+        "output": false,
+        "disabled": true
+      },
+      {
+        "name": "apiBalanceMA",
+        "module": "core",
+        "action": "setvalue",
+        "options": {
+          "value": "{{api.data}}"
+        },
+        "meta": [],
+        "outputType": "text",
+        "output": true,
+        "disabled": true
+      },
+      {
+        "name": "apiMRO",
+        "module": "api",
+        "action": "send",
+        "options": {
+          "url": "https://mrobotics.in/api/lapu_balance",
+          "params": {
+            "api_token": "{{FetchAPI.data[2].api_password}}",
+            "lapu_id": "1"
+          },
+          "method": "POST"
+        },
+        "output": true,
+        "disabled": true
+      },
+      {
+        "name": "apiSN",
+        "module": "api",
+        "action": "send",
+        "options": {
+          "url": "http://sonakshiworld.com/apiservice.asmx/GetBalance",
+          "params": {
+            "apiToken": "{{FetchAPI.data[4].api_password}}"
+          }
+        },
+        "output": false,
+        "disabled": true
+      },
+      {
+        "name": "xml",
+        "module": "core",
+        "action": "setvalue",
+        "options": {
+          "value": "{{apiSN.data.xmlToJSON()}}"
+        },
+        "meta": [],
+        "output": false,
+        "outputType": "text",
+        "disabled": true
+      },
+      {
+        "name": "apiBalanceSN",
+        "module": "core",
+        "action": "setvalue",
+        "options": {
+          "value": "{{xml.string._}}"
+        },
+        "meta": [],
+        "outputType": "text",
+        "output": true,
+        "disabled": true
       }
     ]
   }
