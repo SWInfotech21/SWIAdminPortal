@@ -20,9 +20,6 @@
         "fieldName": "api_code1",
         "options": {
           "rules": {
-            "core:required": {
-              "param": ""
-            },
             "core:maxlength": {
               "param": 7
             }
