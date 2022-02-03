@@ -1,0 +1,319 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "options": {
+          "rules": {
+            "core:required": {}
+          }
+        },
+        "name": "trans_id"
+      },
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ],
+    "$_POST": [
+      {
+        "type": "text",
+        "name": "status"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "getTransDetails",
+        "module": "dbconnector",
+        "action": "single",
+        "options": {
+          "sql": {
+            "type": "SELECT",
+            "columns": [
+              {
+                "table": "tt_recharge_trans",
+                "column": "status"
+              },
+              {
+                "table": "tt_recharge_trans",
+                "column": "api_id"
+              },
+              {
+                "table": "tt_recharge_trans",
+                "column": "api_logs"
+              },
+              {
+                "table": "tt_recharge_trans",
+                "column": "tr_id"
+              },
+              {
+                "table": "tt_recharge_trans",
+                "column": "api_ref"
+              },
+              {
+                "table": "m_api",
+                "column": "username"
+              },
+              {
+                "table": "m_api",
+                "column": "api_password"
+              }
+            ],
+            "table": {
+              "name": "tt_recharge_trans"
+            },
+            "joins": [
+              {
+                "table": "m_api",
+                "column": "*",
+                "alias": "m_api",
+                "type": "INNER",
+                "clauses": {
+                  "condition": "AND",
+                  "rules": [
+                    {
+                      "table": "m_api",
+                      "column": "id",
+                      "operator": "equal",
+                      "value": {
+                        "table": "tt_recharge_trans",
+                        "column": "api_id"
+                      },
+                      "operation": "="
+                    }
+                  ]
+                }
+              }
+            ],
+            "query": "SELECT tt_recharge_trans.status, tt_recharge_trans.api_id, tt_recharge_trans.api_logs, tt_recharge_trans.tr_id, tt_recharge_trans.api_ref, m_api.username, m_api.api_password\nFROM tt_recharge_trans\nINNER JOIN m_api AS m_api ON (m_api.id = tt_recharge_trans.api_id)\nWHERE tt_recharge_trans.id = :P1 /* {{$_GET.trans_id}} */",
+            "params": [
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P1",
+                "value": "{{$_GET.trans_id}}"
+              }
+            ],
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "tt_recharge_trans.id",
+                  "field": "tt_recharge_trans.id",
+                  "type": "double",
+                  "operator": "equal",
+                  "value": "{{$_GET.trans_id}}",
+                  "data": {
+                    "table": "tt_recharge_trans",
+                    "column": "id",
+                    "type": "number"
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            }
+          },
+          "connection": "postgres_gcpServer"
+        },
+        "output": true,
+        "meta": [
+          {
+            "type": "text",
+            "name": "status"
+          },
+          {
+            "type": "number",
+            "name": "api_id"
+          },
+          {
+            "type": "text",
+            "name": "api_logs"
+          },
+          {
+            "type": "text",
+            "name": "tr_id"
+          },
+          {
+            "type": "text",
+            "name": "api_ref"
+          },
+          {
+            "type": "text",
+            "name": "username"
+          },
+          {
+            "type": "text",
+            "name": "api_password"
+          }
+        ],
+        "type": "dbconnector_single",
+        "outputType": "object"
+      },
+      {
+        "name": "",
+        "module": "core",
+        "action": "condition",
+        "options": {
+          "if": "{{getTransDetails.api_logs == 'MA'}}",
+          "then": {
+            "steps": {
+              "name": "apiMA",
+              "module": "api",
+              "action": "send",
+              "options": {
+                "url": "http://corp.moneyart.in/TransactionStatus",
+                "params": {
+                  "token": "{{getTransDetails.api_password}}",
+                  "clientTransactionID": "{{getTransDetails.tr_id}}"
+                }
+              },
+              "output": true
+            }
+          }
+        },
+        "outputType": "boolean"
+      },
+      {
+        "name": "",
+        "module": "core",
+        "action": "condition",
+        "options": {
+          "if": "{{getTransDetails.api_logs == 'MRO'}}",
+          "then": {
+            "steps": {
+              "name": "apiMRO",
+              "module": "api",
+              "action": "send",
+              "options": {
+                "url": "https://mrobotics.in/api/order_id_status",
+                "method": "POST",
+                "params": {
+                  "api_token": "{{getTransDetails.api_password}}",
+                  "order_id": "{{getTransDetails.tr_id}}"
+                }
+              },
+              "output": true
+            }
+          }
+        },
+        "outputType": "boolean"
+      },
+      {
+        "name": "",
+        "module": "core",
+        "action": "condition",
+        "options": {
+          "if": "{{getTransDetails.api_logs == 'AMBI'}}",
+          "then": {
+            "steps": [
+              {
+                "name": "apiAM",
+                "module": "api",
+                "action": "send",
+                "options": {
+                  "url": "http://status.ambikamultiservices.com/API/StatusCheck",
+                  "params": {
+                    "UserID": "{{getTransDetails.username}}",
+                    "Token": "{{getTransDetails.api_password}}",
+                    "RPID": "{{getTransDetails.api_ref}}"
+                  }
+                },
+                "output": true
+              },
+              {
+                "name": "setStat",
+                "module": "core",
+                "action": "setvalue",
+                "options": {
+                  "value": "{{apiAM.data.status}}"
+                },
+                "meta": [],
+                "outputType": "text",
+                "output": true
+              },
+              {
+                "name": "apiStatus",
+                "module": "core",
+                "action": "setvalue",
+                "options": {
+                  "value": "{{setStat == 2 ? 'SUCCESS' : setStat == 1 ? 'PENDING' : setStat == 3 ? 'FAILED' :  getTransDetails.status}}"
+                },
+                "meta": [],
+                "outputType": "text",
+                "output": true
+              }
+            ]
+          }
+        },
+        "outputType": "boolean"
+      },
+      {
+        "name": "updateRechTrans",
+        "module": "dbupdater",
+        "action": "update",
+        "options": {
+          "connection": "postgres_gcpServer",
+          "sql": {
+            "type": "update",
+            "values": [
+              {
+                "table": "tt_recharge_trans",
+                "column": "status",
+                "type": "text",
+                "value": "{{apiStatus}}"
+              }
+            ],
+            "table": "tt_recharge_trans",
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "id",
+                  "field": "id",
+                  "type": "double",
+                  "operator": "equal",
+                  "value": "{{$_GET.trans_id}}",
+                  "data": {
+                    "column": "id"
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "query": "UPDATE tt_recharge_trans\nSET status = :P1 /* {{apiStatus}} */\nWHERE id = :P2 /* {{$_GET.trans_id}} */",
+            "params": [
+              {
+                "name": ":P1",
+                "type": "expression",
+                "value": "{{apiStatus}}"
+              },
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P2",
+                "value": "{{$_GET.trans_id}}"
+              }
+            ]
+          }
+        },
+        "meta": [
+          {
+            "name": "affected",
+            "type": "number"
+          }
+        ],
+        "output": true
+      }
+    ]
+  }
+}
