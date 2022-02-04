@@ -28,27 +28,13 @@
       },
       {
         "type": "text",
-        "fieldName": "service_type",
-        "options": {
-          "rules": {
-            "core:required": {
-              "param": "",
-              "message": "Service Type id is required."
-            },
-            "core:maxlength": {
-              "param": "10"
-            },
-            "core:number": {
-              "param": ""
-            }
-          }
-        },
-        "name": "service_type"
+        "fieldName": "status",
+        "name": "status"
       },
       {
         "type": "text",
-        "fieldName": "status",
-        "name": "status"
+        "fieldName": "bbps",
+        "name": "bbps"
       },
       {
         "type": "text",
@@ -56,7 +42,7 @@
         "options": {
           "rules": {
             "core:maxlength": {
-              "param": "50"
+              "param": "100"
             }
           }
         },
@@ -107,21 +93,9 @@
                   "values": [
                     {
                       "table": "m_service",
-                      "column": "service_name",
-                      "type": "text",
-                      "value": "{{$_POST.name}}"
-                    },
-                    {
-                      "table": "m_service",
                       "column": "service_desc",
                       "type": "text",
                       "value": "{{$_POST.service_desc}}"
-                    },
-                    {
-                      "table": "m_service",
-                      "column": "service_type",
-                      "type": "text",
-                      "value": "{{$_POST.service_type}}"
                     },
                     {
                       "table": "m_service",
@@ -140,6 +114,12 @@
                       "column": "updated_on",
                       "type": "datetime",
                       "value": "{{NOW}}"
+                    },
+                    {
+                      "table": "m_service",
+                      "column": "is_bbps",
+                      "type": "number",
+                      "value": "{{$_POST.bbps}}"
                     }
                   ],
                   "table": "m_service",
@@ -161,42 +141,37 @@
                     "conditional": null,
                     "valid": true
                   },
-                  "query": "UPDATE m_service\nSET service_name = :P1 /* {{$_POST.name}} */, service_desc = :P2 /* {{$_POST.service_desc}} */, service_type = :P3 /* {{$_POST.service_type}} */, is_active = :P4 /* {{$_POST.status}} */, updated_by = :P5 /* {{identity}} */, updated_on = :P6 /* {{NOW}} */\nWHERE id = :P7 /* {{$_POST.ServiceId}} */",
+                  "query": "UPDATE m_service\nSET service_desc = :P1 /* {{$_POST.service_desc}} */, is_active = :P2 /* {{$_POST.status}} */, updated_by = :P3 /* {{identity}} */, updated_on = :P4 /* {{NOW}} */, is_bbps = :P5 /* {{$_POST.bbps}} */\nWHERE id = :P6 /* {{$_POST.ServiceId}} */",
                   "params": [
                     {
                       "name": ":P1",
                       "type": "expression",
-                      "value": "{{$_POST.name}}"
+                      "value": "{{$_POST.service_desc}}"
                     },
                     {
                       "name": ":P2",
                       "type": "expression",
-                      "value": "{{$_POST.service_desc}}"
+                      "value": "{{$_POST.status}}"
                     },
                     {
                       "name": ":P3",
                       "type": "expression",
-                      "value": "{{$_POST.service_type}}"
+                      "value": "{{identity}}"
                     },
                     {
                       "name": ":P4",
                       "type": "expression",
-                      "value": "{{$_POST.status}}"
+                      "value": "{{NOW}}"
                     },
                     {
                       "name": ":P5",
                       "type": "expression",
-                      "value": "{{identity}}"
-                    },
-                    {
-                      "name": ":P6",
-                      "type": "expression",
-                      "value": "{{NOW}}"
+                      "value": "{{$_POST.bbps}}"
                     },
                     {
                       "operator": "equal",
                       "type": "expression",
-                      "name": ":P7",
+                      "name": ":P6",
                       "value": "{{$_POST.ServiceId}}"
                     }
                   ]
