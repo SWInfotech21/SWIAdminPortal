@@ -175,5 +175,152 @@
       }
     ],
     "outputType": "object"
+  },
+  {
+    "name": "GetPaymentRequest",
+    "module": "dbconnector",
+    "action": "single",
+    "options": {
+      "connection": "postgres_gcpServer",
+      "sql": {
+        "type": "SELECT",
+        "columns": [
+          {
+            "table": "payment_request",
+            "column": "id",
+            "alias": "CountPayment",
+            "aggregate": "COUNT"
+          }
+        ],
+        "table": {
+          "name": "payment_request"
+        },
+        "joins": [],
+        "groupBy": [],
+        "wheres": {
+          "condition": "AND",
+          "rules": [
+            {
+              "id": "payment_request.pay_user_id",
+              "field": "payment_request.pay_user_id",
+              "type": "double",
+              "operator": "equal",
+              "value": "{{identity}}",
+              "data": {
+                "table": "payment_request",
+                "column": "pay_user_id",
+                "type": "number"
+              },
+              "operation": "="
+            },
+            {
+              "condition": "OR",
+              "rules": [
+                {
+                  "id": "payment_request.status",
+                  "field": "payment_request.status",
+                  "type": "double",
+                  "operator": "equal",
+                  "value": 1,
+                  "data": {
+                    "table": "payment_request",
+                    "column": "status",
+                    "type": "number"
+                  },
+                  "operation": "="
+                },
+                {
+                  "id": "payment_request.status",
+                  "field": "payment_request.status",
+                  "type": "double",
+                  "operator": "equal",
+                  "value": 4,
+                  "data": {
+                    "table": "payment_request",
+                    "column": "status",
+                    "type": "number"
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null
+            }
+          ],
+          "conditional": null,
+          "valid": true
+        },
+        "query": "SELECT COUNT(id) AS CountPayment\nFROM payment_request\nWHERE pay_user_id = :P1 /* {{identity}} */ AND (status = 1 OR status = 4)",
+        "params": [
+          {
+            "operator": "equal",
+            "type": "expression",
+            "name": ":P1",
+            "value": "{{identity}}"
+          }
+        ]
+      }
+    },
+    "output": true,
+    "meta": [
+      {
+        "type": "number",
+        "name": "CountPayment"
+      }
+    ],
+    "outputType": "object"
+  },
+  {
+    "name": "GetPendingTrans",
+    "module": "dbconnector",
+    "action": "single",
+    "options": {
+      "connection": "postgres_gcpServer",
+      "sql": {
+        "type": "SELECT",
+        "columns": [
+          {
+            "table": "tt_recharge_trans",
+            "column": "id",
+            "alias": "CountTrans",
+            "aggregate": "COUNT"
+          }
+        ],
+        "table": {
+          "name": "tt_recharge_trans"
+        },
+        "joins": [],
+        "groupBy": [],
+        "wheres": {
+          "condition": "AND",
+          "rules": [
+            {
+              "id": "tt_recharge_trans.extra2",
+              "field": "tt_recharge_trans.extra2",
+              "type": "string",
+              "operator": "equal",
+              "value": "1",
+              "data": {
+                "table": "tt_recharge_trans",
+                "column": "extra2",
+                "type": "text"
+              },
+              "operation": "="
+            }
+          ],
+          "conditional": null,
+          "valid": true
+        },
+        "query": "SELECT COUNT(id) AS CountTrans\nFROM tt_recharge_trans\nWHERE extra2 = '1'",
+        "params": []
+      }
+    },
+    "output": true,
+    "meta": [
+      {
+        "type": "number",
+        "name": "CountTrans"
+      }
+    ],
+    "outputType": "object"
   }
 ]

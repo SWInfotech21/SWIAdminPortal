@@ -145,16 +145,15 @@
                     <h4 class="text-center h4 col-12">SWPAY.IN-Admin</h4>
                     <div class="col-2 align-self-center text-center"><img src="assets/images/swpay.png" id="logo_img" width="70px" height="70px" /></div>
                     <div class="col-7 row">
-                        <p class="m-0 col-12 col-md-6"><b>Pending Recharge:</b> 0</p>
-                        <p class="m-0 col-12 col-md-6"><b>Payment Request:</b> 0</p>
+                        <p class="m-0 col-12 col-md-6"><b>Pending Recharge:</b> <a href="pending-recharge" class="text-light">&nbsp;&nbsp;{{scAdminBalance.data.GetPendingTrans.CountTrans}}&nbsp;&nbsp;</a></p>
+                        <p class="m-0 col-12 col-md-6"><b>Payment Request:</b> <a href="response-request" class="text-light">&nbsp;&nbsp;{{scAdminBalance.data.GetPaymentRequest.CountPayment}}&nbsp;&nbsp;</a></p>
                         <p class="m-0 col-12 col-md-6"><b>Tikets:</b>0</p>
                         <p class="m-0 col-12 col-md-6"><b>Bank Withdrawal Request:</b>0</p>
                     </div>
                     <div class="col-3">
-                        <p class="m-0"><b>Logged in site as:</b><span>{{scAdminBalance.data.query.user_fname}}</span></p>
+                        <p class="m-0"><b>Logged in site as:</b>&nbsp;&nbsp;<span>{{scAdminBalance.data.query.user_fname}}</span></p>
                         <p class="m-0"><b>Balance:</b><span id="lblBalance">&emsp;{{scAdminBalance.data.query.balance_amt.toNumber().toFixed(3)}}</span></p>
-                        <p class="m-0"><b>AEPS Balance:</b><span>&emsp;{{scAdminBalance.data.query.aeps_balance.toNumber().toFixed(3)}}</span></p>
-                        <p class="m-0"><b>API Balance:</b><span id="">&emsp;{{scAPIBalance.data.GetAPIBalance.Wallet.main}}</span></p><a class="button red tip-left small" href="#" dmx-on:click="scLogout.load()" title="Click Here to Logout">
+                        <p class="m-0"><b>AEPS Balance:</b><span>&emsp;{{scAdminBalance.data.query.aeps_balance.toNumber().toFixed(3)}}</span></p><a class="button red tip-left small" href="#" dmx-on:click="scLogout.load()" title="Click Here to Logout">
                             <i class="fa fa-sign-out" aria-hidden="true"></i>
                             <span class="sd-fw-500" style="font-weight:bold;">Log Out</span>
                         </a>
