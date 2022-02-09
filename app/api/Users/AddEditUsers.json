@@ -1703,6 +1703,23 @@
                   }
                 },
                 "outputType": "boolean"
+              },
+              {
+                "name": "apiSMS",
+                "module": "api",
+                "action": "send",
+                "options": {
+                  "url": "https://mobicomm.dove-sms.com//submitsms.jsp",
+                  "params": {
+                    "user": "{{'Bucks'}}",
+                    "key": "{{'797b4459a9XX'}}",
+                    "mobile": "{{$_POST.mobile}}",
+                    "message": "{{'Congratulations! Your account has been created in SW Pay with user id '+$_POST.mobile+' and password '+password}}",
+                    "senderid": "{{'BUCKSP'}}",
+                    "accusage": "{{1}}"
+                  }
+                },
+                "output": true
               }
             ]
           }
