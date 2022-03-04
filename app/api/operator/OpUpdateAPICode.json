@@ -156,12 +156,14 @@
               {
                 "table": "m_service",
                 "column": "id",
-                "direction": "ASC"
+                "direction": "ASC",
+                "recid": 1
               },
               {
                 "table": "m_operator",
                 "column": "operator_name",
-                "direction": "ASC"
+                "direction": "ASC",
+                "recid": 2
               }
             ],
             "query": "SELECT m_operator.id AS op_id, m_operator.operator_name, m_operator.image, m_service.service_name, t_op_api_rel.id AS tbl_id, t_op_api_rel.api_code1, t_op_api_rel.api_code2, t_op_api_rel.api_code3, t_op_api_rel.api_code4, t_op_api_rel.api_code5, t_op_api_rel.api_code6, t_op_api_rel.api_code7, t_op_api_rel.api_code8, t_op_api_rel.api_code9, t_op_api_rel.api_code10\nFROM m_operator\nLEFT JOIN m_service AS m_service ON (m_service.id = m_operator.service_id) LEFT JOIN t_op_api_rel AS t_op_api_rel ON (t_op_api_rel.op_id = m_operator.id)\nWHERE m_operator.status = 1 AND m_service.is_active = 1\nORDER BY m_service.id ASC, m_operator.operator_name ASC",

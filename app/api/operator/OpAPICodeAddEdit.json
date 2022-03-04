@@ -86,6 +86,10 @@
           }
         },
         "name": "api_code6"
+      },
+      {
+        "type": "text",
+        "name": "api_code7"
       }
     ]
   },
@@ -174,6 +178,12 @@
                     },
                     {
                       "table": "t_op_api_rel",
+                      "column": "api_code7",
+                      "type": "text",
+                      "value": "{{$_POST.api_code7}}"
+                    },
+                    {
+                      "table": "t_op_api_rel",
                       "column": "updated_by",
                       "type": "number",
                       "value": "{{identity}}"
@@ -204,7 +214,7 @@
                     "conditional": null,
                     "valid": true
                   },
-                  "query": "UPDATE t_op_api_rel\nSET op_id = :P1 /* {{$_POST.op_id}} */, api_code1 = :P2 /* {{$_POST.api_code1}} */, api_code2 = :P3 /* {{$_POST.api_code2}} */, api_code3 = :P4 /* {{$_POST.api_code3}} */, api_code4 = :P5 /* {{$_POST.api_code4}} */, api_code5 = :P6 /* {{$_POST.api_code5}} */, api_code6 = :P7 /* {{$_POST.api_code6}} */, updated_by = :P8 /* {{identity}} */, updated_on = :P9 /* {{NOW}} */\nWHERE id = :P10 /* {{$_POST.opapicodeid}} */",
+                  "query": "UPDATE t_op_api_rel\nSET op_id = :P1 /* {{$_POST.op_id}} */, api_code1 = :P2 /* {{$_POST.api_code1}} */, api_code2 = :P3 /* {{$_POST.api_code2}} */, api_code3 = :P4 /* {{$_POST.api_code3}} */, api_code4 = :P5 /* {{$_POST.api_code4}} */, api_code5 = :P6 /* {{$_POST.api_code5}} */, api_code6 = :P7 /* {{$_POST.api_code6}} */, api_code7 = :P8 /* {{$_POST.api_code7}} */, updated_by = :P9 /* {{identity}} */, updated_on = :P10 /* {{NOW}} */\nWHERE id = :P11 /* {{$_POST.opapicodeid}} */",
                   "params": [
                     {
                       "name": ":P1",
@@ -244,17 +254,22 @@
                     {
                       "name": ":P8",
                       "type": "expression",
-                      "value": "{{identity}}"
+                      "value": "{{$_POST.api_code7}}"
                     },
                     {
                       "name": ":P9",
+                      "type": "expression",
+                      "value": "{{identity}}"
+                    },
+                    {
+                      "name": ":P10",
                       "type": "expression",
                       "value": "{{NOW}}"
                     },
                     {
                       "operator": "equal",
                       "type": "expression",
-                      "name": ":P10",
+                      "name": ":P11",
                       "value": "{{$_POST.opapicodeid}}"
                     }
                   ]
@@ -323,6 +338,12 @@
                     },
                     {
                       "table": "t_op_api_rel",
+                      "column": "api_code7",
+                      "type": "text",
+                      "value": "{{$_POST.api_code7}}"
+                    },
+                    {
+                      "table": "t_op_api_rel",
                       "column": "created_by",
                       "type": "number",
                       "value": "{{identity}}"
@@ -336,7 +357,7 @@
                   ],
                   "table": "t_op_api_rel",
                   "returning": "id",
-                  "query": "INSERT INTO t_op_api_rel\n(op_id, api_code1, api_code2, api_code3, api_code4, api_code5, api_code6, created_by, created_on) VALUES (:P1 /* {{$_POST.op_id}} */, :P2 /* {{$_POST.api_code1}} */, :P3 /* {{$_POST.api_code2}} */, :P4 /* {{$_POST.api_code3}} */, :P5 /* {{$_POST.api_code4}} */, :P6 /* {{$_POST.api_code5}} */, :P7 /* {{$_POST.api_code6}} */, :P8 /* {{identity}} */, :P9 /* {{NOW}} */)",
+                  "query": "INSERT INTO t_op_api_rel\n(op_id, api_code1, api_code2, api_code3, api_code4, api_code5, api_code6, api_code7, created_by, created_on) VALUES (:P1 /* {{$_POST.op_id}} */, :P2 /* {{$_POST.api_code1}} */, :P3 /* {{$_POST.api_code2}} */, :P4 /* {{$_POST.api_code3}} */, :P5 /* {{$_POST.api_code4}} */, :P6 /* {{$_POST.api_code5}} */, :P7 /* {{$_POST.api_code6}} */, :P8 /* {{$_POST.api_code7}} */, :P9 /* {{identity}} */, :P10 /* {{NOW}} */)",
                   "params": [
                     {
                       "name": ":P1",
@@ -376,10 +397,15 @@
                     {
                       "name": ":P8",
                       "type": "expression",
-                      "value": "{{identity}}"
+                      "value": "{{$_POST.api_code7}}"
                     },
                     {
                       "name": ":P9",
+                      "type": "expression",
+                      "value": "{{identity}}"
+                    },
+                    {
+                      "name": ":P10",
                       "type": "expression",
                       "value": "{{NOW}}"
                     }
