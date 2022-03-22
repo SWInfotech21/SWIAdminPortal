@@ -1,9 +1,20 @@
-{
-  "name": "refresh",
-  "module": "sockets",
-  "action": "refresh",
-  "options": {
-    "action": "Reports/LiveTransactions"
+[
+  {
+    "name": "refresh",
+    "module": "sockets",
+    "action": "refresh",
+    "options": {
+      "action": "Reports/LiveTransactions"
+    },
+    "output": true
   },
-  "output": true
-}
+  {
+    "name": "apiRetailer",
+    "module": "api",
+    "action": "send",
+    "options": {
+      "url": "https://login.swpay.in/api/RefreshTrans"
+    },
+    "output": false
+  }
+]
