@@ -103,12 +103,12 @@
     <div class="modal-dialog modal-dialog-aside my-0 modal-lg modal-dialog-centered" role="document">
         <div class="modal-content rounded-0 px-3">
             <div class="modal-header">
-                <h3 class="modal-title">Refund</h3>
+                <h3 class="modal-title">Reply</h3>
                 <button type="button" class="bg-transparent border-1 ms-auto p-0 px-1" data-bs-dismiss="modal" aria-label="Close">
                     <i class="fas fa-times" alt="icon"></i>
                 </button>
             </div>
-            <form is="dmx-serverconnect-form" id="ResponseForm" method="post" action="api/Transactions/ComplainPendingUp" dmx-on:success="scNotif.success('Action Success'); scPendingRech.load();" dmx-on:error="scNotif.warning('An error occurred'); ">
+            <form is="dmx-serverconnect-form" id="ResponseForm" method="post" action="api/Transactions/ComplainPendingUp" dmx-on:success="scNotif.success('Action Success'); scPendingRech.load();modalReply.hide();" dmx-on:error="scNotif.warning('An error occurred'); ">
                 <div class="modal-body">
                     <input type="hidden" name="transid" dmx-bind:value="ddPendingTrans.data.id">
                     <div class="row align-items-baseline">

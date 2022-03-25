@@ -128,7 +128,7 @@
         "options": {
           "provider": "securityLogin"
         },
-        "output": true,
+        "output": false,
         "meta": []
       },
       {
@@ -188,14 +188,14 @@
             "type": "number"
           }
         ],
-        "output": true
+        "output": false
       },
       {
         "name": "",
         "module": "core",
         "action": "condition",
         "options": {
-          "if": "{{$_POST.refdeclval == 2}}",
+          "if": "{{$_POST.refdeclval.toNumber()==3}}",
           "then": {
             "steps": {
               "name": "RechTransUpDecline",
@@ -265,7 +265,7 @@
                   "type": "number"
                 }
               ],
-              "output": true
+              "output": false
             }
           }
         },
@@ -276,7 +276,7 @@
         "module": "core",
         "action": "condition",
         "options": {
-          "if": "{{$_POST.refdeclval == 3}}",
+          "if": "{{$_POST.refdeclval.toNumber()==2}}",
           "then": {
             "steps": [
               {
@@ -404,7 +404,7 @@
                   },
                   "connection": "postgres_gcpServer"
                 },
-                "output": true,
+                "output": false,
                 "meta": [
                   {
                     "type": "number",
@@ -547,7 +547,7 @@
                     ]
                   }
                 },
-                "output": true,
+                "output": false,
                 "meta": [
                   {
                     "type": "text",
@@ -563,6 +563,39 @@
                   }
                 ],
                 "outputType": "object"
+              },
+              {
+                "name": "UserBalance",
+                "module": "core",
+                "action": "setvalue",
+                "options": {
+                  "value": "{{GetUserBalance.balance_amt.toNumber()}}"
+                },
+                "meta": [],
+                "outputType": "text",
+                "output": true
+              },
+              {
+                "name": "RTNetAmt",
+                "module": "core",
+                "action": "setvalue",
+                "options": {
+                  "value": "{{GetTTBal.net_amt.toNumber()}}"
+                },
+                "meta": [],
+                "outputType": "text",
+                "output": true
+              },
+              {
+                "name": "RTClosingBal",
+                "module": "core",
+                "action": "setvalue",
+                "options": {
+                  "value": "{{UserBalance.toNumber()+RTNetAmt.toNumber()}}"
+                },
+                "meta": [],
+                "outputType": "text",
+                "output": true
               },
               {
                 "name": "RechTransUpRefund",
@@ -589,7 +622,13 @@
                         "table": "tt_recharge_trans",
                         "column": "status",
                         "type": "text",
-                        "value": "{{'REFUND'}}"
+                        "value": "{{'FAILED'}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "operator_ref",
+                        "type": "text",
+                        "value": "{{'Transaction Failed and Refund'}}"
                       }
                     ],
                     "table": "tt_recharge_trans",
@@ -611,7 +650,7 @@
                       "conditional": null,
                       "valid": true
                     },
-                    "query": "UPDATE tt_recharge_trans\nSET extra2 = :P1 /* {{$_POST.refdeclval}} */, api_ref = :P2 /* {{$_POST.api_ref}} */, status = :P3 /* {{'REFUND'}} */\nWHERE id = :P4 /* {{$_POST.transid}} */",
+                    "query": "UPDATE tt_recharge_trans\nSET extra2 = :P1 /* {{$_POST.refdeclval}} */, api_ref = :P2 /* {{$_POST.api_ref}} */, status = :P3 /* {{'FAILED'}} */, operator_ref = :P4 /* {{'Transaction Failed and Refund'}} */\nWHERE id = :P5 /* {{$_POST.transid}} */",
                     "params": [
                       {
                         "name": ":P1",
@@ -626,12 +665,17 @@
                       {
                         "name": ":P3",
                         "type": "expression",
-                        "value": "{{'REFUND'}}"
+                        "value": "{{'FAILED'}}"
+                      },
+                      {
+                        "name": ":P4",
+                        "type": "expression",
+                        "value": "{{'Transaction Failed and Refund'}}"
                       },
                       {
                         "operator": "equal",
                         "type": "expression",
-                        "name": ":P4",
+                        "name": ":P5",
                         "value": "{{$_POST.transid}}"
                       }
                     ]
@@ -658,7 +702,7 @@
                         "table": "tt_balance",
                         "column": "status",
                         "type": "text",
-                        "value": "{{'REFUND'}}"
+                        "value": "{{'FAILED'}}"
                       }
                     ],
                     "table": "tt_balance",
@@ -680,12 +724,12 @@
                       "conditional": null,
                       "valid": true
                     },
-                    "query": "UPDATE tt_balance\nSET status = :P1 /* {{'REFUND'}} */\nWHERE pay_ref_id = :P2 /* {{$_POST.transid}} */",
+                    "query": "UPDATE tt_balance\nSET status = :P1 /* {{'FAILED'}} */\nWHERE pay_ref_id = :P2 /* {{$_POST.transid}} */",
                     "params": [
                       {
                         "name": ":P1",
                         "type": "expression",
-                        "value": "{{'REFUND'}}"
+                        "value": "{{'FAILED'}}"
                       },
                       {
                         "operator": "equal",
@@ -735,7 +779,7 @@
                         "table": "tt_balance",
                         "column": "new_balance",
                         "type": "text",
-                        "value": "{{GetUserBalance.balance_amt.toNumber()+GetTTBal.netamt.toNumber()}}"
+                        "value": "{{RTClosingBal.toNumber()}}"
                       },
                       {
                         "table": "tt_balance",
@@ -800,7 +844,7 @@
                     ],
                     "table": "tt_balance",
                     "returning": "id",
-                    "query": "INSERT INTO tt_balance\n(user_id, old_balance, amount, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on, netamt, status) VALUES (:P1 /* {{GetTTBal.user_id}} */, :P2 /* {{GetUserBalance.balance_amt.toNumber()}} */, :P3 /* {{GetTTBal.amount}} */, :P4 /* {{GetUserBalance.balance_amt.toNumber()+GetTTBal.netamt.toNumber()}} */, :P5 /* {{'Recharge Refund'}} */, :P6 /* {{NOW}} */, :P7 /* {{$_SERVER.REMOTE_ADDR}} */, :P8 /* {{'Credit'}} */, :P9 /* {{$_POST.transid}} */, :P10 /* {{'Refund of Amount '+GetTTBal.netamt+' for the transaction id '+$_POST.transid}} */, :P11 /* {{identity}} */, :P12 /* {{NOW}} */, :P13 /* {{GetTTBal.net_amt}} */, :P14 /* {{'ADDREFUND'}} */)",
+                    "query": "INSERT INTO tt_balance\n(user_id, old_balance, amount, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on, netamt, status) VALUES (:P1 /* {{GetTTBal.user_id}} */, :P2 /* {{GetUserBalance.balance_amt.toNumber()}} */, :P3 /* {{GetTTBal.amount}} */, :P4 /* {{RTClosingBal.toNumber()}} */, :P5 /* {{'Recharge Refund'}} */, :P6 /* {{NOW}} */, :P7 /* {{$_SERVER.REMOTE_ADDR}} */, :P8 /* {{'Credit'}} */, :P9 /* {{$_POST.transid}} */, :P10 /* {{'Refund of Amount '+GetTTBal.netamt+' for the transaction id '+$_POST.transid}} */, :P11 /* {{identity}} */, :P12 /* {{NOW}} */, :P13 /* {{GetTTBal.net_amt}} */, :P14 /* {{'ADDREFUND'}} */)",
                     "params": [
                       {
                         "name": ":P1",
@@ -820,7 +864,7 @@
                       {
                         "name": ":P4",
                         "type": "expression",
-                        "value": "{{GetUserBalance.balance_amt.toNumber()+GetTTBal.netamt.toNumber()}}"
+                        "value": "{{RTClosingBal.toNumber()}}"
                       },
                       {
                         "name": ":P5",
@@ -900,7 +944,7 @@
                         "table": "m_users",
                         "column": "balance_amt",
                         "type": "text",
-                        "value": "{{GetUserBalance.balance_amt.toNumber()+GetTTBal.netamt.toNumber()}}"
+                        "value": "{{RTClosingBal.toNumber()}}"
                       }
                     ],
                     "table": "m_users",
@@ -922,12 +966,12 @@
                       "conditional": null,
                       "valid": true
                     },
-                    "query": "UPDATE m_users\nSET balance_amt = :P1 /* {{GetUserBalance.balance_amt.toNumber()+GetTTBal.netamt.toNumber()}} */\nWHERE id = :P2 /* {{GetTTBal.user_id}} */",
+                    "query": "UPDATE m_users\nSET balance_amt = :P1 /* {{RTClosingBal.toNumber()}} */\nWHERE id = :P2 /* {{GetTTBal.user_id}} */",
                     "params": [
                       {
                         "name": ":P1",
                         "type": "expression",
-                        "value": "{{GetUserBalance.balance_amt.toNumber()+GetTTBal.netamt.toNumber()}}"
+                        "value": "{{RTClosingBal.toNumber()}}"
                       },
                       {
                         "operator": "equal",
@@ -1098,6 +1142,17 @@
                         "outputType": "object"
                       },
                       {
+                        "name": "DTClosingBal",
+                        "module": "core",
+                        "action": "setvalue",
+                        "options": {
+                          "value": "{{GetDTUser.balance_amt.toNumber()-GetDTBalcance.netamt.toNumber()}}"
+                        },
+                        "meta": [],
+                        "outputType": "text",
+                        "output": true
+                      },
+                      {
                         "name": "DTDeductComm",
                         "module": "dbupdater",
                         "action": "insert",
@@ -1134,7 +1189,7 @@
                                 "table": "t_charge_cal",
                                 "column": "new_balance",
                                 "type": "text",
-                                "value": "{{GetDTUser.balance_amt.toNumber()-GetDTBalcance.netamt.toNumber()}}"
+                                "value": "{{DTClosingBal}}"
                               },
                               {
                                 "table": "t_charge_cal",
@@ -1187,7 +1242,7 @@
                             ],
                             "table": "t_charge_cal",
                             "returning": "id",
-                            "query": "INSERT INTO t_charge_cal\n(user_id, old_balance, amount, netamt, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on) VALUES (:P1 /* {{GetUserBalance.ds_id}} */, :P2 /* {{GetDTUser.balance_amt}} */, :P3 /* {{GetDTBalcance.amount}} */, :P4 /* {{GetDTBalcance.netamt}} */, :P5 /* {{GetDTUser.balance_amt.toNumber()-GetDTBalcance.netamt.toNumber()}} */, :P6 /* {{'Recharge Comm Reversal'}} */, :P7 /* {{NOW}} */, :P8 /* {{$_SERVER.REMOTE_ADDR}} */, :P9 /* {{'Debit'}} */, :P10 /* {{$_POST.transid}} */, :P11 /* {{'Recharge Reversal | Amount: '+GetDTBalcance.amount+' | Charge & Comm Debit | Ref. Id:\\n '+$_POST.transid}} */, :P12 /* {{identity}} */, :P13 /* {{NOW}} */)",
+                            "query": "INSERT INTO t_charge_cal\n(user_id, old_balance, amount, netamt, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on) VALUES (:P1 /* {{GetUserBalance.ds_id}} */, :P2 /* {{GetDTUser.balance_amt}} */, :P3 /* {{GetDTBalcance.amount}} */, :P4 /* {{GetDTBalcance.netamt}} */, :P5 /* {{DTClosingBal}} */, :P6 /* {{'Recharge Comm Reversal'}} */, :P7 /* {{NOW}} */, :P8 /* {{$_SERVER.REMOTE_ADDR}} */, :P9 /* {{'Debit'}} */, :P10 /* {{$_POST.transid}} */, :P11 /* {{'Recharge Reversal | Amount: '+GetDTBalcance.amount+' | Charge & Comm Debit | Ref. Id:\\n '+$_POST.transid}} */, :P12 /* {{identity}} */, :P13 /* {{NOW}} */)",
                             "params": [
                               {
                                 "name": ":P1",
@@ -1212,7 +1267,7 @@
                               {
                                 "name": ":P5",
                                 "type": "expression",
-                                "value": "{{GetDTUser.balance_amt.toNumber()-GetDTBalcance.netamt.toNumber()}}"
+                                "value": "{{DTClosingBal}}"
                               },
                               {
                                 "name": ":P6",
@@ -1267,7 +1322,7 @@
                             "type": "number"
                           }
                         ],
-                        "output": true
+                        "output": false
                       },
                       {
                         "name": "DTUserWalletUp",
@@ -1282,7 +1337,7 @@
                                 "table": "m_users",
                                 "column": "balance_amt",
                                 "type": "text",
-                                "value": "{{GetDTUser.balance_amt.toNumber()-GetDTBalcance.netamt.toNumber()}}"
+                                "value": "{{DTClosingBal}}"
                               }
                             ],
                             "table": "m_users",
@@ -1304,12 +1359,12 @@
                               "conditional": null,
                               "valid": true
                             },
-                            "query": "UPDATE m_users\nSET balance_amt = :P1 /* {{GetDTUser.balance_amt.toNumber()-GetDTBalcance.netamt.toNumber()}} */\nWHERE id = :P2 /* {{GetUserBalance.ds_id}} */",
+                            "query": "UPDATE m_users\nSET balance_amt = :P1 /* {{DTClosingBal}} */\nWHERE id = :P2 /* {{GetUserBalance.ds_id}} */",
                             "params": [
                               {
                                 "name": ":P1",
                                 "type": "expression",
-                                "value": "{{GetDTUser.balance_amt.toNumber()-GetDTBalcance.netamt.toNumber()}}"
+                                "value": "{{DTClosingBal}}"
                               },
                               {
                                 "operator": "equal",
@@ -1326,7 +1381,7 @@
                             "type": "number"
                           }
                         ],
-                        "output": true
+                        "output": false
                       },
                       {
                         "name": "",
@@ -1480,6 +1535,17 @@
                                 "outputType": "object"
                               },
                               {
+                                "name": "MDTClosingBal",
+                                "module": "core",
+                                "action": "setvalue",
+                                "options": {
+                                  "value": "{{GetMDTUser.balance_amt.toNumber()-GetMDTBalcance.netamt.toNumber()}}"
+                                },
+                                "meta": [],
+                                "outputType": "text",
+                                "output": true
+                              },
+                              {
                                 "name": "MDTDeductComm",
                                 "module": "dbupdater",
                                 "action": "insert",
@@ -1516,7 +1582,7 @@
                                         "table": "t_charge_cal",
                                         "column": "new_balance",
                                         "type": "text",
-                                        "value": "{{GetMDTUser.balance_amt.toNumber()-GetMDTBalcance.netamt.toNumber()}}"
+                                        "value": "{{MDTClosingBal}}"
                                       },
                                       {
                                         "table": "t_charge_cal",
@@ -1569,7 +1635,7 @@
                                     ],
                                     "table": "t_charge_cal",
                                     "returning": "id",
-                                    "query": "INSERT INTO t_charge_cal\n(user_id, old_balance, amount, netamt, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on) VALUES (:P1 /* {{GetUserBalance.md_id}} */, :P2 /* {{GetMDTUser.balance_amt}} */, :P3 /* {{GetMDTBalcance.amount}} */, :P4 /* {{GetMDTBalcance.netamt}} */, :P5 /* {{GetMDTUser.balance_amt.toNumber()-GetMDTBalcance.netamt.toNumber()}} */, :P6 /* {{'Recharge Comm Reversal'}} */, :P7 /* {{NOW}} */, :P8 /* {{$_SERVER.REMOTE_ADDR}} */, :P9 /* {{'Debit'}} */, :P10 /* {{$_POST.transid}} */, :P11 /* {{'Recharge Reversal | Amount: '+GetMDTBalcance.amount+' | Charge & Comm Debit | Ref. Id:  '+$_POST.transid}} */, :P12 /* {{identity}} */, :P13 /* {{NOW}} */)",
+                                    "query": "INSERT INTO t_charge_cal\n(user_id, old_balance, amount, netamt, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on) VALUES (:P1 /* {{GetUserBalance.md_id}} */, :P2 /* {{GetMDTUser.balance_amt}} */, :P3 /* {{GetMDTBalcance.amount}} */, :P4 /* {{GetMDTBalcance.netamt}} */, :P5 /* {{MDTClosingBal}} */, :P6 /* {{'Recharge Comm Reversal'}} */, :P7 /* {{NOW}} */, :P8 /* {{$_SERVER.REMOTE_ADDR}} */, :P9 /* {{'Debit'}} */, :P10 /* {{$_POST.transid}} */, :P11 /* {{'Recharge Reversal | Amount: '+GetMDTBalcance.amount+' | Charge & Comm Debit | Ref. Id:  '+$_POST.transid}} */, :P12 /* {{identity}} */, :P13 /* {{NOW}} */)",
                                     "params": [
                                       {
                                         "name": ":P1",
@@ -1594,7 +1660,7 @@
                                       {
                                         "name": ":P5",
                                         "type": "expression",
-                                        "value": "{{GetMDTUser.balance_amt.toNumber()-GetMDTBalcance.netamt.toNumber()}}"
+                                        "value": "{{MDTClosingBal}}"
                                       },
                                       {
                                         "name": ":P6",
@@ -1649,7 +1715,7 @@
                                     "type": "number"
                                   }
                                 ],
-                                "output": true
+                                "output": false
                               },
                               {
                                 "name": "MDTUserWalletUp",
@@ -1664,7 +1730,7 @@
                                         "table": "m_users",
                                         "column": "balance_amt",
                                         "type": "text",
-                                        "value": "{{GetMDTUser.balance_amt.toNumber()-GetMDTBalcance.netamt.toNumber()}}"
+                                        "value": "{{MDTClosingBal}}"
                                       }
                                     ],
                                     "table": "m_users",
@@ -1686,12 +1752,12 @@
                                       "conditional": null,
                                       "valid": true
                                     },
-                                    "query": "UPDATE m_users\nSET balance_amt = :P1 /* {{GetMDTUser.balance_amt.toNumber()-GetMDTBalcance.netamt.toNumber()}} */\nWHERE id = :P2 /* {{GetUserBalance.md_id}} */",
+                                    "query": "UPDATE m_users\nSET balance_amt = :P1 /* {{MDTClosingBal}} */\nWHERE id = :P2 /* {{GetUserBalance.md_id}} */",
                                     "params": [
                                       {
                                         "name": ":P1",
                                         "type": "expression",
-                                        "value": "{{GetMDTUser.balance_amt.toNumber()-GetMDTBalcance.netamt.toNumber()}}"
+                                        "value": "{{MDTClosingBal}}"
                                       },
                                       {
                                         "operator": "equal",
@@ -1708,7 +1774,7 @@
                                     "type": "number"
                                   }
                                 ],
-                                "output": true
+                                "output": false
                               }
                             ]
                           }
