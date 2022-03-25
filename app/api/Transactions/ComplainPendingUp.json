@@ -366,13 +366,17 @@
                       {
                         "table": "tt_recharge_trans",
                         "column": "mdtchargeamt"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "opening_balance"
                       }
                     ],
                     "table": {
                       "name": "tt_recharge_trans"
                     },
                     "joins": [],
-                    "query": "SELECT user_id, amount, net_amt, comm_per, comm_val, comm_amt, other_charge, charge_per, charge_amt, dtcommval, dtcommamt, dtchargeper, dtchargeval, dtchargeamt, mdtcommper, mdtcommval, mdtcommamt, mdtchargeper, mdtchargeval, mdtchargeamt\nFROM tt_recharge_trans\nWHERE id = :P1 /* {{$_POST.transid}} */",
+                    "query": "SELECT user_id, amount, net_amt, comm_per, comm_val, comm_amt, other_charge, charge_per, charge_amt, dtcommval, dtcommamt, dtchargeper, dtchargeval, dtchargeamt, mdtcommper, mdtcommval, mdtcommamt, mdtchargeper, mdtchargeval, mdtchargeamt, opening_balance\nFROM tt_recharge_trans\nWHERE id = :P1 /* {{$_POST.transid}} */",
                     "params": [
                       {
                         "operator": "equal",
@@ -485,6 +489,10 @@
                   {
                     "type": "text",
                     "name": "mdtchargeamt"
+                  },
+                  {
+                    "type": "text",
+                    "name": "opening_balance"
                   }
                 ],
                 "outputType": "object",
@@ -629,6 +637,12 @@
                         "column": "operator_ref",
                         "type": "text",
                         "value": "{{'Transaction Failed and Refund'}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "closing_balance",
+                        "type": "text",
+                        "value": "{{GetTTBal.opening_balance}}"
                       }
                     ],
                     "table": "tt_recharge_trans",
@@ -650,7 +664,7 @@
                       "conditional": null,
                       "valid": true
                     },
-                    "query": "UPDATE tt_recharge_trans\nSET extra2 = :P1 /* {{$_POST.refdeclval}} */, api_ref = :P2 /* {{$_POST.api_ref}} */, status = :P3 /* {{'FAILED'}} */, operator_ref = :P4 /* {{'Transaction Failed and Refund'}} */\nWHERE id = :P5 /* {{$_POST.transid}} */",
+                    "query": "UPDATE tt_recharge_trans\nSET extra2 = :P1 /* {{$_POST.refdeclval}} */, api_ref = :P2 /* {{$_POST.api_ref}} */, status = :P3 /* {{'FAILED'}} */, operator_ref = :P4 /* {{'Transaction Failed and Refund'}} */, closing_balance = :P5 /* {{GetTTBal.opening_balance}} */\nWHERE id = :P6 /* {{$_POST.transid}} */",
                     "params": [
                       {
                         "name": ":P1",
@@ -673,9 +687,14 @@
                         "value": "{{'Transaction Failed and Refund'}}"
                       },
                       {
+                        "name": ":P5",
+                        "type": "expression",
+                        "value": "{{GetTTBal.opening_balance}}"
+                      },
+                      {
                         "operator": "equal",
                         "type": "expression",
-                        "name": ":P5",
+                        "name": ":P6",
                         "value": "{{$_POST.transid}}"
                       }
                     ]
