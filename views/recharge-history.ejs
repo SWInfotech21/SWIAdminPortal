@@ -1,18 +1,6 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="rechargehistory" appConnect="local" components="{dmxStateManagement:{},dmxDataTraversal:{},dmxBootstrap5TableGenerator:{},dmxSockets:{},dmxBootstrap5Navigation:{},dmxBootstrap5Modal:{}}" -->
 <meta name="ac:route" content="/recharge-history">
-<script is="dmx-flow" id="flowCheckStatus" type="text/dmx-flow">{
-  condition: {
-    if: "{{tt_rech_id.value}}",
-    then: {
-      steps: {
-        run: {action: "{{scTransStatus.load({})}}"}
-      }
-    }
-  }
-}</script>
-<dmx-value id="varTransId" dmx-bind:value="0"></dmx-value>
 <dmx-query-manager id="qm"></dmx-query-manager>
-<dmx-serverconnect id="scTransStatus" url="api/APIS/CheckTransactionStatus" dmx-param:trans_id="tt_rech_id.value" noload></dmx-serverconnect>
 <dmx-serverconnect id="scRechargeTrans" url="api/Reports/RechargeTrans" dmx-param:limit="" dmx-param:offset="qm.data.offset" dmx-param:sort="qm.data.sort" dmx-param:dir="qm.data.dir" sockets="true"></dmx-serverconnect>
 <dmx-data-view id="dvRechTrans" dmx-bind:data="scRechargeTrans.data.Recharge.data" filter="((parent_mobile.contains(formSearchUser.Search.value) || api_ref.contains(formSearchUser.Search.value) || parent_fname.lowercase().contains(formSearchUser.Search.value.lowercase())) || user_fname.lowercase().contains(formSearchUser.Search.value.lowercase()) || api_name.contains(formSearchUser.Search.value) || user_mobile.contains(formSearchUser.Search.value) || recharge_number.contains(formSearchUser.Search.value) || operator_name.lowercase().contains(formSearchUser.Search.value.lowercase()) || status.lowercase().contains(formSearchUser.Search.value.lowercase()))" dmx-bind:page="qm.data.offset" pageSize="100"></dmx-data-view>
 <dmx-data-detail id="ddRechargeTrans" key="table_id" dmx-bind:data="dvRechTrans.data"></dmx-data-detail>
@@ -79,7 +67,6 @@
                             <th class="sorting" dmx-on:click="qm.set('sort','mdtchargeamt');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='mdtchargeamt' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='mdtchargeamt' && qm.data.dir == 'desc'">MDT Charge Amt</th>
                         </tr>
                     </thead>
-                    <input type="hidden" dmx-bind:value="varTransId.value" id="tt_rech_id">
                     <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="dvRechTrans.data" id="tableRepeat1" dmx-state="qm" dmx-sort="sort" dmx-order="dir" key="table_id">
                         <tr>
                             <td>{{$index+1}}</td>
@@ -91,7 +78,13 @@
                             <td dmx-text="recharge_number"></td>
                             <td dmx-text="operator_name+'('+service_name+')'"></td>
                             <td class="fw-bold" dmx-text="status" dmx-class:text-success="status == 'SUCCESS'" dmx-class:text-warning="status == 'PENDING'" dmx-class:text-danger="status == 'FAILED'" dmx-class:text-primary="status == 'REFUND'"></td>
-                            <td><input type="submit" class="btn btn-danger btn-sm" value="Check" dmx-on:click="varTransId.setValue(pay_ref_id);flowCheckStatus.run()" dmx-show="status == 'PENDING' || status == 'SUCCESS'"></td>
+                            <td><button class="btn btn-danger btn-sm" dmx-on:click="formCheck.submit(true)" dmx-show="status == 'PENDING'">
+                                    <form id="formCheck" method="post" action="api/APIS/CheckTransactionStatus" is="dmx-serverconnect-form" dmx-on:success="scNotif.success('Action Success');scRechargeTrans.load({})">
+                                        <input type="hidden" id="trans_id" class="form-control" name="trans_id" required="" dmx-bind:value="pay_ref_id">
+                                    </form>
+                                    Check
+                                </button>
+                            </td>
                             <td dmx-text="old_balance.toNumber().toFixed(2)"></td>
                             <td dmx-text="amount.toNumber().toFixed(2)"></td>
                             <td dmx-text="comm_amt.toNumber().toFixed(2)"></td>
