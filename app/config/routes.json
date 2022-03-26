@@ -196,6 +196,11 @@
       "exec": "/api/PageAccess/UserAccess"
     },
     {
+      "path": "/complain-browse-tickets",
+      "page": "complain-browse-tickets",
+      "layout": "main"
+    },
+    {
       "path": "*",
       "page": "404-not-found"
     }

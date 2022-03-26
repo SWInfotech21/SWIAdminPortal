@@ -150,5 +150,9 @@
   "response-request.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "complain-browse-tickets.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }

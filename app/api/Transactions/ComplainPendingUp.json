@@ -1,19 +1,9 @@
 {
   "meta": {
     "options": {
-      "linkedFile": "/views/pending-recharge.ejs",
+      "linkedFile": "/views/complain-browse-tickets.ejs",
       "linkedForm": "ResponseForm"
     },
-    "$_GET": [
-      {
-        "type": "text",
-        "name": "sort"
-      },
-      {
-        "type": "text",
-        "name": "dir"
-      }
-    ],
     "$_POST": [
       {
         "type": "text",
@@ -22,81 +12,32 @@
       },
       {
         "type": "text",
+        "fieldName": "api_ref",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": ""
+            }
+          }
+        },
+        "name": "api_ref"
+      },
+      {
+        "type": "text",
         "fieldName": "refdeclval",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": ""
+            }
+          }
+        },
         "name": "refdeclval"
       },
       {
         "type": "text",
-        "fieldName": "api_ref",
-        "name": "api_ref"
-      },
-      {
-        "type": "number",
-        "name": "user_id"
-      },
-      {
-        "type": "text",
-        "name": "old_balance"
-      },
-      {
-        "type": "text",
-        "name": "amount"
-      },
-      {
-        "type": "text",
-        "name": "new_balance"
-      },
-      {
-        "type": "text",
-        "name": "transaction_type"
-      },
-      {
-        "type": "text",
-        "name": "tr_date"
-      },
-      {
-        "type": "text",
-        "name": "ip_address"
-      },
-      {
-        "type": "text",
-        "name": "crdr_type"
-      },
-      {
-        "type": "number",
-        "name": "pay_ref_id"
-      },
-      {
-        "type": "text",
-        "name": "remarks"
-      },
-      {
-        "type": "text",
-        "name": "netamt"
-      },
-      {
-        "type": "number",
-        "name": "created_by"
-      },
-      {
-        "type": "datetime",
-        "name": "created_on"
-      },
-      {
-        "type": "number",
-        "name": "updated_by"
-      },
-      {
-        "type": "datetime",
-        "name": "updated_on"
-      },
-      {
-        "type": "number",
-        "name": "deleted_by"
-      },
-      {
-        "type": "datetime",
-        "name": "deleted_on"
+        "fieldName": "response",
+        "name": "response"
       }
     ],
     "$_SERVER": [
@@ -145,6 +86,12 @@
                 "column": "status",
                 "type": "text",
                 "value": "{{$_POST.refdeclval}}"
+              },
+              {
+                "table": "t_ticket",
+                "column": "response",
+                "type": "text",
+                "value": "{{$_POST.response}}"
               }
             ],
             "table": "t_ticket",
@@ -166,7 +113,7 @@
               "conditional": null,
               "valid": true
             },
-            "query": "UPDATE t_ticket\nSET status = :P1 /* {{$_POST.refdeclval}} */\nWHERE tran_id = :P2 /* {{$_POST.transid}} */",
+            "query": "UPDATE t_ticket\nSET status = :P1 /* {{$_POST.refdeclval}} */, response = :P2 /* {{$_POST.response}} */\nWHERE tran_id = :P3 /* {{$_POST.transid}} */",
             "params": [
               {
                 "name": ":P1",
@@ -174,9 +121,14 @@
                 "value": "{{$_POST.refdeclval}}"
               },
               {
+                "name": ":P2",
+                "type": "expression",
+                "value": "{{$_POST.response}}"
+              },
+              {
                 "operator": "equal",
                 "type": "expression",
-                "name": ":P2",
+                "name": ":P3",
                 "value": "{{$_POST.transid}}"
               }
             ]
