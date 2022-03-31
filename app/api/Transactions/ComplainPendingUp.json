@@ -92,6 +92,12 @@
                 "column": "response",
                 "type": "text",
                 "value": "{{$_POST.response}}"
+              },
+              {
+                "table": "t_ticket",
+                "column": "reply_date",
+                "type": "datetime",
+                "value": "{{NOW}}"
               }
             ],
             "table": "t_ticket",
@@ -113,7 +119,7 @@
               "conditional": null,
               "valid": true
             },
-            "query": "UPDATE t_ticket\nSET status = :P1 /* {{$_POST.refdeclval}} */, response = :P2 /* {{$_POST.response}} */\nWHERE tran_id = :P3 /* {{$_POST.transid}} */",
+            "query": "UPDATE t_ticket\nSET status = :P1 /* {{$_POST.refdeclval}} */, response = :P2 /* {{$_POST.response}} */, reply_date = :P3 /* {{NOW}} */\nWHERE tran_id = :P4 /* {{$_POST.transid}} */",
             "params": [
               {
                 "name": ":P1",
@@ -126,12 +132,18 @@
                 "value": "{{$_POST.response}}"
               },
               {
+                "name": ":P3",
+                "type": "expression",
+                "value": "{{NOW}}"
+              },
+              {
                 "operator": "equal",
                 "type": "expression",
-                "name": ":P3",
+                "name": ":P4",
                 "value": "{{$_POST.transid}}"
               }
-            ]
+            ],
+            "returning": "id"
           }
         },
         "meta": [
@@ -208,7 +220,8 @@
                       "name": ":P3",
                       "value": "{{$_POST.transid}}"
                     }
-                  ]
+                  ],
+                  "returning": "id"
                 }
               },
               "meta": [

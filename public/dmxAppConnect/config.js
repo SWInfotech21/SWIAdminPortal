@@ -3588,5 +3588,205 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "complainbrowsetickets": {
+    "dvPendingTrans": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "user_id"
+        },
+        {
+          "type": "text",
+          "name": "user_number"
+        },
+        {
+          "type": "text",
+          "name": "opening_balance"
+        },
+        {
+          "type": "text",
+          "name": "amount"
+        },
+        {
+          "type": "text",
+          "name": "comm_amt"
+        },
+        {
+          "type": "text",
+          "name": "charge_amt"
+        },
+        {
+          "type": "text",
+          "name": "net_amt"
+        },
+        {
+          "type": "text",
+          "name": "closing_balance"
+        },
+        {
+          "type": "datetime",
+          "name": "tr_date"
+        },
+        {
+          "type": "text",
+          "name": "status"
+        },
+        {
+          "type": "text",
+          "name": "tr_type"
+        },
+        {
+          "type": "text",
+          "name": "api_logs"
+        },
+        {
+          "type": "text",
+          "name": "operator_name"
+        },
+        {
+          "type": "text",
+          "name": "user_fname"
+        },
+        {
+          "type": "text",
+          "name": "user_mobile"
+        },
+        {
+          "type": "text",
+          "name": "api_ref"
+        },
+        {
+          "type": "text",
+          "name": "ip_address"
+        },
+        {
+          "type": "number",
+          "name": "ticket_id"
+        },
+        {
+          "type": "text",
+          "name": "message"
+        },
+        {
+          "type": "text",
+          "name": "response"
+        },
+        {
+          "type": "text",
+          "name": "complain_status"
+        }
+      ],
+      "outputType": "array"
+    },
+    "tableRepeat1": {
+      "meta": [
+        {
+          "name": "$index",
+          "type": "number"
+        },
+        {
+          "name": "$key",
+          "type": "text"
+        },
+        {
+          "name": "$value",
+          "type": "object"
+        },
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "user_id"
+        },
+        {
+          "type": "text",
+          "name": "user_number"
+        },
+        {
+          "type": "text",
+          "name": "opening_balance"
+        },
+        {
+          "type": "text",
+          "name": "amount"
+        },
+        {
+          "type": "text",
+          "name": "comm_amt"
+        },
+        {
+          "type": "text",
+          "name": "charge_amt"
+        },
+        {
+          "type": "text",
+          "name": "net_amt"
+        },
+        {
+          "type": "text",
+          "name": "closing_balance"
+        },
+        {
+          "type": "datetime",
+          "name": "tr_date"
+        },
+        {
+          "type": "text",
+          "name": "status"
+        },
+        {
+          "type": "text",
+          "name": "tr_type"
+        },
+        {
+          "type": "text",
+          "name": "api_logs"
+        },
+        {
+          "type": "text",
+          "name": "operator_name"
+        },
+        {
+          "type": "text",
+          "name": "user_fname"
+        },
+        {
+          "type": "text",
+          "name": "user_mobile"
+        },
+        {
+          "type": "text",
+          "name": "api_ref"
+        },
+        {
+          "type": "text",
+          "name": "ip_address"
+        },
+        {
+          "type": "number",
+          "name": "ticket_id"
+        },
+        {
+          "type": "text",
+          "name": "message"
+        },
+        {
+          "type": "text",
+          "name": "response"
+        },
+        {
+          "type": "text",
+          "name": "complain_status"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });
