@@ -3084,12 +3084,16 @@ dmx.config({
           "name": "id"
         },
         {
-          "type": "text",
-          "name": "user_id"
+          "type": "number",
+          "name": "api_id"
         },
         {
           "type": "text",
           "name": "user_number"
+        },
+        {
+          "type": "text",
+          "name": "details"
         },
         {
           "type": "text",
@@ -3101,7 +3105,23 @@ dmx.config({
         },
         {
           "type": "text",
+          "name": "comm_per"
+        },
+        {
+          "type": "text",
+          "name": "comm_val"
+        },
+        {
+          "type": "text",
           "name": "comm_amt"
+        },
+        {
+          "type": "text",
+          "name": "other_charge"
+        },
+        {
+          "type": "text",
+          "name": "charge_per"
         },
         {
           "type": "text",
@@ -3116,12 +3136,8 @@ dmx.config({
           "name": "closing_balance"
         },
         {
-          "type": "datetime",
-          "name": "tr_date"
-        },
-        {
           "type": "text",
-          "name": "status"
+          "name": "tr_mode"
         },
         {
           "type": "text",
@@ -3129,19 +3145,23 @@ dmx.config({
         },
         {
           "type": "text",
+          "name": "tr_status"
+        },
+        {
+          "type": "text",
+          "name": "tr_id"
+        },
+        {
+          "type": "text",
           "name": "api_logs"
         },
         {
           "type": "text",
-          "name": "operator_name"
+          "name": "is_processed"
         },
         {
           "type": "text",
-          "name": "user_fname"
-        },
-        {
-          "type": "text",
-          "name": "user_mobile"
+          "name": "operator_ref"
         },
         {
           "type": "text",
@@ -3153,11 +3173,47 @@ dmx.config({
         },
         {
           "type": "number",
-          "name": "ticket_id"
+          "name": "api_response_id"
         },
         {
           "type": "text",
-          "name": "message"
+          "name": "process_mode"
+        },
+        {
+          "type": "datetime",
+          "name": "tr_date"
+        },
+        {
+          "type": "number",
+          "name": "transaction_by"
+        },
+        {
+          "type": "text",
+          "name": "extra2"
+        },
+        {
+          "type": "text",
+          "name": "user_id"
+        },
+        {
+          "type": "text",
+          "name": "user_fname"
+        },
+        {
+          "type": "text",
+          "name": "user_mobile"
+        },
+        {
+          "type": "number",
+          "name": "user_type"
+        },
+        {
+          "type": "text",
+          "name": "operator_name"
+        },
+        {
+          "type": "text",
+          "name": "service_name"
         }
       ],
       "outputType": "array"
@@ -3169,12 +3225,16 @@ dmx.config({
           "name": "id"
         },
         {
-          "type": "text",
-          "name": "user_id"
+          "type": "number",
+          "name": "api_id"
         },
         {
           "type": "text",
           "name": "user_number"
+        },
+        {
+          "type": "text",
+          "name": "details"
         },
         {
           "type": "text",
@@ -3186,7 +3246,23 @@ dmx.config({
         },
         {
           "type": "text",
+          "name": "comm_per"
+        },
+        {
+          "type": "text",
+          "name": "comm_val"
+        },
+        {
+          "type": "text",
           "name": "comm_amt"
+        },
+        {
+          "type": "text",
+          "name": "other_charge"
+        },
+        {
+          "type": "text",
+          "name": "charge_per"
         },
         {
           "type": "text",
@@ -3201,12 +3277,8 @@ dmx.config({
           "name": "closing_balance"
         },
         {
-          "type": "datetime",
-          "name": "tr_date"
-        },
-        {
           "type": "text",
-          "name": "status"
+          "name": "tr_mode"
         },
         {
           "type": "text",
@@ -3214,19 +3286,23 @@ dmx.config({
         },
         {
           "type": "text",
+          "name": "tr_status"
+        },
+        {
+          "type": "text",
+          "name": "tr_id"
+        },
+        {
+          "type": "text",
           "name": "api_logs"
         },
         {
           "type": "text",
-          "name": "operator_name"
+          "name": "is_processed"
         },
         {
           "type": "text",
-          "name": "user_fname"
-        },
-        {
-          "type": "text",
-          "name": "user_mobile"
+          "name": "operator_ref"
         },
         {
           "type": "text",
@@ -3238,11 +3314,47 @@ dmx.config({
         },
         {
           "type": "number",
-          "name": "ticket_id"
+          "name": "api_response_id"
         },
         {
           "type": "text",
-          "name": "message"
+          "name": "process_mode"
+        },
+        {
+          "type": "datetime",
+          "name": "tr_date"
+        },
+        {
+          "type": "number",
+          "name": "transaction_by"
+        },
+        {
+          "type": "text",
+          "name": "extra2"
+        },
+        {
+          "type": "text",
+          "name": "user_id"
+        },
+        {
+          "type": "text",
+          "name": "user_fname"
+        },
+        {
+          "type": "text",
+          "name": "user_mobile"
+        },
+        {
+          "type": "number",
+          "name": "user_type"
+        },
+        {
+          "type": "text",
+          "name": "operator_name"
+        },
+        {
+          "type": "text",
+          "name": "service_name"
         }
       ],
       "outputType": "array"
