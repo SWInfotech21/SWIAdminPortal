@@ -13,7 +13,7 @@
 <div class="container px-4" id="Pendingrecharge">
     <div class="card">
         <div class="card-header sw-bg-col-primary">
-            <b>Live Transactions</b>
+            <b>Live Transactions (Today's latest 50)</b>
         </div>
 
         <div class="card-body">
@@ -57,6 +57,11 @@
                             <td class="fw-bold" dmx-text="status" dmx-class:text-success="status == 'SUCCESS'" dmx-class:text-warning="status == 'Pending'" dmx-class:text-danger="status == 'FAILED'" dmx-class:text-primary="status == 'REFUND'"></td>
                             <td dmx-text="tr_mode"></td>
                             <td dmx-text="tr_date.formatDate('dd-MM-yyyy hh:mm:ss A')"></td>
+                        </tr>
+                    </tbody>
+                    <tbody dmx-show="content.scLiveRech.data.LiveReport.length==0">
+                        <tr class="text-center fw-bold text-danger fs-4">
+                            <td colspan="19">No Record Found!</td>
                         </tr>
                     </tbody>
                 </table>

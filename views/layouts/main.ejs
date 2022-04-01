@@ -147,7 +147,7 @@
                     <div class="col-7 row">
                         <p class="m-0 col-12 col-md-6"><b>Pending Recharge:</b> <a href="pending-recharge" class="text-light">&nbsp;&nbsp;{{scAdminBalance.data.GetPendingTrans.CountTrans}}&nbsp;&nbsp;</a></p>
                         <p class="m-0 col-12 col-md-6"><b>Payment Request:</b> <a href="response-request" class="text-light">&nbsp;&nbsp;{{scAdminBalance.data.GetPaymentRequest.CountPayment}}&nbsp;&nbsp;</a></p>
-                        <p class="m-0 col-12 col-md-6"><b>Tikets:</b>0</p>
+                        <p class="m-0 col-12 col-md-6"><b>Tikets:</b><a href="complain-browse-tickets" class="text-light">&nbsp;&nbsp;{{scAdminBalance.data.BrowsTicketComplain.CountComplain}}&nbsp;&nbsp;</a></p>
                         <p class="m-0 col-12 col-md-6"><b>Bank Withdrawal Request:</b>0</p>
                     </div>
                     <div class="col-3">
@@ -215,7 +215,7 @@
                             </li>
                             <li id="ctl00_liReport"><a class="sf-with-ul" href="javascript:void(0)">Reports&emsp;<i class="fas fa-angle-down"></i></a>
                                 <ul>
-                                    <li><a href="live-transactions">Live Transactions</a></li>
+                                    <li><a href="live-transactions" target="_blank">Live Transactions</a></li>
                                     <li><a href="pending-recharge">Pending Transactions</a></li>
                                     <li><a href="recharge-history">Transaction Report</a></li>
                                     <li><a href="account-summary-report">Account Summary</a></li>

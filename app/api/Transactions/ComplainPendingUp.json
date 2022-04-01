@@ -335,13 +335,41 @@
                       {
                         "table": "tt_recharge_trans",
                         "column": "opening_balance"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "transaction_type"
                       }
                     ],
                     "table": {
-                      "name": "tt_recharge_trans"
+                      "name": "tt_recharge_trans",
+                      "alias": "tt_recharge_trans"
                     },
-                    "joins": [],
-                    "query": "SELECT user_id, amount, net_amt, comm_per, comm_val, comm_amt, other_charge, charge_per, charge_amt, dtcommval, dtcommamt, dtchargeper, dtchargeval, dtchargeamt, mdtcommper, mdtcommval, mdtcommamt, mdtchargeper, mdtchargeval, mdtchargeamt, opening_balance\nFROM tt_recharge_trans\nWHERE id = :P1 /* {{$_POST.transid}} */",
+                    "joins": [
+                      {
+                        "table": "tt_balance",
+                        "column": "*",
+                        "alias": "tt_balance",
+                        "type": "LEFT",
+                        "clauses": {
+                          "condition": "AND",
+                          "rules": [
+                            {
+                              "table": "tt_balance",
+                              "column": "pay_ref_id",
+                              "operator": "equal",
+                              "value": {
+                                "table": "tt_recharge_trans",
+                                "column": "id"
+                              },
+                              "operation": "="
+                            }
+                          ]
+                        },
+                        "primary": "id"
+                      }
+                    ],
+                    "query": "SELECT tt_recharge_trans.user_id, tt_recharge_trans.amount, tt_recharge_trans.net_amt, tt_recharge_trans.comm_per, tt_recharge_trans.comm_val, tt_recharge_trans.comm_amt, tt_recharge_trans.other_charge, tt_recharge_trans.charge_per, tt_recharge_trans.charge_amt, tt_recharge_trans.dtcommval, tt_recharge_trans.dtcommamt, tt_recharge_trans.dtchargeper, tt_recharge_trans.dtchargeval, tt_recharge_trans.dtchargeamt, tt_recharge_trans.mdtcommper, tt_recharge_trans.mdtcommval, tt_recharge_trans.mdtcommamt, tt_recharge_trans.mdtchargeper, tt_recharge_trans.mdtchargeval, tt_recharge_trans.mdtchargeamt, tt_recharge_trans.opening_balance, tt_balance.transaction_type\nFROM tt_recharge_trans AS tt_recharge_trans\nLEFT JOIN tt_balance AS tt_balance ON (tt_balance.pay_ref_id = tt_recharge_trans.id)\nWHERE tt_recharge_trans.id = :P1 /* {{$_POST.transid}} */",
                     "params": [
                       {
                         "operator": "equal",
@@ -369,7 +397,8 @@
                       ],
                       "conditional": null,
                       "valid": true
-                    }
+                    },
+                    "primary": "id"
                   },
                   "connection": "postgres_gcpServer"
                 },
@@ -458,6 +487,10 @@
                   {
                     "type": "text",
                     "name": "opening_balance"
+                  },
+                  {
+                    "type": "text",
+                    "name": "transaction_type"
                   }
                 ],
                 "outputType": "object",
@@ -486,7 +519,8 @@
                       }
                     ],
                     "table": {
-                      "name": "m_users"
+                      "name": "m_users",
+                      "alias": "m_users"
                     },
                     "joins": [],
                     "wheres": {
@@ -509,7 +543,7 @@
                       "conditional": null,
                       "valid": true
                     },
-                    "query": "SELECT balance_amt, md_id, ds_id\nFROM m_users\nWHERE id = :P1 /* {{GetTTBal.user_id}} */",
+                    "query": "SELECT balance_amt, md_id, ds_id\nFROM m_users AS m_users\nWHERE id = :P1 /* {{GetTTBal.user_id}} */",
                     "params": [
                       {
                         "operator": "equal",
@@ -517,7 +551,8 @@
                         "name": ":P1",
                         "value": "{{GetTTBal.user_id}}"
                       }
-                    ]
+                    ],
+                    "primary": "id"
                   }
                 },
                 "output": false,
@@ -662,7 +697,8 @@
                         "name": ":P6",
                         "value": "{{$_POST.transid}}"
                       }
-                    ]
+                    ],
+                    "returning": "id"
                   }
                 },
                 "meta": [
@@ -687,6 +723,18 @@
                         "column": "status",
                         "type": "text",
                         "value": "{{'FAILED'}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "updated_by",
+                        "type": "number",
+                        "value": "{{identity}}"
+                      },
+                      {
+                        "table": "tt_balance",
+                        "column": "updated_on",
+                        "type": "datetime",
+                        "value": "{{NOW}}"
                       }
                     ],
                     "table": "tt_balance",
@@ -708,7 +756,7 @@
                       "conditional": null,
                       "valid": true
                     },
-                    "query": "UPDATE tt_balance\nSET status = :P1 /* {{'FAILED'}} */\nWHERE pay_ref_id = :P2 /* {{$_POST.transid}} */",
+                    "query": "UPDATE tt_balance\nSET status = :P1 /* {{'FAILED'}} */, updated_by = :P2 /* {{identity}} */, updated_on = :P3 /* {{NOW}} */\nWHERE pay_ref_id = :P4 /* {{$_POST.transid}} */",
                     "params": [
                       {
                         "name": ":P1",
@@ -716,12 +764,23 @@
                         "value": "{{'FAILED'}}"
                       },
                       {
+                        "name": ":P2",
+                        "type": "expression",
+                        "value": "{{identity}}"
+                      },
+                      {
+                        "name": ":P3",
+                        "type": "expression",
+                        "value": "{{NOW}}"
+                      },
+                      {
                         "operator": "equal",
                         "type": "expression",
-                        "name": ":P2",
+                        "name": ":P4",
                         "value": "{{$_POST.transid}}"
                       }
-                    ]
+                    ],
+                    "returning": "id"
                   }
                 },
                 "meta": [
@@ -769,7 +828,7 @@
                         "table": "tt_balance",
                         "column": "transaction_type",
                         "type": "text",
-                        "value": "{{'Recharge Refund'}}"
+                        "value": "{{GetTTBal.transaction_type+' Refund'}}"
                       },
                       {
                         "table": "tt_balance",
@@ -828,7 +887,7 @@
                     ],
                     "table": "tt_balance",
                     "returning": "id",
-                    "query": "INSERT INTO tt_balance\n(user_id, old_balance, amount, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on, netamt, status) VALUES (:P1 /* {{GetTTBal.user_id}} */, :P2 /* {{GetUserBalance.balance_amt.toNumber()}} */, :P3 /* {{GetTTBal.amount}} */, :P4 /* {{RTClosingBal.toNumber()}} */, :P5 /* {{'Recharge Refund'}} */, :P6 /* {{NOW}} */, :P7 /* {{$_SERVER.REMOTE_ADDR}} */, :P8 /* {{'Credit'}} */, :P9 /* {{$_POST.transid}} */, :P10 /* {{'Refund of Amount '+GetTTBal.netamt+' for the transaction id '+$_POST.transid}} */, :P11 /* {{identity}} */, :P12 /* {{NOW}} */, :P13 /* {{GetTTBal.net_amt}} */, :P14 /* {{'ADDREFUND'}} */)",
+                    "query": "INSERT INTO tt_balance\n(user_id, old_balance, amount, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on, netamt, status) VALUES (:P1 /* {{GetTTBal.user_id}} */, :P2 /* {{GetUserBalance.balance_amt.toNumber()}} */, :P3 /* {{GetTTBal.amount}} */, :P4 /* {{RTClosingBal.toNumber()}} */, :P5 /* {{GetTTBal.transaction_type+' Refund'}} */, :P6 /* {{NOW}} */, :P7 /* {{$_SERVER.REMOTE_ADDR}} */, :P8 /* {{'Credit'}} */, :P9 /* {{$_POST.transid}} */, :P10 /* {{'Refund of Amount '+GetTTBal.netamt+' for the transaction id '+$_POST.transid}} */, :P11 /* {{identity}} */, :P12 /* {{NOW}} */, :P13 /* {{GetTTBal.net_amt}} */, :P14 /* {{'ADDREFUND'}} */)",
                     "params": [
                       {
                         "name": ":P1",
@@ -853,7 +912,7 @@
                       {
                         "name": ":P5",
                         "type": "expression",
-                        "value": "{{'Recharge Refund'}}"
+                        "value": "{{GetTTBal.transaction_type+' Refund'}}"
                       },
                       {
                         "name": ":P6",
@@ -963,7 +1022,8 @@
                         "name": ":P2",
                         "value": "{{GetTTBal.user_id}}"
                       }
-                    ]
+                    ],
+                    "returning": "id"
                   }
                 },
                 "meta": [

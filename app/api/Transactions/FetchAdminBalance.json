@@ -193,7 +193,8 @@
           }
         ],
         "table": {
-          "name": "payment_request"
+          "name": "payment_request",
+          "alias": "payment_request"
         },
         "joins": [],
         "groupBy": [],
@@ -249,7 +250,7 @@
           "conditional": null,
           "valid": true
         },
-        "query": "SELECT COUNT(id) AS CountPayment\nFROM payment_request\nWHERE pay_user_id = :P1 /* {{identity}} */ AND (status = 1 OR status = 4)",
+        "query": "SELECT COUNT(id) AS CountPayment\nFROM payment_request AS payment_request\nWHERE pay_user_id = :P1 /* {{identity}} */ AND (status = 1 OR status = 4)",
         "params": [
           {
             "operator": "equal",
@@ -257,7 +258,8 @@
             "name": ":P1",
             "value": "{{identity}}"
           }
-        ]
+        ],
+        "primary": "id"
       }
     },
     "output": true,
@@ -286,8 +288,79 @@
           }
         ],
         "table": {
-          "name": "tt_recharge_trans"
+          "name": "tt_recharge_trans",
+          "alias": "tt_recharge_trans"
         },
+        "joins": [],
+        "groupBy": [],
+        "wheres": {
+          "condition": "AND",
+          "rules": [
+            {
+              "id": "tt_recharge_trans.status",
+              "field": "tt_recharge_trans.status",
+              "type": "string",
+              "operator": "equal",
+              "value": "{{'PENDING'}}",
+              "data": {
+                "table": "tt_recharge_trans",
+                "column": "status",
+                "type": "text",
+                "columnObj": {
+                  "type": "string",
+                  "primary": false,
+                  "nullable": true,
+                  "name": "status"
+                }
+              },
+              "operation": "="
+            }
+          ],
+          "conditional": null,
+          "valid": true
+        },
+        "query": "SELECT COUNT(id) AS CountTrans\nFROM tt_recharge_trans AS tt_recharge_trans\nWHERE status = :P1 /* {{'PENDING'}} */",
+        "params": [
+          {
+            "operator": "equal",
+            "type": "expression",
+            "name": ":P1",
+            "value": "{{'PENDING'}}"
+          }
+        ],
+        "primary": "id"
+      }
+    },
+    "output": true,
+    "meta": [
+      {
+        "type": "number",
+        "name": "CountTrans"
+      }
+    ],
+    "outputType": "object"
+  },
+  {
+    "name": "BrowsTicketComplain",
+    "module": "dbconnector",
+    "action": "single",
+    "options": {
+      "connection": "postgres_gcpServer",
+      "sql": {
+        "type": "SELECT",
+        "columns": [
+          {
+            "table": "tt_recharge_trans",
+            "column": "id",
+            "alias": "CountComplain",
+            "aggregate": "COUNT"
+          }
+        ],
+        "table": {
+          "name": "tt_recharge_trans",
+          "alias": "tt_recharge_trans"
+        },
+        "primary": "id",
         "joins": [],
         "groupBy": [],
         "wheres": {
@@ -298,11 +371,17 @@
               "field": "tt_recharge_trans.extra2",
               "type": "string",
               "operator": "equal",
-              "value": "1",
+              "value": "{{1}}",
               "data": {
                 "table": "tt_recharge_trans",
                 "column": "extra2",
-                "type": "text"
+                "type": "text",
+                "columnObj": {
+                  "type": "string",
+                  "primary": false,
+                  "nullable": true,
+                  "name": "extra2"
+                }
               },
               "operation": "="
             }
@@ -310,15 +389,22 @@
           "conditional": null,
           "valid": true
         },
-        "query": "SELECT COUNT(id) AS CountTrans\nFROM tt_recharge_trans\nWHERE extra2 = '1'",
-        "params": []
+        "query": "SELECT COUNT(id) AS CountComplain\nFROM tt_recharge_trans AS tt_recharge_trans\nWHERE extra2 = :P1 /* {{1}} */",
+        "params": [
+          {
+            "operator": "equal",
+            "type": "expression",
+            "name": ":P1",
+            "value": "{{1}}"
+          }
+        ]
       }
     },
     "output": true,
     "meta": [
       {
         "type": "number",
-        "name": "CountTrans"
+        "name": "CountComplain"
       }
     ],
     "outputType": "object"

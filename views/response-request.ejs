@@ -67,9 +67,14 @@
                     <td dmx-text="utr_no"></td>
                     <td dmx-text="payment_mode"></td>
                     <td dmx-text="cash_type"></td>
-                    <td dmx-text="status == 1 ? 'Pending' : status == 2 ? 'Approved' :status == 3 ? 'Declined' :status == 4 ? 'Hold' : 'N/A'" dmx-class:text-primary="status==1" dmx-class:text-success="status==2" dmx-class:text-danger="status==3" dmx-class:text-warning="status==4"></td>
+                    <td class="fw-bold" dmx-text="status == 1 ? 'Pending' : status == 2 ? 'Approved' :status == 3 ? 'Declined' :status == 4 ? 'Hold' : 'N/A'" dmx-class:text-primary="status==1" dmx-class:text-success="status==2" dmx-class:text-danger="status==3" dmx-class:text-warning="status==4"></td>
                     <td dmx-text="remarks"></td>
                     <td dmx-text="response_time.formatDate('dd-MM-yyyy hh:mm:ss A')"></td>
+                </tr>
+            </tbody>
+            <tbody dmx-show="content.scPaymentReq.data.GetPayReq.total==0">
+                <tr class="text-center fw-bold text-danger fs-4">
+                    <td colspan="19">No Record Found!</td>
                 </tr>
             </tbody>
         </table>
