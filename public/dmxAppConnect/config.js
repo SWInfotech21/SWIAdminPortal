@@ -3820,6 +3820,95 @@ dmx.config({
         }
       ],
       "outputType": "array"
+    },
+    "repeatPayReqList": {
+      "meta": [
+        {
+          "name": "$index",
+          "type": "number"
+        },
+        {
+          "name": "$key",
+          "type": "text"
+        },
+        {
+          "name": "$value",
+          "type": "object"
+        },
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "amount"
+        },
+        {
+          "type": "date",
+          "name": "tr_date"
+        },
+        {
+          "type": "text",
+          "name": "tr_time"
+        },
+        {
+          "type": "text",
+          "name": "tr_no"
+        },
+        {
+          "type": "text",
+          "name": "bank_name"
+        },
+        {
+          "type": "text",
+          "name": "branch_name"
+        },
+        {
+          "type": "text",
+          "name": "cheque_no"
+        },
+        {
+          "type": "text",
+          "name": "utr_no"
+        },
+        {
+          "type": "text",
+          "name": "payment_mode"
+        },
+        {
+          "type": "text",
+          "name": "cash_type"
+        },
+        {
+          "type": "text",
+          "name": "remarks"
+        },
+        {
+          "type": "number",
+          "name": "status"
+        },
+        {
+          "type": "datetime",
+          "name": "request_time"
+        },
+        {
+          "type": "datetime",
+          "name": "response_time"
+        },
+        {
+          "type": "text",
+          "name": "req_user_name"
+        },
+        {
+          "type": "text",
+          "name": "req_user_mobile"
+        },
+        {
+          "type": "text",
+          "name": "req_user_balance"
+        }
+      ],
+      "outputType": "array"
     }
   },
   "complainbrowsetickets": {
