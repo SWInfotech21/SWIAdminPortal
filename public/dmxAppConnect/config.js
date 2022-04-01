@@ -1241,60 +1241,181 @@ dmx.config({
     "tableRepeat1": {
       "meta": [
         {
-          "name": "user_id",
+          "name": "$index",
           "type": "number"
         },
         {
-          "name": "old_balance",
-          "type": "number"
-        },
-        {
-          "name": "amount",
-          "type": "number"
-        },
-        {
-          "name": "new_balance",
-          "type": "number"
-        },
-        {
-          "name": "transaction_type",
+          "name": "$key",
           "type": "text"
         },
         {
-          "name": "tr_date",
-          "type": "text"
+          "name": "$value",
+          "type": "object"
         },
         {
-          "name": "ip_address",
-          "type": "text"
+          "type": "text",
+          "name": "user_number"
         },
         {
-          "name": "crdr_type",
-          "type": "text"
+          "type": "text",
+          "name": "details"
         },
         {
-          "name": "transaction_id",
-          "type": "text"
+          "type": "text",
+          "name": "opening_balance"
         },
         {
-          "name": "remarks",
-          "type": "text"
+          "type": "text",
+          "name": "amount"
         },
         {
-          "name": "created_by",
-          "type": "number"
+          "type": "text",
+          "name": "comm_per"
         },
         {
-          "name": "user_fname",
-          "type": "text"
+          "type": "text",
+          "name": "comm_val"
         },
         {
-          "name": "user_mobile",
-          "type": "text"
+          "type": "text",
+          "name": "other_charge"
         },
         {
-          "name": "user_type",
-          "type": "number"
+          "type": "text",
+          "name": "comm_amt"
+        },
+        {
+          "type": "text",
+          "name": "charge_per"
+        },
+        {
+          "type": "text",
+          "name": "net_amt"
+        },
+        {
+          "type": "text",
+          "name": "closing_balance"
+        },
+        {
+          "type": "text",
+          "name": "tr_mode"
+        },
+        {
+          "type": "text",
+          "name": "tr_type"
+        },
+        {
+          "type": "text",
+          "name": "reason"
+        },
+        {
+          "type": "text",
+          "name": "ip_address"
+        },
+        {
+          "type": "number",
+          "name": "user_type"
+        },
+        {
+          "type": "text",
+          "name": "user_id"
+        },
+        {
+          "type": "number",
+          "name": "transaction_id"
+        },
+        {
+          "type": "text",
+          "name": "charge_amt"
+        },
+        {
+          "type": "datetime",
+          "name": "tr_date"
+        }
+      ],
+      "outputType": "array"
+    },
+    "dvAdminWallet": {
+      "meta": [
+        {
+          "type": "text",
+          "name": "user_number"
+        },
+        {
+          "type": "text",
+          "name": "details"
+        },
+        {
+          "type": "text",
+          "name": "opening_balance"
+        },
+        {
+          "type": "text",
+          "name": "amount"
+        },
+        {
+          "type": "text",
+          "name": "comm_per"
+        },
+        {
+          "type": "text",
+          "name": "comm_val"
+        },
+        {
+          "type": "text",
+          "name": "other_charge"
+        },
+        {
+          "type": "text",
+          "name": "comm_amt"
+        },
+        {
+          "type": "text",
+          "name": "charge_per"
+        },
+        {
+          "type": "text",
+          "name": "net_amt"
+        },
+        {
+          "type": "text",
+          "name": "closing_balance"
+        },
+        {
+          "type": "text",
+          "name": "tr_mode"
+        },
+        {
+          "type": "text",
+          "name": "tr_type"
+        },
+        {
+          "type": "text",
+          "name": "reason"
+        },
+        {
+          "type": "text",
+          "name": "ip_address"
+        },
+        {
+          "type": "number",
+          "name": "user_type"
+        },
+        {
+          "type": "text",
+          "name": "user_id"
+        },
+        {
+          "type": "number",
+          "name": "transaction_id"
+        },
+        {
+          "type": "text",
+          "name": "charge_amt"
+        },
+        {
+          "type": "datetime",
+          "name": "tr_date"
         }
       ],
       "outputType": "array"
