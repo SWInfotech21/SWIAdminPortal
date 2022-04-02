@@ -56,12 +56,12 @@
                             <td dmx-text="user_id+' | '+user_fname+' | '+user_mobile"></td>
                             <td dmx-text="user_number"></td>
                             <td dmx-text="operator_name"></td>
-                            <td dmx-text="opening_balance"></td>
-                            <td dmx-text="amount"></td>
-                            <td dmx-text="comm_amt"></td>
-                            <td dmx-text="charge_amt"></td>
-                            <td dmx-text="net_amt"></td>
-                            <td dmx-text="closing_balance"></td>
+                            <td dmx-text="opening_balance.toNumber().toFixed(2)"></td>
+                            <td dmx-text="amount.toNumber().toFixed(2)"></td>
+                            <td dmx-text="comm_amt.toNumber().toFixed(2)"></td>
+                            <td dmx-text="charge_amt.toNumber().toFixed(2)"></td>
+                            <td dmx-text="net_amt.toNumber().toFixed(2)"></td>
+                            <td dmx-text="closing_balance.toNumber().toFixed(2)"></td>
 
                             <td dmx-text="api_logs"></td>
                             <td class="fw-bold" dmx-text="status" dmx-class:text-success="status == 'SUCCESS'" dmx-class:text-warning="status == 'PENDING'" dmx-class:text-danger="status == 'FAILURE'" dmx-class:text-primary="status == 'REFUND'"></td>

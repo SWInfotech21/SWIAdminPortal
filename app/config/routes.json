@@ -201,6 +201,11 @@
       "layout": "main"
     },
     {
+      "path": "/update-transaction",
+      "page": "update-transaction",
+      "layout": "main"
+    },
+    {
       "path": "*",
       "page": "404-not-found"
     }

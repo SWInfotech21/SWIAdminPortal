@@ -220,7 +220,8 @@
                           }
                         ],
                         "table": {
-                          "name": "tt_balance"
+                          "name": "tt_balance",
+                          "alias": "tt_balance"
                         },
                         "joins": [
                           {
@@ -242,7 +243,8 @@
                                   "operation": "="
                                 }
                               ]
-                            }
+                            },
+                            "primary": "id"
                           },
                           {
                             "table": "m_operator",
@@ -273,7 +275,8 @@
                                   "operation": "="
                                 }
                               ]
-                            }
+                            },
+                            "primary": "id"
                           },
                           {
                             "table": "m_service",
@@ -294,7 +297,8 @@
                                   "operation": "="
                                 }
                               ]
-                            }
+                            },
+                            "primary": "id"
                           },
                           {
                             "table": "m_users",
@@ -315,7 +319,8 @@
                                   "operation": "="
                                 }
                               ]
-                            }
+                            },
+                            "primary": "id"
                           },
                           {
                             "table": "m_users",
@@ -336,10 +341,11 @@
                                   "operation": "="
                                 }
                               ]
-                            }
+                            },
+                            "primary": "id"
                           }
                         ],
-                        "query": "SELECT tt_balance.id AS table_id, tt_balance.pay_ref_id, tt_balance.user_id AS ac_holder_user_id, tt_balance.old_balance, tt_balance.amount, tt_balance.new_balance, tt_balance.transaction_type, tt_balance.tr_date, tt_balance.crdr_type, tt_balance.remarks, tt_balance.created_by AS transaction_by, tt_rt.user_number AS recharge_number, tt_rt.comm_amt, tt_rt.charge_amt, tt_rt.tr_mode, tt_rt.tr_type, tt_rt.tr_id, tt_rt.operator_ref, tt_rt.api_ref, tt_rt.dtcommamt, tt_rt.dtchargeamt, tt_rt.mdtcommamt, tt_rt.mdtchargeamt, m_op.operator_name, m_service.service_name, m_user.created_by AS parent_id, parent_id.user_fname AS parent_fname, parent_id.user_mobile AS parent_mobile, m_user.user_fname, m_user.user_mobile, tt_balance.netamt, tt_rt.api_response_id, tt_rt.api_logs AS api_name, tt_balance.status\nFROM tt_balance\nINNER JOIN tt_recharge_trans AS tt_rt ON (tt_rt.id = tt_balance.pay_ref_id) INNER JOIN m_operator AS m_op ON (m_op.id = tt_rt.op_id AND m_op.service_id = tt_rt.service_id) INNER JOIN m_service AS m_service ON (m_service.id = tt_rt.service_id) INNER JOIN m_users AS m_user ON (m_user.id = tt_balance.user_id) INNER JOIN m_users AS parent_id ON (parent_id.id = m_user.created_by)\nWHERE tt_rt.tr_date >= :P1 /* {{$_GET.fromdate}} */ AND tt_rt.tr_date <= :P2 /* {{$_GET.todate}} */ AND (m_service.service_name = :P3 /* {{'Mobile'}} */ OR m_service.service_name = :P4 /* {{'DTH'}} */ OR m_service.service_name = :P5 /* {{'Postpaid'}} */)\nORDER BY tt_balance.id DESC",
+                        "query": "SELECT tt_balance.id AS table_id, tt_balance.pay_ref_id, tt_balance.user_id AS ac_holder_user_id, tt_balance.old_balance, tt_balance.amount, tt_balance.new_balance, tt_balance.transaction_type, tt_balance.tr_date, tt_balance.crdr_type, tt_balance.remarks, tt_balance.created_by AS transaction_by, tt_rt.user_number AS recharge_number, tt_rt.comm_amt, tt_rt.charge_amt, tt_rt.tr_mode, tt_rt.tr_type, tt_rt.tr_id, tt_rt.operator_ref, tt_rt.api_ref, tt_rt.dtcommamt, tt_rt.dtchargeamt, tt_rt.mdtcommamt, tt_rt.mdtchargeamt, m_op.operator_name, m_service.service_name, m_user.created_by AS parent_id, parent_id.user_fname AS parent_fname, parent_id.user_mobile AS parent_mobile, m_user.user_fname, m_user.user_mobile, tt_balance.netamt, tt_rt.api_response_id, tt_rt.api_logs AS api_name, tt_balance.status\nFROM tt_balance AS tt_balance\nINNER JOIN tt_recharge_trans AS tt_rt ON (tt_rt.id = tt_balance.pay_ref_id) INNER JOIN m_operator AS m_op ON (m_op.id = tt_rt.op_id AND m_op.service_id = tt_rt.service_id) INNER JOIN m_service AS m_service ON (m_service.id = tt_rt.service_id) INNER JOIN m_users AS m_user ON (m_user.id = tt_balance.user_id) INNER JOIN m_users AS parent_id ON (parent_id.id = m_user.created_by)\nWHERE tt_rt.tr_date >= :P1 /* {{$_GET.fromdate}} */ AND tt_rt.tr_date <= :P2 /* {{$_GET.todate}} */\nORDER BY tt_balance.id DESC",
                         "params": [
                           {
                             "operator": "greater_or_equal",
@@ -352,24 +358,6 @@
                             "type": "expression",
                             "name": ":P2",
                             "value": "{{$_GET.todate}}"
-                          },
-                          {
-                            "operator": "equal",
-                            "type": "expression",
-                            "name": ":P3",
-                            "value": "{{'Mobile'}}"
-                          },
-                          {
-                            "operator": "equal",
-                            "type": "expression",
-                            "name": ":P4",
-                            "value": "{{'DTH'}}"
-                          },
-                          {
-                            "operator": "equal",
-                            "type": "expression",
-                            "name": ":P5",
-                            "value": "{{'Postpaid'}}"
                           }
                         ],
                         "orders": [
@@ -392,7 +380,13 @@
                               "data": {
                                 "table": "tt_rt",
                                 "column": "tr_date",
-                                "type": "datetime"
+                                "type": "datetime",
+                                "columnObj": {
+                                  "type": "timestamp",
+                                  "primary": false,
+                                  "nullable": false,
+                                  "name": "tr_date"
+                                }
                               },
                               "operation": ">="
                             },
@@ -405,59 +399,21 @@
                               "data": {
                                 "table": "tt_rt",
                                 "column": "tr_date",
-                                "type": "datetime"
+                                "type": "datetime",
+                                "columnObj": {
+                                  "type": "timestamp",
+                                  "primary": false,
+                                  "nullable": false,
+                                  "name": "tr_date"
+                                }
                               },
                               "operation": "<="
-                            },
-                            {
-                              "condition": "OR",
-                              "rules": [
-                                {
-                                  "id": "m_service.service_name",
-                                  "field": "m_service.service_name",
-                                  "type": "string",
-                                  "operator": "equal",
-                                  "value": "{{'Mobile'}}",
-                                  "data": {
-                                    "table": "m_service",
-                                    "column": "service_name",
-                                    "type": "text"
-                                  },
-                                  "operation": "="
-                                },
-                                {
-                                  "id": "m_service.service_name",
-                                  "field": "m_service.service_name",
-                                  "type": "string",
-                                  "operator": "equal",
-                                  "value": "{{'DTH'}}",
-                                  "data": {
-                                    "table": "m_service",
-                                    "column": "service_name",
-                                    "type": "text"
-                                  },
-                                  "operation": "="
-                                },
-                                {
-                                  "id": "m_service.service_name",
-                                  "field": "m_service.service_name",
-                                  "type": "string",
-                                  "operator": "equal",
-                                  "value": "{{'Postpaid'}}",
-                                  "data": {
-                                    "table": "m_service",
-                                    "column": "service_name",
-                                    "type": "text"
-                                  },
-                                  "operation": "="
-                                }
-                              ],
-                              "conditional": null
                             }
                           ],
                           "conditional": null,
                           "valid": true
-                        }
+                        },
+                        "primary": "id"
                       }
                     },
                     "output": true,
@@ -812,7 +768,8 @@
                           }
                         ],
                         "table": {
-                          "name": "tt_balance"
+                          "name": "tt_balance",
+                          "alias": "tt_balance"
                         },
                         "joins": [
                           {
@@ -834,7 +791,8 @@
                                   "operation": "="
                                 }
                               ]
-                            }
+                            },
+                            "primary": "id"
                           },
                           {
                             "table": "m_operator",
@@ -865,7 +823,8 @@
                                   "operation": "="
                                 }
                               ]
-                            }
+                            },
+                            "primary": "id"
                           },
                           {
                             "table": "m_service",
@@ -886,7 +845,8 @@
                                   "operation": "="
                                 }
                               ]
-                            }
+                            },
+                            "primary": "id"
                           },
                           {
                             "table": "m_users",
@@ -907,7 +867,8 @@
                                   "operation": "="
                                 }
                               ]
-                            }
+                            },
+                            "primary": "id"
                           },
                           {
                             "table": "m_users",
@@ -928,10 +889,11 @@
                                   "operation": "="
                                 }
                               ]
-                            }
+                            },
+                            "primary": "id"
                           }
                         ],
-                        "query": "SELECT tt_balance.id AS table_id, tt_balance.pay_ref_id, tt_balance.user_id AS ac_holder_user_id, tt_balance.old_balance, tt_balance.amount, tt_balance.new_balance, tt_balance.transaction_type, tt_balance.tr_date, tt_balance.crdr_type, tt_balance.remarks, tt_balance.created_by AS transaction_by, tt_rt.user_number AS recharge_number, tt_rt.comm_amt, tt_rt.charge_amt, tt_rt.tr_mode, tt_rt.tr_type, tt_rt.tr_id, tt_rt.operator_ref, tt_rt.api_ref, tt_rt.dtcommamt, tt_rt.dtchargeamt, tt_rt.mdtcommamt, tt_rt.mdtchargeamt, m_op.operator_name, m_service.service_name, m_user.created_by AS parent_id, parent_id.user_fname AS parent_fname, parent_id.user_mobile AS parent_mobile, m_user.user_fname, m_user.user_mobile, tt_balance.netamt, tt_rt.api_response_id, tt_rt.api_logs AS api_name, tt_balance.status\nFROM tt_balance\nINNER JOIN tt_recharge_trans AS tt_rt ON (tt_rt.id = tt_balance.pay_ref_id) INNER JOIN m_operator AS m_op ON (m_op.id = tt_rt.op_id AND m_op.service_id = tt_rt.service_id) INNER JOIN m_service AS m_service ON (m_service.id = tt_rt.service_id) INNER JOIN m_users AS m_user ON (m_user.id = tt_balance.user_id) INNER JOIN m_users AS parent_id ON (parent_id.id = m_user.created_by)\nWHERE tt_rt.tr_date >= :P1 /* {{$_GET.fromdate}} */ AND tt_rt.tr_date <= :P2 /* {{$_GET.todate}} */ AND tt_rt.status = :P3 /* {{$_GET.selectstatus}} */ AND (m_service.service_name = :P4 /* {{'Mobile'}} */ OR m_service.service_name = :P5 /* {{'DTH'}} */ OR m_service.service_name = :P6 /* {{'Postpaid'}} */)\nORDER BY tt_balance.id DESC",
+                        "query": "SELECT tt_balance.id AS table_id, tt_balance.pay_ref_id, tt_balance.user_id AS ac_holder_user_id, tt_balance.old_balance, tt_balance.amount, tt_balance.new_balance, tt_balance.transaction_type, tt_balance.tr_date, tt_balance.crdr_type, tt_balance.remarks, tt_balance.created_by AS transaction_by, tt_rt.user_number AS recharge_number, tt_rt.comm_amt, tt_rt.charge_amt, tt_rt.tr_mode, tt_rt.tr_type, tt_rt.tr_id, tt_rt.operator_ref, tt_rt.api_ref, tt_rt.dtcommamt, tt_rt.dtchargeamt, tt_rt.mdtcommamt, tt_rt.mdtchargeamt, m_op.operator_name, m_service.service_name, m_user.created_by AS parent_id, parent_id.user_fname AS parent_fname, parent_id.user_mobile AS parent_mobile, m_user.user_fname, m_user.user_mobile, tt_balance.netamt, tt_rt.api_response_id, tt_rt.api_logs AS api_name, tt_balance.status\nFROM tt_balance AS tt_balance\nINNER JOIN tt_recharge_trans AS tt_rt ON (tt_rt.id = tt_balance.pay_ref_id) INNER JOIN m_operator AS m_op ON (m_op.id = tt_rt.op_id AND m_op.service_id = tt_rt.service_id) INNER JOIN m_service AS m_service ON (m_service.id = tt_rt.service_id) INNER JOIN m_users AS m_user ON (m_user.id = tt_balance.user_id) INNER JOIN m_users AS parent_id ON (parent_id.id = m_user.created_by)\nWHERE tt_rt.tr_date >= :P1 /* {{$_GET.fromdate}} */ AND tt_rt.tr_date <= :P2 /* {{$_GET.todate}} */ AND tt_rt.status = :P3 /* {{$_GET.selectstatus}} */\nORDER BY tt_balance.id DESC",
                         "params": [
                           {
                             "operator": "greater_or_equal",
@@ -950,24 +912,6 @@
                             "type": "expression",
                             "name": ":P3",
                             "value": "{{$_GET.selectstatus}}"
-                          },
-                          {
-                            "operator": "equal",
-                            "type": "expression",
-                            "name": ":P4",
-                            "value": "{{'Mobile'}}"
-                          },
-                          {
-                            "operator": "equal",
-                            "type": "expression",
-                            "name": ":P5",
-                            "value": "{{'DTH'}}"
-                          },
-                          {
-                            "operator": "equal",
-                            "type": "expression",
-                            "name": ":P6",
-                            "value": "{{'Postpaid'}}"
                           }
                         ],
                         "orders": [
@@ -990,7 +934,13 @@
                               "data": {
                                 "table": "tt_rt",
                                 "column": "tr_date",
-                                "type": "datetime"
+                                "type": "datetime",
+                                "columnObj": {
+                                  "type": "timestamp",
+                                  "primary": false,
+                                  "nullable": false,
+                                  "name": "tr_date"
+                                }
                               },
                               "operation": ">="
                             },
@@ -1003,7 +953,13 @@
                               "data": {
                                 "table": "tt_rt",
                                 "column": "tr_date",
-                                "type": "datetime"
+                                "type": "datetime",
+                                "columnObj": {
+                                  "type": "timestamp",
+                                  "primary": false,
+                                  "nullable": false,
+                                  "name": "tr_date"
+                                }
                               },
                               "operation": "<="
                             },
@@ -1016,59 +972,21 @@
                               "data": {
                                 "table": "tt_rt",
                                 "column": "status",
-                                "type": "text"
+                                "type": "text",
+                                "columnObj": {
+                                  "type": "string",
+                                  "primary": false,
+                                  "nullable": true,
+                                  "name": "status"
+                                }
                               },
                               "operation": "="
-                            },
-                            {
-                              "condition": "OR",
-                              "rules": [
-                                {
-                                  "id": "m_service.service_name",
-                                  "field": "m_service.service_name",
-                                  "type": "string",
-                                  "operator": "equal",
-                                  "value": "{{'Mobile'}}",
-                                  "data": {
-                                    "table": "m_service",
-                                    "column": "service_name",
-                                    "type": "text"
-                                  },
-                                  "operation": "="
-                                },
-                                {
-                                  "id": "m_service.service_name",
-                                  "field": "m_service.service_name",
-                                  "type": "string",
-                                  "operator": "equal",
-                                  "value": "{{'DTH'}}",
-                                  "data": {
-                                    "table": "m_service",
-                                    "column": "service_name",
-                                    "type": "text"
-                                  },
-                                  "operation": "="
-                                },
-                                {
-                                  "id": "m_service.service_name",
-                                  "field": "m_service.service_name",
-                                  "type": "string",
-                                  "operator": "equal",
-                                  "value": "{{'Postpaid'}}",
-                                  "data": {
-                                    "table": "m_service",
-                                    "column": "service_name",
-                                    "type": "text"
-                                  },
-                                  "operation": "="
-                                }
-                              ],
-                              "conditional": null
                             }
                           ],
                           "conditional": null,
                           "valid": true
-                        }
+                        },
+                        "primary": "id"
                       }
                     },
                     "output": true,
@@ -1427,7 +1345,8 @@
                     }
                   ],
                   "table": {
-                    "name": "tt_balance"
+                    "name": "tt_balance",
+                    "alias": "tt_balance"
                   },
                   "joins": [
                     {
@@ -1449,7 +1368,8 @@
                             "operation": "="
                           }
                         ]
-                      }
+                      },
+                      "primary": "id"
                     },
                     {
                       "table": "m_operator",
@@ -1480,7 +1400,8 @@
                             "operation": "="
                           }
                         ]
-                      }
+                      },
+                      "primary": "id"
                     },
                     {
                       "table": "m_service",
@@ -1501,7 +1422,8 @@
                             "operation": "="
                           }
                         ]
-                      }
+                      },
+                      "primary": "id"
                     },
                     {
                       "table": "m_users",
@@ -1522,7 +1444,8 @@
                             "operation": "="
                           }
                         ]
-                      }
+                      },
+                      "primary": "id"
                     },
                     {
                       "table": "m_users",
@@ -1543,85 +1466,21 @@
                             "operation": "="
                           }
                         ]
-                      }
+                      },
+                      "primary": "id"
                     }
                   ],
-                  "query": "SELECT tt_balance.id AS table_id, tt_balance.pay_ref_id, tt_balance.user_id AS ac_holder_user_id, tt_balance.old_balance, tt_balance.amount, tt_balance.new_balance, tt_balance.transaction_type, tt_balance.tr_date, tt_balance.crdr_type, tt_balance.remarks, tt_balance.created_by AS transaction_by, tt_rt.user_number AS recharge_number, tt_rt.comm_amt, tt_rt.charge_amt, tt_rt.tr_mode, tt_rt.tr_type, tt_rt.tr_id, tt_rt.operator_ref, tt_rt.api_ref, tt_rt.dtcommamt, tt_rt.dtchargeamt, tt_rt.mdtcommamt, tt_rt.mdtchargeamt, m_op.operator_name, m_service.service_name, m_user.created_by AS parent_id, parent_id.user_fname AS parent_fname, parent_id.user_mobile AS parent_mobile, m_user.user_fname, m_user.user_mobile, tt_balance.netamt, tt_rt.api_response_id, tt_rt.api_logs AS api_name, tt_balance.status\nFROM tt_balance\nINNER JOIN tt_recharge_trans AS tt_rt ON (tt_rt.id = tt_balance.pay_ref_id) INNER JOIN m_operator AS m_op ON (m_op.id = tt_rt.op_id AND m_op.service_id = tt_rt.service_id) INNER JOIN m_service AS m_service ON (m_service.id = tt_rt.service_id) INNER JOIN m_users AS m_user ON (m_user.id = tt_balance.user_id) INNER JOIN m_users AS parent_id ON (parent_id.id = m_user.created_by)\nWHERE m_service.service_name = :P1 /* {{'Mobile'}} */ OR m_service.service_name = :P2 /* {{'DTH'}} */ OR m_service.service_name = :P3 /* {{'Postpaid'}} */\nORDER BY tt_balance.id DESC",
-                  "params": [
-                    {
-                      "operator": "equal",
-                      "type": "expression",
-                      "name": ":P1",
-                      "value": "{{'Mobile'}}"
-                    },
-                    {
-                      "operator": "equal",
-                      "type": "expression",
-                      "name": ":P2",
-                      "value": "{{'DTH'}}"
-                    },
-                    {
-                      "operator": "equal",
-                      "type": "expression",
-                      "name": ":P3",
-                      "value": "{{'Postpaid'}}"
-                    }
-                  ],
+                  "query": "SELECT tt_balance.id AS table_id, tt_balance.pay_ref_id, tt_balance.user_id AS ac_holder_user_id, tt_balance.old_balance, tt_balance.amount, tt_balance.new_balance, tt_balance.transaction_type, tt_balance.tr_date, tt_balance.crdr_type, tt_balance.remarks, tt_balance.created_by AS transaction_by, tt_rt.user_number AS recharge_number, tt_rt.comm_amt, tt_rt.charge_amt, tt_rt.tr_mode, tt_rt.tr_type, tt_rt.tr_id, tt_rt.operator_ref, tt_rt.api_ref, tt_rt.dtcommamt, tt_rt.dtchargeamt, tt_rt.mdtcommamt, tt_rt.mdtchargeamt, m_op.operator_name, m_service.service_name, m_user.created_by AS parent_id, parent_id.user_fname AS parent_fname, parent_id.user_mobile AS parent_mobile, m_user.user_fname, m_user.user_mobile, tt_balance.netamt, tt_rt.api_response_id, tt_rt.api_logs AS api_name, tt_balance.status\nFROM tt_balance AS tt_balance\nINNER JOIN tt_recharge_trans AS tt_rt ON (tt_rt.id = tt_balance.pay_ref_id) INNER JOIN m_operator AS m_op ON (m_op.id = tt_rt.op_id AND m_op.service_id = tt_rt.service_id) INNER JOIN m_service AS m_service ON (m_service.id = tt_rt.service_id) INNER JOIN m_users AS m_user ON (m_user.id = tt_balance.user_id) INNER JOIN m_users AS parent_id ON (parent_id.id = m_user.created_by)\nORDER BY tt_balance.id DESC",
+                  "params": [],
                   "orders": [
                     {
                       "table": "tt_balance",
                       "column": "id",
                       "direction": "DESC",
-                      "condition": "",
-                      "recid": 1
+                      "condition": ""
                     }
                   ],
-                  "wheres": {
-                    "condition": "OR",
-                    "rules": [
-                      {
-                        "id": "m_service.service_name",
-                        "field": "m_service.service_name",
-                        "type": "string",
-                        "operator": "equal",
-                        "value": "{{'Mobile'}}",
-                        "data": {
-                          "table": "m_service",
-                          "column": "service_name",
-                          "type": "text"
-                        },
-                        "operation": "="
-                      },
-                      {
-                        "id": "m_service.service_name",
-                        "field": "m_service.service_name",
-                        "type": "string",
-                        "operator": "equal",
-                        "value": "{{'DTH'}}",
-                        "data": {
-                          "table": "m_service",
-                          "column": "service_name",
-                          "type": "text"
-                        },
-                        "operation": "="
-                      },
-                      {
-                        "id": "m_service.service_name",
-                        "field": "m_service.service_name",
-                        "type": "string",
-                        "operator": "equal",
-                        "value": "{{'Postpaid'}}",
-                        "data": {
-                          "table": "m_service",
-                          "column": "service_name",
-                          "type": "text"
-                        },
-                        "operation": "="
-                      }
-                    ],
-                    "conditional": null,
-                    "valid": true
-                  }
+                  "primary": "id"
                 }
               },
               "output": true,

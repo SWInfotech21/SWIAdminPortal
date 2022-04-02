@@ -4110,5 +4110,290 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "updatetransaction": {
+    "dvFetchTrns": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "user_number"
+        },
+        {
+          "type": "text",
+          "name": "details"
+        },
+        {
+          "type": "text",
+          "name": "opening_balance"
+        },
+        {
+          "type": "text",
+          "name": "amount"
+        },
+        {
+          "type": "text",
+          "name": "comm_amt"
+        },
+        {
+          "type": "text",
+          "name": "charge_amt"
+        },
+        {
+          "type": "text",
+          "name": "net_amt"
+        },
+        {
+          "type": "text",
+          "name": "closing_balance"
+        },
+        {
+          "type": "text",
+          "name": "tr_mode"
+        },
+        {
+          "type": "text",
+          "name": "status"
+        },
+        {
+          "type": "text",
+          "name": "tr_id"
+        },
+        {
+          "type": "text",
+          "name": "reason"
+        },
+        {
+          "type": "text",
+          "name": "api_logs"
+        },
+        {
+          "type": "datetime",
+          "name": "tr_date"
+        },
+        {
+          "type": "datetime",
+          "name": "updated_on"
+        },
+        {
+          "type": "text",
+          "name": "extra2"
+        },
+        {
+          "type": "text",
+          "name": "user_id"
+        },
+        {
+          "type": "text",
+          "name": "user_fname"
+        },
+        {
+          "type": "text",
+          "name": "user_mobile"
+        },
+        {
+          "type": "text",
+          "name": "operator_name"
+        },
+        {
+          "type": "text",
+          "name": "service_name"
+        }
+      ],
+      "outputType": "array"
+    },
+    "tableRepeat1": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "user_number"
+        },
+        {
+          "type": "text",
+          "name": "details"
+        },
+        {
+          "type": "text",
+          "name": "opening_balance"
+        },
+        {
+          "type": "text",
+          "name": "amount"
+        },
+        {
+          "type": "text",
+          "name": "comm_amt"
+        },
+        {
+          "type": "text",
+          "name": "charge_amt"
+        },
+        {
+          "type": "text",
+          "name": "net_amt"
+        },
+        {
+          "type": "text",
+          "name": "closing_balance"
+        },
+        {
+          "type": "text",
+          "name": "tr_mode"
+        },
+        {
+          "type": "text",
+          "name": "status"
+        },
+        {
+          "type": "text",
+          "name": "tr_id"
+        },
+        {
+          "type": "text",
+          "name": "reason"
+        },
+        {
+          "type": "text",
+          "name": "api_logs"
+        },
+        {
+          "type": "datetime",
+          "name": "tr_date"
+        },
+        {
+          "type": "datetime",
+          "name": "updated_on"
+        },
+        {
+          "type": "text",
+          "name": "extra2"
+        },
+        {
+          "type": "text",
+          "name": "user_id"
+        },
+        {
+          "type": "text",
+          "name": "user_fname"
+        },
+        {
+          "type": "text",
+          "name": "user_mobile"
+        },
+        {
+          "type": "text",
+          "name": "operator_name"
+        },
+        {
+          "type": "text",
+          "name": "service_name"
+        }
+      ],
+      "outputType": "array"
+    },
+    "ddFetchTrans": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "user_number"
+        },
+        {
+          "type": "text",
+          "name": "details"
+        },
+        {
+          "type": "text",
+          "name": "opening_balance"
+        },
+        {
+          "type": "text",
+          "name": "amount"
+        },
+        {
+          "type": "text",
+          "name": "comm_amt"
+        },
+        {
+          "type": "text",
+          "name": "charge_amt"
+        },
+        {
+          "type": "text",
+          "name": "net_amt"
+        },
+        {
+          "type": "text",
+          "name": "closing_balance"
+        },
+        {
+          "type": "text",
+          "name": "tr_mode"
+        },
+        {
+          "type": "text",
+          "name": "status"
+        },
+        {
+          "type": "text",
+          "name": "tr_id"
+        },
+        {
+          "type": "text",
+          "name": "reason"
+        },
+        {
+          "type": "text",
+          "name": "api_logs"
+        },
+        {
+          "type": "text",
+          "name": "api_ref"
+        },
+        {
+          "type": "datetime",
+          "name": "tr_date"
+        },
+        {
+          "type": "datetime",
+          "name": "updated_on"
+        },
+        {
+          "type": "text",
+          "name": "complain_status"
+        },
+        {
+          "type": "text",
+          "name": "user_id"
+        },
+        {
+          "type": "text",
+          "name": "user_fname"
+        },
+        {
+          "type": "text",
+          "name": "user_mobile"
+        },
+        {
+          "type": "text",
+          "name": "operator_name"
+        },
+        {
+          "type": "text",
+          "name": "service_name"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });

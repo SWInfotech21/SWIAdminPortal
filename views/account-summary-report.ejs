@@ -23,9 +23,9 @@
         </h1>
     </div>
     <div class="col-auto order-2 order-md-1 d-flex align-items-center justify-content-start justify-content-md-center px-0 px-lg-2">
-        <label>Year:</label><input type="number" name="year" id="inpYear" class="w-25" value="2021" required="">
+        <label>Year:</label><input type="number" name="year" id="inpYear" class="w-25" dmx-bind:value="varDateTime.datetime.formatDate('yyyy')" required="">
         &emsp;<label>Month:</label>
-        <select id="selectMonth" name="selectMonth" required="">
+        <select id="selectMonth" name="selectMonth" required="" dmx-bind:value="varDateTime.datetime.formatDate('MM')">
             <option value="">Select</option>
             <option value="01">Jan</option>
             <option value="02">Feb</option>
@@ -44,7 +44,7 @@
             <option value="0">All</option>
         </select>
         &emsp;<button id="btnFilter" class="btn btn-primary btn-sm" dmx-on:click="flowAcSummary.run(); varFilter.setValue(1)">Filter</button>
-        <button id="btnExport" class="btn btn-dark btn-sm">Export</button>
+        <a href="#"><button id="btnExport" class="btn btn-dark btn-sm">Export</button></a>
     </div>
     <div class="col-auto order-1 order-md-3 d-flex align-items-center justify-content-center">
         <form id="formSearchUser" class="sd-search-form">

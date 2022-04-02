@@ -154,5 +154,9 @@
   "complain-browse-tickets.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "update-transaction.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }
