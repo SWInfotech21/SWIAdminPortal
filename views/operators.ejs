@@ -2,14 +2,24 @@
 <dmx-serverconnect id="scService" url="api/Services/Services"></dmx-serverconnect>
 <meta name="ac:route" content="/operators">
 <dmx-serverconnect id="scOperator" url="api/operator/OperatorsFetch" dmx-param:limit="1000"></dmx-serverconnect>
-<dmx-data-view id="dvOperator" dmx-bind:data="scOperator.data.OperatorFetch.data"></dmx-data-view>
+<dmx-data-view id="dvOperator" dmx-bind:data="scOperator.data.OperatorFetch.data" filter="(operator_name.lowercase().contains(formSearchUser.Search.value) || service_name.lowercase().contains(formSearchUser.Search.value) )"></dmx-data-view>
 <dmx-data-detail id="ddOperators" dmx-bind:data="dvOperator.data" key="op_id"></dmx-data-detail>
 <header>
     <div class="container">
         <div class="row">
-            <div class="col">
-                <h1 id="Operator" class="text-center align-self-center">SW Infotech Operators <span class="border-3 ms-2 spinner-border spinner-border-sm" role="status" dmx-show="scOperator.state.executing"></span></h1>
+            <div class="col-12 col-md-auto me-auto ps-4">
+                <h1 id="Operator" class="ms-md-1 mt-md-3 text-dark fs-2 sd-fw-800 d-flex align-items-center">SW Infotech Operators <span class="border-3 ms-2 spinner-border spinner-border-sm" role="status" dmx-show="scOperator.state.executing"></span></h1>
+            </div>
+            <div class="col-auto order-2 order-md-1 d-flex align-items-center justify-content-start justify-content-md-center px-0 px-lg-2">
                 <button id="btnAdd" class="btn btn-primary" dmx-on:click="modalAddOperators.show(); ddOperators.select(0);">Add Operator</button>
+            </div>
+            <div class="col-auto order-1 order-md-3 d-flex align-items-center justify-content-center">
+                <form id="formSearchUser" class="sd-search-form">
+                    <div class="d-flex justify-content-end mb-3 mb-lg-0 mb-md-0">
+                        <input type="text" class="form-control sd-search-input rounded-pill" id="Search" name="Search" placeholder="Search">
+                        <span class="bg-transparent btn position-absolute px-1 py-1"><i class="fas fa-search mb-1 mb-xl-0"></i></span>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

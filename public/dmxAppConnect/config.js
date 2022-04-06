@@ -2471,6 +2471,22 @@ dmx.config({
     "tableRepeat1": {
       "meta": [
         {
+          "name": "$index",
+          "type": "number"
+        },
+        {
+          "name": "$key",
+          "type": "text"
+        },
+        {
+          "name": "$value",
+          "type": "object"
+        },
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
           "type": "text",
           "name": "sms_message"
         },
@@ -2487,16 +2503,79 @@ dmx.config({
           "name": "sms_type"
         },
         {
+          "type": "text",
+          "name": "ip_address"
+        },
+        {
           "type": "boolean",
           "name": "status"
         },
         {
           "type": "text",
           "name": "response"
+        },
+        {
+          "type": "number",
+          "name": "user_id"
         }
       ],
       "outputType": "array"
-    }
+    },
+    "dvSMSReport": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "sms_message"
+        },
+        {
+          "type": "text",
+          "name": "sender_mobile"
+        },
+        {
+          "type": "datetime",
+          "name": "created_on"
+        },
+        {
+          "type": "text",
+          "name": "sms_type"
+        },
+        {
+          "type": "text",
+          "name": "ip_address"
+        },
+        {
+          "type": "boolean",
+          "name": "status"
+        },
+        {
+          "type": "text",
+          "name": "response"
+        },
+        {
+          "type": "number",
+          "name": "user_id"
+        }
+      ],
+      "outputType": "array"
+    },
+    "query": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      },
+      {
+        "type": "text",
+        "name": "offset"
+      }
+    ]
   },
   "adduser": {
     "dtrepeat": {
@@ -2886,6 +2965,10 @@ dmx.config({
     "dvOpAPICode": {
       "meta": [
         {
+          "type": "number",
+          "name": "op_id"
+        },
+        {
           "type": "text",
           "name": "operator_name"
         },
@@ -2900,10 +2983,6 @@ dmx.config({
         {
           "type": "number",
           "name": "tbl_id"
-        },
-        {
-          "type": "number",
-          "name": "op_id"
         },
         {
           "type": "text",
@@ -3041,6 +3120,18 @@ dmx.config({
     },
     "repeatOpAPICodeList": {
       "meta": [
+        {
+          "name": "$index",
+          "type": "number"
+        },
+        {
+          "name": "$key",
+          "type": "text"
+        },
+        {
+          "name": "$value",
+          "type": "object"
+        },
         {
           "type": "number",
           "name": "op_id"
@@ -4394,6 +4485,10 @@ dmx.config({
         }
       ],
       "outputType": "array"
+    },
+    "arr1": {
+      "meta": null,
+      "outputType": "text"
     }
   }
 });

@@ -1,13 +1,13 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="opapicodeupdate" appConnect="local" components="{dmxStateManagement:{},dmxDataTraversal:{},dmxBootstrap5TableGenerator:{},dmxBootstrap5PagingGenerator:{},dmxValidator:{}}" -->
 <meta name="ac:route" content="/op-api-code-update">
-<dmx-query-manager id="qm"></dmx-query-manager>
-<dmx-serverconnect id="scOpAPICode" url="api/operator/OpUpdateAPICode" dmx-param:offset="qm.data.offset" dmx-param:limit="100" dmx-param:sort="qm.data.sort" dmx-param:dir="qm.data.dir"></dmx-serverconnect>
-<dmx-data-detail id="ddOpAPICode" key="op_id" dmx-bind:data="scOpAPICode.data.GetAPICode.data"></dmx-data-detail>
+<dmx-serverconnect id="scOpAPICode" url="api/operator/OpUpdateAPICode"></dmx-serverconnect>
+<dmx-data-view id="dvOpAPICode" dmx-bind:data="scOpAPICode.data.GetAPICode" filter="(service_name.lowercase().contains(formSearchUser.Search.value.lowercase()) || operator_name.lowercase().contains(formSearchUser.Search.value.lowercase()) || api_code1.contains(formSearchUser.Search.value) || api_code2.contains(formSearchUser.Search.value) || api_code3.contains(formSearchUser.Search.value) || api_code4.contains(formSearchUser.Search.value) || api_code5.contains(formSearchUser.Search.value) || api_code6.contains(formSearchUser.Search.value) || api_code7.contains(formSearchUser.Search.value))"></dmx-data-view>
+<dmx-data-detail id="ddOpAPICode" key="op_id" dmx-bind:data="dvOpAPICode.data"></dmx-data-detail>
 <div class="row align-items-center justify-content-between px-4 mb-3 sd-secondary-header mx-0">
     <div class="col-12 col-md-auto me-auto">
         <h1 class="ms-md-1 mt-md-3 text-dark fs-2 sd-fw-800 d-flex align-items-center">
             Operator API Code Update
-            <span class="border-3 ms-2 spinner-border spinner-border-sm" role="status" dmx-show="scPatients.state.executing"></span>
+            <span class="border-3 ms-2 spinner-border spinner-border-sm" role="status" dmx-show="scOpAPICode.state.executing"></span>
         </h1>
     </div>
     <div class="col-auto order-1 order-md-3 d-flex align-items-center justify-content-center">
@@ -29,24 +29,24 @@
                 <table class="table table-sm bg-white table-hover">
                     <thead class="bg-warning">
                         <tr>
-                            <th class="sorting" dmx-on:click="qm.set('sort','tbl_id');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='tbl_id' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='tbl_id' && qm.data.dir == 'desc'">Id</th>
-                            <th class="sorting" dmx-on:click="qm.set('sort','op_id');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='op_id' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='op_id' && qm.data.dir == 'desc'">Op. Id</th>
-                            <th class="sorting" dmx-on:click="qm.set('sort','service_name');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='service_name' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='service_name' && qm.data.dir == 'desc'">Service name</th>
-                            <th class="sorting" dmx-on:click="qm.set('sort','image');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='image' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='image' && qm.data.dir == 'desc'">Image</th>
-                            <th class="sorting" dmx-on:click="qm.set('sort','operator_name');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='operator_name' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='operator_name' && qm.data.dir == 'desc'">Operator</th>
-                            <th class="sorting" dmx-on:click="qm.set('sort','api_code1');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='api_code1' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='api_code1' && qm.data.dir == 'desc'">Our Code</th>
-                            <th class="sorting" dmx-on:click="qm.set('sort','api_code2');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='api_code2' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='api_code2' && qm.data.dir == 'desc'">Sonakshi</th>
-                            <th class="sorting" dmx-on:click="qm.set('sort','api_code3');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='api_code3' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='api_code3' && qm.data.dir == 'desc'">M-Robotic</th>
-                            <th class="sorting" dmx-on:click="qm.set('sort','api_code4');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='api_code4' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='api_code4' && qm.data.dir == 'desc'">Money Art</th>
-                            <th class="sorting" dmx-on:click="qm.set('sort','api_code5');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='api_code5' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='api_code5' && qm.data.dir == 'desc'">Ambika</th>
-                            <th class="sorting" dmx-on:click="qm.set('sort','api_code6');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='api_code6' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='api_code6' && qm.data.dir == 'desc'">Rathod</th>
-                            <th class="sorting" dmx-on:click="qm.set('sort','api_code7');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='api_code7' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='api_code7' && qm.data.dir == 'desc'">Utility Hub</th>
+                            <th>#</th>
+                            <th>Op. Id</th>
+                            <th>Service name</th>
+                            <th>Image</th>
+                            <th>Operator</th>
+                            <th>Our Code</th>
+                            <th>Sonakshi</th>
+                            <th>M-Robotic</th>
+                            <th>Money Art</th>
+                            <th>Ambika</th>
+                            <th>Rathod</th>
+                            <th>Utility Hub</th>
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody is="dmx-repeat" dmx-generator="bs5paging" dmx-bind:repeat="scOpAPICode.data.GetAPICode.data" id="repeatOpAPICodeList">
+                    <tbody is="dmx-repeat" dmx-generator="bs5paging" dmx-bind:repeat="dvOpAPICode.data" id="repeatOpAPIop_idCodeList" key="op_id">
                         <tr>
-                            <td>{{tbl_id}}</td>
+                            <td>{{$index+1}}</td>
                             <td dmx-text="op_id"></td>
                             <td dmx-text="service_name"></td>
                             <td>
@@ -72,23 +72,6 @@
 
         </div>
     </div>
-    <ul class="pagination" dmx-populate="content.scOpAPICode.data.GetAPICode" dmx-state="qm" dmx-offset="offset" dmx-generator="bs5paging">
-        <li class="page-item" dmx-class:disabled="content.scOpAPICode.data.GetAPICode.page.current == 1" aria-label="First">
-            <a href="javascript:void(0)" class="page-link" dmx-on:click="qm.set('offset',content.scOpAPICode.data.GetAPICode.page.offset.first)"><span aria-hidden="true">&lsaquo;&lsaquo;</span></a>
-        </li>
-        <li class="page-item" dmx-class:disabled="content.scOpAPICode.data.GetAPICode.page.current == 1" aria-label="Previous">
-            <a href="javascript:void(0)" class="page-link" dmx-on:click="qm.set('offset',content.scOpAPICode.data.GetAPICode.page.offset.prev)"><span aria-hidden="true">&lsaquo;</span></a>
-        </li>
-        <li class="page-item" dmx-class:active="title == content.scOpAPICode.data.GetAPICode.current" dmx-class:disabled="!active" dmx-repeat="content.scOpAPICode.data.GetAPICode.getServerConnectPagination(2,1,'...')">
-            <a href="javascript:void(0)" class="page-link" dmx-on:click="qm.set('offset',(page-1)*content.scOpAPICode.data.GetAPICode.limit)">{{title}}</a>
-        </li>
-        <li class="page-item" dmx-class:disabled="content.scOpAPICode.data.GetAPICode.page.current ==  content.scOpAPICode.data.GetAPICode.page.total" aria-label="Next">
-            <a href="javascript:void(0)" class="page-link" dmx-on:click="qm.set('offset',content.scOpAPICode.data.GetAPICode.page.offset.next)"><span aria-hidden="true">&rsaquo;</span></a>
-        </li>
-        <li class="page-item" dmx-class:disabled="content.scOpAPICode.data.GetAPICode.page.current ==  content.scOpAPICode.data.GetAPICode.page.total" aria-label="Last">
-            <a href="javascript:void(0)" class="page-link" dmx-on:click="qm.set('offset',content.scOpAPICode.data.GetAPICode.page.offset.last)"><span aria-hidden="true">&rsaquo;&rsaquo;</span></a>
-        </li>
-    </ul>
 </div>
 <!-- Modal Add Operator API Code -->
 <div class="modal fade" id="modalAddEditOpUp" is="dmx-bs5-modal" tabindex="-1" nokeyboard="true" nocloseonclick="true">

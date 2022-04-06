@@ -8,11 +8,6 @@
       {
         "type": "text",
         "fieldName": "transid",
-        "options": {
-          "rules": {
-            "core:required": {}
-          }
-        },
         "name": "transid"
       },
       {
@@ -69,7 +64,7 @@
             "write"
           ],
           "loginUrl": "/login",
-          "forbiddenUrl": "/403-update"
+          "forbiddenUrl": "/403-forbidden"
         }
       },
       {
@@ -1216,7 +1211,7 @@
                                 "table": "tt_balance",
                                 "column": "created_by",
                                 "type": "number",
-                                "value": "{{GetRechTrans.user_id}}"
+                                "value": "{{identity}}"
                               },
                               {
                                 "table": "tt_balance",
@@ -1239,7 +1234,7 @@
                             ],
                             "table": "tt_balance",
                             "returning": "id",
-                            "query": "INSERT INTO tt_balance\n(user_id, old_balance, amount, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on, netamt, status) VALUES (:P1 /* {{GetRechTrans.user_id}} */, :P2 /* {{GetRechTrans.balance_amt}} */, :P3 /* {{GetRechTrans.amount}} */, :P4 /* {{RTClosingBal}} */, :P5 /* {{'Recharge Refund'}} */, :P6 /* {{NOW}} */, :P7 /* {{$_SERVER.REMOTE_ADDR}} */, :P8 /* {{'Credit'}} */, :P9 /* {{GetRechTrans.id}} */, :P10 /* {{'Number: '+GetRechTrans.user_number+' | Amount: '+GetRechTrans.amount+' | Recharge Refund | Ref. Id: '+GetRechTrans.id+' | Order Id: '+GetRechTrans.tr_id+' | Comm Per: '+GetRechTrans.comm_per+' | Comm Val: '+GetRechTrans.comm_val+' | Charge Per: '+GetRechTrans.charge_per+' | Charge Val:  '+GetRechTrans.other_charge+' | GST: 00.00 | TDS: 00.00 | Net Amt. '+GetRechTrans.net_amt}} */, :P11 /* {{GetRechTrans.user_id}} */, :P12 /* {{NOW}} */, :P13 /* {{GetRechTrans.net_amt}} */, :P14 /* {{'REFUND'}} */)",
+                            "query": "INSERT INTO tt_balance\n(user_id, old_balance, amount, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on, netamt, status) VALUES (:P1 /* {{GetRechTrans.user_id}} */, :P2 /* {{GetRechTrans.balance_amt}} */, :P3 /* {{GetRechTrans.amount}} */, :P4 /* {{RTClosingBal}} */, :P5 /* {{'Recharge Refund'}} */, :P6 /* {{NOW}} */, :P7 /* {{$_SERVER.REMOTE_ADDR}} */, :P8 /* {{'Credit'}} */, :P9 /* {{GetRechTrans.id}} */, :P10 /* {{'Number: '+GetRechTrans.user_number+' | Amount: '+GetRechTrans.amount+' | Recharge Refund | Ref. Id: '+GetRechTrans.id+' | Order Id: '+GetRechTrans.tr_id+' | Comm Per: '+GetRechTrans.comm_per+' | Comm Val: '+GetRechTrans.comm_val+' | Charge Per: '+GetRechTrans.charge_per+' | Charge Val:  '+GetRechTrans.other_charge+' | GST: 00.00 | TDS: 00.00 | Net Amt. '+GetRechTrans.net_amt}} */, :P11 /* {{identity}} */, :P12 /* {{NOW}} */, :P13 /* {{GetRechTrans.net_amt}} */, :P14 /* {{'REFUND'}} */)",
                             "params": [
                               {
                                 "name": ":P1",
@@ -1294,7 +1289,7 @@
                               {
                                 "name": ":P11",
                                 "type": "expression",
-                                "value": "{{GetRechTrans.user_id}}"
+                                "value": "{{identity}}"
                               },
                               {
                                 "name": ":P12",
@@ -1559,7 +1554,7 @@
                                         "table": "t_charge_cal",
                                         "column": "created_by",
                                         "type": "number",
-                                        "value": "{{GetRechTrans.user_id}}"
+                                        "value": "{{identity}}"
                                       },
                                       {
                                         "table": "t_charge_cal",
@@ -1570,7 +1565,7 @@
                                     ],
                                     "table": "t_charge_cal",
                                     "returning": "id",
-                                    "query": "INSERT INTO t_charge_cal\n(user_id, old_balance, amount, netamt, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on) VALUES (:P1 /* {{GetRechTrans.ds_id}} */, :P2 /* {{GetDT.dt_balance}} */, :P3 /* {{GetRechTrans.amount}} */, :P4 /* {{DTNetAmt}} */, :P5 /* {{DTClosingBal}} */, :P6 /* {{'Recharge Comm Reversal'}} */, :P7 /* {{NOW}} */, :P8 /* {{$_SERVER.REMOTE_ADDR}} */, :P9 /* {{'Debit'}} */, :P10 /* {{GetRechTrans.id}} */, :P11 /* {{'Recharge Comm Reversal | Amount:  '+GetRechTrans.amount+' | Charge & Comm Debit: '+DTNetAmt+' | Ref. Id:\\n '+GetRechTrans.id}} */, :P12 /* {{GetRechTrans.user_id}} */, :P13 /* {{NOW}} */)",
+                                    "query": "INSERT INTO t_charge_cal\n(user_id, old_balance, amount, netamt, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on) VALUES (:P1 /* {{GetRechTrans.ds_id}} */, :P2 /* {{GetDT.dt_balance}} */, :P3 /* {{GetRechTrans.amount}} */, :P4 /* {{DTNetAmt}} */, :P5 /* {{DTClosingBal}} */, :P6 /* {{'Recharge Comm Reversal'}} */, :P7 /* {{NOW}} */, :P8 /* {{$_SERVER.REMOTE_ADDR}} */, :P9 /* {{'Debit'}} */, :P10 /* {{GetRechTrans.id}} */, :P11 /* {{'Recharge Comm Reversal | Amount:  '+GetRechTrans.amount+' | Charge & Comm Debit: '+DTNetAmt+' | Ref. Id:\\n '+GetRechTrans.id}} */, :P12 /* {{identity}} */, :P13 /* {{NOW}} */)",
                                     "params": [
                                       {
                                         "name": ":P1",
@@ -1630,7 +1625,7 @@
                                       {
                                         "name": ":P12",
                                         "type": "expression",
-                                        "value": "{{GetRechTrans.user_id}}"
+                                        "value": "{{identity}}"
                                       },
                                       {
                                         "name": ":P13",
@@ -1890,7 +1885,7 @@
                                         "table": "t_charge_cal",
                                         "column": "created_by",
                                         "type": "number",
-                                        "value": "{{GetRechTrans.user_id}}"
+                                        "value": "{{identity}}"
                                       },
                                       {
                                         "table": "t_charge_cal",
@@ -1901,7 +1896,7 @@
                                     ],
                                     "table": "t_charge_cal",
                                     "returning": "id",
-                                    "query": "INSERT INTO t_charge_cal\n(user_id, old_balance, amount, netamt, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on) VALUES (:P1 /* {{GetRechTrans.md_id}} */, :P2 /* {{GetMDT.mdt_balance}} */, :P3 /* {{GetRechTrans.amount}} */, :P4 /* {{MDTNetAmt}} */, :P5 /* {{MDTClosingBal}} */, :P6 /* {{'Recharge Comm Reversal'}} */, :P7 /* {{NOW}} */, :P8 /* {{$_SERVER.REMOTE_ADDR}} */, :P9 /* {{'Debit'}} */, :P10 /* {{GetRechTrans.id}} */, :P11 /* {{'Recharge Comm Reversal | Amount:  '+GetRechTrans.amount+' | Charge & Comm Debit: '+MDTNetAmt+' | Ref. Id:\\n '+GetRechTrans.id}} */, :P12 /* {{GetRechTrans.user_id}} */, :P13 /* {{NOW}} */)",
+                                    "query": "INSERT INTO t_charge_cal\n(user_id, old_balance, amount, netamt, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on) VALUES (:P1 /* {{GetRechTrans.md_id}} */, :P2 /* {{GetMDT.mdt_balance}} */, :P3 /* {{GetRechTrans.amount}} */, :P4 /* {{MDTNetAmt}} */, :P5 /* {{MDTClosingBal}} */, :P6 /* {{'Recharge Comm Reversal'}} */, :P7 /* {{NOW}} */, :P8 /* {{$_SERVER.REMOTE_ADDR}} */, :P9 /* {{'Debit'}} */, :P10 /* {{GetRechTrans.id}} */, :P11 /* {{'Recharge Comm Reversal | Amount:  '+GetRechTrans.amount+' | Charge & Comm Debit: '+MDTNetAmt+' | Ref. Id:\\n '+GetRechTrans.id}} */, :P12 /* {{identity}} */, :P13 /* {{NOW}} */)",
                                     "params": [
                                       {
                                         "name": ":P1",
@@ -1961,7 +1956,7 @@
                                       {
                                         "name": ":P12",
                                         "type": "expression",
-                                        "value": "{{GetRechTrans.user_id}}"
+                                        "value": "{{identity}}"
                                       },
                                       {
                                         "name": ":P13",
@@ -2257,7 +2252,7 @@
                                 "table": "tt_balance",
                                 "column": "created_by",
                                 "type": "number",
-                                "value": "{{GetRechTrans.user_id}}"
+                                "value": "{{identity}}"
                               },
                               {
                                 "table": "tt_balance",
@@ -2280,7 +2275,7 @@
                             ],
                             "table": "tt_balance",
                             "returning": "id",
-                            "query": "INSERT INTO tt_balance\n(user_id, old_balance, amount, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on, netamt, status) VALUES (:P1 /* {{GetRechTrans.user_id}} */, :P2 /* {{GetRechTrans.balance_amt}} */, :P3 /* {{GetRechTrans.amount}} */, :P4 /* {{RTClosingBal}} */, :P5 /* {{'Recharge'}} */, :P6 /* {{NOW}} */, :P7 /* {{$_SERVER.REMOTE_ADDR}} */, :P8 /* {{'Debit'}} */, :P9 /* {{GetRechTrans.id}} */, :P10 /* {{'Number: '+GetRechTrans.user_number+' | Amount: '+GetRechTrans.amount+' | Recharge Refund | Ref. Id: '+GetRechTrans.id+' | Order Id: '+GetRechTrans.tr_id+' | Comm Per: '+GetRechTrans.comm_per+' | Comm Val: '+GetRechTrans.comm_val+' | Charge Per: '+GetRechTrans.charge_per+' | Charge Val:  '+GetRechTrans.other_charge+' | GST: 00.00 | TDS: 00.00 | Net Amt. '+GetRechTrans.net_amt}} */, :P11 /* {{GetRechTrans.user_id}} */, :P12 /* {{NOW}} */, :P13 /* {{GetRechTrans.net_amt}} */, :P14 /* {{'SUCCESS'}} */)",
+                            "query": "INSERT INTO tt_balance\n(user_id, old_balance, amount, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on, netamt, status) VALUES (:P1 /* {{GetRechTrans.user_id}} */, :P2 /* {{GetRechTrans.balance_amt}} */, :P3 /* {{GetRechTrans.amount}} */, :P4 /* {{RTClosingBal}} */, :P5 /* {{'Recharge'}} */, :P6 /* {{NOW}} */, :P7 /* {{$_SERVER.REMOTE_ADDR}} */, :P8 /* {{'Debit'}} */, :P9 /* {{GetRechTrans.id}} */, :P10 /* {{'Number: '+GetRechTrans.user_number+' | Amount: '+GetRechTrans.amount+' | Recharge Refund | Ref. Id: '+GetRechTrans.id+' | Order Id: '+GetRechTrans.tr_id+' | Comm Per: '+GetRechTrans.comm_per+' | Comm Val: '+GetRechTrans.comm_val+' | Charge Per: '+GetRechTrans.charge_per+' | Charge Val:  '+GetRechTrans.other_charge+' | GST: 00.00 | TDS: 00.00 | Net Amt. '+GetRechTrans.net_amt}} */, :P11 /* {{identity}} */, :P12 /* {{NOW}} */, :P13 /* {{GetRechTrans.net_amt}} */, :P14 /* {{'SUCCESS'}} */)",
                             "params": [
                               {
                                 "name": ":P1",
@@ -2335,7 +2330,7 @@
                               {
                                 "name": ":P11",
                                 "type": "expression",
-                                "value": "{{GetRechTrans.user_id}}"
+                                "value": "{{identity}}"
                               },
                               {
                                 "name": ":P12",
@@ -2600,7 +2595,7 @@
                                         "table": "t_charge_cal",
                                         "column": "created_by",
                                         "type": "number",
-                                        "value": "{{GetRechTrans.user_id}}"
+                                        "value": "{{identity}}"
                                       },
                                       {
                                         "table": "t_charge_cal",
@@ -2611,7 +2606,7 @@
                                     ],
                                     "table": "t_charge_cal",
                                     "returning": "id",
-                                    "query": "INSERT INTO t_charge_cal\n(user_id, old_balance, amount, netamt, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on) VALUES (:P1 /* {{GetRechTrans.ds_id}} */, :P2 /* {{GetDT.dt_balance}} */, :P3 /* {{GetRechTrans.amount}} */, :P4 /* {{DTNetAmt}} */, :P5 /* {{DTClosingBal}} */, :P6 /* {{'Recharge Comm'}} */, :P7 /* {{NOW}} */, :P8 /* {{$_SERVER.REMOTE_ADDR}} */, :P9 /* {{'Credit'}} */, :P10 /* {{GetRechTrans.id}} */, :P11 /* {{'Recharge Comm | Amount:  '+GetRechTrans.amount+' | Charge & Comm Debit: '+DTNetAmt+' | Ref. Id:\\n '+GetRechTrans.id}} */, :P12 /* {{GetRechTrans.user_id}} */, :P13 /* {{NOW}} */)",
+                                    "query": "INSERT INTO t_charge_cal\n(user_id, old_balance, amount, netamt, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on) VALUES (:P1 /* {{GetRechTrans.ds_id}} */, :P2 /* {{GetDT.dt_balance}} */, :P3 /* {{GetRechTrans.amount}} */, :P4 /* {{DTNetAmt}} */, :P5 /* {{DTClosingBal}} */, :P6 /* {{'Recharge Comm'}} */, :P7 /* {{NOW}} */, :P8 /* {{$_SERVER.REMOTE_ADDR}} */, :P9 /* {{'Credit'}} */, :P10 /* {{GetRechTrans.id}} */, :P11 /* {{'Recharge Comm | Amount:  '+GetRechTrans.amount+' | Charge & Comm Debit: '+DTNetAmt+' | Ref. Id:\\n '+GetRechTrans.id}} */, :P12 /* {{identity}} */, :P13 /* {{NOW}} */)",
                                     "params": [
                                       {
                                         "name": ":P1",
@@ -2671,7 +2666,7 @@
                                       {
                                         "name": ":P12",
                                         "type": "expression",
-                                        "value": "{{GetRechTrans.user_id}}"
+                                        "value": "{{identity}}"
                                       },
                                       {
                                         "name": ":P13",
@@ -2931,7 +2926,7 @@
                                         "table": "t_charge_cal",
                                         "column": "created_by",
                                         "type": "number",
-                                        "value": "{{GetRechTrans.user_id}}"
+                                        "value": "{{identity}}"
                                       },
                                       {
                                         "table": "t_charge_cal",
@@ -2942,7 +2937,7 @@
                                     ],
                                     "table": "t_charge_cal",
                                     "returning": "id",
-                                    "query": "INSERT INTO t_charge_cal\n(user_id, old_balance, amount, netamt, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on) VALUES (:P1 /* {{GetRechTrans.md_id}} */, :P2 /* {{GetMDT.mdt_balance}} */, :P3 /* {{GetRechTrans.amount}} */, :P4 /* {{MDTNetAmt}} */, :P5 /* {{MDTClosingBal}} */, :P6 /* {{'Recharge Comm'}} */, :P7 /* {{NOW}} */, :P8 /* {{$_SERVER.REMOTE_ADDR}} */, :P9 /* {{'Credit'}} */, :P10 /* {{GetRechTrans.id}} */, :P11 /* {{'Recharge Comm | Amount:  '+GetRechTrans.amount+' | Charge & Comm Debit: '+MDTNetAmt+' | Ref. Id:\\n '+GetRechTrans.id}} */, :P12 /* {{GetRechTrans.user_id}} */, :P13 /* {{NOW}} */)",
+                                    "query": "INSERT INTO t_charge_cal\n(user_id, old_balance, amount, netamt, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on) VALUES (:P1 /* {{GetRechTrans.md_id}} */, :P2 /* {{GetMDT.mdt_balance}} */, :P3 /* {{GetRechTrans.amount}} */, :P4 /* {{MDTNetAmt}} */, :P5 /* {{MDTClosingBal}} */, :P6 /* {{'Recharge Comm'}} */, :P7 /* {{NOW}} */, :P8 /* {{$_SERVER.REMOTE_ADDR}} */, :P9 /* {{'Credit'}} */, :P10 /* {{GetRechTrans.id}} */, :P11 /* {{'Recharge Comm | Amount:  '+GetRechTrans.amount+' | Charge & Comm Debit: '+MDTNetAmt+' | Ref. Id:\\n '+GetRechTrans.id}} */, :P12 /* {{identity}} */, :P13 /* {{NOW}} */)",
                                     "params": [
                                       {
                                         "name": ":P1",
@@ -3002,7 +2997,7 @@
                                       {
                                         "name": ":P12",
                                         "type": "expression",
-                                        "value": "{{GetRechTrans.user_id}}"
+                                        "value": "{{identity}}"
                                       },
                                       {
                                         "name": ":P13",
@@ -3102,6 +3097,18 @@
                 "output": true
               }
             ]
+          },
+          "else": {
+            "steps": {
+              "name": "TPIN",
+              "module": "core",
+              "action": "response",
+              "options": {
+                "status": 403,
+                "data": "T-Pin Mismatched"
+              },
+              "output": true
+            }
           }
         },
         "outputType": "boolean"

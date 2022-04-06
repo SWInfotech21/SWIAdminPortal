@@ -37,7 +37,7 @@
       {
         "name": "GetAPICode",
         "module": "dbconnector",
-        "action": "paged",
+        "action": "select",
         "options": {
           "sql": {
             "type": "SELECT",
@@ -106,7 +106,8 @@
               }
             ],
             "table": {
-              "name": "m_operator"
+              "name": "m_operator",
+              "alias": "m_operator"
             },
             "joins": [
               {
@@ -128,7 +129,8 @@
                       "operation": "="
                     }
                   ]
-                }
+                },
+                "primary": "id"
               },
               {
                 "table": "t_op_api_rel",
@@ -149,7 +151,8 @@
                       "operation": "="
                     }
                   ]
-                }
+                },
+                "primary": "id"
               }
             ],
             "orders": [
@@ -166,7 +169,7 @@
                 "recid": 2
               }
             ],
-            "query": "SELECT m_operator.id AS op_id, m_operator.operator_name, m_operator.image, m_service.service_name, t_op_api_rel.id AS tbl_id, t_op_api_rel.api_code1, t_op_api_rel.api_code2, t_op_api_rel.api_code3, t_op_api_rel.api_code4, t_op_api_rel.api_code5, t_op_api_rel.api_code6, t_op_api_rel.api_code7, t_op_api_rel.api_code8, t_op_api_rel.api_code9, t_op_api_rel.api_code10\nFROM m_operator\nLEFT JOIN m_service AS m_service ON (m_service.id = m_operator.service_id) LEFT JOIN t_op_api_rel AS t_op_api_rel ON (t_op_api_rel.op_id = m_operator.id)\nWHERE m_operator.status = 1 AND m_service.is_active = 1\nORDER BY m_service.id ASC, m_operator.operator_name ASC",
+            "query": "SELECT m_operator.id AS op_id, m_operator.operator_name, m_operator.image, m_service.service_name, t_op_api_rel.id AS tbl_id, t_op_api_rel.api_code1, t_op_api_rel.api_code2, t_op_api_rel.api_code3, t_op_api_rel.api_code4, t_op_api_rel.api_code5, t_op_api_rel.api_code6, t_op_api_rel.api_code7, t_op_api_rel.api_code8, t_op_api_rel.api_code9, t_op_api_rel.api_code10\nFROM m_operator AS m_operator\nLEFT JOIN m_service AS m_service ON (m_service.id = m_operator.service_id) LEFT JOIN t_op_api_rel AS t_op_api_rel ON (t_op_api_rel.op_id = m_operator.id)\nWHERE m_operator.status = 1 AND m_service.is_active = 1\nORDER BY m_service.id ASC, m_operator.operator_name ASC",
             "params": [],
             "wheres": {
               "condition": "AND",
@@ -200,128 +203,76 @@
               ],
               "conditional": null,
               "valid": true
-            }
+            },
+            "primary": "id"
           },
           "connection": "postgres_gcpServer"
         },
         "output": true,
         "meta": [
           {
-            "name": "offset",
-            "type": "number"
+            "type": "number",
+            "name": "op_id"
           },
           {
-            "name": "limit",
-            "type": "number"
+            "type": "text",
+            "name": "operator_name"
           },
           {
-            "name": "total",
-            "type": "number"
+            "type": "text",
+            "name": "image"
           },
           {
-            "name": "page",
-            "type": "object",
-            "sub": [
-              {
-                "name": "offset",
-                "type": "object",
-                "sub": [
-                  {
-                    "name": "first",
-                    "type": "number"
-                  },
-                  {
-                    "name": "prev",
-                    "type": "number"
-                  },
-                  {
-                    "name": "next",
-                    "type": "number"
-                  },
-                  {
-                    "name": "last",
-                    "type": "number"
-                  }
-                ]
-              },
-              {
-                "name": "current",
-                "type": "number"
-              },
-              {
-                "name": "total",
-                "type": "number"
-              }
-            ]
+            "type": "text",
+            "name": "service_name"
           },
           {
-            "name": "data",
-            "type": "array",
-            "sub": [
-              {
-                "type": "number",
-                "name": "op_id"
-              },
-              {
-                "type": "text",
-                "name": "operator_name"
-              },
-              {
-                "type": "text",
-                "name": "image"
-              },
-              {
-                "type": "text",
-                "name": "service_name"
-              },
-              {
-                "type": "number",
-                "name": "tbl_id"
-              },
-              {
-                "type": "text",
-                "name": "api_code1"
-              },
-              {
-                "type": "text",
-                "name": "api_code2"
-              },
-              {
-                "type": "text",
-                "name": "api_code3"
-              },
-              {
-                "type": "text",
-                "name": "api_code4"
-              },
-              {
-                "type": "text",
-                "name": "api_code5"
-              },
-              {
-                "type": "text",
-                "name": "api_code6"
-              },
-              {
-                "type": "text",
-                "name": "api_code7"
-              },
-              {
-                "type": "text",
-                "name": "api_code8"
-              },
-              {
-                "type": "text",
-                "name": "api_code9"
-              },
-              {
-                "type": "text",
-                "name": "api_code10"
-              }
-            ]
+            "type": "number",
+            "name": "tbl_id"
+          },
+          {
+            "type": "text",
+            "name": "api_code1"
+          },
+          {
+            "type": "text",
+            "name": "api_code2"
+          },
+          {
+            "type": "text",
+            "name": "api_code3"
+          },
+          {
+            "type": "text",
+            "name": "api_code4"
+          },
+          {
+            "type": "text",
+            "name": "api_code5"
+          },
+          {
+            "type": "text",
+            "name": "api_code6"
+          },
+          {
+            "type": "text",
+            "name": "api_code7"
+          },
+          {
+            "type": "text",
+            "name": "api_code8"
+          },
+          {
+            "type": "text",
+            "name": "api_code9"
+          },
+          {
+            "type": "text",
+            "name": "api_code10"
           }
         ],
-        "outputType": "object"
+        "outputType": "array",
+        "type": "dbconnector_select"
       }
     ]
   }

@@ -3,11 +3,11 @@
     "$_GET": [
       {
         "type": "text",
-        "name": "offset"
+        "name": "fromdate"
       },
       {
         "type": "text",
-        "name": "limit"
+        "name": "todate"
       },
       {
         "type": "text",
@@ -16,14 +16,6 @@
       {
         "type": "text",
         "name": "dir"
-      },
-      {
-        "type": "text",
-        "name": "fromdate"
-      },
-      {
-        "type": "text",
-        "name": "todate"
       }
     ]
   },
@@ -45,11 +37,15 @@
       {
         "name": "FetchSMSReport",
         "module": "dbconnector",
-        "action": "paged",
+        "action": "select",
         "options": {
           "sql": {
             "type": "SELECT",
             "columns": [
+              {
+                "table": "t_sms_log",
+                "column": "id"
+              },
               {
                 "table": "t_sms_log",
                 "column": "sms_message"
@@ -68,32 +64,27 @@
               },
               {
                 "table": "t_sms_log",
+                "column": "ip_address"
+              },
+              {
+                "table": "t_sms_log",
                 "column": "status"
               },
               {
                 "table": "t_sms_log",
                 "column": "response"
+              },
+              {
+                "table": "t_sms_log",
+                "column": "user_id"
               }
             ],
             "table": {
-              "name": "t_sms_log"
+              "name": "t_sms_log",
+              "alias": "t_sms_log"
             },
+            "primary": "id",
             "joins": [],
-            "query": "SELECT sms_message, sender_mobile, created_on, sms_type, status, response\nFROM t_sms_log\nWHERE created_on >= :P1 /* {{$_GET.fromdate}} */ AND created_on <= :P2 /* {{$_GET.todate}} */",
-            "params": [
-              {
-                "operator": "greater_or_equal",
-                "type": "expression",
-                "name": ":P1",
-                "value": "{{$_GET.fromdate}}"
-              },
-              {
-                "operator": "less_or_equal",
-                "type": "expression",
-                "name": ":P2",
-                "value": "{{$_GET.todate}}"
-              }
-            ],
             "wheres": {
               "condition": "AND",
               "rules": [
@@ -101,117 +92,93 @@
                   "id": "t_sms_log.created_on",
                   "field": "t_sms_log.created_on",
                   "type": "datetime",
-                  "operator": "greater_or_equal",
-                  "value": "{{$_GET.fromdate}}",
+                  "operator": "between",
+                  "value": [
+                    "{{$_GET.fromdate}}",
+                    "{{$_GET.todate}}"
+                  ],
                   "data": {
                     "table": "t_sms_log",
                     "column": "created_on",
-                    "type": "datetime"
+                    "type": "datetime",
+                    "columnObj": {
+                      "type": "timestamp",
+                      "primary": false,
+                      "nullable": false,
+                      "name": "created_on"
+                    }
                   },
-                  "operation": ">="
-                },
-                {
-                  "id": "t_sms_log.created_on",
-                  "field": "t_sms_log.created_on",
-                  "type": "datetime",
-                  "operator": "less_or_equal",
-                  "value": "{{$_GET.todate}}",
-                  "data": {
-                    "table": "t_sms_log",
-                    "column": "created_on",
-                    "type": "datetime"
-                  },
-                  "operation": "<="
+                  "operation": "BETWEEN"
                 }
               ],
               "conditional": null,
               "valid": true
-            }
+            },
+            "orders": [
+              {
+                "table": "t_sms_log",
+                "column": "id",
+                "direction": "DESC"
+              }
+            ],
+            "query": "SELECT id, sms_message, sender_mobile, created_on, sms_type, ip_address, status, response, user_id\nFROM t_sms_log AS t_sms_log\nWHERE created_on BETWEEN :P1 /* {{$_GET.fromdate}} */ AND :P2 /* {{$_GET.todate}} */\nORDER BY id DESC",
+            "params": [
+              {
+                "operator": "between",
+                "type": "expression",
+                "name": ":P1",
+                "value": "{{$_GET.fromdate}}"
+              },
+              {
+                "operator": "between",
+                "type": "expression",
+                "name": ":P2",
+                "value": "{{$_GET.todate}}"
+              }
+            ]
           },
           "connection": "postgres_gcpServer"
         },
         "output": true,
         "meta": [
           {
-            "name": "offset",
-            "type": "number"
+            "type": "number",
+            "name": "id"
           },
           {
-            "name": "limit",
-            "type": "number"
+            "type": "text",
+            "name": "sms_message"
           },
           {
-            "name": "total",
-            "type": "number"
+            "type": "text",
+            "name": "sender_mobile"
           },
           {
-            "name": "page",
-            "type": "object",
-            "sub": [
-              {
-                "name": "offset",
-                "type": "object",
-                "sub": [
-                  {
-                    "name": "first",
-                    "type": "number"
-                  },
-                  {
-                    "name": "prev",
-                    "type": "number"
-                  },
-                  {
-                    "name": "next",
-                    "type": "number"
-                  },
-                  {
-                    "name": "last",
-                    "type": "number"
-                  }
-                ]
-              },
-              {
-                "name": "current",
-                "type": "number"
-              },
-              {
-                "name": "total",
-                "type": "number"
-              }
-            ]
+            "type": "datetime",
+            "name": "created_on"
           },
           {
-            "name": "data",
-            "type": "array",
-            "sub": [
-              {
-                "type": "text",
-                "name": "sms_message"
-              },
-              {
-                "type": "text",
-                "name": "sender_mobile"
-              },
-              {
-                "type": "datetime",
-                "name": "created_on"
-              },
-              {
-                "type": "text",
-                "name": "sms_type"
-              },
-              {
-                "type": "boolean",
-                "name": "status"
-              },
-              {
-                "type": "text",
-                "name": "response"
-              }
-            ]
+            "type": "text",
+            "name": "sms_type"
+          },
+          {
+            "type": "text",
+            "name": "ip_address"
+          },
+          {
+            "type": "boolean",
+            "name": "status"
+          },
+          {
+            "type": "text",
+            "name": "response"
+          },
+          {
+            "type": "number",
+            "name": "user_id"
           }
         ],
-        "outputType": "object"
+        "outputType": "array"
       }
     ]
   }
