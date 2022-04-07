@@ -20,10 +20,6 @@
         "fieldName": "MultiTrans[]",
         "multiple": true,
         "name": "MultiTrans"
-      },
-      {
-        "type": "text",
-        "name": "api_ref"
       }
     ],
     "$_SERVER": [
@@ -116,7 +112,7 @@
             ]
           }
         },
-        "output": false,
+        "output": true,
         "meta": [
           {
             "type": "text",
@@ -141,6 +137,17 @@
                 "outputFields": [],
                 "exec": {
                   "steps": [
+                    {
+                      "name": "tr_id",
+                      "module": "core",
+                      "action": "setvalue",
+                      "options": {
+                        "value": "{{$value}}"
+                      },
+                      "meta": [],
+                      "outputType": "text",
+                      "output": false
+                    },
                     {
                       "name": "GetRechTrans",
                       "module": "dbconnector",
@@ -440,7 +447,7 @@
                                 "field": "tt_recharge_trans.id",
                                 "type": "double",
                                 "operator": "equal",
-                                "value": "{{$_POST.MultiTrans}}",
+                                "value": "{{tr_id}}",
                                 "data": {
                                   "table": "tt_recharge_trans",
                                   "column": "id",
@@ -459,19 +466,19 @@
                             "conditional": null,
                             "valid": true
                           },
-                          "query": "SELECT tt_recharge_trans.id, tt_recharge_trans.op_id, tt_recharge_trans.service_id, tt_recharge_trans.api_id, tt_recharge_trans.user_id, tt_recharge_trans.user_number, tt_recharge_trans.details, tt_recharge_trans.opening_balance, tt_recharge_trans.amount, tt_recharge_trans.comm_per, tt_recharge_trans.comm_val, tt_recharge_trans.comm_amt, tt_recharge_trans.other_charge, tt_recharge_trans.charge_per, tt_recharge_trans.charge_amt, tt_recharge_trans.net_amt, tt_recharge_trans.closing_balance, tt_recharge_trans.tr_mode, tt_recharge_trans.tr_type, tt_recharge_trans.status, tt_recharge_trans.tr_id, tt_recharge_trans.reason, tt_recharge_trans.api_logs, tt_recharge_trans.is_processed, tt_recharge_trans.operator_ref, tt_recharge_trans.api_ref, tt_recharge_trans.revert_trans, tt_recharge_trans.ip_address, tt_recharge_trans.api_response_id, tt_recharge_trans.process_mode, tt_recharge_trans.live, tt_recharge_trans.tr_date, tt_recharge_trans.updated_on, tt_recharge_trans.transaction_by, tt_recharge_trans.extra1, tt_recharge_trans.extra2, tt_recharge_trans.extra3, tt_recharge_trans.dtcommper, tt_recharge_trans.dtcommval, tt_recharge_trans.dtcommamt, tt_recharge_trans.dtchargeper, tt_recharge_trans.dtchargeval, tt_recharge_trans.dtchargeamt, tt_recharge_trans.mdtcommper, tt_recharge_trans.mdtcommval, tt_recharge_trans.mdtcommamt, tt_recharge_trans.mdtchargeper, tt_recharge_trans.mdtchargeval, tt_recharge_trans.mdtchargeamt, mu.user_fname, mu.user_lname, mu.user_mobile, mu.user_email, mu.user_type, mu.md_id, mu.ds_id, mu.u_status, mu.scheme_id, mu.balance_amt, mu.cap_amt, mu.balance_outstanding, mu.aeps_limit, mu.aeps_balance\nFROM tt_recharge_trans AS tt_recharge_trans\nINNER JOIN m_users AS mu ON (mu.id = tt_recharge_trans.user_id)\nWHERE tt_recharge_trans.id = :P1 /* {{$_POST.MultiTrans}} */",
+                          "query": "SELECT tt_recharge_trans.id, tt_recharge_trans.op_id, tt_recharge_trans.service_id, tt_recharge_trans.api_id, tt_recharge_trans.user_id, tt_recharge_trans.user_number, tt_recharge_trans.details, tt_recharge_trans.opening_balance, tt_recharge_trans.amount, tt_recharge_trans.comm_per, tt_recharge_trans.comm_val, tt_recharge_trans.comm_amt, tt_recharge_trans.other_charge, tt_recharge_trans.charge_per, tt_recharge_trans.charge_amt, tt_recharge_trans.net_amt, tt_recharge_trans.closing_balance, tt_recharge_trans.tr_mode, tt_recharge_trans.tr_type, tt_recharge_trans.status, tt_recharge_trans.tr_id, tt_recharge_trans.reason, tt_recharge_trans.api_logs, tt_recharge_trans.is_processed, tt_recharge_trans.operator_ref, tt_recharge_trans.api_ref, tt_recharge_trans.revert_trans, tt_recharge_trans.ip_address, tt_recharge_trans.api_response_id, tt_recharge_trans.process_mode, tt_recharge_trans.live, tt_recharge_trans.tr_date, tt_recharge_trans.updated_on, tt_recharge_trans.transaction_by, tt_recharge_trans.extra1, tt_recharge_trans.extra2, tt_recharge_trans.extra3, tt_recharge_trans.dtcommper, tt_recharge_trans.dtcommval, tt_recharge_trans.dtcommamt, tt_recharge_trans.dtchargeper, tt_recharge_trans.dtchargeval, tt_recharge_trans.dtchargeamt, tt_recharge_trans.mdtcommper, tt_recharge_trans.mdtcommval, tt_recharge_trans.mdtcommamt, tt_recharge_trans.mdtchargeper, tt_recharge_trans.mdtchargeval, tt_recharge_trans.mdtchargeamt, mu.user_fname, mu.user_lname, mu.user_mobile, mu.user_email, mu.user_type, mu.md_id, mu.ds_id, mu.u_status, mu.scheme_id, mu.balance_amt, mu.cap_amt, mu.balance_outstanding, mu.aeps_limit, mu.aeps_balance\nFROM tt_recharge_trans AS tt_recharge_trans\nINNER JOIN m_users AS mu ON (mu.id = tt_recharge_trans.user_id)\nWHERE tt_recharge_trans.id = :P1 /* {{tr_id}} */",
                           "params": [
                             {
                               "operator": "equal",
                               "type": "expression",
                               "name": ":P1",
-                              "value": "{{$_POST.MultiTrans}}"
+                              "value": "{{tr_id}}"
                             }
                           ],
                           "orders": []
                         }
                       },
-                      "output": true,
+                      "output": false,
                       "meta": [
                         {
                           "type": "number",
@@ -901,7 +908,8 @@
                           ]
                         }
                       },
-                      "outputType": "boolean"
+                      "outputType": "boolean",
+                      "output": false
                     },
                     {
                       "name": "",
@@ -3084,6 +3092,20 @@
                 {
                   "name": "$value",
                   "type": "object"
+                },
+                {
+                  "name": "RTClosingBalOld",
+                  "type": "text",
+                  "sub": []
+                },
+                {
+                  "name": "RTClosingBal",
+                  "type": "text",
+                  "sub": []
+                },
+                {
+                  "name": "apiLive",
+                  "type": "text"
                 }
               ],
               "outputType": "array"
