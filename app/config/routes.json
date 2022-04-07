@@ -206,6 +206,11 @@
       "layout": "main"
     },
     {
+      "path": "/random-rooting",
+      "page": "random-rooting",
+      "layout": "main"
+    },
+    {
       "path": "*",
       "page": "404-not-found"
     }

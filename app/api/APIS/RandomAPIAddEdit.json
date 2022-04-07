@@ -1,8 +1,8 @@
 {
   "meta": {
     "options": {
-      "linkedFile": "/views/api-forward.ejs",
-      "linkedForm": "formAPIForward"
+      "linkedFile": "/views/random-rooting.ejs",
+      "linkedForm": "formAPIRooting"
     },
     "$_GET": [
       {
@@ -85,283 +85,90 @@
         "options": {
           "if": "{{$_POST.operator_id != 0}}",
           "then": {
-            "steps": [
-              {
-                "name": "GetRecord",
-                "module": "dbconnector",
-                "action": "single",
-                "options": {
-                  "sql": {
-                    "type": "SELECT",
-                    "columns": [
-                      {
-                        "table": "m_api_forward",
-                        "column": "id",
-                        "alias": "countid",
-                        "aggregate": "COUNT"
-                      }
-                    ],
-                    "table": {
-                      "name": "m_api_forward"
+            "steps": {
+              "name": "ApiRootingAdd",
+              "module": "dbupdater",
+              "action": "insert",
+              "options": {
+                "connection": "postgres_gcpServer",
+                "sql": {
+                  "type": "insert",
+                  "values": [
+                    {
+                      "table": "t_random_root",
+                      "column": "service_id",
+                      "type": "number",
+                      "value": "{{$_POST.service_id}}"
                     },
-                    "joins": [],
-                    "groupBy": [],
-                    "wheres": {
-                      "condition": "AND",
-                      "rules": [
-                        {
-                          "id": "m_api_forward.service_id",
-                          "field": "m_api_forward.service_id",
-                          "type": "double",
-                          "operator": "equal",
-                          "value": "{{$_POST.service_id}}",
-                          "data": {
-                            "table": "m_api_forward",
-                            "column": "service_id",
-                            "type": "number"
-                          },
-                          "operation": "="
-                        },
-                        {
-                          "id": "m_api_forward.operator_id",
-                          "field": "m_api_forward.operator_id",
-                          "type": "double",
-                          "operator": "equal",
-                          "value": "{{$_POST.operator_id}}",
-                          "data": {
-                            "table": "m_api_forward",
-                            "column": "operator_id",
-                            "type": "number"
-                          },
-                          "operation": "="
-                        }
-                      ],
-                      "conditional": null,
-                      "valid": true
+                    {
+                      "table": "t_random_root",
+                      "column": "op_id",
+                      "type": "number",
+                      "value": "{{$_POST.operator_id}}"
                     },
-                    "query": "SELECT COUNT(id) AS countid\nFROM m_api_forward\nWHERE service_id = :P1 /* {{$_POST.service_id}} */ AND operator_id = :P2 /* {{$_POST.operator_id}} */",
-                    "params": [
-                      {
-                        "operator": "equal",
-                        "type": "expression",
-                        "name": ":P1",
-                        "value": "{{$_POST.service_id}}"
-                      },
-                      {
-                        "operator": "equal",
-                        "type": "expression",
-                        "name": ":P2",
-                        "value": "{{$_POST.operator_id}}"
-                      }
-                    ]
-                  },
-                  "connection": "postgres_gcpServer"
-                },
-                "output": true,
-                "meta": [
-                  {
-                    "type": "number",
-                    "name": "countid"
-                  }
-                ],
-                "type": "dbconnector_single",
-                "outputType": "object"
+                    {
+                      "table": "t_random_root",
+                      "column": "api_id",
+                      "type": "number",
+                      "value": "{{$_POST.api_id}}"
+                    },
+                    {
+                      "table": "t_random_root",
+                      "column": "created_by",
+                      "type": "number",
+                      "value": "{{identity}}"
+                    },
+                    {
+                      "table": "t_random_root",
+                      "column": "created_on",
+                      "type": "datetime",
+                      "value": "{{NOW}}"
+                    }
+                  ],
+                  "table": "t_random_root",
+                  "query": "INSERT INTO t_random_root\n(service_id, op_id, api_id, created_by, created_on) VALUES (:P1 /* {{$_POST.service_id}} */, :P2 /* {{$_POST.operator_id}} */, :P3 /* {{$_POST.api_id}} */, :P4 /* {{identity}} */, :P5 /* {{NOW}} */)",
+                  "params": [
+                    {
+                      "name": ":P1",
+                      "type": "expression",
+                      "value": "{{$_POST.service_id}}"
+                    },
+                    {
+                      "name": ":P2",
+                      "type": "expression",
+                      "value": "{{$_POST.operator_id}}"
+                    },
+                    {
+                      "name": ":P3",
+                      "type": "expression",
+                      "value": "{{$_POST.api_id}}"
+                    },
+                    {
+                      "name": ":P4",
+                      "type": "expression",
+                      "value": "{{identity}}"
+                    },
+                    {
+                      "name": ":P5",
+                      "type": "expression",
+                      "value": "{{NOW}}"
+                    }
+                  ],
+                  "returning": "id"
+                }
               },
-              {
-                "name": "",
-                "module": "core",
-                "action": "condition",
-                "options": {
-                  "if": "{{GetRecord.countid > 0}}",
-                  "then": {
-                    "steps": {
-                      "name": "ApiForwardUP",
-                      "module": "dbupdater",
-                      "action": "update",
-                      "options": {
-                        "connection": "postgres_gcpServer",
-                        "sql": {
-                          "type": "update",
-                          "values": [
-                            {
-                              "table": "m_api_forward",
-                              "column": "api_id",
-                              "type": "number",
-                              "value": "{{$_POST.api_id}}"
-                            },
-                            {
-                              "table": "m_api_forward",
-                              "column": "updated_by",
-                              "type": "text",
-                              "value": "{{identity}}"
-                            },
-                            {
-                              "table": "m_api_forward",
-                              "column": "updated_on",
-                              "type": "datetime",
-                              "value": "{{NOW}}"
-                            }
-                          ],
-                          "table": "m_api_forward",
-                          "wheres": {
-                            "condition": "AND",
-                            "rules": [
-                              {
-                                "id": "service_id",
-                                "field": "service_id",
-                                "type": "double",
-                                "operator": "equal",
-                                "value": "{{$_POST.service_id}}",
-                                "data": {
-                                  "column": "service_id"
-                                },
-                                "operation": "="
-                              },
-                              {
-                                "id": "operator_id",
-                                "field": "operator_id",
-                                "type": "double",
-                                "operator": "equal",
-                                "value": "{{$_POST.operator_id}}",
-                                "data": {
-                                  "column": "operator_id"
-                                },
-                                "operation": "="
-                              }
-                            ],
-                            "conditional": null,
-                            "valid": true
-                          },
-                          "query": "UPDATE m_api_forward\nSET api_id = :P1 /* {{$_POST.api_id}} */, updated_by = :P2 /* {{identity}} */, updated_on = :P3 /* {{NOW}} */\nWHERE service_id = :P4 /* {{$_POST.service_id}} */ AND operator_id = :P5 /* {{$_POST.operator_id}} */",
-                          "params": [
-                            {
-                              "name": ":P1",
-                              "type": "expression",
-                              "value": "{{$_POST.api_id}}"
-                            },
-                            {
-                              "name": ":P2",
-                              "type": "expression",
-                              "value": "{{identity}}"
-                            },
-                            {
-                              "name": ":P3",
-                              "type": "expression",
-                              "value": "{{NOW}}"
-                            },
-                            {
-                              "operator": "equal",
-                              "type": "expression",
-                              "name": ":P4",
-                              "value": "{{$_POST.service_id}}"
-                            },
-                            {
-                              "operator": "equal",
-                              "type": "expression",
-                              "name": ":P5",
-                              "value": "{{$_POST.operator_id}}"
-                            }
-                          ]
-                        }
-                      },
-                      "meta": [
-                        {
-                          "name": "affected",
-                          "type": "number"
-                        }
-                      ],
-                      "output": true
-                    }
-                  },
-                  "else": {
-                    "steps": {
-                      "name": "ApiForwardAdd",
-                      "module": "dbupdater",
-                      "action": "insert",
-                      "options": {
-                        "connection": "postgres_gcpServer",
-                        "sql": {
-                          "type": "insert",
-                          "values": [
-                            {
-                              "table": "m_api_forward",
-                              "column": "service_id",
-                              "type": "number",
-                              "value": "{{$_POST.service_id}}"
-                            },
-                            {
-                              "table": "m_api_forward",
-                              "column": "operator_id",
-                              "type": "number",
-                              "value": "{{$_POST.operator_id}}"
-                            },
-                            {
-                              "table": "m_api_forward",
-                              "column": "api_id",
-                              "type": "number",
-                              "value": "{{$_POST.api_id}}"
-                            },
-                            {
-                              "table": "m_api_forward",
-                              "column": "created_by",
-                              "type": "text",
-                              "value": "{{identity}}"
-                            },
-                            {
-                              "table": "m_api_forward",
-                              "column": "created_on",
-                              "type": "datetime",
-                              "value": "{{NOW}}"
-                            }
-                          ],
-                          "table": "m_api_forward",
-                          "query": "INSERT INTO m_api_forward\n(service_id, operator_id, api_id, created_by, created_on) VALUES (:P1 /* {{$_POST.service_id}} */, :P2 /* {{$_POST.operator_id}} */, :P3 /* {{$_POST.api_id}} */, :P4 /* {{identity}} */, :P5 /* {{NOW}} */)",
-                          "params": [
-                            {
-                              "name": ":P1",
-                              "type": "expression",
-                              "value": "{{$_POST.service_id}}"
-                            },
-                            {
-                              "name": ":P2",
-                              "type": "expression",
-                              "value": "{{$_POST.operator_id}}"
-                            },
-                            {
-                              "name": ":P3",
-                              "type": "expression",
-                              "value": "{{$_POST.api_id}}"
-                            },
-                            {
-                              "name": ":P4",
-                              "type": "expression",
-                              "value": "{{identity}}"
-                            },
-                            {
-                              "name": ":P5",
-                              "type": "expression",
-                              "value": "{{NOW}}"
-                            }
-                          ]
-                        }
-                      },
-                      "meta": [
-                        {
-                          "name": "identity",
-                          "type": "text"
-                        },
-                        {
-                          "name": "affected",
-                          "type": "number"
-                        }
-                      ],
-                      "output": true
-                    }
-                  }
+              "meta": [
+                {
+                  "name": "identity",
+                  "type": "text"
                 },
-                "outputType": "boolean"
-              }
-            ]
+                {
+                  "name": "affected",
+                  "type": "number"
+                }
+              ],
+              "output": true
+            }
           },
           "else": {
             "steps": [
@@ -479,7 +286,14 @@
                                   "data": {
                                     "table": "m_api_forward",
                                     "column": "service_id",
-                                    "type": "number"
+                                    "type": "number",
+                                    "columnObj": {
+                                      "type": "integer",
+                                      "primary": false,
+                                      "nullable": false,
+                                      "unique": false,
+                                      "name": "service_id"
+                                    }
                                   },
                                   "operation": "="
                                 },
@@ -492,7 +306,14 @@
                                   "data": {
                                     "table": "m_api_forward",
                                     "column": "operator_id",
-                                    "type": "number"
+                                    "type": "number",
+                                    "columnObj": {
+                                      "type": "integer",
+                                      "primary": false,
+                                      "nullable": false,
+                                      "unique": false,
+                                      "name": "operator_id"
+                                    }
                                   },
                                   "operation": "="
                                 }
@@ -535,7 +356,7 @@
                           "if": "{{CheckDataAvailable[0].countId > 0}}",
                           "then": {
                             "steps": {
-                              "name": "ApiForwardUpAll",
+                              "name": "ApiRoutingUpAll",
                               "module": "dbupdater",
                               "action": "update",
                               "options": {
@@ -635,7 +456,7 @@
                           },
                           "else": {
                             "steps": {
-                              "name": "ApiForwardAddAll",
+                              "name": "ApiRoutingAddAll",
                               "module": "dbupdater",
                               "action": "insert",
                               "options": {
@@ -757,7 +578,7 @@
                     ]
                   },
                   {
-                    "name": "ApiForwardUpAll",
+                    "name": "ApiRoutingUpAll",
                     "type": "text",
                     "sub": [
                       {
@@ -767,7 +588,7 @@
                     ]
                   },
                   {
-                    "name": "ApiForwardAddAll",
+                    "name": "ApiRoutingAddAll",
                     "type": "text",
                     "sub": [
                       {

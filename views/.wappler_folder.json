@@ -158,5 +158,9 @@
   "update-transaction.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "random-rooting.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }

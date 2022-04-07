@@ -17,6 +17,6 @@
     "meta": {}
   },
   "fileName": "postgres_gcpServer.json",
-  "actionFilePath": "file:///F:/swi/SWIAdminPortal/app/modules/connections/postgres_gcpServer.json",
+  "actionFilePath": "file:///F:/swi/SwpayMaster/app/modules/connections/postgres_gcpServer.json",
   "serverType": "node"
 }

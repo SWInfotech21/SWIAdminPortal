@@ -4490,5 +4490,73 @@ dmx.config({
       "meta": null,
       "outputType": "text"
     }
+  },
+  "randomrooting": {
+    "tableRepeat1": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "datetime",
+          "name": "created_on"
+        },
+        {
+          "type": "text",
+          "name": "api_name"
+        },
+        {
+          "type": "text",
+          "name": "api_code"
+        },
+        {
+          "type": "text",
+          "name": "operator_name"
+        },
+        {
+          "type": "text",
+          "name": "service_name"
+        },
+        {
+          "type": "text",
+          "name": "user_fname"
+        }
+      ],
+      "outputType": "array"
+    },
+    "ddAPIRouting": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "datetime",
+          "name": "created_on"
+        },
+        {
+          "type": "text",
+          "name": "api_name"
+        },
+        {
+          "type": "text",
+          "name": "api_code"
+        },
+        {
+          "type": "text",
+          "name": "operator_name"
+        },
+        {
+          "type": "text",
+          "name": "service_name"
+        },
+        {
+          "type": "text",
+          "name": "user_fname"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });
