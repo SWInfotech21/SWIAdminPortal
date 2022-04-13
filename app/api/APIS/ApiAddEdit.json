@@ -49,6 +49,30 @@
       },
       {
         "type": "text",
+        "fieldName": "response_type",
+        "options": {
+          "rules": {
+            "core:maxlength": {
+              "param": "50"
+            }
+          }
+        },
+        "name": "response_type"
+      },
+      {
+        "type": "text",
+        "fieldName": "api_type",
+        "options": {
+          "rules": {
+            "core:maxlength": {
+              "param": "50"
+            }
+          }
+        },
+        "name": "api_type"
+      },
+      {
+        "type": "text",
         "fieldName": "username",
         "options": {
           "rules": {
@@ -73,15 +97,7 @@
       },
       {
         "type": "text",
-        "fieldName": "response_type",
-        "options": {
-          "rules": {
-            "core:maxlength": {
-              "param": "50"
-            }
-          }
-        },
-        "name": "response_type"
+        "name": "api_url"
       }
     ]
   },
@@ -173,6 +189,18 @@
                       "column": "blank2",
                       "type": "text",
                       "value": "{{$_POST.response_type}}"
+                    },
+                    {
+                      "table": "m_api",
+                      "column": "api_type",
+                      "type": "text",
+                      "value": "{{$_POST.api_type}}"
+                    },
+                    {
+                      "table": "m_api",
+                      "column": "api_url",
+                      "type": "text",
+                      "value": "{{$_POST.api_url}}"
                     }
                   ],
                   "table": "m_api",
@@ -194,7 +222,7 @@
                     "conditional": null,
                     "valid": true
                   },
-                  "query": "UPDATE m_api\nSET api_name = :P1 /* {{$_POST.name}} */, api_code = :P2 /* {{$_POST.api_code}} */, username = :P3 /* {{$_POST.username}} */, api_password = :P4 /* {{$_POST.password}} */, status = :P5 /* {{$_POST.api_status}} */, updated_by = :P6 /* {{identity}} */, updated_on = :P7 /* {{NOW}} */, blank2 = :P8 /* {{$_POST.response_type}} */\nWHERE id = :P9 /* {{$_POST.ApiId}} */",
+                  "query": "UPDATE m_api\nSET api_name = :P1 /* {{$_POST.name}} */, api_code = :P2 /* {{$_POST.api_code}} */, username = :P3 /* {{$_POST.username}} */, api_password = :P4 /* {{$_POST.password}} */, status = :P5 /* {{$_POST.api_status}} */, updated_by = :P6 /* {{identity}} */, updated_on = :P7 /* {{NOW}} */, blank2 = :P8 /* {{$_POST.response_type}} */, api_type = :P9 /* {{$_POST.api_type}} */, api_url = :P10 /* {{$_POST.api_url}} */\nWHERE id = :P11 /* {{$_POST.ApiId}} */",
                   "params": [
                     {
                       "name": ":P1",
@@ -237,12 +265,23 @@
                       "value": "{{$_POST.response_type}}"
                     },
                     {
+                      "name": ":P9",
+                      "type": "expression",
+                      "value": "{{$_POST.api_type}}"
+                    },
+                    {
+                      "name": ":P10",
+                      "type": "expression",
+                      "value": "{{$_POST.api_url}}"
+                    },
+                    {
                       "operator": "equal",
                       "type": "expression",
-                      "name": ":P9",
+                      "name": ":P11",
                       "value": "{{$_POST.ApiId}}"
                     }
-                  ]
+                  ],
+                  "returning": "id"
                 }
               },
               "meta": [
@@ -311,11 +350,23 @@
                       "column": "blank2",
                       "type": "text",
                       "value": "{{$_POST.response_type}}"
+                    },
+                    {
+                      "table": "m_api",
+                      "column": "api_url",
+                      "type": "text",
+                      "value": "{{$_POST.api_url}}"
+                    },
+                    {
+                      "table": "m_api",
+                      "column": "api_type",
+                      "type": "text",
+                      "value": "{{$_POST.api_type}}"
                     }
                   ],
                   "table": "m_api",
                   "returning": "id",
-                  "query": "INSERT INTO m_api\n(api_name, api_code, username, api_password, status, created_by, created_on, blank2) VALUES (:P1 /* {{$_POST.name}} */, :P2 /* {{$_POST.api_code}} */, :P3 /* {{$_POST.username}} */, :P4 /* {{$_POST.password}} */, :P5 /* {{$_POST.api_status}} */, :P6 /* {{identity}} */, :P7 /* {{NOW}} */, :P8 /* {{$_POST.response_type}} */)",
+                  "query": "INSERT INTO m_api\n(api_name, api_code, username, api_password, status, created_by, created_on, blank2, api_url, api_type) VALUES (:P1 /* {{$_POST.name}} */, :P2 /* {{$_POST.api_code}} */, :P3 /* {{$_POST.username}} */, :P4 /* {{$_POST.password}} */, :P5 /* {{$_POST.api_status}} */, :P6 /* {{identity}} */, :P7 /* {{NOW}} */, :P8 /* {{$_POST.response_type}} */, :P9 /* {{$_POST.api_url}} */, :P10 /* {{$_POST.api_type}} */)",
                   "params": [
                     {
                       "name": ":P1",
@@ -356,6 +407,16 @@
                       "name": ":P8",
                       "type": "expression",
                       "value": "{{$_POST.response_type}}"
+                    },
+                    {
+                      "name": ":P9",
+                      "type": "expression",
+                      "value": "{{$_POST.api_url}}"
+                    },
+                    {
+                      "name": ":P10",
+                      "type": "expression",
+                      "value": "{{$_POST.api_type}}"
                     }
                   ]
                 }

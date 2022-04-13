@@ -34,8 +34,10 @@
                 <tr>
                     <th>Sl. No.</th>
                     <th>Provider Name</th>
+                    <th>API Type</th>
                     <th>Available Balance</th>
                     <th>API Code</th>
+                    <th>API URL</th>
                     <th>Username</th>
                     <th>Password/ Token</th>
                     <th>Responce Type</th>
@@ -49,8 +51,10 @@
                 <tr>
                     <td>{{$index+1}}</td>
                     <td dmx-text="api_name.titlecase()"></td>
+                    <td dmx-text="api_type"></td>
                     <td dmx-text="api_code == 'MA' ? scAPIs.data.apiBalanceMA : api_code == 'SN' ? scAPIs.data.apiBalanceSN : '' "></td>
                     <td dmx-text="api_code"></td>
+                    <td dmx-text="api_url"></td>
                     <td dmx-text="username"></td>
                     <td dmx-text="api_password"></td>
                     <td dmx-text="blank2"></td>
@@ -90,6 +94,12 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
+                        <label for="inp_api_url" class="col-sm-2 col-form-label">Api URL</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inp_api_url" name="api_url" aria-describedby="inp_api_url_help" placeholder="E.g: " maxlength="100" required="" data-msg-required="api URL is required." dmx-bind:value="ddAPIs.data.api_url">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
                         <label for="inp_api_username" class="col-sm-2 col-form-label">Api Username</label>
                         <div class="col-sm-10">
                             <textarea type="text" class="form-control" id="inp_APIs_username" name="username" aria-describedby="inp_api_username_help" placeholder="Enter api Username" maxlength="200" dmx-bind:value="ddAPIs.data.username"></textarea>
@@ -110,6 +120,21 @@
                                     <option value="JSON">JSON</option>
                                     <option value="XML">XML</option>
 
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inp_status" class="col-sm-2 col-form-label">API For</label>
+                        <div class="col-sm-10">
+                            <div class="form-check form-switch">
+                                <select type="text" class="form-control form-select" id="inp_api_type" name="api_type" aria-describedby="inp_api_type_help" maxlength="50" data-msg-required="API type is required." dmx-bind:value="ddAPIs.data.api_type">
+                                    <option value="">Select</option>
+                                    <option value="Recharge">Recharge</option>
+                                    <option value="SMS">SMS</option>
+                                    <option value="BBPS">BBPS</option>
+                                    <option value="AEPS">AEPS</option>
+                                    <option value="DMT">DMT</option>
                                 </select>
                             </div>
                         </div>

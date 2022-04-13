@@ -88,6 +88,14 @@
               {
                 "table": "m_api",
                 "column": "blank2"
+              },
+              {
+                "table": "m_api",
+                "column": "api_type"
+              },
+              {
+                "table": "m_api",
+                "column": "api_url"
               }
             ],
             "table": {
@@ -102,8 +110,9 @@
                 "recid": 1
               }
             ],
-            "query": "SELECT id AS api_id, api_name, api_code, username, api_password, status, created_on, created_by, updated_by, updated_on, blank2\nFROM m_api\nORDER BY api_name ASC",
-            "params": []
+            "query": "SELECT id AS api_id, api_name, api_code, username, api_password, status, created_on, created_by, updated_by, updated_on, blank2, api_type, api_url\nFROM m_api\nORDER BY api_name ASC",
+            "params": [],
+            "primary": "id"
           }
         },
         "output": true,
@@ -203,6 +212,14 @@
               {
                 "type": "text",
                 "name": "blank2"
+              },
+              {
+                "type": "text",
+                "name": "api_type"
+              },
+              {
+                "type": "text",
+                "name": "api_url"
               }
             ]
           }
