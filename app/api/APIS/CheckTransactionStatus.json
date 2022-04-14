@@ -158,7 +158,8 @@
                       "operation": "="
                     }
                   ]
-                }
+                },
+                "primary": "id"
               },
               {
                 "table": "m_users",
@@ -179,7 +180,8 @@
                       "operation": "="
                     }
                   ]
-                }
+                },
+                "primary": "id"
               }
             ],
             "query": "SELECT tt_recharge_trans.status, tt_recharge_trans.api_id, tt_recharge_trans.api_logs, tt_recharge_trans.tr_id, tt_recharge_trans.api_ref, m_api.username, m_api.api_password, tt_recharge_trans.opening_balance, tt_recharge_trans.amount, tt_recharge_trans.net_amt, tt_recharge_trans.user_id, mu.balance_amt, tt_recharge_trans.user_number, tt_recharge_trans.comm_per, tt_recharge_trans.comm_val, tt_recharge_trans.comm_amt, tt_recharge_trans.other_charge, tt_recharge_trans.charge_per, tt_recharge_trans.charge_amt\nFROM tt_recharge_trans\nINNER JOIN m_api AS m_api ON (m_api.id = tt_recharge_trans.api_id) LEFT JOIN m_users AS mu ON (mu.id = tt_recharge_trans.user_id)\nWHERE tt_recharge_trans.id = :P1 /* {{$_POST.trans_id}} */",
@@ -210,7 +212,8 @@
               ],
               "conditional": null,
               "valid": true
-            }
+            },
+            "primary": "id"
           },
           "connection": "postgres_gcpServer"
         },
@@ -571,6 +574,79 @@
                 "action": "setvalue",
                 "options": {
                   "value": "{{xml.Result.remark[0]}}"
+                },
+                "meta": [],
+                "outputType": "text",
+                "output": true
+              }
+            ]
+          }
+        },
+        "outputType": "boolean"
+      },
+      {
+        "name": "",
+        "module": "core",
+        "action": "condition",
+        "options": {
+          "if": "{{getTransDetails.api_logs=='UH'}}",
+          "then": {
+            "steps": [
+              {
+                "name": "apiUH",
+                "module": "api",
+                "action": "send",
+                "options": {
+                  "url": "https://utilityhub.app/API/StatusCheck",
+                  "params": {
+                    "UserID": "{{getTransDetails.username}}",
+                    "Token": "{{getTransDetails.api_password}}",
+                    "RPID": "{{getTransDetails.api_ref}}",
+                    "AGENTID": "{{getTransDetails.tr_id}}",
+                    "Format": "1"
+                  }
+                },
+                "output": true
+              },
+              {
+                "name": "setStat",
+                "module": "core",
+                "action": "setvalue",
+                "options": {
+                  "value": "{{apiUH.data.status}}"
+                },
+                "meta": [],
+                "outputType": "text",
+                "output": true
+              },
+              {
+                "name": "apiStatus",
+                "module": "core",
+                "action": "setvalue",
+                "options": {
+                  "value": "{{setStat == 2 ? 'SUCCESS' : setStat == 1 ? 'PENDING' : setStat == 3 ? 'FAILED' :  getTransDetails.status}}"
+                },
+                "meta": [],
+                "outputType": "text",
+                "output": true
+              },
+              {
+                "name": "api_ref",
+                "module": "core",
+                "action": "setvalue",
+                "options": {
+                  "value": "{{apiAM.data.rpid}}"
+                },
+                "meta": [],
+                "outputType": "text",
+                "output": true
+              },
+              {
+                "name": "remark",
+                "module": "core",
+                "action": "setvalue",
+                "options": {
+                  "value": "{{apiAM.data.msg}}"
                 },
                 "meta": [],
                 "outputType": "text",
