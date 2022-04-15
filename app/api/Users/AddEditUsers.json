@@ -12,6 +12,11 @@
       },
       {
         "type": "text",
+        "fieldName": "user_type",
+        "name": "user_type"
+      },
+      {
+        "type": "text",
         "fieldName": "name",
         "options": {
           "rules": {
@@ -103,22 +108,6 @@
         "name": "pan"
       },
       {
-        "type": "text",
-        "fieldName": "address",
-        "options": {
-          "rules": {
-            "core:required": {
-              "param": "",
-              "message": "Address is required."
-            },
-            "core:maxlength": {
-              "param": "100"
-            }
-          }
-        },
-        "name": "address"
-      },
-      {
         "type": "number",
         "fieldName": "pin",
         "options": {
@@ -168,14 +157,19 @@
         "name": "district"
       },
       {
+        "type": "text",
+        "fieldName": "aeps_merchant",
+        "name": "aeps_merchant"
+      },
+      {
         "type": "number",
-        "fieldName": "user_type",
+        "fieldName": "inp_user_type",
         "options": {
           "rules": {
             "core:number": {}
           }
         },
-        "name": "user_type"
+        "name": "inp_user_type"
       },
       {
         "type": "number",
@@ -189,87 +183,23 @@
       },
       {
         "type": "text",
+        "fieldName": "address",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Address is required."
+            },
+            "core:maxlength": {
+              "param": "200"
+            }
+          }
+        },
+        "name": "address"
+      },
+      {
+        "type": "text",
         "name": "status"
-      },
-      {
-        "type": "number",
-        "name": "rtscheme0"
-      },
-      {
-        "type": "number",
-        "name": "rtscheme1"
-      },
-      {
-        "type": "number",
-        "name": "rtscheme2"
-      },
-      {
-        "type": "number",
-        "name": "rtscheme3"
-      },
-      {
-        "type": "number",
-        "name": "dtscheme0"
-      },
-      {
-        "type": "number",
-        "name": "dtscheme1"
-      },
-      {
-        "type": "number",
-        "name": "dtscheme2"
-      },
-      {
-        "type": "number",
-        "name": "dtscheme3"
-      },
-      {
-        "type": "number",
-        "name": "access_page1"
-      },
-      {
-        "type": "number",
-        "name": "access_page2"
-      },
-      {
-        "type": "number",
-        "name": "access_page3"
-      },
-      {
-        "type": "number",
-        "name": "access_page4"
-      },
-      {
-        "type": "number",
-        "name": "access_page5"
-      },
-      {
-        "type": "number",
-        "name": "access_page6"
-      },
-      {
-        "type": "number",
-        "name": "access_page7"
-      },
-      {
-        "type": "number",
-        "name": "support"
-      },
-      {
-        "type": "number",
-        "name": "PendingTrans"
-      },
-      {
-        "type": "number",
-        "name": "TransReport"
-      },
-      {
-        "type": "number",
-        "name": "LiveTrans"
-      },
-      {
-        "type": "number",
-        "name": "ViewUsers"
       }
     ]
   },
@@ -469,6 +399,12 @@
                         "column": "district",
                         "type": "text",
                         "value": "{{$_POST.district}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "aeps_merchant_id",
+                        "type": "text",
+                        "value": "{{$_POST.aeps_merchant}}"
                       }
                     ],
                     "table": "m_users",
@@ -490,7 +426,7 @@
                       "conditional": null,
                       "valid": true
                     },
-                    "query": "UPDATE m_users\nSET user_fname = :P1 /* {{$_POST.name}} */, user_type = :P2 /* {{$_POST.user_type}} */, u_status = :P3 /* {{$_POST.status}} */, updated_by = :P4 /* {{identity}} */, updated_on = :P5 /* {{NOW}} */, scheme_id = :P6 /* {{$_POST.scheme_id}} */, aadhar_no = :P7 /* {{$_POST.aadhar}} */, pan_no = :P8 /* {{$_POST.pan}} */, address = :P9 /* {{$_POST.address}} */, pin = :P10 /* {{$_POST.pin}} */, state = :P11 /* {{$_POST.state}} */, district = :P12 /* {{$_POST.district}} */\nWHERE id = :P13 /* {{$_POST.UserId}} */",
+                    "query": "UPDATE m_users\nSET user_fname = :P1 /* {{$_POST.name}} */, user_type = :P2 /* {{$_POST.user_type}} */, u_status = :P3 /* {{$_POST.status}} */, updated_by = :P4 /* {{identity}} */, updated_on = :P5 /* {{NOW}} */, scheme_id = :P6 /* {{$_POST.scheme_id}} */, aadhar_no = :P7 /* {{$_POST.aadhar}} */, pan_no = :P8 /* {{$_POST.pan}} */, address = :P9 /* {{$_POST.address}} */, pin = :P10 /* {{$_POST.pin}} */, state = :P11 /* {{$_POST.state}} */, district = :P12 /* {{$_POST.district}} */, aeps_merchant_id = :P13 /* {{$_POST.aeps_merchant}} */\nWHERE id = :P14 /* {{$_POST.UserId}} */",
                     "params": [
                       {
                         "name": ":P1",
@@ -553,12 +489,18 @@
                         "value": "{{$_POST.district}}"
                       },
                       {
+                        "name": ":P13",
+                        "type": "expression",
+                        "value": "{{$_POST.aeps_merchant}}"
+                      },
+                      {
                         "operator": "equal",
                         "type": "expression",
-                        "name": ":P13",
+                        "name": ":P14",
                         "value": "{{$_POST.UserId}}"
                       }
-                    ]
+                    ],
+                    "returning": "id"
                   }
                 },
                 "meta": [
@@ -567,7 +509,7 @@
                     "type": "number"
                   }
                 ],
-                "output": true
+                "output": false
               },
               {
                 "name": "for_user_type",
@@ -710,7 +652,7 @@
                           "type": "number"
                         }
                       ],
-                      "output": true
+                      "output": false
                     }
                   }
                 },
@@ -845,7 +787,7 @@
                           "type": "number"
                         }
                       ],
-                      "output": true
+                      "output": false
                     }
                   }
                 },
@@ -981,7 +923,7 @@
                           "type": "number"
                         }
                       ],
-                      "output": true
+                      "output": false
                     }
                   }
                 },
@@ -1304,7 +1246,7 @@
                     "type": "number"
                   }
                 ],
-                "output": true
+                "output": false
               },
               {
                 "name": "for_user_type",
@@ -1439,7 +1381,7 @@
                           "type": "number"
                         }
                       ],
-                      "output": true
+                      "output": false
                     }
                   }
                 },
@@ -1566,7 +1508,7 @@
                           "type": "number"
                         }
                       ],
-                      "output": true
+                      "output": false
                     }
                   }
                 },
@@ -1698,7 +1640,7 @@
                           "type": "number"
                         }
                       ],
-                      "output": true
+                      "output": false
                     }
                   }
                 },
