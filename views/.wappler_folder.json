@@ -166,5 +166,9 @@
   "android-image.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "android-help-desk.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }

@@ -216,6 +216,11 @@
       "layout": "main"
     },
     {
+      "path": "/android-help-desk",
+      "page": "android-help-desk",
+      "layout": "main"
+    },
+    {
       "path": "*",
       "page": "404-not-found"
     }

@@ -4593,5 +4593,105 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "androidhelpdesk": {
+    "ddAndroidHelp": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "number",
+          "name": "user_type"
+        },
+        {
+          "type": "text",
+          "name": "support_email1"
+        },
+        {
+          "type": "text",
+          "name": "sales_email2"
+        },
+        {
+          "type": "text",
+          "name": "support_mobile"
+        },
+        {
+          "type": "text",
+          "name": "support_mobile2"
+        },
+        {
+          "type": "text",
+          "name": "sales_mobile1"
+        },
+        {
+          "type": "text",
+          "name": "sales_mobile2"
+        },
+        {
+          "type": "text",
+          "name": "status"
+        },
+        {
+          "type": "number",
+          "name": "created_by"
+        },
+        {
+          "type": "datetime",
+          "name": "created_on"
+        }
+      ],
+      "outputType": "array"
+    },
+    "tableRepeat1": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "number",
+          "name": "user_type"
+        },
+        {
+          "type": "text",
+          "name": "support_email1"
+        },
+        {
+          "type": "text",
+          "name": "sales_email2"
+        },
+        {
+          "type": "text",
+          "name": "support_mobile"
+        },
+        {
+          "type": "text",
+          "name": "support_mobile2"
+        },
+        {
+          "type": "text",
+          "name": "sales_mobile1"
+        },
+        {
+          "type": "text",
+          "name": "sales_mobile2"
+        },
+        {
+          "type": "text",
+          "name": "status"
+        },
+        {
+          "type": "number",
+          "name": "created_by"
+        },
+        {
+          "type": "datetime",
+          "name": "created_on"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });
