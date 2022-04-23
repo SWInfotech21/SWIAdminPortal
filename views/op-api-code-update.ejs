@@ -1,4 +1,4 @@
-<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="opapicodeupdate" appConnect="local" components="{dmxStateManagement:{},dmxDataTraversal:{},dmxBootstrap5TableGenerator:{},dmxBootstrap5PagingGenerator:{},dmxValidator:{}}" -->
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="opapicodeupdate" appConnect="local" components="{dmxStateManagement:{},dmxDataTraversal:{},dmxBootstrap5TableGenerator:{},dmxBootstrap5PagingGenerator:{},dmxValidator:{},dmxBootstrap5Modal:{}}" -->
 <meta name="ac:route" content="/op-api-code-update">
 <dmx-serverconnect id="scOpAPICode" url="api/operator/OpUpdateAPICode"></dmx-serverconnect>
 <dmx-data-view id="dvOpAPICode" dmx-bind:data="scOpAPICode.data.GetAPICode" filter="(service_name.lowercase().contains(formSearchUser.Search.value.lowercase()) || operator_name.lowercase().contains(formSearchUser.Search.value.lowercase()) || api_code1.contains(formSearchUser.Search.value) || api_code2.contains(formSearchUser.Search.value) || api_code3.contains(formSearchUser.Search.value) || api_code4.contains(formSearchUser.Search.value) || api_code5.contains(formSearchUser.Search.value) || api_code6.contains(formSearchUser.Search.value) || api_code7.contains(formSearchUser.Search.value))"></dmx-data-view>
@@ -26,7 +26,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-sm bg-white table-hover">
+                <table class="table table-sm bg-white table-hover  sw-font-11">
                     <thead class="bg-warning">
                         <tr>
                             <th>#</th>

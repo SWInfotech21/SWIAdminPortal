@@ -4693,5 +4693,183 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "complainothertickets": {
+    "dvPendingTrans": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "support_type"
+        },
+        {
+          "type": "text",
+          "name": "message"
+        },
+        {
+          "type": "text",
+          "name": "status"
+        },
+        {
+          "type": "datetime",
+          "name": "adddate"
+        },
+        {
+          "type": "text",
+          "name": "response"
+        },
+        {
+          "type": "datetime",
+          "name": "reply_date"
+        },
+        {
+          "type": "number",
+          "name": "user_id"
+        },
+        {
+          "type": "text",
+          "name": "tran_id"
+        }
+      ],
+      "outputType": "array"
+    },
+    "tableRepeat1": {
+      "meta": [
+        {
+          "name": "$index",
+          "type": "number"
+        },
+        {
+          "name": "$key",
+          "type": "text"
+        },
+        {
+          "name": "$value",
+          "type": "object"
+        },
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "support_type"
+        },
+        {
+          "type": "text",
+          "name": "message"
+        },
+        {
+          "type": "text",
+          "name": "status"
+        },
+        {
+          "type": "datetime",
+          "name": "adddate"
+        },
+        {
+          "type": "text",
+          "name": "response"
+        },
+        {
+          "type": "datetime",
+          "name": "reply_date"
+        },
+        {
+          "type": "number",
+          "name": "user_id"
+        },
+        {
+          "type": "text",
+          "name": "tran_id"
+        }
+      ],
+      "outputType": "array"
+    },
+    "dvGeneralTrans": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "support_type"
+        },
+        {
+          "type": "text",
+          "name": "message"
+        },
+        {
+          "type": "text",
+          "name": "status"
+        },
+        {
+          "type": "datetime",
+          "name": "adddate"
+        },
+        {
+          "type": "text",
+          "name": "response"
+        },
+        {
+          "type": "datetime",
+          "name": "reply_date"
+        },
+        {
+          "type": "number",
+          "name": "user_id"
+        },
+        {
+          "type": "text",
+          "name": "tran_id"
+        }
+      ],
+      "outputType": "array"
+    },
+    "ddGeneralTicket": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "support_type"
+        },
+        {
+          "type": "text",
+          "name": "message"
+        },
+        {
+          "type": "text",
+          "name": "status"
+        },
+        {
+          "type": "datetime",
+          "name": "adddate"
+        },
+        {
+          "type": "text",
+          "name": "response"
+        },
+        {
+          "type": "datetime",
+          "name": "reply_date"
+        },
+        {
+          "type": "number",
+          "name": "user_id"
+        },
+        {
+          "type": "text",
+          "name": "tran_id"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });

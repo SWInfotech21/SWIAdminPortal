@@ -1,4 +1,4 @@
-<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="smsreport" appConnect="local" components="{dmxDataTraversal:{},dmxStateManagement:{},dmxBootstrap5PagingGenerator:{}}" -->
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="smsreport" appConnect="local" components="{dmxDataTraversal:{},dmxStateManagement:{},dmxBootstrap5PagingGenerator:{},dmxBootstrap5Navigation:{},dmxDatePicker:{}}" -->
 <meta name="ac:route" content="/sms-report">
 <dmx-query-manager id="qm"></dmx-query-manager>
 <dmx-serverconnect id="scSMSReport" url="api/Reports/SMSReport" dmx-param:fromdate="formGetDate.daterange.start" dmx-param:todate="formGetDate.daterange.end" dmx-param:sort="qm.data.sort" dmx-param:dir="qm.data.dir"></dmx-serverconnect>
@@ -42,7 +42,7 @@
 
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped table-bordered table-hover table-sm">
+                <table class="table table-striped table-bordered table-hover table-sm sw-font-11">
                     <thead>
                         <tr>
                             <th>Sl. No.</th>

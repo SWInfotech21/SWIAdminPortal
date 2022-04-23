@@ -1,4 +1,4 @@
-<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="viewapiusers" appConnect="local" -->
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="viewapiusers" appConnect="local" components="{dmxDataTraversal:{},dmxBootstrap5Modal:{}}" -->
 <meta name="ac:route" content="/view-api-users">
 <dmx-serverconnect id="scPinStateDist" url="api/Users/GetPINStateDist" dmx-param:pincode="modalAddUsers.formAddEditUser.inp_pin.value"></dmx-serverconnect>
 <script is="dmx-flow" id="flowGetPIN" type="text/dmx-flow">{
@@ -27,7 +27,7 @@
 </header>
 <div class="container">
     <div class="table-responsive">
-        <table class="table table-striped table-bordered table-sm">
+        <table class="table table-striped table-bordered table-sm  sw-font-11">
             <thead>
                 <tr>
                     <th>Sl No.</th>

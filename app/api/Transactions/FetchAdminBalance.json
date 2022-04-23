@@ -408,5 +408,85 @@
       }
     ],
     "outputType": "object"
+  },
+  {
+    "name": "GeneralTicket",
+    "module": "dbconnector",
+    "action": "single",
+    "options": {
+      "connection": "postgres_gcpServer",
+      "sql": {
+        "type": "SELECT",
+        "columns": [
+          {
+            "table": "t_ticket",
+            "column": "id",
+            "alias": "CountTickets",
+            "aggregate": "COUNT"
+          }
+        ],
+        "table": {
+          "name": "t_ticket"
+        },
+        "primary": "id",
+        "joins": [],
+        "query": "SELECT COUNT(id) AS CountTickets\nFROM t_ticket\nWHERE tran_id IS NULL AND status = '1'",
+        "params": [],
+        "groupBy": [],
+        "wheres": {
+          "condition": "AND",
+          "rules": [
+            {
+              "id": "t_ticket.tran_id",
+              "field": "t_ticket.tran_id",
+              "type": "string",
+              "operator": "is_null",
+              "value": null,
+              "data": {
+                "table": "t_ticket",
+                "column": "tran_id",
+                "type": "text",
+                "columnObj": {
+                  "type": "string",
+                  "primary": false,
+                  "nullable": true,
+                  "name": "tran_id"
+                }
+              },
+              "operation": "IS NULL"
+            },
+            {
+              "id": "t_ticket.status",
+              "field": "t_ticket.status",
+              "type": "string",
+              "operator": "equal",
+              "value": "1",
+              "data": {
+                "table": "t_ticket",
+                "column": "status",
+                "type": "text",
+                "columnObj": {
+                  "type": "string",
+                  "primary": false,
+                  "nullable": false,
+                  "name": "status"
+                }
+              },
+              "operation": "="
+            }
+          ],
+          "conditional": null,
+          "valid": true
+        }
+      }
+    },
+    "output": true,
+    "meta": [
+      {
+        "type": "number",
+        "name": "CountTickets"
+      }
+    ],
+    "outputType": "object"
   }
 ]

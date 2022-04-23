@@ -1,4 +1,4 @@
-<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="pendingrecharge" appConnect="local" components="{dmxDataTraversal:{},dmxSockets:{}}" -->
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="pendingrecharge" appConnect="local" components="{dmxDataTraversal:{},dmxSockets:{},dmxBootstrap5Modal:{}}" -->
 <meta name="ac:route" content="/pending-recharge">
 <dmx-serverconnect id="scPendingRech" url="api/Reports/PendingTransactions"></dmx-serverconnect>
 <dmx-data-view id="dvPendingTrans" dmx-bind:data="scPendingRech.data.GetPending"></dmx-data-view>
@@ -28,7 +28,7 @@
 
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped table-bordered table-hover table-sm">
+                <table class="table table-striped table-bordered table-hover table-sm  sw-font-11">
                     <thead>
                         <tr>
                             <th>Sl. No.</th>

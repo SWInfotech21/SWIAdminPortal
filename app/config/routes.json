@@ -221,6 +221,11 @@
       "layout": "main"
     },
     {
+      "path": "/complain-other-tickets",
+      "page": "complain-other-tickets",
+      "layout": "main"
+    },
+    {
       "path": "*",
       "page": "404-not-found"
     }

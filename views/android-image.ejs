@@ -13,7 +13,7 @@
     </div>
     <div class="row">
         <div class="table-responsive">
-            <table class="table table-striped table-bordered table-hover table-sm text-center">
+            <table class="table table-striped table-bordered table-hover table-sm text-center  sw-font-11">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -30,7 +30,7 @@
                         <td dmx-text="$index+1"></td>
                         <td dmx-text="user_type==3?'RT':user_type==2?'DT':user_type==1?'MDT':user_type==4?'API User':'NA'"></td>
                         <td><img dmx-bind:src="sliding_image" width="200" height="80"></td>
-                        <td dmx-text="image_type"></td>
+                        <td dmx-text="image_type==0?'All':image_type"></td>
                         <td dmx-text="status==1?'Active':'Inactive'" dmx-class:text-primary="status==1" dmx-class:text-secondary="status!=1"></td>
                         <td dmx-text="created_on.formatDate('dd-MM-yyyy hh:mm:ss A')"></td>
                         <td><a class="dropdown-item" href="#" dmx-on:click="ddAndroidImages.select(id)" data-bs-toggle="modal" data-bs-target="#modalAndroidImage"><i class="fas fa-edit sw-col-ar" title="Edit Operator"></i></a></td>

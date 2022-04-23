@@ -1,6 +1,6 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="androidhelpdesk" appConnect="local" components="{dmxDataTraversal:{},dmxBootstrap5Modal:{}}" -->
 <meta name="ac:route" content="/android-help-desk">
-<!-- New Wappler Page -->
+
 <dmx-serverconnect id="scAndroidHelp" url="api/Android/GetHelpDesk"></dmx-serverconnect>
 <dmx-data-detail id="ddAndroidHelp" dmx-bind:data="content.scAndroidHelp.data.GetHelp.data" key="id"></dmx-data-detail>
 <div class="container">
@@ -14,7 +14,7 @@
     </div>
     <div class="row">
         <div class="table-responsive">
-            <table class="table table-striped table-bordered table-hover table-sm text-center">
+            <table class="table table-striped table-bordered table-hover table-sm text-center  sw-font-11">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -23,6 +23,7 @@
                         <th>Support Mobile</th>
                         <th>Sales Mobile</th>
                         <th>Sales Email</th>
+                        <th>Status</th>
                         <th>Created on</th>
                         <th>Action</th>
                     </tr>

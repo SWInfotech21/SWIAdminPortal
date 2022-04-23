@@ -240,7 +240,7 @@ border: 1px solid #333;
 
 /*text color*/
 .text-red {    color: #FF0000 !important;  }
-.text-white {  color: #FFF !important;`    }
+.text-white {  color: #FFF !important;    }
 .text-black {  color: #000 !important;     }
 .text-green {  color: #008000 !important;  }
 .text-blue {   color: #0000FF !important;  }
@@ -693,6 +693,7 @@ mark.style12 {
 	background: url(../images/woo/info_button_32.png) no-repeat 8px 8px, -webkit-linear-gradient(top,  #c7e3f9 0%,#aecee8 100%);
 	background: url(../images/woo/info_button_32.png) no-repeat 8px 8px, -o-linear-gradient(top,  #c7e3f9 0%,#aecee8 100%);
 	background: url(../images/woo/info_button_32.png) no-repeat 8px 8px, -ms-linear-gradient(top,  #c7e3f9 0%,#aecee8 100%);
+	background: url(../images/woo/info_button_32.png) no-repeat 8px 8px, -webkit-gradient(linear,  left top, left bottom,  from(#c7e3f9),to(#aecee8));
 	background: url(../images/woo/info_button_32.png) no-repeat 8px 8px, linear-gradient(top,  #c7e3f9 0%,#aecee8 100%);
 
 	border:1px solid #70A2C9;
@@ -708,6 +709,7 @@ mark.style12 {
 	background: url(../images/woo/close_32.png) no-repeat 8px 8px, -webkit-linear-gradient(top,  #ffc8d1 0%,#ff93a3 100%); /* Chrome10+,Safari5.1+ */
 	background: url(../images/woo/close_32.png) no-repeat 8px 8px, -o-linear-gradient(top,  #ffc8d1 0%,#ff93a3 100%); /* Opera 11.10+ */
 	background: url(../images/woo/close_32.png) no-repeat 8px 8px, -ms-linear-gradient(top,  #ffc8d1 0%,#ff93a3 100%); /* IE10+ */
+	background: url(../images/woo/close_32.png) no-repeat 8px 8px, -webkit-gradient(linear,  left top, left bottom,  from(#ffc8d1),to(#ff93a3));
 	background: url(../images/woo/close_32.png) no-repeat 8px 8px, linear-gradient(top,  #ffc8d1 0%,#ff93a3 100%); /* W3C */
 	
 	border:1px solid #D96E66;
@@ -722,6 +724,7 @@ mark.style12 {
 	background: url(../images/woo/save_32.png) no-repeat 8px 8px, -webkit-linear-gradient(top,  #b5d8fa 0%,#8cb9db 100%);
 	background: url(../images/woo/save_32.png) no-repeat 8px 8px, -o-linear-gradient(top,  #b5d8fa 0%,#8cb9db 100%);
 	background: url(../images/woo/save_32.png) no-repeat 8px 8px, -ms-linear-gradient(top,  #b5d8fa 0%,#8cb9db 100%);
+	background: url(../images/woo/save_32.png) no-repeat 8px 8px, -webkit-gradient(linear,  left top, left bottom,  from(#b5d8fa),to(#8cb9db));
 	background: url(../images/woo/save_32.png) no-repeat 8px 8px, linear-gradient(top,  #b5d8fa 0%,#8cb9db 100%);
 
 	border:1px solid #6495ED;
@@ -736,6 +739,7 @@ mark.style12 {
 	background: url(../images/tick.png) no-repeat 8px 9px, -webkit-linear-gradient(top,  #cdeb8e 0%,#a5c956 100%);
 	background: url(../images/tick.png) no-repeat 8px 9px, -o-linear-gradient(top,  #cdeb8e 0%,#a5c956 100%);
 	background: url(../images/tick.png) no-repeat 8px 9px, -ms-linear-gradient(top,  #cdeb8e 0%,#a5c956 100%);
+	background: url(../images/tick.png) no-repeat 8px 9px, -webkit-gradient(linear,  left top, left bottom,  from(#cdeb8e),to(#a5c956));
 	background: url(../images/tick.png) no-repeat 8px 9px, linear-gradient(top,  #cdeb8e 0%,#a5c956 100%);
 
 	border:1px solid #87AE33;
@@ -751,6 +755,7 @@ mark.style12 {
 	background: url(../images/woo/warning_32.png) no-repeat 8px 8px, -webkit-linear-gradient(top,  #ffedc1 0%,#fcde8d 100%);
 	background: url(../images/woo/warning_32.png) no-repeat 8px 8px, -o-linear-gradient(top,  #ffedc1 0%,#fcde8d 100%);
 	background: url(../images/woo/warning_32.png) no-repeat 8px 8px, -ms-linear-gradient(top,  #ffedc1 0%,#fcde8d 100%);
+	background: url(../images/woo/warning_32.png) no-repeat 8px 8px, -webkit-gradient(linear,  left top, left bottom,  from(#ffedc1),to(#fcde8d));
 	background: url(../images/woo/warning_32.png) no-repeat 8px 8px, linear-gradient(top,  #ffedc1 0%,#fcde8d 100%);
 
 	border:1px solid #EA9936;
@@ -829,6 +834,7 @@ background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9f9f
 background: -webkit-linear-gradient(top,  #f9f9f9 0%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
 background: -o-linear-gradient(top,  #f9f9f9 0%,#e5e5e5 100%); /* Opera 11.10+ */
 background: -ms-linear-gradient(top,  #f9f9f9 0%,#e5e5e5 100%); /* IE10+ */
+background: -webkit-gradient(linear,  left top, left bottom,  from(#f9f9f9),to(#e5e5e5));
 background: linear-gradient(top,  #f9f9f9 0%,#e5e5e5 100%); /* W3C */
 
 -webkit-border-radius: 2px;
@@ -1074,6 +1080,7 @@ background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eaeae
 background: -webkit-linear-gradient(top,  #eaeaea 0%,#e5e5e5 100%);
 background: -o-linear-gradient(top,  #eaeaea 0%,#e5e5e5 100%);
 background: -ms-linear-gradient(top,  #eaeaea 0%,#e5e5e5 100%);
+background: -webkit-gradient(linear,  left top, left bottom,  from(#eaeaea),to(#e5e5e5));
 background: linear-gradient(top,  #eaeaea 0%,#e5e5e5 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaeaea', endColorstr='#e5e5e5',GradientType=0 );
 -webkit-box-shadow: 0 1px 0 rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.5), inset 0 -1px 0 rgba(255,255,255,.3);
@@ -1213,6 +1220,7 @@ background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fffff
 background: -webkit-linear-gradient(top,  #ffffff 0%,#dddddd 98%,#eeeeee 100%);
 background: -o-linear-gradient(top,  #ffffff 0%,#dddddd 98%,#eeeeee 100%);
 background: -ms-linear-gradient(top,  #ffffff 0%,#dddddd 98%,#eeeeee 100%);
+background: -webkit-gradient(linear,  left top, left bottom,  from(#ffffff),color-stop(98%, #dddddd),to(#eeeeee));
 background: linear-gradient(top,  #ffffff 0%,#dddddd 98%,#eeeeee 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eeeeee',GradientType=0 );
 
@@ -1247,6 +1255,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	background-image: -o-linear-gradient(top, #eeeeee 0%, #ffffff 50%);
 	background-image: -ms-linear-gradient(top, #eeeeee 0%, #ffffff 50%);
  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#ffffff', GradientType=0 );
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#eeeeee), color-stop(50%, #ffffff));
 	background-image: linear-gradient(top, #eeeeee 0%, #ffffff 50%);
 	-webkit-border-radius: 4px;
 	-moz-border-radius : 4px;

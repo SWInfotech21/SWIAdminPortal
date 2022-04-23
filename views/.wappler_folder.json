@@ -170,5 +170,9 @@
   "android-help-desk.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "complain-other-tickets.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }
