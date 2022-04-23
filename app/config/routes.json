@@ -211,6 +211,11 @@
       "layout": "main"
     },
     {
+      "path": "/android-image",
+      "page": "android-image",
+      "layout": "main"
+    },
+    {
       "path": "*",
       "page": "404-not-found"
     }

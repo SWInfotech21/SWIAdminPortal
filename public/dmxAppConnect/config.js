@@ -4558,5 +4558,40 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "androidimage": {
+    "ddAndroidImages": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "number",
+          "name": "user_type"
+        },
+        {
+          "type": "text",
+          "name": "sliding_image"
+        },
+        {
+          "type": "text",
+          "name": "image_type"
+        },
+        {
+          "type": "text",
+          "name": "status"
+        },
+        {
+          "type": "number",
+          "name": "created_by"
+        },
+        {
+          "type": "datetime",
+          "name": "created_on"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });

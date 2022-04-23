@@ -162,5 +162,9 @@
   "random-rooting.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "android-image.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }
