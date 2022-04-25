@@ -9,6 +9,11 @@
         "type": "text",
         "fieldName": "UserId",
         "name": "UserId"
+      },
+      {
+        "type": "text",
+        "fieldName": "kyc_status",
+        "name": "kyc_status"
       }
     ]
   },
@@ -40,7 +45,7 @@
                 "table": "m_users",
                 "column": "kyc_status",
                 "type": "text",
-                "value": "{{1}}"
+                "value": "{{$_POST.kyc_status}}"
               }
             ],
             "table": "m_users",
@@ -63,12 +68,12 @@
               "valid": true
             },
             "returning": "id",
-            "query": "UPDATE m_users\nSET kyc_status = :P1 /* {{1}} */\nWHERE id = :P2 /* {{$_POST.UserId}} */",
+            "query": "UPDATE m_users\nSET kyc_status = :P1 /* {{$_POST.kyc_status}} */\nWHERE id = :P2 /* {{$_POST.UserId}} */",
             "params": [
               {
                 "name": ":P1",
                 "type": "expression",
-                "value": "{{1}}"
+                "value": "{{$_POST.kyc_status}}"
               },
               {
                 "operator": "equal",
