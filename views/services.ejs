@@ -33,7 +33,7 @@
             <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="scServices.data.FetchServices.data" id="tableRepeat1">
                 <tr>
                     <td>{{$index+1}}</td>
-                    <td><img dmx-bind:src="service_type" width="50" height="50"></td>
+                    <td><img dmx-bind:src="service_type" width="50" height="50" class="sw-img-render"></td>
                     <td dmx-text="service_name.titlecase()"></td>
                     <!-- <td assets/css/icons/dmx-text="service_type"></td> -->
                     <!-- <td dmx-text="service_desc"></td> -->
