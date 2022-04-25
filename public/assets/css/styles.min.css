@@ -4064,3 +4064,7 @@ div .uploader.disabled span .action {
 .sw-font-11{
     font-size: 11px;
 }
+
+.sw-img-render{
+    image-rendering: -webkit-optimize-contrast;
+}

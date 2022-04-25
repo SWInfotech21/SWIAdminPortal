@@ -112,17 +112,42 @@
                 "column": "district"
               },
               {
-                "table": "m_scheme_user",
-                "column": "scheme_name",
-                "alias": "user_scheme"
-              },
-              {
                 "table": "m_users",
                 "column": "blank1"
               },
               {
                 "table": "m_users",
                 "column": "aeps_merchant_id"
+              },
+              {
+                "table": "m_users",
+                "column": "kyc_status"
+              },
+              {
+                "table": "m_scheme_user",
+                "column": "scheme_name",
+                "alias": "user_scheme"
+              },
+              {
+                "table": "user_kyc",
+                "column": "profile_pic"
+              },
+              {
+                "table": "user_kyc",
+                "column": "pan_card"
+              },
+              {
+                "table": "user_kyc",
+                "column": "aadhar_front"
+              },
+              {
+                "table": "user_kyc",
+                "column": "aadhar_back"
+              },
+              {
+                "table": "user_kyc",
+                "column": "created_on",
+                "alias": "kyc_uploaded_on"
               }
             ],
             "table": {
@@ -150,9 +175,31 @@
                   ]
                 },
                 "primary": "id"
+              },
+              {
+                "table": "t_user_kyc",
+                "column": "*",
+                "alias": "user_kyc",
+                "type": "LEFT",
+                "clauses": {
+                  "condition": "AND",
+                  "rules": [
+                    {
+                      "table": "user_kyc",
+                      "column": "user_id",
+                      "operator": "equal",
+                      "value": {
+                        "table": "m_users",
+                        "column": "id"
+                      },
+                      "operation": "="
+                    }
+                  ]
+                },
+                "primary": "id"
               }
             ],
-            "query": "SELECT m_users.id, m_users.user_id, m_users.user_fname, m_users.user_lname, m_users.user_email, m_users.user_mobile, m_users.user_type, m_users.u_status, m_users.user_tpin, m_users.scheme_id, m_users.balance_amt, m_users.aadhar_no, m_users.pan_no, m_users.address, m_users.pin, m_users.state, m_users.district, m_scheme_user.scheme_name AS user_scheme, m_users.blank1, m_users.aeps_merchant_id\nFROM m_users\nLEFT JOIN m_scheme AS m_scheme_user ON (m_scheme_user.id = m_users.scheme_id)\nWHERE m_users.user_type BETWEEN 1 AND 3\nORDER BY m_users.id DESC",
+            "query": "SELECT m_users.id, m_users.user_id, m_users.user_fname, m_users.user_lname, m_users.user_email, m_users.user_mobile, m_users.user_type, m_users.u_status, m_users.user_tpin, m_users.scheme_id, m_users.balance_amt, m_users.aadhar_no, m_users.pan_no, m_users.address, m_users.pin, m_users.state, m_users.district, m_users.blank1, m_users.aeps_merchant_id, m_users.kyc_status, m_scheme_user.scheme_name AS user_scheme, user_kyc.profile_pic, user_kyc.pan_card, user_kyc.aadhar_front, user_kyc.aadhar_back, user_kyc.created_on AS kyc_uploaded_on\nFROM m_users\nLEFT JOIN m_scheme AS m_scheme_user ON (m_scheme_user.id = m_users.scheme_id) LEFT JOIN t_user_kyc AS user_kyc ON (user_kyc.user_id = m_users.id)\nWHERE m_users.user_type BETWEEN 1 AND 3\nORDER BY m_users.id DESC",
             "params": [],
             "orders": [
               {
@@ -312,15 +359,39 @@
               },
               {
                 "type": "text",
-                "name": "user_scheme"
-              },
-              {
-                "type": "text",
                 "name": "blank1"
               },
               {
                 "type": "text",
                 "name": "aeps_merchant_id"
+              },
+              {
+                "type": "text",
+                "name": "kyc_status"
+              },
+              {
+                "type": "text",
+                "name": "user_scheme"
+              },
+              {
+                "type": "text",
+                "name": "profile_pic"
+              },
+              {
+                "type": "text",
+                "name": "pan_card"
+              },
+              {
+                "type": "text",
+                "name": "aadhar_front"
+              },
+              {
+                "type": "text",
+                "name": "aadhar_back"
+              },
+              {
+                "type": "datetime",
+                "name": "kyc_uploaded_on"
               }
             ]
           }

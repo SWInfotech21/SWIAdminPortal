@@ -2,7 +2,7 @@
   "meta": {
     "options": {
       "linkedFile": "/views/users.ejs",
-      "linkedForm": "formMobRech"
+      "linkedForm": "formKycUser"
     },
     "$_POST": [
       {
@@ -28,17 +28,7 @@
         }
       },
       {
-        "name": "identity",
-        "module": "auth",
-        "action": "identify",
-        "options": {
-          "provider": "securityLogin"
-        },
-        "output": true,
-        "meta": []
-      },
-      {
-        "name": "DelUsers",
+        "name": "KycUp",
         "module": "dbupdater",
         "action": "update",
         "options": {
@@ -48,15 +38,9 @@
             "values": [
               {
                 "table": "m_users",
-                "column": "deleted_by",
+                "column": "kyc_status",
                 "type": "text",
-                "value": "{{identity}}"
-              },
-              {
-                "table": "m_users",
-                "column": "deleted_on",
-                "type": "datetime",
-                "value": "{{NOW}}"
+                "value": "{{1}}"
               }
             ],
             "table": "m_users",
@@ -78,22 +62,18 @@
               "conditional": null,
               "valid": true
             },
-            "query": "UPDATE m_users\nSET deleted_by = :P1 /* {{identity}} */, deleted_on = :P2 /* {{NOW}} */\nWHERE id = :P3 /* {{$_POST.UserId}} */",
+            "returning": "id",
+            "query": "UPDATE m_users\nSET kyc_status = :P1 /* {{1}} */\nWHERE id = :P2 /* {{$_POST.UserId}} */",
             "params": [
               {
                 "name": ":P1",
                 "type": "expression",
-                "value": "{{identity}}"
-              },
-              {
-                "name": ":P2",
-                "type": "expression",
-                "value": "{{NOW}}"
+                "value": "{{1}}"
               },
               {
                 "operator": "equal",
                 "type": "expression",
-                "name": ":P3",
+                "name": ":P2",
                 "value": "{{$_POST.UserId}}"
               }
             ]
