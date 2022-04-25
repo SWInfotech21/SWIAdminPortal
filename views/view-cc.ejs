@@ -40,6 +40,9 @@
                     <th>Access3</th>
                     <th>Access4</th>
                     <th>Access5</th>
+                    <th>Access6</th>
+                    <th>Access7</th>
+                    <th>Access8</th>
                     <th>Status</th>
                     <th>Aadhar No.</th>
                     <th>PAN No.</th>
@@ -62,6 +65,9 @@
                     <td dmx-text="access_page3 == 1 ? 'Transactions Report' : ''"></td>
                     <td dmx-text="access_page4 == 1 ? 'Live Transactions' : ''"></td>
                     <td dmx-text="access_page5 == 1 ? 'View Users' : ''"></td>
+                    <td dmx-text="access_page6 == 1 ? 'Update Txn.' : ''"></td>
+                    <td dmx-text="access_page7 == 1 ? 'Browse Tickets' : ''"></td>
+                    <td dmx-text="access_page8 == 1 ? 'Other Tickets' : ''"></td>
                     <td dmx-text="u_status != 1 ?'Inactive' : 'Active'" dmx-class:text-primary="u_status == 1" dmx-class:text-warning="u_status != 1"></td>
                     <td dmx-text="aadhar_no"></td>
                     <td dmx-text="pan_no"></td>
@@ -236,16 +242,37 @@
                             </div>
                             <div class="flex-column mb-3">
                                 <label class="sw-input-label lh-sm">
+                                    <input type="checkbox" dmx-bind:value="ddUsers.data.access_page6" id="checkUpdateTxn" dmx-bind:checked="ddUsers.data.access_page6 == 1">
+                                    <input type="hidden" name="UpdateTxn" dmx-bind:value="checkUpdateTxn.checked">
+                                    <span class="text-black">Update Txn.</span>
+                                </label>
+                            </div>
+                            <div class="flex-column mb-3">
+                                <label class="sw-input-label lh-sm">
                                     <input type="checkbox" dmx-bind:value="ddUsers.data.access_page5" id="checkViewUsers" dmx-bind:checked="ddUsers.data.access_page5 == 1">
                                     <input type="hidden" name="ViewUsers" dmx-bind:value="checkViewUsers.checked">
                                     <span class="text-black">View Users</span>
+                                </label>
+                            </div>
+                            <div class="flex-column mb-3">
+                                <label class="sw-input-label lh-sm">
+                                    <input type="checkbox" dmx-bind:value="ddUsers.data.access_page7" id="checkBrowseTickets" dmx-bind:checked="ddUsers.data.access_page7 == 1">
+                                    <input type="hidden" name="BrowseTickets" dmx-bind:value="checkBrowseTickets.checked">
+                                    <span class="text-black">Browse Tickets</span>
+                                </label>
+                            </div>
+                            <div class="flex-column mb-3">
+                                <label class="sw-input-label lh-sm">
+                                    <input type="checkbox" dmx-bind:value="ddUsers.data.access_page8" id="checkOtherTickets" dmx-bind:checked="ddUsers.data.access_page8 == 1">
+                                    <input type="hidden" name="OtherTickets" dmx-bind:value="checkOtherTickets.checked">
+                                    <span class="text-black">Other Tickets</span>
                                 </label>
                             </div>
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <div class="col-12 text-center">
-                            <button type="submit" class="btn btn-primary" dmx-bind:disabled="state.executing">{{ddUsers.data.id? 'Update' : 'Save'}}<span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span></button>
+                            <button type="submit" class="btn btn-primary" dmx-bind:disabled="state.executing">{{ddUsers.data.id? 'Update' : 'Submit'}}<span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span></button>
                         </div>
                     </div>
                 </form>

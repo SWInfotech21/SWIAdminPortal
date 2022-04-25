@@ -220,7 +220,8 @@
                 "direction": "DESC",
                 "recid": 1
               }
-            ]
+            ],
+            "primary": "id"
           },
           "connection": "postgres_gcpServer"
         },

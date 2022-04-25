@@ -1,4 +1,4 @@
-<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="users" appConnect="local" components="{dmxBootstrap5TableGenerator:{},dmxBootstrap5Navigation:{},dmxDataTraversal:{},dmxValidator:{},dmxBootstrap5Modal:{}}" -->
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="users" appConnect="local" components="{dmxBootstrap5TableGenerator:{},dmxBootstrap5Navigation:{},dmxDataTraversal:{},dmxValidator:{},dmxBootstrap5Modal:{},dmxFormatter:{}}" -->
 <meta name="ac:route" content="/users">
 <dmx-serverconnect id="scPinStateDist" url="api/Users/GetPINStateDist" dmx-param:pincode="modalAddUsers.formAddEditUser.inp_pin.value"></dmx-serverconnect>
 <script is="dmx-flow" id="flowGetPIN" type="text/dmx-flow">{
@@ -23,18 +23,24 @@
     }
     }</script>
 <dmx-serverconnect id="scUsers" url="api/Users/Users"></dmx-serverconnect>
-<dmx-data-view id="dvUsers" dmx-bind:data="scUsers.data.FetchUsers.data" pageSize="100" page="10"></dmx-data-view>
+<dmx-data-view id="dvUsers" dmx-bind:data="scUsers.data.FetchUsers.data" filter="(user_mobile.contains(formSearchUser.Search.value) || user_fname.lowercase().contains(formSearchUser.Search.value.lowercase()) || user_email.lowercase().contains(formSearchUser.Search.value.lowercase()) || user_type.contains(formSearchUser.Search.value) || aadhar_no.contains(formSearchUser.Search.value) || pan_no.contains(formSearchUser.Search.value) || pin.contains(formSearchUser.Search.value) || district.lowercase().contains(formSearchUser.Search.value.lowercase()) || state.lowercase().contains(formSearchUser.Search.value.lowercase()) || u_status.lowercase().contains(formSearchUser.Search.value.lowercase()) || kyc_status.lowercase().contains(formSearchUser.Search.value.lowercase()) || aeps_merchant_id.contains(formSearchUser.Search.value))"></dmx-data-view>
 <dmx-data-detail id="ddUsers" dmx-bind:data="dvUsers.data" key="id"></dmx-data-detail>
-<header>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <h1 id="Users" class="text-center align-self-center">SW Infotech Users <span class="border-3 ms-2 spinner-border spinner-border-sm" role="status" dmx-show="scUsers.state.executing"></span></h1>
-                <!-- <button id="btnAdd" class="btn btn-primary" dmx-on:click="modalAddUsers.show(); ddUsers.select(0); modalAddUsers.formAddEditUser.reset()">Add User</button> -->
-            </div>
-        </div>
+<div class="row align-items-center justify-content-between px-4 mb-3 sd-secondary-header mx-0">
+    <div class="col-12 col-md-auto me-auto ps-4">
+        <h1 class="ms-md-1 mt-md-3 text-dark fs-2 sd-fw-800 d-flex align-items-center">
+            SW Infotech Users(MDT/RT/DT)
+            <span class="border-3 ms-2 spinner-border spinner-border-sm" role="status" dmx-show="scUsers.state.executing"></span>
+        </h1>
     </div>
-</header>
+    <div class="col-auto order-1 order-md-3 d-flex align-items-center justify-content-center">
+        <form id="formSearchUser" class="sd-search-form">
+            <div class="d-flex justify-content-end mb-3 mb-lg-0 mb-md-0">
+                <input type="text" class="form-control sd-search-input rounded-pill" id="Search" name="Search" placeholder="Search">
+                <span class="bg-transparent btn position-absolute px-1 py-1"><i class="fas fa-search mb-1 mb-xl-0"></i></span>
+            </div>
+        </form>
+    </div>
+</div>
 <div class="container">
     <div class="table-responsive">
         <table class="table table-striped table-bordered table-sm sw-font-11">
@@ -60,7 +66,7 @@
                     <th dmx-show="scAdminBalance.data.query.user_type == 0">Action</th>
                 </tr>
             </thead>
-            <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="scUsers.data.FetchUsers.data" id="tableRepeat1">
+            <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="dvUsers.data" id="tableRepeat1">
                 <tr>
                     <td>{{$index+1}}</td>
                     <td><img class="sw-img-render" dmx-bind:src="profile_pic?+'https://login.swpay.in'+profile_pic:+'https://login.swpay.in/assets/images/icons/user-icon.png'" width="30" height="30"></td>
@@ -78,7 +84,7 @@
                     <td dmx-text="address+' | '+pin"></td>
                     <td dmx-text="state+' | '+district"></td>
                     <td dmx-text="aeps_merchant_id"></td>
-                    <td dmx-class:text-warning="kyc_status!=0" dmx-class:text-primary="kyc_status==1" dmx-class:text-danger="kyc_status!=2">{{kyc_status==0?'Pending': kyc_status==1?'Active':'Inactive'}}<button class="btn btn-warning btn-sm py-0 mt-2" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalDelUser"><i class="fas fa-eye"></i></button></td>
+                    <td class="fw-bold" dmx-class:text-warning="kyc_status==0" dmx-class:text-primary="kyc_status==1" dmx-class:text-danger="kyc_status==2||!kyc_status">{{kyc_status==0?'Pending': kyc_status==1?'Active': kyc_status==2?'Rejected':'Inactive'}}<button class="btn btn-warning btn-sm py-0 mt-2" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalDelUser"><i class="fas fa-eye"></i></button></td>
                     <td dmx-show="scAdminBalance.data.query.user_type == 0">
                         <a class="sw-col-ar" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalAddUsers"><i class="fas fa-edit" title="Edit Users" dmx-on:click="flowGetScheme.run()"></i></a>&emsp;<a class="sw-col-br" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalPasswordUser"><i class="fas fa-user-lock" title="Password Update"></i></a>
                         &emsp;<a class="sw-col-cr" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#"><i class="fas fa-sign-in-alt" title="Login to user panel"></i></a>&emsp;
@@ -190,14 +196,14 @@
                     </div>
                     <div class="mb-3 row">
                         <div class="col-6 col-md-4">
-                            <select class="form-control form-select" id="kyc_status" name="kyc_status" dmx-bind:value="ddUsers.data.kyc_status">
+                            <select class="form-control form-select" id="kyc_status" name="kyc_status" dmx-bind:value="ddUsers.data.kyc_status" required="">
                                 <option value="">Select</option>
                                 <option value="1">Approve</option>
                                 <option value="2">Reject</option>
                             </select>
                         </div>
                         <div class="col-6 col-md-4">
-                            <button type="submit" class="btn btn-primary" dmx-bind:disabled="state.executing">Approve<span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span></button>
+                            <button type="submit" class="btn btn-primary" dmx-bind:disabled="state.executing">Submit<span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span></button>
                         </div>
                     </div>
                 </form>
