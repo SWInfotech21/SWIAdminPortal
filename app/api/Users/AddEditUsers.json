@@ -2233,7 +2233,7 @@
                   "url": "{{GetWhatsappAPI.api_url}}",
                   "params": {
                     "api_token": "{{GetWhatsappAPI.api_password}}",
-                    "mobile": "{{91+$_POST.mobile}}",
+                    "mobile": "{{$_POST.mobile}}",
                     "message": "{{'Dear '+$_POST.name+', Your Account has been created successfully. User Login Name  '+$_POST.mobile+', Password  '+password+' and generate TPIN after login to web portal or mobile app. Thanks for using our services. 😊\\nRegards \\nS W Pay Team\\n\\n'}}"
                   }
                 },
