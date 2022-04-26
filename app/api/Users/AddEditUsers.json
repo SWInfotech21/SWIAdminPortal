@@ -1443,7 +1443,7 @@
                   },
                   "method": "POST"
                 },
-                "output": true
+                "output": false
               },
               {
                 "name": "for_user_type",
