@@ -1304,6 +1304,147 @@
                 "output": false
               },
               {
+                "name": "GetWhatsappAPI",
+                "module": "dbconnector",
+                "action": "single",
+                "options": {
+                  "connection": "postgres_gcpServer",
+                  "sql": {
+                    "type": "SELECT",
+                    "columns": [
+                      {
+                        "table": "m_api",
+                        "column": "api_code"
+                      },
+                      {
+                        "table": "m_api",
+                        "column": "username"
+                      },
+                      {
+                        "table": "m_api",
+                        "column": "api_password"
+                      },
+                      {
+                        "table": "m_api",
+                        "column": "api_type"
+                      },
+                      {
+                        "table": "m_api",
+                        "column": "senderid"
+                      },
+                      {
+                        "table": "m_api",
+                        "column": "api_url"
+                      }
+                    ],
+                    "table": {
+                      "name": "m_api"
+                    },
+                    "primary": "id",
+                    "joins": [],
+                    "wheres": {
+                      "condition": "AND",
+                      "rules": [
+                        {
+                          "id": "m_api.api_type",
+                          "field": "m_api.api_type",
+                          "type": "string",
+                          "operator": "equal",
+                          "value": "{{'Whatsapp'}}",
+                          "data": {
+                            "table": "m_api",
+                            "column": "api_type",
+                            "type": "text",
+                            "columnObj": {
+                              "type": "string",
+                              "maxLength": -5,
+                              "primary": false,
+                              "unique": false,
+                              "nullable": true,
+                              "name": "api_type"
+                            }
+                          },
+                          "operation": "="
+                        },
+                        {
+                          "id": "m_api.status",
+                          "field": "m_api.status",
+                          "type": "double",
+                          "operator": "equal",
+                          "value": 1,
+                          "data": {
+                            "table": "m_api",
+                            "column": "status",
+                            "type": "number",
+                            "columnObj": {
+                              "type": "integer",
+                              "primary": false,
+                              "nullable": false,
+                              "unique": false,
+                              "name": "status"
+                            }
+                          },
+                          "operation": "="
+                        }
+                      ],
+                      "conditional": null,
+                      "valid": true
+                    },
+                    "query": "SELECT api_code, username, api_password, api_type, senderid, api_url\nFROM m_api\nWHERE api_type = :P1 /* {{'Whatsapp'}} */ AND status = 1",
+                    "params": [
+                      {
+                        "operator": "equal",
+                        "type": "expression",
+                        "name": ":P1",
+                        "value": "{{'Whatsapp'}}"
+                      }
+                    ]
+                  }
+                },
+                "output": true,
+                "meta": [
+                  {
+                    "type": "text",
+                    "name": "api_code"
+                  },
+                  {
+                    "type": "text",
+                    "name": "username"
+                  },
+                  {
+                    "type": "text",
+                    "name": "api_password"
+                  },
+                  {
+                    "type": "text",
+                    "name": "api_type"
+                  },
+                  {
+                    "type": "text",
+                    "name": "senderid"
+                  },
+                  {
+                    "type": "text",
+                    "name": "api_url"
+                  }
+                ],
+                "outputType": "object"
+              },
+              {
+                "name": "apiWhatsapp",
+                "module": "api",
+                "action": "send",
+                "options": {
+                  "url": "{{GetWhatsappAPI.api_url}}",
+                  "params": {
+                    "api_token": "{{GetWhatsappAPI.api_password}}",
+                    "mobile": "{{$_POST.mobile}}",
+                    "message": "{{'Dear '+$_POST.name+', Your Account has been created successfully. User Login Name  '+$_POST.mobile+', Password  '+password+' and generate TPIN after login to web portal or mobile app. Thanks for using our services. 😊\\nRegards \\nS W Pay Team\\n\\n'}}"
+                  }
+                },
+                "output": true
+              },
+              {
                 "name": "for_user_type",
                 "module": "core",
                 "action": "setvalue",
@@ -1960,7 +2101,7 @@
                     "tempid": "{{GetAPI.template_id}}"
                   }
                 },
-                "output": true
+                "output": false
               },
               {
                 "name": "api_status",
@@ -2097,147 +2238,6 @@
                     "type": "number"
                   }
                 ]
-              },
-              {
-                "name": "GetWhatsappAPI",
-                "module": "dbconnector",
-                "action": "single",
-                "options": {
-                  "connection": "postgres_gcpServer",
-                  "sql": {
-                    "type": "SELECT",
-                    "columns": [
-                      {
-                        "table": "m_api",
-                        "column": "api_code"
-                      },
-                      {
-                        "table": "m_api",
-                        "column": "username"
-                      },
-                      {
-                        "table": "m_api",
-                        "column": "api_password"
-                      },
-                      {
-                        "table": "m_api",
-                        "column": "api_type"
-                      },
-                      {
-                        "table": "m_api",
-                        "column": "senderid"
-                      },
-                      {
-                        "table": "m_api",
-                        "column": "api_url"
-                      }
-                    ],
-                    "table": {
-                      "name": "m_api"
-                    },
-                    "primary": "id",
-                    "joins": [],
-                    "wheres": {
-                      "condition": "AND",
-                      "rules": [
-                        {
-                          "id": "m_api.api_type",
-                          "field": "m_api.api_type",
-                          "type": "string",
-                          "operator": "equal",
-                          "value": "{{'Whatsapp'}}",
-                          "data": {
-                            "table": "m_api",
-                            "column": "api_type",
-                            "type": "text",
-                            "columnObj": {
-                              "type": "string",
-                              "maxLength": -5,
-                              "primary": false,
-                              "unique": false,
-                              "nullable": true,
-                              "name": "api_type"
-                            }
-                          },
-                          "operation": "="
-                        },
-                        {
-                          "id": "m_api.status",
-                          "field": "m_api.status",
-                          "type": "double",
-                          "operator": "equal",
-                          "value": 1,
-                          "data": {
-                            "table": "m_api",
-                            "column": "status",
-                            "type": "number",
-                            "columnObj": {
-                              "type": "integer",
-                              "primary": false,
-                              "nullable": false,
-                              "unique": false,
-                              "name": "status"
-                            }
-                          },
-                          "operation": "="
-                        }
-                      ],
-                      "conditional": null,
-                      "valid": true
-                    },
-                    "query": "SELECT api_code, username, api_password, api_type, senderid, api_url\nFROM m_api\nWHERE api_type = :P1 /* {{'Whatsapp'}} */ AND status = 1",
-                    "params": [
-                      {
-                        "operator": "equal",
-                        "type": "expression",
-                        "name": ":P1",
-                        "value": "{{'Whatsapp'}}"
-                      }
-                    ]
-                  }
-                },
-                "output": false,
-                "meta": [
-                  {
-                    "type": "text",
-                    "name": "api_code"
-                  },
-                  {
-                    "type": "text",
-                    "name": "username"
-                  },
-                  {
-                    "type": "text",
-                    "name": "api_password"
-                  },
-                  {
-                    "type": "text",
-                    "name": "api_type"
-                  },
-                  {
-                    "type": "text",
-                    "name": "senderid"
-                  },
-                  {
-                    "type": "text",
-                    "name": "api_url"
-                  }
-                ],
-                "outputType": "object"
-              },
-              {
-                "name": "apiWhatsapp",
-                "module": "api",
-                "action": "send",
-                "options": {
-                  "url": "{{GetWhatsappAPI.api_url}}",
-                  "params": {
-                    "api_token": "{{GetWhatsappAPI.api_password}}",
-                    "mobile": "{{$_POST.mobile}}",
-                    "message": "{{'Dear '+$_POST.name+', Your Account has been created successfully. User Login Name  '+$_POST.mobile+', Password  '+password+' and generate TPIN after login to web portal or mobile app. Thanks for using our services. 😊\\nRegards \\nS W Pay Team\\n\\n'}}"
-                  }
-                },
-                "output": false
               }
             ]
           }
