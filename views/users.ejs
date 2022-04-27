@@ -172,7 +172,7 @@
                         <a class="btn btn-primary btn-sm" dmx-bind:href="'https://login.swpay.in'+ddUsers.data.aadhar_back" download target="_blank">Open</a>
                     </div>
                 </div>
-                <form is="dmx-serverconnect-form" id="formKycUser" method="post" action="api/Users/KycUp" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="scNotif.success('User KYC Updated'); scUsers.load();" dmx-on:error="scNotif.warning('An error occurred');">
+                <form is="dmx-serverconnect-form" id="formKycUser" method="post" action="api/Users/KycUp" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="scNotif.success('User KYC Updated'); scUsers.load();modalKYCUser.hide()" dmx-on:error="scNotif.warning('An error occurred');">
                     <input type="hidden" name="UserId" dmx-bind:value="ddUsers.data.id">
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-sm">
