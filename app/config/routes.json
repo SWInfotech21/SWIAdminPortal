@@ -11,7 +11,7 @@
       "path": "/users",
       "page": "users",
       "layout": "main",
-      "exec": "/api/PageAccess/AdminAndCC"
+      "exec": "/api/PageAccess/PageAccessViewUsers"
     },
     {
       "path": "/login",
@@ -85,7 +85,7 @@
       "path": "/recharge-history",
       "page": "recharge-history",
       "layout": "main",
-      "exec": "/api/PageAccess/AdminAndCC"
+      "exec": "/api/PageAccess/PageAccessTransHistory"
     },
     {
       "path": "/account-summary-report",
@@ -103,7 +103,7 @@
       "path": "/balance-report",
       "page": "balance-report",
       "layout": "main",
-      "exec": "/api/PageAccess/AdminAndCC"
+      "exec": "/api/PageAccess/UserAccess"
     },
     {
       "path": "/my-profile",
@@ -150,7 +150,8 @@
     {
       "path": "/add-cc",
       "page": "add-cc",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
     },
     {
       "path": "/view-cc",
@@ -167,12 +168,14 @@
     {
       "path": "/op-api-code-update",
       "page": "op-api-code-update",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
     },
     {
       "path": "/add-api-user",
       "page": "add-api-user",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
     },
     {
       "path": "/view-api-users",
@@ -182,12 +185,14 @@
     {
       "path": "/pending-recharge",
       "page": "pending-recharge",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/PageAccessPendingTrans"
     },
     {
       "path": "/live-transactions",
       "page": "live-transactions",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/PageAccessLiveTrans"
     },
     {
       "path": "/response-request",
@@ -198,32 +203,38 @@
     {
       "path": "/complain-browse-tickets",
       "page": "complain-browse-tickets",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/PageAccessBrowsTickets"
     },
     {
       "path": "/update-transaction",
       "page": "update-transaction",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/PageAccessUpTrans"
     },
     {
       "path": "/random-rooting",
       "page": "random-rooting",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
     },
     {
       "path": "/android-image",
       "page": "android-image",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
     },
     {
       "path": "/android-help-desk",
       "page": "android-help-desk",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
     },
     {
       "path": "/complain-other-tickets",
       "page": "complain-other-tickets",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/PageAccessGeneralTickets"
     },
     {
       "path": "*",

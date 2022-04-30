@@ -19,7 +19,7 @@
     "options": {
       "provider": "securityLogin"
     },
-    "output": true,
+    "output": false,
     "meta": []
   },
   {
@@ -124,7 +124,8 @@
                   ],
                   "conditional": null,
                   "valid": true
-                }
+                },
+                "primary": "id"
               }
             },
             "output": true,

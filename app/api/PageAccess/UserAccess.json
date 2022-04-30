@@ -105,7 +105,8 @@
                     "name": ":P1",
                     "value": "{{identity}}"
                   }
-                ]
+                ],
+                "primary": "id"
               }
             },
             "output": true,

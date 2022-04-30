@@ -58,7 +58,7 @@
                     <th>User Scheme</th>
                     <th>Aadhar No.</th>
                     <th>PAN No.</th>
-                    <th>Password</th>
+                    <th dmx-show="scAdminBalance.data.query.user_type == 0">Password</th>
                     <th>Address & PIN</th>
                     <th>State & Dist.</th>
                     <th>AEPS Mer. Id</th>
@@ -80,7 +80,7 @@
                     <td dmx-text="user_scheme"></td>
                     <td dmx-text="aadhar_no"></td>
                     <td dmx-text="pan_no"></td>
-                    <td dmx-text="blank1"></td>
+                    <td dmx-text="blank1" dmx-show="scAdminBalance.data.query.user_type == 0"></td>
                     <td dmx-text="address+' | '+pin"></td>
                     <td dmx-text="state+' | '+district"></td>
                     <td dmx-text="aeps_merchant_id"></td>
