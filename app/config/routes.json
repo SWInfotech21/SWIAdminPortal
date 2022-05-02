@@ -237,6 +237,11 @@
       "exec": "/api/PageAccess/PageAccessGeneralTickets"
     },
     {
+      "path": "/add-bank-list-beta",
+      "page": "add-bank-list-beta",
+      "layout": "main"
+    },
+    {
       "path": "*",
       "page": "404-not-found"
     }

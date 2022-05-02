@@ -174,5 +174,9 @@
   "complain-other-tickets.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "add-bank-list-beta.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }

@@ -662,6 +662,107 @@
         "module": "core",
         "action": "condition",
         "options": {
+          "if": "{{getTransDetails.api_logs=='DMEP'}}",
+          "then": {
+            "steps": [
+              {
+                "name": "AuthCode",
+                "module": "core",
+                "action": "setvalue",
+                "options": {
+                  "value": "65c43ccd6a7b41c884"
+                },
+                "meta": [],
+                "outputType": "text"
+              },
+              {
+                "name": "MessageCode",
+                "module": "core",
+                "action": "setvalue",
+                "options": {
+                  "value": "E06017"
+                },
+                "meta": [],
+                "outputType": "text"
+              },
+              {
+                "name": "ReqId",
+                "module": "core",
+                "action": "setvalue",
+                "options": {
+                  "value": "{{NOW.md5(123456).substr(1, 9)}}"
+                },
+                "meta": [],
+                "outputType": "text"
+              },
+              {
+                "name": "apiDMEP",
+                "module": "api",
+                "action": "send",
+                "options": {
+                  "url": "https://ezymoney.myezypay.in/RemitMoney/mtransfer",
+                  "method": "POST",
+                  "dataType": "x-www-form-urlencoded",
+                  "data": {
+                    "msg": "{{MessageCode+'~'+AuthCode+'~'+ReqId+'~'+getTransDetails.tr_id+'~0~0'}}"
+                  }
+                },
+                "output": false
+              },
+              {
+                "name": "setStat",
+                "module": "core",
+                "action": "setvalue",
+                "options": {
+                  "value": "{{apiDMEP.data.split('~')[5]}}"
+                },
+                "meta": [],
+                "outputType": "text",
+                "output": true
+              },
+              {
+                "name": "apiStatus",
+                "module": "core",
+                "action": "setvalue",
+                "options": {
+                  "value": "{{apiDMEP.data.split('~')[5]}}"
+                },
+                "meta": [],
+                "outputType": "text",
+                "output": true
+              },
+              {
+                "name": "api_ref",
+                "module": "core",
+                "action": "setvalue",
+                "options": {
+                  "value": "{{apiDMEP.data.split('~')[2]}}"
+                },
+                "meta": [],
+                "outputType": "text",
+                "output": true
+              },
+              {
+                "name": "remark",
+                "module": "core",
+                "action": "setvalue",
+                "options": {
+                  "value": "{{apiDMEP.data.split('~')[6]}}"
+                },
+                "meta": [],
+                "outputType": "text",
+                "output": true
+              }
+            ]
+          }
+        },
+        "outputType": "boolean"
+      },
+      {
+        "name": "",
+        "module": "core",
+        "action": "condition",
+        "options": {
           "if": "{{apiStatus=='SUCCESS'}}",
           "then": {
             "steps": [

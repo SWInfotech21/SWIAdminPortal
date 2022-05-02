@@ -4871,5 +4871,44 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "addbanklistbeta": {
+    "dvBankListBeta": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "bank_name"
+        },
+        {
+          "type": "text",
+          "name": "bank_code"
+        },
+        {
+          "type": "text",
+          "name": "is_imps"
+        },
+        {
+          "type": "text",
+          "name": "is_neft"
+        },
+        {
+          "type": "text",
+          "name": "is_ac_verify_available"
+        },
+        {
+          "type": "text",
+          "name": "ifsc"
+        },
+        {
+          "type": "text",
+          "name": "status"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });
