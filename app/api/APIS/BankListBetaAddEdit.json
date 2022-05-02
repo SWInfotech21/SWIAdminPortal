@@ -52,16 +52,6 @@
       },
       {
         "type": "text",
-        "fieldName": "SwitchCheckStatus",
-        "name": "SwitchCheckStatus"
-      },
-      {
-        "type": "text",
-        "fieldName": "op_status",
-        "name": "op_status"
-      },
-      {
-        "type": "text",
         "fieldName": "is_imps",
         "options": {
           "rules": {
@@ -97,12 +87,16 @@
         "name": "is_ac_verify"
       },
       {
-        "type": "number",
-        "name": "created_by"
-      },
-      {
-        "type": "number",
-        "name": "id"
+        "type": "text",
+        "fieldName": "op_status",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": ""
+            }
+          }
+        },
+        "name": "op_status"
       }
     ]
   },
@@ -188,18 +182,6 @@
                       "column": "status",
                       "type": "text",
                       "value": "{{$_POST.op_status}}"
-                    },
-                    {
-                      "table": "t_bank_list_beta",
-                      "column": "created_by",
-                      "type": "number",
-                      "value": "{{identity}}"
-                    },
-                    {
-                      "table": "t_bank_list_beta",
-                      "column": "created_on",
-                      "type": "datetime",
-                      "value": "{{NOW}}"
                     }
                   ],
                   "table": "t_bank_list_beta",
@@ -222,7 +204,7 @@
                     "valid": true
                   },
                   "returning": "id",
-                  "query": "UPDATE t_bank_list_beta\nSET bank_name = :P1 /* {{$_POST.bank_name}} */, bank_code = :P2 /* {{$_POST.bank_code}} */, is_imps = :P3 /* {{$_POST.is_imps}} */, is_neft = :P4 /* {{$_POST.is_neft}} */, is_ac_verify_available = :P5 /* {{$_POST.is_ac_verify}} */, ifsc = :P6 /* {{$_POST.ifsc}} */, status = :P7 /* {{$_POST.op_status}} */, created_by = :P8 /* {{identity}} */, created_on = :P9 /* {{NOW}} */\nWHERE id = :P10 /* {{$_POST.EditBankId}} */",
+                  "query": "UPDATE t_bank_list_beta\nSET bank_name = :P1 /* {{$_POST.bank_name}} */, bank_code = :P2 /* {{$_POST.bank_code}} */, is_imps = :P3 /* {{$_POST.is_imps}} */, is_neft = :P4 /* {{$_POST.is_neft}} */, is_ac_verify_available = :P5 /* {{$_POST.is_ac_verify}} */, ifsc = :P6 /* {{$_POST.ifsc}} */, status = :P7 /* {{$_POST.op_status}} */\nWHERE id = :P8 /* {{$_POST.EditBankId}} */",
                   "params": [
                     {
                       "name": ":P1",
@@ -260,19 +242,9 @@
                       "value": "{{$_POST.op_status}}"
                     },
                     {
-                      "name": ":P8",
-                      "type": "expression",
-                      "value": "{{identity}}"
-                    },
-                    {
-                      "name": ":P9",
-                      "type": "expression",
-                      "value": "{{NOW}}"
-                    },
-                    {
                       "operator": "equal",
                       "type": "expression",
-                      "name": ":P10",
+                      "name": ":P8",
                       "value": "{{$_POST.EditBankId}}"
                     }
                   ]

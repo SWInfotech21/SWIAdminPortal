@@ -1,7 +1,7 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="addbanklistbeta" appConnect="local" components="{dmxDataTraversal:{},dmxBootstrap5Navigation:{},dmxBootstrap5Modal:{}}" -->
 <meta name="ac:route" content="/add-bank-list-beta">
 <dmx-serverconnect id="scBankListBeta" url="api/APIS/BankListBeta"></dmx-serverconnect>
-<dmx-data-view id="dvBankListBeta" dmx-bind:data="scBankListBeta.data.GetBankList.data" filter="((parent_mobile.contains(formSearchUser.Search.value) || api_ref.contains(formSearchUser.Search.value) || parent_fname.lowercase().contains(formSearchUser.Search.value.lowercase())) || user_fname.lowercase().contains(formSearchUser.Search.value.lowercase()) || api_name.contains(formSearchUser.Search.value) || user_mobile.contains(formSearchUser.Search.value) || recharge_number.contains(formSearchUser.Search.value) || operator_name.lowercase().contains(formSearchUser.Search.value.lowercase()) || status.lowercase().contains(formSearchUser.Search.value.lowercase()))"></dmx-data-view>
+<dmx-data-view id="dvBankListBeta" dmx-bind:data="scBankListBeta.data.GetBankList.data" filter="(bank_name.lowercase().contains(formSearchUser.Search.value.lowercase()) || bank_code.lowercase().contains(formSearchUser.Search.value.lowercase()))"></dmx-data-view>
 <dmx-data-detail id="ddBankListBeta" key="id" dmx-bind:data="dvBankListBeta.data"></dmx-data-detail>
 <div class="row align-items-center justify-content-between px-4 mb-3 sd-secondary-header mx-0">
     <div class="col-12 col-md-auto me-auto ps-4">
@@ -9,6 +9,9 @@
             DMT Bank List Beta
             <span class="border-3 ms-2 spinner-border spinner-border-sm" role="status" dmx-show="scBankListBeta.state.executing"></span>
         </h1>
+    </div>
+    <div class="col-auto order-2 order-md-1 d-flex align-items-center justify-content-start justify-content-md-center px-0 px-lg-2">
+        <button id="btnAdd" class="btn btn-primary" dmx-on:click="modalAddBank.show(); ddBankListBeta.select(0);">Add Bank</button>
     </div>
     <div class="col-auto order-1 order-md-3 d-flex align-items-center justify-content-center">
         <form id="formSearchUser" class="sd-search-form">
@@ -51,7 +54,7 @@
                             <td dmx-text="is_imps"></td>
                             <td dmx-text="is_ac_verify_available"></td>
                             <td class="fw-bold" dmx-text="status" dmx-class:text-success="status == 'Active'" dmx-class:text-danger="status == 'InActive'"></td>
-                            <td><a class="dropdown-item" href="#" dmx-on:click="ddBankListBeta.select(id)" data-bs-toggle="modal" data-bs-target="#modalAddBank"><i class="fas fa-edit sw-col-ar" title="Edit Add/ Edit Bank"></i></a>
+                            <td><a class="dropdown-item" href="#" dmx-on:click="ddBankListBeta.select(id);modalAddBank.show()" data-bs-toggle="modal" data-bs-target="#modalAddBank"><i class="fas fa-edit sw-col-ar" title="Edit Add/ Edit Bank"></i></a>
                             </td>
                         </tr>
                     </tbody>
@@ -87,29 +90,31 @@
                     <div class="mb-3 row">
                         <label for="inp_ifsc" class="col-sm-2 col-form-label">IFSC</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inp_ifsc" name="ifsc" aria-describedby="inp_ifsc_help" placeholder="Enter IFSC Code" required="" dmx-bind:value="ddBankListBeta.data.ifsc">
+                            <select type="text" class="form-control form-select" id="inp_ifsc" name="ifsc" aria-describedby="inp_is_ifsc_help" dmx-bind:value="ddBankListBeta.data.ifsc" required="">
+                                <option value="">Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
                         </div>
                     </div>
                     <div class="mb-3 row mx-0">
-                        <div class="mb-3 col-6 px-0 row">
-                            <label for="inp_is_imps" class="col-sm-2 col-form-label">Is IMPS</label>
-                            <div class="col-sm-10">
-                                <select type="text" class="form-control form-select" id="inp_imps" name="is_imps" aria-describedby="inp_is_imps_help" dmx-bind:value="ddBankListBeta.data.is_imps" required="">
-                                    <option value="">Select</option>
-                                    <option value="Yes">Yes</option>
-                                    <option value="No">No</option>
-                                </select>
-                            </div>
+                        <label for="inp_is_imps" class="col-sm-2 col-form-label">Is IMPS</label>
+                        <div class="col-sm-10">
+                            <select type="text" class="form-control form-select" id="inp_imps" name="is_imps" aria-describedby="inp_is_imps_help" dmx-bind:value="ddBankListBeta.data.is_imps" required="">
+                                <option value="">Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
                         </div>
-                        <div class="mb-3 col-6 px-0 row">
-                            <label for="inp_is_neft" class="col-sm-2 col-form-label">Is NEFT</label>
-                            <div class="col-sm-10">
-                                <select type="text" class="form-control form-select" id="inp_neft" name="is_neft" aria-describedby="inp_is_neft_help" dmx-bind:value="ddBankListBeta.data.is_neft" required="">
-                                    <option value="">Select</option>
-                                    <option value="Yes">Yes</option>
-                                    <option value="No">No</option>
-                                </select>
-                            </div>
+                    </div>
+                    <div class="mb-3 col-6 px-0 row">
+                        <label for="inp_is_neft" class="col-sm-2 col-form-label">Is NEFT</label>
+                        <div class="col-sm-10">
+                            <select type="text" class="form-control form-select" id="inp_neft" name="is_neft" aria-describedby="inp_is_neft_help" dmx-bind:value="ddBankListBeta.data.is_neft" required="">
+                                <option value="">Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
                         </div>
                     </div>
                     <div class="mb-3 row mx-0">
@@ -125,11 +130,12 @@
                         </div>
                         <div class="mb-3 col-6 px-0 row">
                             <label for="inp_status" class="col-5 col-form-label">Status</label>
-                            <div class="col-sm-7">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="SwitchCheckStatus" dmx-bind:checked="ddBankListBeta.data.status == 1" dmx-bind:value="SwitchCheckStatus.checked ? 1 : 0">
-                                    <input type="hidden" name="status" dmx-bind:value="SwitchCheckStatus.checked">
-                                </div>
+                            <div class="col-sm-10">
+                                <select type="text" class="form-control form-select" id="inp_status" name="op_status" aria-describedby="inp_is_status_help" dmx-bind:value="ddBankListBeta.data.status" required="">
+                                    <option value="">Select</option>
+                                    <option value="Active">Active</option>
+                                    <option value="InActive">InActive</option>
+                                </select>
                             </div>
                         </div>
                     </div>
