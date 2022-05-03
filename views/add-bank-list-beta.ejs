@@ -1,7 +1,7 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="addbanklistbeta" appConnect="local" components="{dmxDataTraversal:{},dmxBootstrap5Navigation:{},dmxBootstrap5Modal:{}}" -->
 <meta name="ac:route" content="/add-bank-list-beta">
 <dmx-serverconnect id="scBankListBeta" url="api/APIS/BankListBeta"></dmx-serverconnect>
-<dmx-data-view id="dvBankListBeta" dmx-bind:data="scBankListBeta.data.GetBankList.data" filter="(bank_name.lowercase().contains(formSearchUser.Search.value.lowercase()) || bank_code.lowercase().contains(formSearchUser.Search.value.lowercase()))"></dmx-data-view>
+<dmx-data-view id="dvBankListBeta" dmx-bind:data="scBankListBeta.data.GetBankList" filter="(bank_name.lowercase().contains(formSearchUser.Search.value.lowercase()) || bank_code.lowercase().contains(formSearchUser.Search.value.lowercase()))"></dmx-data-view>
 <dmx-data-detail id="ddBankListBeta" key="id" dmx-bind:data="dvBankListBeta.data"></dmx-data-detail>
 <div class="row align-items-center justify-content-between px-4 mb-3 sd-secondary-header mx-0">
     <div class="col-12 col-md-auto me-auto ps-4">

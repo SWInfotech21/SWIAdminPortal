@@ -37,7 +37,7 @@
       {
         "name": "GetBankList",
         "module": "dbconnector",
-        "action": "paged",
+        "action": "select",
         "options": {
           "sql": {
             "type": "SELECT",
@@ -80,101 +80,53 @@
             },
             "joins": [],
             "primary": "id",
-            "query": "SELECT id, bank_name, bank_code, is_imps, is_neft, is_ac_verify_available, ifsc, status\nFROM t_bank_list_beta",
-            "params": []
+            "query": "SELECT id, bank_name, bank_code, is_imps, is_neft, is_ac_verify_available, ifsc, status\nFROM t_bank_list_beta\nOFFSET  ROWS",
+            "params": [],
+            "limit": "",
+            "offset": "",
+            "sort": "",
+            "dir": "",
+            "orders": []
           },
           "connection": "postgres_gcpServer"
         },
         "output": true,
         "meta": [
           {
-            "name": "offset",
-            "type": "number"
+            "type": "number",
+            "name": "id"
           },
           {
-            "name": "limit",
-            "type": "number"
+            "type": "text",
+            "name": "bank_name"
           },
           {
-            "name": "total",
-            "type": "number"
+            "type": "text",
+            "name": "bank_code"
           },
           {
-            "name": "page",
-            "type": "object",
-            "sub": [
-              {
-                "name": "offset",
-                "type": "object",
-                "sub": [
-                  {
-                    "name": "first",
-                    "type": "number"
-                  },
-                  {
-                    "name": "prev",
-                    "type": "number"
-                  },
-                  {
-                    "name": "next",
-                    "type": "number"
-                  },
-                  {
-                    "name": "last",
-                    "type": "number"
-                  }
-                ]
-              },
-              {
-                "name": "current",
-                "type": "number"
-              },
-              {
-                "name": "total",
-                "type": "number"
-              }
-            ]
+            "type": "text",
+            "name": "is_imps"
           },
           {
-            "name": "data",
-            "type": "array",
-            "sub": [
-              {
-                "type": "number",
-                "name": "id"
-              },
-              {
-                "type": "text",
-                "name": "bank_name"
-              },
-              {
-                "type": "text",
-                "name": "bank_code"
-              },
-              {
-                "type": "text",
-                "name": "is_imps"
-              },
-              {
-                "type": "text",
-                "name": "is_neft"
-              },
-              {
-                "type": "text",
-                "name": "is_ac_verify_available"
-              },
-              {
-                "type": "text",
-                "name": "ifsc"
-              },
-              {
-                "type": "text",
-                "name": "status"
-              }
-            ]
+            "type": "text",
+            "name": "is_neft"
+          },
+          {
+            "type": "text",
+            "name": "is_ac_verify_available"
+          },
+          {
+            "type": "text",
+            "name": "ifsc"
+          },
+          {
+            "type": "text",
+            "name": "status"
           }
         ],
-        "outputType": "object"
+        "outputType": "array",
+        "type": "dbconnector_select"
       }
     ]
   }
