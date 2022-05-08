@@ -93,7 +93,7 @@
                             "field": "m_api.api_type",
                             "type": "string",
                             "operator": "equal",
-                            "value": "{{$_GET.api_type}}",
+                            "value": "0",
                             "data": {
                               "table": "m_api",
                               "column": "api_type",
@@ -114,7 +114,7 @@
                             "field": "m_api.api_type",
                             "type": "string",
                             "operator": "equal",
-                            "value": "0",
+                            "value": "{{$_GET.api_type}}",
                             "data": {
                               "table": "m_api",
                               "column": "api_type",
@@ -145,7 +145,7 @@
                       "recid": 1
                     }
                   ],
-                  "query": "SELECT id, api_name, api_code\nFROM m_api\nWHERE status = 1 AND (api_type = :P1 /* {{$_GET.api_type}} */ OR api_type = '0')\nORDER BY api_name ASC",
+                  "query": "SELECT id, api_name, api_code\nFROM m_api\nWHERE status = 1 AND (api_type = '0' OR api_type = :P1 /* {{$_GET.api_type}} */)\nORDER BY api_name ASC",
                   "params": [
                     {
                       "operator": "equal",
