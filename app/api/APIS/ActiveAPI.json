@@ -86,25 +86,52 @@
                         "operation": "="
                       },
                       {
-                        "id": "m_api.api_type",
-                        "field": "m_api.api_type",
-                        "type": "string",
-                        "operator": "equal",
-                        "value": "{{$_GET.api_type}}",
-                        "data": {
-                          "table": "m_api",
-                          "column": "api_type",
-                          "type": "text",
-                          "columnObj": {
+                        "condition": "OR",
+                        "rules": [
+                          {
+                            "id": "m_api.api_type",
+                            "field": "m_api.api_type",
                             "type": "string",
-                            "maxLength": -5,
-                            "primary": false,
-                            "unique": false,
-                            "nullable": true,
-                            "name": "api_type"
+                            "operator": "equal",
+                            "value": "{{$_GET.api_type}}",
+                            "data": {
+                              "table": "m_api",
+                              "column": "api_type",
+                              "type": "text",
+                              "columnObj": {
+                                "type": "string",
+                                "maxLength": -5,
+                                "primary": false,
+                                "unique": false,
+                                "nullable": true,
+                                "name": "api_type"
+                              }
+                            },
+                            "operation": "="
+                          },
+                          {
+                            "id": "m_api.api_type",
+                            "field": "m_api.api_type",
+                            "type": "string",
+                            "operator": "equal",
+                            "value": "0",
+                            "data": {
+                              "table": "m_api",
+                              "column": "api_type",
+                              "type": "text",
+                              "columnObj": {
+                                "type": "string",
+                                "maxLength": -5,
+                                "primary": false,
+                                "unique": false,
+                                "nullable": true,
+                                "name": "api_type"
+                              }
+                            },
+                            "operation": "="
                           }
-                        },
-                        "operation": "="
+                        ],
+                        "conditional": null
                       }
                     ],
                     "conditional": null,
@@ -118,7 +145,7 @@
                       "recid": 1
                     }
                   ],
-                  "query": "SELECT id, api_name, api_code\nFROM m_api\nWHERE status = 1 AND api_type = :P1 /* {{$_GET.api_type}} */\nORDER BY api_name ASC",
+                  "query": "SELECT id, api_name, api_code\nFROM m_api\nWHERE status = 1 AND (api_type = :P1 /* {{$_GET.api_type}} */ OR api_type = '0')\nORDER BY api_name ASC",
                   "params": [
                     {
                       "operator": "equal",
