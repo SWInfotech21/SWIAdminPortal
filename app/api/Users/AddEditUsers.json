@@ -1187,10 +1187,16 @@
                         "column": "ds_id",
                         "type": "text",
                         "value": "0"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "user_tpin",
+                        "type": "text",
+                        "value": "{{1234}}"
                       }
                     ],
                     "table": "m_users",
-                    "query": "INSERT INTO m_users\n(user_id, user_fname, user_mobile, user_email, password, salt, user_type, u_status, created_by, created_on, user_lname, cap_amt, balance_amt, balance_outstanding, aeps_balance, scheme_id, aadhar_no, pan_no, address, pin, state, district, blank1, blank2, md_id, ds_id) VALUES (:P1 /* {{UniqueID}} */, :P2 /* {{$_POST.name}} */, :P3 /* {{$_POST.mobile}} */, :P4 /* {{$_POST.email.lowercase()}} */, :P5 /* {{password.sha256(NOW)}} */, :P6 /* {{NOW}} */, :P7 /* {{$_POST.user_type}} */, '1', :P8 /* {{identity}} */, :P9 /* {{NOW}} */, :P10 /* {{'https://github.com/ado.png'}} */, '0', '0', '0', '0', :P11 /* {{$_POST.scheme_id}} */, :P12 /* {{$_POST.aadhar}} */, :P13 /* {{$_POST.pan}} */, :P14 /* {{$_POST.address}} */, :P15 /* {{$_POST.pin}} */, :P16 /* {{$_POST.state}} */, :P17 /* {{$_POST.district}} */, :P18 /* {{password}} */, :P19 /* {{$_POST.mobile}} */, '0', '0')",
+                    "query": "INSERT INTO m_users\n(user_id, user_fname, user_mobile, user_email, password, salt, user_type, u_status, created_by, created_on, user_lname, cap_amt, balance_amt, balance_outstanding, aeps_balance, scheme_id, aadhar_no, pan_no, address, pin, state, district, blank1, blank2, md_id, ds_id, user_tpin) VALUES (:P1 /* {{UniqueID}} */, :P2 /* {{$_POST.name}} */, :P3 /* {{$_POST.mobile}} */, :P4 /* {{$_POST.email.lowercase()}} */, :P5 /* {{password.sha256(NOW)}} */, :P6 /* {{NOW}} */, :P7 /* {{$_POST.user_type}} */, '1', :P8 /* {{identity}} */, :P9 /* {{NOW}} */, :P10 /* {{'https://github.com/ado.png'}} */, '0', '0', '0', '0', :P11 /* {{$_POST.scheme_id}} */, :P12 /* {{$_POST.aadhar}} */, :P13 /* {{$_POST.pan}} */, :P14 /* {{$_POST.address}} */, :P15 /* {{$_POST.pin}} */, :P16 /* {{$_POST.state}} */, :P17 /* {{$_POST.district}} */, :P18 /* {{password}} */, :P19 /* {{$_POST.mobile}} */, '0', '0', :P20 /* {{1234}} */)",
                     "params": [
                       {
                         "name": ":P1",
@@ -1286,6 +1292,11 @@
                         "name": ":P19",
                         "type": "expression",
                         "value": "{{$_POST.mobile}}"
+                      },
+                      {
+                        "name": ":P20",
+                        "type": "expression",
+                        "value": "{{1234}}"
                       }
                     ],
                     "returning": "id"
@@ -1439,7 +1450,7 @@
                   "params": {
                     "api_token": "{{GetWhatsappAPI.api_password}}",
                     "mobile": "{{91+$_POST.mobile}}",
-                    "message": "{{'Dear '+$_POST.name+', Your Account has been created successfully. User Login Name  '+$_POST.mobile+', Password  '+password+' and generate TPIN after login to web portal or mobile app. Thanks for using our services. 😊\\nRegards S W Pay Team\\n'}}"
+                    "message": "{{'Dear '+$_POST.name+', Your Account has been created successfully. User Login Id  '+$_POST.mobile+', Password  is '+password+' and default TPIN is 1234 .\\nUpdate Password and TPIN after login to web portal or mobile app.\\nThanks for using our services. 😊\\nRegards \\nS W Pay Team\\n\\n'}}"
                   },
                   "method": "POST"
                 },
@@ -2095,7 +2106,7 @@
                     "user": "{{GetAPI.username}}",
                     "key": "{{GetAPI.api_password}}",
                     "mobile": "{{$_POST.mobile}}",
-                    "message": "{{'Dear Partner, Your Account has been created successfully. User Name '+$_POST.mobile+' Password  '+password+' TPIN XXXX . Thanks for using our service.\\nRegards S W Pay Team'}}",
+                    "message": "{{'Dear Partner, Your Account has been created successfully. User Name '+$_POST.mobile+' Password  '+password+' TPIN 1234 . Thanks for using our service.\\nRegards S W Pay Team'}}",
                     "senderid": "{{GetAPI.senderid}}",
                     "accusage": "{{1}}",
                     "entityid": "{{GetAPI.entity_id}}",
