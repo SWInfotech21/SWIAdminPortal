@@ -76,7 +76,7 @@
             <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="dvUsers.data" id="tableRepeat1">
                 <tr>
                     <td>{{$index+1}}</td>
-                    <td><img class="sw-img-render" dmx-bind:src="profile_pic?+'https://login.swpay.in'+profile_pic:+'https://login.swpay.in/assets/images/icons/user-icon.png'" width="30" height="30"></td>
+                    <td><img class="sw-img-render" dmx-bind:src="profile_pic?+'https://swpay.in'+profile_pic:+'https://swpay.in/assets/images/icons/user-icon.png'" width="30" height="30"></td>
                     <td dmx-text="user_id"></td>
                     <td dmx-text="user_fname.titlecase()"></td>
                     <td dmx-text="user_email"></td>
@@ -166,17 +166,17 @@
             <div class="modal-body">
                 <h3>Do you want to Approve this user?</h3>
                 <div class="row mx-0">
-                    <div class="col-12 col-md-6 px-0 text-center"><img class="sw-img-render" dmx-bind:src="'https://login.swpay.in'+ddUsers.data.profile_pic" width="350">
-                        <a class="btn btn-primary btn-sm" dmx-bind:href="'https://login.swpay.in'+ddUsers.data.profile_pic" download target="_blank">Open</a>
+                    <div class="col-12 col-md-6 px-0 text-center"><img class="sw-img-render" dmx-bind:src="'https://swpay.in'+ddUsers.data.profile_pic" width="350">
+                        <a class="btn btn-primary btn-sm" dmx-bind:href="'https://swpay.in'+ddUsers.data.profile_pic" download target="_blank">Open</a>
                     </div>
-                    <div class="col-12 col-md-6 px-0 text-center"><img class="sw-img-render" dmx-bind:src="'https://login.swpay.in'+ddUsers.data.pan_card" width="350">
-                        <a class="btn btn-primary btn-sm" dmx-bind:href="'https://login.swpay.in'+ddUsers.data.pan_card" download target="_blank">Open</a>
+                    <div class="col-12 col-md-6 px-0 text-center"><img class="sw-img-render" dmx-bind:src="'https://swpay.in'+ddUsers.data.pan_card" width="350">
+                        <a class="btn btn-primary btn-sm" dmx-bind:href="'https://swpay.in'+ddUsers.data.pan_card" download target="_blank">Open</a>
                     </div>
-                    <div class="col-12 col-md-6 px-0 text-center"><img class="sw-img-render" dmx-bind:src="'https://login.swpay.in'+ddUsers.data.aadhar_front" width="350">
-                        <a class="btn btn-primary btn-sm" dmx-bind:href="'https://login.swpay.in'+ddUsers.data.aadhar_front" download target="_blank">Open</a>
+                    <div class="col-12 col-md-6 px-0 text-center"><img class="sw-img-render" dmx-bind:src="'https://swpay.in'+ddUsers.data.aadhar_front" width="350">
+                        <a class="btn btn-primary btn-sm" dmx-bind:href="'https://swpay.in'+ddUsers.data.aadhar_front" download target="_blank">Open</a>
                     </div>
-                    <div class="col-12 col-md-6 px-0 text-center"><img class="sw-img-render" dmx-bind:src="'https://login.swpay.in'+ddUsers.data.aadhar_back" width="350">
-                        <a class="btn btn-primary btn-sm" dmx-bind:href="'https://login.swpay.in'+ddUsers.data.aadhar_back" download target="_blank">Open</a>
+                    <div class="col-12 col-md-6 px-0 text-center"><img class="sw-img-render" dmx-bind:src="'https://swpay.in'+ddUsers.data.aadhar_back" width="350">
+                        <a class="btn btn-primary btn-sm" dmx-bind:href="'https://swpay.in'+ddUsers.data.aadhar_back" download target="_blank">Open</a>
                     </div>
                 </div>
                 <form is="dmx-serverconnect-form" id="formKycUser" method="post" action="api/Users/KycUp" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="scNotif.success('User KYC Updated'); scUsers.load();modalKYCUser.hide()" dmx-on:error="scNotif.warning('An error occurred');">
@@ -192,7 +192,7 @@
                                 <td>Phone No.</td>
                             </tr>
                             <tr>
-                                <td><img dmx-bind:src="'https://login.swpay.in'+ddUsers.data.profile_pic" width="50" height="50"></td>
+                                <td><img dmx-bind:src="'https://swpay.in'+ddUsers.data.profile_pic" width="50" height="50"></td>
                                 <td>{{ddUsers.data.user_fname.titlecase()}}</td>
                                 <td>{{ddUsers.data.user_type==1?'MDT':ddUsers.data.user_type==2?'DT':ddUsers.data.user_type==3?'RT':''}}</td>
                                 <td>{{ddUsers.data.user_id}}</td>
@@ -319,6 +319,15 @@
                             <label for="inp_aeps_merchant" class="col-form-label">AEPS Merchant Id</label>
                             <div class="col-12 px-0">
                                 <input type="text" class="form-control" id="inp_aeps_merchant" name="aeps_merchant" aria-describedby="inp_merchant_help" placeholder="Enter Mobile" dmx-bind:value="ddUsers.data.aeps_merchant_id">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 row mx-0">
+                            <label for="inp_aeps_merchant" class="col-form-label">Status</label>
+                            <div class="col-12 px-0">
+                                <select type="text" class="form-control form-select" id="u_status" name="status" dmx-bind:value="ddUsers.data.u_status">
+                                    <option value="1">Active</option>
+                                    <option value="0">InActive</option>
+                                </select>
                             </div>
                         </div>
                     </div>
