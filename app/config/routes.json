@@ -58,7 +58,7 @@
       "exec": "/api/PageAccess/UserAccess"
     },
     {
-      "path": "/scheme-priority",
+      "path": "/scheme-priority/:id",
       "page": "scheme-priority",
       "layout": "main",
       "exec": "/api/PageAccess/UserAccess"

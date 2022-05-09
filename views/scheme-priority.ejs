@@ -1,5 +1,5 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="schemepriority" appConnect="local" components="{dmxDataTraversal:{},dmxBootstrap5Modal:{}}" -->
-<meta name="ac:route" content="/scheme-priority">
+<meta name="ac:route" content="/scheme-priority/:id">
 <script is="dmx-flow" id="flowFetchScheme" type="text/dmx-flow">{
     condition: {
         if: "{{(modalSchemePriority.formAddEditSchPriority.ForUserType.value)}}",
@@ -20,8 +20,8 @@
     }
   }
 }</script>
-
-<dmx-serverconnect id="scSchemePriority" url="api/Scheme/FetchSchemePriority"></dmx-serverconnect>
+<dmx-value id="varSchemeUserId" dmx-bind:value="<%= $_PARAM.id %>"></dmx-value>
+<dmx-serverconnect id="scSchemePriority" url="api/Scheme/FetchSchemePriority" dmx-param:user_id="varSchemeUserId.value"></dmx-serverconnect>
 <dmx-data-view id="dvSchemePriority" pageSize="100" page="10" dmx-bind:data="scSchemePriority.data.SchemePriority"></dmx-data-view>
 <dmx-data-detail id="ddSchemePriority" key="id" dmx-bind:data="dvSchemePriority.data"></dmx-data-detail>
 <dmx-serverconnect id="scUserSchemPrio" url="api/Scheme/FetchSchPrioUser" dmx-param:user_type="modalSchemePriority.formAddEditSchPriority.UserTypeSelf.value" noload></dmx-serverconnect>

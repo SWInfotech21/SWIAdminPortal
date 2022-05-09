@@ -1122,7 +1122,13 @@ dmx.config({
     "tableRepeat1": {
       "meta": null,
       "outputType": "array"
-    }
+    },
+    "query": [
+      {
+        "type": "text",
+        "name": "id"
+      }
+    ]
   },
   "schemecommisionset": {
     "tableRepeat1": {

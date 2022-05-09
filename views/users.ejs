@@ -82,8 +82,8 @@
                     <td dmx-text="user_email"></td>
                     <td dmx-text="user_mobile"></td>
                     <td dmx-text="balance_amt.toNumber().toFixed(2)"></td>
-                    <td dmx-text="user_type == 1 ? 'MDT' : user_type == 2 ? 'DT' : user_type == 3 ? 'RT' : 'None'" dmx-class:text-primary="user_type == 1" dmx-class:text-success="user_type == 2" dmx-class:text-warning="user_type == 3" dmx-class:text-danger="user_type == 4"></td>
-                    <td dmx-text="u_status != 1 ?'Inactive' : 'Active'" dmx-class:text-primary="u_status == 1" dmx-class:text-warning="u_status != 1"></td>
+                    <td class="fw-bold" dmx-text="user_type == 1 ? 'MDT' : user_type == 2 ? 'DT' : user_type == 3 ? 'RT' : 'None'" dmx-class:text-primary="user_type == 1" dmx-class:text-success="user_type == 2" dmx-class:text-danger="user_type == 3" dmx-class:text-warning="user_type == 4"></td>
+                    <td class="fw-bold" dmx-text="u_status != 1 ?'Inactive' : 'Active'" dmx-class:text-primary="u_status == 1" dmx-class:text-danger="u_status != 1"></td>
                     <td dmx-text="user_scheme"></td>
                     <td dmx-text="aadhar_no"></td>
                     <td dmx-text="pan_no"></td>
@@ -95,7 +95,7 @@
                     <td dmx-show="scAdminBalance.data.query.user_type == 0">
                         <a class="sw-col-ar" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalAddUsers"><i class="fas fa-edit" title="Edit Users" dmx-on:click="flowGetScheme.run()"></i></a>&emsp;<a class="sw-col-br" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalPasswordUser"><i class="fas fa-user-lock" title="Password Update"></i></a>
                         &emsp;<a class="sw-col-cr" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#"><i class="fas fa-sign-in-alt" title="Login to user panel"></i></a>&emsp;
-                        <a class="sw-col-cr" href="scheme-priority"><i class="fas fa-code-branch" title="Scheme Priority"></i></a>
+                        <a class="sw-col-cr" href="#" dmx-on:click="browserMain.goto('scheme-priority/'+id,true);"><i class="fas fa-code-branch" title="Scheme Priority"></i></a>
                     </td>
                 </tr>
             </tbody>
