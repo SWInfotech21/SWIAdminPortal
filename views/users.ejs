@@ -22,7 +22,7 @@
     }
     }
     }</script>
-<dmx-serverconnect id="scUsers" url="api/Users/Users"></dmx-serverconnect>
+<dmx-serverconnect id="scUsers" url="api/Users/Users" dmx-param:user_type="selectUserType.value"></dmx-serverconnect>
 <dmx-data-view id="dvUsers" dmx-bind:data="scUsers.data.FetchUsers.data" filter="(user_mobile.contains(formSearchUser.Search.value) || user_fname.lowercase().contains(formSearchUser.Search.value.lowercase()) || user_email.lowercase().contains(formSearchUser.Search.value.lowercase()) || user_type.contains(formSearchUser.Search.value) || aadhar_no.contains(formSearchUser.Search.value) || pan_no.contains(formSearchUser.Search.value) || pin.contains(formSearchUser.Search.value) || district.lowercase().contains(formSearchUser.Search.value.lowercase()) || state.lowercase().contains(formSearchUser.Search.value.lowercase()) || u_status.lowercase().contains(formSearchUser.Search.value.lowercase()) || kyc_status.lowercase().contains(formSearchUser.Search.value.lowercase()) || aeps_merchant_id.contains(formSearchUser.Search.value))"></dmx-data-view>
 <dmx-data-detail id="ddUsers" dmx-bind:data="dvUsers.data" key="id"></dmx-data-detail>
 <div class="row align-items-center justify-content-between px-4 mb-3 sd-secondary-header mx-0">
@@ -31,6 +31,13 @@
             SW Infotech Users(MDT/RT/DT)
             <span class="border-3 ms-2 spinner-border spinner-border-sm" role="status" dmx-show="scUsers.state.executing"></span>
         </h1>
+    </div>
+    <div class="col-auto order-2 order-md-1 d-flex align-items-center justify-content-start justify-content-md-center px-0 px-lg-2"><select id="selectUserType" class="form-control form-select">
+            <option value="0">All</option>
+            <option value="1">MDT</option>
+            <option value="2">DT</option>
+            <option value="3">RT</option>
+        </select>
     </div>
     <div class="col-auto order-1 order-md-3 d-flex align-items-center justify-content-center">
         <form id="formSearchUser" class="sd-search-form">
