@@ -22,7 +22,7 @@
     }
     }
     }</script>
-<dmx-serverconnect id="scUsers" url="api/Users/Users" dmx-param:user_type="selectUserType.value"></dmx-serverconnect>
+<dmx-serverconnect id="scUsers" url="api/Users/Users" dmx-param:user_type="selectUserType.value" dmx-param:limit="10000"></dmx-serverconnect>
 <dmx-data-view id="dvUsers" dmx-bind:data="scUsers.data.FetchUsers.data" filter="(user_mobile.contains(formSearchUser.Search.value) || user_fname.lowercase().contains(formSearchUser.Search.value.lowercase()) || user_email.lowercase().contains(formSearchUser.Search.value.lowercase()) || user_type.contains(formSearchUser.Search.value) || aadhar_no.contains(formSearchUser.Search.value) || pan_no.contains(formSearchUser.Search.value) || pin.contains(formSearchUser.Search.value) || district.lowercase().contains(formSearchUser.Search.value.lowercase()) || state.lowercase().contains(formSearchUser.Search.value.lowercase()) || u_status.lowercase().contains(formSearchUser.Search.value.lowercase()) || kyc_status.lowercase().contains(formSearchUser.Search.value.lowercase()) || aeps_merchant_id.contains(formSearchUser.Search.value))"></dmx-data-view>
 <dmx-data-detail id="ddUsers" dmx-bind:data="dvUsers.data" key="id"></dmx-data-detail>
 <div class="row align-items-center justify-content-between px-4 mb-3 sd-secondary-header mx-0">
@@ -71,6 +71,7 @@
                     <th>AEPS Mer. Id</th>
                     <th>KYC Status</th>
                     <th dmx-show="scAdminBalance.data.query.user_type == 0">Action</th>
+                    <th>Created On</th>
                 </tr>
             </thead>
             <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="dvUsers.data" id="tableRepeat1">
@@ -97,6 +98,7 @@
                         &emsp;<a class="sw-col-cr" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#"><i class="fas fa-sign-in-alt" title="Login to user panel"></i></a>&emsp;
                         <a class="sw-col-cr" href="#" dmx-on:click="browserMain.goto('scheme-priority/'+id,true);"><i class="fas fa-code-branch" title="Scheme Priority"></i></a>
                     </td>
+                    <td dmx-text="created_on.formatDate('dd-MM-yyyy hh:mm:ss A')"></td>
                 </tr>
             </tbody>
         </table>
