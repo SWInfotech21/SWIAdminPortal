@@ -75,6 +75,10 @@
         "type": "text",
         "fieldName": "status",
         "name": "status"
+      },
+      {
+        "type": "text",
+        "name": "service_id"
       }
     ]
   },
@@ -350,11 +354,17 @@
                       "column": "created_on",
                       "type": "datetime",
                       "value": "{{NOW}}"
+                    },
+                    {
+                      "table": "m_commission",
+                      "column": "service_id",
+                      "type": "text",
+                      "value": "{{$_POST.service_id}}"
                     }
                   ],
                   "table": "m_commission",
                   "returning": "id",
-                  "query": "INSERT INTO m_commission\n(operator_id, user_id, api_id, scheme_id, comm_per, comm_val, service_charge_per, service_charge_val, is_active, created_by, created_on) VALUES (:P1 /* {{$_POST.op_id}} */, :P2 /* {{identity}} */, '1', :P3 /* {{$_POST.scheme_id}} */, :P4 /* {{$_POST.comm_percent}} */, :P5 /* {{$_POST.comm_val}} */, :P6 /* {{$_POST.charge_percent}} */, :P7 /* {{$_POST.charge_val}} */, :P8 /* {{$_POST.status}} */, :P9 /* {{identity}} */, :P10 /* {{NOW}} */)",
+                  "query": "INSERT INTO m_commission\n(operator_id, user_id, api_id, scheme_id, comm_per, comm_val, service_charge_per, service_charge_val, is_active, created_by, created_on, service_id) VALUES (:P1 /* {{$_POST.op_id}} */, :P2 /* {{identity}} */, '1', :P3 /* {{$_POST.scheme_id}} */, :P4 /* {{$_POST.comm_percent}} */, :P5 /* {{$_POST.comm_val}} */, :P6 /* {{$_POST.charge_percent}} */, :P7 /* {{$_POST.charge_val}} */, :P8 /* {{$_POST.status}} */, :P9 /* {{identity}} */, :P10 /* {{NOW}} */, :P11 /* {{$_POST.service_id}} */)",
                   "params": [
                     {
                       "name": ":P1",
@@ -405,6 +415,11 @@
                       "name": ":P10",
                       "type": "expression",
                       "value": "{{NOW}}"
+                    },
+                    {
+                      "name": ":P11",
+                      "type": "expression",
+                      "value": "{{$_POST.service_id}}"
                     }
                   ]
                 }

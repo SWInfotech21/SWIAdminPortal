@@ -24,7 +24,9 @@
         "type": "number",
         "fieldName": "commision_value",
         "options": {
-          "rules": {}
+          "rules": {
+            "core:number": {}
+          }
         },
         "name": "commision_value"
       },
@@ -32,7 +34,9 @@
         "type": "number",
         "fieldName": "charge_percent",
         "options": {
-          "rules": {}
+          "rules": {
+            "core:number": {}
+          }
         },
         "name": "charge_percent"
       },
@@ -40,9 +44,23 @@
         "type": "number",
         "fieldName": "charge_value",
         "options": {
-          "rules": {}
+          "rules": {
+            "core:number": {}
+          }
         },
         "name": "charge_value"
+      },
+      {
+        "type": "text",
+        "fieldName": "service",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": ""
+            }
+          }
+        },
+        "name": "service"
       }
     ]
   },
@@ -143,12 +161,23 @@
                     "column": "scheme_id"
                   },
                   "operation": "="
+                },
+                {
+                  "id": "service_id",
+                  "field": "service_id",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "{{$_POST.service}}",
+                  "data": {
+                    "column": "service_id"
+                  },
+                  "operation": "="
                 }
               ],
               "conditional": null,
               "valid": true
             },
-            "query": "UPDATE m_commission\nSET user_id = :P1 /* {{identity}} */, comm_per = :P2 /* {{$_POST.commision_percent}} */, comm_val = :P3 /* {{$_POST.commision_value}} */, service_charge_per = :P4 /* {{$_POST.charge_percent}} */, service_charge_val = :P5 /* {{$_POST.charge_value}} */, is_active = '1', updated_by = :P6 /* {{identity}} */, updated_on = :P7 /* {{NOW}} */\nWHERE scheme_id = :P8 /* {{$_POST.scheme_id_all}} */",
+            "query": "UPDATE m_commission\nSET user_id = :P1 /* {{identity}} */, comm_per = :P2 /* {{$_POST.commision_percent}} */, comm_val = :P3 /* {{$_POST.commision_value}} */, service_charge_per = :P4 /* {{$_POST.charge_percent}} */, service_charge_val = :P5 /* {{$_POST.charge_value}} */, is_active = '1', updated_by = :P6 /* {{identity}} */, updated_on = :P7 /* {{NOW}} */\nWHERE scheme_id = :P8 /* {{$_POST.scheme_id_all}} */ AND service_id = :P9 /* {{$_POST.service}} */",
             "params": [
               {
                 "name": ":P1",
@@ -190,8 +219,15 @@
                 "type": "expression",
                 "name": ":P8",
                 "value": "{{$_POST.scheme_id_all}}"
+              },
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P9",
+                "value": "{{$_POST.service}}"
               }
-            ]
+            ],
+            "returning": "id"
           }
         },
         "meta": [

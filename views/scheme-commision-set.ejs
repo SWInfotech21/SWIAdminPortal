@@ -1,5 +1,6 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="schemecommisionset" appConnect="local" components="{dmxDataTraversal:{},dmxBootstrap5Modal:{}}" -->
 <meta name="ac:route" content="/scheme-commision-set">
+<dmx-serverconnect id="scService" url="api/Services/Services"></dmx-serverconnect>
 <script is="dmx-flow" id="flowCommision" type="text/dmx-flow">{
   condition: {
     if: "{{scheme_type.value}}",
@@ -11,7 +12,7 @@
   }
 }</script>
 <dmx-serverconnect id="scSchemes" url="api/Scheme/FetchActiveScheme"></dmx-serverconnect>
-<dmx-serverconnect id="scCommision" url="api/commision/FetchAllCommision" noload dmx-param:scheme_id="scheme_type.value"></dmx-serverconnect>
+<dmx-serverconnect id="scCommision" url="api/commision/FetchAllCommision" noload dmx-param:scheme_id="scheme_type.value" dmx-param:service_id="formUpdateAllCommision.inp_Fetch_service.value"></dmx-serverconnect>
 <dmx-data-view id="dvCommision" dmx-bind:data="scCommision.data.AllCommisionScheme" filter="(service_name.lowercase().contains(formSearchUser.Search.value.lowercase()) || operator_name.lowercase().contains(formSearchUser.Search.value.lowercase()))"></dmx-data-view>
 <dmx-data-detail id="ddCommision" dmx-bind:data="dvCommision.data" key="commision_id"></dmx-data-detail>
 
@@ -19,7 +20,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1 id="Commision" class="text-center align-self-center">SW Infotech Commision<span class="border-3 ms-2 spinner-border spinner-border-sm" role="status" dmx-show="scCommision.state.executing"></span></h1>
+                <h1 id="Commision">SW Infotech Commision Set<span class="border-3 ms-2 spinner-border spinner-border-sm" role="status" dmx-show="scCommision.state.executing"></span></h1>
             </div>
             <div class="col-auto order-1 order-md-3 d-flex align-items-center justify-content-center">
                 <form id="formSearchUser" class="sd-search-form">
@@ -47,6 +48,10 @@
                 </div>
                 <form is="dmx-serverconnect-form" id="formUpdateAllCommision" method="post" action="api/commision/UpdateAllCommision" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formUpdateAllCommision.data.UpdateAllCommision ? scNotif.success('New Commision Added') : scNotif.success('All Commision Updated');formUpdateAllCommision.reset(); scCommision.load({})" dmx-on:error="scNotif.warning('An error occurred'); " class="d-flex col-12 col-md-9 justify-content-md-end">
                     <input type="hidden" name="scheme_id_all" dmx-bind:value="scheme_type.value">
+                    <div class="col-2 col-md-3 p-0"><label>Select Service</label><select type="text" class="form-control form-select" id="inp_Fetch_service" name="service" aria-describedby="inp_service_help" placeholder="Enter Service" dmx-bind:options="scService.data.FetchServices.data" optiontext="service_name" optionvalue="id" required="" dmx-on:changed="flowCommision.run()">
+                            <option value="0">All</option>
+                        </select>
+                    </div>
                     <div class="col-2 col-md-1 p-0">
                         <label>Comm. Per.</label>
                         <input type="number" id="commision_percent" name="commision_percent" class="form-control px-1" placeholder="E.g: 0.00" value="0.00">
@@ -64,7 +69,7 @@
                         <input type="number" id="charge_value" name="charge_value" class="form-control px-1" placeholder="E.g: 0.00" value="0.00">
                     </div>
                     <div class="col-2 p-0 mt-3 ms-3">
-                        <button id="btn1" class="btn btn-info mt-md-4" type="submit" dmx-bind:disabled="state.executing">Update All<span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span></button>
+                        <button id="btn1" class="btn btn-info" type="submit" dmx-bind:disabled="state.executing">Update All<span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span></button>
 
                     </div>
                 </form>
@@ -119,7 +124,7 @@
             <div class="modal-body">
                 <form is="dmx-serverconnect-form" id="formAddEditCommision" method="post" action="api/commision/SchemeCommisionAddEdit" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAddEditCommision.data.SchemeCommisionAddEdit ? scNotif.success('New Commision Added') : scNotif.success('Commision Updated'); scCommision.load({})" dmx-on:error="scNotif.warning('An error occurred'); ">
                     <!-- formAddEditCommision.reset(); -->
-                    <input type="hidden" name="commisionid" dmx-bind:value="ddCommision.data.commision_id">
+                    <input type="hidden" name="commisionid" dmx-bind:value="ddCommision.data.commision_id"><input type="hidden" name="service_id" dmx-bind:value="ddCommision.data.service_id">
                     <input type="hidden" name="op_id" dmx-bind:value="ddCommision.data.op_id">
                     <input type="hidden" name="scheme_id" dmx-bind:value="scheme_type.value">
                     <div class="mb-3 row">
