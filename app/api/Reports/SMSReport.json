@@ -77,6 +77,10 @@
               {
                 "table": "t_sms_log",
                 "column": "user_id"
+              },
+              {
+                "table": "t_sms_log",
+                "column": "extra1"
               }
             ],
             "table": {
@@ -118,10 +122,11 @@
               {
                 "table": "t_sms_log",
                 "column": "id",
-                "direction": "DESC"
+                "direction": "DESC",
+                "recid": 1
               }
             ],
-            "query": "SELECT id, sms_message, sender_mobile, created_on, sms_type, ip_address, status, response, user_id\nFROM t_sms_log AS t_sms_log\nWHERE created_on BETWEEN :P1 /* {{$_GET.fromdate}} */ AND :P2 /* {{$_GET.todate}} */\nORDER BY id DESC",
+            "query": "SELECT id, sms_message, sender_mobile, created_on, sms_type, ip_address, status, response, user_id, extra1\nFROM t_sms_log AS t_sms_log\nWHERE created_on BETWEEN :P1 /* {{$_GET.fromdate}} */ AND :P2 /* {{$_GET.todate}} */\nORDER BY id DESC",
             "params": [
               {
                 "operator": "between",
@@ -176,6 +181,10 @@
           {
             "type": "number",
             "name": "user_id"
+          },
+          {
+            "type": "text",
+            "name": "extra1"
           }
         ],
         "outputType": "array"

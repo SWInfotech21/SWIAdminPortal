@@ -3024,42 +3024,52 @@
               "type": "increments",
               "default": "",
               "primary": true,
-              "nullable": false
+              "nullable": false,
+              "unique": true
             }
           },
           "sms_message": {
             "db": {
               "type": "string",
               "primary": false,
-              "nullable": false
+              "nullable": false,
+              "maxLength": -5,
+              "unique": false
             }
           },
           "sender_mobile": {
             "db": {
               "type": "string",
               "primary": false,
-              "nullable": false
+              "nullable": false,
+              "maxLength": -5,
+              "unique": false
             }
           },
           "created_on": {
             "db": {
               "type": "timestamp",
               "primary": false,
-              "nullable": false
+              "nullable": false,
+              "unique": false
             }
           },
           "sms_type": {
             "db": {
               "type": "string",
               "primary": false,
-              "nullable": false
+              "nullable": false,
+              "maxLength": -5,
+              "unique": false
             }
           },
           "ip_address": {
             "db": {
               "type": "string",
               "primary": false,
-              "nullable": false
+              "nullable": false,
+              "maxLength": -5,
+              "unique": false
             }
           },
           "status": {
@@ -3067,50 +3077,62 @@
               "type": "boolean",
               "maxLength": 1,
               "primary": false,
-              "nullable": false
+              "nullable": false,
+              "unique": false
             }
           },
           "response": {
             "db": {
               "type": "string",
               "primary": false,
-              "nullable": true
+              "nullable": true,
+              "maxLength": -5,
+              "unique": false
             }
           },
           "extra1": {
             "db": {
               "type": "string",
               "primary": false,
-              "nullable": true
+              "nullable": true,
+              "maxLength": -5,
+              "unique": false
             }
           },
           "extra2": {
             "db": {
               "type": "string",
               "primary": false,
-              "nullable": true
+              "nullable": true,
+              "maxLength": -5,
+              "unique": false
             }
           },
           "extra3": {
             "db": {
               "type": "string",
               "primary": false,
-              "nullable": true
+              "nullable": true,
+              "maxLength": -5,
+              "unique": false
             }
           },
           "extra4": {
             "db": {
               "type": "string",
               "primary": false,
-              "nullable": true
+              "nullable": true,
+              "maxLength": -5,
+              "unique": false
             }
           },
           "user_id": {
             "db": {
               "type": "integer",
-              "default": "0",
+              "default": 0,
               "primary": false,
-              "nullable": false
+              "nullable": false,
+              "unique": false
             }
           }
         }
