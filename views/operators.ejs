@@ -1,7 +1,7 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="operators" appConnect="local" components="{dmxSwiper:{},dmxFormatter:{},dmxDataTraversal:{},dmxBootstrap5Modal:{},dmxValidator:{}}" -->
-<dmx-serverconnect id="scService" url="api/Services/Services"></dmx-serverconnect>
 <meta name="ac:route" content="/operators">
-<dmx-serverconnect id="scOperator" url="api/operator/OperatorsFetch" dmx-param:limit="1000"></dmx-serverconnect>
+<dmx-serverconnect id="scService" url="api/Services/Services"></dmx-serverconnect>
+<dmx-serverconnect id="scOperator" url="api/operator/OperatorsFetch" dmx-param:limit="1000" dmx-param:service_id="content.inp_Fetch_service.value"></dmx-serverconnect>
 <dmx-data-view id="dvOperator" dmx-bind:data="scOperator.data.OperatorFetch.data" filter="(operator_name.lowercase().contains(formSearchUser.Search.value) || service_name.lowercase().contains(formSearchUser.Search.value) )"></dmx-data-view>
 <dmx-data-detail id="ddOperators" dmx-bind:data="dvOperator.data" key="op_id"></dmx-data-detail>
 <header>
@@ -9,6 +9,11 @@
         <div class="row">
             <div class="col-12 col-md-auto me-auto ps-4">
                 <h1 id="Operator" class="ms-md-1 mt-md-3 text-dark fs-2 sd-fw-800 d-flex align-items-center">SW Infotech Operators <span class="border-3 ms-2 spinner-border spinner-border-sm" role="status" dmx-show="scOperator.state.executing"></span></h1>
+            </div>
+            <div class="col-auto order-2 order-md-1 d-flex align-items-center justify-content-start justify-content-md-center px-0 px-lg-2">
+                <select type="text" class="form-control form-select" id="inp_Fetch_service" name="service" aria-describedby="inp_service_help" placeholder="Enter Service" dmx-bind:options="scService.data.FetchServices.data" optiontext="service_name" optionvalue="id" required="">
+                    <option value="0">All</option>
+                </select>
             </div>
             <div class="col-auto order-2 order-md-1 d-flex align-items-center justify-content-start justify-content-md-center px-0 px-lg-2">
                 <button id="btnAdd" class="btn btn-primary" dmx-on:click="modalAddOperators.show(); ddOperators.select(0);">Add Operator</button>
