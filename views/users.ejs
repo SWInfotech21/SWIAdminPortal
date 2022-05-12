@@ -60,12 +60,13 @@
                     <th>Parent</th>
                     <th>Mobile</th>
                     <th>Wallet Bal.</th>
+                    <th>AEPS Bal.</th>
                     <th>Type</th>
                     <th>Status</th>
                     <th>User Scheme</th>
                     <th>Aadhar No.</th>
                     <th>PAN No.</th>
-                    <th dmx-show="scAdminBalance.data.query.user_type == 0">Password</th>
+                    <th dmx-show="scAdminBalance.data.query.user_type == 0"> Password</th>
                     <th>Address & PIN</th>
                     <th>State & Dist.</th>
                     <th>AEPS Mer. Id</th>
@@ -84,6 +85,7 @@
                     <td dmx-text="parent_id+' | '+parent_name+' | '+parent_phone_no"></td>
                     <td dmx-text="user_mobile"></td>
                     <td dmx-text="balance_amt.toNumber().toFixed(2)"></td>
+                    <td dmx-text="aeps_balance.toNumber().toFixed(2)"></td>
                     <td class="fw-bold" dmx-text="user_type == 1 ? 'MDT' : user_type == 2 ? 'DT' : user_type == 3 ? 'RT' : 'None'" dmx-class:text-primary="user_type == 1" dmx-class:text-success="user_type == 2" dmx-class:text-danger="user_type == 3" dmx-class:text-warning="user_type == 4"></td>
                     <td class="fw-bold" dmx-text="u_status != 1 ?'Inactive' : 'Active'" dmx-class:text-primary="u_status == 1" dmx-class:text-danger="u_status != 1"></td>
                     <td dmx-text="user_scheme"></td>
