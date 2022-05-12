@@ -1,7 +1,7 @@
 {
   "meta": {
     "options": {
-      "linkedFile": "/views/add-cc.ejs",
+      "linkedFile": "/views/add-user.ejs",
       "linkedForm": "formAddEditUser"
     },
     "$_POST": [
@@ -9,16 +9,6 @@
         "type": "text",
         "fieldName": "UserId",
         "name": "UserId"
-      },
-      {
-        "type": "text",
-        "fieldName": "user_type",
-        "name": "user_type"
-      },
-      {
-        "type": "text",
-        "fieldName": "scheme_id",
-        "name": "scheme_id"
       },
       {
         "type": "text",
@@ -113,7 +103,7 @@
         "name": "pan"
       },
       {
-        "type": "number",
+        "type": "text",
         "fieldName": "pin",
         "options": {
           "rules": {
@@ -121,9 +111,8 @@
               "param": "",
               "message": "PIN is required."
             },
-            "core:number": {},
             "core:maxlength": {
-              "param": "100"
+              "param": "10"
             }
           }
         },
@@ -163,43 +152,38 @@
       },
       {
         "type": "text",
-        "fieldName": "support",
-        "name": "support"
+        "fieldName": "firm_name",
+        "name": "firm_name"
+      },
+      {
+        "type": "number",
+        "fieldName": "user_type",
+        "options": {
+          "rules": {
+            "core:number": {}
+          }
+        },
+        "name": "user_type"
+      },
+      {
+        "type": "number",
+        "fieldName": "scheme_id",
+        "options": {
+          "rules": {
+            "core:number": {}
+          }
+        },
+        "name": "scheme_id"
       },
       {
         "type": "text",
-        "fieldName": "PendingTrans",
-        "name": "PendingTrans"
+        "fieldName": "'rtscheme'+$index",
+        "name": "'rtscheme'+$index"
       },
       {
         "type": "text",
-        "fieldName": "TransReport",
-        "name": "TransReport"
-      },
-      {
-        "type": "text",
-        "fieldName": "LiveTrans",
-        "name": "LiveTrans"
-      },
-      {
-        "type": "text",
-        "fieldName": "UpdateTxn",
-        "name": "UpdateTxn"
-      },
-      {
-        "type": "text",
-        "fieldName": "ViewUsers",
-        "name": "ViewUsers"
-      },
-      {
-        "type": "text",
-        "fieldName": "BrowseTickets",
-        "name": "BrowseTickets"
-      },
-      {
-        "type": "text",
-        "fieldName": "OtherTickets",
-        "name": "OtherTickets"
+        "fieldName": "'dtscheme'+$index",
+        "name": "'dtscheme'+$index"
       },
       {
         "type": "text",
@@ -216,6 +200,14 @@
           }
         },
         "name": "address"
+      },
+      {
+        "type": "text",
+        "name": "status"
+      },
+      {
+        "type": "text",
+        "name": "aeps_merchant"
       }
     ],
     "$_SERVER": [
@@ -427,6 +419,13 @@
                         "column": "aeps_merchant_id",
                         "type": "text",
                         "value": "{{$_POST.aeps_merchant}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "blank3",
+                        "type": "text",
+                        "value": "{{$_POST.firm_name}}",
+                        "condition": "{{$_POST.firm_name}}"
                       }
                     ],
                     "table": "m_users",
@@ -448,7 +447,7 @@
                       "conditional": null,
                       "valid": true
                     },
-                    "query": "UPDATE m_users\nSET user_fname = :P1 /* {{$_POST.name}} */, user_type = :P2 /* {{$_POST.user_type}} */, u_status = :P3 /* {{$_POST.status}} */, updated_by = :P4 /* {{identity}} */, updated_on = :P5 /* {{NOW}} */, scheme_id = :P6 /* {{$_POST.scheme_id}} */, aadhar_no = :P7 /* {{$_POST.aadhar}} */, pan_no = :P8 /* {{$_POST.pan}} */, address = :P9 /* {{$_POST.address}} */, pin = :P10 /* {{$_POST.pin}} */, state = :P11 /* {{$_POST.state}} */, district = :P12 /* {{$_POST.district}} */, aeps_merchant_id = :P13 /* {{$_POST.aeps_merchant}} */\nWHERE id = :P14 /* {{$_POST.UserId}} */",
+                    "query": "UPDATE m_users\nSET user_fname = :P1 /* {{$_POST.name}} */, user_type = :P2 /* {{$_POST.user_type}} */, u_status = :P3 /* {{$_POST.status}} */, updated_by = :P4 /* {{identity}} */, updated_on = :P5 /* {{NOW}} */, scheme_id = :P6 /* {{$_POST.scheme_id}} */, aadhar_no = :P7 /* {{$_POST.aadhar}} */, pan_no = :P8 /* {{$_POST.pan}} */, address = :P9 /* {{$_POST.address}} */, pin = :P10 /* {{$_POST.pin}} */, state = :P11 /* {{$_POST.state}} */, district = :P12 /* {{$_POST.district}} */, aeps_merchant_id = :P13 /* {{$_POST.aeps_merchant}} */, blank3 = :P14 /* {{$_POST.firm_name}} */\nWHERE id = :P15 /* {{$_POST.UserId}} */",
                     "params": [
                       {
                         "name": ":P1",
@@ -516,9 +515,14 @@
                         "value": "{{$_POST.aeps_merchant}}"
                       },
                       {
+                        "name": ":P14",
+                        "type": "expression",
+                        "value": "{{$_POST.firm_name}}"
+                      },
+                      {
                         "operator": "equal",
                         "type": "expression",
-                        "name": ":P14",
+                        "name": ":P15",
                         "value": "{{$_POST.UserId}}"
                       }
                     ],
@@ -1193,10 +1197,17 @@
                         "column": "user_tpin",
                         "type": "text",
                         "value": "{{1234}}"
+                      },
+                      {
+                        "table": "m_users",
+                        "column": "blank3",
+                        "type": "text",
+                        "value": "{{$_POST.firm_name}}",
+                        "condition": "{{$_POST.firm_name}}"
                       }
                     ],
                     "table": "m_users",
-                    "query": "INSERT INTO m_users\n(user_id, user_fname, user_mobile, user_email, password, salt, user_type, u_status, created_by, created_on, user_lname, cap_amt, balance_amt, balance_outstanding, aeps_balance, scheme_id, aadhar_no, pan_no, address, pin, state, district, blank1, blank2, md_id, ds_id, user_tpin) VALUES (:P1 /* {{UniqueID}} */, :P2 /* {{$_POST.name}} */, :P3 /* {{$_POST.mobile}} */, :P4 /* {{$_POST.email.lowercase()}} */, :P5 /* {{password.sha256(NOW)}} */, :P6 /* {{NOW}} */, :P7 /* {{$_POST.user_type}} */, '1', :P8 /* {{identity}} */, :P9 /* {{NOW}} */, :P10 /* {{'https://github.com/ado.png'}} */, '0', '0', '0', '0', :P11 /* {{$_POST.scheme_id}} */, :P12 /* {{$_POST.aadhar}} */, :P13 /* {{$_POST.pan}} */, :P14 /* {{$_POST.address}} */, :P15 /* {{$_POST.pin}} */, :P16 /* {{$_POST.state}} */, :P17 /* {{$_POST.district}} */, :P18 /* {{password}} */, :P19 /* {{$_POST.mobile}} */, '0', '0', :P20 /* {{1234}} */)",
+                    "query": "INSERT INTO m_users\n(user_id, user_fname, user_mobile, user_email, password, salt, user_type, u_status, created_by, created_on, user_lname, cap_amt, balance_amt, balance_outstanding, aeps_balance, scheme_id, aadhar_no, pan_no, address, pin, state, district, blank1, blank2, md_id, ds_id, user_tpin, blank3) VALUES (:P1 /* {{UniqueID}} */, :P2 /* {{$_POST.name}} */, :P3 /* {{$_POST.mobile}} */, :P4 /* {{$_POST.email.lowercase()}} */, :P5 /* {{password.sha256(NOW)}} */, :P6 /* {{NOW}} */, :P7 /* {{$_POST.user_type}} */, '1', :P8 /* {{identity}} */, :P9 /* {{NOW}} */, :P10 /* {{'https://github.com/ado.png'}} */, '0', '0', '0', '0', :P11 /* {{$_POST.scheme_id}} */, :P12 /* {{$_POST.aadhar}} */, :P13 /* {{$_POST.pan}} */, :P14 /* {{$_POST.address}} */, :P15 /* {{$_POST.pin}} */, :P16 /* {{$_POST.state}} */, :P17 /* {{$_POST.district}} */, :P18 /* {{password}} */, :P19 /* {{$_POST.mobile}} */, '0', '0', :P20 /* {{1234}} */, :P21 /* {{$_POST.firm_name}} */)",
                     "params": [
                       {
                         "name": ":P1",
@@ -1297,6 +1308,11 @@
                         "name": ":P20",
                         "type": "expression",
                         "value": "{{1234}}"
+                      },
+                      {
+                        "name": ":P21",
+                        "type": "expression",
+                        "value": "{{$_POST.firm_name}}"
                       }
                     ],
                     "returning": "id"

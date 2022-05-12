@@ -7,39 +7,67 @@ dmx.config({
           "type": "number"
         },
         {
-          "name": "name",
+          "name": "user_id",
           "type": "text"
         },
         {
-          "name": "email",
+          "name": "user_fname",
           "type": "text"
         },
         {
-          "name": "mobile",
+          "name": "user_lname",
           "type": "text"
         },
         {
-          "name": "password",
+          "name": "user_email",
           "type": "text"
         },
         {
-          "name": "saltvalue",
-          "type": "text"
-        },
-        {
-          "name": "status",
+          "name": "user_mobile",
           "type": "text"
         },
         {
           "name": "user_type",
+          "type": "number"
+        },
+        {
+          "name": "u_status",
           "type": "text"
         },
         {
-          "name": "super_user",
+          "name": "user_tpin",
           "type": "text"
         },
         {
-          "name": "remove",
+          "name": "scheme_id",
+          "type": "number"
+        },
+        {
+          "name": "balance_amt",
+          "type": "text"
+        },
+        {
+          "name": "aadhar_no",
+          "type": "text"
+        },
+        {
+          "name": "pan_no",
+          "type": "text"
+        },
+        {
+          "name": "address",
+          "type": "text"
+        },
+        {
+          "name": "pin",
+          "type": "text"
+        },
+        {
+          "name": "state",
+          "type": "text"
+        },
+        {
+          "name": "district",
           "type": "text"
         },
         {
@@ -47,44 +75,48 @@ dmx.config({
           "type": "text"
         },
         {
-          "name": "blank2",
+          "name": "aeps_merchant_id",
           "type": "text"
         },
         {
-          "name": "blank3",
+          "name": "kyc_status",
           "type": "text"
         },
         {
-          "name": "blank4",
+          "name": "user_scheme",
           "type": "text"
         },
         {
-          "name": "image",
+          "name": "profile_pic",
           "type": "text"
         },
         {
-          "name": "created_by",
+          "name": "pan_card",
           "type": "text"
         },
         {
-          "name": "created_on",
-          "type": "datetime"
-        },
-        {
-          "name": "updated_by",
+          "name": "aadhar_front",
           "type": "text"
         },
         {
-          "name": "updated_on",
-          "type": "datetime"
-        },
-        {
-          "name": "deleted_by",
+          "name": "aadhar_back",
           "type": "text"
         },
         {
-          "name": "deleted_on",
-          "type": "datetime"
+          "name": "kyc_uploaded_on",
+          "type": "text"
+        },
+        {
+          "name": "parent_id",
+          "type": "text"
+        },
+        {
+          "name": "parent_name",
+          "type": "text"
+        },
+        {
+          "name": "parent_phone_no",
+          "type": "text"
         }
       ],
       "outputType": "array"
@@ -96,39 +128,67 @@ dmx.config({
           "type": "number"
         },
         {
-          "name": "name",
+          "name": "user_id",
           "type": "text"
         },
         {
-          "name": "email",
+          "name": "user_fname",
           "type": "text"
         },
         {
-          "name": "mobile",
+          "name": "user_lname",
           "type": "text"
         },
         {
-          "name": "password",
+          "name": "user_email",
           "type": "text"
         },
         {
-          "name": "saltvalue",
-          "type": "text"
-        },
-        {
-          "name": "status",
+          "name": "user_mobile",
           "type": "text"
         },
         {
           "name": "user_type",
+          "type": "number"
+        },
+        {
+          "name": "u_status",
           "type": "text"
         },
         {
-          "name": "super_user",
+          "name": "user_tpin",
           "type": "text"
         },
         {
-          "name": "remove",
+          "name": "scheme_id",
+          "type": "number"
+        },
+        {
+          "name": "balance_amt",
+          "type": "text"
+        },
+        {
+          "name": "aadhar_no",
+          "type": "text"
+        },
+        {
+          "name": "pan_no",
+          "type": "text"
+        },
+        {
+          "name": "address",
+          "type": "text"
+        },
+        {
+          "name": "pin",
+          "type": "text"
+        },
+        {
+          "name": "state",
+          "type": "text"
+        },
+        {
+          "name": "district",
           "type": "text"
         },
         {
@@ -136,44 +196,48 @@ dmx.config({
           "type": "text"
         },
         {
-          "name": "blank2",
+          "name": "aeps_merchant_id",
           "type": "text"
         },
         {
-          "name": "blank3",
+          "name": "kyc_status",
           "type": "text"
         },
         {
-          "name": "blank4",
+          "name": "user_scheme",
           "type": "text"
         },
         {
-          "name": "image",
+          "name": "profile_pic",
           "type": "text"
         },
         {
-          "name": "created_by",
+          "name": "pan_card",
           "type": "text"
         },
         {
-          "name": "created_on",
-          "type": "datetime"
-        },
-        {
-          "name": "updated_by",
+          "name": "aadhar_front",
           "type": "text"
         },
         {
-          "name": "updated_on",
-          "type": "datetime"
-        },
-        {
-          "name": "deleted_by",
+          "name": "aadhar_back",
           "type": "text"
         },
         {
-          "name": "deleted_on",
-          "type": "datetime"
+          "name": "kyc_uploaded_on",
+          "type": "text"
+        },
+        {
+          "name": "parent_id",
+          "type": "text"
+        },
+        {
+          "name": "parent_name",
+          "type": "text"
+        },
+        {
+          "name": "parent_phone_no",
+          "type": "text"
         }
       ],
       "outputType": "array"
@@ -200,6 +264,139 @@ dmx.config({
         {
           "type": "text",
           "name": "scheme_name"
+        }
+      ],
+      "outputType": "array"
+    },
+    "tableRepeat1": {
+      "meta": [
+        {
+          "name": "$index",
+          "type": "number"
+        },
+        {
+          "name": "$key",
+          "type": "text"
+        },
+        {
+          "name": "$value",
+          "type": "object"
+        },
+        {
+          "name": "id",
+          "type": "number"
+        },
+        {
+          "name": "user_id",
+          "type": "text"
+        },
+        {
+          "name": "user_fname",
+          "type": "text"
+        },
+        {
+          "name": "user_lname",
+          "type": "text"
+        },
+        {
+          "name": "user_email",
+          "type": "text"
+        },
+        {
+          "name": "user_mobile",
+          "type": "text"
+        },
+        {
+          "name": "user_type",
+          "type": "number"
+        },
+        {
+          "name": "u_status",
+          "type": "text"
+        },
+        {
+          "name": "user_tpin",
+          "type": "text"
+        },
+        {
+          "name": "scheme_id",
+          "type": "number"
+        },
+        {
+          "name": "balance_amt",
+          "type": "text"
+        },
+        {
+          "name": "aadhar_no",
+          "type": "text"
+        },
+        {
+          "name": "pan_no",
+          "type": "text"
+        },
+        {
+          "name": "address",
+          "type": "text"
+        },
+        {
+          "name": "pin",
+          "type": "text"
+        },
+        {
+          "name": "state",
+          "type": "text"
+        },
+        {
+          "name": "district",
+          "type": "text"
+        },
+        {
+          "name": "blank1",
+          "type": "text"
+        },
+        {
+          "name": "aeps_merchant_id",
+          "type": "text"
+        },
+        {
+          "name": "kyc_status",
+          "type": "text"
+        },
+        {
+          "name": "user_scheme",
+          "type": "text"
+        },
+        {
+          "name": "profile_pic",
+          "type": "text"
+        },
+        {
+          "name": "pan_card",
+          "type": "text"
+        },
+        {
+          "name": "aadhar_front",
+          "type": "text"
+        },
+        {
+          "name": "aadhar_back",
+          "type": "text"
+        },
+        {
+          "name": "kyc_uploaded_on",
+          "type": "text"
+        },
+        {
+          "name": "parent_id",
+          "type": "text"
+        },
+        {
+          "name": "parent_name",
+          "type": "text"
+        },
+        {
+          "name": "parent_phone_no",
+          "type": "text"
         }
       ],
       "outputType": "array"

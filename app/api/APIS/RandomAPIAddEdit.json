@@ -365,25 +365,25 @@
                                   "type": "update",
                                   "values": [
                                     {
-                                      "table": "m_api_forward",
+                                      "table": "t_random_root",
                                       "column": "api_id",
                                       "type": "number",
                                       "value": "{{$_POST.api_id}}"
                                     },
                                     {
-                                      "table": "m_api_forward",
-                                      "column": "updated_by",
-                                      "type": "text",
+                                      "table": "t_random_root",
+                                      "column": "created_by",
+                                      "type": "number",
                                       "value": "{{identity}}"
                                     },
                                     {
-                                      "table": "m_api_forward",
-                                      "column": "updated_on",
+                                      "table": "t_random_root",
+                                      "column": "created_on",
                                       "type": "datetime",
                                       "value": "{{NOW}}"
                                     }
                                   ],
-                                  "table": "m_api_forward",
+                                  "table": "t_random_root",
                                   "wheres": {
                                     "condition": "AND",
                                     "rules": [
@@ -399,13 +399,13 @@
                                         "operation": "="
                                       },
                                       {
-                                        "id": "operator_id",
-                                        "field": "operator_id",
+                                        "id": "op_id",
+                                        "field": "op_id",
                                         "type": "double",
                                         "operator": "equal",
                                         "value": "{{op_id}}",
                                         "data": {
-                                          "column": "operator_id"
+                                          "column": "op_id"
                                         },
                                         "operation": "="
                                       }
@@ -413,7 +413,7 @@
                                     "conditional": null,
                                     "valid": true
                                   },
-                                  "query": "UPDATE m_api_forward\nSET api_id = :P1 /* {{$_POST.api_id}} */, updated_by = :P2 /* {{identity}} */, updated_on = :P3 /* {{NOW}} */\nWHERE service_id = :P4 /* {{$_POST.service_id}} */ AND operator_id = :P5 /* {{op_id}} */",
+                                  "query": "UPDATE t_random_root\nSET api_id = :P1 /* {{$_POST.api_id}} */, created_by = :P2 /* {{identity}} */, created_on = :P3 /* {{NOW}} */\nWHERE service_id = :P4 /* {{$_POST.service_id}} */ AND op_id = :P5 /* {{op_id}} */",
                                   "params": [
                                     {
                                       "name": ":P1",
@@ -442,7 +442,8 @@
                                       "name": ":P5",
                                       "value": "{{op_id}}"
                                     }
-                                  ]
+                                  ],
+                                  "returning": "id"
                                 }
                               },
                               "meta": [
@@ -465,38 +466,38 @@
                                   "type": "insert",
                                   "values": [
                                     {
-                                      "table": "m_api_forward",
+                                      "table": "t_random_root",
                                       "column": "service_id",
                                       "type": "number",
                                       "value": "{{$_POST.service_id}}"
                                     },
                                     {
-                                      "table": "m_api_forward",
-                                      "column": "operator_id",
+                                      "table": "t_random_root",
+                                      "column": "op_id",
                                       "type": "number",
                                       "value": "{{op_id}}"
                                     },
                                     {
-                                      "table": "m_api_forward",
+                                      "table": "t_random_root",
                                       "column": "api_id",
                                       "type": "number",
                                       "value": "{{$_POST.api_id}}"
                                     },
                                     {
-                                      "table": "m_api_forward",
+                                      "table": "t_random_root",
                                       "column": "created_by",
-                                      "type": "text",
+                                      "type": "number",
                                       "value": "{{identity}}"
                                     },
                                     {
-                                      "table": "m_api_forward",
+                                      "table": "t_random_root",
                                       "column": "created_on",
                                       "type": "datetime",
                                       "value": "{{NOW}}"
                                     }
                                   ],
-                                  "table": "m_api_forward",
-                                  "query": "INSERT INTO m_api_forward\n(service_id, operator_id, api_id, created_by, created_on) VALUES (:P1 /* {{$_POST.service_id}} */, :P2 /* {{op_id}} */, :P3 /* {{$_POST.api_id}} */, :P4 /* {{identity}} */, :P5 /* {{NOW}} */)",
+                                  "table": "t_random_root",
+                                  "query": "INSERT INTO t_random_root\n(service_id, op_id, api_id, created_by, created_on) VALUES (:P1 /* {{$_POST.service_id}} */, :P2 /* {{op_id}} */, :P3 /* {{$_POST.api_id}} */, :P4 /* {{identity}} */, :P5 /* {{NOW}} */)",
                                   "params": [
                                     {
                                       "name": ":P1",
@@ -523,7 +524,8 @@
                                       "type": "expression",
                                       "value": "{{NOW}}"
                                     }
-                                  ]
+                                  ],
+                                  "returning": "id"
                                 }
                               },
                               "meta": [

@@ -23,7 +23,7 @@
     }
     }</script>
 <dmx-serverconnect id="scUsers" url="api/Users/Users" dmx-param:user_type="selectUserType.value" dmx-param:limit="10000"></dmx-serverconnect>
-<dmx-data-view id="dvUsers" dmx-bind:data="scUsers.data.FetchUsers.data" filter="(user_mobile.contains(formSearchUser.Search.value) || user_fname.lowercase().contains(formSearchUser.Search.value.lowercase()) || user_email.lowercase().contains(formSearchUser.Search.value.lowercase()) || user_type.contains(formSearchUser.Search.value) || aadhar_no.contains(formSearchUser.Search.value) || pan_no.contains(formSearchUser.Search.value) || pin.contains(formSearchUser.Search.value) || district.lowercase().contains(formSearchUser.Search.value.lowercase()) || state.lowercase().contains(formSearchUser.Search.value.lowercase()) || u_status.lowercase().contains(formSearchUser.Search.value.lowercase()) || kyc_status.lowercase().contains(formSearchUser.Search.value.lowercase()) || aeps_merchant_id.contains(formSearchUser.Search.value))"></dmx-data-view>
+<dmx-data-view id="dvUsers" dmx-bind:data="scUsers.data.FetchUsers" filter="(user_mobile.contains(formSearchUser.Search.value) || user_fname.lowercase().contains(formSearchUser.Search.value.lowercase()) || user_email.lowercase().contains(formSearchUser.Search.value.lowercase()) || user_type.contains(formSearchUser.Search.value) || aadhar_no.contains(formSearchUser.Search.value) || pan_no.contains(formSearchUser.Search.value) || pin.contains(formSearchUser.Search.value) || district.lowercase().contains(formSearchUser.Search.value.lowercase()) || state.lowercase().contains(formSearchUser.Search.value.lowercase()) || u_status.lowercase().contains(formSearchUser.Search.value.lowercase()) || kyc_status.lowercase().contains(formSearchUser.Search.value.lowercase()) || aeps_merchant_id.contains(formSearchUser.Search.value))"></dmx-data-view>
 <dmx-data-detail id="ddUsers" dmx-bind:data="dvUsers.data" key="id"></dmx-data-detail>
 <div class="row align-items-center justify-content-between px-4 mb-3 sd-secondary-header mx-0">
     <div class="col-12 col-md-auto me-auto ps-4">
@@ -57,7 +57,7 @@
                     <th>Image</th>
                     <th>Unique Id</th>
                     <th>Name</th>
-                    <th>Email</th>
+                    <th>Parent</th>
                     <th>Mobile</th>
                     <th>Wallet Bal.</th>
                     <th>Type</th>
@@ -72,6 +72,7 @@
                     <th>KYC Status</th>
                     <th dmx-show="scAdminBalance.data.query.user_type == 0">Action</th>
                     <th>Created On</th>
+                    <th>Firm Name</th>
                 </tr>
             </thead>
             <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="dvUsers.data" id="tableRepeat1">
@@ -80,7 +81,7 @@
                     <td><img class="sw-img-render" dmx-bind:src="profile_pic?+'https://swpay.in'+profile_pic:+'https://swpay.in/assets/images/icons/user-icon.png'" width="30" height="30"></td>
                     <td dmx-text="user_id"></td>
                     <td dmx-text="user_fname.titlecase()"></td>
-                    <td dmx-text="user_email"></td>
+                    <td dmx-text="parent_id+' | '+parent_name+' | '+parent_phone_no"></td>
                     <td dmx-text="user_mobile"></td>
                     <td dmx-text="balance_amt.toNumber().toFixed(2)"></td>
                     <td class="fw-bold" dmx-text="user_type == 1 ? 'MDT' : user_type == 2 ? 'DT' : user_type == 3 ? 'RT' : 'None'" dmx-class:text-primary="user_type == 1" dmx-class:text-success="user_type == 2" dmx-class:text-danger="user_type == 3" dmx-class:text-warning="user_type == 4"></td>
@@ -99,6 +100,7 @@
                         <a class="sw-col-cr" href="#" dmx-on:click="browserMain.goto('scheme-priority/'+id,true);"><i class="fas fa-code-branch" title="Scheme Priority"></i></a>
                     </td>
                     <td dmx-text="created_on.formatDate('dd-MM-yyyy hh:mm:ss A')"></td>
+                    <td dmx-text="blank3.titlecase()"></td>
                 </tr>
             </tbody>
         </table>
@@ -311,10 +313,13 @@
                         </div>
                         <div class="col-12 col-sm-6"><label for="inp_address" class="col-form-label">Address</label>
                             <div class="col-12 px-0">
-                                <!-- <select type="text" class="form-control form-select" id="inp_address" name="address" dmx-bind:options="scPinStateDist.data.PinAPI" optiontext="Name" optionvalue="Name" dmx-bind:value="ddUsers.data.address">
-                                    <option value="">Select Address</option>
-                                </select> -->
                                 <textarea type="text" class="form-control" id="inp_address" name="address" aria-describedby="inp_address_help" placeholder="Enter address No" maxlength="200" required="" data-msg-required="Address is required." dmx-bind:value="ddUsers.data.address"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <label for="inp_firm" class="col-form-label">Firm Name</label>
+                            <div class="col-12 px-0">
+                                <input type="text" class="form-control" id="inp_firm_name" name="firm_name" aria-describedby="inp_firm_name_help" placeholder="Enter Firm Name" dmx-bind:value="ddUsers.data.blank3">
                             </div>
                         </div>
                         <div class="col-12 col-sm-6 row mx-0" dmx-show="ddUsers.data.user_type == 3">

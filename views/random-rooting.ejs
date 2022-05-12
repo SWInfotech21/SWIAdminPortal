@@ -12,7 +12,7 @@ run: {action: "{{scOperator.load({})}}"}
 }
 }</script>
 <dmx-serverconnect id="scOperator" url="api/operator/ActiveOperator" noload dmx-param:service_type="formAPIRooting.ServiceType.value"></dmx-serverconnect>
-<dmx-serverconnect id="scActiveAPI" url="api/APIS/ActiveAPI"></dmx-serverconnect>
+<dmx-serverconnect id="scActiveAPI" url="api/APIS/ActiveAPI" dmx-param:api_type="formAPIRooting.inp_api_type.value"></dmx-serverconnect>
 <dmx-serverconnect id="scAPIRouting" url="api/APIS/RandomRoutingFetch" noload dmx-param:service_id="content.formAPIRooting.ServiceType.value" dmx-param:op_id="content.formAPIRooting.inp_operator_type.value"></dmx-serverconnect>
 <dmx-data-detail id="ddAPIRouting" dmx-bind:data="content.scAPIRouting.data.GetRandomAPI" key="id"></dmx-data-detail>
 <script is="dmx-flow" id="flowFetchRouting" type="text/dmx-flow">{
@@ -43,20 +43,31 @@ run: {action: "{{scAPIRouting.load({})}}"}
         <div class="card-body">
             <form is="dmx-serverconnect-form" id="formAPIRooting" method="post" action="api/APIS/RandomAPIAddEdit" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="scNotif.success('API Rooting Added Successfully');scAPIRouting.load()" dmx-on:error="scNotif.warning('An error occurred'); " dmx-on:forbidden="scNotif.danger('Unable to Access!')">
                 <div class="row">
-                    <div class="col-12 col-sm-6 col-md-4 my-2">
+                    <div class="col-12 col-sm-6 col-md-3 my-2">
                         <label>Service Type</label>
                         <select id="ServiceType" name="service_id" class="form-control form-select col-12 px-2" dmx-bind:options="scServices.data.GetActiveServices" optiontext="service_name" optionvalue="id" dmx-on:changed="flowFetchOperator.run();flowFetchRouting.run();" required="">
                             <option value="">Select</option>
                         </select>
                     </div>
-                    <div class="col-12 col-sm-6 col-md-4 my-2">
+                    <div class="col-12 col-sm-6 col-md-3 my-2">
                         <label>Select Operator</label>
                         <select type="text" class="form-control form-select" id="inp_operator_type" name="operator_id" aria-describedby="inp_operator_type_help" dmx-bind:options="scOperator.data.GetActiveOp" optionvalue="id" required="" optiontext="operator_name" dmx-on:changed="flowFetchRouting.run();">
                             <option value="">Select</option>
                             <option value="0">All</option>
                         </select>
                     </div>
-                    <div class="col-12 col-sm-6 col-md-4 my-2">
+                    <div class="col-12 col-sm-6 col-md-3 my-2">
+                        <label>API Type</label>
+                        <select type="text" class="form-control form-select" id="inp_api_type" aria-describedby="inp_api_type_help" required="" dmx-on:changed="flowFetchRouting.run();">
+                            <option value="Recharge">Recharge</option>
+                            <option value="AEPS">AEPS</option>
+                            <option value="BBPS">BBPS</option>
+                            <option value="DMT">DMT</option>
+                            <option value="SMS">SMS</option>
+                            <option value="Whatsapp">Whatsapp</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3 my-2">
                         <label>Select Route API</label>
                         <select type="text" class="form-control form-select" id="inp_api" name="api_id" aria-describedby="inp_api_help" optionvalue="id" required="" dmx-bind:options="scActiveAPI.data.GetActiveAPI" optiontext="api_name+'('+api_code+')'" dmx-bind:value="scGetFwdSpecific.data.GetDetails[0].api_id">
                             <option value="">Select</option>
