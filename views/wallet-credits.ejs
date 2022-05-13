@@ -141,7 +141,6 @@
                     <th>Sl No.</th>
                     <th>Tr. Id</th>
                     <th>User Details</th>
-                    <th>Parent Details</th>
                     <th>Type</th>
                     <th>Old Bal.</th>
                     <th>Amt.</th>
@@ -150,6 +149,7 @@
                     <th>Mode</th>
                     <th>Tr. Date</th>
                     <th>Remarks</th>
+                    <th>Parent Details</th>
                 </tr>
             </thead>
             <tbody is="dmx-repeat" dmx-generator="bs5table" id="tableRepeat1" dmx-bind:repeat="dvAdminWallet.data">
@@ -157,8 +157,7 @@
                     <td>{{$index+1}}</td>
                     <td dmx-text="transaction_id"></td>
                     <td dmx-text="details+' | '+user_number+' | '+user_id"></td>
-                    <td dmx-text="dt_id? dt_name+' | '+dt_number+' | '+dt_id:mdt_id? mdt_name+' | '+mdt_number+' | '+mdt_id:'Admin'"></td>
-                    <td dmx-text="opening_balance.toNumber().toFixed(2)> closing_balance.toNumber().toFixed(2)? 'Debit' : 'Credit'"></td>
+                    <td dmx-text="crdr_type"></td>
                     <td dmx-text="opening_balance.toNumber().toFixed(2)"></td>
                     <td dmx-text="amount.toNumber().toFixed(2)"></td>
                     <td dmx-text="comm_amt.toNumber().toFixed(2)+' | '+charge_amt.toNumber().toFixed(2)+' | '+net_amt.toNumber().toFixed(2)"></td>
@@ -166,6 +165,7 @@
                     <td dmx-text="tr_type+' | '+tr_mode "></td>
                     <td dmx-text="tr_date.formatDate('dd-MM-yyyy HH:mm:ss A')"></td>
                     <td dmx-text="reason"></td>
+                    <td dmx-text="dt_id? dt_name+' | '+dt_number+' | '+dt_id:mdt_id? mdt_name+' | '+mdt_number+' | '+mdt_id:'Admin'"></td>
                 </tr>
             </tbody>
         </table>
