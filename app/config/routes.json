@@ -244,6 +244,11 @@
     {
       "path": "*",
       "page": "404-not-found"
+    },
+    {
+      "path": "/AEPS-transaction-history",
+      "page": "AEPS-transaction-history",
+      "layout": "main"
     }
   ]
 }

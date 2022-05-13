@@ -1,5 +1,5 @@
-<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="rechargehistory" appConnect="local" components="{dmxStateManagement:{},dmxDataTraversal:{},dmxBootstrap5TableGenerator:{},dmxSockets:{},dmxBootstrap5Navigation:{},dmxBootstrap5Modal:{}}" -->
-<meta name="ac:route" content="/recharge-history">
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="AEPStransactionhistory" appConnect="local" components="{dmxBootstrap5Navigation:{},dmxDataTraversal:{},dmxStateManagement:{},dmxBootstrap5Modal:{}}" -->
+<meta name="ac:route" content="/AEPS-transaction-history">
 <dmx-query-manager id="qm"></dmx-query-manager>
 <dmx-serverconnect id="scRechargeTrans" url="api/Reports/RechargeTrans" dmx-param:limit="" dmx-param:offset="qm.data.offset" dmx-param:sort="qm.data.sort" dmx-param:dir="qm.data.dir" sockets="true"></dmx-serverconnect>
 <dmx-data-view id="dvRechTrans" dmx-bind:data="scRechargeTrans.data.Recharge.data" filter="((parent_mobile.contains(formSearchUser.Search.value) || api_ref.contains(formSearchUser.Search.value) || parent_fname.lowercase().contains(formSearchUser.Search.value.lowercase())) || user_fname.lowercase().contains(formSearchUser.Search.value.lowercase()) || api_name.contains(formSearchUser.Search.value) || user_mobile.contains(formSearchUser.Search.value) || recharge_number.contains(formSearchUser.Search.value) || operator_name.lowercase().contains(formSearchUser.Search.value.lowercase()) || status.lowercase().contains(formSearchUser.Search.value.lowercase()))" dmx-bind:page="qm.data.offset" pageSize="100"></dmx-data-view>
@@ -97,7 +97,7 @@
                             <td dmx-text="api_name"></td>
                             <td dmx-text="api_response_id"></td>
                             <td dmx-text="tr_mode+' | '+tr_type"></td>
-                            <td style="max-width: 200px; overflow: hidden;" dmx-text="operator_ref"></td>
+                            <td dmx-text="operator_ref"></td>
                             <td dmx-text="dtcommamt.toNumber().toFixed(2)"></td>
                             <td dmx-text="dtchargeamt.toNumber().toFixed(2)"></td>
                             <td dmx-text="mdtcommamt.toNumber().toFixed(2)"></td>

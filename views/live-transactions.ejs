@@ -22,41 +22,33 @@
                     <thead>
                         <tr>
                             <th>Sl. No.</th>
-                            <th>Tr. Id</th>
-                            <th>Order. Id</th>
+                            <th>Order Id</th>
                             <th>Tr.By</th>
-                            <th>Mobile</th>
+                            <th>Mobile/ A/C. No.</th>
                             <th>Operator</th>
-                            <th>Opening Balance</th>
                             <th>Amount</th>
-                            <th>Comm. Amt</th>
-                            <th>Charge. Amt.</th>
-                            <th>Net Amt.</th>
-                            <th>Closing Balance</th>
                             <th>API</th>
                             <th>Status</th>
+                            <th>Tr. Id</th>
                             <th>Tr. Mode</th>
                             <th>Date</th>
+                            <th>Response</th>
                         </tr>
                     </thead>
                     <tbody is="dmx-repeat" dmx-generator="bs5table" id="tableRepeat1" dmx-bind:repeat="scLiveRech.data.LiveReport">
                         <tr>
                             <td>{{$index+1}}</td>
                             <td dmx-text="id"></td>
-                            <td dmx-text="tr_id"></td>
                             <td dmx-text="user_id+' | '+user_fname+' | '+user_mobile"></td>
                             <td dmx-text="recharge_mobile"></td>
                             <td dmx-text="operator_name"></td>
-                            <td dmx-text="opening_balance.toNumber().toFixed(2)"></td>
                             <td dmx-text="amount.toNumber().toFixed(2)"></td>
-                            <td dmx-text="comm_amt.toNumber().toFixed(2)"></td>
-                            <td dmx-text="charge_amt.toNumber().toFixed(2)"></td>
-                            <td dmx-text="net_amt.toNumber().toFixed(2)"></td>
-                            <td dmx-text="closing_balance.toNumber().toFixed(2)"></td>
                             <td dmx-text="api_logs"></td>
                             <td class="fw-bold" dmx-text="status" dmx-class:text-success="status == 'SUCCESS'" dmx-class:text-warning="status == 'Pending'" dmx-class:text-danger="status == 'FAILED'" dmx-class:text-primary="status == 'REFUND'"></td>
+                            <td dmx-text="api_ref"></td>
                             <td dmx-text="tr_mode"></td>
                             <td dmx-text="tr_date.formatDate('dd-MM-yyyy hh:mm:ss A')"></td>
+                            <td style="max-width: 200px; overflow: hidden;" dmx-text="operator_ref"></td>
                         </tr>
                     </tbody>
                     <tbody dmx-show="content.scLiveRech.data.LiveReport.length==0">

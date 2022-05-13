@@ -178,5 +178,9 @@
   "add-bank-list-beta.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "AEPS-transaction-history.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }
