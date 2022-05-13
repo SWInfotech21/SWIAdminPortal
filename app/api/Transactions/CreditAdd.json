@@ -161,7 +161,7 @@
             }
           }
         },
-        "output": true,
+        "output": false,
         "meta": [
           {
             "type": "text",
@@ -268,7 +268,7 @@
                     "params": []
                   }
                 },
-                "output": true,
+                "output": false,
                 "meta": [
                   {
                     "type": "number",
@@ -351,7 +351,7 @@
                     ]
                   }
                 },
-                "output": true,
+                "output": false,
                 "meta": [
                   {
                     "type": "text",
@@ -460,7 +460,7 @@
                     ]
                   }
                 },
-                "output": true,
+                "output": false,
                 "meta": [
                   {
                     "type": "text",
@@ -974,7 +974,7 @@
                             "type": "number"
                           }
                         ],
-                        "output": true
+                        "output": false
                       },
                       {
                         "name": "WalletCrBalance",
@@ -1397,7 +1397,7 @@
                             "type": "number"
                           }
                         ],
-                        "output": true
+                        "output": false
                       },
                       {
                         "name": "BalUpDebitUser",
@@ -1456,7 +1456,7 @@
                             "type": "number"
                           }
                         ],
-                        "output": true
+                        "output": false
                       },
                       {
                         "name": "GetWhatsappAPI",
