@@ -48,8 +48,7 @@
           ],
           "loginUrl": "/login",
           "forbiddenUrl": "/403-forbidden"
-        },
-        "disabled": true
+        }
       },
       {
         "name": "",

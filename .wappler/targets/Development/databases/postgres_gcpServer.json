@@ -4103,6 +4103,15 @@
               "unique": false,
               "nullable": true
             }
+          },
+          "aeps_number": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
           }
         }
       },

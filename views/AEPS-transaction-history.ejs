@@ -1,19 +1,32 @@
-<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="AEPStransactionhistory" appConnect="local" components="{dmxBootstrap5Navigation:{},dmxDataTraversal:{},dmxStateManagement:{},dmxBootstrap5Modal:{}}" -->
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="AEPStransactionhistory" appConnect="local" components="{dmxBootstrap5Navigation:{},dmxDataTraversal:{},dmxStateManagement:{},dmxBootstrap5Modal:{},dmxDatePicker:{}}" -->
 <meta name="ac:route" content="/AEPS-transaction-history">
 <dmx-query-manager id="qm"></dmx-query-manager>
-<dmx-serverconnect id="scRechargeTrans" url="api/Reports/RechargeTrans" dmx-param:limit="" dmx-param:offset="qm.data.offset" dmx-param:sort="qm.data.sort" dmx-param:dir="qm.data.dir" sockets="true"></dmx-serverconnect>
-<dmx-data-view id="dvRechTrans" dmx-bind:data="scRechargeTrans.data.Recharge.data" filter="((parent_mobile.contains(formSearchUser.Search.value) || api_ref.contains(formSearchUser.Search.value) || parent_fname.lowercase().contains(formSearchUser.Search.value.lowercase())) || user_fname.lowercase().contains(formSearchUser.Search.value.lowercase()) || api_name.contains(formSearchUser.Search.value) || user_mobile.contains(formSearchUser.Search.value) || recharge_number.contains(formSearchUser.Search.value) || operator_name.lowercase().contains(formSearchUser.Search.value.lowercase()) || status.lowercase().contains(formSearchUser.Search.value.lowercase()))" dmx-bind:page="qm.data.offset" pageSize="100"></dmx-data-view>
-<dmx-data-detail id="ddRechargeTrans" key="table_id" dmx-bind:data="dvRechTrans.data"></dmx-data-detail>
+<dmx-serverconnect id="scAEPSTrans" url="api/Reports/AEPSTrans" dmx-param:limit="100000" dmx-param:offset="qm.data.offset" dmx-param:sort="qm.data.sort" dmx-param:dir="qm.data.dir" dmx-param:fromdate="formDatePicker.daterange.start" dmx-param:todate="formDatePicker.daterange.end" dmx-param:selectstatus="selectstatus.value"></dmx-serverconnect>
+<dmx-data-view id="dvAEPSTrans" dmx-bind:data="scAEPSTrans.data.AEPSTxn.data" filter="((parent_mobile.contains(formSearchUser.Search.value) || api_ref.contains(formSearchUser.Search.value) || parent_fname.lowercase().contains(formSearchUser.Search.value.lowercase())) || user_fname.lowercase().contains(formSearchUser.Search.value.lowercase()) || api_name.contains(formSearchUser.Search.value) || user_mobile.contains(formSearchUser.Search.value) || aeps_number.contains(formSearchUser.Search.value) || operator_name.lowercase().contains(formSearchUser.Search.value.lowercase()) || status.lowercase().contains(formSearchUser.Search.value.lowercase()))"></dmx-data-view>
+<dmx-data-detail id="ddAEPSTrans" key="table_id" dmx-bind:data="dvAEPSTrans.data"></dmx-data-detail>
 
 <div class="row align-items-center justify-content-between px-4 mb-3 sd-secondary-header mx-0">
     <div class="col-12 col-md-auto me-auto ps-4">
         <h1 class="ms-md-1 mt-md-3 text-dark fs-2 sd-fw-800 d-flex align-items-center">
-            SW Infotech Recharge History
-            <span class="border-3 ms-2 spinner-border spinner-border-sm" role="status" dmx-show="scRechargeTrans.state.executing"></span>
+            AEPS Transaction History
+            <span class="border-3 ms-2 spinner-border spinner-border-sm" role="status" dmx-show="scAEPSTrans.state.executing"></span>
         </h1>
     </div>
+    <div class="col-auto order-3 order-md-2 d-flex align-items-center justify-content-start justify-content-md-center px-0 px-lg-2">
+        <select class="form-control form-select" id="selectstatus">
+            <option value="0">All</option>
+            <option value="SUCCESS">SUCCESS</option>
+            <option value="FAILED">FAILED</option>
+            <option value="PENDING">PENDING</option>
+            <option value="REFUND">REFUND</option>
+        </select>
+    </div>
     <div class="col-auto order-2 order-md-1 d-flex align-items-center justify-content-start justify-content-md-center px-0 px-lg-2">
-        <button id="btnFilter" class="btn" data-bs-toggle="modal" data-bs-target="#modalFilter"><i alt="Filter" class="fas fa-filter"></i></button>
+        <form id="formDatePicker"><label class="sw-datepicker">
+                <span class="btn bg-light"><img src="assets/images/icons/calendar.svg" class="img-fluid" width="20px"></span>
+                <input type="text" is="dmx-date-range-picker" format="DD MMM YY" class="" placeholder="Nov 2021 - Dec 2021" id="daterange" dmx-bind:startdate="dateNow.datetime.addDays(0)" dmx-bind:enddate="dateNow.datetime.formatDate('yyyy-MM-dd 23:59:59')" autoapply="true">
+            </label>
+        </form>
     </div>
     <div class="col-auto order-1 order-md-3 d-flex align-items-center justify-content-center">
         <form id="formSearchUser" class="sd-search-form">
@@ -38,89 +51,95 @@
                     <thead>
                         <tr>
                             <th>Sl. No.</th>
-                            <!-- <th class="sorting" dmx-on:click="qm.set('sort','table_id');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='table_id' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='table_id' && qm.data.dir == 'desc'">Table Id</th> -->
+
                             <th class="sorting" dmx-on:click="qm.set('sort','pay_ref_id');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='pay_ref_id' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='pay_ref_id' && qm.data.dir == 'desc'">Pay Ref. Id</th>
                             <th class="sorting" dmx-on:click="qm.set('sort','api_ref');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='api_ref' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='api_ref' && qm.data.dir == 'desc'">Api Ref. No. <i class="fas fa-search"></i></th>
-                            <th class="sorting" dmx-on:click="qm.set('sort','parent_fname');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='parent_fname' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='parent_fname' && qm.data.dir == 'desc'">Parent <i class="fas fa-search"></i></th>
                             <th class="sorting" dmx-on:click="qm.set('sort','user_fname');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='user_fname' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='user_fname' && qm.data.dir == 'desc'">Owner <i class="fas fa-search"></i></th>
-                            <th class="sorting" dmx-on:click="qm.set('sort','recharge_number');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='recharge_number' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='recharge_number' && qm.data.dir == 'desc'">Number <i class="fas fa-search"></i></th>
+                            <th class="sorting" dmx-on:click="qm.set('sort','aeps_number');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='aeps_number' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='aeps_number' && qm.data.dir == 'desc'">Number <i class="fas fa-search"></i></th>
                             <th class="sorting" dmx-on:click="qm.set('sort','operator_name');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='operator_name' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='operator_name' && qm.data.dir == 'desc'">Operator & Service <i class="fas fa-search"></i></th>
                             <th class="sorting" dmx-on:click="qm.set('sort','status');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='status' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='status' && qm.data.dir == 'desc'">Status <i class="fas fa-search"></i></th>
+                            <th class="sorting" dmx-on:click="qm.set('sort','operator_ref');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='operator_ref' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='operator_ref' && qm.data.dir == 'desc'">Response MSG</th>
                             <th>Action</th>
-                            <th class="sorting" dmx-on:click="qm.set('sort','old_balance');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='old_balance' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='old_balance' && qm.data.dir == 'desc'">Old balance</th>
+                            <th class="sorting" dmx-on:click="qm.set('sort','old_bal');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='old_bal' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='old_bal' && qm.data.dir == 'desc'">Old balance</th>
                             <th class="sorting" dmx-on:click="qm.set('sort','amount');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='amount' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='amount' && qm.data.dir == 'desc'">Amount</th>
 
                             <th class="sorting" dmx-on:click="qm.set('sort','comm_amt');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='comm_amt' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='comm_amt' && qm.data.dir == 'desc'">Comm Amt</th>
                             <th class="sorting" dmx-on:click="qm.set('sort','charge_amt');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='charge_amt' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='charge_amt' && qm.data.dir == 'desc'">Charge Amt</th>
                             <th class="sorting" dmx-on:click="qm.set('sort','netamt');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='netamt' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='netamt' && qm.data.dir == 'desc'">Net Amt</th>
-                            <th class="sorting" dmx-on:click="qm.set('sort','new_balance');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='new_balance' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='new_balance' && qm.data.dir == 'desc'">New Balance</th>
+                            <th class="sorting" dmx-on:click="qm.set('sort','new_bal');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='new_bal' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='new_bal' && qm.data.dir == 'desc'">New Balance</th>
+                            <th class="sorting" dmx-on:click="qm.set('sort','tr_date');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='tr_date' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='tr_date' && qm.data.dir == 'desc'">Tr. Date</th>
                             <th class="sorting" dmx-on:click="qm.set('sort','transaction_type');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='transaction_type' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='transaction_type' && qm.data.dir == 'desc'">Transaction Type</th>
                             <th class="sorting" dmx-on:click="qm.set('sort','crdr_type');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='crdr_type' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='crdr_type' && qm.data.dir == 'desc'">Crdr Type</th>
-                            <th class="sorting" dmx-on:click="qm.set('sort','tr_date');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='tr_date' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='tr_date' && qm.data.dir == 'desc'">Tr. Date</th>
                             <th class="sorting" dmx-on:click="qm.set('sort','api_name');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='api_name' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='api_name' && qm.data.dir == 'desc'">Api Name</th>
+                            <th>Bank A/C No.</th>
+                            <th>Bank Name</th>
+                            <th>Beneficiary</th>
                             <th class="sorting" dmx-on:click="qm.set('sort','api_response_id');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='api_response_id' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='api_response_id' && qm.data.dir == 'desc'">Api Response Time</th>
                             <th class="sorting" dmx-on:click="qm.set('sort','tr_mode');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='tr_mode' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='tr_mode' && qm.data.dir == 'desc'">Tr. Mode & Type</th>
-                            <th class="sorting" dmx-on:click="qm.set('sort','operator_ref');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='operator_ref' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='operator_ref' && qm.data.dir == 'desc'">Response MSG</th>
-                            <th class="sorting" dmx-on:click="qm.set('sort','dtcommamt');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='dtcommamt' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='dtcommamt' && qm.data.dir == 'desc'">DT Comm Amt</th>
-                            <th class="sorting" dmx-on:click="qm.set('sort','dtchargeamt');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='dtchargeamt' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='dtchargeamt' && qm.data.dir == 'desc'">DT Charge Amt</th>
-                            <th class="sorting" dmx-on:click="qm.set('sort','mdtcommamt');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='mdtcommamt' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='mdtcommamt' && qm.data.dir == 'desc'">MDT Comm Amt</th>
-                            <th class="sorting" dmx-on:click="qm.set('sort','mdtchargeamt');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='mdtchargeamt' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='mdtchargeamt' && qm.data.dir == 'desc'">MDT Charge Amt</th>
+                            <th>DT Comm Amt</th>
+                            <th>DT Charge Amt</th>
+                            <th>MDT Comm Amt</th>
+                            <th>MDT Charge Amt</th>
+                            <th class="sorting" dmx-on:click="qm.set('sort','parent_fname');qm.set('dir',qm.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="qm.data.sort=='parent_fname' && qm.data.dir == 'asc'" dmx-class:sorting_desc="qm.data.sort=='parent_fname' && qm.data.dir == 'desc'">Parent <i class="fas fa-search"></i></th>
                         </tr>
                     </thead>
-                    <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="dvRechTrans.data" id="tableRepeat1" dmx-state="qm" dmx-sort="sort" dmx-order="dir" key="table_id">
+                    <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="dvAEPSTrans.data" id="tableRepeat1" dmx-state="qm" dmx-sort="sort" dmx-order="dir" key="table_id">
                         <tr>
                             <td>{{$index+1}}</td>
                             <!-- <td dmx-text="table_id"></td> -->
                             <td dmx-text="pay_ref_id"></td>
                             <td dmx-text="api_ref"></td>
-                            <td dmx-text="parent_mobile+' | '+parent_fname"></td>
                             <td dmx-text="user_mobile+' | '+user_fname"></td>
-                            <td dmx-text="recharge_number"></td>
+                            <td dmx-text="aeps_number"></td>
                             <td dmx-text="operator_name+'('+service_name+')'"></td>
                             <td class="fw-bold" dmx-text="status" dmx-class:text-success="status == 'SUCCESS'" dmx-class:text-warning="status == 'PENDING'" dmx-class:text-danger="status == 'FAILED'" dmx-class:text-primary="status == 'REFUND'"></td>
+                            <td dmx-text="operator_ref"></td>
                             <td><button class="btn btn-danger btn-sm" dmx-on:click="formCheck.submit(true)" dmx-show="status == 'PENDING'">
-                                    <form id="formCheck" method="post" action="api/APIS/CheckTransactionStatus" is="dmx-serverconnect-form" dmx-on:success="scNotif.success('Action Success');scRechargeTrans.load({})">
+                                    <form id="formCheck" method="post" action="#" is="dmx-serverconnect-form" dmx-on:success="scNotif.success('Action Success');scAEPSTrans.load({})">
                                         <input type="hidden" id="trans_id" class="form-control" name="trans_id" required="" dmx-bind:value="pay_ref_id">
                                     </form>
                                     Check
                                 </button>
                             </td>
-                            <td dmx-text="old_balance.toNumber().toFixed(2)"></td>
+                            <td dmx-text="old_bal.toNumber().toFixed(2)"></td>
                             <td dmx-text="amount.toNumber().toFixed(2)"></td>
                             <td dmx-text="comm_amt.toNumber().toFixed(2)"></td>
                             <td dmx-text="charge_amt.toNumber().toFixed(2)"></td>
-                            <td dmx-text="netamt.toNumber().toFixed(2)"></td>
-                            <td dmx-text="new_balance.toNumber().toFixed(2)"></td>
-                            <td dmx-text="transaction_type"></td>
-                            <td dmx-text="crdr_type"></td>
+                            <td dmx-text="net_amt.toNumber().toFixed(2)"></td>
+                            <td dmx-text="new_bal.toNumber().toFixed(2)"></td>
                             <td dmx-text="tr_date.formatDate('dd-MM-yyyy hh:mm:ss A')"></td>
+                            <td dmx-text="tr_type"></td>
+                            <td dmx-text="crdr_type"></td>
                             <td dmx-text="api_name"></td>
-                            <td dmx-text="api_response_id"></td>
+                            <td dmx-text="bank_acno"></td>
+                            <td dmx-text="bank_name"></td>
+                            <td dmx-text="benef_id"></td>
+                            <td dmx-text="api_response_time"></td>
                             <td dmx-text="tr_mode+' | '+tr_type"></td>
-                            <td dmx-text="operator_ref"></td>
-                            <td dmx-text="dtcommamt.toNumber().toFixed(2)"></td>
-                            <td dmx-text="dtchargeamt.toNumber().toFixed(2)"></td>
-                            <td dmx-text="mdtcommamt.toNumber().toFixed(2)"></td>
-                            <td dmx-text="mdtchargeamt.toNumber().toFixed(2)"></td>
+                            <td dmx-text="dt_comm_amt.toNumber().toFixed(2)"></td>
+                            <td dmx-text="dt_charge_amount.toNumber().toFixed(2)"></td>
+                            <td dmx-text="mdt_comm_amt.toNumber().toFixed(2)"></td>
+                            <td dmx-text="mdt_charge_amt.toNumber().toFixed(2)"></td>
+                            <td dmx-text="parent_mobile+' | '+parent_fname"></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <ul class="pagination" dmx-populate="scRechargeTrans.data.Recharge" dmx-state="qm" dmx-offset="offset" dmx-generator="bs5paging">
-                <li class="page-item" dmx-class:disabled="scRechargeTrans.data.Recharge.page.current == 1" aria-label="First">
-                    <a href="javascript:void(0)" class="page-link" dmx-on:click="qm.set('offset',scRechargeTrans.data.Recharge.page.offset.first)"><span aria-hidden="true">&lsaquo;&lsaquo;</span></a>
+            <ul class="pagination" dmx-populate="scAEPSTrans.data.Recharge" dmx-state="qm" dmx-offset="offset" dmx-generator="bs5paging">
+                <li class="page-item" dmx-class:disabled="scAEPSTrans.data.Recharge.page.current == 1" aria-label="First">
+                    <a href="javascript:void(0)" class="page-link" dmx-on:click="qm.set('offset',scAEPSTrans.data.Recharge.page.offset.first)"><span aria-hidden="true">&lsaquo;&lsaquo;</span></a>
                 </li>
-                <li class="page-item" dmx-class:disabled="scRechargeTrans.data.Recharge.page.current == 1" aria-label="Previous">
-                    <a href="javascript:void(0)" class="page-link" dmx-on:click="qm.set('offset',scRechargeTrans.data.Recharge.page.offset.prev)"><span aria-hidden="true">&lsaquo;</span></a>
+                <li class="page-item" dmx-class:disabled="scAEPSTrans.data.Recharge.page.current == 1" aria-label="Previous">
+                    <a href="javascript:void(0)" class="page-link" dmx-on:click="qm.set('offset',scAEPSTrans.data.Recharge.page.offset.prev)"><span aria-hidden="true">&lsaquo;</span></a>
                 </li>
-                <li class="page-item" dmx-class:active="title == scRechargeTrans.data.Recharge.page.current" dmx-class:disabled="!active" id="Title" dmx-repeat:repeattitle="scRechargeTrans.data.Recharge.getServerConnectPagination(2,1,'...')">
-                    <a href="javascript:void(0)" class="page-link" dmx-on:click="qm.set('offset',(page-1)*scRechargeTrans.data.Recharge.limit)">{{title}}</a>
+                <li class="page-item" dmx-class:active="title == scAEPSTrans.data.Recharge.page.current" dmx-class:disabled="!active" id="Title" dmx-repeat:repeattitle="scAEPSTrans.data.Recharge.getServerConnectPagination(2,1,'...')">
+                    <a href="javascript:void(0)" class="page-link" dmx-on:click="qm.set('offset',(page-1)*scAEPSTrans.data.Recharge.limit)">{{title}}</a>
                 </li>
-                <li class="page-item" dmx-class:disabled="scRechargeTrans.data.Recharge.page.current ==  scRechargeTrans.data.Recharge.page.total" aria-label="Next">
-                    <a href="javascript:void(0)" class="page-link" dmx-on:click="qm.set('offset',scRechargeTrans.data.Recharge.page.offset.next)"><span aria-hidden="true">&rsaquo;</span></a>
+                <li class="page-item" dmx-class:disabled="scAEPSTrans.data.Recharge.page.current ==  scAEPSTrans.data.Recharge.page.total" aria-label="Next">
+                    <a href="javascript:void(0)" class="page-link" dmx-on:click="qm.set('offset',scAEPSTrans.data.Recharge.page.offset.next)"><span aria-hidden="true">&rsaquo;</span></a>
                 </li>
-                <li class="page-item" dmx-class:disabled="scRechargeTrans.data.Recharge.page.current ==  scRechargeTrans.data.Recharge.page.total" aria-label="Last">
-                    <a href="javascript:void(0)" class="page-link" dmx-on:click="qm.set('offset',scRechargeTrans.data.Recharge.page.offset.last)"><span aria-hidden="true">&rsaquo;&rsaquo;</span></a>
+                <li class="page-item" dmx-class:disabled="scAEPSTrans.data.Recharge.page.current ==  scAEPSTrans.data.Recharge.page.total" aria-label="Last">
+                    <a href="javascript:void(0)" class="page-link" dmx-on:click="qm.set('offset',scAEPSTrans.data.Recharge.page.offset.last)"><span aria-hidden="true">&rsaquo;&rsaquo;</span></a>
                 </li>
             </ul>
         </div>
@@ -158,11 +177,11 @@
                             </select>
                         </div>
                         <div class="col-6 col-md-2">
-                            <button id="applyFilters" class="btn btn-primary mt-5 px-1 sd-fw-300 text-white" dmx-on:click="scRechargeTrans.load({fromdate: modalFilter.filterForm1.inpFromDate.value+' 00:00:00', todate: modalFilter.filterForm1.inpToDate.value+' 23:59:59.999', selectstatus: modalFilter.filterForm1.selectStatus.value, transfilter: 1})" data-bs-dismiss="modal" aria-label="Close">
+                            <button id="applyFilters" class="btn btn-primary mt-5 px-1 sd-fw-300 text-white" dmx-on:click="scAEPSTrans.load({fromdate: modalFilter.filterForm1.inpFromDate.value+' 00:00:00', todate: modalFilter.filterForm1.inpToDate.value+' 23:59:59.999', selectstatus: modalFilter.filterForm1.selectStatus.value, transfilter: 1})" data-bs-dismiss="modal" aria-label="Close">
                                 Apply Filters</button>
                         </div>
                         <div class="col-6 col-md-2">
-                            <button id="clearFilters" type="button" class="btn btn-dark mt-5 px-1 sd-fw-300 text-light" dmx-on:click="filterForm1.reset();scRechargeTrans.load({},true);">Clear Filters</button>
+                            <button id="clearFilters" type="button" class="btn btn-dark mt-5 px-1 sd-fw-300 text-light" dmx-on:click="filterForm1.reset();scAEPSTrans.load({},true);">Clear Filters</button>
                         </div>
                     </div>
                 </form>

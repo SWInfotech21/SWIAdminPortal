@@ -5113,5 +5113,228 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "AEPStransactionhistory": {
+    "dvRechTrans": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "table_id"
+        },
+        {
+          "type": "number",
+          "name": "pay_ref_id"
+        },
+        {
+          "type": "number",
+          "name": "ac_holder_user_id"
+        },
+        {
+          "type": "text",
+          "name": "old_bal"
+        },
+        {
+          "type": "text",
+          "name": "amount"
+        },
+        {
+          "type": "text",
+          "name": "net_amt"
+        },
+        {
+          "type": "text",
+          "name": "new_bal"
+        },
+        {
+          "type": "text",
+          "name": "tr_type"
+        },
+        {
+          "type": "datetime",
+          "name": "tr_date"
+        },
+        {
+          "type": "text",
+          "name": "remarks"
+        },
+        {
+          "type": "text",
+          "name": "status"
+        },
+        {
+          "type": "number",
+          "name": "transaction_by"
+        },
+        {
+          "type": "text",
+          "name": "crdr_type"
+        },
+        {
+          "type": "text",
+          "name": "user_rt_id"
+        },
+        {
+          "type": "text",
+          "name": "merchant_id"
+        },
+        {
+          "type": "text",
+          "name": "comm_per"
+        },
+        {
+          "type": "text",
+          "name": "comm_val"
+        },
+        {
+          "type": "text",
+          "name": "comm_amt"
+        },
+        {
+          "type": "text",
+          "name": "charge_per"
+        },
+        {
+          "type": "text",
+          "name": "charge_val"
+        },
+        {
+          "type": "text",
+          "name": "charge_amt"
+        },
+        {
+          "type": "text",
+          "name": "tr_mode"
+        },
+        {
+          "type": "text",
+          "name": "tr_id"
+        },
+        {
+          "type": "text",
+          "name": "reason"
+        },
+        {
+          "type": "text",
+          "name": "api_name"
+        },
+        {
+          "type": "text",
+          "name": "is_processed"
+        },
+        {
+          "type": "text",
+          "name": "operator_ref"
+        },
+        {
+          "type": "text",
+          "name": "api_ref"
+        },
+        {
+          "type": "text",
+          "name": "ip_address"
+        },
+        {
+          "type": "text",
+          "name": "api_response_time"
+        },
+        {
+          "type": "text",
+          "name": "process_mode"
+        },
+        {
+          "type": "text",
+          "name": "live"
+        },
+        {
+          "type": "text",
+          "name": "trans_by"
+        },
+        {
+          "type": "datetime",
+          "name": "updated_on"
+        },
+        {
+          "type": "text",
+          "name": "dt_comm_per"
+        },
+        {
+          "type": "text",
+          "name": "dt_comm_val"
+        },
+        {
+          "type": "text",
+          "name": "dt_comm_amt"
+        },
+        {
+          "type": "text",
+          "name": "dt_charge_per"
+        },
+        {
+          "type": "text",
+          "name": "dt_charge_val"
+        },
+        {
+          "type": "text",
+          "name": "dt_charge_amount"
+        },
+        {
+          "type": "text",
+          "name": "mdt_comm_amt"
+        },
+        {
+          "type": "text",
+          "name": "mdt_charge_amt"
+        },
+        {
+          "type": "text",
+          "name": "bank_name"
+        },
+        {
+          "type": "text",
+          "name": "bank_acno"
+        },
+        {
+          "type": "text",
+          "name": "benef_name"
+        },
+        {
+          "type": "text",
+          "name": "benef_id"
+        },
+        {
+          "type": "text",
+          "name": "operator_name"
+        },
+        {
+          "type": "text",
+          "name": "service_name"
+        },
+        {
+          "type": "text",
+          "name": "user_fname"
+        },
+        {
+          "type": "text",
+          "name": "user_mobile"
+        },
+        {
+          "type": "text",
+          "name": "aeps_merchant_id"
+        },
+        {
+          "type": "number",
+          "name": "parent_id"
+        },
+        {
+          "type": "text",
+          "name": "parent_fname"
+        },
+        {
+          "type": "text",
+          "name": "parent_mobile"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });
