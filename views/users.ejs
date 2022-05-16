@@ -236,7 +236,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form is="dmx-serverconnect-form" id="formAddEditUser" method="post" action="api/Users/AddEditUsers" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAddEditUser.data.AddEditUsers ? scNotif.success('New User Added') : scNotif.success('User Details Updated');formAddEditUser.reset();scUsers.load();" dmx-on:error="scNotif.warning('An error occurred');">
+                <form is="dmx-serverconnect-form" id="formAddEditUser" method="post" action="api/Users/AddEditUsers" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="scNotif.success('User Details Updated');formAddEditUser.reset();scUsers.load();" dmx-on:error="scNotif.warning('An error occurred');">
                     <input type="hidden" name="UserId" dmx-bind:value="ddUsers.data.id">
                     <div class="mb-3 row">
                         <div class="col-12 col-sm-6">
@@ -277,7 +277,7 @@
                         <div class="col-12 col-sm-6">
                             <label for="inp_mobile" class="col-form-label">Mobile</label>
                             <div class="col-12 px-0">
-                                <input type="number" class="form-control" id="inp_mobile" name="mobile" aria-describedby="inp_mobile_help" placeholder="Enter Mobile" maxlength="10" required="" data-msg-required="Mobile id is required." data-rule-number="" dmx-bind:value="ddUsers.data.user_mobile" dmx-bind:readonly="ddUsers.data.id">
+                                <input type="number" class="form-control" id="inp_mobile" name="mobile" aria-describedby="inp_mobile_help" placeholder="Enter Mobile" maxlength="10" required="" data-msg-required="Mobile id is required." data-rule-number="" dmx-bind:value="ddUsers.data.user_mobile">
                             </div>
                         </div>
                         <div class="col-12 col-sm-6"><label for="inp_aadhar" class="col-form-label">Aadhar No</label>

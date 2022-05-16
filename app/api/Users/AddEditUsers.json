@@ -334,112 +334,48 @@
           "then": {
             "steps": [
               {
-                "name": "EditUsers",
-                "module": "dbupdater",
-                "action": "update",
+                "name": "GetUser",
+                "module": "dbconnector",
+                "action": "single",
                 "options": {
                   "connection": "postgres_gcpServer",
                   "sql": {
-                    "type": "update",
-                    "values": [
+                    "type": "SELECT",
+                    "columns": [
                       {
                         "table": "m_users",
-                        "column": "user_fname",
-                        "type": "text",
-                        "value": "{{$_POST.name}}"
-                      },
-                      {
-                        "table": "m_users",
-                        "column": "user_type",
-                        "type": "text",
-                        "value": "{{$_POST.user_type}}"
-                      },
-                      {
-                        "table": "m_users",
-                        "column": "u_status",
-                        "type": "text",
-                        "value": "{{$_POST.status}}"
-                      },
-                      {
-                        "table": "m_users",
-                        "column": "updated_by",
-                        "type": "text",
-                        "value": "{{identity}}"
-                      },
-                      {
-                        "table": "m_users",
-                        "column": "updated_on",
-                        "type": "datetime",
-                        "value": "{{NOW}}"
-                      },
-                      {
-                        "table": "m_users",
-                        "column": "scheme_id",
-                        "type": "text",
-                        "value": "{{$_POST.scheme_id}}"
-                      },
-                      {
-                        "table": "m_users",
-                        "column": "aadhar_no",
-                        "type": "text",
-                        "value": "{{$_POST.aadhar}}"
-                      },
-                      {
-                        "table": "m_users",
-                        "column": "pan_no",
-                        "type": "text",
-                        "value": "{{$_POST.pan}}"
-                      },
-                      {
-                        "table": "m_users",
-                        "column": "address",
-                        "type": "text",
-                        "value": "{{$_POST.address}}"
-                      },
-                      {
-                        "table": "m_users",
-                        "column": "pin",
-                        "type": "text",
-                        "value": "{{$_POST.pin}}"
-                      },
-                      {
-                        "table": "m_users",
-                        "column": "state",
-                        "type": "text",
-                        "value": "{{$_POST.state}}"
-                      },
-                      {
-                        "table": "m_users",
-                        "column": "district",
-                        "type": "text",
-                        "value": "{{$_POST.district}}"
-                      },
-                      {
-                        "table": "m_users",
-                        "column": "aeps_merchant_id",
-                        "type": "text",
-                        "value": "{{$_POST.aeps_merchant}}"
-                      },
-                      {
-                        "table": "m_users",
-                        "column": "blank3",
-                        "type": "text",
-                        "value": "{{$_POST.firm_name}}",
-                        "condition": "{{$_POST.firm_name}}"
+                        "column": "id",
+                        "alias": "CountMobile",
+                        "aggregate": "COUNT"
                       }
                     ],
-                    "table": "m_users",
+                    "table": {
+                      "name": "m_users"
+                    },
+                    "primary": "id",
+                    "joins": [],
+                    "groupBy": [],
                     "wheres": {
                       "condition": "AND",
                       "rules": [
                         {
-                          "id": "id",
-                          "field": "id",
-                          "type": "double",
+                          "id": "m_users.user_mobile",
+                          "field": "m_users.user_mobile",
+                          "type": "string",
                           "operator": "equal",
-                          "value": "{{$_POST.UserId}}",
+                          "value": "{{$_POST.mobile}}",
                           "data": {
-                            "column": "id"
+                            "table": "m_users",
+                            "column": "user_mobile",
+                            "type": "text",
+                            "columnObj": {
+                              "type": "string",
+                              "primary": false,
+                              "nullable": false,
+                              "maxLength": -5,
+                              "unique": false,
+                              "name": "user_mobile"
+                            }
                           },
                           "operation": "="
                         }
@@ -447,107 +383,457 @@
                       "conditional": null,
                       "valid": true
                     },
-                    "query": "UPDATE m_users\nSET user_fname = :P1 /* {{$_POST.name}} */, user_type = :P2 /* {{$_POST.user_type}} */, u_status = :P3 /* {{$_POST.status}} */, updated_by = :P4 /* {{identity}} */, updated_on = :P5 /* {{NOW}} */, scheme_id = :P6 /* {{$_POST.scheme_id}} */, aadhar_no = :P7 /* {{$_POST.aadhar}} */, pan_no = :P8 /* {{$_POST.pan}} */, address = :P9 /* {{$_POST.address}} */, pin = :P10 /* {{$_POST.pin}} */, state = :P11 /* {{$_POST.state}} */, district = :P12 /* {{$_POST.district}} */, aeps_merchant_id = :P13 /* {{$_POST.aeps_merchant}} */, blank3 = :P14 /* {{$_POST.firm_name}} */\nWHERE id = :P15 /* {{$_POST.UserId}} */",
+                    "query": "SELECT COUNT(id) AS CountMobile\nFROM m_users\nWHERE user_mobile = :P1 /* {{$_POST.mobile}} */",
                     "params": [
-                      {
-                        "name": ":P1",
-                        "type": "expression",
-                        "value": "{{$_POST.name}}"
-                      },
-                      {
-                        "name": ":P2",
-                        "type": "expression",
-                        "value": "{{$_POST.user_type}}"
-                      },
-                      {
-                        "name": ":P3",
-                        "type": "expression",
-                        "value": "{{$_POST.status}}"
-                      },
-                      {
-                        "name": ":P4",
-                        "type": "expression",
-                        "value": "{{identity}}"
-                      },
-                      {
-                        "name": ":P5",
-                        "type": "expression",
-                        "value": "{{NOW}}"
-                      },
-                      {
-                        "name": ":P6",
-                        "type": "expression",
-                        "value": "{{$_POST.scheme_id}}"
-                      },
-                      {
-                        "name": ":P7",
-                        "type": "expression",
-                        "value": "{{$_POST.aadhar}}"
-                      },
-                      {
-                        "name": ":P8",
-                        "type": "expression",
-                        "value": "{{$_POST.pan}}"
-                      },
-                      {
-                        "name": ":P9",
-                        "type": "expression",
-                        "value": "{{$_POST.address}}"
-                      },
-                      {
-                        "name": ":P10",
-                        "type": "expression",
-                        "value": "{{$_POST.pin}}"
-                      },
-                      {
-                        "name": ":P11",
-                        "type": "expression",
-                        "value": "{{$_POST.state}}"
-                      },
-                      {
-                        "name": ":P12",
-                        "type": "expression",
-                        "value": "{{$_POST.district}}"
-                      },
-                      {
-                        "name": ":P13",
-                        "type": "expression",
-                        "value": "{{$_POST.aeps_merchant}}"
-                      },
-                      {
-                        "name": ":P14",
-                        "type": "expression",
-                        "value": "{{$_POST.firm_name}}"
-                      },
                       {
                         "operator": "equal",
                         "type": "expression",
-                        "name": ":P15",
-                        "value": "{{$_POST.UserId}}"
+                        "name": ":P1",
+                        "value": "{{$_POST.mobile}}"
                       }
-                    ],
-                    "returning": "id"
+                    ]
                   }
                 },
+                "output": false,
                 "meta": [
                   {
-                    "name": "affected",
-                    "type": "number"
+                    "type": "number",
+                    "name": "CountMobile"
                   }
                 ],
-                "output": false
+                "outputType": "object"
               },
               {
-                "name": "for_user_type",
+                "name": "",
                 "module": "core",
-                "action": "setvalue",
+                "action": "condition",
                 "options": {
-                  "value": "{{$_POST.user_type==1?2:3}}"
+                  "if": "{{GetUser.CountMobile>=1}}",
+                  "then": {
+                    "steps": {
+                      "name": "EditUsers",
+                      "module": "dbupdater",
+                      "action": "update",
+                      "options": {
+                        "connection": "postgres_gcpServer",
+                        "sql": {
+                          "type": "update",
+                          "values": [
+                            {
+                              "table": "m_users",
+                              "column": "user_fname",
+                              "type": "text",
+                              "value": "{{$_POST.name}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "user_type",
+                              "type": "text",
+                              "value": "{{$_POST.user_type}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "u_status",
+                              "type": "text",
+                              "value": "{{$_POST.status}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "updated_by",
+                              "type": "text",
+                              "value": "{{identity}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "updated_on",
+                              "type": "datetime",
+                              "value": "{{NOW}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "scheme_id",
+                              "type": "text",
+                              "value": "{{$_POST.scheme_id}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "aadhar_no",
+                              "type": "text",
+                              "value": "{{$_POST.aadhar}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "pan_no",
+                              "type": "text",
+                              "value": "{{$_POST.pan}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "address",
+                              "type": "text",
+                              "value": "{{$_POST.address}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "pin",
+                              "type": "text",
+                              "value": "{{$_POST.pin}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "state",
+                              "type": "text",
+                              "value": "{{$_POST.state}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "district",
+                              "type": "text",
+                              "value": "{{$_POST.district}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "aeps_merchant_id",
+                              "type": "text",
+                              "value": "{{$_POST.aeps_merchant}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "blank3",
+                              "type": "text",
+                              "value": "{{$_POST.firm_name}}",
+                              "condition": "{{$_POST.firm_name}}"
+                            }
+                          ],
+                          "table": "m_users",
+                          "wheres": {
+                            "condition": "AND",
+                            "rules": [
+                              {
+                                "id": "id",
+                                "field": "id",
+                                "type": "double",
+                                "operator": "equal",
+                                "value": "{{$_POST.UserId}}",
+                                "data": {
+                                  "column": "id"
+                                },
+                                "operation": "="
+                              }
+                            ],
+                            "conditional": null,
+                            "valid": true
+                          },
+                          "query": "UPDATE m_users\nSET user_fname = :P1 /* {{$_POST.name}} */, user_type = :P2 /* {{$_POST.user_type}} */, u_status = :P3 /* {{$_POST.status}} */, updated_by = :P4 /* {{identity}} */, updated_on = :P5 /* {{NOW}} */, scheme_id = :P6 /* {{$_POST.scheme_id}} */, aadhar_no = :P7 /* {{$_POST.aadhar}} */, pan_no = :P8 /* {{$_POST.pan}} */, address = :P9 /* {{$_POST.address}} */, pin = :P10 /* {{$_POST.pin}} */, state = :P11 /* {{$_POST.state}} */, district = :P12 /* {{$_POST.district}} */, aeps_merchant_id = :P13 /* {{$_POST.aeps_merchant}} */, blank3 = :P14 /* {{$_POST.firm_name}} */\nWHERE id = :P15 /* {{$_POST.UserId}} */",
+                          "params": [
+                            {
+                              "name": ":P1",
+                              "type": "expression",
+                              "value": "{{$_POST.name}}"
+                            },
+                            {
+                              "name": ":P2",
+                              "type": "expression",
+                              "value": "{{$_POST.user_type}}"
+                            },
+                            {
+                              "name": ":P3",
+                              "type": "expression",
+                              "value": "{{$_POST.status}}"
+                            },
+                            {
+                              "name": ":P4",
+                              "type": "expression",
+                              "value": "{{identity}}"
+                            },
+                            {
+                              "name": ":P5",
+                              "type": "expression",
+                              "value": "{{NOW}}"
+                            },
+                            {
+                              "name": ":P6",
+                              "type": "expression",
+                              "value": "{{$_POST.scheme_id}}"
+                            },
+                            {
+                              "name": ":P7",
+                              "type": "expression",
+                              "value": "{{$_POST.aadhar}}"
+                            },
+                            {
+                              "name": ":P8",
+                              "type": "expression",
+                              "value": "{{$_POST.pan}}"
+                            },
+                            {
+                              "name": ":P9",
+                              "type": "expression",
+                              "value": "{{$_POST.address}}"
+                            },
+                            {
+                              "name": ":P10",
+                              "type": "expression",
+                              "value": "{{$_POST.pin}}"
+                            },
+                            {
+                              "name": ":P11",
+                              "type": "expression",
+                              "value": "{{$_POST.state}}"
+                            },
+                            {
+                              "name": ":P12",
+                              "type": "expression",
+                              "value": "{{$_POST.district}}"
+                            },
+                            {
+                              "name": ":P13",
+                              "type": "expression",
+                              "value": "{{$_POST.aeps_merchant}}"
+                            },
+                            {
+                              "name": ":P14",
+                              "type": "expression",
+                              "value": "{{$_POST.firm_name}}"
+                            },
+                            {
+                              "operator": "equal",
+                              "type": "expression",
+                              "name": ":P15",
+                              "value": "{{$_POST.UserId}}"
+                            }
+                          ],
+                          "returning": "id"
+                        }
+                      },
+                      "meta": [
+                        {
+                          "name": "affected",
+                          "type": "number"
+                        }
+                      ],
+                      "output": false
+                    }
+                  },
+                  "else": {
+                    "steps": {
+                      "name": "EditUsers",
+                      "module": "dbupdater",
+                      "action": "update",
+                      "options": {
+                        "connection": "postgres_gcpServer",
+                        "sql": {
+                          "type": "update",
+                          "values": [
+                            {
+                              "table": "m_users",
+                              "column": "user_mobile",
+                              "type": "text",
+                              "value": "{{$_POST.mobile}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "user_fname",
+                              "type": "text",
+                              "value": "{{$_POST.name}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "user_type",
+                              "type": "text",
+                              "value": "{{$_POST.user_type}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "u_status",
+                              "type": "text",
+                              "value": "{{$_POST.status}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "updated_by",
+                              "type": "text",
+                              "value": "{{identity}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "updated_on",
+                              "type": "datetime",
+                              "value": "{{NOW}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "scheme_id",
+                              "type": "text",
+                              "value": "{{$_POST.scheme_id}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "aadhar_no",
+                              "type": "text",
+                              "value": "{{$_POST.aadhar}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "pan_no",
+                              "type": "text",
+                              "value": "{{$_POST.pan}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "address",
+                              "type": "text",
+                              "value": "{{$_POST.address}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "pin",
+                              "type": "text",
+                              "value": "{{$_POST.pin}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "state",
+                              "type": "text",
+                              "value": "{{$_POST.state}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "district",
+                              "type": "text",
+                              "value": "{{$_POST.district}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "aeps_merchant_id",
+                              "type": "text",
+                              "value": "{{$_POST.aeps_merchant}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "blank3",
+                              "type": "text",
+                              "value": "{{$_POST.firm_name}}",
+                              "condition": "{{$_POST.firm_name}}"
+                            }
+                          ],
+                          "table": "m_users",
+                          "wheres": {
+                            "condition": "AND",
+                            "rules": [
+                              {
+                                "id": "id",
+                                "field": "id",
+                                "type": "double",
+                                "operator": "equal",
+                                "value": "{{$_POST.UserId}}",
+                                "data": {
+                                  "column": "id"
+                                },
+                                "operation": "="
+                              }
+                            ],
+                            "conditional": null,
+                            "valid": true
+                          },
+                          "query": "UPDATE m_users\nSET user_mobile = :P1 /* {{$_POST.mobile}} */, user_fname = :P2 /* {{$_POST.name}} */, user_type = :P3 /* {{$_POST.user_type}} */, u_status = :P4 /* {{$_POST.status}} */, updated_by = :P5 /* {{identity}} */, updated_on = :P6 /* {{NOW}} */, scheme_id = :P7 /* {{$_POST.scheme_id}} */, aadhar_no = :P8 /* {{$_POST.aadhar}} */, pan_no = :P9 /* {{$_POST.pan}} */, address = :P10 /* {{$_POST.address}} */, pin = :P11 /* {{$_POST.pin}} */, state = :P12 /* {{$_POST.state}} */, district = :P13 /* {{$_POST.district}} */, aeps_merchant_id = :P14 /* {{$_POST.aeps_merchant}} */, blank3 = :P15 /* {{$_POST.firm_name}} */\nWHERE id = :P16 /* {{$_POST.UserId}} */",
+                          "params": [
+                            {
+                              "name": ":P1",
+                              "type": "expression",
+                              "value": "{{$_POST.mobile}}"
+                            },
+                            {
+                              "name": ":P2",
+                              "type": "expression",
+                              "value": "{{$_POST.name}}"
+                            },
+                            {
+                              "name": ":P3",
+                              "type": "expression",
+                              "value": "{{$_POST.user_type}}"
+                            },
+                            {
+                              "name": ":P4",
+                              "type": "expression",
+                              "value": "{{$_POST.status}}"
+                            },
+                            {
+                              "name": ":P5",
+                              "type": "expression",
+                              "value": "{{identity}}"
+                            },
+                            {
+                              "name": ":P6",
+                              "type": "expression",
+                              "value": "{{NOW}}"
+                            },
+                            {
+                              "name": ":P7",
+                              "type": "expression",
+                              "value": "{{$_POST.scheme_id}}"
+                            },
+                            {
+                              "name": ":P8",
+                              "type": "expression",
+                              "value": "{{$_POST.aadhar}}"
+                            },
+                            {
+                              "name": ":P9",
+                              "type": "expression",
+                              "value": "{{$_POST.pan}}"
+                            },
+                            {
+                              "name": ":P10",
+                              "type": "expression",
+                              "value": "{{$_POST.address}}"
+                            },
+                            {
+                              "name": ":P11",
+                              "type": "expression",
+                              "value": "{{$_POST.pin}}"
+                            },
+                            {
+                              "name": ":P12",
+                              "type": "expression",
+                              "value": "{{$_POST.state}}"
+                            },
+                            {
+                              "name": ":P13",
+                              "type": "expression",
+                              "value": "{{$_POST.district}}"
+                            },
+                            {
+                              "name": ":P14",
+                              "type": "expression",
+                              "value": "{{$_POST.aeps_merchant}}"
+                            },
+                            {
+                              "name": ":P15",
+                              "type": "expression",
+                              "value": "{{$_POST.firm_name}}"
+                            },
+                            {
+                              "operator": "equal",
+                              "type": "expression",
+                              "name": ":P16",
+                              "value": "{{$_POST.UserId}}"
+                            }
+                          ],
+                          "returning": "id"
+                        }
+                      },
+                      "meta": [
+                        {
+                          "name": "affected",
+                          "type": "number"
+                        }
+                      ],
+                      "output": false
+                    }
+                  }
                 },
-                "meta": [],
-                "outputType": "text",
-                "output": false,
-                "disabled": true
+                "outputType": "boolean"
               },
               {
                 "name": "",
