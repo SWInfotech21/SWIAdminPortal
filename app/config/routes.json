@@ -247,6 +247,11 @@
       "layout": "main"
     },
     {
+      "path": "/AEPS-live-transaction",
+      "page": "AEPS-live-transaction",
+      "layout": "main"
+    },
+    {
       "path": "*",
       "page": "404-not-found"
     }

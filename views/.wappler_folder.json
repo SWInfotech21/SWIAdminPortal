@@ -182,5 +182,9 @@
   "AEPS-transaction-history.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "AEPS-live-transaction.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }
