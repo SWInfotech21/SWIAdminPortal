@@ -78,6 +78,7 @@
                             <th>Amount</th>
                             <th>API</th>
                             <th>Status</th>
+                            <th>Req. Id</th>
                             <th>Tr. Id</th>
                             <th>Tr. Mode</th>
                             <th>Date</th>
@@ -99,6 +100,7 @@
                             <td dmx-text="amount.toNumber().toFixed(2)"></td>
                             <td dmx-text="api_logs"></td>
                             <td class="fw-bold" dmx-text="status" dmx-class:text-success="status == 'SUCCESS'" dmx-class:text-warning="status == 'Pending'" dmx-class:text-danger="status == 'FAILED'" dmx-class:text-primary="status == 'REFUND'"></td>
+                            <td dmx-text="tr_id"></td>
                             <td dmx-text="api_ref"></td>
                             <td dmx-text="tr_mode"></td>
                             <td dmx-text="tr_date.formatDate('dd-MM-yyyy hh:mm:ss A')"></td>
