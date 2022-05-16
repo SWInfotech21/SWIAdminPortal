@@ -1,19 +1,32 @@
-<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="rechargehistory" appConnect="local" components="{dmxStateManagement:{},dmxDataTraversal:{},dmxBootstrap5TableGenerator:{},dmxSockets:{},dmxBootstrap5Navigation:{},dmxBootstrap5Modal:{}}" -->
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="rechargehistory" appConnect="local" components="{dmxStateManagement:{},dmxDataTraversal:{},dmxBootstrap5TableGenerator:{},dmxSockets:{},dmxBootstrap5Navigation:{},dmxBootstrap5Modal:{},dmxDatePicker:{}}" -->
 <meta name="ac:route" content="/recharge-history">
 <dmx-query-manager id="qm"></dmx-query-manager>
-<dmx-serverconnect id="scRechargeTrans" url="api/Reports/RechargeTrans" dmx-param:limit="" dmx-param:offset="qm.data.offset" dmx-param:sort="qm.data.sort" dmx-param:dir="qm.data.dir" sockets="true"></dmx-serverconnect>
+<dmx-serverconnect id="scRechargeTrans" url="api/Reports/RechargeTrans" dmx-param:limit="100000" dmx-param:offset="qm.data.offset" dmx-param:sort="qm.data.sort" dmx-param:dir="qm.data.dir" dmx-param:fromdate="formDatePicker.daterange.start" dmx-param:todate="formDatePicker.daterange.end" dmx-param:selectstatus="selectstatus.value"></dmx-serverconnect>
 <dmx-data-view id="dvRechTrans" dmx-bind:data="scRechargeTrans.data.Recharge.data" filter="((parent_mobile.contains(formSearchUser.Search.value) || api_ref.contains(formSearchUser.Search.value) || parent_fname.lowercase().contains(formSearchUser.Search.value.lowercase())) || user_fname.lowercase().contains(formSearchUser.Search.value.lowercase()) || api_name.contains(formSearchUser.Search.value) || user_mobile.contains(formSearchUser.Search.value) || recharge_number.contains(formSearchUser.Search.value) || operator_name.lowercase().contains(formSearchUser.Search.value.lowercase()) || status.lowercase().contains(formSearchUser.Search.value.lowercase()))" dmx-bind:page="qm.data.offset" pageSize="100"></dmx-data-view>
 <dmx-data-detail id="ddRechargeTrans" key="table_id" dmx-bind:data="dvRechTrans.data"></dmx-data-detail>
 
 <div class="row align-items-center justify-content-between px-4 mb-3 sd-secondary-header mx-0">
     <div class="col-12 col-md-auto me-auto ps-4">
         <h1 class="ms-md-1 mt-md-3 text-dark fs-2 sd-fw-800 d-flex align-items-center">
-            SW Infotech Recharge History
+            Recharge Transaction History
             <span class="border-3 ms-2 spinner-border spinner-border-sm" role="status" dmx-show="scRechargeTrans.state.executing"></span>
         </h1>
     </div>
+    <div class="col-auto order-3 order-md-2 d-flex align-items-center justify-content-start justify-content-md-center px-0 px-lg-2">
+        <select class="form-control form-select" id="selectstatus">
+            <option value="0">All</option>
+            <option value="SUCCESS">SUCCESS</option>
+            <option value="FAILED">FAILED</option>
+            <option value="PENDING">PENDING</option>
+            <option value="REFUND">REFUND</option>
+        </select>
+    </div>
     <div class="col-auto order-2 order-md-1 d-flex align-items-center justify-content-start justify-content-md-center px-0 px-lg-2">
-        <button id="btnFilter" class="btn" data-bs-toggle="modal" data-bs-target="#modalFilter"><i alt="Filter" class="fas fa-filter"></i></button>
+        <form id="formDatePicker"><label class="sw-datepicker">
+                <span class="btn bg-light"><img src="assets/images/icons/calendar.svg" class="img-fluid" width="20px"></span>
+                <input type="text" is="dmx-date-range-picker" format="DD MMM YY" class="" placeholder="Nov 2021 - Dec 2021" id="daterange" dmx-bind:startdate="dateNow.datetime.addDays(0)" dmx-bind:enddate="dateNow.datetime.formatDate('yyyy-MM-dd 23:59:59')" autoapply="true">
+            </label>
+        </form>
     </div>
     <div class="col-auto order-1 order-md-3 d-flex align-items-center justify-content-center">
         <form id="formSearchUser" class="sd-search-form">
@@ -123,52 +136,6 @@
                     <a href="javascript:void(0)" class="page-link" dmx-on:click="qm.set('offset',scRechargeTrans.data.Recharge.page.offset.last)"><span aria-hidden="true">&rsaquo;&rsaquo;</span></a>
                 </li>
             </ul>
-        </div>
-    </div>
-</div>
-
-
-<div class="modal fade fixed-left sd-right-sidebar-40" id="modalFilter" is="dmx-bs5-modal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-aside my-0 modal-lg" role="document">
-        <div class="modal-content rounded-0 px-3">
-            <div class="modal-header border-0 pb-0">
-                <h3 class="modal-title">Filter By</h3>
-                <button type="button" class="bg-transparent border-0 ms-auto p-0 px-1" data-bs-dismiss="modal" aria-label="Close">
-                    <i class="fas fa-times" alt="icon"></i>
-                </button>
-            </div>
-            <div class="modal-body py-0">
-                <form id="filterForm1" method="post">
-                    <div class="row align-items-baseline">
-                        <div class="col-6 col-md-3">
-                            <label for="inpFromDate" class="form-label text-black sd-fw-600">From Date</label>
-                            <input type="date" name="fromdate" id="inpFromDate" class="form-control" required="">
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <label for="inpToDate" class="form-label text-black sd-fw-600"> To Date</label>
-                            <input type="date" name="todate" id="inpToDate" class="form-control" required="">
-                        </div>
-                        <div class="col-6 col-md-2">
-                            <label for="inpSelectStatus" class="form-label text-black sd-fw-600">Status</label>
-                            <select id="selectStatus" class="form-control" name="Status">
-                                <option value="0">All</option>
-                                <option value="SUCCESS">Success</option>
-                                <option value="FAILURE">Failure</option>
-                                <option value="REFUND">Refund</option>
-                            </select>
-                        </div>
-                        <div class="col-6 col-md-2">
-                            <button id="applyFilters" class="btn btn-primary mt-5 px-1 sd-fw-300 text-white" dmx-on:click="scRechargeTrans.load({fromdate: modalFilter.filterForm1.inpFromDate.value+' 00:00:00', todate: modalFilter.filterForm1.inpToDate.value+' 23:59:59.999', selectstatus: modalFilter.filterForm1.selectStatus.value, transfilter: 1})" data-bs-dismiss="modal" aria-label="Close">
-                                Apply Filters</button>
-                        </div>
-                        <div class="col-6 col-md-2">
-                            <button id="clearFilters" type="button" class="btn btn-dark mt-5 px-1 sd-fw-300 text-light" dmx-on:click="filterForm1.reset();scRechargeTrans.load({},true);">Clear Filters</button>
-                        </div>
-                    </div>
-                </form>
-                <div class="border-divider mb-4"></div>
-
-            </div>
         </div>
     </div>
 </div>
