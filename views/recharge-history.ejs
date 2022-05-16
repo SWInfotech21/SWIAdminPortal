@@ -1,4 +1,4 @@
-<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="rechargehistory" appConnect="local" components="{dmxStateManagement:{},dmxDataTraversal:{},dmxBootstrap5TableGenerator:{},dmxSockets:{},dmxBootstrap5Navigation:{},dmxBootstrap5Modal:{},dmxDatePicker:{}}" -->
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="rechargehistory" appConnect="local" components="{dmxStateManagement:{},dmxDataTraversal:{},dmxBootstrap5TableGenerator:{},dmxSockets:{},dmxBootstrap5Navigation:{},dmxBootstrap5Modal:{},dmxDatePicker:{}}" jquery_slim_35="cdn" moment_2="cdn" -->
 <meta name="ac:route" content="/recharge-history">
 <dmx-query-manager id="qm"></dmx-query-manager>
 <dmx-serverconnect id="scRechargeTrans" url="api/Reports/RechargeTrans" dmx-param:limit="100000" dmx-param:offset="qm.data.offset" dmx-param:sort="qm.data.sort" dmx-param:dir="qm.data.dir" dmx-param:fromdate="formDatePicker.daterange.start" dmx-param:todate="formDatePicker.daterange.end" dmx-param:selectstatus="selectstatus.value"></dmx-serverconnect>
