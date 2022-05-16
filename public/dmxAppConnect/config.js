@@ -3867,6 +3867,123 @@ dmx.config({
     "data_view1": {
       "meta": [],
       "outputType": "text"
+    },
+    "tableRepeat2": {
+      "meta": [
+        {
+          "name": "id",
+          "type": "number"
+        },
+        {
+          "name": "aeps_number",
+          "type": "text"
+        },
+        {
+          "name": "op_bal",
+          "type": "text"
+        },
+        {
+          "name": "amount",
+          "type": "text"
+        },
+        {
+          "name": "comm_amt",
+          "type": "text"
+        },
+        {
+          "name": "charge_amt",
+          "type": "text"
+        },
+        {
+          "name": "net_amt",
+          "type": "text"
+        },
+        {
+          "name": "closing_bal",
+          "type": "text"
+        },
+        {
+          "name": "merchant_id",
+          "type": "text"
+        },
+        {
+          "name": "user_rt_id",
+          "type": "text"
+        },
+        {
+          "name": "bank_acno",
+          "type": "text"
+        },
+        {
+          "name": "benef_name",
+          "type": "text"
+        },
+        {
+          "name": "benef_id",
+          "type": "text"
+        },
+        {
+          "name": "bank_name",
+          "type": "text"
+        },
+        {
+          "name": "service_api",
+          "type": "text"
+        },
+        {
+          "name": "tr_mode",
+          "type": "text"
+        },
+        {
+          "name": "status",
+          "type": "text"
+        },
+        {
+          "name": "tr_id",
+          "type": "text"
+        },
+        {
+          "name": "api_logs",
+          "type": "text"
+        },
+        {
+          "name": "api_ref",
+          "type": "text"
+        },
+        {
+          "name": "operator_ref",
+          "type": "text"
+        },
+        {
+          "name": "live",
+          "type": "text"
+        },
+        {
+          "name": "tr_date",
+          "type": "text"
+        },
+        {
+          "name": "operator_name",
+          "type": "text"
+        },
+        {
+          "name": "service_name",
+          "type": "text"
+        },
+        {
+          "name": "user_id",
+          "type": "text"
+        },
+        {
+          "name": "user_fname",
+          "type": "text"
+        },
+        {
+          "name": "user_mobile",
+          "type": "text"
+        }
+      ],
+      "outputType": "array"
     }
   },
   "responserequest": {
