@@ -158,23 +158,36 @@
         "options": {
           "connection": "postgres_gcpServer",
           "sql": {
-            "query": "with daterange as\n(\n  select generate_series(@startdate, @enddate, interval '1 day')::date as dt\n)\nselect to_char(dt, 'YYYY-MM-DD'), \n\tcoalesce((\n\tselect sum(trt.amount::int) as totalamt from tt_recharge_trans trt\n\twhere to_char(trt.tr_date, 'YYYY-MM-DD')::date = daterange.dt\n\tand trt.status = 'SUCCESS'\n\tgroup by to_char(trt.tr_date, 'YYYY-MM-DD')\n\t),0) as totalsuccessamount,\n\tcoalesce((\n\tselect sum(trt.amount::int) as totalfailedamt from tt_recharge_trans trt\n\twhere to_char(trt.tr_date, 'YYYY-MM-DD')::date = daterange.dt\n\tand trt.status = 'FAILED'\n\tgroup by to_char(trt.tr_date, 'YYYY-MM-DD')\n\t),0) as totalfailedamount\nfrom daterange;",
+            "query": "with daterange as\n(\n  select generate_series(@startdate, @enddate, interval '1 day')::date as dt\n)\nselect to_char(dt, 'YYYY-MM-DD'), \n\tcoalesce((\n\tselect sum(trt.amount::float) as totalamt from tt_recharge_trans trt\n\twhere to_char(trt.tr_date, 'YYYY-MM-DD')::date = daterange.dt\n\tand trt.status = 'SUCCESS'\n\tgroup by to_char(trt.tr_date, 'YYYY-MM-DD')\n\t),0) as totalsuccessamount,\n\tcoalesce((\n\tselect sum(trt.amount::float) as totalfailedamt from tt_recharge_trans trt\n\twhere to_char(trt.tr_date, 'YYYY-MM-DD')::date = daterange.dt\n\tand trt.status = 'FAILED'\n\tgroup by to_char(trt.tr_date, 'YYYY-MM-DD')\n\t),0) as totalfailedamount\nfrom daterange;",
             "params": [
               {
                 "name": "@startdate",
                 "value": "{{$_GET.startdate.formatDate('yyyy-MM-dd')}}",
-                "test": "2021-11-20"
+                "test": "2022-05-17"
               },
               {
                 "name": "@enddate",
                 "value": "{{$_GET.enddate.formatDate('yyyy-MM-dd')}}",
-                "test": "2021-11-23"
+                "test": "2022-05-17"
               }
             ]
           }
         },
         "output": true,
-        "meta": [],
+        "meta": [
+          {
+            "name": "to_char",
+            "type": "text"
+          },
+          {
+            "name": "totalsuccessamount",
+            "type": "number"
+          },
+          {
+            "name": "totalfailedamount",
+            "type": "number"
+          }
+        ],
         "outputType": "array"
       },
       {
@@ -184,21 +197,36 @@
         "options": {
           "connection": "postgres_gcpServer",
           "sql": {
-            "query": "select ms.service_name, sum(trt.amount::int) as successamount, sum(trt2.amount::int) as failedamount  \nfrom m_service ms \nleft join tt_recharge_trans trt on trt.service_id = ms.id and trt.status = 'SUCCESS' \n\t\tand (ms.service_name = 'Mobile' or ms.service_name = 'Wallet' or ms.service_name = 'DTH') and trt.tr_date between @startdate and @enddate\nleft join tt_recharge_trans trt2 on trt2.service_id = ms.id and trt2.status = 'FAILED' \n\t\tand (ms.service_name = 'Mobile' or ms.service_name = 'Wallet' or ms.service_name = 'DTH') and trt2.tr_date between @startdate and @enddate\nwhere ms.service_name = 'Mobile' or ms.service_name = 'DTH' or ms.service_name = 'Wallet'\n\t\tgroup by ms.service_name;",
+            "query": "select ms.service_name, sum(trt.amount::float) as successamount, sum(trt2.amount::float) as failedamount  \nfrom m_service ms \nleft join tt_recharge_trans trt on trt.service_id = ms.id and trt.status = 'SUCCESS' \n\t\tand (ms.service_name = 'Mobile' or ms.service_name = 'Wallet' or ms.service_name = 'DTH') and trt.tr_date between @startdate and @enddate\nleft join tt_recharge_trans trt2 on trt2.service_id = ms.id and trt2.status = 'FAILED' \n\t\tand (ms.service_name = 'Mobile' or ms.service_name = 'Wallet' or ms.service_name = 'DTH') and trt2.tr_date between @startdate and @enddate\nwhere ms.service_name = 'Mobile' or ms.service_name = 'DTH' or ms.service_name = 'Wallet'\n\t\tgroup by ms.service_name;",
             "params": [
               {
                 "name": "@startdate",
-                "value": "{{$_GET.startdate}}"
+                "value": "{{$_GET.startdate}}",
+                "test": "2022-05-17"
               },
               {
                 "name": "@enddate",
-                "value": "{{$_GET.enddate}}"
+                "value": "{{$_GET.enddate}}",
+                "test": "2022-05-17"
               }
             ]
           }
         },
         "output": true,
-        "meta": [],
+        "meta": [
+          {
+            "name": "service_name",
+            "type": "text"
+          },
+          {
+            "name": "successamount",
+            "type": "text"
+          },
+          {
+            "name": "failedamount",
+            "type": "text"
+          }
+        ],
         "outputType": "array"
       },
       {
@@ -286,17 +314,17 @@
         "options": {
           "connection": "postgres_gcpServer",
           "sql": {
-            "query": "select mo.operator_name, sum(trt.amount::int) as successamount, sum(trt2.amount::int) as failedamount\nfrom m_operator mo \nleft join tt_recharge_trans trt on trt.op_id = mo.id and trt.status = 'SUCCESS' \n\t\tand trt.tr_date between @startdate and @enddate\nleft join tt_recharge_trans trt2 on trt2.op_id = mo.id and trt2.status = 'FAILED' \n\t\t and trt2.tr_date between @startdate and @enddate \ngroup by mo.operator_name ;",
+            "query": "select mo.operator_name, sum(trt.amount::float) as successamount, sum(trt2.amount::float) as failedamount\nfrom m_operator mo \nleft join tt_recharge_trans trt on trt.op_id = mo.id and trt.status = 'SUCCESS' \n\t\tand trt.tr_date between @startdate and @enddate\nleft join tt_recharge_trans trt2 on trt2.op_id = mo.id and trt2.status = 'FAILED' \n\t\t and trt2.tr_date between @startdate and @enddate \ngroup by mo.operator_name ;",
             "params": [
               {
                 "name": "@startdate",
                 "value": "{{$_GET.startdate}}",
-                "test": "2021-11-20 00:00:00"
+                "test": "2021-05-17 00:00:00"
               },
               {
                 "name": "@enddate",
                 "value": "{{$_GET.enddate}}",
-                "test": "2021-11-23 23:59:59"
+                "test": "2021-05-17 23:59:59"
               }
             ]
           }
