@@ -252,6 +252,11 @@
       "layout": "main"
     },
     {
+      "path": "/update-aeps-transaction",
+      "page": "update-aeps-transaction",
+      "layout": "main"
+    },
+    {
       "path": "*",
       "page": "404-not-found"
     }

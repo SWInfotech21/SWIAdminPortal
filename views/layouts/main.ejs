@@ -85,6 +85,7 @@
 
     <meta charset="UTF-8">
     <title>Admin Panel</title>
+    <link rel="icon" href="assets/images/swpay.png" type="image/ico" />
     <dmx-serverconnect id="scAdminBalance" url="api/Transactions/FetchAdminBalance" dmx-on:unauthorized="browserMain.goto('/login')" dmx-on:forbidden="browserMain.goto('/login')" dmx-on:invalid="browserMain.goto('/login')" dmx-on:error="browserMain.goto('/login')"></dmx-serverconnect>
     <dmx-serverconnect id="scOperator" url="api/operator/OperatorsFetch" noload></dmx-serverconnect>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -228,8 +229,9 @@
                                     <li><a href="recharge-history">Transaction Report</a></li>
                                     <li><a href="#" class="sf-with-ul">AEPS<i class="fas fa-angle-right float-end"></i></a>
                                         <ul>
-                                            <li dmx-show="scAdminBalance.data.query.user_type == 0"><a href="AEPS-transaction-history">AEPS Transaction</a></li>
                                             <li><a href="AEPS-live-transaction" target="_blank">Live AEPS</a></li>
+                                            <li dmx-show="scAdminBalance.data.query.user_type == 0"><a href="AEPS-transaction-history">AEPS Txn.</a></li>
+                                            <li dmx-show="scAdminBalance.data.query.user_type == 0"><a href="update-aeps-transaction">Update AEPS Txn.</a></li>
                                         </ul>
                                     </li>
                                     <li dmx-show="scAdminBalance.data.query.user_type == 0"><a href="account-summary-report">Account Summary</a></li>

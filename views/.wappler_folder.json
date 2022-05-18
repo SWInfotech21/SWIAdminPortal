@@ -186,5 +186,9 @@
   "AEPS-live-transaction.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "update-aeps-transaction.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }

@@ -5452,6 +5452,671 @@ dmx.config({
         }
       ],
       "outputType": "array"
+    },
+    "dvAEPSTrans": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "number",
+          "name": "user_id"
+        },
+        {
+          "type": "text",
+          "name": "user_rt_id"
+        },
+        {
+          "type": "text",
+          "name": "merchant_id"
+        },
+        {
+          "type": "text",
+          "name": "amount"
+        },
+        {
+          "type": "text",
+          "name": "op_bal"
+        },
+        {
+          "type": "text",
+          "name": "comm_per"
+        },
+        {
+          "type": "text",
+          "name": "comm_val"
+        },
+        {
+          "type": "text",
+          "name": "comm_amt"
+        },
+        {
+          "type": "text",
+          "name": "charge_per"
+        },
+        {
+          "type": "text",
+          "name": "charge_val"
+        },
+        {
+          "type": "text",
+          "name": "charge_amt"
+        },
+        {
+          "type": "text",
+          "name": "net_amt"
+        },
+        {
+          "type": "text",
+          "name": "closing_bal"
+        },
+        {
+          "type": "text",
+          "name": "tr_mode"
+        },
+        {
+          "type": "text",
+          "name": "tr_type"
+        },
+        {
+          "type": "text",
+          "name": "status"
+        },
+        {
+          "type": "text",
+          "name": "tr_id"
+        },
+        {
+          "type": "text",
+          "name": "reason"
+        },
+        {
+          "type": "text",
+          "name": "api_name"
+        },
+        {
+          "type": "text",
+          "name": "is_processed"
+        },
+        {
+          "type": "text",
+          "name": "operator_ref"
+        },
+        {
+          "type": "text",
+          "name": "api_ref"
+        },
+        {
+          "type": "text",
+          "name": "api_response_time"
+        },
+        {
+          "type": "text",
+          "name": "process_mode"
+        },
+        {
+          "type": "text",
+          "name": "live"
+        },
+        {
+          "type": "datetime",
+          "name": "tr_date"
+        },
+        {
+          "type": "text",
+          "name": "dt_comm_per"
+        },
+        {
+          "type": "text",
+          "name": "dt_comm_val"
+        },
+        {
+          "type": "text",
+          "name": "dt_comm_amt"
+        },
+        {
+          "type": "text",
+          "name": "dt_charge_per"
+        },
+        {
+          "type": "text",
+          "name": "dt_charge_val"
+        },
+        {
+          "type": "text",
+          "name": "dt_charge_amount"
+        },
+        {
+          "type": "text",
+          "name": "mdt_comm_per"
+        },
+        {
+          "type": "text",
+          "name": "mdt_comm_val"
+        },
+        {
+          "type": "text",
+          "name": "mdt_comm_amt"
+        },
+        {
+          "type": "text",
+          "name": "mdt_charge_per"
+        },
+        {
+          "type": "text",
+          "name": "mdt_charge_val"
+        },
+        {
+          "type": "text",
+          "name": "mdt_charge_amt"
+        },
+        {
+          "type": "text",
+          "name": "bank_name"
+        },
+        {
+          "type": "text",
+          "name": "service_api"
+        },
+        {
+          "type": "text",
+          "name": "api_tnx_date"
+        },
+        {
+          "type": "text",
+          "name": "bank_acno"
+        },
+        {
+          "type": "text",
+          "name": "benef_name"
+        },
+        {
+          "type": "text",
+          "name": "benef_id"
+        },
+        {
+          "type": "text",
+          "name": "aeps_number"
+        },
+        {
+          "type": "text",
+          "name": "operator_name"
+        },
+        {
+          "type": "text",
+          "name": "service_name"
+        },
+        {
+          "type": "text",
+          "name": "user_fname"
+        },
+        {
+          "type": "text",
+          "name": "user_mobile"
+        },
+        {
+          "type": "text",
+          "name": "parent_id"
+        },
+        {
+          "type": "text",
+          "name": "parent_name"
+        },
+        {
+          "type": "text",
+          "name": "parent_mobile"
+        }
+      ],
+      "outputType": "array"
+    }
+  },
+  "updateaepstransaction": {
+    "dvFetchTrns": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "number",
+          "name": "user_id"
+        },
+        {
+          "type": "text",
+          "name": "user_rt_id"
+        },
+        {
+          "type": "text",
+          "name": "merchant_id"
+        },
+        {
+          "type": "text",
+          "name": "amount"
+        },
+        {
+          "type": "text",
+          "name": "op_bal"
+        },
+        {
+          "type": "text",
+          "name": "comm_per"
+        },
+        {
+          "type": "text",
+          "name": "comm_val"
+        },
+        {
+          "type": "text",
+          "name": "comm_amt"
+        },
+        {
+          "type": "text",
+          "name": "charge_per"
+        },
+        {
+          "type": "text",
+          "name": "charge_val"
+        },
+        {
+          "type": "text",
+          "name": "charge_amt"
+        },
+        {
+          "type": "text",
+          "name": "net_amt"
+        },
+        {
+          "type": "text",
+          "name": "closing_bal"
+        },
+        {
+          "type": "text",
+          "name": "tr_mode"
+        },
+        {
+          "type": "text",
+          "name": "tr_type"
+        },
+        {
+          "type": "text",
+          "name": "status"
+        },
+        {
+          "type": "text",
+          "name": "tr_id"
+        },
+        {
+          "type": "text",
+          "name": "reason"
+        },
+        {
+          "type": "text",
+          "name": "api_name"
+        },
+        {
+          "type": "text",
+          "name": "is_processed"
+        },
+        {
+          "type": "text",
+          "name": "operator_ref"
+        },
+        {
+          "type": "text",
+          "name": "api_ref"
+        },
+        {
+          "type": "text",
+          "name": "api_response_time"
+        },
+        {
+          "type": "text",
+          "name": "process_mode"
+        },
+        {
+          "type": "text",
+          "name": "live"
+        },
+        {
+          "type": "datetime",
+          "name": "tr_date"
+        },
+        {
+          "type": "text",
+          "name": "dt_comm_per"
+        },
+        {
+          "type": "text",
+          "name": "dt_comm_val"
+        },
+        {
+          "type": "text",
+          "name": "dt_comm_amt"
+        },
+        {
+          "type": "text",
+          "name": "dt_charge_per"
+        },
+        {
+          "type": "text",
+          "name": "dt_charge_val"
+        },
+        {
+          "type": "text",
+          "name": "dt_charge_amount"
+        },
+        {
+          "type": "text",
+          "name": "mdt_comm_per"
+        },
+        {
+          "type": "text",
+          "name": "mdt_comm_val"
+        },
+        {
+          "type": "text",
+          "name": "mdt_comm_amt"
+        },
+        {
+          "type": "text",
+          "name": "mdt_charge_per"
+        },
+        {
+          "type": "text",
+          "name": "mdt_charge_val"
+        },
+        {
+          "type": "text",
+          "name": "mdt_charge_amt"
+        },
+        {
+          "type": "text",
+          "name": "bank_name"
+        },
+        {
+          "type": "text",
+          "name": "service_api"
+        },
+        {
+          "type": "text",
+          "name": "api_tnx_date"
+        },
+        {
+          "type": "text",
+          "name": "bank_acno"
+        },
+        {
+          "type": "text",
+          "name": "benef_name"
+        },
+        {
+          "type": "text",
+          "name": "benef_id"
+        },
+        {
+          "type": "text",
+          "name": "aeps_number"
+        },
+        {
+          "type": "text",
+          "name": "operator_name"
+        },
+        {
+          "type": "text",
+          "name": "service_name"
+        },
+        {
+          "type": "text",
+          "name": "user_fname"
+        },
+        {
+          "type": "text",
+          "name": "user_mobile"
+        },
+        {
+          "type": "text",
+          "name": "parent_id"
+        },
+        {
+          "type": "text",
+          "name": "parent_name"
+        },
+        {
+          "type": "text",
+          "name": "parent_mobile"
+        }
+      ],
+      "outputType": "array"
+    },
+    "tableRepeat1": {
+      "meta": [
+        {
+          "name": "$index",
+          "type": "number"
+        },
+        {
+          "name": "$key",
+          "type": "text"
+        },
+        {
+          "name": "$value",
+          "type": "object"
+        },
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "number",
+          "name": "user_id"
+        },
+        {
+          "type": "text",
+          "name": "user_rt_id"
+        },
+        {
+          "type": "text",
+          "name": "merchant_id"
+        },
+        {
+          "type": "text",
+          "name": "amount"
+        },
+        {
+          "type": "text",
+          "name": "op_bal"
+        },
+        {
+          "type": "text",
+          "name": "comm_per"
+        },
+        {
+          "type": "text",
+          "name": "comm_val"
+        },
+        {
+          "type": "text",
+          "name": "comm_amt"
+        },
+        {
+          "type": "text",
+          "name": "charge_per"
+        },
+        {
+          "type": "text",
+          "name": "charge_val"
+        },
+        {
+          "type": "text",
+          "name": "charge_amt"
+        },
+        {
+          "type": "text",
+          "name": "net_amt"
+        },
+        {
+          "type": "text",
+          "name": "closing_bal"
+        },
+        {
+          "type": "text",
+          "name": "tr_mode"
+        },
+        {
+          "type": "text",
+          "name": "tr_type"
+        },
+        {
+          "type": "text",
+          "name": "status"
+        },
+        {
+          "type": "text",
+          "name": "tr_id"
+        },
+        {
+          "type": "text",
+          "name": "reason"
+        },
+        {
+          "type": "text",
+          "name": "api_name"
+        },
+        {
+          "type": "text",
+          "name": "is_processed"
+        },
+        {
+          "type": "text",
+          "name": "operator_ref"
+        },
+        {
+          "type": "text",
+          "name": "api_ref"
+        },
+        {
+          "type": "text",
+          "name": "api_response_time"
+        },
+        {
+          "type": "text",
+          "name": "process_mode"
+        },
+        {
+          "type": "text",
+          "name": "live"
+        },
+        {
+          "type": "datetime",
+          "name": "tr_date"
+        },
+        {
+          "type": "text",
+          "name": "dt_comm_per"
+        },
+        {
+          "type": "text",
+          "name": "dt_comm_val"
+        },
+        {
+          "type": "text",
+          "name": "dt_comm_amt"
+        },
+        {
+          "type": "text",
+          "name": "dt_charge_per"
+        },
+        {
+          "type": "text",
+          "name": "dt_charge_val"
+        },
+        {
+          "type": "text",
+          "name": "dt_charge_amount"
+        },
+        {
+          "type": "text",
+          "name": "mdt_comm_per"
+        },
+        {
+          "type": "text",
+          "name": "mdt_comm_val"
+        },
+        {
+          "type": "text",
+          "name": "mdt_comm_amt"
+        },
+        {
+          "type": "text",
+          "name": "mdt_charge_per"
+        },
+        {
+          "type": "text",
+          "name": "mdt_charge_val"
+        },
+        {
+          "type": "text",
+          "name": "mdt_charge_amt"
+        },
+        {
+          "type": "text",
+          "name": "bank_name"
+        },
+        {
+          "type": "text",
+          "name": "service_api"
+        },
+        {
+          "type": "text",
+          "name": "api_tnx_date"
+        },
+        {
+          "type": "text",
+          "name": "bank_acno"
+        },
+        {
+          "type": "text",
+          "name": "benef_name"
+        },
+        {
+          "type": "text",
+          "name": "benef_id"
+        },
+        {
+          "type": "text",
+          "name": "aeps_number"
+        },
+        {
+          "type": "text",
+          "name": "operator_name"
+        },
+        {
+          "type": "text",
+          "name": "service_name"
+        },
+        {
+          "type": "text",
+          "name": "user_fname"
+        },
+        {
+          "type": "text",
+          "name": "user_mobile"
+        },
+        {
+          "type": "text",
+          "name": "parent_id"
+        },
+        {
+          "type": "text",
+          "name": "parent_name"
+        },
+        {
+          "type": "text",
+          "name": "parent_mobile"
+        }
+      ],
+      "outputType": "array"
     }
   }
 });
