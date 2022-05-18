@@ -19,7 +19,7 @@
     "options": {
       "connection": "postgres_gcpServer",
       "sql": {
-        "query": "select trt.id, trt.user_number as recharge_mobile, trt.opening_balance, trt.amount, trt.comm_amt, trt.charge_amt, trt.net_amt, trt.closing_balance,\ntrt.tr_mode, trt.status, trt.tr_id, trt.api_logs, trt.api_ref, trt.operator_ref, trt.live, trt.tr_date, mo.operator_name, ms.service_name, mu.user_id, mu.user_fname, mu.user_mobile \nfrom tt_recharge_trans trt\nleft join m_operator mo on mo.id = trt.op_id and mo.service_id = trt.service_id \nleft join m_service ms on ms.id = trt.service_id \nleft join m_users mu on mu.id = trt.user_id \nwhere (ms.service_name = 'Mobile' or ms.service_name = 'Postpaid' or ms.service_name = 'DTH' or ms.service_name = 'Money' or is_bbps = 1) and TO_CHAR(trt.tr_date :: DATE, 'yyyy/mm/dd') = TO_CHAR(NOW() :: DATE, 'yyyy/mm/dd')\norder by trt.id desc limit 50;",
+        "query": "select trt.id, trt.user_number as recharge_mobile, trt.opening_balance, trt.amount, trt.comm_amt, trt.charge_amt, trt.net_amt, trt.closing_balance,\ntrt.tr_mode, trt.status, trt.tr_id, trt.api_logs, trt.api_ref, trt.operator_ref, trt.live, trt.tr_date::text, mo.operator_name, ms.service_name, mu.user_id, mu.user_fname, mu.user_mobile \nfrom tt_recharge_trans trt\nleft join m_operator mo on mo.id = trt.op_id and mo.service_id = trt.service_id \nleft join m_service ms on ms.id = trt.service_id \nleft join m_users mu on mu.id = trt.user_id \nwhere (ms.service_name = 'Mobile' or ms.service_name = 'Postpaid' or ms.service_name = 'DTH' or ms.service_name = 'Money' or is_bbps = 1) and TO_CHAR(trt.tr_date :: DATE, 'yyyy/mm/dd') = TO_CHAR(NOW() :: DATE, 'yyyy/mm/dd')\norder by trt.id desc limit 50;",
         "params": []
       }
     },
@@ -75,6 +75,10 @@
       },
       {
         "name": "api_ref",
+        "type": "text"
+      },
+      {
+        "name": "operator_ref",
         "type": "text"
       },
       {
