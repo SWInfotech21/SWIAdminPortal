@@ -119,7 +119,7 @@
     "options": {
       "connection": "postgres_gcpServer",
       "sql": {
-        "query": "select tat.id, tat.aeps_number, tat.op_bal, tat.amount, tat.comm_amt, tat.charge_amt, tat.net_amt, tat.closing_bal, tat.merchant_id, tat.user_rt_id, tat.bank_acno, tat.benef_name, tat.benef_id, \ntat.bank_name, tat.service_api, tat.tr_mode, tat.status, tat.tr_id, tat.api_logs, tat.api_ref, tat.operator_ref, tat.live, tat.tr_date, mo.operator_name, ms.service_name, mu.user_id, mu.user_fname, mu.user_mobile \nfrom tt_aeps_trans tat \nleft join m_operator mo on mo.id = tat.op_id and mo.service_id = tat.service_id \nleft join m_service ms on ms.id = tat.service_id \nleft join m_users mu on mu.id = tat.user_id \nwhere TO_CHAR(tat.tr_date :: DATE, 'yyyy/mm/dd') = TO_CHAR(NOW() :: DATE, 'yyyy/mm/dd')\norder by tat.id desc limit 50;",
+        "query": "select tat.id, tat.aeps_number, tat.op_bal, tat.amount, tat.comm_amt, tat.charge_amt, tat.net_amt, tat.closing_bal, tat.merchant_id, tat.user_rt_id, tat.bank_acno, tat.benef_name, tat.benef_id, \ntat.bank_name, tat.service_api, tat.tr_mode, tat.status, tat.tr_id, tat.api_logs, tat.api_ref, tat.operator_ref, tat.live, tat.tr_date::text, mo.operator_name, ms.service_name, mu.user_id, mu.user_fname, mu.user_mobile \nfrom tt_aeps_trans tat \nleft join m_operator mo on mo.id = tat.op_id and mo.service_id = tat.service_id \nleft join m_service ms on ms.id = tat.service_id \nleft join m_users mu on mu.id = tat.user_id \nwhere TO_CHAR(tat.tr_date :: DATE, 'yyyy/mm/dd') = TO_CHAR(NOW() :: DATE, 'yyyy/mm/dd')\norder by tat.id desc limit 50;",
         "params": []
       }
     },
