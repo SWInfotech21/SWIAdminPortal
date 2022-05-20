@@ -101,6 +101,12 @@
                         "column": "updated_on",
                         "type": "datetime",
                         "value": "{{NOW}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "operator_ref",
+                        "type": "text",
+                        "value": "{{'Transaction Successful'}}"
                       }
                     ],
                     "table": "tt_recharge_trans",
@@ -123,7 +129,7 @@
                       "valid": true
                     },
                     "returning": "id",
-                    "query": "UPDATE tt_recharge_trans\nSET status = :P1 /* {{$_POST.tr_status}} */, api_ref = :P2 /* {{$_POST.api_ref}} */, updated_on = :P3 /* {{NOW}} */\nWHERE id = :P4 /* {{$_POST.transid}} */",
+                    "query": "UPDATE tt_recharge_trans\nSET status = :P1 /* {{$_POST.tr_status}} */, api_ref = :P2 /* {{$_POST.api_ref}} */, updated_on = :P3 /* {{NOW}} */, operator_ref = :P4 /* {{'Transaction Successful'}} */\nWHERE id = :P5 /* {{$_POST.transid}} */",
                     "params": [
                       {
                         "name": ":P1",
@@ -141,9 +147,14 @@
                         "value": "{{NOW}}"
                       },
                       {
+                        "name": ":P4",
+                        "type": "expression",
+                        "value": "{{'Transaction Successful'}}"
+                      },
+                      {
                         "operator": "equal",
                         "type": "expression",
-                        "name": ":P4",
+                        "name": ":P5",
                         "value": "{{$_POST.transid}}"
                       }
                     ]
@@ -405,7 +416,7 @@
                     ]
                   }
                 },
-                "output": true,
+                "output": false,
                 "meta": [
                   {
                     "type": "text",
@@ -508,6 +519,12 @@
                         "column": "closing_balance",
                         "type": "text",
                         "value": "{{GetTrInfo.opening_balance}}"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "operator_ref",
+                        "type": "text",
+                        "value": "{{'Transaction Failed'}}"
                       }
                     ],
                     "table": "tt_recharge_trans",
@@ -530,7 +547,7 @@
                       "valid": true
                     },
                     "returning": "id",
-                    "query": "UPDATE tt_recharge_trans\nSET status = :P1 /* {{$_POST.tr_status}} */, api_ref = :P2 /* {{$_POST.api_ref}} */, updated_on = :P3 /* {{NOW}} */, closing_balance = :P4 /* {{GetTrInfo.opening_balance}} */\nWHERE id = :P5 /* {{$_POST.transid}} */",
+                    "query": "UPDATE tt_recharge_trans\nSET status = :P1 /* {{$_POST.tr_status}} */, api_ref = :P2 /* {{$_POST.api_ref}} */, updated_on = :P3 /* {{NOW}} */, closing_balance = :P4 /* {{GetTrInfo.opening_balance}} */, operator_ref = :P5 /* {{'Transaction Failed'}} */\nWHERE id = :P6 /* {{$_POST.transid}} */",
                     "params": [
                       {
                         "name": ":P1",
@@ -553,9 +570,14 @@
                         "value": "{{GetTrInfo.opening_balance}}"
                       },
                       {
+                        "name": ":P5",
+                        "type": "expression",
+                        "value": "{{'Transaction Failed'}}"
+                      },
+                      {
                         "operator": "equal",
                         "type": "expression",
-                        "name": ":P5",
+                        "name": ":P6",
                         "value": "{{$_POST.transid}}"
                       }
                     ]
@@ -1047,7 +1069,7 @@
                             ]
                           }
                         },
-                        "output": true,
+                        "output": false,
                         "meta": [
                           {
                             "type": "number",
@@ -1502,7 +1524,7 @@
                             ]
                           }
                         },
-                        "output": true,
+                        "output": false,
                         "meta": [
                           {
                             "type": "number",
