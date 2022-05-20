@@ -257,6 +257,11 @@
       "layout": "main"
     },
     {
+      "path": "/children/:id",
+      "page": "children",
+      "layout": "main"
+    },
+    {
       "path": "*",
       "page": "404-not-found"
     }

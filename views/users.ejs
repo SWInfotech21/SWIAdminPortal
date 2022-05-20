@@ -96,12 +96,13 @@
                     <td dmx-text="state+' | '+district"></td>
                     <td dmx-text="aeps_merchant_id"></td>
                     <td class="fw-bold" dmx-class:text-warning="kyc_status==0" dmx-class:text-primary="kyc_status==1" dmx-class:text-danger="kyc_status==2||!kyc_status">{{kyc_status==0?'Pending': kyc_status==1?'Active': kyc_status==2?'Rejected':'Inactive'}}<button class="btn btn-warning btn-sm py-0 mt-2" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalKYCUser" dmx-hide="kyc_status==1||!kyc_status"><i class="fas fa-eye"></i></button></td>
-                    <td dmx-show="scAdminBalance.data.query.user_type == 0">
+                    <td dmx-show="scAdminBalance.data.query.user_type == 0" style="min-width: 130px; overflow: hidden;">
                         <a class="sw-col-ar" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalAddUsers"><i class="fas fa-edit" title="Edit Users" dmx-on:click="flowGetScheme.run()"></i></a>&emsp;<a class="sw-col-br" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalPasswordUser"><i class="fas fa-user-lock" title="Password Update"></i></a>
                         &emsp;<a class="sw-col-cr" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#"><i class="fas fa-sign-in-alt" title="Login to user panel"></i></a>&emsp;
-                        <a class="sw-col-cr" href="#" dmx-on:click="browserMain.goto('scheme-priority/'+id,true);"><i class="fas fa-code-branch" title="Scheme Priority"></i></a>
+                        <a class="sw-col-cr" href="#" dmx-on:click="browserMain.goto('scheme-priority/'+id,true);" dmx-show="user_type == 1 || user_type == 2"><i class="fas fa-code-branch" title="Scheme Priority"></i></a>&emsp;
+                        <a class="sw-col-br" href="#" dmx-on:click="browserMain.goto('children/'+id,true);" dmx-show="user_type == 1 || user_type == 2"><i class="fas fa-network-wired" title="Show Children"></i></a>
                     </td>
-                    <td dmx-text="created_on.formatDate('dd-MM-yyyy hh:mm:ss A')"></td>
+                    <td style="min-width: 70px; overflow: hidden;" dmx-text="created_on.formatDate('dd-MM-yyyy hh:mm:ss A')"></td>
                     <td dmx-text="blank3.titlecase()"></td>
                 </tr>
             </tbody>

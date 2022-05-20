@@ -190,5 +190,9 @@
   "update-aeps-transaction.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "children.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }
