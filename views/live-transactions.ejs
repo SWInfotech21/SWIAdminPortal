@@ -36,7 +36,7 @@
                         </tr>
                     </thead>
                     <tbody is="dmx-repeat" dmx-generator="bs5table" id="tableRepeat1" dmx-bind:repeat="scLiveRech.data.LiveReport">
-                        <tr>
+                        <tr dmx-class:sw-col-fail="status == 'FAILED'" dmx-class:sw-col-pending="status == 'PENDING'">
                             <td>{{$index+1}}</td>
                             <td dmx-text="id"></td>
                             <td dmx-text="user_id+' | '+user_fname+' | '+user_mobile"></td>
@@ -44,7 +44,7 @@
                             <td dmx-text="operator_name"></td>
                             <td dmx-text="amount.toNumber().toFixed(2)"></td>
                             <td dmx-text="api_logs"></td>
-                            <td class="fw-bold" dmx-text="status" dmx-class:text-success="status == 'SUCCESS'" dmx-class:text-warning="status == 'Pending'" dmx-class:text-danger="status == 'FAILED'" dmx-class:text-primary="status == 'REFUND'"></td>
+                            <td class="fw-bold" dmx-text="status" dmx-class:text-success="status == 'SUCCESS'" dmx-class:text-warning="status == 'PENDING'" dmx-class:text-danger="status == 'FAILED'" dmx-class:text-primary="status == 'REFUND'"></td>
                             <td dmx-text="api_ref"></td>
                             <td dmx-text="tr_mode"></td>
                             <td dmx-text="tr_date.formatDate('dd-MM-yyyy hh:mm:ss A')"></td>
