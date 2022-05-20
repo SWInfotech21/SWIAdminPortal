@@ -36,7 +36,7 @@
                         </tr>
                     </thead>
                     <tbody is="dmx-repeat" dmx-generator="bs5table" id="tableRepeat1" dmx-bind:repeat="scLiveRech.data.LiveReport">
-                        <tr dmx-class:sw-col-fail="status == 'FAILED'" dmx-class:sw-col-pending="status == 'PENDING'">
+                        <tr dmx-class:sw-col-fail="status == 'FAILED'" dmx-class:sw-col-pending="status=='Pending'||status=='PENDING'">
                             <td>{{$index+1}}</td>
                             <td dmx-text="id"></td>
                             <td dmx-text="user_id+' | '+user_fname+' | '+user_mobile"></td>
