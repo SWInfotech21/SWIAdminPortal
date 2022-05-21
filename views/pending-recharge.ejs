@@ -2,7 +2,7 @@
 <meta name="ac:route" content="/pending-recharge">
 <dmx-serverconnect id="scPendingRech" url="api/Reports/PendingTransactions"></dmx-serverconnect>
 <dmx-data-view id="dvPendingTrans" dmx-bind:data="scPendingRech.data.GetPending"></dmx-data-view>
-<dmx-data-detail id="ddPendingTrans" dmx-bind:data="content.dvPendingTrans.data" key="id" filter="(user_number.contains(formSearchUser.Search.value) || user_mobile.contains(formSearchUser.Search.value) || user_fname.lowercase().contains(formSearchUser.Search.value) || id.contains(formSearchUser.Search.value) || amount.contains(formSearchUser.Search.value))"></dmx-data-detail>
+<dmx-data-detail id="ddPendingTrans" dmx-bind:data="dvPendingTrans.data" key="id" filter="(user_number.contains(formSearchUser.Search.value) || user_mobile.contains(formSearchUser.Search.value) || user_fname.lowercase().contains(formSearchUser.Search.value) || id.contains(formSearchUser.Search.value) || amount.contains(formSearchUser.Search.value))"></dmx-data-detail>
 
 <div class="row align-items-center justify-content-between px-4 mb-3 sd-secondary-header mx-0">
     <div class="col-12 col-md-auto me-auto ps-4">

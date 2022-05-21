@@ -3636,140 +3636,128 @@ dmx.config({
     "dvPendingTrans": {
       "meta": [
         {
-          "type": "number",
-          "name": "id"
+          "name": "id",
+          "type": "number"
         },
         {
-          "type": "number",
-          "name": "api_id"
+          "name": "api_id",
+          "type": "number"
         },
         {
-          "type": "text",
-          "name": "user_number"
+          "name": "user_number",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "details"
+          "name": "details",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "opening_balance"
+          "name": "opening_balance",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "amount"
+          "name": "amount",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "comm_per"
+          "name": "comm_per",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "comm_val"
+          "name": "comm_val",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "comm_amt"
+          "name": "comm_amt",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "other_charge"
+          "name": "other_charge",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "charge_per"
+          "name": "charge_per",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "charge_amt"
+          "name": "charge_amt",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "net_amt"
+          "name": "net_amt",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "closing_balance"
+          "name": "closing_balance",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "tr_mode"
+          "name": "tr_mode",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "tr_type"
+          "name": "tr_type",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "tr_status"
+          "name": "status",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "tr_id"
+          "name": "tr_id",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "api_logs"
+          "name": "reason",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "is_processed"
+          "name": "api_logs",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "operator_ref"
+          "name": "is_processed",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "api_ref"
+          "name": "operator_ref",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "ip_address"
+          "name": "api_ref",
+          "type": "text"
         },
         {
-          "type": "number",
-          "name": "api_response_id"
+          "name": "api_response_id",
+          "type": "number"
         },
         {
-          "type": "text",
-          "name": "process_mode"
+          "name": "process_mode",
+          "type": "text"
         },
         {
-          "type": "datetime",
-          "name": "tr_date"
+          "name": "live",
+          "type": "text"
         },
         {
-          "type": "number",
-          "name": "transaction_by"
+          "name": "tr_date",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "extra2"
+          "name": "operator_name",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "user_id"
+          "name": "user_id",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "user_fname"
+          "name": "user_fname",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "user_mobile"
-        },
-        {
-          "type": "number",
-          "name": "user_type"
-        },
-        {
-          "type": "text",
-          "name": "operator_name"
-        },
-        {
-          "type": "text",
-          "name": "service_name"
+          "name": "user_mobile",
+          "type": "text"
         }
       ],
       "outputType": "array"
@@ -3777,68 +3765,128 @@ dmx.config({
     "ddPendingTrans": {
       "meta": [
         {
-          "type": "number",
-          "name": "id"
+          "name": "id",
+          "type": "number"
         },
         {
-          "type": "text",
-          "name": "user_id"
+          "name": "api_id",
+          "type": "number"
         },
         {
-          "type": "text",
-          "name": "user_number"
+          "name": "user_number",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "opening_balance"
+          "name": "details",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "amount"
+          "name": "opening_balance",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "comm_amt"
+          "name": "amount",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "charge_amt"
+          "name": "comm_per",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "net_amt"
+          "name": "comm_val",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "closing_balance"
+          "name": "comm_amt",
+          "type": "text"
         },
         {
-          "type": "datetime",
-          "name": "tr_date"
+          "name": "other_charge",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "status"
+          "name": "charge_per",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "tr_type"
+          "name": "charge_amt",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "api_logs"
+          "name": "net_amt",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "operator_name"
+          "name": "closing_balance",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "user_fname"
+          "name": "tr_mode",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "user_mobile"
+          "name": "tr_type",
+          "type": "text"
+        },
+        {
+          "name": "status",
+          "type": "text"
+        },
+        {
+          "name": "tr_id",
+          "type": "text"
+        },
+        {
+          "name": "reason",
+          "type": "text"
+        },
+        {
+          "name": "api_logs",
+          "type": "text"
+        },
+        {
+          "name": "is_processed",
+          "type": "text"
+        },
+        {
+          "name": "operator_ref",
+          "type": "text"
+        },
+        {
+          "name": "api_ref",
+          "type": "text"
+        },
+        {
+          "name": "api_response_id",
+          "type": "number"
+        },
+        {
+          "name": "process_mode",
+          "type": "text"
+        },
+        {
+          "name": "live",
+          "type": "text"
+        },
+        {
+          "name": "tr_date",
+          "type": "text"
+        },
+        {
+          "name": "operator_name",
+          "type": "text"
+        },
+        {
+          "name": "user_id",
+          "type": "text"
+        },
+        {
+          "name": "user_fname",
+          "type": "text"
+        },
+        {
+          "name": "user_mobile",
+          "type": "text"
         }
       ],
       "outputType": "array"
