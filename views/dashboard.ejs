@@ -26,7 +26,7 @@
                     <h4 class="card-title m-1">Overall Performance (No. of Trans.)</h4>
                 </div>
                 <div class="card-body">
-                    <dmx-chart id="chartRechPer" legend="right" responsive="true" dmx-bind:data="scRechargePerformance.data.Overall" labels="countrecharges" dataset-1:label="Success" dataset-1:value="countsuccess" dataset-2:label="Failure" dataset-2:value="countfailure" dataset-3:label="Reversal" dataset-3:value="countreversal" points="true" point-size="" cutout="" height="100" width="100" colors="colors8" thickness="1" dataset-1:tooltip="" type="bar"></dmx-chart>
+                    <dmx-chart id="chartRechPer" legend="right" responsive="true" dmx-bind:data="scRechargePerformance.data.Overall" labels="countrecharges" dataset-2:label="Success" dataset-2:value="countsuccess" dataset-1:label="Failure" dataset-1:value="countfailure" dataset-3:label="Reversal" dataset-3:value="countreversal" point-size="" cutout="" height="100" width="100" colors="colors9" thickness="1" dataset-1:tooltip="" type="bar" points="true"></dmx-chart>
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
                     <h4 class="card-title m-1">Recharge Performance (No. of Trans.)</h4>
                 </div>
                 <div class="card-body">
-                    <dmx-chart id="" legend="right" responsive="true" dmx-bind:data="scRechargePerformance.data.RechargeOnly" labels="countrecharges" dataset-1:label="Success" dataset-1:value="countsuccess" dataset-2:label="Failure" dataset-2:value="countfailure" dataset-3:label="Reversal" dataset-3:value="countreversal" type="horizontalBar" points="true" point-size="" cutout="" height="100" width="100" colors="colors8" thickness="1" dataset-1:tooltip=""></dmx-chart>
+                    <dmx-chart id="" legend="right" responsive="true" dmx-bind:data="scRechargePerformance.data.RechargeOnly" labels="countrecharges" dataset-1:label="Success" dataset-1:value="countsuccess" dataset-2:label="Failure" dataset-2:value="countfailure" dataset-3:label="Reversal" dataset-3:value="countreversal" type="bar" points="true" point-size="" cutout="" height="100" width="100" colors="colors1" thickness="1" dataset-1:tooltip=""></dmx-chart>
                 </div>
             </div>
         </div>
@@ -56,7 +56,7 @@
                     <h4 class="card-title m-1">Recharge Transaction (in Rs.)</h4>
                 </div>
                 <div class="card-body">
-                    <dmx-chart id="RechargeTrans" legend="right" responsive="true" dmx-bind:data="scRechargePerformance.data.DateWiseAmt" dataset-1:label="Success" dataset-1:value="totalsuccessamount" dataset-2:label="Failure" dataset-2:value="totalfailedamount" type="horizontalBar" points="true" point-size="" cutout="" height="100" width="100" colors="colors1" thickness="1" labels="to_char"></dmx-chart>
+                    <dmx-chart id="RechargeTrans" legend="right" responsive="true" dmx-bind:data="scRechargePerformance.data.DateWiseAmt" dataset-1:label="Success" dataset-1:value="totalsuccessamount" dataset-2:label="Failure" dataset-2:value="totalfailedamount" type="bar" points="true" point-size="" cutout="" height="100" width="100" colors="colors1" thickness="1" labels="to_char"></dmx-chart>
                 </div>
             </div>
         </div>
