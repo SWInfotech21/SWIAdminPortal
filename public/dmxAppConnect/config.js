@@ -4038,76 +4038,76 @@ dmx.config({
     "dvPaymentReq": {
       "meta": [
         {
-          "type": "number",
-          "name": "id"
+          "name": "id",
+          "type": "number"
         },
         {
-          "type": "text",
-          "name": "amount"
+          "name": "amount",
+          "type": "text"
         },
         {
-          "type": "date",
-          "name": "tr_date"
+          "name": "tr_date",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "tr_time"
+          "name": "tr_time",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "tr_no"
+          "name": "tr_no",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "bank_name"
+          "name": "bank_name",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "branch_name"
+          "name": "branch_name",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "cheque_no"
+          "name": "cheque_no",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "utr_no"
+          "name": "utr_no",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "payment_mode"
+          "name": "payment_mode",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "cash_type"
+          "name": "cash_type",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "remarks"
+          "name": "remarks",
+          "type": "text"
         },
         {
-          "type": "number",
-          "name": "status"
+          "name": "status",
+          "type": "number"
         },
         {
-          "type": "datetime",
-          "name": "request_time"
+          "name": "request_time",
+          "type": "text"
         },
         {
-          "type": "datetime",
-          "name": "response_time"
+          "name": "response_time",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "req_user_name"
+          "name": "req_user_name",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "req_user_mobile"
+          "name": "req_user_mobile",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "req_user_balance"
+          "name": "req_user_balance",
+          "type": "text"
         }
       ],
       "outputType": "array"

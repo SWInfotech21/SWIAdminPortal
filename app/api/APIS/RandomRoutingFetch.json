@@ -43,271 +43,28 @@
           "then": {
             "steps": {
               "name": "GetRandomAPI",
-              "module": "dbconnector",
-              "action": "select",
+              "module": "dbupdater",
+              "action": "custom",
               "options": {
+                "connection": "postgres_gcpServer",
                 "sql": {
-                  "type": "SELECT",
-                  "columns": [
-                    {
-                      "table": "t_random_root",
-                      "column": "id"
-                    },
-                    {
-                      "table": "t_random_root",
-                      "column": "created_on"
-                    },
-                    {
-                      "table": "m_api",
-                      "column": "api_name"
-                    },
-                    {
-                      "table": "m_api",
-                      "column": "api_code"
-                    },
-                    {
-                      "table": "m_op",
-                      "column": "operator_name"
-                    },
-                    {
-                      "table": "m_service",
-                      "column": "service_name"
-                    },
-                    {
-                      "table": "m_user",
-                      "column": "user_fname"
-                    }
-                  ],
-                  "table": {
-                    "name": "t_random_root"
-                  },
-                  "joins": [
-                    {
-                      "table": "m_api",
-                      "column": "*",
-                      "alias": "m_api",
-                      "type": "LEFT",
-                      "clauses": {
-                        "condition": "AND",
-                        "rules": [
-                          {
-                            "table": "m_api",
-                            "column": "id",
-                            "operator": "equal",
-                            "value": {
-                              "table": "t_random_root",
-                              "column": "api_id"
-                            },
-                            "operation": "="
-                          }
-                        ]
-                      },
-                      "primary": "id"
-                    },
-                    {
-                      "table": "m_operator",
-                      "column": "*",
-                      "alias": "m_op",
-                      "type": "LEFT",
-                      "clauses": {
-                        "condition": "AND",
-                        "rules": [
-                          {
-                            "table": "m_op",
-                            "column": "id",
-                            "operator": "equal",
-                            "value": {
-                              "table": "t_random_root",
-                              "column": "op_id"
-                            },
-                            "operation": "="
-                          }
-                        ]
-                      },
-                      "primary": "id"
-                    },
-                    {
-                      "table": "m_service",
-                      "column": "*",
-                      "alias": "m_service",
-                      "type": "LEFT",
-                      "clauses": {
-                        "condition": "AND",
-                        "rules": [
-                          {
-                            "table": "m_service",
-                            "column": "id",
-                            "operator": "equal",
-                            "value": {
-                              "table": "t_random_root",
-                              "column": "service_id"
-                            },
-                            "operation": "="
-                          }
-                        ]
-                      },
-                      "primary": "id"
-                    },
-                    {
-                      "table": "m_users",
-                      "column": "*",
-                      "alias": "m_user",
-                      "type": "LEFT",
-                      "clauses": {
-                        "condition": "AND",
-                        "rules": [
-                          {
-                            "table": "m_user",
-                            "column": "id",
-                            "operator": "equal",
-                            "value": {
-                              "table": "t_random_root",
-                              "column": "created_by"
-                            },
-                            "operation": "="
-                          }
-                        ]
-                      },
-                      "primary": "id"
-                    }
-                  ],
-                  "primary": "id",
-                  "wheres": {
-                    "condition": "AND",
-                    "rules": [
-                      {
-                        "id": "t_random_root.service_id",
-                        "field": "t_random_root.service_id",
-                        "type": "double",
-                        "operator": "equal",
-                        "value": "{{$_GET.service_id}}",
-                        "data": {
-                          "table": "t_random_root",
-                          "column": "service_id",
-                          "type": "number",
-                          "columnObj": {
-                            "type": "integer",
-                            "primary": false,
-                            "unique": false,
-                            "nullable": false,
-                            "name": "service_id"
-                          }
-                        },
-                        "operation": "="
-                      },
-                      {
-                        "id": "t_random_root.op_id",
-                        "field": "t_random_root.op_id",
-                        "type": "double",
-                        "operator": "equal",
-                        "value": "{{$_GET.op_id}}",
-                        "data": {
-                          "table": "t_random_root",
-                          "column": "op_id",
-                          "type": "number",
-                          "columnObj": {
-                            "type": "integer",
-                            "primary": false,
-                            "unique": false,
-                            "nullable": true,
-                            "name": "op_id"
-                          }
-                        },
-                        "operation": "="
-                      },
-                      {
-                        "id": "m_api.status",
-                        "field": "m_api.status",
-                        "type": "double",
-                        "operator": "equal",
-                        "value": 1,
-                        "data": {
-                          "table": "m_api",
-                          "column": "status",
-                          "type": "number",
-                          "columnObj": {
-                            "type": "integer",
-                            "primary": false,
-                            "nullable": false,
-                            "unique": false,
-                            "name": "status"
-                          }
-                        },
-                        "operation": "="
-                      },
-                      {
-                        "id": "m_op.status",
-                        "field": "m_op.status",
-                        "type": "double",
-                        "operator": "equal",
-                        "value": 1,
-                        "data": {
-                          "table": "m_op",
-                          "column": "status",
-                          "type": "number",
-                          "columnObj": {
-                            "type": "integer",
-                            "primary": false,
-                            "nullable": false,
-                            "unique": false,
-                            "name": "status"
-                          }
-                        },
-                        "operation": "="
-                      }
-                    ],
-                    "conditional": null,
-                    "valid": true
-                  },
-                  "query": "SELECT t_random_root.id, t_random_root.created_on, m_api.api_name, m_api.api_code, m_op.operator_name, m_service.service_name, m_user.user_fname\nFROM t_random_root\nLEFT JOIN m_api AS m_api ON (m_api.id = t_random_root.api_id) LEFT JOIN m_operator AS m_op ON (m_op.id = t_random_root.op_id) LEFT JOIN m_service AS m_service ON (m_service.id = t_random_root.service_id) LEFT JOIN m_users AS m_user ON (m_user.id = t_random_root.created_by)\nWHERE t_random_root.service_id = :P1 /* {{$_GET.service_id}} */ AND t_random_root.op_id = :P2 /* {{$_GET.op_id}} */ AND m_api.status = 1 AND m_op.status = 1",
+                  "query": "SELECT t_random_root.id, t_random_root.created_on::text, m_api.api_name, m_api.api_code, m_op.operator_name, m_service.service_name, m_user.user_fname FROM t_random_root\nLEFT JOIN m_api AS m_api ON (m_api.id = t_random_root.api_id) \nLEFT JOIN m_operator AS m_op ON (m_op.id = t_random_root.op_id) \nLEFT JOIN m_service AS m_service ON (m_service.id = t_random_root.service_id) \nLEFT JOIN m_users AS m_user ON (m_user.id = t_random_root.created_by)\nWHERE t_random_root.service_id = @service AND t_random_root.op_id = @op AND m_api.status = 1 AND m_op.status = 1",
                   "params": [
                     {
-                      "operator": "equal",
-                      "type": "expression",
-                      "name": ":P1",
-                      "value": "{{$_GET.service_id}}"
+                      "name": "@service",
+                      "value": "{{$_GET.service_id}}",
+                      "test": ""
                     },
                     {
-                      "operator": "equal",
-                      "type": "expression",
-                      "name": ":P2",
-                      "value": "{{$_GET.op_id}}"
+                      "name": "@op",
+                      "value": "{{$_GET.op_id}}",
+                      "test": ""
                     }
                   ]
-                },
-                "connection": "postgres_gcpServer"
+                }
               },
               "output": true,
-              "meta": [
-                {
-                  "type": "number",
-                  "name": "id"
-                },
-                {
-                  "type": "datetime",
-                  "name": "created_on"
-                },
-                {
-                  "type": "text",
-                  "name": "api_name"
-                },
-                {
-                  "type": "text",
-                  "name": "api_code"
-                },
-                {
-                  "type": "text",
-                  "name": "operator_name"
-                },
-                {
-                  "type": "text",
-                  "name": "service_name"
-                },
-                {
-                  "type": "text",
-                  "name": "user_fname"
-                }
-              ],
+              "meta": [],
               "outputType": "array"
             }
           }
@@ -323,243 +80,50 @@
           "then": {
             "steps": {
               "name": "GetRandomAPI",
-              "module": "dbconnector",
-              "action": "select",
+              "module": "dbupdater",
+              "action": "custom",
               "options": {
+                "connection": "postgres_gcpServer",
                 "sql": {
-                  "type": "SELECT",
-                  "columns": [
-                    {
-                      "table": "t_random_root",
-                      "column": "id"
-                    },
-                    {
-                      "table": "t_random_root",
-                      "column": "created_on"
-                    },
-                    {
-                      "table": "m_api",
-                      "column": "api_name"
-                    },
-                    {
-                      "table": "m_api",
-                      "column": "api_code"
-                    },
-                    {
-                      "table": "m_op",
-                      "column": "operator_name"
-                    },
-                    {
-                      "table": "m_service",
-                      "column": "service_name"
-                    },
-                    {
-                      "table": "m_user",
-                      "column": "user_fname"
-                    }
-                  ],
-                  "table": {
-                    "name": "t_random_root"
-                  },
-                  "joins": [
-                    {
-                      "table": "m_api",
-                      "column": "*",
-                      "alias": "m_api",
-                      "type": "LEFT",
-                      "clauses": {
-                        "condition": "AND",
-                        "rules": [
-                          {
-                            "table": "m_api",
-                            "column": "id",
-                            "operator": "equal",
-                            "value": {
-                              "table": "t_random_root",
-                              "column": "api_id"
-                            },
-                            "operation": "="
-                          }
-                        ]
-                      },
-                      "primary": "id"
-                    },
-                    {
-                      "table": "m_operator",
-                      "column": "*",
-                      "alias": "m_op",
-                      "type": "LEFT",
-                      "clauses": {
-                        "condition": "AND",
-                        "rules": [
-                          {
-                            "table": "m_op",
-                            "column": "id",
-                            "operator": "equal",
-                            "value": {
-                              "table": "t_random_root",
-                              "column": "op_id"
-                            },
-                            "operation": "="
-                          }
-                        ]
-                      },
-                      "primary": "id"
-                    },
-                    {
-                      "table": "m_service",
-                      "column": "*",
-                      "alias": "m_service",
-                      "type": "LEFT",
-                      "clauses": {
-                        "condition": "AND",
-                        "rules": [
-                          {
-                            "table": "m_service",
-                            "column": "id",
-                            "operator": "equal",
-                            "value": {
-                              "table": "t_random_root",
-                              "column": "service_id"
-                            },
-                            "operation": "="
-                          }
-                        ]
-                      },
-                      "primary": "id"
-                    },
-                    {
-                      "table": "m_users",
-                      "column": "*",
-                      "alias": "m_user",
-                      "type": "LEFT",
-                      "clauses": {
-                        "condition": "AND",
-                        "rules": [
-                          {
-                            "table": "m_user",
-                            "column": "id",
-                            "operator": "equal",
-                            "value": {
-                              "table": "t_random_root",
-                              "column": "created_by"
-                            },
-                            "operation": "="
-                          }
-                        ]
-                      },
-                      "primary": "id"
-                    }
-                  ],
-                  "primary": "id",
-                  "wheres": {
-                    "condition": "AND",
-                    "rules": [
-                      {
-                        "id": "t_random_root.service_id",
-                        "field": "t_random_root.service_id",
-                        "type": "double",
-                        "operator": "equal",
-                        "value": "{{$_GET.service_id}}",
-                        "data": {
-                          "table": "t_random_root",
-                          "column": "service_id",
-                          "type": "number",
-                          "columnObj": {
-                            "type": "integer",
-                            "primary": false,
-                            "unique": false,
-                            "nullable": false,
-                            "name": "service_id"
-                          }
-                        },
-                        "operation": "="
-                      },
-                      {
-                        "id": "m_api.status",
-                        "field": "m_api.status",
-                        "type": "double",
-                        "operator": "equal",
-                        "value": 1,
-                        "data": {
-                          "table": "m_api",
-                          "column": "status",
-                          "type": "number",
-                          "columnObj": {
-                            "type": "integer",
-                            "primary": false,
-                            "nullable": false,
-                            "unique": false,
-                            "name": "status"
-                          }
-                        },
-                        "operation": "="
-                      },
-                      {
-                        "id": "m_op.status",
-                        "field": "m_op.status",
-                        "type": "double",
-                        "operator": "equal",
-                        "value": 1,
-                        "data": {
-                          "table": "m_op",
-                          "column": "status",
-                          "type": "number",
-                          "columnObj": {
-                            "type": "integer",
-                            "primary": false,
-                            "nullable": false,
-                            "unique": false,
-                            "name": "status"
-                          }
-                        },
-                        "operation": "="
-                      }
-                    ],
-                    "conditional": null,
-                    "valid": true
-                  },
-                  "query": "SELECT t_random_root.id, t_random_root.created_on, m_api.api_name, m_api.api_code, m_op.operator_name, m_service.service_name, m_user.user_fname\nFROM t_random_root\nLEFT JOIN m_api AS m_api ON (m_api.id = t_random_root.api_id) LEFT JOIN m_operator AS m_op ON (m_op.id = t_random_root.op_id) LEFT JOIN m_service AS m_service ON (m_service.id = t_random_root.service_id) LEFT JOIN m_users AS m_user ON (m_user.id = t_random_root.created_by)\nWHERE t_random_root.service_id = :P1 /* {{$_GET.service_id}} */ AND m_api.status = 1 AND m_op.status = 1",
+                  "query": "SELECT t_random_root.id, t_random_root.created_on::text, m_api.api_name, m_api.api_code, m_op.operator_name, m_service.service_name, m_user.user_fname\nFROM t_random_root\nLEFT JOIN m_api AS m_api ON (m_api.id = t_random_root.api_id) \nLEFT JOIN m_operator AS m_op ON (m_op.id = t_random_root.op_id) \nLEFT JOIN m_service AS m_service ON (m_service.id = t_random_root.service_id) \nLEFT JOIN m_users AS m_user ON (m_user.id = t_random_root.created_by)\nWHERE t_random_root.service_id = @service AND m_api.status = 1 AND m_op.status = 1",
                   "params": [
                     {
-                      "operator": "equal",
-                      "type": "expression",
-                      "name": ":P1",
-                      "value": "{{$_GET.service_id}}"
+                      "name": "@service",
+                      "value": "{{$_GET.service_id}}",
+                      "test": "1"
                     }
                   ]
-                },
-                "connection": "postgres_gcpServer"
+                }
               },
               "output": true,
               "meta": [
                 {
-                  "type": "number",
-                  "name": "id"
+                  "name": "id",
+                  "type": "number"
                 },
                 {
-                  "type": "datetime",
-                  "name": "created_on"
+                  "name": "created_on",
+                  "type": "text"
                 },
                 {
-                  "type": "text",
-                  "name": "api_name"
+                  "name": "api_name",
+                  "type": "text"
                 },
                 {
-                  "type": "text",
-                  "name": "api_code"
+                  "name": "api_code",
+                  "type": "text"
                 },
                 {
-                  "type": "text",
-                  "name": "operator_name"
+                  "name": "operator_name",
+                  "type": "text"
                 },
                 {
-                  "type": "text",
-                  "name": "service_name"
+                  "name": "service_name",
+                  "type": "text"
                 },
                 {
-                  "type": "text",
-                  "name": "user_fname"
+                  "name": "user_fname",
+                  "type": "text"
                 }
               ],
               "outputType": "array"
