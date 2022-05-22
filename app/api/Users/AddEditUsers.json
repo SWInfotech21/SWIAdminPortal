@@ -2493,11 +2493,17 @@
                         "column": "user_id",
                         "type": "number",
                         "value": "{{AddUser.identity}}"
+                      },
+                      {
+                        "table": "t_sms_log",
+                        "column": "extra1",
+                        "type": "text",
+                        "value": "{{'Admin Portal'}}"
                       }
                     ],
                     "table": "t_sms_log",
                     "returning": "id",
-                    "query": "INSERT INTO t_sms_log\n(sms_message, sender_mobile, created_on, sms_type, ip_address, status, response, user_id) VALUES (:P1 /* {{'Dear Partner, Your Account has been created successfully. User Name '+$_POST.mobile+' Password  '+password+' TPIN XXXX . Thanks for using our service.\\nRegards S W Pay Team'}} */, :P2 /* {{$_POST.mobile}} */, :P3 /* {{NOW}} */, :P4 /* {{'Add New User SMS'}} */, :P5 /* {{$_SERVER.REMOTE_ADDR}} */, :P6 /* {{api_status == 200 ? 1 : 0}} */, :P7 /* {{api_response}} */, :P8 /* {{AddUser.identity}} */)",
+                    "query": "INSERT INTO t_sms_log\n(sms_message, sender_mobile, created_on, sms_type, ip_address, status, response, user_id, extra1) VALUES (:P1 /* {{'Dear Partner, Your Account has been created successfully. User Name '+$_POST.mobile+' Password  '+password+' TPIN XXXX . Thanks for using our service.\\nRegards S W Pay Team'}} */, :P2 /* {{$_POST.mobile}} */, :P3 /* {{NOW}} */, :P4 /* {{'Add New User SMS'}} */, :P5 /* {{$_SERVER.REMOTE_ADDR}} */, :P6 /* {{api_status == 200 ? 1 : 0}} */, :P7 /* {{api_response}} */, :P8 /* {{AddUser.identity}} */, :P9 /* {{'Admin Portal'}} */)",
                     "params": [
                       {
                         "name": ":P1",
@@ -2538,6 +2544,11 @@
                         "name": ":P8",
                         "type": "expression",
                         "value": "{{AddUser.identity}}"
+                      },
+                      {
+                        "name": ":P9",
+                        "type": "expression",
+                        "value": "{{'Admin Portal'}}"
                       }
                     ]
                   }

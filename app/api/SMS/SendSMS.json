@@ -86,6 +86,10 @@
           {
             "type": "boolean",
             "name": "api_status == 200 ? 1 : 0"
+          },
+          {
+            "type": "text",
+            "name": "'Admin"
           }
         ]
       }
@@ -106,7 +110,7 @@
         "options": {
           "provider": "securityLogin"
         },
-        "output": true,
+        "output": false,
         "meta": []
       },
       {
@@ -192,7 +196,7 @@
                     ]
                   }
                 },
-                "output": true,
+                "output": false,
                 "meta": [
                   {
                     "type": "text",
@@ -225,7 +229,7 @@
                             "accusage": "{{1}}"
                           }
                         },
-                        "output": true
+                        "output": false
                       },
                       {
                         "name": "api_status",
@@ -305,11 +309,17 @@
                                 "column": "user_id",
                                 "type": "number",
                                 "value": "{{identity}}"
+                              },
+                              {
+                                "table": "t_sms_log",
+                                "column": "extra1",
+                                "type": "text",
+                                "value": "{{'Admin Portal'}}"
                               }
                             ],
                             "table": "t_sms_log",
                             "returning": "id",
-                            "query": "INSERT INTO t_sms_log\n(sms_message, sender_mobile, created_on, sms_type, ip_address, status, response, user_id) VALUES (:P1 /* {{$_POST.message}} */, :P2 /* {{GetUserMobile[$index].user_mobile}} */, :P3 /* {{NOW}} */, :P4 /* {{$_POST.user_type}} */, :P5 /* {{$_SERVER.REMOTE_ADDR}} */, :P6 /* {{api_status == 200 ? 1 : 0}} */, :P7 /* {{api_response}} */, :P8 /* {{identity}} */)",
+                            "query": "INSERT INTO t_sms_log\n(sms_message, sender_mobile, created_on, sms_type, ip_address, status, response, user_id, extra1) VALUES (:P1 /* {{$_POST.message}} */, :P2 /* {{GetUserMobile[$index].user_mobile}} */, :P3 /* {{NOW}} */, :P4 /* {{$_POST.user_type}} */, :P5 /* {{$_SERVER.REMOTE_ADDR}} */, :P6 /* {{api_status == 200 ? 1 : 0}} */, :P7 /* {{api_response}} */, :P8 /* {{identity}} */, :P9 /* {{'Admin Portal'}} */)",
                             "params": [
                               {
                                 "name": ":P1",
@@ -350,6 +360,11 @@
                                 "name": ":P8",
                                 "type": "expression",
                                 "value": "{{identity}}"
+                              },
+                              {
+                                "name": ":P9",
+                                "type": "expression",
+                                "value": "{{'Admin Portal'}}"
                               }
                             ]
                           }
@@ -364,7 +379,7 @@
                             "type": "number"
                           }
                         ],
-                        "output": true
+                        "output": false
                       }
                     ]
                   }
@@ -392,10 +407,6 @@
                     "type": "text"
                   },
                   {
-                    "name": "api",
-                    "type": "text"
-                  },
-                  {
                     "name": "api_status",
                     "type": "text",
                     "sub": []
@@ -404,20 +415,6 @@
                     "name": "api_response",
                     "type": "text",
                     "sub": []
-                  },
-                  {
-                    "name": "record_insert",
-                    "type": "text",
-                    "sub": [
-                      {
-                        "name": "identity",
-                        "type": "text"
-                      },
-                      {
-                        "name": "affected",
-                        "type": "number"
-                      }
-                    ]
                   }
                 ],
                 "outputType": "array"
@@ -450,7 +447,7 @@
                     "accusage": "{{1}}"
                   }
                 },
-                "output": true
+                "output": false
               },
               {
                 "name": "api_status",
@@ -530,11 +527,17 @@
                         "column": "user_id",
                         "type": "number",
                         "value": "{{identity}}"
+                      },
+                      {
+                        "table": "t_sms_log",
+                        "column": "extra1",
+                        "type": "text",
+                        "value": "{{'Admin Portal'}}"
                       }
                     ],
                     "table": "t_sms_log",
                     "returning": "id",
-                    "query": "INSERT INTO t_sms_log\n(sms_message, sender_mobile, created_on, sms_type, ip_address, status, response, user_id) VALUES (:P1 /* {{$_POST.message}} */, :P2 /* {{$_POST.sms_mobile}} */, :P3 /* {{NOW}} */, :P4 /* {{'Individual'}} */, :P5 /* {{$_SERVER.REMOTE_ADDR}} */, :P6 /* {{api_status == 200 ? 1 : 0}} */, :P7 /* {{api_response}} */, :P8 /* {{identity}} */)",
+                    "query": "INSERT INTO t_sms_log\n(sms_message, sender_mobile, created_on, sms_type, ip_address, status, response, user_id, extra1) VALUES (:P1 /* {{$_POST.message}} */, :P2 /* {{$_POST.sms_mobile}} */, :P3 /* {{NOW}} */, :P4 /* {{'Individual'}} */, :P5 /* {{$_SERVER.REMOTE_ADDR}} */, :P6 /* {{api_status == 200 ? 1 : 0}} */, :P7 /* {{api_response}} */, :P8 /* {{identity}} */, :P9 /* {{'Admin Portal'}} */)",
                     "params": [
                       {
                         "name": ":P1",
@@ -575,6 +578,11 @@
                         "name": ":P8",
                         "type": "expression",
                         "value": "{{identity}}"
+                      },
+                      {
+                        "name": ":P9",
+                        "type": "expression",
+                        "value": "{{'Admin Portal'}}"
                       }
                     ]
                   }
@@ -589,7 +597,7 @@
                     "type": "number"
                   }
                 ],
-                "output": true
+                "output": false
               }
             ]
           }
