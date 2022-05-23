@@ -259,7 +259,8 @@
     {
       "path": "/children/:id",
       "page": "children",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
     },
     {
       "path": "*",
