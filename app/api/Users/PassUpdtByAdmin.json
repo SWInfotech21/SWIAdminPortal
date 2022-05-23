@@ -107,6 +107,12 @@
                       "column": "user_tpin",
                       "type": "text",
                       "value": "{{$_POST.tpin}}"
+                    },
+                    {
+                      "table": "m_users",
+                      "column": "blank1",
+                      "type": "text",
+                      "value": "{{$_POST.Password}}"
                     }
                   ],
                   "table": "m_users",
@@ -128,7 +134,7 @@
                     "conditional": null,
                     "valid": true
                   },
-                  "query": "UPDATE m_users\nSET password = :P1 /* {{$_POST.Password.sha256(NOW)}} */, salt = :P2 /* {{NOW}} */, updated_by = :P3 /* {{identity}} */, updated_on = :P4 /* {{NOW}} */, user_tpin = :P5 /* {{$_POST.tpin}} */\nWHERE id = :P6 /* {{$_POST.UserId}} */",
+                  "query": "UPDATE m_users\nSET password = :P1 /* {{$_POST.Password.sha256(NOW)}} */, salt = :P2 /* {{NOW}} */, updated_by = :P3 /* {{identity}} */, updated_on = :P4 /* {{NOW}} */, user_tpin = :P5 /* {{$_POST.tpin}} */, blank1 = :P6 /* {{$_POST.Password}} */\nWHERE id = :P7 /* {{$_POST.UserId}} */",
                   "params": [
                     {
                       "name": ":P1",
@@ -156,12 +162,18 @@
                       "value": "{{$_POST.tpin}}"
                     },
                     {
+                      "name": ":P6",
+                      "type": "expression",
+                      "value": "{{$_POST.Password}}"
+                    },
+                    {
                       "operator": "equal",
                       "type": "expression",
-                      "name": ":P6",
+                      "name": ":P7",
                       "value": "{{$_POST.UserId}}"
                     }
-                  ]
+                  ],
+                  "returning": "id"
                 }
               },
               "meta": [
