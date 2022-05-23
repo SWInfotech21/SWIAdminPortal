@@ -6334,6 +6334,12 @@ dmx.config({
         "type": "text",
         "name": "id"
       }
+    ],
+    "global": [
+      {
+        "type": "text",
+        "name": "id"
+      }
     ]
   }
 });
