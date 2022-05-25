@@ -37,13 +37,126 @@
         "options": {
           "sql": {
             "type": "SELECT",
-            "columns": [],
+            "columns": [
+              {
+                "table": "m_users",
+                "column": "id"
+              },
+              {
+                "table": "m_users",
+                "column": "user_id"
+              },
+              {
+                "table": "m_users",
+                "column": "user_fname"
+              },
+              {
+                "table": "m_users",
+                "column": "user_lname"
+              },
+              {
+                "table": "m_users",
+                "column": "user_mobile"
+              },
+              {
+                "table": "m_users",
+                "column": "user_email"
+              },
+              {
+                "table": "m_users",
+                "column": "user_type"
+              },
+              {
+                "table": "m_users",
+                "column": "md_id"
+              },
+              {
+                "table": "m_users",
+                "column": "ds_id"
+              },
+              {
+                "table": "m_users",
+                "column": "u_status"
+              },
+              {
+                "table": "m_users",
+                "column": "user_tpin"
+              },
+              {
+                "table": "m_users",
+                "column": "scheme_id"
+              },
+              {
+                "table": "m_users",
+                "column": "kyc_status"
+              },
+              {
+                "table": "m_users",
+                "column": "balance_amt"
+              },
+              {
+                "table": "m_users",
+                "column": "aeps_balance"
+              },
+              {
+                "table": "m_users",
+                "column": "created_by"
+              },
+              {
+                "table": "m_users",
+                "column": "created_on"
+              },
+              {
+                "table": "m_users",
+                "column": "updated_on"
+              },
+              {
+                "table": "m_users",
+                "column": "aadhar_no"
+              },
+              {
+                "table": "m_users",
+                "column": "pan_no"
+              },
+              {
+                "table": "m_users",
+                "column": "address"
+              },
+              {
+                "table": "m_users",
+                "column": "pin"
+              },
+              {
+                "table": "m_users",
+                "column": "state"
+              },
+              {
+                "table": "m_users",
+                "column": "district"
+              },
+              {
+                "table": "m_users",
+                "column": "blank1"
+              },
+              {
+                "table": "m_users",
+                "column": "blank2"
+              },
+              {
+                "table": "m_users",
+                "column": "blank3"
+              },
+              {
+                "table": "m_users",
+                "column": "aeps_merchant_id"
+              }
+            ],
             "table": {
               "name": "m_users"
             },
             "primary": "id",
             "joins": [],
-            "query": "SELECT *\nFROM m_users\nWHERE created_by = :P1 /* {{$_GET.user_id}} */",
+            "query": "SELECT id, user_id, user_fname, user_lname, user_mobile, user_email, user_type, md_id, ds_id, u_status, user_tpin, scheme_id, kyc_status, balance_amt, aeps_balance, created_by, created_on, updated_on, aadhar_no, pan_no, address, pin, state, district, blank1, blank2, blank3, aeps_merchant_id\nFROM m_users\nWHERE created_by = :P1 /* {{$_GET.user_id}} */",
             "params": [
               {
                 "operator": "equal",
@@ -109,14 +222,6 @@
             "name": "user_email"
           },
           {
-            "type": "text",
-            "name": "password"
-          },
-          {
-            "type": "text",
-            "name": "salt"
-          },
-          {
             "type": "number",
             "name": "user_type"
           },
@@ -142,31 +247,11 @@
           },
           {
             "type": "text",
-            "name": "ip"
-          },
-          {
-            "type": "text",
             "name": "kyc_status"
-          },
-          {
-            "type": "number",
-            "name": "is_block"
-          },
-          {
-            "type": "number",
-            "name": "cap_amt"
           },
           {
             "type": "text",
             "name": "balance_amt"
-          },
-          {
-            "type": "text",
-            "name": "balance_outstanding"
-          },
-          {
-            "type": "text",
-            "name": "aeps_limit"
           },
           {
             "type": "text",
@@ -181,20 +266,8 @@
             "name": "created_on"
           },
           {
-            "type": "text",
-            "name": "updated_by"
-          },
-          {
             "type": "datetime",
             "name": "updated_on"
-          },
-          {
-            "type": "text",
-            "name": "deleted_by"
-          },
-          {
-            "type": "datetime",
-            "name": "deleted_on"
           },
           {
             "type": "text",
@@ -234,15 +307,24 @@
           },
           {
             "type": "text",
-            "name": "blank4"
-          },
-          {
-            "type": "text",
             "name": "aeps_merchant_id"
           }
         ],
         "outputType": "array",
         "type": "dbconnector_select"
+      },
+      {
+        "name": "csvExport",
+        "module": "export",
+        "action": "csv",
+        "options": {
+          "path": "/public/assets/csvFile/ChildrenList.csv",
+          "data": "{{GetChildren}}",
+          "header": true,
+          "overwrite": true
+        },
+        "outputType": "text",
+        "output": true
       }
     ]
   }

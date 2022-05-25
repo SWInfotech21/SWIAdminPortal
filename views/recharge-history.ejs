@@ -7,10 +7,10 @@
 
 <div class="row align-items-center justify-content-between px-4 mb-3 sd-secondary-header mx-0">
     <div class="col-12 col-md-auto me-auto ps-4">
-        <h1 class="ms-md-1 mt-md-3 text-dark fs-2 sd-fw-800 d-flex align-items-center">
+        <h3 class="ms-md-1 mt-md-3 text-dark fs-2 sd-fw-800 d-flex align-items-center">
             Recharge Transaction History
             <span class="border-3 ms-2 spinner-border spinner-border-sm" role="status" dmx-show="scRechargeTrans.state.executing"></span>
-        </h1>
+        </h3>
     </div>
     <div class="col-auto order-3 order-md-2 d-flex align-items-center justify-content-start justify-content-md-center px-0 px-lg-2">
         <select class="form-control form-select" id="selectstatus">
@@ -21,6 +21,10 @@
             <option value="REFUND">REFUND</option>
         </select>
     </div>
+    <div class="col-auto order-3 order-md-3 d-flex align-items-center justify-content-start justify-content-md-center px-0 px-lg-2">
+        <a href="assets/csvFile/RechargeHistory.csv"><button class="btn btn-primary" id="Download">Export
+            </button></a>
+    </div>
     <div class="col-auto order-2 order-md-1 d-flex align-items-center justify-content-start justify-content-md-center px-0 px-lg-2">
         <form id="formDatePicker"><label class="sw-datepicker">
                 <span class="btn bg-light"><img src="assets/images/icons/calendar.svg" class="img-fluid" width="20px"></span>
@@ -28,7 +32,7 @@
             </label>
         </form>
     </div>
-    <div class="col-auto order-1 order-md-3 d-flex align-items-center justify-content-center">
+    <div class="col-auto order-1 order-md-4 d-flex align-items-center justify-content-center">
         <form id="formSearchUser" class="sd-search-form">
             <div class="d-flex justify-content-end mb-3 mb-lg-0 mb-md-0">
                 <input type="text" class="form-control sd-search-input rounded-pill" id="Search" name="Search" placeholder="Search">

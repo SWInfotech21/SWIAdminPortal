@@ -905,7 +905,8 @@
                     {
                       "table": "tt_balance",
                       "column": "pay_ref_id",
-                      "direction": "DESC"
+                      "direction": "DESC",
+                      "recid": 1
                     }
                   ],
                   "wheres": {
@@ -1173,6 +1174,19 @@
           }
         },
         "outputType": "boolean"
+      },
+      {
+        "name": "csvExport",
+        "module": "export",
+        "action": "csv",
+        "options": {
+          "path": "/public/assets/csvFile/RechargeHistory.csv",
+          "data": "{{Recharge.data}}",
+          "overwrite": true,
+          "header": true
+        },
+        "outputType": "text",
+        "output": true
       }
     ]
   }
