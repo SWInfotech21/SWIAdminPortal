@@ -1,7 +1,7 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="updatetransaction" appConnect="local" components="{dmxDatePicker:{},dmxDataTraversal:{},dmxDatastore:{},dmxBootstrap5Modal:{}}" jquery_slim_35="cdn" moment_2="cdn" -->
 <meta name="ac:route" content="/update-transaction">
 <dmx-serverconnect id="scFetchTrans" url="api/Reports/FetchUpdateTrans" dmx-param:fromdate="formDatePicker.daterange.start" dmx-param:todate="formDatePicker.daterange.end"></dmx-serverconnect>
-<dmx-data-view id="dvFetchTrns" dmx-bind:data="content.scFetchTrans.data.GetTrans"></dmx-data-view>
+<dmx-data-view id="dvFetchTrns" dmx-bind:data="content.scFetchTrans.data.GetTrans" filter="(api_ref.contains(formSearchUser.Search.value) || user_fname.lowercase().contains(formSearchUser.Search.value.lowercase()) || user_mobile.contains(formSearchUser.Search.value) || user_number.contains(formSearchUser.Search.value) || operator_name.lowercase().contains(formSearchUser.Search.value.lowercase()))"></dmx-data-view>
 <dmx-data-detail id="ddFetchTrans" dmx-bind:data="content.dvFetchTrns.data" key="id">
 </dmx-data-detail>
 <div class="row align-items-center justify-content-between px-4 mb-3 sd-secondary-header mx-0">
