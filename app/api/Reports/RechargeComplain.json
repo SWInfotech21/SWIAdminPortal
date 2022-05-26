@@ -449,6 +449,19 @@
           }
         },
         "outputType": "boolean"
+      },
+      {
+        "name": "csvExport",
+        "module": "export",
+        "action": "csv",
+        "options": {
+          "path": "/public/assets/csvFile/ComplainTxn.csv",
+          "data": "{{GetPendingComplaint}}",
+          "overwrite": true,
+          "header": true
+        },
+        "outputType": "text",
+        "output": true
       }
     ]
   }

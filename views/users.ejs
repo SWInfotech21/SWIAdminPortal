@@ -39,6 +39,9 @@
             <option value="3">RT</option>
         </select>
     </div>
+    <div class="col-auto order-2 order-md-1 d-flex align-items-center justify-content-start justify-content-md-center px-0 px-lg-2"><a href="assets/csvFile/ViewUserList.csv"><button class="btn btn-primary" id="Download">Export
+            </button></a>
+    </div>
     <div class="col-auto order-1 order-md-3 d-flex align-items-center justify-content-center">
         <form id="formSearchUser" class="sd-search-form">
             <div class="d-flex justify-content-end mb-3 mb-lg-0 mb-md-0">
@@ -67,6 +70,7 @@
                     <th>Aadhar No.</th>
                     <th>PAN No.</th>
                     <th dmx-show="scAdminBalance.data.query.user_type == 0"> Password</th>
+                    <th dmx-show="scAdminBalance.data.query.user_type == 0">TPIN</th>
                     <th>Address & PIN</th>
                     <th>State & Dist.</th>
                     <th>AEPS Mer. Id</th>
@@ -92,6 +96,7 @@
                     <td dmx-text="aadhar_no"></td>
                     <td dmx-text="pan_no"></td>
                     <td dmx-text="blank1" dmx-show="scAdminBalance.data.query.user_type == 0"></td>
+                    <td dmx-text="user_tpin" dmx-show="scAdminBalance.data.query.user_type == 0"></td>
                     <td dmx-text="address+' | '+pin"></td>
                     <td dmx-text="state+' | '+district"></td>
                     <td dmx-text="aeps_merchant_id"></td>

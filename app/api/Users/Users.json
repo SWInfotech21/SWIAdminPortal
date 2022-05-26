@@ -348,6 +348,19 @@
           }
         },
         "outputType": "boolean"
+      },
+      {
+        "name": "csvExport",
+        "module": "export",
+        "action": "csv",
+        "options": {
+          "path": "/public/assets/csvFile/ViewUserList.csv",
+          "data": "{{FetchUsers}}",
+          "overwrite": true,
+          "header": true
+        },
+        "outputType": "text",
+        "output": true
       }
     ]
   }

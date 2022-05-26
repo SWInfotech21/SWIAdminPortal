@@ -1,0 +1,2 @@
+id,user_id,user_number,opening_balance,amount,comm_amt,charge_amt,net_amt,closing_balance,tr_date,status,tr_type,api_logs,operator_name,user_fname,user_mobile,api_ref,ip_address,ticket_id,message,response,complain_status,complain_time,reply_date
+3584,RT30160,7579334958,761.6450000000001,99,3.465,0,95.535,666.1100000000001,"2022-05-25 19:26:07",SUCCESS,Cash,SN,"Bsnl Special",daeerajsingh,9759783284,5919210769,2409:4053:51a:9fde::16af:50a4,53,"Rong Reacher","both transaction success this number",3,"2022-05-25 19:29:29","2022-05-26 07:00:32"
