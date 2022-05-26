@@ -2727,40 +2727,44 @@ dmx.config({
     "dvSMSReport": {
       "meta": [
         {
-          "type": "number",
-          "name": "id"
+          "name": "id",
+          "type": "number"
         },
         {
-          "type": "text",
-          "name": "sms_message"
+          "name": "sms_message",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "sender_mobile"
+          "name": "sender_mobile",
+          "type": "text"
         },
         {
-          "type": "datetime",
-          "name": "created_on"
+          "name": "created_on",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "sms_type"
+          "name": "sms_type",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "ip_address"
+          "name": "ip_address",
+          "type": "text"
         },
         {
-          "type": "boolean",
-          "name": "status"
+          "name": "status",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "response"
+          "name": "response",
+          "type": "text"
         },
         {
-          "type": "number",
-          "name": "user_id"
+          "name": "user_id",
+          "type": "number"
+        },
+        {
+          "name": "extra1",
+          "type": "text"
         }
       ],
       "outputType": "array"

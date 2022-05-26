@@ -2,7 +2,7 @@
 <meta name="ac:route" content="/sms-report">
 <dmx-query-manager id="qm"></dmx-query-manager>
 <dmx-serverconnect id="scSMSReport" url="api/Reports/SMSReport" dmx-param:fromdate="formGetDate.daterange.start" dmx-param:todate="formGetDate.daterange.end" dmx-param:sort="qm.data.sort" dmx-param:dir="qm.data.dir"></dmx-serverconnect>
-<dmx-data-view id="dvSMSReport" dmx-bind:data="content.scSMSReport.data.FetchSMSReport" filter="(sender_mobile.contains(formSearchUser.Search.value) || sms_type.lowercase().contains(formSearchUser.Search.value.lowercase()))" pageSize="500" page="10"></dmx-data-view>
+<dmx-data-view id="dvSMSReport" dmx-bind:data="scSMSReport.data.FetchSMSReport" filter="(sender_mobile.contains(formSearchUser.Search.value) || sms_type.lowercase().contains(formSearchUser.Search.value.lowercase()))" pageSize="500" page="10"></dmx-data-view>
 
 
 <div class="row align-items-center justify-content-between px-4 mb-3 sd-secondary-header mx-0">
