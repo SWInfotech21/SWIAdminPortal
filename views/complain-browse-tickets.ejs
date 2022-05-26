@@ -15,7 +15,7 @@
 }
 </script>
 <!-- <dmx-serverconnect id="scPendingRech" url="api/Reports/RechargeComplain" dmx-param:fromdate="formPendingDate.daterange.start" dmx-param:todate="formPendingDate.daterange.end"></dmx-serverconnect> -->
-<dmx-data-view id="dvPendingTrans" dmx-bind:data="scPendingRech.data.GetPendingComplaint.data" filter="(user_mobile.contains(formSearchUser.Search.value) || user_number.contains(formSearchUser.Search.value))"></dmx-data-view>
+<dmx-data-view id="dvPendingTrans" dmx-bind:data="scPendingRech.data.GetPendingComplaint" filter="(user_mobile.contains(formSearchUser.Search.value) || user_number.contains(formSearchUser.Search.value))"></dmx-data-view>
 <dmx-data-detail id="ddPendingTrans" dmx-bind:data="content.dvPendingTrans.data" key="id"></dmx-data-detail>
 
 <div class="row align-items-center justify-content-between px-4 mb-3 sw-secondary-header mx-0">
@@ -111,7 +111,7 @@
                             <td><button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalReply" dmx-on:click="ddPendingTrans.select(id)">Reply</button></td>
                         </tr>
                     </tbody>
-                    <tbody dmx-show="content.scPendingRech.data.GetPendingComplaint.total==0">
+                    <tbody dmx-show="content.scPendingRech.data.GetPendingComplaint.length ==0">
                         <tr class="text-center fw-bold text-danger fs-4">
                             <td colspan="19">No Record Found!</td>
                         </tr>

@@ -4378,92 +4378,92 @@ dmx.config({
     "dvPendingTrans": {
       "meta": [
         {
-          "type": "number",
-          "name": "id"
+          "name": "id",
+          "type": "number"
         },
         {
-          "type": "text",
-          "name": "user_id"
+          "name": "user_id",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "user_number"
+          "name": "user_number",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "opening_balance"
+          "name": "opening_balance",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "amount"
+          "name": "amount",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "comm_amt"
+          "name": "comm_amt",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "charge_amt"
+          "name": "charge_amt",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "net_amt"
+          "name": "net_amt",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "closing_balance"
+          "name": "closing_balance",
+          "type": "text"
         },
         {
-          "type": "datetime",
-          "name": "tr_date"
+          "name": "tr_date",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "status"
+          "name": "status",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "tr_type"
+          "name": "tr_type",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "api_logs"
+          "name": "api_logs",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "operator_name"
+          "name": "operator_name",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "user_fname"
+          "name": "user_fname",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "user_mobile"
+          "name": "user_mobile",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "api_ref"
+          "name": "api_ref",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "ip_address"
+          "name": "ip_address",
+          "type": "text"
         },
         {
-          "type": "number",
-          "name": "ticket_id"
+          "name": "ticket_id",
+          "type": "number"
         },
         {
-          "type": "text",
-          "name": "message"
+          "name": "message",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "response"
+          "name": "response",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "complain_status"
+          "name": "complain_status",
+          "type": "text"
         }
       ],
       "outputType": "array"
