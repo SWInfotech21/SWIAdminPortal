@@ -84,7 +84,9 @@
                             <th>Response</th>
                             <th>Complain Status</th>
                             <th>Tr. Type</th>
-                            <th>Date</th>
+                            <th>Tr. Date</th>
+                            <th>Complain Date</th>
+                            <th>Reply Date</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -108,6 +110,8 @@
                             <td class="fw-bold" dmx-text="complain_status==1?'Open':'Closed'" dmx-class:text-success="complain_status == 0" dmx-class:text-danger="complain_status == 1"></td>
                             <td dmx-text="tr_type"></td>
                             <td dmx-text="tr_date.formatDate('dd-MM-yyyy hh:mm:ss A')"></td>
+                            <td dmx-text="complain_time.formatDate('dd-MM-yyyy hh:mm:ss A')"></td>
+                            <td dmx-text="reply_date.formatDate('dd-MM-yyyy hh:mm:ss A')"></td>
                             <td><button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalReply" dmx-on:click="ddPendingTrans.select(id)">Reply</button></td>
                         </tr>
                     </tbody>
