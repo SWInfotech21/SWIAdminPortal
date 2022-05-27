@@ -5200,40 +5200,44 @@ dmx.config({
           "type": "object"
         },
         {
-          "type": "number",
-          "name": "id"
+          "name": "id",
+          "type": "number"
         },
         {
-          "type": "text",
-          "name": "support_type"
+          "name": "support_type",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "message"
+          "name": "message",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "status"
+          "name": "status",
+          "type": "text"
         },
         {
-          "type": "datetime",
-          "name": "adddate"
+          "name": "adddate",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "response"
+          "name": "response",
+          "type": "text"
         },
         {
-          "type": "datetime",
-          "name": "reply_date"
+          "name": "reply_date",
+          "type": "text"
         },
         {
-          "type": "number",
-          "name": "user_id"
+          "name": "user_fname",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "tran_id"
+          "name": "user_mobile",
+          "type": "text"
+        },
+        {
+          "name": "user_id",
+          "type": "text"
         }
       ],
       "outputType": "array"
@@ -5241,40 +5245,44 @@ dmx.config({
     "dvGeneralTrans": {
       "meta": [
         {
-          "type": "number",
-          "name": "id"
+          "name": "id",
+          "type": "number"
         },
         {
-          "type": "text",
-          "name": "support_type"
+          "name": "support_type",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "message"
+          "name": "message",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "status"
+          "name": "status",
+          "type": "text"
         },
         {
-          "type": "datetime",
-          "name": "adddate"
+          "name": "adddate",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "response"
+          "name": "response",
+          "type": "text"
         },
         {
-          "type": "datetime",
-          "name": "reply_date"
+          "name": "reply_date",
+          "type": "text"
         },
         {
-          "type": "number",
-          "name": "user_id"
+          "name": "user_fname",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "tran_id"
+          "name": "user_mobile",
+          "type": "text"
+        },
+        {
+          "name": "user_id",
+          "type": "text"
         }
       ],
       "outputType": "array"

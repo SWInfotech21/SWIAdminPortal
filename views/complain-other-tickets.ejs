@@ -15,7 +15,7 @@
     }
 }
 </script>
-<dmx-data-view id="dvGeneralTrans" dmx-bind:data="content.scGeneralTicket.data.GetPendingComplaint.data" filter="(support_type.lowercase().contains(formSearchUser.Search.value.lowercase()) || user_mobile.contains(formSearchUser.Search.value) || user_fname.lowercase().contains(formSearchUser.Search.value.lowercase()))"></dmx-data-view>
+<dmx-data-view id="dvGeneralTrans" dmx-bind:data="scGeneralTicket.data.GetPendingComplaint" filter="(support_type.lowercase().contains(formSearchUser.Search.value.lowercase()) || user_mobile.contains(formSearchUser.Search.value) || user_fname.lowercase().contains(formSearchUser.Search.value.lowercase()))"></dmx-data-view>
 <dmx-data-detail id="ddGeneralTicket" dmx-bind:data="content.dvGeneralTrans.data" key="id"></dmx-data-detail>
 
 <div class="row align-items-center justify-content-between px-4 mb-3 sw-secondary-header mx-0">
