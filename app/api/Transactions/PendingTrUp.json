@@ -325,6 +325,54 @@
                       {
                         "table": "m_users",
                         "column": "md_id"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "dtcommper"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "dtcommval"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "dtcommamt"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "dtchargeper"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "dtchargeval"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "dtchargeamt"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "mdtcommper"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "mdtcommval"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "mdtcommamt"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "mdtchargeper"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "mdtchargeval"
+                      },
+                      {
+                        "table": "tt_recharge_trans",
+                        "column": "mdtchargeamt"
                       }
                     ],
                     "table": {
@@ -405,7 +453,7 @@
                       "conditional": null,
                       "valid": true
                     },
-                    "query": "SELECT tt_recharge_trans.opening_balance, tt_balance.user_id, tt_balance.old_balance, tt_balance.amount, tt_balance.new_balance, tt_balance.transaction_type, tt_balance.tr_date, tt_balance.crdr_type, tt_balance.pay_ref_id, tt_balance.remarks, tt_balance.netamt, m_users.balance_amt, m_users.ds_id, m_users.md_id\nFROM tt_recharge_trans AS tt_recharge_trans\nLEFT JOIN tt_balance AS tt_balance ON (tt_balance.pay_ref_id = tt_recharge_trans.id) LEFT JOIN m_users AS m_users ON (m_users.id = tt_recharge_trans.user_id)\nWHERE tt_recharge_trans.id = :P1 /* {{$_POST.transid}} */",
+                    "query": "SELECT tt_recharge_trans.opening_balance, tt_balance.user_id, tt_balance.old_balance, tt_balance.amount, tt_balance.new_balance, tt_balance.transaction_type, tt_balance.tr_date, tt_balance.crdr_type, tt_balance.pay_ref_id, tt_balance.remarks, tt_balance.netamt, m_users.balance_amt, m_users.ds_id, m_users.md_id, tt_recharge_trans.dtcommper, tt_recharge_trans.dtcommval, tt_recharge_trans.dtcommamt, tt_recharge_trans.dtchargeper, tt_recharge_trans.dtchargeval, tt_recharge_trans.dtchargeamt, tt_recharge_trans.mdtcommper, tt_recharge_trans.mdtcommval, tt_recharge_trans.mdtcommamt, tt_recharge_trans.mdtchargeper, tt_recharge_trans.mdtchargeval, tt_recharge_trans.mdtchargeamt\nFROM tt_recharge_trans AS tt_recharge_trans\nLEFT JOIN tt_balance AS tt_balance ON (tt_balance.pay_ref_id = tt_recharge_trans.id) LEFT JOIN m_users AS m_users ON (m_users.id = tt_recharge_trans.user_id)\nWHERE tt_recharge_trans.id = :P1 /* {{$_POST.transid}} */",
                     "params": [
                       {
                         "operator": "equal",
@@ -413,7 +461,8 @@
                         "name": ":P1",
                         "value": "{{$_POST.transid}}"
                       }
-                    ]
+                    ],
+                    "orders": []
                   }
                 },
                 "output": false,
@@ -473,6 +522,54 @@
                   {
                     "type": "text",
                     "name": "md_id"
+                  },
+                  {
+                    "type": "text",
+                    "name": "dtcommper"
+                  },
+                  {
+                    "type": "text",
+                    "name": "dtcommval"
+                  },
+                  {
+                    "type": "text",
+                    "name": "dtcommamt"
+                  },
+                  {
+                    "type": "text",
+                    "name": "dtchargeper"
+                  },
+                  {
+                    "type": "text",
+                    "name": "dtchargeval"
+                  },
+                  {
+                    "type": "text",
+                    "name": "dtchargeamt"
+                  },
+                  {
+                    "type": "text",
+                    "name": "mdtcommper"
+                  },
+                  {
+                    "type": "text",
+                    "name": "mdtcommval"
+                  },
+                  {
+                    "type": "text",
+                    "name": "mdtcommamt"
+                  },
+                  {
+                    "type": "text",
+                    "name": "mdtchargeper"
+                  },
+                  {
+                    "type": "text",
+                    "name": "mdtchargeval"
+                  },
+                  {
+                    "type": "text",
+                    "name": "mdtchargeamt"
                   }
                 ],
                 "outputType": "object"
@@ -972,10 +1069,6 @@
                               {
                                 "table": "t_charge_cal",
                                 "column": "remarks"
-                              },
-                              {
-                                "table": "DTusers",
-                                "column": "balance_amt"
                               }
                             ],
                             "table": {
@@ -983,30 +1076,7 @@
                               "alias": "t_charge_cal"
                             },
                             "primary": "id",
-                            "joins": [
-                              {
-                                "table": "m_users",
-                                "column": "*",
-                                "alias": "DTusers",
-                                "type": "LEFT",
-                                "clauses": {
-                                  "condition": "AND",
-                                  "rules": [
-                                    {
-                                      "table": "DTusers",
-                                      "column": "id",
-                                      "operator": "equal",
-                                      "value": {
-                                        "table": "t_charge_cal",
-                                        "column": "user_id"
-                                      },
-                                      "operation": "="
-                                    }
-                                  ]
-                                },
-                                "primary": "id"
-                              }
-                            ],
+                            "joins": [],
                             "wheres": {
                               "condition": "AND",
                               "rules": [
@@ -1052,7 +1122,7 @@
                               "conditional": null,
                               "valid": true
                             },
-                            "query": "SELECT t_charge_cal.user_id, t_charge_cal.old_balance, t_charge_cal.amount, t_charge_cal.netamt, t_charge_cal.new_balance, t_charge_cal.transaction_type, t_charge_cal.tr_date, t_charge_cal.ip_address, t_charge_cal.crdr_type, t_charge_cal.pay_ref_id, t_charge_cal.remarks, DTusers.balance_amt\nFROM t_charge_cal AS t_charge_cal\nLEFT JOIN m_users AS DTusers ON (DTusers.id = t_charge_cal.user_id)\nWHERE t_charge_cal.pay_ref_id = :P1 /* {{$_POST.transid}} */ AND t_charge_cal.user_id = :P2 /* {{GetTrInfo.ds_id}} */",
+                            "query": "SELECT user_id, old_balance, amount, netamt, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks\nFROM t_charge_cal AS t_charge_cal\nWHERE pay_ref_id = :P1 /* {{$_POST.transid}} */ AND user_id = :P2 /* {{GetTrInfo.ds_id}} */",
                             "params": [
                               {
                                 "operator": "equal",
@@ -1114,7 +1184,70 @@
                           {
                             "type": "text",
                             "name": "remarks"
-                          },
+                          }
+                        ],
+                        "outputType": "object"
+                      },
+                      {
+                        "name": "GetDTBal",
+                        "module": "dbconnector",
+                        "action": "single",
+                        "options": {
+                          "connection": "postgres_gcpServer",
+                          "sql": {
+                            "type": "SELECT",
+                            "columns": [
+                              {
+                                "table": "m_users",
+                                "column": "balance_amt"
+                              }
+                            ],
+                            "table": {
+                              "name": "m_users"
+                            },
+                            "primary": "id",
+                            "joins": [],
+                            "wheres": {
+                              "condition": "AND",
+                              "rules": [
+                                {
+                                  "id": "m_users.id",
+                                  "field": "m_users.id",
+                                  "type": "double",
+                                  "operator": "equal",
+                                  "value": "{{GetTrInfo.ds_id}}",
+                                  "data": {
+                                    "table": "m_users",
+                                    "column": "id",
+                                    "type": "number",
+                                    "columnObj": {
+                                      "type": "increments",
+                                      "default": "",
+                                      "primary": true,
+                                      "nullable": false,
+                                      "unique": true,
+                                      "name": "id"
+                                    }
+                                  },
+                                  "operation": "="
+                                }
+                              ],
+                              "conditional": null,
+                              "valid": true
+                            },
+                            "query": "SELECT balance_amt\nFROM m_users\nWHERE id = :P1 /* {{GetTrInfo.ds_id}} */",
+                            "params": [
+                              {
+                                "operator": "equal",
+                                "type": "expression",
+                                "name": ":P1",
+                                "value": "{{GetTrInfo.ds_id}}"
+                              }
+                            ]
+                          }
+                        },
+                        "output": false,
+                        "meta": [
                           {
                             "type": "text",
                             "name": "balance_amt"
@@ -1127,7 +1260,7 @@
                         "module": "core",
                         "action": "setvalue",
                         "options": {
-                          "value": "{{GetDtComm.balance_amt.toNumber()-GetDtComm.netamt.toNumber()}}"
+                          "value": "{{GetDTBal.balance_amt.toNumber()-GetTrInfo.dtcommamt.toNumber()+GetTrInfo.dtchargeamt.toNumber()}}"
                         },
                         "meta": [],
                         "outputType": "text"
@@ -1145,19 +1278,19 @@
                                 "table": "t_charge_cal",
                                 "column": "user_id",
                                 "type": "number",
-                                "value": "{{GetDtComm.user_id}}"
+                                "value": "{{GetTrInfo.ds_id}}"
                               },
                               {
                                 "table": "t_charge_cal",
                                 "column": "old_balance",
                                 "type": "text",
-                                "value": "{{GetDtComm.balance_amt}}"
+                                "value": "{{GetDTBal.balance_amt}}"
                               },
                               {
                                 "table": "t_charge_cal",
                                 "column": "amount",
                                 "type": "text",
-                                "value": "{{GetDtComm.amount}}"
+                                "value": "{{GetTrInfo.amount}}"
                               },
                               {
                                 "table": "t_charge_cal",
@@ -1222,22 +1355,22 @@
                             ],
                             "table": "t_charge_cal",
                             "returning": "id",
-                            "query": "INSERT INTO t_charge_cal\n(user_id, old_balance, amount, netamt, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on) VALUES (:P1 /* {{GetDtComm.user_id}} */, :P2 /* {{GetDtComm.balance_amt}} */, :P3 /* {{GetDtComm.amount}} */, :P4 /* {{GetDtComm.netamt}} */, :P5 /* {{DTClosingBal}} */, :P6 /* {{GetDtComm.transaction_type+' Reversal'}} */, :P7 /* {{NOW}} */, :P8 /* {{$_SERVER.REMOTE_ADDR}} */, :P9 /* {{'Debit'}} */, :P10 /* {{$_POST.transid}} */, :P11 /* {{GetDtComm.remarks}} */, :P12 /* {{identity}} */, :P13 /* {{NOW}} */)",
+                            "query": "INSERT INTO t_charge_cal\n(user_id, old_balance, amount, netamt, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on) VALUES (:P1 /* {{GetTrInfo.ds_id}} */, :P2 /* {{GetDTBal.balance_amt}} */, :P3 /* {{GetTrInfo.amount}} */, :P4 /* {{GetDtComm.netamt}} */, :P5 /* {{DTClosingBal}} */, :P6 /* {{GetDtComm.transaction_type+' Reversal'}} */, :P7 /* {{NOW}} */, :P8 /* {{$_SERVER.REMOTE_ADDR}} */, :P9 /* {{'Debit'}} */, :P10 /* {{$_POST.transid}} */, :P11 /* {{GetDtComm.remarks}} */, :P12 /* {{identity}} */, :P13 /* {{NOW}} */)",
                             "params": [
                               {
                                 "name": ":P1",
                                 "type": "expression",
-                                "value": "{{GetDtComm.user_id}}"
+                                "value": "{{GetTrInfo.ds_id}}"
                               },
                               {
                                 "name": ":P2",
                                 "type": "expression",
-                                "value": "{{GetDtComm.balance_amt}}"
+                                "value": "{{GetDTBal.balance_amt}}"
                               },
                               {
                                 "name": ":P3",
                                 "type": "expression",
-                                "value": "{{GetDtComm.amount}}"
+                                "value": "{{GetTrInfo.amount}}"
                               },
                               {
                                 "name": ":P4",
@@ -1427,10 +1560,6 @@
                               {
                                 "table": "t_charge_cal",
                                 "column": "remarks"
-                              },
-                              {
-                                "table": "MDTusers",
-                                "column": "balance_amt"
                               }
                             ],
                             "table": {
@@ -1438,30 +1567,7 @@
                               "alias": "t_charge_cal"
                             },
                             "primary": "id",
-                            "joins": [
-                              {
-                                "table": "m_users",
-                                "column": "*",
-                                "alias": "MDTusers",
-                                "type": "LEFT",
-                                "clauses": {
-                                  "condition": "AND",
-                                  "rules": [
-                                    {
-                                      "table": "MDTusers",
-                                      "column": "id",
-                                      "operator": "equal",
-                                      "value": {
-                                        "table": "t_charge_cal",
-                                        "column": "user_id"
-                                      },
-                                      "operation": "="
-                                    }
-                                  ]
-                                },
-                                "primary": "id"
-                              }
-                            ],
+                            "joins": [],
                             "wheres": {
                               "condition": "AND",
                               "rules": [
@@ -1507,7 +1613,7 @@
                               "conditional": null,
                               "valid": true
                             },
-                            "query": "SELECT t_charge_cal.user_id, t_charge_cal.old_balance, t_charge_cal.amount, t_charge_cal.netamt, t_charge_cal.new_balance, t_charge_cal.transaction_type, t_charge_cal.tr_date, t_charge_cal.ip_address, t_charge_cal.crdr_type, t_charge_cal.pay_ref_id, t_charge_cal.remarks, MDTusers.balance_amt\nFROM t_charge_cal AS t_charge_cal\nLEFT JOIN m_users AS MDTusers ON (MDTusers.id = t_charge_cal.user_id)\nWHERE t_charge_cal.pay_ref_id = :P1 /* {{$_POST.transid}} */ AND t_charge_cal.user_id = :P2 /* {{GetTrInfo.md_id}} */",
+                            "query": "SELECT user_id, old_balance, amount, netamt, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks\nFROM t_charge_cal AS t_charge_cal\nWHERE pay_ref_id = :P1 /* {{$_POST.transid}} */ AND user_id = :P2 /* {{GetTrInfo.md_id}} */",
                             "params": [
                               {
                                 "operator": "equal",
@@ -1569,7 +1675,70 @@
                           {
                             "type": "text",
                             "name": "remarks"
-                          },
+                          }
+                        ],
+                        "outputType": "object"
+                      },
+                      {
+                        "name": "GetMDTBal",
+                        "module": "dbconnector",
+                        "action": "single",
+                        "options": {
+                          "connection": "postgres_gcpServer",
+                          "sql": {
+                            "type": "SELECT",
+                            "columns": [
+                              {
+                                "table": "m_users",
+                                "column": "balance_amt"
+                              }
+                            ],
+                            "table": {
+                              "name": "m_users"
+                            },
+                            "primary": "id",
+                            "joins": [],
+                            "wheres": {
+                              "condition": "AND",
+                              "rules": [
+                                {
+                                  "id": "m_users.id",
+                                  "field": "m_users.id",
+                                  "type": "double",
+                                  "operator": "equal",
+                                  "value": "{{GetTrInfo.md_id}}",
+                                  "data": {
+                                    "table": "m_users",
+                                    "column": "id",
+                                    "type": "number",
+                                    "columnObj": {
+                                      "type": "increments",
+                                      "default": "",
+                                      "primary": true,
+                                      "nullable": false,
+                                      "unique": true,
+                                      "name": "id"
+                                    }
+                                  },
+                                  "operation": "="
+                                }
+                              ],
+                              "conditional": null,
+                              "valid": true
+                            },
+                            "query": "SELECT balance_amt\nFROM m_users\nWHERE id = :P1 /* {{GetTrInfo.md_id}} */",
+                            "params": [
+                              {
+                                "operator": "equal",
+                                "type": "expression",
+                                "name": ":P1",
+                                "value": "{{GetTrInfo.md_id}}"
+                              }
+                            ]
+                          }
+                        },
+                        "output": false,
+                        "meta": [
                           {
                             "type": "text",
                             "name": "balance_amt"
@@ -1582,7 +1751,7 @@
                         "module": "core",
                         "action": "setvalue",
                         "options": {
-                          "value": "{{GetMDtComm.balance_amt.toNumber()-GetMDtComm.netamt.toNumber()}}"
+                          "value": "{{GetMDTBal.balance_amt.toNumber()-GetTrInfo.mdtcommamt.toNumber()+GetTrInfo.mdtchargeamt}}"
                         },
                         "meta": [],
                         "outputType": "text"
@@ -1600,19 +1769,19 @@
                                 "table": "t_charge_cal",
                                 "column": "user_id",
                                 "type": "number",
-                                "value": "{{GetMDtComm.user_id}}"
+                                "value": "{{GetTrInfo.md_id}}"
                               },
                               {
                                 "table": "t_charge_cal",
                                 "column": "old_balance",
                                 "type": "text",
-                                "value": "{{GetMDtComm.balance_amt}}"
+                                "value": "{{GetMDTBal.balance_amt}}"
                               },
                               {
                                 "table": "t_charge_cal",
                                 "column": "amount",
                                 "type": "text",
-                                "value": "{{GetMDtComm.amount}}"
+                                "value": "{{GetTrInfo.amount}}"
                               },
                               {
                                 "table": "t_charge_cal",
@@ -1677,22 +1846,22 @@
                             ],
                             "table": "t_charge_cal",
                             "returning": "id",
-                            "query": "INSERT INTO t_charge_cal\n(user_id, old_balance, amount, netamt, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on) VALUES (:P1 /* {{GetMDtComm.user_id}} */, :P2 /* {{GetMDtComm.balance_amt}} */, :P3 /* {{GetMDtComm.amount}} */, :P4 /* {{GetMDtComm.netamt}} */, :P5 /* {{MDTClosingBal}} */, :P6 /* {{GetMDtComm.transaction_type+' Reversal'}} */, :P7 /* {{NOW}} */, :P8 /* {{$_SERVER.REMOTE_ADDR}} */, :P9 /* {{'Debit'}} */, :P10 /* {{$_POST.transid}} */, :P11 /* {{GetMDtComm.remarks}} */, :P12 /* {{identity}} */, :P13 /* {{NOW}} */)",
+                            "query": "INSERT INTO t_charge_cal\n(user_id, old_balance, amount, netamt, new_balance, transaction_type, tr_date, ip_address, crdr_type, pay_ref_id, remarks, created_by, created_on) VALUES (:P1 /* {{GetTrInfo.md_id}} */, :P2 /* {{GetMDTBal.balance_amt}} */, :P3 /* {{GetTrInfo.amount}} */, :P4 /* {{GetMDtComm.netamt}} */, :P5 /* {{MDTClosingBal}} */, :P6 /* {{GetMDtComm.transaction_type+' Reversal'}} */, :P7 /* {{NOW}} */, :P8 /* {{$_SERVER.REMOTE_ADDR}} */, :P9 /* {{'Debit'}} */, :P10 /* {{$_POST.transid}} */, :P11 /* {{GetMDtComm.remarks}} */, :P12 /* {{identity}} */, :P13 /* {{NOW}} */)",
                             "params": [
                               {
                                 "name": ":P1",
                                 "type": "expression",
-                                "value": "{{GetMDtComm.user_id}}"
+                                "value": "{{GetTrInfo.md_id}}"
                               },
                               {
                                 "name": ":P2",
                                 "type": "expression",
-                                "value": "{{GetMDtComm.balance_amt}}"
+                                "value": "{{GetMDTBal.balance_amt}}"
                               },
                               {
                                 "name": ":P3",
                                 "type": "expression",
-                                "value": "{{GetMDtComm.amount}}"
+                                "value": "{{GetTrInfo.amount}}"
                               },
                               {
                                 "name": ":P4",
