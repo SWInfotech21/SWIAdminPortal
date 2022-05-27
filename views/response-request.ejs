@@ -1,9 +1,9 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="responserequest" appConnect="local" components="{dmxStateManagement:{},dmxDataTraversal:{},dmxBootstrap5Navigation:{},dmxDatePicker:{},dmxBootstrap5Modal:{}}" -->
 <meta name="ac:route" content="/response-request">
 <dmx-query-manager id="qm"></dmx-query-manager>
-<dmx-serverconnect id="scPaymentReq" url="api/PaymentRequest/ManagePayReq" dmx-param:fromdate="formGetPayDate.daterange.start" dmx-param:todate="formGetPayDate.daterange.end" dmx-param:offset="qm.data.offset" dmx-param:limit="10000" dmx-param:sort="qm.data.sort" dmx-param:dir="qm.data.dir"></dmx-serverconnect>
+<dmx-serverconnect id="scPaymentReq" url="api/PaymentRequest/ManagePayReq" dmx-param:fromdate="formGetPayDate.daterange.start" dmx-param:todate="formGetPayDate.daterange.end" dmx-param:offset="qm.data.offset" dmx-param:limit="1000" dmx-param:sort="qm.data.sort" dmx-param:dir="qm.data.dir"></dmx-serverconnect>
 <dmx-data-view id="dvPaymentReq" dmx-bind:data="scPaymentReq.data.GetPayReq" filter="(req_user_mobile.contains(formSearchUser.Search.value) || tr_no.contains(formSearchUser.Search.value) || req_user_name.lowercase().contains(formSearchUser.Search.value) || bank_name.lowercase().contains(formSearchUser.Search.value) || amount.contains(formSearchUser.Search.value))"></dmx-data-view>
-<dmx-data-detail id="ddManagePayReq" key="id" dmx-bind:data="scPaymentReq.data.GetPayReq.data"></dmx-data-detail>
+<dmx-data-detail id="ddManagePayReq" key="id" dmx-bind:data="dvPaymentReq.data"></dmx-data-detail>
 <div class="row align-items-center justify-content-between px-4 mb-3 sd-secondary-header mx-0">
     <div class="col-12 col-md-auto me-auto">
         <h1 class="ms-md-1 mt-md-3 text-dark fs-2 sd-fw-800 d-flex align-items-center">
