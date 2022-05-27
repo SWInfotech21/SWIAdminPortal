@@ -1,6 +1,6 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="livetransactions" appConnect="local" components="{dmxSockets:{},dmxDataTraversal:{}}" -->
 <meta name="ac:route" content="/live-transactions">
-<dmx-serverconnect id="scLiveRech" url="api/Reports/LiveTransactions" sockets="true"></dmx-serverconnect>
+<dmx-serverconnect id="scLiveRech" url="api/Reports/LiveTransactions" sockets="true" dmx-param:date="dateNow.datetime.formatDate('yyyy-MM-dd')"></dmx-serverconnect>
 
 <div class="row align-items-center justify-content-between px-4 mb-3 sd-secondary-header mx-0">
     <div class="col-12 col-md-auto me-auto ps-4">
