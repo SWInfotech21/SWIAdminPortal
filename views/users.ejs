@@ -102,10 +102,11 @@
                     <td dmx-text="aeps_merchant_id"></td>
                     <td class="fw-bold" dmx-class:text-warning="kyc_status==0" dmx-class:text-primary="kyc_status==1" dmx-class:text-danger="kyc_status==2||!kyc_status">{{kyc_status==0?'Pending': kyc_status==1?'Active': kyc_status==2?'Rejected':'Inactive'}}<button class="btn btn-warning btn-sm py-0 mt-2" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalKYCUser" dmx-hide="kyc_status==1||!kyc_status"><i class="fas fa-eye"></i></button></td>
                     <td dmx-show="scAdminBalance.data.query.user_type == 0" style="min-width: 130px; overflow: hidden;">
-                        <a class="sw-col-ar" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalAddUsers"><i class="fas fa-edit" title="Edit Users" dmx-on:click="flowGetScheme.run()"></i></a>&emsp;<a class="sw-col-br" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalPasswordUser"><i class="fas fa-user-lock" title="Password Update"></i></a>
-                        &emsp;<a class="sw-col-cr" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#"><i class="fas fa-sign-in-alt" title="Login to user panel"></i></a>&emsp;
-                        <a class="sw-col-cr" href="#" dmx-on:click="browserMain.goto('scheme-priority/'+id,true);" dmx-show="user_type == 1 || user_type == 2"><i class="fas fa-code-branch" title="Scheme Priority"></i></a>&emsp;
-                        <a class="sw-col-br" href="#" dmx-on:click="browserMain.goto('children/'+id,true);" dmx-show="user_type == 1 || user_type == 2"><i class="fas fa-network-wired" title="Show Children"></i></a>
+                        <a class="sw-col-ar" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalAddUsers"><i class="fas fa-edit" title="Edit Users" dmx-on:click="flowGetScheme.run()"></i></a>
+                        &emsp;<a class="sw-col-br" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalPasswordUser"><i class="fas fa-user-lock" title="Password Update"></i></a>
+                        &emsp;<a class="sw-col-cr" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalLoginUser" dmx-on:click="ddUsers.select(id)"><i class="fas fa-sign-in-alt" title="Login to user panel"></i></a>
+                        &emsp;<a class="sw-col-cr" href="#" dmx-on:click="browserMain.goto('scheme-priority/'+id,true);" dmx-show="user_type == 1 || user_type == 2"><i class="fas fa-code-branch" title="Scheme Priority"></i></a>
+                        &emsp;<a class="sw-col-br" href="#" dmx-on:click="browserMain.goto('children/'+id,true);" dmx-show="user_type == 1 || user_type == 2"><i class="fas fa-network-wired" title="Show Children"></i></a>
                     </td>
                     <td style="min-width: 70px; overflow: hidden;" dmx-text="created_on.formatDate('dd-MM-yyyy hh:mm:ss A')"></td>
                     <td dmx-text="blank3.titlecase()"></td>
@@ -158,6 +159,53 @@
                     <div class="mb-3 row">
                         <div class="col-sm-10">
                             <button type="submit" class="btn btn-primary" dmx-bind:disabled="state.executing">Update<span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Users Login-->
+<div class="modal fade" id="modalLoginUser" is="dmx-bs5-modal" tabindex="-1" nokeyboard="true" nocloseonclick="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">User Panel Login</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h3>Do you want to login to this user panel?</h3>
+                <form is="dmx-serverconnect-form" id="formUserLogin" method="post" action="api/Users/UserPanelLogin" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="" dmx-on:error="scNotif.warning('An error occurred');">
+                    <input type="hidden" name="UserId" dmx-bind:value="ddUsers.data.id">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-sm">
+                            <tr>
+                                <td>Image</td>
+                                <td>Name</td>
+                                <td>Email</td>
+                                <td>Phone No.</td>
+                            </tr>
+                            <tr>
+                                <td><img dmx-bind:src="ddUsers.data.user_lname" width="50" height="50"></td>
+                                <td>{{ddUsers.data.user_fname.titlecase()}}</td>
+                                <td>{{ddUsers.data.user_email}}</td>
+                                <td>{{ddUsers.data.user_mobile}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inp_tpin" class="col-sm-2 col-form-label">Admin TPIN</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="inp_AdminTpin" name="tpin" aria-describedby="inp_tpin_help" placeholder="Enter TPIN" data-rule-integer="" required="" maxlength="6">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary" dmx-bind:disabled="state.executing">Submit<span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span></button>
                         </div>
                     </div>
                 </form>
