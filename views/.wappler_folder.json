@@ -194,5 +194,9 @@
   "children.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "ClientPanel.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }
