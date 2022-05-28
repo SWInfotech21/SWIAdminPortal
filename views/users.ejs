@@ -1,6 +1,19 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="users" appConnect="local" components="{dmxBootstrap5TableGenerator:{},dmxBootstrap5Navigation:{},dmxDataTraversal:{},dmxValidator:{},dmxBootstrap5Modal:{},dmxFormatter:{}}" -->
 <meta name="ac:route" content="/users">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <dmx-serverconnect id="scPinStateDist" url="api/Users/GetPINStateDist" dmx-param:pincode="modalAddUsers.formAddEditUser.inp_pin.value"></dmx-serverconnect>
+<dmx-serverconnect id="scUserSchemPrio" url="api/Scheme/FetchSchPrioUser" dmx-param:user_type="modalChangeParentUser.formChangeParent.UserTypeSelf.value" noload></dmx-serverconnect>
+<script is="dmx-flow" id="flowFetchUser" type="text/dmx-flow">{
+  condition: {
+    if: "{{(modalChangeParentUser.formChangeParent.UserTypeSelf.value)}}",
+    then: {
+      steps: {
+        run: {action: "{{scUserSchemPrio.load({})}}"}
+      }
+    }
+  }
+}</script>
 <script is="dmx-flow" id="flowGetPIN" type="text/dmx-flow">{
     condition: {
     if: "{{modalAddUsers.formAddEditUser.inp_pin.value.length() == 6}}",
@@ -105,6 +118,7 @@
                         <a class="sw-col-ar" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalAddUsers"><i class="fas fa-edit" title="Edit Users" dmx-on:click="flowGetScheme.run()"></i></a>
                         &emsp;<a class="sw-col-br" href="#" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalPasswordUser"><i class="fas fa-user-lock" title="Password Update"></i></a>
                         &emsp;<a class="sw-col-cr" href="#" target="_blank"><i class="fas fa-sign-in-alt" title="Login to user panel"></i></a>
+                        &emsp;<a class="sw-col-ar" href="#"><i class="fas fa-user-alt" title="Change Parent" dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalChangeParentUser"></i></a>
                         <!-- dmx-on:click="ddUsers.select(id)" data-bs-toggle="modal" data-bs-target="#modalLoginUser" -->
                         &emsp;<a class="sw-col-cr" href="#" dmx-on:click="browserMain.goto('scheme-priority/'+id,true);" dmx-show="user_type == 1 || user_type == 2"><i class="fas fa-code-branch" title="Scheme Priority"></i></a>
                         &emsp;<a class="sw-col-br" href="#" dmx-on:click="browserMain.goto('children/'+id,true);" dmx-show="user_type == 1 || user_type == 2"><i class="fas fa-network-wired" title="Show Children"></i></a>
@@ -170,35 +184,46 @@
         </div>
     </div>
 </div>
-<!-- Modal Users Login-->
-<div class="modal fade" id="modalLoginUser" is="dmx-bs5-modal" tabindex="-1" nokeyboard="true" nocloseonclick="true">
+<!-- Modal Parent Change Users-->
+<div class="modal fade" id="modalChangeParentUser" is="dmx-bs5-modal" tabindex="-1" nokeyboard="true" nocloseonclick="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">User Panel Login</h5>
+                <h5 class="modal-title">User Parent Change</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <h3>Do you want to login to this user panel?</h3>
-
-                <form is="dmx-api-form" id="formUserLogin" method="post" action="https://swpay.in/api/Users/AdminLogin" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="browserMain.goto('https://swpay.in/dashboard')" dmx-on:error="scNotif.warning('An error occurred');">
-                    <input type="hidden" name="Mobile" dmx-bind:value="ddUsers.data.user_mobile">
-                    <input type="hidden" name="Password" dmx-bind:value="ddUsers.data.blank1">
+                <form is="dmx-api-form" id="formChangeParent" method="post" action="" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="" dmx-on:error="scNotif.warning('An error occurred');">
+                    <input type="hidden" name="UserId" dmx-bind:value="ddUsers.data.id">
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-sm">
                             <tr>
                                 <td>Image</td>
                                 <td>Name</td>
-                                <td>Email</td>
                                 <td>Phone No.</td>
+                                <td>Current Parent Details</td>
                             </tr>
                             <tr>
                                 <td><img dmx-bind:src="ddUsers.data.user_lname" width="50" height="50"></td>
                                 <td>{{ddUsers.data.user_fname.titlecase()}}</td>
-                                <td>{{ddUsers.data.user_email}}</td>
                                 <td>{{ddUsers.data.user_mobile}}</td>
+                                <td>{{ddUsers.data.parent_id}} | {{ddUsers.data.parent_name}} | {{ddUsers.data.parent_phone_no}}</td>
                             </tr>
                         </table>
+                    </div>
+                    <div class="mb-3 row">
+                        <label>User Type<span class="border-3 ms-2 spinner-border spinner-border-sm" role="status" dmx-show="scUserSchemPrio.state.executing"></span></label>
+                        <select id="UserTypeSelf" name="user_type" class="form-control form-select col-12 px-2" dmx-on:changed="flowFetchUser.run()" required="">
+                            <option value="">Select</option>
+                            <option value="1">MDT</option>
+                            <option value="2">DT</option>
+                        </select>
+                    </div>
+                    <div class="mb-3 row">
+                        <label>Select User</label>
+                        <select class="form-control form-select" id="inp_target_user" name="target_user_id" aria-describedby="inp_target_user_help" dmx-bind:options="scUserSchemPrio.data.UserDetails" optiontext="user_mobile+' - '+user_id+' - '+user_fname+' :: Current Balance = Rs. '+balance_amt" optionvalue="id" required="">
+                            <option value="">Select</option>
+                        </select>
                     </div>
                     <div class="mb-3 row">
                         <label for="inp_tpin" class="col-sm-2 col-form-label">Admin TPIN</label>
@@ -432,3 +457,7 @@
 <!-- <script>
     setTimeout(function () { location.reload(1); }, 60000);
 </script> -->
+<script>
+    var $disabledResults = $("#inp_target_user");
+    $disabledResults.select2();
+</script>

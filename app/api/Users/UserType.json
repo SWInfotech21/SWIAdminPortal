@@ -82,27 +82,28 @@
           "valid": true
         },
         "query": "SELECT id, type_name, user_type, status\nFROM m_user_type\nWHERE status = 1\nORDER BY id ASC",
-        "params": []
+        "params": [],
+        "primary": "id"
       }
     },
     "output": true,
     "type": "dbconnector_select",
     "meta": [
       {
-        "name": "id",
-        "type": "text"
+        "type": "number",
+        "name": "id"
       },
       {
-        "name": "type_name",
-        "type": "text"
+        "type": "text",
+        "name": "type_name"
       },
       {
-        "name": "user_type",
-        "type": "text"
+        "type": "text",
+        "name": "user_type"
       },
       {
-        "name": "status",
-        "type": "number"
+        "type": "number",
+        "name": "status"
       }
     ],
     "outputType": "array"
