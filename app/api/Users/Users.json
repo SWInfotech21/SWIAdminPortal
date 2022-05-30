@@ -690,17 +690,28 @@
         "outputType": "boolean"
       },
       {
-        "name": "csvExport",
-        "module": "export",
-        "action": "csv",
+        "name": "",
+        "module": "core",
+        "action": "condition",
         "options": {
-          "path": "/public/assets/csvFile/ViewUserList.csv",
-          "data": "{{FetchUsers}}",
-          "overwrite": true,
-          "header": true
+          "if": "{{FetchUsers[0].id}}",
+          "then": {
+            "steps": {
+              "name": "csvExport",
+              "module": "export",
+              "action": "csv",
+              "options": {
+                "path": "/public/assets/csvFile/ViewUserList.csv",
+                "data": "{{FetchUsers}}",
+                "header": true,
+                "overwrite": true
+              },
+              "outputType": "text",
+              "output": true
+            }
+          }
         },
-        "outputType": "text",
-        "output": true
+        "outputType": "boolean"
       }
     ]
   }

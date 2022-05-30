@@ -195,7 +195,7 @@
         "module": "core",
         "action": "condition",
         "options": {
-          "if": "{{!$_GET.get_type||$_GET.get_type==1}}",
+          "if": "{{$_GET.get_type==1}}",
           "then": {
             "steps": {
               "name": "GetPendingComplaint",
@@ -451,17 +451,28 @@
         "outputType": "boolean"
       },
       {
-        "name": "csvExport",
-        "module": "export",
-        "action": "csv",
+        "name": "",
+        "module": "core",
+        "action": "condition",
         "options": {
-          "path": "/public/assets/csvFile/ComplainTxn.csv",
-          "data": "{{GetPendingComplaint}}",
-          "overwrite": true,
-          "header": true
+          "if": "{{GetPendingComplaint[0].id}}",
+          "then": {
+            "steps": {
+              "name": "csvExport",
+              "module": "export",
+              "action": "csv",
+              "options": {
+                "path": "/public/assets/csvFile/ComplainTxn.csv",
+                "data": "{{GetPendingComplaint}}",
+                "overwrite": true,
+                "header": true
+              },
+              "outputType": "text",
+              "output": true
+            }
+          }
         },
-        "outputType": "text",
-        "output": true
+        "outputType": "boolean"
       }
     ]
   }
