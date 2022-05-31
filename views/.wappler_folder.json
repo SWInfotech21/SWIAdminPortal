@@ -198,5 +198,9 @@
   "ClientPanel.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "sales-report-dt.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }

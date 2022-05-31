@@ -6430,5 +6430,86 @@ dmx.config({
         "name": "id"
       }
     ]
+  },
+  "salesreportdt": {
+    "dvDTSales": {
+      "meta": [
+        {
+          "name": "dt_id",
+          "type": "text"
+        },
+        {
+          "name": "dt_name",
+          "type": "text"
+        },
+        {
+          "name": "dt_mobile",
+          "type": "text"
+        },
+        {
+          "name": "success_amt",
+          "type": "number"
+        },
+        {
+          "name": "failed_amt",
+          "type": "number"
+        }
+      ],
+      "outputType": "array"
+    },
+    "tableRepeat1": {
+      "meta": [
+        {
+          "name": "dt_id",
+          "type": "text"
+        },
+        {
+          "name": "dt_name",
+          "type": "text"
+        },
+        {
+          "name": "dt_mobile",
+          "type": "text"
+        },
+        {
+          "name": "success_amt",
+          "type": "number"
+        },
+        {
+          "name": "failed_amt",
+          "type": "number"
+        }
+      ],
+      "outputType": "array"
+    },
+    "tableRepeat2": {
+      "meta": [
+        {
+          "name": "$index",
+          "type": "number"
+        },
+        {
+          "name": "$key",
+          "type": "text"
+        },
+        {
+          "name": "$value",
+          "type": "object"
+        },
+        {
+          "name": "user_id",
+          "type": "text"
+        },
+        {
+          "name": "user_fname",
+          "type": "text"
+        },
+        {
+          "name": "success_amt",
+          "type": "number"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });
