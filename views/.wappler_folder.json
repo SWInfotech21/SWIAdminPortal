@@ -202,5 +202,9 @@
   "sales-report-dt.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "recharge-plan.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }

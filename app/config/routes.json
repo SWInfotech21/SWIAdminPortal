@@ -269,6 +269,12 @@
       "exec": "/api/PageAccess/UserAccess"
     },
     {
+      "path": "/recharge-plan",
+      "page": "recharge-plan",
+      "layout": "main",
+      "exec": "/api/PageAccess/UserAccess"
+    },
+    {
       "path": "*",
       "page": "404-not-found"
     }

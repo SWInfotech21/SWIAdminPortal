@@ -6511,5 +6511,129 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "rechargeplan": {
+    "dvRechargePlan": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "plan_type"
+        },
+        {
+          "type": "text",
+          "name": "operator_name"
+        },
+        {
+          "type": "text",
+          "name": "mrp_op_code"
+        },
+        {
+          "type": "text",
+          "name": "amount"
+        },
+        {
+          "type": "text",
+          "name": "description"
+        },
+        {
+          "type": "text",
+          "name": "special_tag"
+        },
+        {
+          "type": "text",
+          "name": "status"
+        },
+        {
+          "type": "text",
+          "name": "old_amount"
+        },
+        {
+          "type": "text",
+          "name": "old_description"
+        },
+        {
+          "type": "text",
+          "name": "remarks"
+        },
+        {
+          "type": "number",
+          "name": "created_by"
+        },
+        {
+          "type": "datetime",
+          "name": "created_on"
+        },
+        {
+          "type": "text",
+          "name": "blank"
+        }
+      ],
+      "outputType": "array"
+    },
+    "ddBank": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "plan_type"
+        },
+        {
+          "type": "text",
+          "name": "operator_name"
+        },
+        {
+          "type": "text",
+          "name": "mrp_op_code"
+        },
+        {
+          "type": "text",
+          "name": "amount"
+        },
+        {
+          "type": "text",
+          "name": "description"
+        },
+        {
+          "type": "text",
+          "name": "special_tag"
+        },
+        {
+          "type": "text",
+          "name": "status"
+        },
+        {
+          "type": "text",
+          "name": "old_amount"
+        },
+        {
+          "type": "text",
+          "name": "old_description"
+        },
+        {
+          "type": "text",
+          "name": "remarks"
+        },
+        {
+          "type": "number",
+          "name": "created_by"
+        },
+        {
+          "type": "datetime",
+          "name": "created_on"
+        },
+        {
+          "type": "text",
+          "name": "blank"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });
