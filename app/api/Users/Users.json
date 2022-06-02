@@ -1119,7 +1119,6 @@
                 "path": "/public/assets/csvFile/ViewUserList.csv",
                 "data": "{{GetCSV}}",
                 "header": true,
-                "nobom": true,
                 "overwrite": true
               },
               "outputType": "text",
