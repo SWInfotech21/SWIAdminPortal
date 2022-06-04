@@ -1,7 +1,5 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="users" appConnect="local" components="{dmxBootstrap5TableGenerator:{},dmxBootstrap5Navigation:{},dmxDataTraversal:{},dmxValidator:{},dmxBootstrap5Modal:{},dmxFormatter:{}}" -->
 <meta name="ac:route" content="/users">
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <dmx-serverconnect id="scPinStateDist" url="api/Users/GetPINStateDist" dmx-param:pincode="modalAddUsers.formAddEditUser.inp_pin.value"></dmx-serverconnect>
 <dmx-serverconnect id="scUserSchemPrio" url="api/Scheme/FetchSchPrioUser" dmx-param:user_type="modalChangeParentUser.formChangeParent.UserTypeSelf.value" noload></dmx-serverconnect>
 <script is="dmx-flow" id="flowFetchUser" type="text/dmx-flow">{
@@ -172,13 +170,13 @@
                     <div class="mb-3 row">
                         <label for="inp_password" class="col-sm-2 col-form-label">Password</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" id="inp_password" name="Password" aria-describedby="inp_password_help" placeholder="Enter Password" required="" maxlength="50">
+                            <input type="text" class="form-control" id="inp_password" name="Password" aria-describedby="inp_password_help" placeholder="Enter Password" required="" maxlength="50" dmx-bind:value="ddUsers.data.blank1">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="inp_tpin" class="col-sm-2 col-form-label">TPIN</label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" id="inp_tpin" name="tpin" aria-describedby="inp_tpin_help" placeholder="Enter TPIN" data-rule-integer="" required="" maxlength="6">
+                            <input type="text" class="form-control" id="inp_tpin" name="tpin" aria-describedby="inp_tpin_help" placeholder="Enter TPIN" data-rule-integer="" required="" maxlength="6" dmx-bind:value="ddUsers.data.user_tpin">
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -200,11 +198,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">User Parent Change</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="formChangeParent.reset();"></button>
             </div>
             <div class="modal-body">
-                <form is="dmx-api-form" id="formChangeParent" method="post" action="" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="" dmx-on:error="scNotif.warning('An error occurred');">
-                    <input type="hidden" name="UserId" dmx-bind:value="ddUsers.data.id">
+                <form is="dmx-serverconnect-form" id="formChangeParent" method="post" action="api/Users/ChangeParent" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="scNotif.success('Parent Updated Successfully'); formChangeParent.reset(); scUsers.load();" dmx-on:error="scNotif.warning('An error occurred');">
+                    <input type="hidden" name="ChildUserId" dmx-bind:value="ddUsers.data.id">
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-sm">
                             <tr>
@@ -221,24 +219,25 @@
                             </tr>
                         </table>
                     </div>
-                    <div class="mb-3 row">
-                        <label>User Type<span class="border-3 ms-2 spinner-border spinner-border-sm" role="status" dmx-show="scUserSchemPrio.state.executing"></span></label>
-                        <select id="UserTypeSelf" name="user_type" class="form-control form-select col-12 px-2" dmx-on:changed="flowFetchUser.run()" required="">
+                    <div class="mb-3 row mx-0">
+                        <label>Parent Type<span class="border-3 ms-2 spinner-border spinner-border-sm" role="status" dmx-show="scUserSchemPrio.state.executing"></span></label>
+                        <select id="UserTypeSelf" name="parent_user_type" class="form-control form-select col-12 px-2" dmx-on:changed="flowFetchUser.run()" required="">
                             <option value="">Select</option>
-                            <option value="1">MDT</option>
-                            <option value="2">DT</option>
+                            <option value="0">Admin</option>
+                            <option value="1" dmx-hide="ddUsers.data.user_type==3 || ddUsers.data.user_type==1">MDT</option>
+                            <option value="2" dmx-hide="ddUsers.data.user_type==2 || ddUsers.data.user_type==1">DT</option>
                         </select>
                     </div>
-                    <div class="mb-3 row">
-                        <label>Select User</label>
-                        <select class="form-control form-select" id="inp_target_user" name="target_user_id" aria-describedby="inp_target_user_help" dmx-bind:options="scUserSchemPrio.data.UserDetails" optiontext="user_mobile+' - '+user_id+' - '+user_fname+' :: Current Balance = Rs. '+balance_amt" optionvalue="id" required="">
+                    <div class="mb-3 row mx-0">
+                        <label>Select Parent</label>
+                        <select class="form-control form-select" id="inp_target_user" name="parent_user_id" aria-describedby="inp_target_user_help" dmx-bind:options="scUserSchemPrio.data.UserDetails" optiontext="user_mobile+' - '+user_id+' - '+user_fname+' :: Current Balance = Rs. '+balance_amt" optionvalue="id" required="">
                             <option value="">Select</option>
                         </select>
                     </div>
                     <div class="mb-3 row">
                         <label for="inp_tpin" class="col-sm-2 col-form-label">Admin TPIN</label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" id="inp_AdminTpin" name="tpin" aria-describedby="inp_tpin_help" placeholder="Enter TPIN" data-rule-integer="" required="" maxlength="6">
+                            <input type="number" class="form-control" id="inp_AdminTpin" name="Admin_tpin" aria-describedby="inp_tpin_help" placeholder="Enter TPIN" data-rule-integer="" required="" maxlength="6">
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -249,7 +248,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" dmx-on:click="formChangeParent.reset();">Close</button>
             </div>
         </div>
     </div>
@@ -467,7 +466,3 @@
 <!-- <script>
     setTimeout(function () { location.reload(1); }, 60000);
 </script> -->
-<script>
-    var $disabledResults = $("#inp_target_user");
-    $disabledResults.select2();
-</script>
