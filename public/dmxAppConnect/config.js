@@ -6635,5 +6635,428 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "individualtxn": {
+    "query": [
+      {
+        "type": "text",
+        "name": "offset"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      },
+      {
+        "type": "text",
+        "name": "limit"
+      }
+    ],
+    "dvIndTxn": {
+      "meta": [
+        {
+          "type": "text",
+          "name": "old_balance"
+        },
+        {
+          "type": "text",
+          "name": "amount"
+        },
+        {
+          "type": "text",
+          "name": "netamt"
+        },
+        {
+          "type": "text",
+          "name": "new_balance"
+        },
+        {
+          "type": "text",
+          "name": "transaction_type"
+        },
+        {
+          "type": "text",
+          "name": "tr_date"
+        },
+        {
+          "type": "text",
+          "name": "status"
+        },
+        {
+          "type": "text",
+          "name": "ip_address"
+        },
+        {
+          "type": "text",
+          "name": "crdr_type"
+        },
+        {
+          "type": "number",
+          "name": "pay_ref_id"
+        },
+        {
+          "type": "text",
+          "name": "remarks"
+        },
+        {
+          "type": "text",
+          "name": "recharge_number"
+        },
+        {
+          "type": "text",
+          "name": "tr_mode"
+        },
+        {
+          "type": "text",
+          "name": "tr_type"
+        },
+        {
+          "type": "text",
+          "name": "tr_id"
+        },
+        {
+          "type": "text",
+          "name": "api_logs"
+        },
+        {
+          "type": "text",
+          "name": "reason"
+        },
+        {
+          "type": "text",
+          "name": "is_processed"
+        },
+        {
+          "type": "text",
+          "name": "operator_ref"
+        },
+        {
+          "type": "text",
+          "name": "api_ref"
+        },
+        {
+          "type": "number",
+          "name": "api_response_id"
+        },
+        {
+          "type": "text",
+          "name": "process_mode"
+        },
+        {
+          "type": "text",
+          "name": "live"
+        },
+        {
+          "type": "text",
+          "name": "dtcommamt"
+        },
+        {
+          "type": "text",
+          "name": "dtchargeamt"
+        },
+        {
+          "type": "text",
+          "name": "mdtcommamt"
+        },
+        {
+          "type": "text",
+          "name": "mdtchargeamt"
+        },
+        {
+          "type": "text",
+          "name": "bank_ac_no"
+        },
+        {
+          "type": "text",
+          "name": "remitter_id"
+        },
+        {
+          "type": "text",
+          "name": "blank1"
+        },
+        {
+          "type": "text",
+          "name": "operator_name"
+        },
+        {
+          "type": "text",
+          "name": "service_name"
+        }
+      ],
+      "outputType": "array"
+    },
+    "ddIndTxn": {
+      "meta": [
+        {
+          "type": "text",
+          "name": "old_balance"
+        },
+        {
+          "type": "text",
+          "name": "amount"
+        },
+        {
+          "type": "text",
+          "name": "netamt"
+        },
+        {
+          "type": "text",
+          "name": "new_balance"
+        },
+        {
+          "type": "text",
+          "name": "transaction_type"
+        },
+        {
+          "type": "text",
+          "name": "tr_date"
+        },
+        {
+          "type": "text",
+          "name": "status"
+        },
+        {
+          "type": "text",
+          "name": "ip_address"
+        },
+        {
+          "type": "text",
+          "name": "crdr_type"
+        },
+        {
+          "type": "number",
+          "name": "pay_ref_id"
+        },
+        {
+          "type": "text",
+          "name": "remarks"
+        },
+        {
+          "type": "text",
+          "name": "recharge_number"
+        },
+        {
+          "type": "text",
+          "name": "tr_mode"
+        },
+        {
+          "type": "text",
+          "name": "tr_type"
+        },
+        {
+          "type": "text",
+          "name": "tr_id"
+        },
+        {
+          "type": "text",
+          "name": "api_logs"
+        },
+        {
+          "type": "text",
+          "name": "reason"
+        },
+        {
+          "type": "text",
+          "name": "is_processed"
+        },
+        {
+          "type": "text",
+          "name": "operator_ref"
+        },
+        {
+          "type": "text",
+          "name": "api_ref"
+        },
+        {
+          "type": "number",
+          "name": "api_response_id"
+        },
+        {
+          "type": "text",
+          "name": "process_mode"
+        },
+        {
+          "type": "text",
+          "name": "live"
+        },
+        {
+          "type": "text",
+          "name": "dtcommamt"
+        },
+        {
+          "type": "text",
+          "name": "dtchargeamt"
+        },
+        {
+          "type": "text",
+          "name": "mdtcommamt"
+        },
+        {
+          "type": "text",
+          "name": "mdtchargeamt"
+        },
+        {
+          "type": "text",
+          "name": "bank_ac_no"
+        },
+        {
+          "type": "text",
+          "name": "remitter_id"
+        },
+        {
+          "type": "text",
+          "name": "blank1"
+        },
+        {
+          "type": "text",
+          "name": "operator_name"
+        },
+        {
+          "type": "text",
+          "name": "service_name"
+        },
+        {
+          "type": "number",
+          "name": "table_id"
+        }
+      ],
+      "outputType": "array"
+    },
+    "tableRepeat1": {
+      "meta": [
+        {
+          "type": "text",
+          "name": "old_balance"
+        },
+        {
+          "type": "text",
+          "name": "amount"
+        },
+        {
+          "type": "text",
+          "name": "netamt"
+        },
+        {
+          "type": "text",
+          "name": "new_balance"
+        },
+        {
+          "type": "text",
+          "name": "transaction_type"
+        },
+        {
+          "type": "text",
+          "name": "tr_date"
+        },
+        {
+          "type": "text",
+          "name": "status"
+        },
+        {
+          "type": "text",
+          "name": "ip_address"
+        },
+        {
+          "type": "text",
+          "name": "crdr_type"
+        },
+        {
+          "type": "number",
+          "name": "pay_ref_id"
+        },
+        {
+          "type": "text",
+          "name": "remarks"
+        },
+        {
+          "type": "text",
+          "name": "recharge_number"
+        },
+        {
+          "type": "text",
+          "name": "tr_mode"
+        },
+        {
+          "type": "text",
+          "name": "tr_type"
+        },
+        {
+          "type": "text",
+          "name": "tr_id"
+        },
+        {
+          "type": "text",
+          "name": "api_logs"
+        },
+        {
+          "type": "text",
+          "name": "reason"
+        },
+        {
+          "type": "text",
+          "name": "is_processed"
+        },
+        {
+          "type": "text",
+          "name": "operator_ref"
+        },
+        {
+          "type": "text",
+          "name": "api_ref"
+        },
+        {
+          "type": "number",
+          "name": "api_response_id"
+        },
+        {
+          "type": "text",
+          "name": "process_mode"
+        },
+        {
+          "type": "text",
+          "name": "live"
+        },
+        {
+          "type": "text",
+          "name": "dtcommamt"
+        },
+        {
+          "type": "text",
+          "name": "dtchargeamt"
+        },
+        {
+          "type": "text",
+          "name": "mdtcommamt"
+        },
+        {
+          "type": "text",
+          "name": "mdtchargeamt"
+        },
+        {
+          "type": "text",
+          "name": "bank_ac_no"
+        },
+        {
+          "type": "text",
+          "name": "remitter_id"
+        },
+        {
+          "type": "text",
+          "name": "blank1"
+        },
+        {
+          "type": "text",
+          "name": "operator_name"
+        },
+        {
+          "type": "text",
+          "name": "service_name"
+        },
+        {
+          "type": "number",
+          "name": "table_id"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });

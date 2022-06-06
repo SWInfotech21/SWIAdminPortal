@@ -206,5 +206,9 @@
   "recharge-plan.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "individual-txn.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }

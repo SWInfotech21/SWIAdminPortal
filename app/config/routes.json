@@ -275,6 +275,11 @@
       "exec": "/api/PageAccess/UserAccess"
     },
     {
+      "path": "/individual-txn",
+      "page": "individual-txn",
+      "layout": "main"
+    },
+    {
       "path": "*",
       "page": "404-not-found"
     }
