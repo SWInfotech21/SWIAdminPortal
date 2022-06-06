@@ -26,20 +26,20 @@
         "name": "filelogo",
         "sub": [
           {
-            "name": "name",
-            "type": "text"
+            "type": "text",
+            "name": "name"
           },
           {
-            "name": "type",
-            "type": "text"
+            "type": "text",
+            "name": "type"
           },
           {
-            "name": "size",
-            "type": "number"
+            "type": "number",
+            "name": "size"
           },
           {
-            "name": "error",
-            "type": "text"
+            "type": "text",
+            "name": "error"
           }
         ],
         "outputType": "file"
@@ -207,6 +207,26 @@
                         ],
                         "outputType": "file",
                         "output": false
+                      },
+                      {
+                        "name": "fileExists",
+                        "module": "fs",
+                        "action": "exists",
+                        "options": {
+                          "path": "{{'/public'+GetImageName.sliding_image}}",
+                          "then": {
+                            "steps": {
+                              "name": "fileRemove",
+                              "module": "fs",
+                              "action": "remove",
+                              "options": {
+                                "path": "{{'/public'+GetImageName.sliding_image}}"
+                              },
+                              "outputType": "boolean"
+                            }
+                          }
+                        },
+                        "outputType": "boolean"
                       },
                       {
                         "name": "putFile_edit",

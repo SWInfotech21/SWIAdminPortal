@@ -261,6 +261,26 @@
                         "output": false
                       },
                       {
+                        "name": "fileExists",
+                        "module": "fs",
+                        "action": "exists",
+                        "options": {
+                          "path": "{{'/public'+GetImageName.image}}",
+                          "then": {
+                            "steps": {
+                              "name": "fileRemove",
+                              "module": "fs",
+                              "action": "remove",
+                              "options": {
+                                "path": "{{'/public'+GetImageName.image}}"
+                              },
+                              "outputType": "boolean"
+                            }
+                          }
+                        },
+                        "outputType": "boolean"
+                      },
+                      {
                         "name": "putFile_edit",
                         "module": "s3",
                         "action": "putFile",
