@@ -31,25 +31,25 @@
 <dmx-data-detail id="ddIndTxn" key="table_id" dmx-bind:data="content.dvIndTxn.data"></dmx-data-detail>
 
 <div class="row align-items-center justify-content-between px-4 mb-3 sd-secondary-header mx-0">
-    <div class="col-12 col-md-auto me-auto ps-3">
+    <div class="col-12 col-md-auto">
         <h6 class="ms-md-1 mt-md-3 text-dark fs-2 sd-fw-800 d-flex align-items-center">
             Individual Txns.
             <span class="border-3 ms-2 spinner-border spinner-border-sm" role="status" dmx-show="scIndividualTxn.state.executing"></span>
         </h6>
     </div>
     <div class="col-auto order-1 order-md-1 d-flex align-items-center justify-content-start justify-content-md-center px-0 px-lg-2">
-        <select id="UserTypeSelf" name="user_type" class="form-control form-select col-12 px-2" dmx-bind:options="scUserType.data.GetUserType" optiontext="user_type" optionvalue="id" dmx-on:changed="flowFetchUser.run()" required="">
-            <option value="">Select</option>
+        <select id="UserTypeSelf" name="user_type" class="form-control form-select col-12" dmx-bind:options="scUserType.data.GetUserType" optiontext="user_type" optionvalue="id" dmx-on:changed="flowFetchUser.run()" required="">
+            <option value="">Select Type</option>
         </select>
     </div>
     <div class="col-auto order-2 order-md-2 d-flex align-items-center justify-content-start justify-content-md-center px-0 px-lg-2">
-        <label>Select User</label>
-        <select class="form-control form-select" id="inp_target_user" name="target_user_id" aria-describedby="inp_target_user_help" dmx-bind:options="scUserSchemPrio.data.UserDetails" optiontext="user_mobile+' - '+user_id+' - '+user_fname+' :: Current Balance = Rs. '+balance_amt" optionvalue="id" required="" dmx-on:changed="flowIndTxnData.run()">
-            <option value="">Select</option>
+        <select class="form-control form-select" id="inp_target_user" name="target_user_id" aria-describedby="inp_target_user_help" dmx-bind:options="scUserSchemPrio.data.UserDetails" optiontext="user_mobile+' - '+user_id+' - '+user_fname+' :: Current Balance = Rs. '+balance_amt" optionvalue="id" required="" dmx-on:changed="flowIndTxnData.run()" style="min-width:300px;">
+            <option value="">Select User</option>
         </select>
     </div>
     <div class="col-auto order-4 order-md-4 d-flex align-items-center justify-content-start justify-content-md-center px-0 px-lg-2">
         <select class="form-control form-select" id="selectstatus" dmx-on:changed="flowIndTxnData.run()">
+            <option value="">Select</option>
             <option value="All">All</option>
             <option value="SUCCESS">SUCCESS</option>
             <option value="FAILED">FAILED</option>
