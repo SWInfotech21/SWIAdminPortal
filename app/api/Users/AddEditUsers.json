@@ -503,6 +503,12 @@
                               "type": "text",
                               "value": "{{$_POST.firm_name}}",
                               "condition": "{{$_POST.firm_name}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "user_email",
+                              "type": "text",
+                              "value": "{{$_POST.email}}"
                             }
                           ],
                           "table": "m_users",
@@ -524,7 +530,7 @@
                             "conditional": null,
                             "valid": true
                           },
-                          "query": "UPDATE m_users\nSET user_fname = :P1 /* {{$_POST.name}} */, user_type = :P2 /* {{$_POST.user_type}} */, u_status = :P3 /* {{$_POST.status}} */, updated_by = :P4 /* {{identity}} */, updated_on = :P5 /* {{NOW}} */, scheme_id = :P6 /* {{$_POST.scheme_id}} */, aadhar_no = :P7 /* {{$_POST.aadhar}} */, pan_no = :P8 /* {{$_POST.pan}} */, address = :P9 /* {{$_POST.address}} */, pin = :P10 /* {{$_POST.pin}} */, state = :P11 /* {{$_POST.state}} */, district = :P12 /* {{$_POST.district}} */, aeps_merchant_id = :P13 /* {{$_POST.aeps_merchant}} */, blank3 = :P14 /* {{$_POST.firm_name}} */\nWHERE id = :P15 /* {{$_POST.UserId}} */",
+                          "query": "UPDATE m_users\nSET user_fname = :P1 /* {{$_POST.name}} */, user_type = :P2 /* {{$_POST.user_type}} */, u_status = :P3 /* {{$_POST.status}} */, updated_by = :P4 /* {{identity}} */, updated_on = :P5 /* {{NOW}} */, scheme_id = :P6 /* {{$_POST.scheme_id}} */, aadhar_no = :P7 /* {{$_POST.aadhar}} */, pan_no = :P8 /* {{$_POST.pan}} */, address = :P9 /* {{$_POST.address}} */, pin = :P10 /* {{$_POST.pin}} */, state = :P11 /* {{$_POST.state}} */, district = :P12 /* {{$_POST.district}} */, aeps_merchant_id = :P13 /* {{$_POST.aeps_merchant}} */, blank3 = :P14 /* {{$_POST.firm_name}} */, user_email = :P15 /* {{$_POST.email}} */\nWHERE id = :P16 /* {{$_POST.UserId}} */",
                           "params": [
                             {
                               "name": ":P1",
@@ -597,9 +603,14 @@
                               "value": "{{$_POST.firm_name}}"
                             },
                             {
+                              "name": ":P15",
+                              "type": "expression",
+                              "value": "{{$_POST.email}}"
+                            },
+                            {
                               "operator": "equal",
                               "type": "expression",
-                              "name": ":P15",
+                              "name": ":P16",
                               "value": "{{$_POST.UserId}}"
                             }
                           ],
@@ -715,6 +726,12 @@
                               "type": "text",
                               "value": "{{$_POST.firm_name}}",
                               "condition": "{{$_POST.firm_name}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "user_email",
+                              "type": "text",
+                              "value": "{{$_POST.email}}"
                             }
                           ],
                           "table": "m_users",
@@ -736,7 +753,7 @@
                             "conditional": null,
                             "valid": true
                           },
-                          "query": "UPDATE m_users\nSET user_mobile = :P1 /* {{$_POST.mobile}} */, user_fname = :P2 /* {{$_POST.name}} */, user_type = :P3 /* {{$_POST.user_type}} */, u_status = :P4 /* {{$_POST.status}} */, updated_by = :P5 /* {{identity}} */, updated_on = :P6 /* {{NOW}} */, scheme_id = :P7 /* {{$_POST.scheme_id}} */, aadhar_no = :P8 /* {{$_POST.aadhar}} */, pan_no = :P9 /* {{$_POST.pan}} */, address = :P10 /* {{$_POST.address}} */, pin = :P11 /* {{$_POST.pin}} */, state = :P12 /* {{$_POST.state}} */, district = :P13 /* {{$_POST.district}} */, aeps_merchant_id = :P14 /* {{$_POST.aeps_merchant}} */, blank3 = :P15 /* {{$_POST.firm_name}} */\nWHERE id = :P16 /* {{$_POST.UserId}} */",
+                          "query": "UPDATE m_users\nSET user_mobile = :P1 /* {{$_POST.mobile}} */, user_fname = :P2 /* {{$_POST.name}} */, user_type = :P3 /* {{$_POST.user_type}} */, u_status = :P4 /* {{$_POST.status}} */, updated_by = :P5 /* {{identity}} */, updated_on = :P6 /* {{NOW}} */, scheme_id = :P7 /* {{$_POST.scheme_id}} */, aadhar_no = :P8 /* {{$_POST.aadhar}} */, pan_no = :P9 /* {{$_POST.pan}} */, address = :P10 /* {{$_POST.address}} */, pin = :P11 /* {{$_POST.pin}} */, state = :P12 /* {{$_POST.state}} */, district = :P13 /* {{$_POST.district}} */, aeps_merchant_id = :P14 /* {{$_POST.aeps_merchant}} */, blank3 = :P15 /* {{$_POST.firm_name}} */, user_email = :P16 /* {{$_POST.email}} */\nWHERE id = :P17 /* {{$_POST.UserId}} */",
                           "params": [
                             {
                               "name": ":P1",
@@ -814,9 +831,14 @@
                               "value": "{{$_POST.firm_name}}"
                             },
                             {
+                              "name": ":P16",
+                              "type": "expression",
+                              "value": "{{$_POST.email}}"
+                            },
+                            {
                               "operator": "equal",
                               "type": "expression",
-                              "name": ":P16",
+                              "name": ":P17",
                               "value": "{{$_POST.UserId}}"
                             }
                           ],
