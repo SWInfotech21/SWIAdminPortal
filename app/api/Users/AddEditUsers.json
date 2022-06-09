@@ -732,6 +732,12 @@
                               "column": "user_email",
                               "type": "text",
                               "value": "{{$_POST.email}}"
+                            },
+                            {
+                              "table": "m_users",
+                              "column": "blank2",
+                              "type": "text",
+                              "value": "{{$_POST.mobile}}"
                             }
                           ],
                           "table": "m_users",
@@ -753,7 +759,7 @@
                             "conditional": null,
                             "valid": true
                           },
-                          "query": "UPDATE m_users\nSET user_mobile = :P1 /* {{$_POST.mobile}} */, user_fname = :P2 /* {{$_POST.name}} */, user_type = :P3 /* {{$_POST.user_type}} */, u_status = :P4 /* {{$_POST.status}} */, updated_by = :P5 /* {{identity}} */, updated_on = :P6 /* {{NOW}} */, scheme_id = :P7 /* {{$_POST.scheme_id}} */, aadhar_no = :P8 /* {{$_POST.aadhar}} */, pan_no = :P9 /* {{$_POST.pan}} */, address = :P10 /* {{$_POST.address}} */, pin = :P11 /* {{$_POST.pin}} */, state = :P12 /* {{$_POST.state}} */, district = :P13 /* {{$_POST.district}} */, aeps_merchant_id = :P14 /* {{$_POST.aeps_merchant}} */, blank3 = :P15 /* {{$_POST.firm_name}} */, user_email = :P16 /* {{$_POST.email}} */\nWHERE id = :P17 /* {{$_POST.UserId}} */",
+                          "query": "UPDATE m_users\nSET user_mobile = :P1 /* {{$_POST.mobile}} */, user_fname = :P2 /* {{$_POST.name}} */, user_type = :P3 /* {{$_POST.user_type}} */, u_status = :P4 /* {{$_POST.status}} */, updated_by = :P5 /* {{identity}} */, updated_on = :P6 /* {{NOW}} */, scheme_id = :P7 /* {{$_POST.scheme_id}} */, aadhar_no = :P8 /* {{$_POST.aadhar}} */, pan_no = :P9 /* {{$_POST.pan}} */, address = :P10 /* {{$_POST.address}} */, pin = :P11 /* {{$_POST.pin}} */, state = :P12 /* {{$_POST.state}} */, district = :P13 /* {{$_POST.district}} */, aeps_merchant_id = :P14 /* {{$_POST.aeps_merchant}} */, blank3 = :P15 /* {{$_POST.firm_name}} */, user_email = :P16 /* {{$_POST.email}} */, blank2 = :P17 /* {{$_POST.mobile}} */\nWHERE id = :P18 /* {{$_POST.UserId}} */",
                           "params": [
                             {
                               "name": ":P1",
@@ -836,9 +842,14 @@
                               "value": "{{$_POST.email}}"
                             },
                             {
+                              "name": ":P17",
+                              "type": "expression",
+                              "value": "{{$_POST.mobile}}"
+                            },
+                            {
                               "operator": "equal",
                               "type": "expression",
-                              "name": ":P17",
+                              "name": ":P18",
                               "value": "{{$_POST.UserId}}"
                             }
                           ],
