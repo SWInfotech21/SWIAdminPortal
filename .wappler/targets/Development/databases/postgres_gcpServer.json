@@ -796,6 +796,13 @@
               "nullable": true
             }
           }
+        },
+        "sub": {
+          "m_api_forward": "api_id"
+        },
+        "refs": {
+          "t_op_api": "api_id",
+          "t_random_root": "api_id"
         }
       },
       "m_api_forward": {
@@ -930,7 +937,8 @@
               "unique": false
             }
           }
-        }
+        },
+        "parent": "m_api"
       },
       "m_bank": {
         "db": {
@@ -1291,6 +1299,15 @@
               "unique": false
             }
           }
+        },
+        "refs": {
+          "m_api_forward": "operator_id",
+          "m_commission": "operator_id",
+          "t_op_api": "op_id",
+          "t_op_api_rel": "op_id",
+          "t_random_root": "op_id",
+          "tt_aeps_trans": "op_id",
+          "tt_recharge_trans": "op_id"
         }
       },
       "m_recharge_plan": {
@@ -1532,6 +1549,7 @@
           }
         },
         "refs": {
+          "m_commission": "scheme_id",
           "m_users": "scheme_id"
         }
       },
@@ -1648,6 +1666,11 @@
               "unique": false
             }
           }
+        },
+        "refs": {
+          "t_random_root": "service_id",
+          "tt_aeps_trans": "service_id",
+          "tt_recharge_trans": "service_id"
         }
       },
       "m_signup": {
@@ -1696,6 +1719,10 @@
               "nullable": true
             }
           }
+        },
+        "refs": {
+          "android_sliding_image": "user_type",
+          "m_users": "user_type"
         }
       },
       "m_users": {
@@ -2050,6 +2077,22 @@
               "nullable": true
             }
           }
+        },
+        "refs": {
+          "cc_pageaccess": "ccuser_id",
+          "dump_api_token": "user_id",
+          "payment_request": "pay_user_id",
+          "t_api_token": "user_id",
+          "t_charge_aeps_cal": "user_id",
+          "t_charge_cal": "user_id",
+          "t_login_history": "user_id",
+          "t_sms_log": "user_id",
+          "t_ticket": "user_id",
+          "t_user_kyc": "user_id",
+          "tt_aeps_balance": "user_id",
+          "tt_aeps_trans": "user_id",
+          "tt_balance": "user_id",
+          "tt_recharge_trans": "user_id"
         }
       },
       "payment_request": {
@@ -2364,6 +2407,156 @@
       "t_charge_aeps_cal": {
         "db": {
           "schema": "public"
+        },
+        "columns": {
+          "id": {
+            "db": {
+              "type": "increments",
+              "default": "",
+              "primary": true,
+              "unique": true,
+              "nullable": false
+            }
+          },
+          "user_id": {
+            "db": {
+              "type": "reference",
+              "primary": false,
+              "unique": false,
+              "nullable": false,
+              "references": "id",
+              "inTable": "m_users",
+              "onUpdate": "NO ACTION",
+              "onDelete": "NO ACTION"
+            }
+          },
+          "pay_ref_id": {
+            "db": {
+              "type": "reference",
+              "primary": false,
+              "unique": false,
+              "nullable": false,
+              "references": "id",
+              "inTable": "tt_aeps_trans",
+              "onUpdate": "NO ACTION",
+              "onDelete": "NO ACTION"
+            }
+          },
+          "crdr_type": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "old_bal": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "amount": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": false
+            }
+          },
+          "net_amt": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "new_bal": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "tr_type": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "tr_date": {
+            "db": {
+              "type": "timestamp",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "ip_address": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "remarks": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "created_by": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "blank1": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "blank2": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "blank3": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          }
         }
       },
       "t_charge_cal": {
@@ -4244,6 +4437,10 @@
               "nullable": true
             }
           }
+        },
+        "refs": {
+          "t_charge_aeps_cal": "pay_ref_id",
+          "tt_aeps_balance": "pay_ref_id"
         }
       },
       "tt_balance": {
@@ -4904,6 +5101,11 @@
               "nullable": true
             }
           }
+        },
+        "refs": {
+          "bbps_info": "pay_ref_id",
+          "t_charge_cal": "pay_ref_id",
+          "tt_balance": "pay_ref_id"
         }
       }
     },
