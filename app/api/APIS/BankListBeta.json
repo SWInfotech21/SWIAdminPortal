@@ -80,13 +80,19 @@
             },
             "joins": [],
             "primary": "id",
-            "query": "SELECT id, bank_name, bank_code, is_imps, is_neft, is_ac_verify_available, ifsc, status\nFROM t_bank_list_beta\nOFFSET  ROWS",
+            "query": "SELECT id, bank_name, bank_code, is_imps, is_neft, is_ac_verify_available, ifsc, status\nFROM t_bank_list_beta\nORDER BY bank_name ASC\nOFFSET  ROWS",
             "params": [],
             "limit": "",
             "offset": "",
             "sort": "",
             "dir": "",
-            "orders": []
+            "orders": [
+              {
+                "table": "t_bank_list_beta",
+                "column": "bank_name",
+                "direction": "ASC"
+              }
+            ]
           },
           "connection": "postgres_gcpServer"
         },
