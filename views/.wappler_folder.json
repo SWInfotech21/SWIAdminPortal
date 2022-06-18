@@ -210,5 +210,9 @@
   "individual-txn.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "manage-services.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }

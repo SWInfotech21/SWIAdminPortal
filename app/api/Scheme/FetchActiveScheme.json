@@ -118,7 +118,8 @@
               ],
               "conditional": null,
               "valid": true
-            }
+            },
+            "primary": "id"
           }
         },
         "output": true,

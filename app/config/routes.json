@@ -280,6 +280,11 @@
       "layout": "main"
     },
     {
+      "path": "/manage-services",
+      "page": "manage-services",
+      "layout": "main"
+    },
+    {
       "path": "*",
       "page": "404-not-found"
     }

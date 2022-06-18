@@ -961,10 +961,14 @@
           },
           "operator_id": {
             "db": {
-              "type": "integer",
+              "type": "reference",
               "primary": false,
               "nullable": false,
-              "unique": false
+              "unique": false,
+              "references": "id",
+              "inTable": "m_operator",
+              "onUpdate": "NO ACTION",
+              "onDelete": "NO ACTION"
             }
           },
           "user_id": {
@@ -985,10 +989,14 @@
           },
           "scheme_id": {
             "db": {
-              "type": "integer",
+              "type": "reference",
               "primary": false,
               "nullable": true,
-              "unique": false
+              "unique": false,
+              "references": "id",
+              "inTable": "m_scheme",
+              "onUpdate": "NO ACTION",
+              "onDelete": "NO ACTION"
             }
           },
           "comm_per": {
@@ -3241,6 +3249,79 @@
             "db": {
               "type": "integer",
               "primary": false,
+              "nullable": true
+            }
+          }
+        }
+      },
+      "t_service_scheme_control": {
+        "db": {
+          "schema": "public"
+        },
+        "columns": {
+          "id": {
+            "db": {
+              "type": "increments",
+              "default": "",
+              "primary": true,
+              "unique": true,
+              "nullable": false
+            }
+          },
+          "service_id": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "scheme_id": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "status": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "remarks": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "created_by": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "created_on": {
+            "db": {
+              "type": "timestamp",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "updated_on": {
+            "db": {
+              "type": "timestamp",
+              "primary": false,
+              "unique": false,
               "nullable": true
             }
           }
