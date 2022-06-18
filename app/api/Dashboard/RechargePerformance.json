@@ -33,7 +33,7 @@
         "options": {
           "connection": "postgres_gcpServer",
           "sql": {
-            "query": "select distinct coalesce((\n\tselect count(trt.id) as countrecharge from tt_recharge_trans trt where trt.tr_date between @startdate and @enddate),0) as countrecharges,\n\tcoalesce((\n\tselect count(trt.id) as countfalil from tt_recharge_trans trt\n\twhere trt.status = 'FAILED' and trt.tr_date between @startdate and @enddate),0) as countfailure,\n\tcoalesce((\n\tselect count(trt.id) as countsucc from tt_recharge_trans trt\n\twhere trt.status = 'SUCCESS' and trt.tr_date between @startdate and @enddate),0) as countsuccess,\n\tcoalesce((\n\tselect count(trt.id) as countrev from tt_recharge_trans trt\n\twhere trt.status = 'REVERSAL' and trt.tr_date between @startdate and @enddate),0) as countreversal\nfrom tt_recharge_trans trt2 ;",
+            "query": "select distinct coalesce((\n\tselect count(trt.id) as countrecharge from tt_recharge_trans trt where trt.tr_date between @startdate and @enddate),0) as countrecharges,\n\tcoalesce((\n\tselect count(trt.id) as countfalil from tt_recharge_trans trt\n\twhere trt.status = 'FAILED' and trt.tr_date between @startdate and @enddate),0) as countfailure,\n\tcoalesce((\n\tselect count(trt.id) as countsucc from tt_recharge_trans trt\n\twhere trt.status = 'SUCCESS' and trt.tr_date between @startdate and @enddate),0) as countsuccess,\n\tcoalesce((\n\tselect count(trt.id) as countrev from tt_recharge_trans trt\n\twhere trt.status = 'REFUND' and trt.tr_date between @startdate and @enddate),0) as countreversal\nfrom tt_recharge_trans trt2 ;",
             "params": [
               {
                 "name": "@startdate",

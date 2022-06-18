@@ -19,7 +19,7 @@
     "options": {
       "provider": "securityLogin"
     },
-    "output": true,
+    "output": false,
     "meta": []
   },
   {
@@ -336,6 +336,76 @@
       {
         "type": "number",
         "name": "CountTrans"
+      }
+    ],
+    "outputType": "object"
+  },
+  {
+    "name": "AEPSPendingTrans",
+    "module": "dbconnector",
+    "action": "single",
+    "options": {
+      "connection": "postgres_gcpServer",
+      "sql": {
+        "type": "SELECT",
+        "columns": [
+          {
+            "table": "tt_aeps_trans",
+            "column": "id",
+            "alias": "CountAEPS",
+            "aggregate": "COUNT"
+          }
+        ],
+        "table": {
+          "name": "tt_aeps_trans"
+        },
+        "joins": [],
+        "query": "SELECT COUNT(id) AS CountAEPS\nFROM tt_aeps_trans\nWHERE status = :P1 /* {{'PENDING'}} */",
+        "params": [
+          {
+            "operator": "equal",
+            "type": "expression",
+            "name": ":P1",
+            "value": "{{'PENDING'}}"
+          }
+        ],
+        "primary": "id",
+        "groupBy": [],
+        "wheres": {
+          "condition": "AND",
+          "rules": [
+            {
+              "id": "tt_aeps_trans.status",
+              "field": "tt_aeps_trans.status",
+              "type": "string",
+              "operator": "equal",
+              "value": "{{'PENDING'}}",
+              "data": {
+                "table": "tt_aeps_trans",
+                "column": "status",
+                "type": "text",
+                "columnObj": {
+                  "type": "string",
+                  "maxLength": -5,
+                  "primary": false,
+                  "unique": false,
+                  "nullable": true,
+                  "name": "status"
+                }
+              },
+              "operation": "="
+            }
+          ],
+          "conditional": null,
+          "valid": true
+        }
+      }
+    },
+    "output": true,
+    "meta": [
+      {
+        "type": "number",
+        "name": "CountAEPS"
       }
     ],
     "outputType": "object"

@@ -153,8 +153,8 @@
                     <div class="col-7 row">
                         <p class="m-0 col-12 col-md-6"><b>Pending Recharge:</b> <a href="pending-recharge" class="text-light">&nbsp;&nbsp;{{scAdminBalance.data.GetPendingTrans.CountTrans}}&nbsp;&nbsp;</a></p>
                         <p class="m-0 col-12 col-md-6"><b>Payment Request:</b> <a href="response-request" class="text-light">&nbsp;&nbsp;{{scAdminBalance.data.GetPaymentRequest.CountPayment}}&nbsp;&nbsp;</a></p>
+                        <p class="m-0 col-12 col-md-6"><b>AEPS Pending:</b><a href="#" class="text-light">&nbsp;&nbsp;{{scAdminBalance.data.AEPSPendingTrans.CountAEPS}}&nbsp;&nbsp;</a></p>
                         <p class="m-0 col-12 col-md-6"><b>Tikets:</b><a href="complain-browse-tickets" class="text-light">&nbsp;&nbsp;{{scAdminBalance.data.BrowsTicketComplain.CountComplain}}&nbsp;&nbsp;</a>&emsp;<b>General Tikets:</b><a href="complain-other-tickets" class="text-light">&nbsp;&nbsp;{{scAdminBalance.data.GeneralTicket.CountTickets}}&nbsp;&nbsp;</a></p>
-                        <p class="m-0 col-12 col-md-6"><b>Bank Withdrawal Request:</b>0</p>
                     </div>
                     <div class="col-3">
                         <p class="m-0"><b>Logged in site as:</b>&nbsp;&nbsp;<span>{{scAdminBalance.data.query.user_fname}}</span></p>
