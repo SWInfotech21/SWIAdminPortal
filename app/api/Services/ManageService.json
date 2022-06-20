@@ -45,7 +45,7 @@
         "options": {
           "connection": "postgres_gcpServer",
           "sql": {
-            "query": "select tssc.id, ms.id as service_id, ms.service_name, tssc.status \nfrom m_service ms \nleft join t_service_scheme_control tssc on tssc.service_id = ms.id and tssc.scheme_id = @scheme \norder by ms.service_name asc",
+            "query": "select tssc.id, msb.id as service_id, msb.service_name, tssc.status \nfrom m_services_broad msb \nleft join t_service_scheme_control tssc on tssc.service_id = msb.id and tssc.scheme_id = @scheme\norder by msb.service_name asc;",
             "params": [
               {
                 "name": "@scheme",
@@ -59,6 +59,10 @@
         "meta": [
           {
             "name": "id",
+            "type": "text"
+          },
+          {
+            "name": "service_id",
             "type": "number"
           },
           {
