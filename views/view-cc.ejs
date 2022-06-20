@@ -180,6 +180,15 @@
                                 <input type="text" class="form-control" id="inp_pan" name="pan" aria-describedby="inp_pan_help" placeholder="Enter PAN No" maxlength="10" required="" data-msg-required="PAN no is required." dmx-bind:value="ddUsers.data.pan_no">
                             </div>
                         </div>
+                        <div class="col-12 col-sm-6 row mx-0">
+                            <label for="inp_aeps_merchant" class="col-form-label">Status</label>
+                            <div class="col-12 px-0">
+                                <select type="text" class="form-control form-select" id="u_status" name="status" dmx-bind:value="ddUsers.data.u_status">
+                                    <option value="1">Active</option>
+                                    <option value="0">InActive</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="mb-3 row">
                         <div class="col-12 col-sm-6 row mx-0">
