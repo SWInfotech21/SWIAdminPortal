@@ -285,6 +285,11 @@
       "layout": "main"
     },
     {
+      "path": "/swpay-enquiry",
+      "page": "swpay-enquiry",
+      "layout": "main"
+    },
+    {
       "path": "*",
       "page": "404-not-found"
     }

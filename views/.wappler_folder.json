@@ -214,5 +214,9 @@
   "manage-services.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "swpay-enquiry.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }

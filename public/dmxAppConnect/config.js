@@ -7058,5 +7058,109 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "swpayenquiry": {
+    "SWPAYConatct": {
+      "meta": [
+        {
+          "name": "id",
+          "type": "number"
+        },
+        {
+          "name": "sms_message",
+          "type": "text"
+        },
+        {
+          "name": "sender_mobile",
+          "type": "text"
+        },
+        {
+          "name": "created_on",
+          "type": "text"
+        },
+        {
+          "name": "sms_type",
+          "type": "text"
+        },
+        {
+          "name": "ip_address",
+          "type": "text"
+        },
+        {
+          "name": "status",
+          "type": "text"
+        },
+        {
+          "name": "response",
+          "type": "text"
+        },
+        {
+          "name": "user_id",
+          "type": "number"
+        },
+        {
+          "name": "extra1",
+          "type": "text"
+        }
+      ],
+      "outputType": "array"
+    },
+    "tableRepeat1": {
+      "meta": [
+        {
+          "name": "$index",
+          "type": "number"
+        },
+        {
+          "name": "$key",
+          "type": "text"
+        },
+        {
+          "name": "$value",
+          "type": "object"
+        },
+        {
+          "name": "id",
+          "type": "number"
+        },
+        {
+          "name": "sms_message",
+          "type": "text"
+        },
+        {
+          "name": "sender_mobile",
+          "type": "text"
+        },
+        {
+          "name": "created_on",
+          "type": "text"
+        },
+        {
+          "name": "sms_type",
+          "type": "text"
+        },
+        {
+          "name": "ip_address",
+          "type": "text"
+        },
+        {
+          "name": "status",
+          "type": "text"
+        },
+        {
+          "name": "response",
+          "type": "text"
+        },
+        {
+          "name": "user_id",
+          "type": "number"
+        },
+        {
+          "name": "extra1",
+          "type": "text"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });
