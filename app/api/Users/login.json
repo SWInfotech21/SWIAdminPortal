@@ -65,7 +65,7 @@
               "name": "m_users"
             },
             "joins": [],
-            "query": "SELECT salt AS saltvalue, id\nFROM m_users\nWHERE blank2 = :P1 /* {{$_POST.Mobile}} */ AND (user_type = 0 OR user_type = 4)",
+            "query": "SELECT salt AS saltvalue, id\nFROM m_users\nWHERE blank2 = :P1 /* {{$_POST.Mobile}} */ AND (user_type = 0 OR user_type = 4) AND u_status = '1'",
             "params": [
               {
                 "operator": "equal",
@@ -86,7 +86,15 @@
                   "data": {
                     "table": "m_users",
                     "column": "blank2",
-                    "type": "text"
+                    "type": "text",
+                    "columnObj": {
+                      "type": "string",
+                      "primary": false,
+                      "nullable": true,
+                      "maxLength": -5,
+                      "unique": false,
+                      "name": "blank2"
+                    }
                   },
                   "operation": "="
                 },
@@ -102,7 +110,14 @@
                       "data": {
                         "table": "m_users",
                         "column": "user_type",
-                        "type": "number"
+                        "type": "number",
+                        "columnObj": {
+                          "type": "integer",
+                          "primary": false,
+                          "nullable": false,
+                          "unique": false,
+                          "name": "user_type"
+                        }
                       },
                       "operation": "="
                     },
@@ -115,17 +130,46 @@
                       "data": {
                         "table": "m_users",
                         "column": "user_type",
-                        "type": "number"
+                        "type": "number",
+                        "columnObj": {
+                          "type": "integer",
+                          "primary": false,
+                          "nullable": false,
+                          "unique": false,
+                          "name": "user_type"
+                        }
                       },
                       "operation": "="
                     }
                   ],
                   "conditional": null
+                },
+                {
+                  "id": "m_users.u_status",
+                  "field": "m_users.u_status",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "1",
+                  "data": {
+                    "table": "m_users",
+                    "column": "u_status",
+                    "type": "text",
+                    "columnObj": {
+                      "type": "string",
+                      "primary": false,
+                      "nullable": true,
+                      "maxLength": -5,
+                      "unique": false,
+                      "name": "u_status"
+                    }
+                  },
+                  "operation": "="
                 }
               ],
               "conditional": null,
               "valid": true
-            }
+            },
+            "primary": "id"
           }
         },
         "output": true,
