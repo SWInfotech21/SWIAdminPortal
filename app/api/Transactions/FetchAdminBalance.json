@@ -177,6 +177,68 @@
     "outputType": "object"
   },
   {
+    "name": "GetAddMoneyReq",
+    "module": "dbconnector",
+    "action": "single",
+    "options": {
+      "connection": "postgres_gcpServer",
+      "sql": {
+        "type": "SELECT",
+        "columns": [
+          {
+            "table": "payment_req_self",
+            "column": "id",
+            "alias": "CountAddMoney",
+            "aggregate": "COUNT"
+          }
+        ],
+        "table": {
+          "name": "payment_req_self"
+        },
+        "joins": [],
+        "primary": "id",
+        "groupBy": [],
+        "wheres": {
+          "condition": "AND",
+          "rules": [
+            {
+              "id": "payment_req_self.status",
+              "field": "payment_req_self.status",
+              "type": "double",
+              "operator": "equal",
+              "value": 1,
+              "data": {
+                "table": "payment_req_self",
+                "column": "status",
+                "type": "number",
+                "columnObj": {
+                  "type": "integer",
+                  "primary": false,
+                  "unique": false,
+                  "nullable": false,
+                  "name": "status"
+                }
+              },
+              "operation": "="
+            }
+          ],
+          "conditional": null,
+          "valid": true
+        },
+        "query": "SELECT COUNT(id) AS CountAddMoney\nFROM payment_req_self\nWHERE status = 1",
+        "params": []
+      }
+    },
+    "output": true,
+    "meta": [
+      {
+        "type": "number",
+        "name": "CountAddMoney"
+      }
+    ],
+    "outputType": "object"
+  },
+  {
     "name": "GetPaymentRequest",
     "module": "dbconnector",
     "action": "single",

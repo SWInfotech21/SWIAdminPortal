@@ -1681,7 +1681,22 @@
           "tt_recharge_trans": "service_id"
         }
       },
+      "m_services_broad": {
+        "db": {
+          "schema": "public"
+        }
+      },
       "m_signup": {
+        "db": {
+          "schema": "public"
+        }
+      },
+      "m_swinfotech_contact_us": {
+        "db": {
+          "schema": "public"
+        }
+      },
+      "m_swpay_contact_us": {
         "db": {
           "schema": "public"
         }
@@ -2089,6 +2104,7 @@
         "refs": {
           "cc_pageaccess": "ccuser_id",
           "dump_api_token": "user_id",
+          "payment_req_self": "pay_user_id",
           "payment_request": "pay_user_id",
           "t_api_token": "user_id",
           "t_charge_aeps_cal": "user_id",
@@ -2101,6 +2117,221 @@
           "tt_aeps_trans": "user_id",
           "tt_balance": "user_id",
           "tt_recharge_trans": "user_id"
+        }
+      },
+      "payment_req_self": {
+        "db": {
+          "schema": "public"
+        },
+        "columns": {
+          "id": {
+            "db": {
+              "type": "increments",
+              "default": "",
+              "primary": true,
+              "unique": true,
+              "nullable": false
+            }
+          },
+          "pay_user_id": {
+            "db": {
+              "type": "reference",
+              "primary": false,
+              "unique": false,
+              "nullable": false,
+              "references": "id",
+              "inTable": "m_users",
+              "onUpdate": "NO ACTION",
+              "onDelete": "NO ACTION"
+            }
+          },
+          "req_user_id": {
+            "db": {
+              "type": "reference",
+              "primary": false,
+              "unique": false,
+              "nullable": false,
+              "references": "id",
+              "inTable": "m_users",
+              "onUpdate": "NO ACTION",
+              "onDelete": "NO ACTION"
+            }
+          },
+          "user_name": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "req_email": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "req_mobile": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "amount": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": false
+            }
+          },
+          "message": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "payment_url": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "client_req_id": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "order_id": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "api_id": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "payment_mode": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "pay_type": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "response": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "status": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "unique": false,
+              "nullable": false
+            }
+          },
+          "blank1": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "blank2": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "blank3": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "expiry_date": {
+            "db": {
+              "type": "date",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "tr_date": {
+            "db": {
+              "type": "date",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "request_time": {
+            "db": {
+              "type": "timestamp",
+              "primary": false,
+              "unique": false,
+              "nullable": false
+            }
+          },
+          "response_time": {
+            "db": {
+              "type": "timestamp",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          }
         }
       },
       "payment_request": {
