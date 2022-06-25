@@ -290,6 +290,11 @@
       "layout": "main"
     },
     {
+      "path": "/add-money-request",
+      "page": "add-money-request",
+      "layout": "main"
+    },
+    {
       "path": "*",
       "page": "404-not-found"
     }

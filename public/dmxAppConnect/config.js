@@ -7162,5 +7162,72 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "addmoneyrequest": {
+    "dvPaymentReq": {
+      "meta": [
+        {
+          "name": "id",
+          "type": "number"
+        },
+        {
+          "name": "amount",
+          "type": "text"
+        },
+        {
+          "name": "order_id",
+          "type": "text"
+        },
+        {
+          "name": "tr_date",
+          "type": "text"
+        },
+        {
+          "name": "tr_no",
+          "type": "text"
+        },
+        {
+          "name": "payment_mode",
+          "type": "text"
+        },
+        {
+          "name": "pay_type",
+          "type": "text"
+        },
+        {
+          "name": "status",
+          "type": "number"
+        },
+        {
+          "name": "response",
+          "type": "text"
+        },
+        {
+          "name": "payment_url",
+          "type": "text"
+        },
+        {
+          "name": "message",
+          "type": "text"
+        },
+        {
+          "name": "expiry_date",
+          "type": "text"
+        },
+        {
+          "name": "req_user_name",
+          "type": "text"
+        },
+        {
+          "name": "req_user_mobile",
+          "type": "text"
+        },
+        {
+          "name": "req_user_balance",
+          "type": "text"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });

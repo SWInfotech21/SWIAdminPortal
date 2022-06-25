@@ -218,5 +218,9 @@
   "swpay-enquiry.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "add-money-request.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }
