@@ -7519,5 +7519,152 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "pendingaeps": {
+    "dvPendingTrans": {
+      "meta": [
+        {
+          "name": "id",
+          "type": "number"
+        },
+        {
+          "name": "api_id",
+          "type": "number"
+        },
+        {
+          "name": "user_number",
+          "type": "text"
+        },
+        {
+          "name": "details",
+          "type": "text"
+        },
+        {
+          "name": "bank_name",
+          "type": "text"
+        },
+        {
+          "name": "bank_acno",
+          "type": "text"
+        },
+        {
+          "name": "benef_name",
+          "type": "text"
+        },
+        {
+          "name": "benef_id",
+          "type": "text"
+        },
+        {
+          "name": "opening_balance",
+          "type": "text"
+        },
+        {
+          "name": "amount",
+          "type": "text"
+        },
+        {
+          "name": "comm_per",
+          "type": "text"
+        },
+        {
+          "name": "comm_val",
+          "type": "text"
+        },
+        {
+          "name": "comm_amt",
+          "type": "text"
+        },
+        {
+          "name": "other_charge",
+          "type": "text"
+        },
+        {
+          "name": "charge_per",
+          "type": "text"
+        },
+        {
+          "name": "charge_amt",
+          "type": "text"
+        },
+        {
+          "name": "net_amt",
+          "type": "text"
+        },
+        {
+          "name": "closing_balance",
+          "type": "text"
+        },
+        {
+          "name": "tr_mode",
+          "type": "text"
+        },
+        {
+          "name": "tr_type",
+          "type": "text"
+        },
+        {
+          "name": "status",
+          "type": "text"
+        },
+        {
+          "name": "tr_id",
+          "type": "text"
+        },
+        {
+          "name": "reason",
+          "type": "text"
+        },
+        {
+          "name": "api_logs",
+          "type": "text"
+        },
+        {
+          "name": "is_processed",
+          "type": "text"
+        },
+        {
+          "name": "operator_ref",
+          "type": "text"
+        },
+        {
+          "name": "api_ref",
+          "type": "text"
+        },
+        {
+          "name": "api_response_id",
+          "type": "text"
+        },
+        {
+          "name": "process_mode",
+          "type": "text"
+        },
+        {
+          "name": "live",
+          "type": "text"
+        },
+        {
+          "name": "tr_date",
+          "type": "text"
+        },
+        {
+          "name": "operator_name",
+          "type": "text"
+        },
+        {
+          "name": "user_id",
+          "type": "text"
+        },
+        {
+          "name": "user_fname",
+          "type": "text"
+        },
+        {
+          "name": "user_mobile",
+          "type": "text"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });

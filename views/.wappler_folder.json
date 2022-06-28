@@ -222,5 +222,9 @@
   "add-money-request.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "pending-aeps.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }
