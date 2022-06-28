@@ -295,13 +295,13 @@
       "layout": "main"
     },
     {
-      "path": "*",
-      "page": "404-not-found"
-    },
-    {
       "path": "/pending-aeps",
       "page": "pending-aeps",
       "layout": "main"
+    },
+    {
+      "path": "*",
+      "page": "404-not-found"
     }
   ]
 }
