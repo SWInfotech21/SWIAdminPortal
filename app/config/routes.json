@@ -302,6 +302,11 @@
     {
       "path": "*",
       "page": "404-not-found"
+    },
+    {
+      "path": "/update_nan_balance",
+      "page": "update_nan_balance",
+      "layout": "main"
     }
   ]
 }
