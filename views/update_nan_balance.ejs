@@ -36,7 +36,7 @@
         </div>
 
         <div class="card-body">
-            <form is="dmx-serverconnect-form" id="formAddDebit" method="post" action="api/Transactions/UpdateBalance" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAddDebit.data ? scNotif.success('Amount Updated Successfully') : scNotif.success('Amount Updated');formAddDebit.reset(); scCommision.load({});scAdminBalance.load()" dmx-on:error="scNotif.warning('An error occurred'); " dmx-on:forbidden="scNotif.warning(lastError.response)">
+            <form is="dmx-serverconnect-form" id="formAddDebit" method="post" action="api/Transactions/UpdateBalance" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAddDebit.data ? scNotif.success('Amount Updated Successfully') : scNotif.success('Amount Updated');formAddDebit.reset(); scCommision.load({});scAdminBalance.load();formAddDebit.reset()" dmx-on:error="scNotif.warning('An error occurred'); " dmx-on:forbidden="scNotif.warning(lastError.response)">
                 <div class="row">
                     <div class="col-12 col-lg-2 p-2">
                         <label>User Type</label>
