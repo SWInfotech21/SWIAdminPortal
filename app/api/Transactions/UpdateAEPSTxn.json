@@ -17,18 +17,6 @@
       },
       {
         "type": "text",
-        "fieldName": "tpin",
-        "options": {
-          "rules": {
-            "core:required": {
-              "param": ""
-            }
-          }
-        },
-        "name": "tpin"
-      },
-      {
-        "type": "text",
         "fieldName": "tr_status",
         "options": {
           "rules": {
