@@ -1,6 +1,6 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="update_nan_balance" appConnect="local" components="{dmxDataTraversal:{}}" -->
 <meta name="ac:route" content="/update_nan_balance">
-<!-- New Wappler Page -->
+
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <dmx-value id="varBalance" dmx-bind:value="0"></dmx-value>
@@ -36,7 +36,7 @@
         </div>
 
         <div class="card-body">
-            <form is="dmx-serverconnect-form" id="formAddDebit" method="post" action="api/Transactions/UpdateBalance" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAddDebit.data ? scNotif.success('Amount Updated Successfully') : scNotif.success('Amount Updated');formAddDebit.reset(); scCommision.load({});scAdminBalance.load();formAddDebit.reset()" dmx-on:error="scNotif.warning('An error occurred'); " dmx-on:forbidden="scNotif.warning(lastError.response)">
+            <form is="dmx-serverconnect-form" id="formAddDebit" method="post" action="api/Transactions/UpdateBalance" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="formAddDebit.data ? scNotif.success('Amount Updated Successfully') : scNotif.success('Amount Updated');formAddDebit.reset(); scBalance.load();scAdminBalance.load();formAddDebit.reset()" dmx-on:error="scNotif.warning('An error occurred'); " dmx-on:forbidden="scNotif.warning(lastError.response)">
                 <div class="row">
                     <div class="col-12 col-lg-2 p-2">
                         <label>User Type</label>
