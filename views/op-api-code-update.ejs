@@ -2,7 +2,7 @@
 <meta name="ac:route" content="/op-api-code-update">
 <dmx-serverconnect id="scService" url="api/Services/Services"></dmx-serverconnect>
 <dmx-serverconnect id="scOpAPICode" url="api/operator/OpUpdateAPICode" dmx-param:service_id="inp_Fetch_service.value"></dmx-serverconnect>
-<dmx-data-view id="dvOpAPICode" dmx-bind:data="scOpAPICode.data.GetAPICode" filter="(service_name.lowercase().contains(formSearchUser.Search.value.lowercase()) || operator_name.lowercase().contains(formSearchUser.Search.value.lowercase()) || api_code1.contains(formSearchUser.Search.value) || api_code2.contains(formSearchUser.Search.value) || api_code3.contains(formSearchUser.Search.value) || api_code4.contains(formSearchUser.Search.value) || api_code5.contains(formSearchUser.Search.value) || api_code6.contains(formSearchUser.Search.value) || api_code7.contains(formSearchUser.Search.value) || api_code8.contains(formSearchUser.Search.value))"></dmx-data-view>
+<dmx-data-view id="dvOpAPICode" dmx-bind:data="scOpAPICode.data.GetAPICode" filter="(service_name.lowercase().contains(formSearchUser.Search.value.lowercase()) || operator_name.lowercase().contains(formSearchUser.Search.value.lowercase()) || api_code1.contains(formSearchUser.Search.value) || api_code2.contains(formSearchUser.Search.value) || api_code3.contains(formSearchUser.Search.value) || api_code4.contains(formSearchUser.Search.value) || api_code5.contains(formSearchUser.Search.value) || api_code6.contains(formSearchUser.Search.value) || api_code7.contains(formSearchUser.Search.value) || api_code8.contains(formSearchUser.Search.value) || api_code9.contains(formSearchUser.Search.value))"></dmx-data-view>
 <dmx-data-detail id="ddOpAPICode" key="op_id" dmx-bind:data="dvOpAPICode.data"></dmx-data-detail>
 <div class="row align-items-center justify-content-between px-4 mb-3 sd-secondary-header mx-0">
     <div class="col-12 col-md-auto me-auto">
@@ -48,6 +48,7 @@
                             <th>Rathod</th>
                             <th>Utility Hub</th>
                             <th>Easy Pay</th>
+                            <th>Pay One</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -69,6 +70,7 @@
                             <td dmx-text="api_code6"></td>
                             <td dmx-text="api_code7"></td>
                             <td dmx-text="api_code8"></td>
+                            <td dmx-text="api_code9"></td>
                             <td>
                                 <a class="dropdown-item" href="#" dmx-on:click="ddOpAPICode.select(op_id)" data-bs-toggle="modal" data-bs-target="#modalAddEditOpUp"><i class="fas fa-edit sw-col-ar" title="Edit Operator API Code"></i></a>
                             </td>
@@ -144,6 +146,12 @@
                         <label for="inp_api_code8" class="col-sm-2 col-form-label">Easy Pay</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="inp_api_code8" name="api_code8" aria-describedby="inp_api_code8_help" placeholder="E.g: AB" maxlength="7" dmx-bind:value="ddOpAPICode.data.api_code8">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inp_api_code9" class="col-sm-2 col-form-label">Pay One</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inp_api_code9" name="api_code9" aria-describedby="inp_api_code9_help" placeholder="E.g: AB" maxlength="7" dmx-bind:value="ddOpAPICode.data.api_code9">
                         </div>
                     </div>
                     <div class="mb-3 row">
